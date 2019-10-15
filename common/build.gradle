@@ -1,0 +1,118 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'x86', 'x86_64', 'arm64-v8a'
+
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64','armeabi','armeabi-v8a',
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    sourceSets {
+        main {
+            if (IsBuildMudle.toBoolean()) {
+                java.srcDirs += "src/main/debug/java/";
+            } else {
+                java.srcDirs += "src/main/release/java/";
+            }
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    resourcePrefix "common_"
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:support-v4:28.0.0'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'jsr305'
+    })
+    testImplementation rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["appcompat"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-compiler"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    //core
+    api project(":core")
+
+    //utilcode
+    api project(":utilcode")
+
+    //opensource
+    api project(":opensource")
+
+    // glide
+    api rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
+    // arouter
+    api rootProject.ext.dependencies["arouter"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    // bindingcollectionadapter
+    api rootProject.ext.dependencies["bindingcollectionadapter"]
+    api rootProject.ext.dependencies["bindingcollectionadapter-rv"]
+
+    //rx
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxrelay"]
+
+    api rootProject.ext.dependencies["richedit"] // 编辑器
+    api rootProject.ext.dependencies["circleimage"] // 圆图
+    api rootProject.ext.dependencies["magic"] // indector
+    api rootProject.ext.dependencies["shortcut"] // 角标
+    api rootProject.ext.dependencies["picture"] // 图片选择
+    api rootProject.ext.dependencies["banner"] // banner
+    api rootProject.ext.dependencies["picker"]
+    // picker https://github.com/gzu-liyujiang/AndroidPicker 日期 地址 自定义 支持的wheelview
+    api rootProject.ext.dependencies["goodview"] // 点赞view
+    api rootProject.ext.dependencies["tablayout-lib"] // flyco_tablayout-lib
+    api rootProject.ext.dependencies["pinyin"] // pinyin
+    api rootProject.ext.dependencies["pinyin-cncity"] // pinyin
+    api rootProject.ext.dependencies["chipslayout"] // chipslayout
+    api rootProject.ext.dependencies["luban"] // luban
+    api rootProject.ext.dependencies["media"] // 音频
+
+
+    api 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.8'
+    api 'com.yanzhenjie.recyclerview:support:1.3.2'
+}

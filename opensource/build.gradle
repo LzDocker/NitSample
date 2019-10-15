@@ -1,0 +1,114 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64','armeabi','armeabi-v8a',
+        }
+
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    resourcePrefix "open_"
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:support-v4:28.0.0'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude module: 'jsr305'
+    })
+    testImplementation rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["appcompat"]
+    // 讯飞
+    api files('libs/Msc.jar')
+    api files('libs/Sunflower.jar')
+    // 腾讯X5
+    api files('libs/tbs_sdk_thirdapp20190111_105200.jar')
+    // 百度地图
+    api files('libs/BaiduLBS_Android.jar')
+    api files('libs/BaiduTraceSDK_v3_1_0.jar')
+    api files('libs/bos-android-sdk-1.0.3.jar')
+    implementation files('libs/BaiduLBS_Android.jar')
+    // 友盟
+    api files('libs/umeng-share-core-6.9.4.jar')
+    api files('libs/umeng-sharetool-6.9.4.jar')
+    api files('libs/umeng-share-wechat-full-6.9.4.jar')
+    api files('libs/wechat-sdk-android-without-mta-5.1.4.jar')
+    api files('libs/umeng-share-QQ-simplify-6.9.4.jar')
+    api files('libs/umeng-common-2.0.2.jar')
+    // 激光
+    api 'cn.jiguang.sdk:jpush:3.3.2'  //
+    api 'cn.jiguang.sdk:jcore:2.0.1'  //
+
+    // ali 支付
+    api(name: 'alipaySdk-15.6.0-20190226104053', ext: 'aar') {
+        transitive = true
+        exclude module: 'alicloud-android-utdid'
+    }
+
+    // oss
+    api 'com.aliyun.dpa:oss-android-sdk:2.9.2'
+
+    // ali video
+//    api('com.aliyun.ams:alicloud-android-ha-adapter:1.1.0.6.2-open@aar') {
+//        transitive = true
+//        exclude module: 'alicloud-android-utdid'
+//    }
+//    api('com.aliyun.ams:alicloud-android-ha-ut-analytics:1.1.0.1-open@aar') {
+//        transitive = true
+//        exclude module: 'alicloud-android-utdid'
+//    }
+
+    api(name: 'AlivcPlayer-3.4.9', ext: 'aar') {
+        transitive = true
+    }
+    api(name: 'AliyunVodPlayer-3.4.9', ext: 'aar') {
+        transitive = true
+    }
+    api(name: 'AlivcReporter-1.2', ext: 'aar') {
+        transitive = true
+    }
+
+
+}

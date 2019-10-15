@@ -1,0 +1,23 @@
+<resources>
+
+    <string name="circle_person_num">人数  </string>
+    <string name="circle_person_aten">人气： </string>
+    <string name="circle_fans_num">关注</string>
+    <string name="isFav">已赞</string>
+    <string name="fav">点赞</string>
+    <string name="favwj">超赞</string>
+    <string name="commentUnit">条</string>
+    <string name="commentUnitWj"> </string>
+    <string name="isCollect">收藏</string>
+    <string name="collect">已收藏</string>
+    <string name="zan">赞</string>
+    <string name="liulan">浏览</string>
+    <string name="jiaoliu1">有</string>
+    <string name="jiaoliu2">个小伙伴在这里互相交流</string>
+    <string name="fromCircle1">来自“</string>
+    <string name="fromCircle2">”圈子</string>
+    <string name="circle_ren">人</string>
+    <string name="circle_publish1">发动态，发问答，发新闻，查资料；\n还能建圈子，快来和圈友一起交流学习吧！</string>
+    <string name="circle_publish2">店铺名称:</string>
+    <string name="circle_publish3">联系人:</string>
+</resources>

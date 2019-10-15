@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.account.vm.AccountViewModel" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_f2"
+        android:orientation="vertical">
+
+        <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_circle_title"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/tv_circle_more"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:tag="fixed"
+            tl:tl_divider_color="#00000000"
+            tl:tl_divider_padding="10dp"
+            tl:tl_divider_width="0.1dp"
+            tl:tl_indicator_color="#333"
+            tl:tl_indicator_width_equal_title="true"
+            tl:tl_tab_padding="5dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_tab_width="90dp"
+            tl:tl_textSelectColor="#333"
+            tl:tl_textUnselectColor="#666"
+            tl:tl_textsize="13sp"
+            tl:tl_underline_color="#E1E1E1"
+            tl:tl_underline_height="0.1dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+
+
+    </LinearLayout>
+
+</layout>
+
+

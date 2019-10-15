@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+
+    </data>
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <EditText
+                android:id="@+id/account_ed_sug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="top|left"
+                android:hint="@string/suggest"
+                android:lines="15"
+                android:maxEms="500"
+                android:padding="5dp"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/divier"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:layout_below="@+id/account_ed_sug"
+                android:background="#F3F3F3" />
+
+            <TextView
+                android:id="@+id/tv_cons"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/divier"
+                android:gravity="center_vertical"
+                android:lines="20"
+                android:paddingLeft="14dp"
+                android:text="联系方式"
+                android:textColor="#333" />
+
+            <EditText
+                android:id="@+id/account_ed_cona"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/tv_cons"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:hint="请留下您的电话、邮箱等联系方式"
+                android:singleLine="true"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginBottom="14dp"
+                android:background="#B52127"
+                android:gravity="center"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+
+</layout>
+
+

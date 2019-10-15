@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.FansVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.account.vm.AccountViewModel" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_coutainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp"
+        tools:ignore="MissingDefaultResource">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/account_iv_user_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:scaleType="centerCrop"
+            app:errorImg="@{R.mipmap.circle_default_avatar}"
+            app:placeHolder="@{R.mipmap.circle_default_avatar}"
+            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#333"
+                android:textSize="15sp"
+                tools:text="@{item.nickname}" />
+
+            <TextView
+                android:id="@+id/tv_fans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text='@{item.fansNum + @string/account_gz}'
+                android:textColor="#C2BBBB"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_isFocusMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/account_lable_shape"
+            android:clickable="false"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="互相关注"
+            android:textColor="#333"
+            android:textSize="12sp"
+            app:visibleGone="@{item.isFocus != 0}" />
+
+        <TextView
+            android:id="@+id/tv_isFocus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFC107"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:text="关注"
+            android:textColor="#333"
+            android:textSize="12sp"
+            app:visibleGone="@{item.isFocus == 0}" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bfhd.circle">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application>
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:label="图片剪裁"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CirclePublishActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleEditClassActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CirclePersonListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleMemberGroupListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleTypeListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleCoverActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".ui.circle.CirclePersonDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleCreateListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleCreateActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.circle.CircleperssionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.circle.CircleFriendShareActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.circle.CircleGroupPerssionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.circle.CirclePersionSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleModifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleEditMemberGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CirclePersonPerssionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.circle.CircleShareSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleShareGroupSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CirclePerssionSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.circle.CircleDynamicDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name=".ui.circle.CircleReplayQuestionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name="com.bfhd.circle.ui.common.CommonH5Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.bfhd.circle.ui.active.CircleReplyListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.bfhd.circle.ui.active.CircleCommentListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name="com.bfhd.circle.ui.circle.CircleHomeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.circle.CircleCreateHwjActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".ui.circle.CirclePersonDetailWjActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".ui.circle.CircleAddSurfActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+
+    </application>
+
+</manifest>

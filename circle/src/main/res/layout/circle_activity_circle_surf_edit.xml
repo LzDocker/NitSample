@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.circle.vm.CircleViewModel" />
+
+        <variable
+            name="img1"
+            type="String" />
+
+        <variable
+            name="img2"
+            type="String" />
+
+        <variable
+            name="img3"
+            type="String" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/chang_menu_ll_photo1"
+                android:layout_width="match_parent"
+                android:layout_height="153.6dp"
+                android:background="#f0f0f0"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/activity_creatcircle_cover1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:roundImgUrl="@{BdUtils.getCompleteImg(img1)}" />
+
+                <FrameLayout
+                    android:id="@+id/frame_surf1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:id="@+id/activity_creatcircle_coverhint1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="添加一张封面"
+                    android:textColor="#999"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_edit1"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_shape_red_8"
+                        android:gravity="right|center"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="2dp"
+                        android:text="再添加一张"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/chang_menu_ll_photo2"
+                android:layout_width="match_parent"
+                android:layout_height="153.6dp"
+                android:layout_marginTop="10dp"
+                android:background="#f0f0f0"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/activity_creatcircle_cover2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:roundImgUrl="@{BdUtils.getCompleteImg(img2)}" />
+
+                <FrameLayout
+                    android:id="@+id/frame_surf2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:id="@+id/activity_creatcircle_coverhint2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="添加一张封面"
+                    android:textColor="#999"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_edit2"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_del2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/circle_shape_gray_8"
+                        android:gravity="right|center"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="2dp"
+                        android:text="删除本张"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tv_add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_shape_red_8"
+                        android:gravity="right|center"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="2dp"
+                        android:text="再添加一张"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/chang_menu_ll_photo3"
+                android:layout_width="match_parent"
+                android:layout_height="153.6dp"
+                android:layout_marginTop="10dp"
+                android:background="#f0f0f0"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/activity_creatcircle_cover3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:roundImgUrl="@{BdUtils.getCompleteImg(img3)}" />
+
+                <FrameLayout
+                    android:id="@+id/frame_surf3"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+
+                <TextView
+                    android:id="@+id/activity_creatcircle_coverhint3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="添加一张封面"
+                    android:textColor="#999"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_edit3"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="bottom"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_del3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_shape_gray_8"
+                        android:gravity="right|center"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="2dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="2dp"
+                        android:text="删除本张"
+                        android:textColor="#fff"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</layout>
+
+

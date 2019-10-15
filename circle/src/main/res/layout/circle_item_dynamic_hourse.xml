@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.circle.vo.ServiceDataBean" />
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.circle.vm.CircleDynamicViewModel" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:layout_margin="4dp"
+        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="7dp">
+
+            <FrameLayout
+                android:id="@+id/circle_iv_header"
+                android:layout_width="match_parent"
+                android:layout_height="172dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:errorImg="@{R.mipmap.circle_icon_empty}"
+                    app:placeHolder="@{R.mipmap.circle_icon_empty}"
+                    app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:background="#E60012"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="2dp"
+                    android:text="@{BdUtils.getPoint(item)}"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    app:visibleGone="@{BdUtils.isShowPoint(item)}" />
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_title_coutainer"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/circle_iv_header"
+                android:layout_marginTop="7dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/circle_tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/circle_iv_header"
+                    android:layout_toRightOf="@+id/tv_label"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:textColor="#333"
+                    android:textSize="14sp"
+                    android:text="@{item}" />
+
+                <TextView
+                    android:id="@+id/circle_tv_house_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:text="@{BdUtils.getHourseInfo(item)}"
+                    android:textColor="#999"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/ll_title_coutainer"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="¥"
+                    android:textColor="#E84651"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/circle_tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{BdUtils.getPayMoneyforHourse(item)}"
+                    android:textColor="#E84651"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circle_iv_avater"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/ll_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
+                app:errorImg="@{R.mipmap.circle_default_avatar}"
+                app:placeHolder="@{R.mipmap.circle_default_avatar}"
+                app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_below="@+id/ll_content"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_toRightOf="@+id/circle_iv_avater"
+                android:gravity="center_vertical"
+                android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.nickname}"
+                    android:textColor="#333"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{BdUtils.getGoodsFoot(item)}"
+                    android:textColor="#999"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

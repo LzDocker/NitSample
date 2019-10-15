@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <item name="custom_id_min" type="id" tools:ignore="ResourceName" />
+
+    <item name="fixedTabIndicator" type="id" />
+    <item name="contentView" type="id" />
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/pro_tab_title"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:tag="fixed"
+            tl:tl_divider_color="#00000000"
+            tl:tl_divider_padding="10dp"
+            tl:tl_divider_width="0.1dp"
+            tl:tl_indicator_color="#E60012"
+            tl:tl_indicator_width_equal_title="true"
+            tl:tl_tab_padding="5dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="#E60012"
+            tl:tl_textUnselectColor="#666"
+            tl:tl_textsize="13sp"
+            tl:tl_underline_color="#E1E1E1"
+            tl:tl_underline_height="0.1dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pro_tab_title"
+            android:layout_marginBottom="30dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_scrollFlags="scroll" />
+
+    </LinearLayout>
+
+</layout>

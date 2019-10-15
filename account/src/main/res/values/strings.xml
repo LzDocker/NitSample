@@ -1,0 +1,19 @@
+<resources>
+    <string name="account_app_name">account</string>
+    <string name="account_three">▼</string>
+    <string name="account_sos">“在你发出求救信息时，系统将第一\n  时间通知你的紧急联系人\n      以获取更好的救助”</string>
+    <string name="account_fans">粉丝</string>
+    <string name="account_gz">关注</string>
+    <string name="add_help_user">添加紧急联系人</string>
+    <string name="publish_help">发布求救</string>
+    <string name="look_detail">查看详情</string>
+    <string name="comment">评论</string>
+    <string name="heji">合计：</string>
+    <string name="jifen">积分</string>
+    <string name="zhi">至</string>
+    <string name="daoqi">到期</string>
+    <string name="payTime">下单时间：</string>
+    <string name="suggest">把您的意见或者建议告诉我们吧(500字以内哦)</string>
+    <string name="yuan">元</string>
+    <string name="circleName">家族成员</string>
+</resources>

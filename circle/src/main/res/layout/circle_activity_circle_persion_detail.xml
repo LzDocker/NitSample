@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.circle.vm.CircleViewModel" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <variable
+            name="item"
+            type="com.bfhd.circle.vo.CircleCountpageVo" />
+    </data>
+
+    <com.docker.common.common.widget.empty.EmptyLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlFooterTranslationViewId="@+id/frame_dynamic">
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/frame_dynamic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_scrollFlags="scroll">
+
+                </FrameLayout>
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:orientation="vertical"
+                    app:elevation="0dp">
+
+                    <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/toolbarLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:contentScrim="#ff233C6A"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <!-- app:contentScrim="#ff233C6A"-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_scrollFlags="scroll">
+
+                            <!--          app:layout_collapseMode="parallax"-->
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/parallax"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="190dp"
+                                    android:adjustViewBounds="true"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="centerCrop"
+                                    app:errorImg="@{R.mipmap.circle_persion_head}"
+                                    app:placeHolder="@{R.mipmap.circle_persion_head}"
+                                    app:roundImgUrl="@{Constant.getCompleteImageUrl(item.backgroundImg)}" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="155dp">
+
+
+                                    <RelativeLayout
+                                        android:id="@+id/rlcoutainer"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:gravity="center_vertical"
+                                        android:paddingLeft="15dp"
+                                        android:paddingRight="15dp">
+
+                                        <de.hdodenhof.circleimageview.CircleImageView
+                                            android:id="@+id/circle_iv_icon"
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_centerVertical="true"
+                                            android:layout_gravity="center_vertical"
+                                            android:scaleType="centerCrop"
+                                            app:errorImg="@{R.mipmap.circle_default_avatar}"
+                                            app:placeHolder="@{R.mipmap.circle_default_avatar}"
+                                            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+
+                                        <LinearLayout
+                                            android:id="@+id/ll_focu_cou"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentBottom="true">
+
+                                            <TextView
+                                                android:id="@+id/tv_alerFocus"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="5dp"
+                                                android:background="@drawable/circle_lable_shape_gray"
+                                                android:clickable="false"
+                                                android:gravity="center"
+                                                android:paddingLeft="10dp"
+                                                android:paddingTop="5dp"
+                                                android:paddingRight="10dp"
+                                                android:paddingBottom="5dp"
+                                                android:text="已关注"
+                                                android:textColor="#333"
+                                                android:textSize="12sp"
+                                                app:visibleGone="@{item.isFocus != 0}" />
+
+                                            <TextView
+                                                android:id="@+id/tv_Focu"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="5dp"
+                                                android:background="#FFC107"
+                                                android:gravity="center"
+                                                android:paddingLeft="10dp"
+                                                android:paddingTop="5dp"
+                                                android:paddingRight="10dp"
+                                                android:paddingBottom="5dp"
+                                                android:text="关注"
+                                                android:textColor="#333"
+                                                android:textSize="12sp"
+                                                app:visibleGone="@{item.isFocus == 0}" />
+
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/circle_ll_info"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/rlcoutainer"
+                                    android:layout_marginTop="14dp"
+                                    android:background="@color/white"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:overScrollMode="never"
+                                    android:paddingLeft="14dp"
+                                    android:paddingRight="14dp"
+                                    app:layout_scrollFlags="scroll">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@{item.nickname}"
+                                        android:textColor="#333"
+                                        android:textSize="17sp" />
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="45dp"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="@{item.circleNum}"
+                                            android:textColor="#333" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="圈子"
+                                            android:textColor="#666" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="20dp"
+                                            android:gravity="center_vertical"
+                                            android:text="@{item.fansNum}"
+                                            android:textColor="#333" />
+
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="粉丝"
+                                            android:textColor="#666" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginLeft="20dp"
+                                            android:gravity="center_vertical"
+                                            android:text="@{item.focusNum}"
+                                            android:textColor="#333" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center_vertical"
+                                            android:text="关注"
+                                            android:textColor="#666" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <View
+                                    android:id="@+id/divier"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="7dp"
+                                    android:layout_below="@+id/circle_ll_info"
+                                    android:background="#f5f5f5"
+                                    android:overScrollMode="never"
+                                    app:layout_scrollFlags="scroll" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/divier"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical"
+                                    android:overScrollMode="never"
+                                    app:layout_scrollFlags="scroll">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="14dp"
+                                        android:text="加入的圈子"
+                                        android:textColor="#333"
+                                        android:textSize="16sp" />
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/recyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="10dp"
+                                        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="45dp"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:gravity="center_vertical"
+                                            android:paddingLeft="14dp"
+                                            android:text="动态 "
+                                            android:textColor="#333"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginLeft="5dp"
+                                            android:gravity="center_vertical"
+                                            android:paddingLeft="14dp"
+                                            android:text="@{item.dynamicNum}"
+                                            android:textColor="#333"
+                                            android:textSize="16sp" />
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <android.support.v7.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@+id/view"
+                            android:elevation="0dp"
+                            android:tag="fixed"
+                            app:layout_collapseMode="pin"
+                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:paddingRight="14dp">
+
+                                <ImageView
+                                    android:id="@+id/iv_back"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20sp"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/ic_toolbar_back" />
+
+                                <TextView
+                                    android:id="@+id/title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:gravity="right"
+                                    android:textColor="#fff"
+                                    android:textSize="18sp" />
+                            </RelativeLayout>
+                        </android.support.v7.widget.Toolbar>
+                    </android.support.design.widget.CollapsingToolbarLayout>
+
+                </android.support.design.widget.AppBarLayout>
+
+            </android.support.design.widget.CoordinatorLayout>
+
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+    </com.docker.common.common.widget.empty.EmptyLayout>
+
+</layout>
+
+
+
+
+

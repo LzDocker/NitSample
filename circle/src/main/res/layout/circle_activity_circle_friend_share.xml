@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+
+        <variable
+            name="imgurl"
+            type="java.lang.String" />
+
+        <variable
+            name="name"
+            type="java.lang.String" />
+
+    </data>
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/circle_share_bg"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="20dp">
+
+            <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:layout_marginRight="25dp"-->
+            <!--android:layout_marginBottom="40dp"-->
+            <!--app:cardCornerRadius="28dp"-->
+            <!--app:cardElevation="14dp">-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="60dp"
+                android:background="@mipmap/circle_invite_coutainer_bg"
+                android:orientation="vertical"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+
+                <ImageView
+                    android:id="@+id/iv_header"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:errorImg="@{R.mipmap.circle_icon_empty}"
+                    app:placeHolder="@{R.mipmap.circle_icon_empty}"
+                    app:roundImgUrl="@{BdUtils.getImgUrl(imgurl)}" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_header"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:text="@{name}"
+                    android:textColor="#000"
+                    android:textSize="24sp" />
+
+                <EditText
+                    android:id="@+id/ed_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="153dp"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginRight="15dp"
+                    android:background="#F5F5F5"
+                    android:gravity="left" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/ed_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="25dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_vertical"
+                        android:text="设成员分组"
+                        android:textColor="#333" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableRight="@mipmap/arrow_right"
+                        android:drawablePadding="10dp"
+                        android:text="未设置分组" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_invite"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="39dp"
+                    android:layout_marginRight="39dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@mipmap/circle_invite"
+                    android:gravity="center"
+                    android:text="邀请好友"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <!--</android.support.v7.widget.CardView>-->
+
+
+        </LinearLayout>
+
+
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+</layout>

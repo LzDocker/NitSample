@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <!--<variable-->
+        <!--name="viewmodel"-->
+        <!--type="com.bfhd.circle.vm.CircleViewModel" />-->
+    </data>
+
+
+    <!--<com.docker.core.widget.emptylayout.EmptyLayout-->
+    <!--android:id="@+id/empty"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:minHeight="80dp"-->
+    <!--&gt;-->
+    <!-- bind:onRetryCommand="@{viewmodel.mCommand.retrycommand}"
+    bind:status="@{viewmodel.mEmptycommand}"-->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab_circle_child_title"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:visibility="gone"
+            android:background="@drawable/open_liner_bg_shape"
+            android:overScrollMode="ifContentScrolls"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:tag="fixed"
+            tl:tl_divider_color="#00000000"
+            tl:tl_divider_width="0.1dp"
+            tl:tl_indicator_color="#333"
+            tl:tl_tab_width="60dp"
+            tl:tl_indicator_width="0dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="#E60012"
+            tl:tl_textUnselectColor="#666"
+            tl:tl_textsize="12sp"
+            tl:tl_underline_color="@color/common_grey"
+            tl:tl_underline_height="0.1dp" />
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_scrollFlags="scroll" />
+
+    </LinearLayout>
+
+    <!--</com.docker.core.widget.emptylayout.EmptyLayout>-->
+
+</layout>
+
+

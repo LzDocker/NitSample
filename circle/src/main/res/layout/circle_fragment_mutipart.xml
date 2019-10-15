@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <import type="com.docker.core.util.LayoutManager" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.docker.common.common.widget.empty.EmptyLayout
+                android:id="@+id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusableInTouchMode="true"
+
+                    />
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:focusableInTouchMode="true"-->
+                <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"-->
+                <!--bind:itemView="@{viewmodel.newsVoItemViewSelector}"-->
+                <!--bind:items="@{viewmodel.newsItems}"-->
+                <!--bind:layoutManager="@{LayoutManager.linear}" />-->
+
+            </com.docker.common.common.widget.empty.EmptyLayout>
+
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <com.docker.common.common.widget.empty.EmptyLayout
+            android:id="@+id/emptys"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top"
+            android:overScrollMode="never"
+            android:scrollbarStyle="outsideOverlay">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusableInTouchMode="true" />
+
+            <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/recyclerViews"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:focusableInTouchMode="true"-->
+            <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"-->
+            <!--bind:itemView="@{viewmodel.newsVoItemViewSelector}"-->
+            <!--bind:items="@{viewmodel.newsItems}"-->
+            <!--bind:layoutManager="@{LayoutManager.linear}" />-->
+
+        </com.docker.common.common.widget.empty.EmptyLayout>
+        <!--</FrameLayout>-->
+
+
+    </LinearLayout>
+
+</layout>
+
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.circle.vo.ServiceDataBean.ResourceBean" />
+        <variable
+            name="viewmodel"
+            type="com.bfhd.circle.vm.CircleDynamicViewModel"/>
+
+        <!--<import type="com.bfhd.circle.vm.CircleDynamicViewModel" />-->
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="3dp"
+        android:onClick="@{(view)->viewmodel.imgclick(item,view,BdUtils.getResourceImgUrl(item))}"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="2dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:errorImg="@{R.mipmap.circle_icon_empty}"
+                app:placeHolder="@{R.mipmap.circle_icon_empty}"
+                app:roundImgUrl="@{BdUtils.getResourceImgUrl(item)}" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/circle_player_icon"
+                app:visibleGone="@{item.t==2}" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

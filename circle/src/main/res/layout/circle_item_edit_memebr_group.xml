@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.circle.vo.MemberGroupingVo"></variable>
+
+        <variable
+            name="editFlag"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@drawable/open_liner_bg_shape"
+            android:singleLine="true"
+            android:text="@={item.groupName}" />
+
+        <ImageView
+            android:id="@+id/circle_iv_drag"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/circle_move_icon"
+            app:visibleGone="@{editFlag}" />
+
+        <TextView
+            android:id="@+id/circle_tv_del"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/common_grey"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/white"
+            app:visibleGone="@{editFlag}" />
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.circle.vo.ServiceDataBean" />
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.circle.vm.CircleDynamicViewModel" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+    </data>
+
+    <!--mPerisonAttenEmptycommand-->
+    <com.docker.common.common.widget.empty.EmptyLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        bind:onRetryCommand="@{viewmodel.mPerisonAttenretrycommand}"
+        bind:status="@{viewmodel.mPerisonAttenEmptycommand}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            app:visibleGone="@{item.observableList.size >0}">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="14dp"
+                android:text="他们也在用和玩家"
+                android:textColor="#333"
+                android:textSize="14sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:focusable="false"
+                android:overScrollMode="never"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                app:itemBinding="@{viewmodel.itemPersionBinding}"
+                app:items="@{item.observableList}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                bind:layoutManager="@{LayoutManager.linear(0,false)}">
+
+                <!--     app:items="@{viewmodel.getPersionData(item)}"-->
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </com.docker.common.common.widget.empty.EmptyLayout>
+
+
+</layout>

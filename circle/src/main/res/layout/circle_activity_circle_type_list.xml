@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <!--<variable-->
+        <!--name="viewmodel"-->
+        <!--type="com.bfhd.circle.vm.CircleViewModel" />-->
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/circle_recycle_type"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+        <com.docker.common.common.widget.NoScrollViewPager
+            android:id="@+id/circle_viewpager"
+            android:layout_width="0dp"
+            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:layout_weight="5" />
+
+    </LinearLayout>
+
+    <!--<com.docker.core.widget.refresh.SmartRefreshLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:srlFooterTranslationViewId="@id/circle_viewpager">-->
+
+        <!--&lt;!&ndash;<com.docker.core.widget.emptylayout.EmptyLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center">&ndash;&gt;-->
+
+
+
+        <!--&lt;!&ndash;</com.docker.core.widget.emptylayout.EmptyLayout>&ndash;&gt;-->
+
+    <!--</com.docker.core.widget.refresh.SmartRefreshLayout>-->
+
+</layout>
+
+

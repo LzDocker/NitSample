@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.circle.vo.ServiceDataBean" />
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.circle.vm.CircleDynamicViewModel" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerCrop"
+                    app:errorImg="@{R.mipmap.circle_default_avatar}"
+                    app:placeHolder="@{R.mipmap.circle_default_avatar}"
+                    app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/iv_user_icon"
+                    android:text="@{item.nickname}"
+                    android:textColor="#121212"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_pub_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_username"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/iv_user_icon"
+                    android:text="@{BdUtils.getStandardDate(item.inputtime)}"
+                    android:textColor="#979797"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_username"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/tv_pub_time"
+                    android:text="@{item.companyName}"
+                    android:textColor="#979797"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{item.extData.content}"
+                    android:textColor="#121212"
+                    android:textSize="16sp" />
+
+
+                <!--      <ImageView
+                          android:layout_width="113dp"
+                          android:layout_height="75dp"
+                          android:layout_marginLeft="15dp"
+                          android:scaleType="fitXY"
+                          app:errorImg="@{R.mipmap.circle_icon_empty}"
+                          app:placeHolder="@{R.mipmap.circle_icon_empty}"
+                          app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}"
+                          app:visibleGone="@{BdUtils.isShowSingleImg(item)}" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:itemBinding="@{viewmodel.itemImgBinding}"
+                    app:items="@{viewmodel.getResouceData(item)}"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:visibleGone="@{BdUtils.isShowRvImg(item)}"
+                    bind:layoutManager="@{LayoutManager.grid(3)}" />
+                <!--bind:items="@{item.extData.resource}"-->
+                <!--bind:items="@{item.getResouceData(item.extData)}"-->
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"
+                    app:visibleGone="@{BdUtils.isShowSingleImg(item)}">
+
+                    <!--<ImageView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="188dp"-->
+                    <!--app:errorImg="@{R.mipmap.circle_icon_empty}"-->
+                    <!--app:placeHolder="@{R.mipmap.circle_icon_empty}"-->
+                    <!--app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}" />-->
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="188dp"
+                        android:scaleType="fitXY"
+                        app:errorImg="@{R.mipmap.circle_icon_empty}"
+                        app:placeHolder="@{R.mipmap.circle_icon_empty}"
+                        app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/circle_player_icon"
+                        app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@mipmap/circle_zhuanfa_icon"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"
+                    android:text="转发" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@mipmap/circle_pinglun_icon"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
+                    android:text="评论" />
+
+
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+
+                <!--android:drawableLeft="@{item.isFav == 1?R.mipmap.circle_icon_hd_dz2:R.mipmap.circle_zan_icon}"-->
+                <!--android:drawablePadding="10dp"-->
+                <!--android:gravity="center|right"-->
+                <!--android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"-->
+                <!--android:text="30" />-->
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_dz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_hd_dz2:R.mipmap.circle_zan_icon}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@{item.favourNum == 0?BdUtils.getFavNum(item.favourNum):BdUtils.getFavNum(item.favourNum)}" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#F4F5F6" />
+    </LinearLayout>
+</layout>

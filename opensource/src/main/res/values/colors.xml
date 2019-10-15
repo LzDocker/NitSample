@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <color name="open_black">#333333</color>
+    <color name="open_black_666">#666</color>
+    <color name="open_black_999">#999</color>
+    <color name="open_read">#E60012</color>
+    <color name="open_time_bacground_gray">#cecece</color>
+
+    <color name="alivc_white" tools:ignore="ResourceName">#e7e7e7</color>
+    <color name="alivc_blue" tools:ignore="ResourceName">#379DF2</color>
+    <color name="alivc_green" tools:ignore="ResourceName">#57AB44</color>
+    <color name="alivc_orange" tools:ignore="ResourceName">#EE7C33</color>
+    <color name="alivc_red" tools:ignore="ResourceName">#E94033</color>
+
+    <color name="alivc_info_text_duration" tools:ignore="ResourceName">#9f9e9e</color>
+    <color name="alivc_dialog_error_bg" tools:ignore="ResourceName">#b2000000</color>
+    <color name="alivc_dialog_gesture_bg" tools:ignore="ResourceName">#66ffffff</color>
+    <color name="alivc_gesture_text_color" tools:ignore="ResourceName">#333333</color>
+
+    <color name="alivc_color_rate_item" tools:ignore="ResourceName">#4c000000</color>
+
+    <color name="alivc_color_player_setting_background" tools:ignore="ResourceName">#1e222d</color>
+    <color name="alivc_color_player_tab_selected" tools:ignore="ResourceName">#00FFFF</color>
+    <color name="alivc_color_player_tab_defaut" tools:ignore="ResourceName">#D8D8D8</color>
+
+    <color name="alivc_color_player_background" tools:ignore="ResourceName">#1e222d</color>
+    <color name="alivc_color_player_colorPrimary" tools:ignore="ResourceName">#00FFFF</color>
+    <color name="alivc_color_player_colorAccent" tools:ignore="ResourceName">#00c1de</color>
+    <color name="alivc_color_player_clear_logs" tools:ignore="ResourceName">#373d41</color>
+    <color name="alivc_color_player_manager_background" tools:ignore="ResourceName">#373d41</color>
+    <color name="alivc_color_player_setting" tools:ignore="ResourceName">#373d41</color>
+
+    <color name="colorPrimary" tools:ignore="ResourceName">#1e222d</color>
+    <color name="colorPrimaryDark" tools:ignore="ResourceName">#303F9F</color>
+    <color name="colorAccent" tools:ignore="ResourceName">#FF4081</color>
+
+    <color name="colorPrimary_alpha_five" tools:ignore="ResourceName">#1affffff</color>
+    <color name="colorPrimary_alpha_ten" tools:ignore="ResourceName">#0cffffff</color>
+    <color name="colorPrimary_alpha_fifteen" tools:ignore="ResourceName">#26ffffff</color>
+
+    <color name="add_download_info_background" tools:ignore="ResourceName">#373d41</color>
+    <color name="delete_download_info_background" tools:ignore="ResourceName">#373d41</color>
+    <color name="alivc_color_player_list_item_press" tools:ignore="ResourceName">#2d3342</color>
+
+    <color name="alivc_color_action_list_dialog_background" tools:ignore="ResourceName">#1e2321
+    </color>
+    <color name="alivc_color_gray" tools:ignore="ResourceName">#D8D8D8</color>
+    <color name="alivc_dialog_bg_translucent" tools:ignore="ResourceName">#E6373d41</color>
+    <color name="alivc_barrage_switch_background" tools:ignore="ResourceName">#80D8D8D8</color>
+
+
+
+
+</resources>

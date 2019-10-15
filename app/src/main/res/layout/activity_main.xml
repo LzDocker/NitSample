@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rel_coutainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.docker.common.common.widget.NoScrollViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <com.docker.common.common.widget.boottomBar.NitCommonTabLayout
+                android:id="@+id/tl_home_tab"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                app:tl_divider_color="#ffeeeeee"
+                tl:tl_iconHeight="20dp"
+                tl:tl_iconWidth="20dp"
+                tl:tl_indicator_color="@color/colorAccent"
+                tl:tl_indicator_height="0dp"
+                tl:tl_textSelectColor="@color/colorAccent"
+                tl:tl_textUnselectColor="#66000000"
+                tl:tl_textsize="11sp"
+                tl:tl_underline_color="#DDDDDD"
+                tl:tl_underline_gravity="TOP"
+                tl:tl_underline_height="0.1dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/iv_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/circle_add_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center|bottom"
+                android:text="全球发布"
+                android:textColor="#000000"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

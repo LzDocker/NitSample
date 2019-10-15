@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="common_black">#333333</color>
+    <color name="common_black_666">#666</color>
+    <color name="common_black_999">#999</color>
+    <color name="common_black_ce">#cecece</color>
+</resources>
