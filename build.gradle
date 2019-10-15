@@ -9,7 +9,8 @@ buildscript {
             url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
         maven {
-            url "http://maven.aliyun.com/nexus/content/repositories/releases" \
+            url "http://maven.aliyun.com/nexus/content/repositories/releases"  \
+
         }
     }
     dependencies {
@@ -30,6 +31,7 @@ allprojects {
         mavenCentral()
         flatDir {
             dirs project(':opensource').file('../opensource/libs')
+            dirs project(':video').file('../video/libs')
         }
     }
 }

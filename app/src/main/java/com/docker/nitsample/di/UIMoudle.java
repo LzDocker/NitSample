@@ -5,6 +5,8 @@ import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 import com.docker.nitsample.ui.MainActivity;
 import com.docker.nitsample.ui.index.IndexFragment;
+import com.docker.nitsample.ui.index.SampleFragment;
+import com.docker.nitsample.ui.index.SampleListFragment;
 //import com.docker.nitsample.ui.index.IndexFragment;
 
 import dagger.Module;
@@ -28,5 +30,13 @@ public abstract class UIMoudle {
     @ActivityScope
     @ContributesAndroidInjector
     abstract IndexFragment contributeIndexFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract SampleFragment contributeSampleFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract SampleListFragment contributeSampleListFragmentInjector();
 
 }

@@ -1,0 +1,129 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.docker.videobasic">
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".util.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/main_theme"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".util.videolist.VideoListActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".util.videolist.TestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".util.videolist.WindowSwitchPlayActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".util.videolist.TestListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+
+    </application>
+
+
+    <!--<application-->
+
+    <!--android:name=".util.LiveApplication"-->
+    <!--android:allowBackup="true"-->
+    <!--android:icon="@mipmap/ic_launcher"-->
+    <!--android:label="@string/app_name"-->
+    <!--android:resizeableActivity="true"-->
+    <!--android:roundIcon="@mipmap/ic_launcher_round"-->
+    <!--android:supportsRtl="true"-->
+    <!--android:theme="@style/main_theme"-->
+    <!--tools:ignore="AllowBackup,GoogleAppIndexingWarning">-->
+
+    <!--<activity-->
+    <!--android:name=".util.MainActivity"-->
+    <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
+    <!--android:launchMode="singleTask"-->
+    <!--android:screenOrientation="portrait"-->
+    <!--android:theme="@style/main_theme"-->
+    <!--android:windowSoftInputMode="adjustNothing">-->
+    <!--<meta-data-->
+    <!--android:name="max_aspect"-->
+    <!--android:value="2.1">-->
+
+    <!--</meta-data>-->
+    <!--<intent-filter>-->
+    <!--<action android:name="android.intent.action.MAIN" />-->
+
+    <!--<category android:name="android.intent.category.LAUNCHER" />-->
+    <!--</intent-filter>-->
+    <!--</activity>-->
+    <!--<activity-->
+    <!--android:name=".util.videolist.VideoListActivity"-->
+    <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
+    <!--android:screenOrientation="portrait"-->
+    <!--android:theme="@style/AppTheme">-->
+
+    <!--</activity>-->
+    <!--<activity-->
+    <!--android:name=".util.videolist.TestActivity"-->
+    <!--android:configChanges="orientation|keyboardHidden|screenSize"-->
+    <!--android:screenOrientation="portrait"-->
+    <!--android:theme="@style/AppTheme" />-->
+
+    <!--<activity-->
+    <!--android:name=".util.videolist.WindowSwitchPlayActivity"-->
+    <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+    <!--android:screenOrientation="portrait"-->
+    <!--android:theme="@style/AppTheme" />-->
+
+    <!--<activity-->
+    <!--android:name=".util.videolist.TestListActivity"-->
+    <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+    <!--android:screenOrientation="portrait"-->
+    <!--android:theme="@style/AppTheme" />-->
+
+
+    <!--</application>-->
+</manifest>

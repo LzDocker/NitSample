@@ -1,5 +1,6 @@
 package com.docker.common.common.ui.base;
 
+import android.databinding.Observable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -9,8 +10,8 @@ import android.view.View;
 import com.docker.common.R;
 import com.docker.common.common.model.CommonListReq;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.databinding.CommonFragmentListBinding;
 import com.docker.common.common.widget.refresh.SmartRefreshLayout;
+import com.docker.common.databinding.CommonFragmentListBinding;
 import com.docker.core.util.LayoutManager;
 
 import java.util.ArrayList;
@@ -28,35 +29,50 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
 
     @Override
     protected void initView(View var1) {
-        ((CommonFragmentListBinding) mBinding.get()).setViewmodel((NitCommonListVm) mViewModel);
+        (mBinding.get()).setViewmodel(mViewModel);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         commonListReq = getArgument();
-        ((NitCommonListVm) mViewModel).initParam(commonListReq);
+        (mViewModel).initParam(commonListReq);
+        mBinding.get().setViewmodel(mViewModel);
         initRvUi();
         initRefreshUi();
         initListener();
     }
 
     public void initListener() {
-        ((NitCommonListVm) mViewModel).mServerLiveData.observe(this, o -> {
-            if (((CommonFragmentListBinding) mBinding.get()).refresh != null) {
-                if (o != null && ((Collection) o).size() < ((NitCommonListVm) mViewModel).mPageSize) {
-                    ((CommonFragmentListBinding) mBinding.get()).refresh.setNoMoreData(true);
-                } else if (o == null && ((NitCommonListVm) mViewModel).mItems.size() > 0) {
-                    ((CommonFragmentListBinding) mBinding.get()).refresh.setNoMoreData(true);
+        mViewModel.mServerLiveData.observe(this, o -> {
+            if ((mBinding.get()).refresh != null) {
+                if (o != null && ((Collection) o).size() < (mViewModel).mPageSize) {
+                    (mBinding.get()).refresh.setNoMoreData(true);
+                } else if (o == null && (mViewModel).mItems.size() > 0) {
+                    (mBinding.get()).refresh.setNoMoreData(true);
                 } else {
-                    ((CommonFragmentListBinding) mBinding.get()).refresh.setNoMoreData(false);
+                    (mBinding.get()).refresh.setNoMoreData(false);
                 }
             }
         });
-        ((NitCommonListVm) mViewModel).mRefreshStateLiveData.observe(this, o -> {
-            if (o.booleanValue()) {
-                if (refreshLayout != null) {
-                    refreshLayout.finishRefresh();
+        mViewModel.mRefreshStateLiveData.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if (mViewModel.mRefreshStateLiveData.get()) {
+                    if (refreshLayout != null) {
+                        refreshLayout.finishRefresh();
+                    }
+                }
+            }
+        });
+        (mViewModel).mRefreshStateNodataLiveData.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if ((mViewModel).mRefreshStateNodataLiveData.get()) {
+                    mBinding.get().refresh.setNoMoreData((mViewModel).mRefreshStateNodataLiveData.get());
+                    if (refreshLayout != null) {
+                        refreshLayout.setNoMoreData((mViewModel).mRefreshStateNodataLiveData.get());
+                    }
                 }
             }
         });
@@ -66,32 +82,32 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
 
     protected void initRvUi() {
         if (commonListReq.RvUi == 0) {
-            ((CommonFragmentListBinding) mBinding.get()).recyclerView.setLayoutManager(LayoutManager.linear().create(((CommonFragmentListBinding) mBinding.get()).recyclerView));
+            (mBinding.get()).recyclerView.setLayoutManager(LayoutManager.linear().create((mBinding.get()).recyclerView));
         } else {
-            ((CommonFragmentListBinding) mBinding.get()).recyclerView.setLayoutManager(LayoutManager
+            (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
                     .grid(2)
-                    .create(((CommonFragmentListBinding) mBinding.get()).recyclerView));
+                    .create((mBinding.get()).recyclerView));
         }
     }
 
     protected void initRefreshUi() {
         switch (commonListReq.refreshState) {
             case 0:
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableRefresh(true);
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableLoadMore(true);
+                (mBinding.get()).refresh.setEnableRefresh(true);
+                (mBinding.get()).refresh.setEnableLoadMore(true);
                 break;
             case 1:
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableRefresh(true);
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableLoadMore(false);
+                (mBinding.get()).refresh.setEnableRefresh(true);
+                (mBinding.get()).refresh.setEnableLoadMore(false);
                 break;
             case 2:
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableRefresh(false);
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableLoadMore(false);
+                (mBinding.get()).refresh.setEnableRefresh(false);
+                (mBinding.get()).refresh.setEnableLoadMore(false);
                 break;
             case 3:
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableRefresh(false);
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnableLoadMore(false);
-                ((CommonFragmentListBinding) mBinding.get()).refresh.setEnablePureScrollMode(true);
+                (mBinding.get()).refresh.setEnableRefresh(true);
+                (mBinding.get()).refresh.setEnableLoadMore(true);
+                (mBinding.get()).refresh.setEnablePureScrollMode(true);
                 break;
         }
     }
@@ -99,55 +115,55 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     // 外部更改请求接口的参数
     // isall 是否全量更改
     public void UpdateReqParam(boolean isAll, Pair<String, String> pair) {
-        ((NitCommonListVm) mViewModel).loadingState = false;
+        mViewModel.loadingState = false;
         if (isAll) {
-            ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.clear();
+            (mViewModel).mCommonListReq.ReqParam.clear();
             if (!TextUtils.isEmpty(pair.first) && !TextUtils.isEmpty(pair.second)) {
-                ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.put(pair.first, pair.second);
+                (mViewModel).mCommonListReq.ReqParam.put(pair.first, pair.second);
             }
         } else {
             if (!TextUtils.isEmpty(pair.first) && !TextUtils.isEmpty(pair.second)) {
-                ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.put(pair.first, pair.second);
+                (mViewModel).mCommonListReq.ReqParam.put(pair.first, pair.second);
             }
             if (!TextUtils.isEmpty(pair.first) && TextUtils.isEmpty(pair.second)) {
-                ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.remove(pair.first);
+                (mViewModel).mCommonListReq.ReqParam.remove(pair.first);
             }
         }
-        ((NitCommonListVm) mViewModel).mPage = 1;
-        ((NitCommonListVm) mViewModel).mItems.clear();
+        (mViewModel).mPage = 1;
+        (mViewModel).mItems.clear();
     }
 
 
     // 外部更改请求接口的参数
     // isall 是否全量更改
     public void UpdateReqParam(boolean isAll, ArrayList<Pair<String, String>> pairList) {
-        ((NitCommonListVm) mViewModel).loadingState = false;
+        (mViewModel).loadingState = false;
         if (isAll) {
-            ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.clear();
+            (mViewModel).mCommonListReq.ReqParam.clear();
             for (int i = 0; i < pairList.size(); i++) {
                 if (!TextUtils.isEmpty(pairList.get(i).first) && !TextUtils.isEmpty(pairList.get(i).second)) {
-                    ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.put(pairList.get(i).first, pairList.get(i).second);
+                    (mViewModel).mCommonListReq.ReqParam.put(pairList.get(i).first, pairList.get(i).second);
                 }
             }
         } else {
             if (pairList != null && pairList.size() > 0) {
                 for (int i = 0; i < pairList.size(); i++) {
                     if (!TextUtils.isEmpty(pairList.get(i).first) && !TextUtils.isEmpty(pairList.get(i).second)) {
-                        ((NitCommonListVm) mViewModel).mCommonListReq.ReqParam.put(pairList.get(i).first, pairList.get(i).second);
+                        (mViewModel).mCommonListReq.ReqParam.put(pairList.get(i).first, pairList.get(i).second);
                     }
                 }
             }
 
         }
-        ((NitCommonListVm) mViewModel).mPage = 1;
-        ((NitCommonListVm) mViewModel).mItems.clear();
+        (mViewModel).mPage = 1;
+        (mViewModel).mItems.clear();
     }
 
     @Override
     public void onVisible() {
         super.onVisible();
-        if (((NitCommonListVm) mViewModel).mItems.size() == 0 && ((NitCommonListVm) mViewModel).mPage == 1 && !((NitCommonListVm) mViewModel).loadingState) {
-            ((NitCommonListVm) mViewModel).loadData();
+        if ((mViewModel).mItems.size() == 0 && (mViewModel).mPage == 1 && !(mViewModel).loadingState) {
+            (mViewModel).loadData();
         }
     }
 
@@ -155,7 +171,7 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     public void onReFresh(SmartRefreshLayout refreshLayout) {
         super.onReFresh(refreshLayout);
         this.refreshLayout = refreshLayout;
-        ((NitCommonListVm) mViewModel).mPage = 1;
-        ((NitCommonListVm) mViewModel).mItems.clear();
+        (mViewModel).mPage = 1;
+        (mViewModel).mItems.clear();
     }
 }

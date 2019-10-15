@@ -1,1 +1,1 @@
-include ':app', ':core', ':utilcode', ':common', ':opensource', ':circle', ':account'
+include ':app', ':core', ':utilcode', ':common', ':opensource', ':circle', ':account', ':video', ':videobasic'

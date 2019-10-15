@@ -102,4 +102,5 @@ dependencies {
     api project(":common")
     api project(":circle")
     api project(":account")
+    api project(":videobasic")
 }

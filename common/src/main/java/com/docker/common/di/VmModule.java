@@ -2,7 +2,7 @@ package com.docker.common.di;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.docker.common.common.video.vm.AliPlayerViewModel;
+import com.docker.common.common.vm.NitEmptyVm;
 import com.docker.core.di.scope.ViewModelKey;
 
 import dagger.Binds;
@@ -18,7 +18,7 @@ public abstract class VmModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(AliPlayerViewModel.class)
-    abstract ViewModel aliPlayerModel(AliPlayerViewModel model);
+    @ViewModelKey(NitEmptyVm.class)
+    abstract ViewModel NitEmptyVm(NitEmptyVm model);
 
 }

@@ -4,11 +4,16 @@ import android.app.Notification;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alivc.player.AliVcMediaPlayer;
+import com.alivc.player.VcPlayerLog;
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.dcbfhd.utilcode.utils.Utils;
 import com.docker.common.R;
 import com.docker.core.base.BaseApp;
+import com.docker.video.AlivcPlayer.AlivcPlayer;
+import com.docker.video.config.PlayerConfig;
+import com.docker.video.config.PlayerLibrary;
+import com.docker.video.entity.DecoderPlan;
 import com.tencent.smtt.sdk.QbSdk;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -88,6 +93,23 @@ public class ThiredPartModel {
 
         ARouter.init(app);
 
+
+        // -------------video----------------------------
+        //查看log
+        VcPlayerLog.enableLog();
+
+        //初始化播放器
         AliVcMediaPlayer.init(app);
+
+        PlayerConfig.addDecoderPlan(new DecoderPlan(1, AlivcPlayer.class.getName(), "AlivcPlayer"));
+        PlayerConfig.setDefaultPlanId(1);
+
+        //use default NetworkEventProducer.
+        PlayerConfig.setUseDefaultNetworkEventProducer(true);
+
+        PlayerLibrary.init(app);
+
+        //-----------video---------------------------------
+
     }
 }

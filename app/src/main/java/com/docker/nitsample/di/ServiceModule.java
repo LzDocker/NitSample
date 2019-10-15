@@ -1,7 +1,10 @@
 package com.docker.nitsample.di;
 
 import com.docker.core.di.httpmodule.CommonService;
+import com.docker.nitsample.api.SampleService;
+
 import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -17,5 +20,11 @@ public class ServiceModule {
     @Provides
     CommonService provideCommonService(Retrofit retrofit) {
         return retrofit.create(CommonService.class);
+    }
+
+    @Singleton
+    @Provides
+    SampleService provideSampleService(Retrofit retrofit) {
+        return retrofit.create(SampleService.class);
     }
 }

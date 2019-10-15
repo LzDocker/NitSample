@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
+import android.view.View;
 
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
@@ -17,6 +18,7 @@ import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,8 +27,7 @@ import me.tatarka.bindingcollectionadapter2.OnItemBind;
 import retrofit2.Call;
 import timber.log.Timber;
 
-public abstract class NitCommonListVm extends NitCommonVm {
-
+public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     public int mPage = 1;
     public int mPageSize = 20;
@@ -34,7 +35,8 @@ public abstract class NitCommonListVm extends NitCommonVm {
      * vm 数据源
      * */
     public final MediatorLiveData<Object> mServerLiveData = new MediatorLiveData<Object>();
-    public final MediatorLiveData<Boolean> mRefreshStateLiveData = new MediatorLiveData<>();
+    public final ObservableBoolean mRefreshStateLiveData = new ObservableBoolean();
+    public final ObservableBoolean mRefreshStateNodataLiveData = new ObservableBoolean();
     public CommonListReq mCommonListReq;
     public ObservableBoolean bdenable = new ObservableBoolean(false);
     public ObservableBoolean bdenablemore = new ObservableBoolean(false);
@@ -59,14 +61,15 @@ public abstract class NitCommonListVm extends NitCommonVm {
     }
 
     // 列表数据源
-    public final ObservableList<BaseItemModel> mItems = new ObservableArrayList<>();
+    public ObservableList<BaseItemModel> mItems = new ObservableArrayList<>();
 
     // 多类型条目适配
-    public final OnItemBind<BaseItemModel> mutipartItemsBinding = (itemBinding, position, item) -> {
+    public OnItemBind<BaseItemModel> mutipartItemsBinding = (itemBinding, position, item) -> {
         itemBinding.set(BR.item, item.getItemLayout());
     };
     // itembinding
-    public final ItemBinding<BaseItemModel> itemBinding = ItemBinding.of(mutipartItemsBinding).bindExtra(BR.viewmodel, this);
+    public ItemBinding<BaseItemModel> itemBinding = ItemBinding.of(mutipartItemsBinding)
+            .bindExtra(BR.viewmodel, this);
 
 
     private void setLoadControl(boolean enable) {
@@ -85,7 +88,7 @@ public abstract class NitCommonListVm extends NitCommonVm {
     }
 
     public void loadData() {
-        LiveData<ApiResponse<BaseResponse<Object>>> servicefun = null;
+        LiveData<ApiResponse<BaseResponse<T>>> servicefun = null;
         mCommonListReq.ReqParam.put("page", String.valueOf(mPage));
         servicefun = getServicefun(mCommonListReq.ApiUrl, mCommonListReq.ReqParam);
         if (servicefun == null) {
@@ -94,11 +97,12 @@ public abstract class NitCommonListVm extends NitCommonVm {
         }
         mServerLiveData.addSource(
                 commonRepository.noneChache(
-                        servicefun), new NitNetBoundObserver<>(new NitBoundCallback<Object>() {
+                        servicefun), new NitNetBoundObserver<>(new NitBoundCallback<T>() {
                     @Override
                     public void onLoading(Call call) {
                         super.onLoading(call);
-                        mRefreshStateLiveData.setValue(false);
+                        mRefreshStateLiveData.set(false);
+                        mRefreshStateLiveData.notifyChange();
                     }
 
                     @Override
@@ -106,6 +110,8 @@ public abstract class NitCommonListVm extends NitCommonVm {
                         super.onLoading();
                         loadingState = true;
                         if (mPage == 1) {
+                            mRefreshStateNodataLiveData.set(false);
+                            mRefreshStateNodataLiveData.notifyChange();
                             if (mIsfirstLoad) {
                                 mEmptycommand.set(EmptyStatus.BdLoading);
                                 setLoadControl(false);
@@ -116,7 +122,7 @@ public abstract class NitCommonListVm extends NitCommonVm {
                     }
 
                     @Override
-                    public void onComplete(Resource<Object> resource) {
+                    public void onComplete(Resource<T> resource) {
                         super.onComplete(resource);
                         loadingState = false;
                         mIsfirstLoad = false;
@@ -124,15 +130,29 @@ public abstract class NitCommonListVm extends NitCommonVm {
                             mItems.clear();
                         }
                         if (resource.data != null) {
-                            mEmptycommand.set(EmptyStatus.BdHiden);
-                            mItems.addAll(formartData(resource.data));
-                            mPage++;
                             setLoadControl(true);
+                            mEmptycommand.set(EmptyStatus.BdHiden);
+                            if (resource.data instanceof List) {
+                                if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
+                                    mRefreshStateNodataLiveData.set(true);
+                                } else {
+                                    mRefreshStateNodataLiveData.set(false);
+                                    mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
+                                }
+                                mRefreshStateNodataLiveData.notifyChange();
+                            } else {
+                                mItems.add((BaseItemModel) resource.data);
+                                setLoadControl(true);
+                            }
+                            mPage++;
                         } else {
                             if (mItems.size() == 0) { // 暂无数据
                                 mEmptycommand.set(EmptyStatus.BdEmpty);
-                                setLoadControl(false);
+                            } else {
+                                mRefreshStateNodataLiveData.set(true);
+                                mRefreshStateNodataLiveData.notifyChange();
                             }
+                            setLoadControl(false);
                         }
                         mCompleteCommand.set(true);
                         mCompleteCommand.notifyChange();
@@ -141,20 +161,21 @@ public abstract class NitCommonListVm extends NitCommonVm {
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        mRefreshStateLiveData.setValue(true);
+                        mRefreshStateLiveData.set(true);
+                        mRefreshStateLiveData.notifyChange();
                         loadingState = false;
                         mCompleteCommand.set(true);
                         mCompleteCommand.notifyChange();
                     }
 
                     @Override
-                    public void onBusinessError(Resource<Object> resource) {
+                    public void onBusinessError(Resource<T> resource) {
                         super.onBusinessError(resource);
                         setLoadControl(false);
                     }
 
                     @Override
-                    public void onNetworkError(Resource<Object> resource) {
+                    public void onNetworkError(Resource<T> resource) {
                         super.onNetworkError(resource);
                         mCompleteCommand.set(true);
                         mCompleteCommand.notifyChange();
@@ -186,11 +207,12 @@ public abstract class NitCommonListVm extends NitCommonVm {
     /*
      * 服务端接口
      * */
-    public abstract LiveData<ApiResponse<BaseResponse<Object>>> getServicefun(String apiurl, HashMap<String, String> param);
+    public abstract LiveData<ApiResponse<BaseResponse<T>>> getServicefun(String apiurl, HashMap<String, String> param);
 
     /*
-     * 格式化数据
+     * 条目点击事件
      * */
-    public abstract List<BaseItemModel> formartData(Object o);
+    public void ItemClick(BaseItemModel item, View view) {
+    }
 
 }

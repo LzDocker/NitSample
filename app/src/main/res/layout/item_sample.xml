@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.nitsample.vo.SampleItemVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.common.common.vm.NitCommonListVm" />
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/open_liner_bg_shape"
+        android:gravity="center"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+        android:text="@{item.title}" />
+
+    <!-- android:onClick="@{(view)->viewmodel.ItemClick(item,view)}"-->
+
+</layout>

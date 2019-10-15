@@ -90,25 +90,4 @@ dependencies {
     // oss
     api 'com.aliyun.dpa:oss-android-sdk:2.9.2'
 
-    // ali video
-//    api('com.aliyun.ams:alicloud-android-ha-adapter:1.1.0.6.2-open@aar') {
-//        transitive = true
-//        exclude module: 'alicloud-android-utdid'
-//    }
-//    api('com.aliyun.ams:alicloud-android-ha-ut-analytics:1.1.0.1-open@aar') {
-//        transitive = true
-//        exclude module: 'alicloud-android-utdid'
-//    }
-
-    api(name: 'AlivcPlayer-3.4.9', ext: 'aar') {
-        transitive = true
-    }
-    api(name: 'AliyunVodPlayer-3.4.9', ext: 'aar') {
-        transitive = true
-    }
-    api(name: 'AlivcReporter-1.2', ext: 'aar') {
-        transitive = true
-    }
-
-
 }

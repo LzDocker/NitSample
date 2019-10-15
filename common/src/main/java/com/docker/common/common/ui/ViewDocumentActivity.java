@@ -13,7 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.R;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.video.vm.AliPlayerViewModel;
+import com.docker.common.common.vm.NitEmptyVm;
 import com.docker.common.common.widget.SuperFileView;
 import com.docker.common.databinding.CommonViewDocumentBinding;
 import com.docker.core.base.BaseActivity;
@@ -36,7 +36,7 @@ import retrofit2.Response;
  */
 
 @Route(path = AppRouter.ViewDoc_Document)
-public class ViewDocumentActivity extends BaseActivity<AliPlayerViewModel, CommonViewDocumentBinding> {//implements TbsReaderView.ReaderCallback {
+public class ViewDocumentActivity extends BaseActivity<NitEmptyVm, CommonViewDocumentBinding> {//implements TbsReaderView.ReaderCallback {
 
     private SuperFileView superFileView;
     @Inject
@@ -54,8 +54,8 @@ public class ViewDocumentActivity extends BaseActivity<AliPlayerViewModel, Commo
     }
 
     @Override
-    public AliPlayerViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(AliPlayerViewModel.class);
+    public NitEmptyVm getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(NitEmptyVm.class);
     }
 
     @Override

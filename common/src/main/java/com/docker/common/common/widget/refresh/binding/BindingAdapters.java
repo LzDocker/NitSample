@@ -37,5 +37,4 @@ public class BindingAdapters {
     public static void setoncompleteCommand(SmartRefreshLayout smartRefreshLayout, final ReplyCommandParam oncompleteCommand) {
         oncompleteCommand.exectue(smartRefreshLayout);
     }
-
 }

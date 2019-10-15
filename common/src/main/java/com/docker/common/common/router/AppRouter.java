@@ -69,4 +69,8 @@ public class AppRouter {
     public static final String HomeGroup = "/Home/";
 
 
+    public static final String VIDEOGROUP = "/video/";
+
+    public static final String VIDEOMAIN = VIDEOGROUP + "main";
+
 }

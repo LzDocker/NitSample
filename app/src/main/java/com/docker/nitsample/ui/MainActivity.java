@@ -1,6 +1,7 @@
 package com.docker.nitsample.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -17,6 +18,8 @@ import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
 import com.docker.nitsample.ui.index.IndexFragment;
+import com.docker.nitsample.ui.index.SampleFragment;
+import com.docker.nitsample.ui.index.SampleListFragment;
 import com.docker.nitsample.vm.MainViewModel;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
@@ -94,8 +97,8 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
             }
         });
         mBinding.tlHomeTab.setCurrentTab(0);
-        fragments.add(IndexFragment.newInstance());
-        fragments.add(IndexFragment.newInstance());
+        fragments.add(SampleFragment.newInstance());
+        fragments.add(SampleListFragment.newInstance());
         fragments.add(IndexFragment.newInstance());
         fragments.add(MineFragmentWj.newInstance());
         mBinding.viewpager.setOffscreenPageLimit(4);
