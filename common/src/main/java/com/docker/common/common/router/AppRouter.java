@@ -37,6 +37,8 @@ public class AppRouter {
 
     public static final String ViewDoc_Document = ViewDocGroup + "document";
 
+    public static final String AUDIO_DEMO = ViewDocGroup + "audio";
+
 
     public static final String CircleGroup = "/Circle/";
 
