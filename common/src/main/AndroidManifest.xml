@@ -10,6 +10,9 @@
         <activity
             android:name="com.docker.common.common.ui.ViewDocumentActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.docker.common.common.ui.AudioDemoActivity"
+            android:configChanges="orientation" />
 
     </application>
 

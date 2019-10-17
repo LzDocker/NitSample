@@ -36,6 +36,9 @@ public class SampleItemVo implements BaseItemModel {
                     staCirParam.setUtid("482e8892629068523502b63df24bc526");
                     ARouter.getInstance().build(AppRouter.CIRCLEHOME).withSerializable("mStartParam", staCirParam).navigation();
                     break;
+                case 4:
+                    ARouter.getInstance().build(AppRouter.AUDIO_DEMO).navigation();
+                    break;
             }
         };
     }

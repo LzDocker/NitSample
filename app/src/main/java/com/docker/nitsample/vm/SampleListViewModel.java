@@ -7,6 +7,7 @@ import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.httpmodule.ApiResponse;
 import com.docker.core.di.httpmodule.BaseResponse;
 import com.docker.nitsample.vo.SampleItemVo;
+
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -34,6 +35,9 @@ public class SampleListViewModel extends NitCommonListVm {
 
         SampleItemVo circle_sample = new SampleItemVo("圈子", 3);
         mItems.add(circle_sample);
+
+        SampleItemVo audio_sample = new SampleItemVo("音频", 4);
+        mItems.add(audio_sample);
     }
 
     @Override
