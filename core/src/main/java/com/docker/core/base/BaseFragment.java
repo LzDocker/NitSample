@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.docker.core.R;
+import com.docker.core.di.Injectable;
 import com.docker.core.util.AutoClearedValue;
 import com.gyf.immersionbar.components.ImmersionFragment;
 

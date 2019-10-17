@@ -62,16 +62,20 @@ public abstract class NetworkBoundResourceAuto<ResultType> {
         setZoneValue(Resource.loading(null, null));
         LiveData<ApiResponse<ResultType>> apiResponse = createSpecCall();
         result.addSource(apiResponse, response -> {
-            result.removeSource(apiResponse);
-            if (response != null && response.isSuccessful() && response.body != null) {
-                setZoneValue(Resource.success((ResultType) response.body));
+            if (response != null && response.isSuccessful() && response.call != null) {
+                result.setValue(Resource.loading(response.call));
             } else {
-                onFetchFailed();
-                result.addSource(apiResponse,
-                        newData -> {
-                            result.removeSource(apiResponse);
-                            setZoneValue(Resource.error(response.errorMessage, null));
-                        });
+                result.removeSource(apiResponse);
+                if (response != null && response.isSuccessful() && response.body != null) {
+                    setZoneValue(Resource.success((ResultType) response.body));
+                } else {
+                    onFetchFailed();
+                    result.addSource(apiResponse,
+                            newData -> {
+                                result.removeSource(apiResponse);
+                                setZoneValue(Resource.error(response.errorMessage, null));
+                            });
+                }
             }
         });
     }

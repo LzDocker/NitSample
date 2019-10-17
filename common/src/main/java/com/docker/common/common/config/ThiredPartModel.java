@@ -45,8 +45,6 @@ public class ThiredPartModel {
 
     public static void init(BaseApp app) {
         Utils.init(app);
-//        // 播放器初始化
-//        AliVcMediaPlayer.init(app);
 
         // 友盟
         UMConfigure.init(app, Umeng
@@ -76,7 +74,6 @@ public class ThiredPartModel {
         };
         //x5内核初始化接口
         QbSdk.initX5Environment(app, cb);
-
         // 极光推送
         JPushInterface.setDebugMode(false);
         JPushInterface.init(app);
@@ -93,22 +90,16 @@ public class ThiredPartModel {
 
         ARouter.init(app);
 
-
         // -------------video----------------------------
         //查看log
         VcPlayerLog.enableLog();
-
         //初始化播放器
         AliVcMediaPlayer.init(app);
-
         PlayerConfig.addDecoderPlan(new DecoderPlan(1, AlivcPlayer.class.getName(), "AlivcPlayer"));
         PlayerConfig.setDefaultPlanId(1);
-
         //use default NetworkEventProducer.
         PlayerConfig.setUseDefaultNetworkEventProducer(true);
-
         PlayerLibrary.init(app);
-
         //-----------video---------------------------------
 
     }

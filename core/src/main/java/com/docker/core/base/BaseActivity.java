@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
 import com.docker.core.R;
+import com.docker.core.di.Injectable;
 import com.docker.core.widget.ToolBar;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -30,7 +31,7 @@ import dagger.android.HasFragmentInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public abstract class BaseActivity<VM extends BaseVm, VB extends ViewDataBinding> extends AppCompatActivity
-        implements HasFragmentInjector, HasSupportFragmentInjector {
+        implements HasFragmentInjector, HasSupportFragmentInjector, Injectable {
     protected VB mBinding;
     public VM mViewModel;
     protected ToolBar mToolbar;
@@ -54,7 +55,7 @@ public abstract class BaseActivity<VM extends BaseVm, VB extends ViewDataBinding
     @CallSuper
     @MainThread
     protected void inject() {
-        AndroidInjection.inject(this);
+//        AndroidInjection.inject(this);
     }
 
     @Override

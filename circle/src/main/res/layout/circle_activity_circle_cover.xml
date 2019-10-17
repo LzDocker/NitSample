@@ -143,6 +143,7 @@
                             android:id="@+id/circle_ed_search"
                             android:layout_width="0dp"
                             android:layout_height="30dp"
+                            android:paddingLeft="10dp"
                             android:layout_weight="1"
                             android:background="@drawable/open_white_corner8_shape"
                             android:drawableLeft="@mipmap/serch_icon_nor"

@@ -8,7 +8,11 @@ ext {
             versionCode      : 100,
             versionName      : "1.0.0"
     ]
-
+    push = [
+            JPUSH_PKGNAME: "com.docker.nitsample",
+            JPUSH_APPKEY : "2e2ecab09929af8af20533ea",
+            JPUSH_CHANNEL: "developer-default",
+    ]
     dependencies = [
             "junit"                      : 'junit:junit:4.12',
 

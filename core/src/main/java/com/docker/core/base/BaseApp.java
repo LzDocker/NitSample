@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.docker.core.di.AppInjector;
 import com.docker.core.di.AppModule;
 import com.docker.core.di.httpmodule.GlobalConfigModule;
 import com.docker.core.di.httpmodule.HttpClientModule;
@@ -51,6 +52,7 @@ public abstract class BaseApp extends MultiDexApplication implements HasActivity
     @Inject
     DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
 
+
     private static BaseApp instance;
 
     public static BaseApp getInstance() {
@@ -72,6 +74,7 @@ public abstract class BaseApp extends MultiDexApplication implements HasActivity
     private void init() {
         instance = this;
         injectApp();
+        AppInjector.init(this);
     }
 
 
@@ -150,5 +153,6 @@ public abstract class BaseApp extends MultiDexApplication implements HasActivity
     protected AppModule getAppModule() {
         return new AppModule(this);
     }
+
 
 }
