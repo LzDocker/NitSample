@@ -51,7 +51,9 @@ public abstract class BaseFragment<VM extends BaseVm, VB extends ViewDataBinding
         AndroidSupportInjection.inject(this);
         super.onAttach(activity);
         this.mViewModel = this.getViewModel();
-        this.getLifecycle().addObserver(this.mViewModel);
+        if (this.mViewModel != null) {
+            this.getLifecycle().addObserver(this.mViewModel);
+        }
     }
 
     protected BaseActivity getHoldingActivity() {

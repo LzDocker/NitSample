@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 // 加载 commonlistfragment  入参
-public class CommonListReq implements Serializable {
+public class CommonListOptions implements Serializable {
 
     /*
      *   0  内部控制 （多用在 viewpager 嵌套）
@@ -15,7 +15,7 @@ public class CommonListReq implements Serializable {
      *
      *   3  smartc纯滚动
      * */
-    public int refreshState;
+    public int refreshState = 3;
 
 
     // 请求参数
@@ -35,5 +35,10 @@ public class CommonListReq implements Serializable {
      * */
     public String ApiUrl;
 
+
+    /*
+     * flag  标记coutainercommand
+     * */
+    public int falg = 0;
 
 }

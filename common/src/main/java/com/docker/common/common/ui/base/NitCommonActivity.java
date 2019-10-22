@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.docker.common.common.command.NitContainerCommand;
 import com.docker.core.base.BaseActivity;
 import com.docker.core.base.BaseVm;
 
@@ -21,8 +22,6 @@ public abstract class NitCommonActivity<VM extends BaseVm, VB extends ViewDataBi
         initView();
         initObserver();
         initRouter();
-
-
     }
 
     public abstract void initView();
@@ -30,5 +29,7 @@ public abstract class NitCommonActivity<VM extends BaseVm, VB extends ViewDataBi
     public abstract void initObserver();
 
     public abstract void initRouter();
+
+    public abstract NitContainerCommand providerNitContainerCommand(int flag);
 
 }

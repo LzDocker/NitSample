@@ -1,5 +1,8 @@
 package com.docker.common.common.ui.base;
 
+import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.databinding.Observable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,26 +10,52 @@ import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.common.R;
+import com.docker.common.common.command.ReponseCommand;
+import com.docker.common.common.command.ReponseInterface;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vm.NitSampleListViewModel;
 import com.docker.common.common.widget.refresh.SmartRefreshLayout;
 import com.docker.common.databinding.CommonFragmentListBinding;
+import com.docker.core.base.BaseVm;
 import com.docker.core.util.LayoutManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> {
+import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
+
+@Deprecated
+public class NitCommonListInstanceFragment extends NitCommonFragment<NitSampleListViewModel, CommonFragmentListBinding> {
 
     protected CommonListOptions commonListReq;
     private SmartRefreshLayout refreshLayout;
+    private ReponseInterface reponseInterface;
 
     @Override
     protected int getLayoutId() {
         return R.layout.common_fragment_list;
     }
+
+    @Override
+    protected NitSampleListViewModel getViewModel() {
+        return ViewModelProviders.of(this, factory).get(NitSampleListViewModel.class);
+    }
+
+
+    public static NitCommonListInstanceFragment newinstance(CommonListOptions commonListReq, ReponseInterface reponseCommand) {
+        NitCommonListInstanceFragment nitCommonListInstanceFragment = new NitCommonListInstanceFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constant.ContainerParam, commonListReq);
+        bundle.putSerializable("interface", reponseCommand);
+        nitCommonListInstanceFragment.setArguments(bundle);
+        return nitCommonListInstanceFragment;
+    }
+
 
     @Override
     protected void initView(View var1) {
@@ -36,15 +65,17 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        commonListReq = getArgument();
-        if (commonListReq != null) {
-            ARouter.getInstance().inject(this);
-            (mViewModel).initParam(commonListReq);
-            mBinding.get().setViewmodel(mViewModel);
-            initRvUi();
-            initRefreshUi();
-            initListener();
-        }
+        commonListReq = (CommonListOptions) getArguments().getSerializable(Constant.ContainerParam);
+        reponseInterface = (ReponseInterface) getArguments().getSerializable("interface");
+        mViewModel = (NitSampleListViewModel) reponseInterface.exectue(this);
+        this.getLifecycle().addObserver(mViewModel);
+        (mViewModel).initParam(commonListReq);
+        mBinding.get().setViewmodel(mViewModel);
+        reponseInterface.next(this);
+        initRvUi();
+        initRefreshUi();
+        initListener();
+
     }
 
     public void initListener() {
@@ -82,7 +113,6 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         });
     }
 
-    public abstract CommonListOptions getArgument();
 
     protected void initRvUi() {
         if (commonListReq.RvUi == 0) {
@@ -172,10 +202,21 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     @Override
+    public void initImmersionBar() {
+
+    }
+
+    @Override
     public void onReFresh(SmartRefreshLayout refreshLayout) {
         super.onReFresh(refreshLayout);
         this.refreshLayout = refreshLayout;
         (mViewModel).mPage = 1;
         (mViewModel).mItems.clear();
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
     }
 }

@@ -1,5 +1,7 @@
 package com.docker.nitsample.ui;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Handler;
@@ -9,11 +11,18 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.ui.MineFragmentWj;
+import com.bfhd.account.ui.index.FragmentMineIndex;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.ui.container.NitCommonContainerFragment;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
+import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
@@ -21,6 +30,8 @@ import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
 import com.docker.nitsample.vm.MainViewModel;
+import com.docker.nitsample.vm.SampleListViewModel;
+import com.docker.nitsample.vm.SampleNetListViewModel;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -28,6 +39,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.Disposable;
+import timber.log.Timber;
 
 public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
@@ -37,6 +51,7 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
     private List<Fragment> fragments = new ArrayList<>();
     private PopmenuWj mpopMenu;
     private String type;
+    private Disposable disposable;
 
     @Override
     protected int getLayoutId() {
@@ -62,6 +77,23 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         this.getLifecycle().addObserver(versionManager.Bind(this,
                 this, mViewModel.checkUpData(),
                 versionManager.TYPE_DIALOG, "com.bfhd.tjxq"));
+
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("Badger")) {
+                int num = (int) rxEvent.getR();
+                if (num > 0) {
+                    mBinding.tlHomeTab.showDot(3);
+                } else {
+                    mBinding.tlHomeTab.hideMsg(3);
+                }
+            }
+            if (rxEvent.getT().equals("change")) {
+                int num = (int) rxEvent.getR();
+                mBinding.tlHomeTab.setCurrentTab(num);
+                mBinding.viewpager.setCurrentItem(num - 1, false);
+            }
+        });
+
     }
 
     @Override
@@ -69,6 +101,20 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
 
     }
 
+    @Override
+    public NitContainerCommand providerNitContainerCommand(int flag) {
+
+        NitContainerCommand nitContainerCommand = null;
+        switch (flag) {
+            case 0:
+                nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
+                break;
+            case 1:
+                nitContainerCommand = (NitContainerCommand) () -> (SampleNetListViewModel.class);
+                break;
+        }
+        return nitContainerCommand;
+    }
 
     private void initMainTab() {
         mBinding.tlHomeTab.setTabData(new Bottombar().initBotombar());
@@ -81,7 +127,7 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
                 mBinding.viewpager.setCurrentItem(position, false);
                 if (position == 3) {
                     ImmersionBar.with(MainActivity.this)
-                            .fitsSystemWindows(false)
+                            .fitsSystemWindows(true)
                             .init();
                 } else {
                     ImmersionBar.with(MainActivity.this)
@@ -97,10 +143,25 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
             }
         });
         mBinding.tlHomeTab.setCurrentTab(0);
-        fragments.add(SampleFragment.newInstance());
-        fragments.add(SampleListFragment.newInstance());
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.falg = 0;
+//        fragments.add(SampleFragment.newInstance());
+        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
+        fragments.add(containerFragment);
+
+        CommonListOptions commonListOptions1 = new CommonListOptions();
+        commonListOptions1.falg = 1;
+        commonListOptions1.refreshState = 0;
+        commonListOptions1.RvUi = 0;
+        commonListOptions1.ReqParam.put("t", "dynamic");
+        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
+        commonListOptions1.ReqParam.put("memberid", "64");
+
+        fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
+//        fragments.add(SampleListFragment.newInstance());
+
         fragments.add(IndexFragment.newInstance());
-        fragments.add(MineFragmentWj.newInstance());
+        fragments.add(FragmentMineIndex.newInstance());
         mBinding.viewpager.setOffscreenPageLimit(4);
         mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
 
@@ -160,4 +221,9 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) disposable.dispose();
+    }
 }

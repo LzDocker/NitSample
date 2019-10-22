@@ -20,6 +20,15 @@ public class AppRouter {
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
 
+    /*
+     * 设置*/
+    public static final String ACCOUNT_ATTEN_SETTING = AccountGroup + "setting";
+
+    /*
+     * 设置*/
+    public static final String ACCOUNT_ATTEN_SETTING_FRAG = AccountGroup + "settingfragment";
+
+
 //    public static final String ACCOUNT_MESSAGE_LIST = AccountGroup + "message_list";
 
     public static final String ACCOUNT_MESSAGE_LIST = "/a/b";  // todo
@@ -74,5 +83,12 @@ public class AppRouter {
     public static final String VIDEOGROUP = "/video/";
 
     public static final String VIDEOMAIN = VIDEOGROUP + "main";
+
+
+    public static final String COMMONGROUP = "/common/";
+
+    public static final String COMMON_CONTAINER = COMMONGROUP + "container";
+
+    public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
 
 }

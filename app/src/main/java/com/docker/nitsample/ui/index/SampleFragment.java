@@ -5,13 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-import com.docker.common.common.model.CommonListReq;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.nitsample.vm.SampleListViewModel;
 
 public class SampleFragment extends NitCommonListFragment<SampleListViewModel> {
 
-    CommonListReq commonListReq = new CommonListReq();
+    CommonListOptions commonListReq = new CommonListOptions();
 
     public static SampleFragment newInstance() {
         return new SampleFragment();
@@ -34,7 +34,7 @@ public class SampleFragment extends NitCommonListFragment<SampleListViewModel> {
     }
 
     @Override
-    public CommonListReq getArgument() {
+    public CommonListOptions getArgument() {
         commonListReq.refreshState = 3;
         commonListReq.RvUi = 0;
         return commonListReq;

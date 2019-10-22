@@ -16,6 +16,7 @@ import com.bfhd.account.ui.AccounParseListActivity;
 import com.bfhd.account.ui.AccounPrivacySettingActivity;
 import com.bfhd.account.ui.AccounSelectCountryNumActivity;
 import com.bfhd.account.ui.AccounSettingActivity;
+import com.bfhd.account.ui.index.setting.AccounSettingFragment;
 import com.bfhd.account.ui.AccounSuggestionActivity;
 import com.bfhd.account.ui.AccounSystemMessageActivity;
 import com.bfhd.account.ui.AccountAddConstActivity;
@@ -43,6 +44,7 @@ import com.bfhd.account.ui.AccounPointRecordListActivity;
 import com.bfhd.account.ui.MineFragmentWj;
 import com.bfhd.account.ui.RegistActivity;
 import com.bfhd.account.ui.RegisteFragment;
+import com.bfhd.account.ui.index.FragmentMineIndex;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
@@ -230,6 +232,14 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounNoSeeActivity contributAccounNoSeeActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract FragmentMineIndex contributFragmentMineIndexInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounSettingFragment contributAccounSettingFragmentInjector();
 
 
 }

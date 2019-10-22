@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public abstract class NitCommonVm extends NitCommonBaseVm {
+public abstract class NitCommonVm<T> extends NitCommonBaseVm {
 
     @Inject
     CommonRepository commonRepository;
@@ -23,7 +23,7 @@ public abstract class NitCommonVm extends NitCommonBaseVm {
 
     }
 
-    public MediatorLiveData<Resource<Object>> RequestServer(LiveData<ApiResponse<BaseResponse<Object>>> servicefun) {
+    public MediatorLiveData<Resource<T>> RequestServer(LiveData<ApiResponse<BaseResponse<T>>> servicefun) {
         if (servicefun == null) {
             Timber.e("servicefun == null");
             return null;
@@ -31,7 +31,7 @@ public abstract class NitCommonVm extends NitCommonBaseVm {
         return commonRepository.noneChache(servicefun);
     }
 
-    public MediatorLiveData<Resource<Object>> RequestSpeicalServer(LiveData<ApiResponse<Object>> servicefun) {
+    public MediatorLiveData<Resource<T>> RequestSpeicalServer(LiveData<ApiResponse<T>> servicefun) {
         if (servicefun == null) {
             Timber.e("servicefun == null");
             return null;

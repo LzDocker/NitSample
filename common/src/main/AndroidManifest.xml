@@ -13,6 +13,22 @@
         <activity
             android:name="com.docker.common.common.ui.AudioDemoActivity"
             android:configChanges="orientation" />
+        <activity
+            android:name=".common.ui.container.NitCommonContainerActivity"
+            android:configChanges="orientation" />
+
+
+        <activity android:name="com.docker.common.common.ui.ArouterSchemeActivity">
+            <intent-filter>
+                <data
+                    android:host="m.aliyun.com"
+                    android:scheme="arouter" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
 
     </application>
 

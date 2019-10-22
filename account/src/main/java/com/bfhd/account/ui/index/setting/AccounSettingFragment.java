@@ -1,109 +1,54 @@
-package com.bfhd.account.ui;
+package com.bfhd.account.ui.index.setting;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.R;
-import com.bfhd.account.databinding.AccountActivitySettingBinding;
-import com.bfhd.account.vm.AccountIndexListViewModel;
 import com.bfhd.account.vm.AccountSettingViewModel;
-import com.bfhd.account.vm.AccountViewModel;
-import com.bfhd.account.vo.MyInfoVo;
-import com.bfhd.circle.base.Constant;
-import com.bfhd.circle.base.HivsBaseActivity;
-import com.bfhd.circle.ui.common.CommonH5Activity;
-import com.dcbfhd.utilcode.utils.ActivityUtils;
-import com.dcbfhd.utilcode.utils.AppUtils;
-import com.dcbfhd.utilcode.utils.FragmentUtils;
-import com.docker.common.common.command.ReponseInterface;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.ui.base.NitCommonListInstanceFragment;
-import com.docker.common.common.utils.GlideCacheUtil;
-import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
-import com.docker.core.base.BaseFragment;
 import com.docker.core.widget.BottomSheetDialog;
 
 import javax.inject.Inject;
 
-import cn.jpush.android.api.JPushInterface;
+import static android.app.Activity.RESULT_OK;
 
 /*
  * 设置
  **/
-@Route(path = AppRouter.ACCOUNT_ATTEN_SETTING)
-@Deprecated
-public class AccounSettingActivity extends HivsBaseActivity<AccountViewModel, AccountActivitySettingBinding> {
+@Route(path = AppRouter.ACCOUNT_ATTEN_SETTING_FRAG)
+public class AccounSettingFragment extends NitCommonListFragment<AccountSettingViewModel> {
 
-    @Inject
-    ViewModelProvider.Factory factory;
+    CommonListOptions commonListReq = new CommonListOptions();
 
     private BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
     private String tel;
+
+
     @Inject
     AppVersionManager versionManager;
 
     @Override
-    public AccountViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(AccountViewModel.class);
+    public AccountSettingViewModel getViewModel() {
+        return ViewModelProviders.of(this, factory).get(AccountSettingViewModel.class);
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.account_activity_setting;
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    protected void inject() {
-        super.inject();
-        ARouter.getInstance().inject(this);
+    public CommonListOptions getArgument() {
+        commonListReq.refreshState = 3;
+        commonListReq.RvUi = 0;
+        return commonListReq;
     }
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        tel = getIntent().getStringExtra("tel");
-//        mBinding.tvConstUs.setText(tel);
-    }
-
-    @Override
-    public void initView() {
-
-        // @Deprecated ----
-//        CommonListOptions commonListReq = new CommonListOptions();
-//        commonListReq.refreshState = 3;
-//        NitCommonListInstanceFragment nitCommonListInstanceFragment = NitCommonListInstanceFragment.newinstance(commonListReq, new ReponseInterface() {
-//            @Override
-//            public Object exectue(Object o) {
-//                return ViewModelProviders.of(((NitCommonFragment) o),
-//                        ((NitCommonFragment) o).factory).get(AccountIndexListViewModel.class);
-//            }
-//
-//            @Override
-//            public void next(Object o) {
-//                ((AccountIndexListViewModel) ((NitCommonListInstanceFragment) o).mViewModel).infoVoMutableLiveData.observe((NitCommonListInstanceFragment) o, new Observer<MyInfoVo>() {
-//                    @Override
-//                    public void onChanged(@Nullable MyInfoVo myInfoVo) {
-//
-//                    }
-//                });
-//                ((AccountIndexListViewModel) ((NitCommonListInstanceFragment) o).mViewModel).fetchMyInfo();
-//            }
-//        });
-//        FragmentUtils.add(getSupportFragmentManager(), nitCommonListInstanceFragment, R.id.frame);
-
-    }
 
 //    @Override
 //    public void initView() {
@@ -112,19 +57,19 @@ public class AccounSettingActivity extends HivsBaseActivity<AccountViewModel, Ac
 //
 //        // 修改密码
 //        mBinding.llModifyPwd.setOnClickListener(v -> {
-//            Intent intent = new Intent(AccounSettingActivity.this, FindPwdActivity.class);
+//            Intent intent = new Intent(AccounSettingFragment.this, FindPwdActivity.class);
 //            intent.putExtra("title", "修改密码");
 //            startActivity(intent);
 //
 //        });
 //        mBinding.llPersonInfo.setOnClickListener(v -> {
-//            Intent intent = new Intent(AccounSettingActivity.this, AccountPersonInfoActivity.class);
+//            Intent intent = new Intent(AccounSettingFragment.this, AccountPersonInfoActivity.class);
 //            startActivity(intent);
 //        });
 //
 //        //地址管理
 //        mBinding.llAddress.setOnClickListener(v -> {
-//            Intent intent = new Intent(AccounSettingActivity.this, AccounAddressListActivity.class);
+//            Intent intent = new Intent(AccounSettingFragment.this, AccounAddressListActivity.class);
 //            startActivity(intent);
 //        });
 //        mBinding.tvVersionvode.setText("版本号： " + AppUtils.getAppVersionName());
@@ -136,7 +81,7 @@ public class AccounSettingActivity extends HivsBaseActivity<AccountViewModel, Ac
 //        mBinding.llHelpCenter.setOnClickListener(v -> {
 ////            Intent intent = new Intent(AccounSettingActivity.this, AccountHelpCenterActivity.class);
 ////            startActivity(intent);
-//            CommonH5Activity.startMe(AccounSettingActivity.this, Constant.HelpCenterWeb, "帮助中心");
+//            CommonH5Activity.startMe(AccounSettingFragment.this, Constant.HelpCenterWeb, "帮助中心");
 //        });
 //
 //        // 联系我们
@@ -149,12 +94,12 @@ public class AccounSettingActivity extends HivsBaseActivity<AccountViewModel, Ac
 //            startActivity(dialIntent);
 //        });
 //        mBinding.llPrivacySetting.setOnClickListener(v -> {
-//            Intent intent = new Intent(AccounSettingActivity.this, AccounPrivacySettingActivity.class);
+//            Intent intent = new Intent(AccounSettingFragment.this, AccounPrivacySettingActivity.class);
 //            startActivity(intent);
 //        });
 //        //
 //        mBinding.llAboutUs.setOnClickListener(v -> {
-//            CommonH5Activity.startMe(AccounSettingActivity.this, Constant.AboutUsWeb, "关于我们");
+//            CommonH5Activity.startMe(AccounSettingFragment.this, Constant.AboutUsWeb, "关于我们");
 //        });
 //
 //        mBinding.tvChacheClear.setOnClickListener(v -> {
@@ -168,7 +113,7 @@ public class AccounSettingActivity extends HivsBaseActivity<AccountViewModel, Ac
 //                        break;
 //                }
 //            });
-//            bottomSheetDialog.show(AccounSettingActivity.this);
+//            bottomSheetDialog.show(AccounSettingFragment.this);
 //
 //        });
 //
@@ -195,12 +140,23 @@ public class AccounSettingActivity extends HivsBaseActivity<AccountViewModel, Ac
 //    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 10086 && resultCode == RESULT_OK) {
                 versionManager.install();
             }
         }
+    }
+
+    @Override
+    public void initImmersionBar() {
+
+    }
+
+    @Override
+    public void onVisible() {
+        super.onVisible();
+
     }
 }

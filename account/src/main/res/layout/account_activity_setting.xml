@@ -7,286 +7,292 @@
 
     </data>
 
-    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        app:srlEnablePureScrollMode="true">
+        android:id="@+id/frame"
+        ></FrameLayout>
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/scroll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:scrollbars="none">
+    <!--<com.docker.common.common.widget.refresh.SmartRefreshLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/white"-->
+    <!--app:srlEnablePureScrollMode="true">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:id="@+id/scroll"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/white"-->
+    <!--android:scrollbars="none">-->
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="新消息通知"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
-
-                    <CheckBox
-                        android:id="@+id/account_message_check"
-                        style="@style/account_CustomCheckBoxTheme"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_person_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:gravity="center_vertical"
-                        android:text="个人资料"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_modify_pwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:gravity="center_vertical"
-                        android:text="修改密码"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:gravity="center_vertical"
-                        android:text="地址管理"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:visibility="gone">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="版本更新"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="新消息通知"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
 
-                    <TextView
-                        android:id="@+id/tv_versionvode"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:drawablePadding="5dp"
-                        android:gravity="right|center"
-                        android:textSize="14sp" />
-                </LinearLayout>
+    <!--<View-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:layout_weight="1" />-->
 
-                <LinearLayout
-                    android:id="@+id/ll_help_center"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+    <!--<CheckBox-->
+    <!--android:id="@+id/account_message_check"-->
+    <!--style="@style/account_CustomCheckBoxTheme"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:gravity="center" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:gravity="center_vertical"
-                        android:text="帮助中心"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
+    <!--</LinearLayout>-->
 
-                    <!--<View-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:layout_weight="1"/>-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_person_info"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal">-->
 
-                </LinearLayout>
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="个人资料"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal">
+    <!--</LinearLayout>-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="清除缓存"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_modify_pwd"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal">-->
 
-                    <TextView
-                        android:id="@+id/tv_chache_clear"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:drawablePadding="5dp"
-                        android:gravity="right|center"
-                        android:hint="36.8M"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_privacy_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal">
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="修改密码"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:gravity="center_vertical"
-                        android:text="隐私设置"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
+    <!--</LinearLayout>-->
 
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_about_us"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:background="@drawable/open_liner_bg_shape"
-                    android:orientation="horizontal">
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_address"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawableRight="@mipmap/arrow_right"
-                        android:gravity="center_vertical"
-                        android:text="关于和太极"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="地址管理"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
 
-                </LinearLayout>
+    <!--</LinearLayout>-->
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:visibility="gone">-->
 
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginRight="14dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="版本更新"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="联系我们"
-                        android:textColor="#333"
-                        android:textSize="14sp" />
+    <!--<TextView-->
+    <!--android:id="@+id/tv_versionvode"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="right"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@null"-->
+    <!--android:drawablePadding="5dp"-->
+    <!--android:gravity="right|center"-->
+    <!--android:textSize="14sp" />-->
+    <!--</LinearLayout>-->
 
-                    <TextView
-                        android:id="@+id/tv_const_us"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:gravity="right|center"
-                        android:textColor="#B41D23"
-                        android:textSize="14sp" />
-                </LinearLayout>
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_help_center"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:visibility="gone">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="帮助中心"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--&lt;!&ndash;<View&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="1dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_weight="1"/>&ndash;&gt;-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="清除缓存"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_chache_clear"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="right"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@null"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:drawablePadding="5dp"-->
+    <!--android:gravity="right|center"-->
+    <!--android:hint="36.8M"-->
+    <!--android:textSize="14sp" />-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_privacy_setting"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="隐私设置"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_about_us"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="@drawable/open_liner_bg_shape"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:drawableRight="@mipmap/arrow_right"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:text="关于和太极"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--</LinearLayout>-->
 
 
-                <TextView
-                    android:id="@+id/tv_go_out"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginRight="14dp"
-                    android:background="#B41D23"
-                    android:gravity="center"
-                    android:text="退出登录"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:visibility="gone">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="联系我们"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_const_us"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="right"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@null"-->
+    <!--android:gravity="right|center"-->
+    <!--android:textColor="#B41D23"-->
+    <!--android:textSize="14sp" />-->
+    <!--</LinearLayout>-->
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_go_out"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45dp"-->
+    <!--android:layout_marginLeft="14dp"-->
+    <!--android:layout_marginTop="50dp"-->
+    <!--android:layout_marginRight="14dp"-->
+    <!--android:background="#B41D23"-->
+    <!--android:gravity="center"-->
+    <!--android:text="退出登录"-->
+    <!--android:textColor="@color/white" />-->
+    <!--</LinearLayout>-->
+    <!--</android.support.v4.widget.NestedScrollView>-->
+    <!--</com.docker.common.common.widget.refresh.SmartRefreshLayout>-->
 
 </layout>
 

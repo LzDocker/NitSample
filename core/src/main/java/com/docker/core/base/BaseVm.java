@@ -4,6 +4,9 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ViewModel;
+
+import java.io.Serializable;
+
 public class BaseVm extends ViewModel implements LifecycleObserver {
 
     public BaseVm() {

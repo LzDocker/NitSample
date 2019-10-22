@@ -10,7 +10,7 @@ import android.view.View;
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.model.BaseItemModel;
-import com.docker.common.common.model.CommonListReq;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.httpmodule.ApiResponse;
 import com.docker.core.di.httpmodule.BaseResponse;
@@ -35,13 +35,14 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      * vm 数据源
      * */
     public final MediatorLiveData<Object> mServerLiveData = new MediatorLiveData<Object>();
+
     public final ObservableBoolean mRefreshStateLiveData = new ObservableBoolean();
     public final ObservableBoolean mRefreshStateNodataLiveData = new ObservableBoolean();
-    public CommonListReq mCommonListReq;
+    public CommonListOptions mCommonListReq;
     public ObservableBoolean bdenable = new ObservableBoolean(false);
     public ObservableBoolean bdenablemore = new ObservableBoolean(false);
 
-    public void initParam(CommonListReq commonListReq) {
+    public void initParam(CommonListOptions commonListReq) {
         this.mCommonListReq = commonListReq;
     }
 
@@ -207,7 +208,9 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     /*
      * 服务端接口
      * */
-    public abstract LiveData<ApiResponse<BaseResponse<T>>> getServicefun(String apiurl, HashMap<String, String> param);
+    public LiveData<ApiResponse<BaseResponse<T>>> getServicefun(String apiurl, HashMap<String, String> param) {
+        return null;
+    }
 
     /*
      * 条目点击事件

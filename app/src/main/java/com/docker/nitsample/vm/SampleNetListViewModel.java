@@ -3,6 +3,7 @@ package com.docker.nitsample.vm;
 import android.arch.lifecycle.LiveData;
 
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.core.di.httpmodule.ApiResponse;
 import com.docker.core.di.httpmodule.BaseResponse;
 import com.docker.nitsample.api.SampleService;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
-public class SampleNetListViewModel extends NitCommonListVm {
+public class SampleNetListViewModel extends NitCommonContainerViewModel {
 
     @Inject
     SampleService sampleService;
