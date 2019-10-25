@@ -4,6 +4,7 @@ package com.docker.nitsample.di;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 import com.docker.nitsample.ui.MainActivity;
+import com.docker.nitsample.ui.MainModule;
 import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
@@ -24,7 +25,7 @@ public abstract class UIMoudle {
 //    abstract MainActivity contributeMainActivitytInjector();
 
     @ActivityScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity contributeMainActivitytInjector();
 
     @ActivityScope

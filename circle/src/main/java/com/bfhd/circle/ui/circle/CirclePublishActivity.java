@@ -24,7 +24,7 @@ import javax.inject.Inject;
 /*
  * 发布 编辑
  * */
-@Route(path = AppRouter.CIRCLE_CREATE)
+//@Route(path = AppRouter.CIRCLE_CREATE)
 public class CirclePublishActivity extends HivsBaseActivity<CircleViewModel, CircleActivityCircleCreateBinding> {
 
 

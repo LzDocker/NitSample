@@ -1,1 +1,1 @@
-include ':app', ':core', ':utilcode', ':common', ':opensource', ':circle', ':account', ':video', ':videobasic'
+include ':app', ':lib_core', ':lib_utilcode', ':lib_common', ':lib_opensource', ':circle', ':account', ':lib_video', ':videobasic'

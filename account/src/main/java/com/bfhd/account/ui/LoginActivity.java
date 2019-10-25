@@ -45,6 +45,7 @@ import javax.inject.Inject;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
+import timber.log.Timber;
 
 @Route(path = AppRouter.ACCOUNT_LOGIN)
 public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountActivityLoginBinding> {
@@ -61,6 +62,10 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
 
     @Inject
     DbCacheUtils dbCacheUtils;
+
+
+    @Inject
+    UserInfoVo userInfoVo;
 
     @Override
     public AccountViewModel getmViewModel() {
@@ -86,6 +91,8 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
         mToolbar.setBackgroundColor(getResources().getColor(R.color.account_white));
         mToolbar.setTitle("登录", getResources().getColor(R.color.account_black));
         initperssion();
+
+        Timber.e("===========" + userInfoVo.nickname);
     }
 
 

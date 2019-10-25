@@ -323,12 +323,12 @@ public class CommonWebFragment extends CommonFragment<CircleTypeViewModel, Circl
                 if (TextUtils.isEmpty(price) || TextUtils.isEmpty(pointaccount) || TextUtils.isEmpty(app_id) || TextUtils.isEmpty(id)) {
                     return;
                 }
-                ARouter.getInstance().build(AppRouter.Pro_Country_select)
-                        .withString("price", price)
-                        .withString("pointaccount", pointaccount)
-                        .withString("app_id", app_id)
-                        .withString("id", id)
-                        .navigation((Activity) context, 105);
+//                ARouter.getInstance().build(AppRouter.Pro_Country_select)
+//                        .withString("price", price)
+//                        .withString("pointaccount", pointaccount)
+//                        .withString("app_id", app_id)
+//                        .withString("id", id)
+//                        .navigation((Activity) context, 105);
             });
         }
 

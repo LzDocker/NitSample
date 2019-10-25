@@ -1,33 +1,19 @@
 package com.docker.common.common.ui.container;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.dcbfhd.utilcode.utils.FragmentUtils;
-import com.docker.common.R;
 import com.docker.common.common.command.NitContainerCommand;
-import com.docker.common.common.command.ReponseCommand;
-import com.docker.common.common.command.ReponseInterface;
 import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.CommonContainerOptions;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonListFragment;
-import com.docker.common.common.ui.base.NitCommonListInstanceFragment;
-import com.docker.common.common.vm.NitEmptyVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
-import com.docker.common.databinding.CommonActivityContainerBinding;
-import com.docker.core.base.BaseVm;
-
-import java.io.Serializable;
 
 /*
  * 通用容器单一fragment  todo --zxd

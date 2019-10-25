@@ -60,7 +60,7 @@ public abstract class UIModule {
 
 
     @ActivityScope
-    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    @ContributesAndroidInjector(modules = LoginModule.class)
     abstract LoginActivity contributeLoginActivityInjector();
 
     @ActivityScope
@@ -189,7 +189,6 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccountCityCoutainerFragment contributAccountCityCoutainerFragmentInjector();
 
-
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounAddressListActivity contributAccounAddressListActivityInjector();
@@ -240,7 +239,6 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounSettingFragment contributAccounSettingFragmentInjector();
-
 
 }
 
