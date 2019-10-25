@@ -13,6 +13,7 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -27,6 +28,7 @@ import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
 @Module
@@ -50,12 +52,22 @@ public class HttpClientModule {
                 .build();
     }
 
+//    @Singleton
+//    @Provides
+//    @Named("rxretrofit")
+//    Retrofit provideRxRetrofit(Retrofit.Builder builder, OkHttpClient client, HttpUrl httpUrl) {
+//        return builder
+//                .baseUrl(httpUrl)
+//                .client(client)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//    }
 
 
     private SSLSocketFactory createSSLSocketFactory() {
         SSLSocketFactory ssfFactory = null;
         try {
-            MyTrustManager  mMyTrustManager = new MyTrustManager();
+            MyTrustManager mMyTrustManager = new MyTrustManager();
             SSLContext sc = SSLContext.getInstance("TLS");
             sc.init(null, new TrustManager[]{mMyTrustManager}, new SecureRandom());
             ssfFactory = sc.getSocketFactory();
@@ -83,12 +95,12 @@ public class HttpClientModule {
     }
 
 
-
-
     @Singleton
     @Provides
     OkHttpClient provideClient(OkHttpClient.Builder okHttpClient, Interceptor intercept
-            , List<Interceptor> interceptors, CookieJar cookieJar) {
+            , List<Interceptor> interceptors, CookieJar cookieJar, HttpLoggingInterceptor loggingInterceptor) {
+
+
 //        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory(null, null, null);
         OkHttpClient.Builder builder = okHttpClient
                 .connectTimeout(60000L, TimeUnit.MILLISECONDS)
@@ -110,7 +122,8 @@ public class HttpClientModule {
 //                    }
 //                })
 //                .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
-                .addInterceptor(intercept);
+                .addInterceptor(intercept)
+                .addInterceptor(loggingInterceptor);
 
         if (interceptors != null && interceptors.size() > 0) {
             for (Interceptor interceptor : interceptors) {
@@ -159,4 +172,12 @@ public class HttpClientModule {
         return interceptor;
     }
 
+
+    @Singleton
+    @Provides
+    public HttpLoggingInterceptor provideLog() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return logging;
+    }
 }

@@ -82,9 +82,10 @@
 
                 <SeekBar
                     android:id="@+id/alivc_info_small_seekbar"
-                    style="@style/alivc_info_seekbar"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+                <!--style="@style/alivc_info_seekbar"-->
 
             </LinearLayout>
 

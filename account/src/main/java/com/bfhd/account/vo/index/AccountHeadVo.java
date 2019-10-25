@@ -2,9 +2,6 @@ package com.bfhd.account.vo.index;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.Observable;
-import android.databinding.ObservableField;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.vo.MyInfoVo;
@@ -17,7 +14,6 @@ import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
-
 public class AccountHeadVo extends BaseObservable implements BaseItemModel {
 
     @Override
