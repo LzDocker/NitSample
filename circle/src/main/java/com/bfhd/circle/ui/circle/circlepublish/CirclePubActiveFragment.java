@@ -113,12 +113,21 @@ public class CirclePubActiveFragment extends CommonFragment<CirclePublishViewMod
                 if (resourceBeans != null && resourceBeans.size() > 0) {
                     for (int i = 0; i < resourceBeans.size(); i++) {
                         LocalMedia localMedia = new LocalMedia();
-                        localMedia.setPictureType("1");
-                        if (!TextUtils.isEmpty(resourceBeans.get(i).getImg())) {
-                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
-                        } else {
+
+                        if (2 == resourceBeans.get(i).getT()) {
+                            localMedia.setPictureType("video/mp4");
                             localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getUrl()));
+                        } else {
+                            localMedia.setPictureType("image/jpeg");
+                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
                         }
+
+//                        localMedia.setPictureType("1");
+//                        if (!TextUtils.isEmpty(resourceBeans.get(i).getImg())) {
+//                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
+//                        } else {
+//                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getUrl()));
+//                        }
                         localMediaList.add(localMedia);
                     }
                 }

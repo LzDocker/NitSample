@@ -39,6 +39,9 @@ public class SampleItemVo implements BaseItemModel {
                 case 4:
                     ARouter.getInstance().build(AppRouter.AUDIO_DEMO).navigation();
                     break;
+                case 5:
+                    ARouter.getInstance().build(AppRouter.COMMON_XPOPUP).navigation();
+                    break;
             }
         };
     }

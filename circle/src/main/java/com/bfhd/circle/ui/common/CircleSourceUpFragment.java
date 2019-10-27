@@ -325,7 +325,8 @@ public class CircleSourceUpFragment extends CommonFragment<EmptyVm, CircleFragme
             if (selectList.size() > 0) {
                 LocalMedia media = selectList.get(position);
                 String pictureType = media.getPictureType();
-                int mediaType = PictureMimeType.pictureToVideo(pictureType);
+//                int mediaType = PictureMimeType.pictureToVideo(pictureType);
+                int mediaType = pictureOrVideo(pictureType);
                 switch (mediaType) {
                     case 1:
                         // 预览图片 可自定长按保存路径
@@ -355,6 +356,18 @@ public class CircleSourceUpFragment extends CommonFragment<EmptyVm, CircleFragme
                 }
             }
         });
+    }
+    public static int pictureOrVideo(String pictureType) {
+        if (!TextUtils.isEmpty(pictureType)) {
+            if (pictureType.startsWith("image")) {
+                return PictureConfig.TYPE_IMAGE;
+            } else if (pictureType.startsWith("video")) {
+                return PictureConfig.TYPE_VIDEO;
+            } else if (pictureType.startsWith("audio")) {
+                return PictureConfig.TYPE_AUDIO;
+            }
+        }
+        return PictureConfig.TYPE_IMAGE;
     }
 
     public UCrop.Options options;

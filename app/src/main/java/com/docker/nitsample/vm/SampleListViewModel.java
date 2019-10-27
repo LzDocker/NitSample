@@ -39,6 +39,8 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
 
         SampleItemVo audio_sample = new SampleItemVo("音频", 4);
         mItems.add(audio_sample);
+        SampleItemVo xPopup_sample = new SampleItemVo("XPopup", 5);
+        mItems.add(xPopup_sample);
     }
 
     @Override
