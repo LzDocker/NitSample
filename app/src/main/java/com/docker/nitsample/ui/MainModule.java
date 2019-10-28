@@ -8,6 +8,7 @@ import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.nitsample.ui.index.IndexFragment;
+import com.docker.nitsample.ui.index.SampleListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,8 @@ public class MainModule {
         commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
         commonListOptions1.ReqParam.put("memberid", "64");
         fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
-//        fragments.add(SampleListFragment.newInstance());
-        fragments.add(IndexFragment.newInstance());
+        fragments.add(SampleListFragment.newInstance());
+//        fragments.add(IndexFragment.newInstance());
         fragments.add(FragmentMineIndex.newInstance());
         return fragments;
     }

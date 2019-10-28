@@ -52,7 +52,6 @@ import okhttp3.OkHttpClient;
         com.docker.common.di.UIModule.class,
         com.docker.common.di.VmModule.class,
 
-
 })
 public interface AppComponent {
 

@@ -2,6 +2,7 @@ package com.docker.common.common.ui.base;
 
 import android.databinding.Observable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Pair;
@@ -34,8 +35,8 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         commonListReq = getArgument();
         if (commonListReq != null) {
             ARouter.getInstance().inject(this);
@@ -45,6 +46,12 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
             initRefreshUi();
             initListener();
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     public void initListener() {
