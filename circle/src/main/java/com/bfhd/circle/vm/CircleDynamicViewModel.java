@@ -591,7 +591,7 @@ public class CircleDynamicViewModel extends HivsBaseViewModel {
             if (serviceDataBean.getExtData().getResource().get(0).getT() == 2) {
                 String videoUrl = Constant.getCompleteImageUrl(serviceDataBean.getExtData().getResource().get(0).getUrl());
                 String thumbUrl = Constant.getCompleteImageUrl(serviceDataBean.getExtData().getResource().get(0).getImg());
-                ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
+//                ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
             }
         }
     }
@@ -601,7 +601,7 @@ public class CircleDynamicViewModel extends HivsBaseViewModel {
             if (serviceDataBean.getExtData().getResource().get(0).getT() == 2) {
                 String videoUrl = Constant.getCompleteImageUrl(serviceDataBean.getExtData().getResource().get(0).getUrl());
                 String thumbUrl = Constant.getCompleteImageUrl(serviceDataBean.getExtData().getResource().get(0).getImg());
-                ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
+//                ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
             } else {
                 List<ServiceDataBean.ResourceBean> resourceBeans = null;
                 int position = 0;
@@ -636,7 +636,7 @@ public class CircleDynamicViewModel extends HivsBaseViewModel {
         if (resourceBean.getT() == 2) {
             String videoUrl = Constant.getCompleteImageUrl(resourceBean.getUrl());
             String thumbUrl = Constant.getCompleteImageUrl(resourceBean.getImg());
-            ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
+//            ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
         } else {
             List<ServiceDataBean.ResourceBean> resourceBeans = null;
             int position = 0;

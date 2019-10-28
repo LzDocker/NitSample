@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.docker.video.assist.DataInter;
 import com.docker.video.assist.OnVideoViewEventHandler;
 import com.docker.video.assist.ReceiverGroupManager;
@@ -29,6 +30,7 @@ import com.docker.video.render.AspectRatio;
 import com.docker.video.render.IRender;
 import com.docker.video.widget.BaseVideoView;
 import com.docker.videobasic.R;
+
 
 /**
  * Description:

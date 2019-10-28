@@ -39,7 +39,7 @@ public class AppRouter {
 
     public static final String VideoGroup = "/Video/";
 
-    public static final String Video_Player = VideoGroup + "player";
+//    public static final String Video_Player = VideoGroup + "player";
 
 
     public static final String ViewDocGroup = "/ViewDoc/";
