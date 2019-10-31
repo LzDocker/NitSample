@@ -3,6 +3,7 @@ package com.docker.video.AlivcPlayer;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -18,6 +19,7 @@ import com.docker.video.event.EventKey;
 import com.docker.video.event.OnErrorEventListener;
 import com.docker.video.event.OnPlayerEventListener;
 import com.docker.video.player.BaseInternalPlayer;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +50,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     private Context applicationContext = AppContextAttach.getApplicationContext();
 
-    public AlivcPlayer(){
+    public AlivcPlayer() {
 
         init();
     }
@@ -60,33 +62,35 @@ public class AlivcPlayer extends BaseInternalPlayer {
 //        AliVcMediaPlayer.init(getApplicationContext());
 //    }
 
-    private void init(){
+    private void init() {
         mAliyunVodPlayer = createPlayer();
         applicationContext = AppContextAttach.getApplicationContext();
     }
 
-    private AliyunVodPlayer createPlayer(){
+    private AliyunVodPlayer createPlayer() {
 
         applicationContext = AppContextAttach.getApplicationContext();
 
         mAliyunVodPlayer = new AliyunVodPlayer(applicationContext);
+        String sdDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/video_cache";
+        mAliyunVodPlayer.setPlayingCache(true, sdDir, 60 * 60, 300);
 
         return mAliyunVodPlayer;
     }
 
     @Override
     public void setDataSource(DataSource dataSource) {
-        if (dataSource!=null){
+        if (dataSource != null) {
             openVideo(dataSource);
         }
     }
 
-    private void openVideo(DataSource dataSource){
+    private void openVideo(DataSource dataSource) {
         try {
-            if (mAliyunVodPlayer == null){
+            if (mAliyunVodPlayer == null) {
                 mAliyunVodPlayer = new AliyunVodPlayer(applicationContext);
                 mAliyunVodPlayer.setVideoScalingMode(IAliyunVodPlayer.VideoScalingMode.VIDEO_SCALING_MODE_SCALE_TO_FIT);
-            }else {
+            } else {
                 stop();
                 reset();
                 resetListener();
@@ -112,33 +116,33 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
             String url = dataSource.getData();
 
-            if (url!=null){
+            if (url != null) {
                 AliyunLocalSource.AliyunLocalSourceBuilder alsb = new AliyunLocalSource.AliyunLocalSourceBuilder();
                 alsb.setSource(url);
                 alsb.setTitle(dataSource.getTitle());
                 AliyunLocalSource localSource = alsb.build();
                 mAliyunVodPlayer.prepareAsync(localSource);
-            }else if(dataSource.aliyunLocalSource!=null){
+            } else if (dataSource.aliyunLocalSource != null) {
                 mAliyunVodPlayer.prepareAsync(dataSource.aliyunLocalSource);
-            } else if (dataSource.aliyunVidSts!=null){
+            } else if (dataSource.aliyunVidSts != null) {
                 mAliyunVodPlayer.prepareAsync(dataSource.aliyunVidSts);
-            }else if (dataSource.aliyunVidSource!=null){
+            } else if (dataSource.aliyunVidSource != null) {
                 mAliyunVodPlayer.prepareAsync(dataSource.aliyunVidSource);
-            }else if (dataSource.aliyunPlayAuth!=null){
+            } else if (dataSource.aliyunPlayAuth != null) {
                 mAliyunVodPlayer.prepareAsync(dataSource.aliyunPlayAuth);
             }
 
 
             Bundle bundle = BundlePool.obtain();
-            bundle.putSerializable(EventKey.SERIALIZABLE_DATA,dataSource);
-            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_DATA_SOURCE_SET,bundle);
+            bundle.putSerializable(EventKey.SERIALIZABLE_DATA, dataSource);
+            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_DATA_SOURCE_SET, bundle);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
             updateStatus(STATE_ERROR);
             mTargetState = STATE_ERROR;
-            submitErrorEvent(OnErrorEventListener.ERROR_EVENT_COMMON,null);
+            submitErrorEvent(OnErrorEventListener.ERROR_EVENT_COMMON, null);
         }
 
     }
@@ -146,11 +150,11 @@ public class AlivcPlayer extends BaseInternalPlayer {
     @Override
     public void setDisplay(SurfaceHolder surfaceHolder) {
         try {
-            if(mAliyunVodPlayer!=null){
+            if (mAliyunVodPlayer != null) {
                 mAliyunVodPlayer.setDisplay(surfaceHolder);
                 submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SURFACE_HOLDER_UPDATE, null);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -158,32 +162,32 @@ public class AlivcPlayer extends BaseInternalPlayer {
     @Override
     public void setSurface(Surface surface) {
         try {
-            if(mAliyunVodPlayer!=null){
+            if (mAliyunVodPlayer != null) {
                 mAliyunVodPlayer.setSurface(surface);
                 submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SURFACE_UPDATE, null);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void setVolume(float leftVolume, float rightVolume) {
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             mAliyunVodPlayer.setVolume((int) leftVolume);
         }
     }
 
     @Override
     public void setSpeed(float speed) {
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             mAliyunVodPlayer.setPlaySpeed(speed);
         }
     }
 
     @Override
     public boolean isPlaying() {
-        if(mAliyunVodPlayer!=null && getState()!= STATE_ERROR){
+        if (mAliyunVodPlayer != null && getState() != STATE_ERROR) {
             return mAliyunVodPlayer.isPlaying();
         }
         return false;
@@ -191,10 +195,10 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public int getCurrentPosition() {
-        if(mAliyunVodPlayer!=null&& (getState()== STATE_PREPARED
-                || getState()== STATE_STARTED
-                || getState()== STATE_PAUSED
-                || getState()== STATE_PLAYBACK_COMPLETE)){
+        if (mAliyunVodPlayer != null && (getState() == STATE_PREPARED
+                || getState() == STATE_STARTED
+                || getState() == STATE_PAUSED
+                || getState() == STATE_PLAYBACK_COMPLETE)) {
             return (int) mAliyunVodPlayer.getCurrentPosition();
         }
         return 0;
@@ -202,10 +206,10 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public int getDuration() {
-        if(mAliyunVodPlayer!=null
-                && getState()!= STATE_ERROR
-                && getState()!= STATE_INITIALIZED
-                && getState()!= STATE_IDLE){
+        if (mAliyunVodPlayer != null
+                && getState() != STATE_ERROR
+                && getState() != STATE_INITIALIZED
+                && getState() != STATE_IDLE) {
             return (int) mAliyunVodPlayer.getDuration();
         }
         return 0;
@@ -219,7 +223,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public int getVideoWidth() {
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             return mAliyunVodPlayer.getVideoWidth();
         }
         return 0;
@@ -227,7 +231,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public int getVideoHeight() {
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             return mAliyunVodPlayer.getVideoHeight();
         }
         return 0;
@@ -235,26 +239,26 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public void start() {
-        if (mAliyunVodPlayer!=null &&
-                (getState()==STATE_PREPARED
-                        || getState()==STATE_PAUSED
-                        || getState()==STATE_PLAYBACK_COMPLETE
-                        || getState()== STATE_INITIALIZED)){
+        if (mAliyunVodPlayer != null &&
+                (getState() == STATE_PREPARED
+                        || getState() == STATE_PAUSED
+                        || getState() == STATE_PLAYBACK_COMPLETE
+                        || getState() == STATE_INITIALIZED)) {
 
             mAliyunVodPlayer.start();
             updateStatus(STATE_STARTED);
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_START, null);
         }
         mTargetState = STATE_STARTED;
-        Log.e(TAG,"start---");
+        Log.e(TAG, "start---");
     }
 
     @Override
     public void start(int msc) {
-        if(msc > 0){
+        if (msc > 0) {
             startSeekPos = msc;
         }
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             start();
         }
     }
@@ -262,12 +266,12 @@ public class AlivcPlayer extends BaseInternalPlayer {
     @Override
     public void pause() {
         try {
-            if (mAliyunVodPlayer!=null){
+            if (mAliyunVodPlayer != null) {
                 mAliyunVodPlayer.pause();
                 updateStatus(STATE_PAUSED);
                 submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_PAUSE, null);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         mTargetState = STATE_PAUSED;
@@ -276,12 +280,12 @@ public class AlivcPlayer extends BaseInternalPlayer {
     @Override
     public void resume() {
         try {
-            if (mAliyunVodPlayer!=null){
+            if (mAliyunVodPlayer != null) {
                 mAliyunVodPlayer.resume();
                 updateStatus(STATE_STARTED);
                 submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_RESUME, null);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         mTargetState = STATE_STARTED;
@@ -289,10 +293,10 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public void seekTo(int msc) {
-        if (mAliyunVodPlayer!=null && (getState()== STATE_PREPARED
-                || getState()== STATE_STARTED
-                || getState()== STATE_PAUSED
-                || getState()== STATE_PLAYBACK_COMPLETE)){
+        if (mAliyunVodPlayer != null && (getState() == STATE_PREPARED
+                || getState() == STATE_STARTED
+                || getState() == STATE_PAUSED
+                || getState() == STATE_PLAYBACK_COMPLETE)) {
 
             mAliyunVodPlayer.seekTo(msc);
             Bundle bundle = BundlePool.obtain();
@@ -303,10 +307,10 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public void stop() {
-        if (mAliyunVodPlayer!=null && (getState()== STATE_PREPARED
-                || getState()== STATE_STARTED
-                || getState()== STATE_PAUSED
-                || getState()== STATE_PLAYBACK_COMPLETE)){
+        if (mAliyunVodPlayer != null && (getState() == STATE_PREPARED
+                || getState() == STATE_STARTED
+                || getState() == STATE_PAUSED
+                || getState() == STATE_PLAYBACK_COMPLETE)) {
 
             mAliyunVodPlayer.stop();
             updateStatus(STATE_STOPPED);
@@ -317,7 +321,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
     @Override
     public void reset() {
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             mAliyunVodPlayer.reset();
             updateStatus(STATE_IDLE);
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_RESET, null);
@@ -326,22 +330,22 @@ public class AlivcPlayer extends BaseInternalPlayer {
     }
 
 
-
     @Override
     public void destroy() {
-        if(mAliyunVodPlayer!=null){
+        if (mAliyunVodPlayer != null) {
             updateStatus(STATE_END);
             resetListener();
             mAliyunVodPlayer.release();
             submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_DESTROY, null);
         }
     }
+
     private final int MEDIA_INFO_NETWORK_BANDWIDTH = 703;
     private long mBandWidth;
     IAliyunVodPlayer.OnInfoListener mInfoListener = new IAliyunVodPlayer.OnInfoListener() {
         @Override
         public void onInfo(int arg1, int arg2) {
-            Log.e(TAG,"mInfoListener--"+arg1+"--"+arg2);
+            Log.e(TAG, "mInfoListener--" + arg1 + "--" + arg2);
             switch (arg1) {
                 case MediaPlayer.MEDIA_INFO_VIDEO_TRACK_LAGGING:
                     Log.e(TAG, "MEDIA_INFO_VIDEO_TRACK_LAGGING:");
@@ -349,42 +353,42 @@ public class AlivcPlayer extends BaseInternalPlayer {
                 case MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START:
                     Log.e(TAG, "MEDIA_INFO_VIDEO_RENDERING_START");
                     startSeekPos = 0;
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_RENDER_START,null);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_RENDER_START, null);
                     break;
                 case MediaPlayer.MEDIA_INFO_BUFFERING_START:
                     Log.e(TAG, "MEDIA_INFO_BUFFERING_START:" + arg2);
                     Bundle bundle = BundlePool.obtain();
                     bundle.putLong(EventKey.LONG_DATA, mBandWidth);
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_START,bundle);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_START, bundle);
                     break;
                 case MediaPlayer.MEDIA_INFO_BUFFERING_END:
                     Log.e(TAG, "MEDIA_INFO_BUFFERING_END:" + arg2);
                     Bundle bundle1 = BundlePool.obtain();
                     bundle1.putLong(EventKey.LONG_DATA, mBandWidth);
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_END,bundle1);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BUFFERING_END, bundle1);
                     break;
                 case MediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
                     Log.e(TAG, "MEDIA_INFO_BAD_INTERLEAVING:");
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BAD_INTERLEAVING,null);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_BAD_INTERLEAVING, null);
                     break;
                 case MediaPlayer.MEDIA_INFO_NOT_SEEKABLE:
                     Log.e(TAG, "MEDIA_INFO_NOT_SEEKABLE:");
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_NOT_SEEK_ABLE,null);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_NOT_SEEK_ABLE, null);
                     break;
                 case MediaPlayer.MEDIA_INFO_METADATA_UPDATE:
                     Log.e(TAG, "MEDIA_INFO_METADATA_UPDATE:");
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_METADATA_UPDATE,null);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_METADATA_UPDATE, null);
                     break;
                 case MediaPlayer.MEDIA_INFO_UNSUPPORTED_SUBTITLE:
                     Log.e(TAG, "MEDIA_INFO_UNSUPPORTED_SUBTITLE:");
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_UNSUPPORTED_SUBTITLE,null);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_UNSUPPORTED_SUBTITLE, null);
                     break;
                 case MediaPlayer.MEDIA_INFO_SUBTITLE_TIMED_OUT:
                     Log.e(TAG, "MEDIA_INFO_SUBTITLE_TIMED_OUT:");
-                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SUBTITLE_TIMED_OUT,null);
+                    submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SUBTITLE_TIMED_OUT, null);
                     break;
                 case MEDIA_INFO_NETWORK_BANDWIDTH:
-                    Log.e(TAG,"band_width : " + arg2);
+                    Log.e(TAG, "band_width : " + arg2);
                     mBandWidth = arg2 * 1000;
                     break;
             }
@@ -394,8 +398,8 @@ public class AlivcPlayer extends BaseInternalPlayer {
     IAliyunVodPlayer.OnSeekCompleteListener mOnSeekCompleteListener = new IAliyunVodPlayer.OnSeekCompleteListener() {
         @Override
         public void onSeekComplete() {
-            Log.e(TAG,"EVENT_CODE_SEEK_COMPLETE");
-            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SEEK_COMPLETE,null);
+            Log.e(TAG, "EVENT_CODE_SEEK_COMPLETE");
+            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_SEEK_COMPLETE, null);
         }
     };
 
@@ -404,24 +408,23 @@ public class AlivcPlayer extends BaseInternalPlayer {
         public void onCompletion() {
             updateStatus(STATE_PLAYBACK_COMPLETE);
             mTargetState = STATE_PLAYBACK_COMPLETE;
-            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_PLAY_COMPLETE,null);
+            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_PLAY_COMPLETE, null);
         }
     };
 
     IAliyunVodPlayer.OnErrorListener mErrorListener = new IAliyunVodPlayer.OnErrorListener() {
         @Override
         public void onError(int i, int i1, String s) {
-            Log.e(TAG, "mErrorListener--"+format.format(new Date())+"--"+i+"--"+i1+"--"+s);
+            Log.e(TAG, "mErrorListener--" + format.format(new Date()) + "--" + i + "--" + i1 + "--" + s);
 
             updateStatus(STATE_ERROR);
             mTargetState = STATE_ERROR;
             /* If an error handler has been supplied, use it and finish. */
             Bundle bundle = BundlePool.obtain();
-            submitErrorEvent(OnErrorEventListener.ERROR_EVENT_COMMON,bundle);
+            submitErrorEvent(OnErrorEventListener.ERROR_EVENT_COMMON, bundle);
             mAliyunVodPlayer.replay();
         }
     };
-
 
 
     IAliyunVodPlayer.OnTimeExpiredErrorListener onTimeExpiredErrorListener = new IAliyunVodPlayer.OnTimeExpiredErrorListener() {
@@ -435,7 +438,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
         @Override
         public void onUrlTimeExpired(String s, String s1) {
 
-            Log.e(TAG, "onUrlTimeExpiredListener"+format.format(new Date())+"--"+s+"--"+s1);
+            Log.e(TAG, "onUrlTimeExpiredListener" + format.format(new Date()) + "--" + s + "--" + s1);
 
             mAliyunVodPlayer.replay();
         }
@@ -455,8 +458,8 @@ public class AlivcPlayer extends BaseInternalPlayer {
             Bundle bundle = BundlePool.obtain();
             bundle.putInt(EventKey.INT_ARG1, mVideoWidth);
             bundle.putInt(EventKey.INT_ARG2, mVideoHeight);
-            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_SIZE_CHANGE,bundle);
-            Log.e(TAG,w+"w--"+h+"h--");
+            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_SIZE_CHANGE, bundle);
+            Log.e(TAG, w + "w--" + h + "h--");
         }
     };
 
@@ -487,8 +490,8 @@ public class AlivcPlayer extends BaseInternalPlayer {
             }
             logStrs.add(format.format(new Date()) + applicationContext.getString(R.string.alivc_log_first_frame_played));
 
-            for (String s:debugInfo.keySet()){
-                logStrs.add(format.format(new Date())+"---"+debugInfo.get(s));
+            for (String s : debugInfo.keySet()) {
+                logStrs.add(format.format(new Date()) + "---" + debugInfo.get(s));
             }
             for (String log : logStrs) {
                 Log.e(TAG, log);
@@ -499,7 +502,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
     IAliyunVodPlayer.OnPreparedListener mPreparedListener = new IAliyunVodPlayer.OnPreparedListener() {
         @Override
         public void onPrepared() {
-            Log.e(TAG,"onPrepared...");
+            Log.e(TAG, "onPrepared...");
             updateStatus(STATE_PREPARED);
             mAliyunVodPlayer.setVideoScalingMode(IAliyunVodPlayer.VideoScalingMode.VIDEO_SCALING_MODE_SCALE_TO_FIT);
             mVideoWidth = mAliyunVodPlayer.getVideoWidth();
@@ -509,7 +512,7 @@ public class AlivcPlayer extends BaseInternalPlayer {
             bundle.putInt(EventKey.INT_ARG1, mVideoWidth);
             bundle.putInt(EventKey.INT_ARG2, mVideoHeight);
 
-            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_PREPARED,bundle);
+            submitPlayerEvent(OnPlayerEventListener.PLAYER_EVENT_ON_PREPARED, bundle);
 
             int seekToPosition = startSeekPos;  // mSeekWhenPrepared may be changed after seekTo() call
             if (seekToPosition != 0) {
@@ -519,13 +522,13 @@ public class AlivcPlayer extends BaseInternalPlayer {
 
             // We don't know the video size yet, but should start anyway.
             // The video size might be reported to us later.
-            Log.e(TAG,"mTargetState = " + mTargetState);
+            Log.e(TAG, "mTargetState = " + mTargetState);
             if (mTargetState == STATE_STARTED) {
                 start();
-            }else if(mTargetState == STATE_PAUSED){
+            } else if (mTargetState == STATE_PAUSED) {
                 pause();
-            }else if(mTargetState == STATE_STOPPED
-                    || mTargetState == STATE_IDLE){
+            } else if (mTargetState == STATE_STOPPED
+                    || mTargetState == STATE_IDLE) {
                 reset();
             }
 
@@ -541,30 +544,30 @@ public class AlivcPlayer extends BaseInternalPlayer {
         public void onBufferingUpdate(int percent) {
             submitBufferingUpdate(percent, null);
 
-            Log.e(TAG,"Buffer--"+percent);
+            Log.e(TAG, "Buffer--" + percent);
         }
     };
 
     IAliyunVodPlayer.OnLoadingListener onLoadingListener = new IAliyunVodPlayer.OnLoadingListener() {
         @Override
         public void onLoadStart() {
-            Log.e(TAG,"onLoadStart--");
+            Log.e(TAG, "onLoadStart--");
         }
 
         @Override
         public void onLoadEnd() {
-            Log.e(TAG,"onLoadEnd--");
+            Log.e(TAG, "onLoadEnd--");
         }
 
         @Override
         public void onLoadProgress(int i) {
-            Log.e(TAG,"onLoadProgress--"+i);
+            Log.e(TAG, "onLoadProgress--" + i);
         }
     };
     IAliyunVodPlayer.OnAutoPlayListener onAutoPlayListener = new IAliyunVodPlayer.OnAutoPlayListener() {
         @Override
         public void onAutoPlayStarted() {
-            Log.e(TAG,"onAutoPlayStarted--");
+            Log.e(TAG, "onAutoPlayStarted--");
         }
     };
 
@@ -579,17 +582,16 @@ public class AlivcPlayer extends BaseInternalPlayer {
         }
     };
 
-    IAliyunVodPlayer.OnPcmDataListener onPcmDataListener= new IAliyunVodPlayer.OnPcmDataListener() {
+    IAliyunVodPlayer.OnPcmDataListener onPcmDataListener = new IAliyunVodPlayer.OnPcmDataListener() {
         @Override
         public void onPcmData(byte[] bytes, int i) {
-            Log.e(TAG,"onPcmDataListener--"+bytes+"--"+i);
+            Log.e(TAG, "onPcmDataListener--" + bytes + "--" + i);
         }
     };
 
 
-
-    private void resetListener(){
-        if(mAliyunVodPlayer==null)
+    private void resetListener() {
+        if (mAliyunVodPlayer == null)
             return;
         mAliyunVodPlayer.setOnPreparedListener(null);
         mAliyunVodPlayer.setOnVideoSizeChangedListener(null);

@@ -9,6 +9,7 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
+import com.docker.videobasic.ui.VideoListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,9 @@ public class MainModule {
         //shopType2=&shopType1=&t=goods&page=1&goodsui=product&uuid=8621e837a2a1579710a95143e5862424&memberid=64&companyid=1
         fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
 
-        fragments.add(SampleListFragment.newInstance());
+        fragments.add(VideoListFragment.newInstance());
+
+
         fragments.add(IndexFragment.newInstance());
 //        fragments.add(FragmentMineIndex.newInstance());
         return fragments;

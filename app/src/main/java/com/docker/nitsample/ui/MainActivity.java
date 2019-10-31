@@ -25,6 +25,7 @@ import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
 import com.docker.videobasic.ui.SingleVideoActivity;
 import com.docker.videobasic.util.videolist.TestActivity;
+import com.docker.videobasic.util.videolist.VideoListActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -69,6 +70,9 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
 
             Intent intent = new Intent(MainActivity.this, SingleVideoActivity.class);
             startActivity(intent);
+
+//            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
+//            startActivity(intent);
 
         });
     }

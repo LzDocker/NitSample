@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.videobasic.vo.VideoEntityVo" />
+
+        <import type="com.docker.videobasic.util.ImgUrlUtil" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.videobasic.vm.VideoListViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view)->viewmodel.ItemVideoClick(item,view)}">
+
+        <RelativeLayout
+            android:id="@+id/card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="6dp"
+            android:background="#EFEFEF">
+
+            <RelativeLayout
+                android:id="@+id/layBox"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <RelativeLayout
+                    android:id="@+id/album_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/albumImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:roundImgUrl="@{ImgUrlUtil.getCompleteImageUrl(item)}" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/player_icon_start_play" />
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:id="@+id/layoutContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                   />
+                <!--  app:visibleGone="@{!item.isPlayer}"-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/titleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layBox">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:padding="8dp"
+                    android:text="NAME"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

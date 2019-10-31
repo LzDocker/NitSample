@@ -37,8 +37,10 @@
                 app:fastScrollEnabled="false"
                 app:itemBinding="@{viewmodel.itemBinding}"
                 app:items="@{viewmodel.mItems}" />
-
         </com.docker.common.common.widget.refresh.SmartRefreshLayout>
 
+
     </com.docker.common.common.widget.empty.EmptyLayout>
+
+
 </layout>

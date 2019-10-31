@@ -3,16 +3,20 @@ package com.docker.common.api;
 import android.arch.lifecycle.LiveData;
 
 import com.docker.common.common.router.RoutersServerVo;
+import com.docker.common.common.vo.ServiceDataBean;
 import com.docker.common.common.vo.UpdateInfo;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
+import retrofit2.http.Url;
 
 public interface OpenService {
 

@@ -77,7 +77,6 @@ public class VideoListActivity extends NitCommonActivity<SingleVideoVm, SingleVi
         dataProvider.setTestData(videoBeans);
         mVideoView.setDataProvider(dataProvider);
         mVideoView.setDataSource(generatorDataSource(mDataSourceId));
-        mBinding.setItem("http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg");
 
 //        DataSource dataSource = new DataSource();
 //        dataSource.setData("https://oimryzjfe.qnssl.com/content/1F3D7F815F2C6870FB512B8CA2C3D2C1.mp4");

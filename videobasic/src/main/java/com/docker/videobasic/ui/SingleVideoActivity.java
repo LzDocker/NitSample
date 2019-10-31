@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.video.assist.DataInter;
@@ -21,7 +20,6 @@ import com.docker.video.widget.BaseVideoView;
 import com.docker.videobasic.R;
 import com.docker.videobasic.databinding.SingleVideoActivityBinding;
 import com.docker.videobasic.vm.SingleVideoVm;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +75,6 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
         dataProvider.setTestData(videoBeans);
         mVideoView.setDataProvider(dataProvider);
         mVideoView.setDataSource(generatorDataSource(mDataSourceId));
-        mBinding.setItem("http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg");
 
 //        DataSource dataSource = new DataSource();
 //        dataSource.setData("https://oimryzjfe.qnssl.com/content/1F3D7F815F2C6870FB512B8CA2C3D2C1.mp4");

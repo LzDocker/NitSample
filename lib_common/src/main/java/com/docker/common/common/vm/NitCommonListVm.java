@@ -207,6 +207,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      * 条目点击事件
      * */
     public void ItemClick(BaseItemModel item, View view) {
+
+
     }
 
 }

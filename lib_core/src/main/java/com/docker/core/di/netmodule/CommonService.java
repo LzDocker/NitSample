@@ -15,4 +15,7 @@ public interface CommonService {
     @GET
     @Streaming
     Call<ResponseBody> download(@Url String url);
+
+
+
 }
