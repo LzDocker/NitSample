@@ -358,7 +358,7 @@ public class CommonWebFragment extends CommonFragment<CircleTypeViewModel, Circl
                     if (resourceBeans.get(Integer.parseInt(position)).getT() == 2) {
                         String videoUrl = Constant.getCompleteImageUrl(resourceBeans.get(Integer.parseInt(position)).getUrl());
                         String thumbUrl = Constant.getCompleteImageUrl(resourceBeans.get(Integer.parseInt(position)).getImg());
-                        ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
+//                        ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
                     } else {
                         List<LocalMedia> localMediaList = new ArrayList<>();
                         for (int i = 0; i < resourceBeans.size(); i++) {
