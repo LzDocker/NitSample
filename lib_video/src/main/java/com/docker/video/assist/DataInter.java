@@ -40,6 +40,7 @@ public interface DataInter {
         String KEY_COMPLETE_COVER = "complete_cover";
         String KEY_ERROR_COVER = "error_cover";
         String KEY_CLOSE_COVER = "close_cover";
+        String KEY_THUMB_COVER = "thumb_cover";
     }
 
     interface PrivateEvent{

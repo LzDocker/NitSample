@@ -1510,32 +1510,4 @@ public class SampleServiceDataVo extends BaseObservable implements Serializable,
     }
 
 
-//    /*
-//     * 新闻列表中的图片itemview
-//     * */
-//    public ItemViewArg.ItemViewSelector<ServiceDataBean.ResourceBean> ResourceItemView = new ItemViewArg.ItemViewSelector<ServiceDataBean.ResourceBean>() {
-//        @Override
-//        public void select(ItemViewArg.ItemView itemView, int position, ServiceDataBean.ResourceBean item) {
-//            itemView.set(BR.item, R.layout.circle_item_dynamic_img_fin);
-//        }
-//
-//        @Override
-//        public int viewTypeCount() {
-//            return 1;
-//        }
-//    };
-//
-//    public final ObservableList<ServiceDataBean.ResourceBean> observableList = new ObservableArrayList<>();
-//
-//    public ObservableList<ServiceDataBean.ResourceBean> getResouceData(ServiceDataBean serviceDataBean) {
-//        observableList.clear();
-//        if (serviceDataBean.getExtData().getResource() != null && serviceDataBean.getExtData().getResource().size() > 0) {
-//            for (int i = 0; i < serviceDataBean.getExtData().getResource().size(); i++) {
-//                serviceDataBean.getExtData().getResource().get(i).setParentid(serviceDataBean.getDynamicid());
-//            }
-//            observableList.addAll(serviceDataBean.getExtData().getResource());
-//        }
-//        return observableList;
-//    }
-
 }

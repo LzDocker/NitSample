@@ -90,27 +90,6 @@ public class NitCommonListInstanceFragment extends NitCommonFragment<NitSampleLi
                 }
             }
         });
-        mViewModel.mRefreshStateLiveData.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if (mViewModel.mRefreshStateLiveData.get()) {
-                    if (refreshLayout != null) {
-                        refreshLayout.finishRefresh();
-                    }
-                }
-            }
-        });
-        (mViewModel).mRefreshStateNodataLiveData.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if ((mViewModel).mRefreshStateNodataLiveData.get()) {
-                    mBinding.get().refresh.setNoMoreData((mViewModel).mRefreshStateNodataLiveData.get());
-                    if (refreshLayout != null) {
-                        refreshLayout.setNoMoreData((mViewModel).mRefreshStateNodataLiveData.get());
-                    }
-                }
-            }
-        });
     }
 
 

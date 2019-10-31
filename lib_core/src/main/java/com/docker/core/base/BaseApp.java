@@ -13,9 +13,9 @@ import android.support.multidex.MultiDexApplication;
 
 import com.docker.core.di.AppInjector;
 import com.docker.core.di.AppModule;
-import com.docker.core.di.httpmodule.GlobalConfigModule;
-import com.docker.core.di.httpmodule.HttpClientModule;
-import com.docker.core.di.httpmodule.HttpRequestHandler;
+import com.docker.core.di.netmodule.GlobalConfigModule;
+import com.docker.core.di.netmodule.HttpClientModule;
+import com.docker.core.di.netmodule.HttpRequestHandler;
 import com.docker.core.di.module.cachemodule.CacheModule;
 
 import javax.inject.Inject;

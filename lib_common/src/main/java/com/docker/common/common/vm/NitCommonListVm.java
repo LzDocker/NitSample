@@ -1,19 +1,17 @@
 package com.docker.common.common.vm;
-
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 import android.view.View;
-
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.widget.empty.EmptyStatus;
-import com.docker.core.di.httpmodule.ApiResponse;
-import com.docker.core.di.httpmodule.BaseResponse;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
@@ -36,11 +34,10 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      * */
     public final MediatorLiveData<Object> mServerLiveData = new MediatorLiveData<Object>();
 
-    public final ObservableBoolean mRefreshStateLiveData = new ObservableBoolean();
-    public final ObservableBoolean mRefreshStateNodataLiveData = new ObservableBoolean();
     public CommonListOptions mCommonListReq;
     public ObservableBoolean bdenable = new ObservableBoolean(false);
     public ObservableBoolean bdenablemore = new ObservableBoolean(false);
+    public ObservableBoolean bdenablenodata = new ObservableBoolean(false);
 
     public void initParam(CommonListOptions commonListReq) {
         this.mCommonListReq = commonListReq;
@@ -102,8 +99,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     @Override
                     public void onLoading(Call call) {
                         super.onLoading(call);
-                        mRefreshStateLiveData.set(false);
-                        mRefreshStateLiveData.notifyChange();
                     }
 
                     @Override
@@ -111,8 +106,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                         super.onLoading();
                         loadingState = true;
                         if (mPage == 1) {
-                            mRefreshStateNodataLiveData.set(false);
-                            mRefreshStateNodataLiveData.notifyChange();
                             if (mIsfirstLoad) {
                                 mEmptycommand.set(EmptyStatus.BdLoading);
                                 setLoadControl(false);
@@ -125,6 +118,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     @Override
                     public void onComplete(Resource<T> resource) {
                         super.onComplete(resource);
+                        mCompleteCommand.set(true);
+                        mCompleteCommand.notifyChange();
                         loadingState = false;
                         mIsfirstLoad = false;
                         if (mPage == 1) {
@@ -135,35 +130,31 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                             mEmptycommand.set(EmptyStatus.BdHiden);
                             if (resource.data instanceof List) {
                                 if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
-                                    mRefreshStateNodataLiveData.set(true);
+                                    bdenablenodata.set(true);
                                 } else {
-                                    mRefreshStateNodataLiveData.set(false);
-                                    mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
+                                    bdenablenodata.set(false);
                                 }
-                                mRefreshStateNodataLiveData.notifyChange();
+                                bdenablenodata.notifyChange();
+                                mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
                             } else {
                                 mItems.add((BaseItemModel) resource.data);
-                                setLoadControl(true);
+
                             }
                             mPage++;
                         } else {
                             if (mItems.size() == 0) { // 暂无数据
                                 mEmptycommand.set(EmptyStatus.BdEmpty);
+                                setLoadControl(false);
                             } else {
-                                mRefreshStateNodataLiveData.set(true);
-                                mRefreshStateNodataLiveData.notifyChange();
+                                setLoadControl(true);
                             }
-                            setLoadControl(false);
                         }
-                        mCompleteCommand.set(true);
-                        mCompleteCommand.notifyChange();
+
                     }
 
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        mRefreshStateLiveData.set(true);
-                        mRefreshStateLiveData.notifyChange();
                         loadingState = false;
                         mCompleteCommand.set(true);
                         mCompleteCommand.notifyChange();
@@ -178,10 +169,10 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     @Override
                     public void onNetworkError(Resource<T> resource) {
                         super.onNetworkError(resource);
-                        mCompleteCommand.set(true);
-                        mCompleteCommand.notifyChange();
                         setLoadControl(false);
-                        mEmptycommand.set(EmptyStatus.BdError);
+                        if (mPageSize == 1) {
+                            mEmptycommand.set(EmptyStatus.BdError);
+                        }
                     }
                 }));
 

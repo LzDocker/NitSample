@@ -1,17 +1,12 @@
 package com.bfhd.account.vm;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MediatorLiveData;
 
-import com.bfhd.account.vo.MyInfoVo;
-import com.bfhd.account.vo.index.AccountHeadVo;
-import com.bfhd.account.vo.index.AccountIndexItemVo;
 import com.bfhd.account.vo.index.setting.SettingItemVo;
-import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.empty.EmptyStatus;
-import com.docker.core.di.httpmodule.ApiResponse;
-import com.docker.core.di.httpmodule.BaseResponse;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 
 import java.util.HashMap;
 

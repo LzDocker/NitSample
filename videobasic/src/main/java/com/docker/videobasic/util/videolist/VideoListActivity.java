@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.docker.video.assist.AssistPlayer;
 import com.docker.video.assist.DataInter;
 import com.docker.video.assist.ReceiverGroupManager;
@@ -25,11 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 /**
  * Description:
  * Created by PangHaHa on 18-8-29.
  * Copyright (c) 2018 PangHaHa All rights reserved.
  */
+
 public class VideoListActivity extends AppCompatActivity implements VideoListAdapter.OnListListener,
         OnReceiverEventListener, OnPlayerEventListener {
 
@@ -72,7 +76,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if(newState== RecyclerView.SCROLL_STATE_IDLE){
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
                     int first = manager.findFirstVisibleItemPosition();
                     int pos = manager.findFirstCompletelyVisibleItemPosition();
@@ -96,10 +100,10 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        isLandScape = newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE;
-        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+        isLandScape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             attachFullScreen();
-        }else if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             attachList();
         }
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_IS_LANDSCAPE, isLandScape);
@@ -107,17 +111,17 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
 
     @Override
     public void onBackPressed() {
-        if(isLandScape){
+        if (isLandScape) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             return;
         }
         super.onBackPressed();
     }
 
-    private void attachFullScreen(){
+    private void attachFullScreen() {
         mReceiverGroup.addReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER, new GestureCover(this));
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, true);
-        AssistPlayer.get().play(mContainer,null);
+        AssistPlayer.get().play(mContainer, null);
     }
 
     @Override
@@ -133,13 +137,13 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
         mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
         AssistPlayer.get().setReceiverGroup(mReceiverGroup);
-        if(isLandScape){
+        if (isLandScape) {
             attachFullScreen();
-        }else{
+        } else {
             attachList();
         }
         int state = AssistPlayer.get().getState();
-        if(state!= IPlayer.STATE_PLAYBACK_COMPLETE){
+        if (state != IPlayer.STATE_PLAYBACK_COMPLETE) {
             AssistPlayer.get().resume();
         }
     }
@@ -147,13 +151,13 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
     @Override
     protected void onPause() {
         super.onPause();
-        if(!toDetail){
+        if (!toDetail) {
             AssistPlayer.get().pause();
         }
     }
 
     private void attachList() {
-        if(mAdapter!=null){
+        if (mAdapter != null) {
             mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
             mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
             mAdapter.getListPlayLogic().attachPlay();
@@ -170,13 +174,13 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
 
     @Override
     public void onReceiverEvent(int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
             case DataInter.Event.EVENT_CODE_REQUEST_BACK:
                 onBackPressed();
                 break;
             case DataInter.Event.EVENT_CODE_REQUEST_TOGGLE_SCREEN:
-                setRequestedOrientation(isLandScape?
-                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                setRequestedOrientation(isLandScape ?
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT :
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
         }
@@ -184,7 +188,7 @@ public class VideoListActivity extends AppCompatActivity implements VideoListAda
 
     @Override
     public void onPlayerEvent(int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
             case OnPlayerEventListener.PLAYER_EVENT_ON_PLAY_COMPLETE:
                 AssistPlayer.get().stop();
                 break;

@@ -1,8 +1,8 @@
 package com.docker.core.di.component;
 import com.docker.core.base.BaseApp;
 import com.docker.core.di.AppModule;
-import com.docker.core.di.httpmodule.GlobalConfigModule;
-import com.docker.core.di.httpmodule.HttpClientModule;
+import com.docker.core.di.netmodule.GlobalConfigModule;
+import com.docker.core.di.netmodule.HttpClientModule;
 import com.docker.core.di.module.cachemodule.CacheDatabase;
 import com.docker.core.di.module.cachemodule.CacheModule;
 import com.google.gson.Gson;

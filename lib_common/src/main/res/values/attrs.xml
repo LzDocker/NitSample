@@ -91,9 +91,10 @@
         <attr name="srlFixedHeaderViewId" format="reference" />
         <attr name="srlFixedFooterViewId" format="reference" />
 
-        <attr name="bdcomplete" format="boolean" />
-        <attr name="bdenable" format="boolean" />
-        <attr name="bdenablemore" format="boolean" />
+        <attr name="bdcomplete" format="boolean" /> <!--加载完成-->
+        <attr name="bdenable" format="boolean" /> <!--是否可用-->
+        <attr name="bdenablemore" format="boolean" /> <!--加载更多是否可用-->
+        <attr name="bdenablenodata" format="boolean" /> <!--加载更多是否可用-->
 
     </declare-styleable>
 

@@ -62,14 +62,14 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
                 , WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.test_video_activity);
 
-        margin = PUtil.dip2px(this,2);
+        margin = PUtil.dip2px(this, 2);
 
         mVideoView = findViewById(R.id.videoView);
         testbut = findViewById(R.id.testbut);
         initPlay();
     }
 
-    private void initPlay(){
+    private void initPlay() {
         updateVideo(false);
 
         mVideoView.setOnPlayerEventListener(this);
@@ -95,93 +95,94 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
             public void onClick(View view) {
                 int i = mVideoView.getCurrentPosition();
                 int d = mVideoView.getDuration();
-                Log.e("getCurrentPosition---",i+"");
-                Log.e("getDuration---",d+"");
+                Log.e("getCurrentPosition---", i + "");
+                Log.e("getDuration---", d + "");
             }
         });
 
     }
 
-    private DataSource generatorDataSource(long id){
+    private DataSource generatorDataSource(long id) {
         DataSource dataSource = new DataSource();
         dataSource.setId(id);
         return dataSource;
     }
 
-    public void setRenderSurfaceView(View view){
+    public void setRenderSurfaceView(View view) {
         mVideoView.setRenderType(IRender.RENDER_TYPE_SURFACE_VIEW);
     }
 
-    public void setRenderTextureView(View view){
+    public void setRenderTextureView(View view) {
+
         mVideoView.setRenderType(IRender.RENDER_TYPE_TEXTURE_VIEW);
     }
 
-    public void onStyleSetRoundRect(View view){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            mVideoView.setRoundRectShape(PUtil.dip2px(this,25));
-        }else{
+    public void onStyleSetRoundRect(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mVideoView.setRoundRectShape(PUtil.dip2px(this, 25));
+        } else {
             Toast.makeText(this, "not support", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onStyleSetOvalRect(View view){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+    public void onStyleSetOvalRect(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mVideoView.setOvalRectShape();
-        }else{
+        } else {
             Toast.makeText(this, "not support", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onShapeStyleReset(View view){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+    public void onShapeStyleReset(View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mVideoView.clearShapeStyle();
-        }else{
+        } else {
             Toast.makeText(this, "not support", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void onAspect16_9(View view){
+    public void onAspect16_9(View view) {
         mVideoView.setAspectRatio(AspectRatio.AspectRatio_16_9);
     }
 
-    public void onAspect4_3(View view){
+    public void onAspect4_3(View view) {
         mVideoView.setAspectRatio(AspectRatio.AspectRatio_4_3);
     }
 
-    public void onAspectFill(View view){
+    public void onAspectFill(View view) {
         mVideoView.setAspectRatio(AspectRatio.AspectRatio_FILL_PARENT);
     }
 
-    public void onAspectFit(View view){
+    public void onAspectFit(View view) {
         mVideoView.setAspectRatio(AspectRatio.AspectRatio_FIT_PARENT);
     }
 
-    public void onAspectOrigin(View view){
+    public void onAspectOrigin(View view) {
         mVideoView.setAspectRatio(AspectRatio.AspectRatio_ORIGIN);
     }
 
-    public void onDecoderChangeMediaPlayer(View view){
+    public void onDecoderChangeMediaPlayer(View view) {
         int curr = mVideoView.getCurrentPosition();
-        if(mVideoView.switchDecoder(PlayerConfig.DEFAULT_PLAN_ID)){
+        if (mVideoView.switchDecoder(PlayerConfig.DEFAULT_PLAN_ID)) {
             replay(curr);
         }
     }
 
 
-    private void replay(int msc){
+    private void replay(int msc) {
         mVideoView.setDataSource(generatorDataSource(mDataSourceId));
         mVideoView.start(msc);
     }
 
-    public void removeControllerCover(View view){
+    public void removeControllerCover(View view) {
         mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_CONTROLLER_COVER);
         Toast.makeText(this, "已移除", Toast.LENGTH_SHORT).show();
     }
 
-    public void addControllerCover(View view){
+    public void addControllerCover(View view) {
         IReceiver receiver = mReceiverGroup.getReceiver(DataInter.ReceiverKey.KEY_CONTROLLER_COVER);
-        if(receiver==null){
-            mReceiverGroup.addReceiver(DataInter.ReceiverKey.KEY_CONTROLLER_COVER, new ControllerCover(this,true));
+        if (receiver == null) {
+            mReceiverGroup.addReceiver(DataInter.ReceiverKey.KEY_CONTROLLER_COVER, new ControllerCover(this, true));
             Toast.makeText(this, "已添加", Toast.LENGTH_SHORT).show();
         }
     }
@@ -189,9 +190,9 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
     @Override
     protected void onPause() {
         super.onPause();
-        if(mVideoView.isInPlaybackState()){
+        if (mVideoView.isInPlaybackState()) {
             mVideoView.pause();
-        }else{
+        } else {
             mVideoView.stop();
         }
     }
@@ -199,10 +200,10 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
     @Override
     protected void onResume() {
         super.onResume();
-        if(mVideoView.isInPlaybackState()){
-            if(!userPause)
+        if (mVideoView.isInPlaybackState()) {
+            if (!userPause)
                 mVideoView.resume();
-        }else{
+        } else {
             mVideoView.rePlay(0);
         }
     }
@@ -215,7 +216,7 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
 
     @Override
     public void onBackPressed() {
-        if(isLandscape){
+        if (isLandscape) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             return;
         }
@@ -225,28 +226,28 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             isLandscape = true;
             updateVideo(true);
-        }else{
+        } else {
             isLandscape = false;
             updateVideo(false);
         }
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_IS_LANDSCAPE, isLandscape);
     }
 
-    private OnVideoViewEventHandler mOnEventAssistHandler = new OnVideoViewEventHandler(){
+    private OnVideoViewEventHandler mOnEventAssistHandler = new OnVideoViewEventHandler() {
         @Override
         public void onAssistHandle(BaseVideoView assist, int eventCode, Bundle bundle) {
             super.onAssistHandle(assist, eventCode, bundle);
-            switch (eventCode){
+            switch (eventCode) {
                 case DataInter.Event.CODE_REQUEST_PAUSE:
                     userPause = true;
                     break;
                 case DataInter.Event.EVENT_CODE_REQUEST_BACK:
-                    if(isLandscape){
+                    if (isLandscape) {
                         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    }else{
+                    } else {
                         finish();
                     }
                     break;
@@ -257,7 +258,7 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
                     break;
                 case DataInter.Event.EVENT_CODE_REQUEST_TOGGLE_SCREEN:
                     setRequestedOrientation(isLandscape ?
-                            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT :
                             ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     break;
                 case DataInter.Event.EVENT_CODE_ERROR_SHOW:
@@ -269,7 +270,7 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
 
     @Override
     public void onPlayerEvent(int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
             case OnPlayerEventListener.PLAYER_EVENT_ON_VIDEO_RENDER_START:
 
                 break;
@@ -282,7 +283,7 @@ public class TestActivity extends AppCompatActivity implements OnPlayerEventList
         }
     }
 
-    private void updateVideo(boolean landscape){
+    private void updateVideo(boolean landscape) {
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mVideoView.getLayoutParams();
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;

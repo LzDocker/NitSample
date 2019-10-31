@@ -1,11 +1,13 @@
 package com.docker.nitsample.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.docker.common.common.adapter.CommonpagerAdapter;
@@ -21,6 +23,8 @@ import com.docker.nitsample.databinding.ActivityMainBinding;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
+import com.docker.videobasic.ui.SingleVideoActivity;
+import com.docker.videobasic.util.videolist.TestActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -30,6 +34,9 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
+import static com.docker.common.common.router.AppRouter.HOME;
+
+@Route(path = HOME)
 public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject
@@ -58,7 +65,11 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         mToolbar.hide();
         initMainTab();
         mBinding.ivCenter.setOnClickListener(v -> {
-            showPopMenu();
+//            showPopMenu();
+
+            Intent intent = new Intent(MainActivity.this, SingleVideoActivity.class);
+            startActivity(intent);
+
         });
     }
 
@@ -187,7 +198,6 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         });
     }
 
-
     /**
      * 双击返回键退出
      */
@@ -199,12 +209,7 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
             } else {
                 Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
                 isExit = true;
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        isExit = false;
-                    }
-                }, 2000);
+                new Handler().postDelayed(() -> isExit = false, 2000);
             }
             return true;
         }

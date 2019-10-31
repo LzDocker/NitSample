@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 
 import com.docker.common.common.router.RoutersServerVo;
 import com.docker.common.common.vo.UpdateInfo;
-import com.docker.core.di.httpmodule.ApiResponse;
-import com.docker.core.di.httpmodule.BaseResponse;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 
 import java.util.HashMap;
 

@@ -38,7 +38,7 @@ import com.dcbfhd.utilcode.utils.NetworkUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.docker.common.common.utils.oss.MyOSSUtils;
-import com.docker.core.di.httpmodule.ApiResponse;
+import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.util.AppExecutors;
 import com.docker.core.widget.BottomSheetDialog;
 import com.luck.picture.lib.PictureSelector;
@@ -295,6 +295,9 @@ public class CircleSourceUpFragment extends CommonFragment<EmptyVm, CircleFragme
                                     break;
                             }
                         });
+                        if (gridIamgeAdapter == null) {
+                            initPicView();
+                        }
                         gridIamgeAdapter.setSelectMax(mSourceUpParam.sourceMaxNum);
                         bottomSheetDialog.show(CircleSourceUpFragment.this.getHoldingActivity());
                     } else {

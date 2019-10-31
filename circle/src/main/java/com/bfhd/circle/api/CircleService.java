@@ -27,8 +27,8 @@ import com.bfhd.circle.vo.TradingCommonVo;
 import com.bfhd.circle.vo.TypeVo;
 import com.docker.common.common.vo.RstServerVo;
 import com.docker.common.common.vo.ShareBean;
-import com.docker.core.di.httpmodule.ApiResponse;
-import com.docker.core.di.httpmodule.BaseResponse;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 
 import java.util.HashMap;
 import java.util.List;

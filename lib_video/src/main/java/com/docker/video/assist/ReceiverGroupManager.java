@@ -7,6 +7,7 @@ import com.docker.video.cover.ControllerCover;
 import com.docker.video.cover.ErrorCover;
 import com.docker.video.cover.GestureCover;
 import com.docker.video.cover.LoadingCover;
+import com.docker.video.cover.ThumbCover;
 import com.docker.video.receiver.GroupValue;
 import com.docker.video.receiver.ReceiverGroup;
 
@@ -15,6 +16,7 @@ import static com.docker.video.assist.DataInter.ReceiverKey.KEY_CONTROLLER_COVER
 import static com.docker.video.assist.DataInter.ReceiverKey.KEY_ERROR_COVER;
 import static com.docker.video.assist.DataInter.ReceiverKey.KEY_GESTURE_COVER;
 import static com.docker.video.assist.DataInter.ReceiverKey.KEY_LOADING_COVER;
+import static com.docker.video.assist.DataInter.ReceiverKey.KEY_THUMB_COVER;
 
 
 /**
@@ -25,13 +27,13 @@ public class ReceiverGroupManager {
 
     private static ReceiverGroupManager i;
 
-    private ReceiverGroupManager(){
+    private ReceiverGroupManager() {
     }
 
-    public static ReceiverGroupManager get(){
-        if(null==i){
-            synchronized (ReceiverGroupManager.class){
-                if(null==i){
+    public static ReceiverGroupManager get() {
+        if (null == i) {
+            synchronized (ReceiverGroupManager.class) {
+                if (null == i) {
                     i = new ReceiverGroupManager();
                 }
             }
@@ -39,11 +41,11 @@ public class ReceiverGroupManager {
         return i;
     }
 
-    public ReceiverGroup getLittleReceiverGroup(Context context){
+    public ReceiverGroup getLittleReceiverGroup(Context context) {
         return getLiteReceiverGroup(context, null);
     }
 
-    public ReceiverGroup getLittleReceiverGroup(Context context, GroupValue groupValue){
+    public ReceiverGroup getLittleReceiverGroup(Context context, GroupValue groupValue) {
         ReceiverGroup receiverGroup = new ReceiverGroup(groupValue);
         receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
         receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
@@ -51,30 +53,41 @@ public class ReceiverGroupManager {
         return receiverGroup;
     }
 
-    public ReceiverGroup getLiteReceiverGroup(Context context){
+    public ReceiverGroup getLiteReceiverGroup(Context context) {
         return getLiteReceiverGroup(context, null);
     }
 
-    public ReceiverGroup getLiteReceiverGroup(Context context, GroupValue groupValue){
+    public ReceiverGroup getLiteReceiverGroup(Context context, GroupValue groupValue) {
         ReceiverGroup receiverGroup = new ReceiverGroup(groupValue);
         receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
-        receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context,false));
+        receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context, false));
         receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
         receiverGroup.addReceiver(KEY_ERROR_COVER, new ErrorCover(context));
         return receiverGroup;
     }
 
-    public ReceiverGroup getReceiverGroup(Context context){
+    public ReceiverGroup getReceiverGroup(Context context) {
         return getReceiverGroup(context, null);
     }
 
-    public ReceiverGroup getReceiverGroup(Context context, GroupValue groupValue){
+    public ReceiverGroup getReceiverGroup(Context context, GroupValue groupValue) {
         ReceiverGroup receiverGroup = new ReceiverGroup(groupValue);
         receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
-        receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context,true));
+        receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context, true));
         receiverGroup.addReceiver(KEY_GESTURE_COVER, new GestureCover(context));
         receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
         receiverGroup.addReceiver(KEY_ERROR_COVER, new ErrorCover(context));
+        return receiverGroup;
+    }
+
+    public ReceiverGroup getReceiverGroup(Context context, GroupValue groupValue,String thumburl) {
+        ReceiverGroup receiverGroup = new ReceiverGroup(groupValue);
+        receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
+        receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context, true));
+        receiverGroup.addReceiver(KEY_GESTURE_COVER, new GestureCover(context));
+        receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
+        receiverGroup.addReceiver(KEY_ERROR_COVER, new ErrorCover(context));
+        receiverGroup.addReceiver(KEY_THUMB_COVER, new ThumbCover(context,thumburl));
         return receiverGroup;
     }
 

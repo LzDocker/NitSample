@@ -25,6 +25,7 @@
             bind:bdcomplete="@={viewmodel.mCompleteCommand}"
             bind:bdenable="@={viewmodel.bdenable}"
             bind:bdenablemore="@={viewmodel.bdenablemore}"
+            bind:bdenablenodata="@={viewmodel.bdenablenodata}"
             bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
             bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}">
 

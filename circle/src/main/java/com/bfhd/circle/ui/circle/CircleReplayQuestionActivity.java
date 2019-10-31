@@ -38,7 +38,7 @@ import com.docker.common.common.utils.oss.MyOSSUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
-import com.docker.core.di.httpmodule.progress.ProgressManager;
+import com.docker.core.di.netmodule.progress.ProgressManager;
 import com.docker.core.util.AppExecutors;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;

@@ -9,7 +9,7 @@ import android.text.TextUtils;
 import com.dcbfhd.utilcode.utils.AppUtils;
 import com.dcbfhd.utilcode.utils.SPUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
-import com.docker.core.di.httpmodule.MHeader;
+import com.docker.core.di.netmodule.MHeader;
 import com.docker.core.widget.BottomSheetDialog;
 
 import javax.inject.Inject;

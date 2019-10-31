@@ -1,0 +1,150 @@
+package com.docker.core.di.netmodule;
+
+import android.text.TextUtils;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import okhttp3.Headers;
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import timber.log.Timber;
+
+/**
+ * Created by zxd on 17/5/15.
+ */
+@Singleton
+public class RequestInterceptor implements Interceptor {
+
+    private HttpRequestHandler mHttpRequestHandler;
+    private MHeader mHeader;
+
+    @Inject
+    public RequestInterceptor(HttpRequestHandler httpRequestHandler, MHeader mHeader) {
+        this.mHttpRequestHandler = httpRequestHandler;
+        this.mHeader = mHeader;
+    }
+
+    public Response intercept(Chain chain) throws IOException {
+
+        Request originrequest = chain.request();
+        HttpUrl originHttpUrl = originrequest.url();
+        Request.Builder newBuilder;
+        HttpUrl newBaseUrl;
+        if (!TextUtils.isEmpty(mHeader.getServerUrl())
+                && !TextUtils.isEmpty(mHeader.getBaseUrl())
+                && !mHeader.getBaseUrl().equals(mHeader.getServerUrl())
+                && !originHttpUrl.toString().startsWith(mHeader.getServerUrl())) {
+            newBuilder = originrequest.newBuilder();
+            newBaseUrl = HttpUrl.parse(originHttpUrl.toString().replace(mHeader.getBaseUrl(), mHeader.getServerUrl()));
+            newBuilder.url(newBaseUrl);
+            Request request = newBuilder.build();
+            if (mHttpRequestHandler != null) {
+                // do something before http request like adding specific headers.
+                request = mHttpRequestHandler.onHttpRequestBefore(chain, request);
+            }
+            Response originalResponse;
+            if (request != null) {
+                originalResponse = chain.proceed(request);
+
+            } else {
+                originalResponse = new Response.Builder()
+                        .code(505) // 其实code可以随便给
+                        .protocol(Protocol.HTTP_2)
+                        .message("Network is closed by login")
+                        .body(ResponseBody.create(MediaType.parse("text/html; charset=utf-8"), "")) // 返回空页面
+                        .request(chain.request())
+                        .build();
+            }
+
+            if (mHttpRequestHandler != null) {
+                originalResponse = mHttpRequestHandler.onHttpResultResponse(originalResponse.body().toString(), chain, originalResponse);
+            }
+//            Timber.e("==========Request========" + request.toString() + "Headers:-----" + bodyToString(request.headers()));
+            Timber.e("==========Request========" + request.toString());
+            Timber.e("==========param========" + bodyToString(request.body()));
+            return originalResponse;
+        } else {
+            if (mHttpRequestHandler != null) {
+                originrequest = mHttpRequestHandler.onHttpRequestBefore(chain, originrequest);
+            }
+            Response originalResponse;
+            if (originrequest == null) {
+                originalResponse = new Response.Builder()
+                        .code(505) // 其实code可以随便给
+                        .protocol(Protocol.HTTP_2)
+                        .message("Network is closed by login")
+                        .body(ResponseBody.create(MediaType.parse("text/html; charset=utf-8"), "")) // 返回空页面
+                        .request(chain.request())
+                        .build();
+            } else {
+                originalResponse = chain.proceed(originrequest);
+//                Timber.e("==========Request========" + originrequest.toString() + "Headers:-----" + bodyToString(originrequest.headers()));
+                Timber.e("==========Request========" + originrequest.toString());
+                Timber.e("==========param========" + bodyToString(originrequest.body()));
+            }
+            if (mHttpRequestHandler != null) {
+                originalResponse = mHttpRequestHandler.onHttpResultResponse(originalResponse.body().toString(), chain, originalResponse);
+            }
+
+            return originalResponse;
+        }
+    }
+
+
+    private static String getUserAgent() {
+        String userAgent = "";
+        StringBuffer sb = new StringBuffer();
+        userAgent = System.getProperty("http.agent");//Dalvik/2.1.0 (Linux; U; Android 6.0.1; vivo X9L Build/MMB29M)
+        for (int i = 0, length = userAgent.length(); i < length; i++) {
+            char c = userAgent.charAt(i);
+            if (c <= '\u001f' || c >= '\u007f') {
+                sb.append(String.format("\\u%04x", (int) c));
+            } else {
+                sb.append(c);
+            }
+
+        }
+//        LogUtils.tag("xxx").e("User-Agent","User-Agent: "+ sb.toString());
+        return sb.toString();
+    }
+
+
+    private static String bodyToString(RequestBody request) {
+        try {
+            Buffer buffer = new Buffer();
+            if (request != null) {
+                request.writeTo(buffer);
+                return buffer.readUtf8();
+            } else {
+                return "";
+            }
+        } catch (IOException var3) {
+            return "did not work";
+        }
+    }
+
+    private static String bodyToString(Headers headers) {
+        Map<String, List<String>> params = headers.toMultimap();
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator var3 = params.entrySet().iterator();
+
+        while (var3.hasNext()) {
+            Map.Entry<String, List<String>> entry = (Map.Entry) var3.next();
+            stringBuilder.append((String) entry.getKey()).append(":").append(entry.getValue());
+        }
+        return stringBuilder.toString();
+    }
+}

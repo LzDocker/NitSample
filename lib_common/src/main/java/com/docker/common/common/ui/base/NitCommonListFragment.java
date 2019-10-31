@@ -56,36 +56,7 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
 
     public void initListener() {
         mViewModel.mServerLiveData.observe(this, o -> {
-            if ((mBinding.get()).refresh != null) {
-                if (o != null && ((Collection) o).size() < (mViewModel).mPageSize) {
-                    (mBinding.get()).refresh.setNoMoreData(true);
-                } else if (o == null && (mViewModel).mItems.size() > 0) {
-                    (mBinding.get()).refresh.setNoMoreData(true);
-                } else {
-                    (mBinding.get()).refresh.setNoMoreData(false);
-                }
-            }
-        });
-        mViewModel.mRefreshStateLiveData.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if (mViewModel.mRefreshStateLiveData.get()) {
-                    if (refreshLayout != null) {
-                        refreshLayout.finishRefresh();
-                    }
-                }
-            }
-        });
-        (mViewModel).mRefreshStateNodataLiveData.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if ((mViewModel).mRefreshStateNodataLiveData.get()) {
-                    mBinding.get().refresh.setNoMoreData((mViewModel).mRefreshStateNodataLiveData.get());
-                    if (refreshLayout != null) {
-                        refreshLayout.setNoMoreData((mViewModel).mRefreshStateNodataLiveData.get());
-                    }
-                }
-            }
+
         });
     }
 

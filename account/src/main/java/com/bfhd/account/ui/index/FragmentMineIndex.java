@@ -1,6 +1,5 @@
 package com.bfhd.account.ui.index;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.bfhd.account.vm.AccountIndexListViewModel;
-import com.bfhd.account.vo.MyInfoVo;
 import com.bfhd.circle.vo.ShareVo;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.model.CommonListOptions;

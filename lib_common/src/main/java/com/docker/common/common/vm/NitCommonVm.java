@@ -3,9 +3,8 @@ package com.docker.common.common.vm;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 
-import com.docker.common.common.command.ReponseCommand;
-import com.docker.core.di.httpmodule.ApiResponse;
-import com.docker.core.di.httpmodule.BaseResponse;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.CommonRepository;
 import com.docker.core.repository.Resource;
 

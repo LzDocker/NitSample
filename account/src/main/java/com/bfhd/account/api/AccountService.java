@@ -24,8 +24,8 @@ import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.VisitingCardVo;
 import com.docker.common.common.vo.WorldNumList;
 import com.docker.common.common.vo.WorldNumListWj;
-import com.docker.core.di.httpmodule.ApiResponse;
-import com.docker.core.di.httpmodule.BaseResponse;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 
 import java.util.HashMap;
 import java.util.List;

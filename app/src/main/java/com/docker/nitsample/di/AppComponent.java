@@ -1,12 +1,11 @@
 package com.docker.nitsample.di;
 
+import com.bfhd.account.di.AccountModule;
+import com.bfhd.circle.di.CircleModule;
+import com.docker.common.di.CommonModule;
 import com.docker.core.base.BaseApp;
-import com.docker.core.di.AppModule;
-import com.docker.core.di.BaseVmModule;
-import com.docker.core.di.httpmodule.CommonServiceModule;
-import com.docker.core.di.httpmodule.GlobalConfigModule;
-import com.docker.core.di.httpmodule.HttpClientModule;
-import com.docker.core.di.module.cachemodule.CacheModule;
+import com.docker.core.di.netmodule.GlobalConfigModule;
+import com.docker.videobasic.di.VideoModule;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -23,35 +22,20 @@ import okhttp3.OkHttpClient;
 @Component(modules = {
         AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
-        AppModule.class,
-        HttpClientModule.class,
         GlobalConfigModule.class,
-
-        ServiceModule.class,
-        CommonServiceModule.class,
-        CacheModule.class,
-
-        BaseVmModule.class,
-        UIMoudle.class,
-        ViewModelModule.class,
-
-
+        /*app*/
+        NitAppModule.class,
         /* account*/
-        com.bfhd.account.di.ServiceModule.class,
-        com.bfhd.account.di.UIModule.class,
-        com.bfhd.account.di.VmModule.class,
-
+        AccountModule.class,
         /*
          * circle*/
-        com.bfhd.circle.di.ServiceModule.class,
-        com.bfhd.circle.di.UIModule.class,
-        com.bfhd.circle.di.VmModule.class,
-
+        CircleModule.class,
         /*common*/
-        com.docker.common.di.ServiceModule.class,
-        com.docker.common.di.UIModule.class,
-        com.docker.common.di.VmModule.class,
+        CommonModule.class,
 
+        /*VideoModule
+         * */
+        VideoModule.class,
 })
 public interface AppComponent {
 

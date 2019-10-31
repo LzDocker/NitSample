@@ -17,8 +17,8 @@ import com.docker.common.common.vm.NitEmptyVm;
 import com.docker.common.common.widget.SuperFileView;
 import com.docker.common.databinding.CommonViewDocumentBinding;
 import com.docker.core.base.BaseActivity;
-import com.docker.core.di.httpmodule.progress.ProgressListen;
-import com.docker.core.di.httpmodule.progress.ProgressManager;
+import com.docker.core.di.netmodule.progress.ProgressListen;
+import com.docker.core.di.netmodule.progress.ProgressManager;
 
 import java.io.File;
 import java.util.Map;

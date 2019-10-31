@@ -26,12 +26,11 @@ public class NitCommonContainerFragment extends NitCommonListFragment<NitCommonC
 
 
     private NitContainerCommand containerCommand;
-    
-    public static NitCommonContainerFragment newinstance(CommonListOptions commonListReq/*, NitContainerCommand containerCommand*/) {
+
+    public static NitCommonContainerFragment newinstance(CommonListOptions commonListReq) {
         NitCommonContainerFragment nitCommonContainerFragment = new NitCommonContainerFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.ContainerParam, commonListReq);
-//        bundle.putSerializable(Constant.ContainerCommand, containerCommand);
         nitCommonContainerFragment.setArguments(bundle);
         return nitCommonContainerFragment;
     }
@@ -52,12 +51,9 @@ public class NitCommonContainerFragment extends NitCommonListFragment<NitCommonC
         super.onActivityCreated(savedInstanceState);
         ARouter.getInstance().inject(this);
         commonListReq = (CommonListOptions) getArguments().getSerializable(Constant.ContainerParam);
-//        containerCommand = (NitContainerCommand) getArguments().getSerializable(Constant.ContainerCommand);
         containerCommand = ((NitCommonActivity) getHoldingActivity()).providerNitContainerCommand(commonListReq.falg);
-//        mViewModel = containerCommand.exectue(this);
         mViewModel = (NitCommonContainerViewModel) ViewModelProviders.of(this, factory).get(containerCommand.exectue());
         this.getLifecycle().addObserver(mViewModel);
-//        this.getLifecycle().addObserver(containerCommand);
         mViewModel.initParam(commonListReq);
         mBinding.get().setViewmodel(mViewModel);
         initRvUi();
@@ -70,7 +66,6 @@ public class NitCommonContainerFragment extends NitCommonListFragment<NitCommonC
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        containerCommand.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -81,6 +76,5 @@ public class NitCommonContainerFragment extends NitCommonListFragment<NitCommonC
     @Override
     public void onVisible() {
         super.onVisible();
-//        containerCommand.onVisible();
     }
 }

@@ -228,6 +228,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
 
     private boolean bdenable;
     private boolean bdenablemore;
+    private boolean bdenablenodata;
 
 
     //</editor-fold>
@@ -313,6 +314,7 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
         bdcomplete = ta.getBoolean(R.styleable.SmartRefreshLayout_bdcomplete, false);
         bdenable = ta.getBoolean(R.styleable.SmartRefreshLayout_bdenable, false);
         bdenablemore = ta.getBoolean(R.styleable.SmartRefreshLayout_bdenablemore, false);
+        bdenablenodata = ta.getBoolean(R.styleable.SmartRefreshLayout_bdenablenodata, false);
 
 
         int accentColor = ta.getColor(R.styleable.SmartRefreshLayout_srlAccentColor, 0);
@@ -431,6 +433,37 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
     public static boolean getBdenablemore(SmartRefreshLayout view) {
         return view.getBdenablemore();
     }
+   //=======没有更多数据======
+
+    public boolean isBdenablenodata() {
+        return bdenablenodata;
+    }
+
+    public void setBdenablenodata(boolean bdenablenodata) {
+        this.bdenablenodata = bdenablenodata;
+    }
+
+
+    @BindingAdapter("bdenablenodataAttrChanged")
+    public static void setbdenablenodataAttrChanged(SmartRefreshLayout view, InverseBindingListener inverseBindingListener) {
+        if (inverseBindingListener == null) {
+            view.setListener(null);
+        } else {
+            view.setListener(inverseBindingListener::onChange);
+        }
+    }
+    @BindingAdapter(value = "bdenablenodata", requireAll = false)
+    public static void setbdenablenodata(SmartRefreshLayout view, boolean bdenable) {
+       view.setNoMoreData(bdenable);
+    }
+
+    @InverseBindingAdapter(attribute = "bdenablenodata", event = "bdenablenodataAttrChanged")
+    public static boolean getbdenablenodata(SmartRefreshLayout view) {
+        return view.isBdenablenodata();
+    }
+
+    //============
+
 
 
     ///////
@@ -2939,9 +2972,9 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
             @Override
             public void run() {
                 if (mState == RefreshState.Refreshing && mRefreshHeader != null && mRefreshContent != null) {
-                    if (success) {
-                        resetNoMoreData();
-                    }
+//                    if (success) {
+//                        resetNoMoreData();
+//                    }
                     notifyStateChanged(RefreshState.RefreshFinish);
                     int startDelay = mRefreshHeader.onFinish(SmartRefreshLayout.this, success);
                     if (mOnMultiPurposeListener != null && mRefreshHeader instanceof RefreshHeader) {

@@ -462,9 +462,7 @@ public class AliyunVodPlayerView extends RelativeLayout implements ITheme{
                 } else {
                     start();
                 }
-
             }
-
             @Override
             public void onStopPlay() {
                 // 结束播放

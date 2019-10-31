@@ -189,7 +189,7 @@ public class MineFragment extends CommonFragment<AccountViewModel, AccountFragme
             String videoUrl =
                     "https://zaijiaxue.oss-cn-beijing.aliyuncs.com/static2/var/upload/cn/language/6%20%E9%BB%84%E5%B1%B1%E5%A5%87%E6%9D%BE_L%20CN.mp4";
             String thumbUrl = "http://app.zjxk12.com/var/upload/2019/05/2019050508195443760_600x400.jpg";
-            ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
+//            ARouter.getInstance().build(AppRouter.Video_Player).withString("videoUrl", videoUrl).withString("thumbUrl", thumbUrl).navigation();
 //            AliVideoPlayerFragment fragment = AliVideoPlayerFragment.newInstance(videoUrl,thumbUrl);
 //            FragmentUtils.add(getChildFragmentManager(), fragment, R.id.pro_frame);
 

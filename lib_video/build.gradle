@@ -76,5 +76,10 @@ dependencies {
     api(name: 'hipraiseanimationlib', ext: 'aar') {
         transitive = true
     }
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
+    implementation rootProject.ext.dependencies["glide"]
+    //glide
+
+    implementation project(':lib_utilcode')
 }
