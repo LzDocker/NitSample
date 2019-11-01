@@ -29,6 +29,7 @@ public class VideoListViewModel extends NitCommonContainerViewModel {
 
 
     public final MediatorLiveData<Integer> playPosLv = new MediatorLiveData();
+    public final MediatorLiveData<Boolean> onrefresh = new MediatorLiveData();
 
     public View view;
 
@@ -42,6 +43,11 @@ public class VideoListViewModel extends NitCommonContainerViewModel {
         return videoService.fechCircleInfoList(apiurl, param);
     }
 
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+        onrefresh.setValue(true);
+    }
 
     /*
      * 条目点击事件

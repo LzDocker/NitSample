@@ -10,37 +10,48 @@
             type="com.docker.common.common.vm.NitCommonListVm" />
     </data>
 
-
-    <com.docker.common.common.widget.empty.EmptyLayout
-        android:id="@+id/empty"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        bind:onRetryCommand="@{viewmodel.mCommand.retrycommand}"
-        bind:status="@{viewmodel.mEmptycommand}">
+        android:layout_height="match_parent">
 
-        <com.docker.common.common.widget.refresh.SmartRefreshLayout
-            android:id="@+id/refresh"
+        <com.docker.common.common.widget.empty.EmptyLayout
+            android:id="@+id/empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            bind:bdcomplete="@={viewmodel.mCompleteCommand}"
-            bind:bdenable="@={viewmodel.bdenable}"
-            bind:bdenablemore="@={viewmodel.bdenablemore}"
-            bind:bdenablenodata="@={viewmodel.bdenablenodata}"
-            bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
-            bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}">
+            bind:onRetryCommand="@{viewmodel.mCommand.retrycommand}"
+            bind:status="@{viewmodel.mEmptycommand}">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            <com.docker.common.common.widget.refresh.SmartRefreshLayout
+                android:id="@+id/refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusable="false"
-                app:fastScrollEnabled="false"
-                app:itemBinding="@{viewmodel.itemBinding}"
-                app:items="@{viewmodel.mItems}" />
-        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+                bind:bdcomplete="@={viewmodel.mCompleteCommand}"
+                bind:bdenable="@={viewmodel.bdenable}"
+                bind:bdenablemore="@={viewmodel.bdenablemore}"
+                bind:bdenablenodata="@={viewmodel.bdenablenodata}"
+                bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
+                bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    app:fastScrollEnabled="false"
+                    app:itemBinding="@{viewmodel.itemBinding}"
+                    app:items="@{viewmodel.mItems}" />
+            </com.docker.common.common.widget.refresh.SmartRefreshLayout>
 
 
-    </com.docker.common.common.widget.empty.EmptyLayout>
+        </com.docker.common.common.widget.empty.EmptyLayout>
+
+        <FrameLayout
+            android:id="@+id/coutainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+    </RelativeLayout>
 
 
 </layout>

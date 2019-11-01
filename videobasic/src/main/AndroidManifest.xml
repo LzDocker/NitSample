@@ -37,7 +37,6 @@
             android:name=".util.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"
             android:theme="@style/main_theme"
             android:windowSoftInputMode="adjustNothing" />
         <activity
@@ -66,6 +65,11 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.SingleVideoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.VideoListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

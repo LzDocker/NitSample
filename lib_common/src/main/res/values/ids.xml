@@ -3,5 +3,5 @@
     <item name="custom_id_min" type="id" tools:ignore="ResourceName" />
 
     <item name="fixedTabIndicator" type="id" />
-    <item name="contentView" type="id" />
+    <item name="contentcontentView" type="id" />
 </resources>

@@ -2,9 +2,13 @@ package com.docker.nitsample.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -24,8 +28,8 @@ import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
 import com.docker.videobasic.ui.SingleVideoActivity;
+import com.docker.videobasic.ui.VideoListActivity;
 import com.docker.videobasic.util.videolist.TestActivity;
-import com.docker.videobasic.util.videolist.VideoListActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -62,13 +66,20 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    @Override
     public void initView() {
         mToolbar.hide();
         initMainTab();
         mBinding.ivCenter.setOnClickListener(v -> {
 //            showPopMenu();
 
-            Intent intent = new Intent(MainActivity.this, SingleVideoActivity.class);
+            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
             startActivity(intent);
 
 //            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);

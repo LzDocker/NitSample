@@ -1,10 +1,12 @@
 package com.docker.common.common.vm;
+
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 import android.view.View;
+
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.model.BaseItemModel;
@@ -48,6 +50,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
         mCommand.OnRefresh(() -> {
             mPage = 1;
             loadData();
+            onRefresh();
         });
         mCommand.OnLoadMore(() -> {
             loadData();
@@ -208,7 +211,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      * */
     public void ItemClick(BaseItemModel item, View view) {
 
-
     }
 
+    public void onRefresh() {
+    }
 }

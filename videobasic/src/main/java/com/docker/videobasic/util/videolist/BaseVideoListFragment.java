@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+
 import com.docker.video.assist.AssistPlayer;
 import com.docker.video.assist.DataInter;
 import com.docker.video.assist.ReceiverGroupManager;
@@ -22,6 +24,9 @@ import com.docker.video.provider.VideoBean;
 import com.docker.video.receiver.OnReceiverEventListener;
 import com.docker.video.receiver.ReceiverGroup;
 import com.docker.videobasic.R;
+import com.docker.videobasic.util.videolist.DataUtils;
+import com.docker.videobasic.util.videolist.VideoListAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +50,15 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
     private ReceiverGroup mReceiverGroup;
     private View contentView;
 
+
+    public static BaseVideoListFragment newinstance() {
+        return new BaseVideoListFragment();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (contentView == null){
+        if (contentView == null) {
             contentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_videolist, container, false);
         }
         return contentView;
@@ -60,8 +70,8 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
         initView();
     }
 
-    public void onBackPressed(){
-        if(isLandScape){
+    public void onBackPressed() {
+        if (isLandScape) {
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             return;
         }
@@ -111,19 +121,19 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        isLandScape = newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE;
-        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+        isLandScape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             attachFullScreen();
-        }else if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT){
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             attachList();
         }
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_IS_LANDSCAPE, isLandScape);
     }
 
-    private void attachFullScreen(){
+    private void attachFullScreen() {
         mReceiverGroup.addReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER, new GestureCover(getContext()));
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, true);
-        AssistPlayer.get().play(mContainer,null);
+        AssistPlayer.get().play(mContainer, null);
     }
 
     @Override
@@ -139,13 +149,13 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
         mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
         AssistPlayer.get().setReceiverGroup(mReceiverGroup);
-        if(isLandScape){
+        if (isLandScape) {
             attachFullScreen();
-        }else{
+        } else {
             attachList();
         }
         int state = AssistPlayer.get().getState();
-        if(state!= IPlayer.STATE_PLAYBACK_COMPLETE){
+        if (state != IPlayer.STATE_PLAYBACK_COMPLETE) {
             AssistPlayer.get().resume();
         }
     }
@@ -153,13 +163,13 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
     @Override
     public void onPause() {
         super.onPause();
-        if(!toDetail){
+        if (!toDetail) {
             AssistPlayer.get().pause();
         }
     }
 
     private void attachList() {
-        if(mAdapter!=null){
+        if (mAdapter != null) {
             mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
             mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
             mAdapter.getListPlayLogic().attachPlay();
@@ -176,13 +186,13 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
 
     @Override
     public void onReceiverEvent(int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
             case DataInter.Event.EVENT_CODE_REQUEST_BACK:
                 getActivity().onBackPressed();
                 break;
             case DataInter.Event.EVENT_CODE_REQUEST_TOGGLE_SCREEN:
-                getActivity().setRequestedOrientation(isLandScape?
-                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                getActivity().setRequestedOrientation(isLandScape ?
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT :
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
             case DataInter.Event.CODE_REQUEST_RESUME:
@@ -197,7 +207,7 @@ public class BaseVideoListFragment extends Fragment implements VideoListAdapter.
 
     @Override
     public void onPlayerEvent(int eventCode, Bundle bundle) {
-        switch (eventCode){
+        switch (eventCode) {
             case OnPlayerEventListener.PLAYER_EVENT_ON_PLAY_COMPLETE:
                 AssistPlayer.get().stop();
                 break;

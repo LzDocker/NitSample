@@ -25,7 +25,6 @@ import java.util.List;
  * Copyright (c) 2018 PangHaHa All rights reserved.
  */
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.VideoItemHolder> {
-
     private Context mContext;
     private List<VideoBean> mItems;
     private OnListListener onListListener;

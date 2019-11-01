@@ -15,7 +15,6 @@ import com.docker.videobasic.R;
  * Copyright (c) 2018 PangHaHa All rights reserved.
  */
 public class TestListActivity extends AppCompatActivity {
-
     BaseVideoListFragment fragment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

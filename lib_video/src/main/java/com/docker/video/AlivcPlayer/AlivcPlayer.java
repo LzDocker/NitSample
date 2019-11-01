@@ -70,7 +70,6 @@ public class AlivcPlayer extends BaseInternalPlayer {
     private AliyunVodPlayer createPlayer() {
 
         applicationContext = AppContextAttach.getApplicationContext();
-
         mAliyunVodPlayer = new AliyunVodPlayer(applicationContext);
         String sdDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/video_cache";
         mAliyunVodPlayer.setPlayingCache(true, sdDir, 60 * 60, 300);
