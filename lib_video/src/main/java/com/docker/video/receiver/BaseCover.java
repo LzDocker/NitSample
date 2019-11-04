@@ -19,9 +19,12 @@ package com.docker.video.receiver;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IntRange;
+import android.util.Log;
 import android.view.View;
 
 import com.docker.video.assist.InterEvent;
+
+import java.sql.Time;
 
 /**
  * Created by Taurus on 2018/3/17.
@@ -65,7 +68,11 @@ public abstract class BaseCover extends BaseReceiver implements
 
     @Override
     public final void requestRetry(Bundle bundle) {
-        notifyReceiverEvent(InterEvent.CODE_REQUEST_RETRY, bundle);
+        try {
+            notifyReceiverEvent(InterEvent.CODE_REQUEST_RETRY, bundle);
+        } catch (Exception e) {
+            Log.e("sss", "requestRetry: =========视频文件损坏了=====");
+        }
     }
 
     @Override
@@ -88,17 +95,17 @@ public abstract class BaseCover extends BaseReceiver implements
         notifyReceiverEvent(InterEvent.CODE_REQUEST_STOP_TIMER, null);
     }
 
-    protected final <T extends View> T findViewById(int id){
+    protected final <T extends View> T findViewById(int id) {
         return mCoverView.findViewById(id);
     }
 
     @Override
-    public final void setCoverVisibility(int visibility){
+    public final void setCoverVisibility(int visibility) {
         mCoverView.setVisibility(visibility);
     }
 
     @Override
-    public final View getView(){
+    public final View getView() {
         return mCoverView;
     }
 
@@ -115,14 +122,14 @@ public abstract class BaseCover extends BaseReceiver implements
     /**
      * when cover view add to window.
      */
-    protected void onCoverAttachedToWindow(){
+    protected void onCoverAttachedToWindow() {
 
     }
 
     /**
      * when cover view removed from window.
      */
-    protected void onCoverDetachedToWindow(){
+    protected void onCoverDetachedToWindow() {
 
     }
 
@@ -141,7 +148,7 @@ public abstract class BaseCover extends BaseReceiver implements
      * @param priority range from 0-31
      * @return
      */
-    protected final int levelLow(@IntRange(from = 0, to = 31)int priority){
+    protected final int levelLow(@IntRange(from = 0, to = 31) int priority) {
         return levelPriority(ICover.COVER_LEVEL_LOW, priority);
     }
 
@@ -153,7 +160,7 @@ public abstract class BaseCover extends BaseReceiver implements
      * @param priority range from 0-31
      * @return
      */
-    protected final int levelMedium(@IntRange(from = 0, to = 31)int priority){
+    protected final int levelMedium(@IntRange(from = 0, to = 31) int priority) {
         return levelPriority(ICover.COVER_LEVEL_MEDIUM, priority);
     }
 
@@ -165,11 +172,11 @@ public abstract class BaseCover extends BaseReceiver implements
      * @param priority range from 0-31
      * @return
      */
-    protected final int levelHigh(@IntRange(from = 0, to = 31)int priority){
+    protected final int levelHigh(@IntRange(from = 0, to = 31) int priority) {
         return levelPriority(ICover.COVER_LEVEL_HIGH, priority);
     }
 
-    private int levelPriority(int level, int priority){
-        return level + (priority%LEVEL_MAX);
+    private int levelPriority(int level, int priority) {
+        return level + (priority % LEVEL_MAX);
     }
 }

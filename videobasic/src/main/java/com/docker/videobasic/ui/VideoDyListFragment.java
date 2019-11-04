@@ -166,8 +166,9 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
 
     private void stopPlayer() {
         if (mPlayPosition != -1) {
-            AssistPlayer.get().play(null, null);
-            AssistPlayer.get().stop();
+//            AssistPlayer.get().play(null, null);
+//            AssistPlayer.get().stop();
+//            AssistPlayer.get().stop();
             mPlayPosition = -1;
         }
     }

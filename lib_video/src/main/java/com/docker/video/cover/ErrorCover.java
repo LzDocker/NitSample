@@ -73,7 +73,7 @@ public class ErrorCover extends BaseCover {
         switch (mStatus){
             case STATUS_ERROR:
                 setErrorState(false);
-                requestReplay(bundle);
+                requestRetry(bundle);
                 break;
             case STATUS_MOBILE:
                 PlayerLibrary.ignoreMobile = true;
@@ -82,7 +82,7 @@ public class ErrorCover extends BaseCover {
                 break;
             case STATUS_NETWORK_ERROR:
                 setErrorState(false);
-                requestReplay(bundle);
+                requestRetry(bundle);
                 break;
         }
     }
