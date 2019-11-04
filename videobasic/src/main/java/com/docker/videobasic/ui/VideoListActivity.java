@@ -4,11 +4,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.dcbfhd.utilcode.utils.FragmentUtils;
+import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.video.assist.DataInter;
@@ -30,10 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VideoListActivity extends NitCommonActivity<SingleVideoVm, VideoListActivityBinding> {
-
-
-    public FrameLayout frameLayout;
-    private VideoListFragment fragment;
+    public List<Fragment> fragments = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -48,8 +47,10 @@ public class VideoListActivity extends NitCommonActivity<SingleVideoVm, VideoLis
     @Override
     public void initView() {
         mToolbar.hide();
-        fragment = VideoListFragment.newInstance();
-        FragmentUtils.add(getSupportFragmentManager(), fragment, R.id.content);
+        fragments.add(VideoListFragment.newInstance());
+        fragments.add(VideoDyListFragment.newInstance());
+        mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
+        mBinding.viewpager.setCurrentItem(0);
 
     }
 
@@ -71,10 +72,17 @@ public class VideoListActivity extends NitCommonActivity<SingleVideoVm, VideoLis
 
     @Override
     public void onBackPressed() {
-        if (fragment != null) {
-            fragment.onBackPressed();
+        if (fragments.get(mBinding.viewpager.getCurrentItem()) instanceof VideoListFragment) {
+            ((VideoListFragment) fragments.get(mBinding.viewpager.getCurrentItem())).onBackPressed();
         } else {
-            super.onBackPressed();
+            ((VideoDyListFragment) fragments.get(mBinding.viewpager.getCurrentItem())).onBackPressed();
         }
+//        if(fragment!=null){
+//            fragment.onBackPressed();
+//        }else {
+//            super.onBackPressed();
+//        }
     }
+
+
 }

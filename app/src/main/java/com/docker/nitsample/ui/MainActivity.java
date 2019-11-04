@@ -2,11 +2,13 @@ package com.docker.nitsample.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -27,8 +29,10 @@ import com.docker.nitsample.databinding.ActivityMainBinding;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
+import com.docker.video.assist.DataInter;
 import com.docker.videobasic.ui.SingleVideoActivity;
 import com.docker.videobasic.ui.VideoListActivity;
+import com.docker.videobasic.ui.VideoListFragment;
 import com.docker.videobasic.util.videolist.TestActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
@@ -178,6 +182,7 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
 //
 //        fragments.add(IndexFragment.newInstance());
 //        fragments.add(FragmentMineIndex.newInstance());
+
         mBinding.viewpager.setOffscreenPageLimit(4);
         mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
 
@@ -213,27 +218,40 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         });
     }
 
-    /**
-     * 双击返回键退出
-     */
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (isExit) {
-                this.finish();
-            } else {
-                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
-                isExit = true;
-                new Handler().postDelayed(() -> isExit = false, 2000);
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         if (disposable != null) disposable.dispose();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (mBinding.viewpager.getCurrentItem() == 2) {
+            if (fragments.get(2) != null) {
+                ((VideoListFragment) (fragments.get(2))).onBackPressed();
+            }
+        }
+
+        if (isExit) {
+            this.finish();
+        } else {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            isExit = true;
+            new Handler().postDelayed(() -> isExit = false, 2000);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mBinding.tlHomeTab.setVisibility(View.GONE);
+            mBinding.ivCenter.setVisibility(View.GONE);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mBinding.tlHomeTab.setVisibility(View.VISIBLE);
+            mBinding.ivCenter.setVisibility(View.VISIBLE);
+        }
     }
 }

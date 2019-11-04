@@ -50,7 +50,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
         mCommand.OnRefresh(() -> {
             mPage = 1;
             loadData();
-            onRefresh();
+            refresh();
         });
         mCommand.OnLoadMore(() -> {
             loadData();
@@ -213,6 +213,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     }
 
-    public void onRefresh() {
+    public void refresh() {
     }
 }

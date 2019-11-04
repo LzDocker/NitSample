@@ -4,12 +4,16 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
+import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.video.assist.AssistPlayer;
@@ -23,9 +27,10 @@ import com.docker.video.receiver.ReceiverGroup;
 import com.docker.videobasic.R;
 import com.docker.videobasic.util.videolist.PUtil;
 import com.docker.videobasic.vm.VideoListViewModel;
-import com.docker.videobasic.vo.VideoEntityVo;
 
-public class VideoListFragment extends NitCommonListFragment<VideoListViewModel> implements OnReceiverEventListener, OnPlayerEventListener {
+import timber.log.Timber;
+
+public class VideoDyListFragment extends NitCommonListFragment<VideoListViewModel> implements OnReceiverEventListener, OnPlayerEventListener {
 
     CommonListOptions commonListReq = new CommonListOptions();
 
@@ -41,11 +46,14 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
 
     private int mScreenH;
 
-
     private boolean isNeedStop = true;
 
-    public static VideoListFragment newInstance() {
-        return new VideoListFragment();
+    private int targetPos = 0;
+
+    private PagerSnapHelper pagerSnapHelper;
+
+    public static VideoDyListFragment newInstance() {
+        return new VideoDyListFragment();
     }
 
     @Override
@@ -56,13 +64,46 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
     @Override
     public void onCreate(@Nullable Bundle savedInstanceStates) {
         super.onCreate(savedInstanceStates);
+        mViewModel.scope = 1;
         mViewModel.playPosLv.observe(this, integer -> {
             mPlayPosition = integer.intValue();
         });
         mViewModel.onrefresh.observe(this, aBoolean -> {
             stopPlayer();
         });
+        mViewModel.mItems.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList>() {
+            @Override
+            public void onChanged(ObservableList sender) {
+                Timber.e("=========================11111=========");
+                if (mViewModel.mItems.size() > 0 && mViewModel.mPage == 1) {
+                    Timber.e("=========================222222=========");
+                    View view1 = mBinding.get().recyclerView.getLayoutManager().findViewByPosition(0);
+                    mViewModel.ItemVideoClick((BaseItemModel) mViewModel.mItems.get(targetPos), view1);
+                }
+            }
+
+            @Override
+            public void onItemRangeChanged(ObservableList sender, int positionStart, int itemCount) {
+
+            }
+
+            @Override
+            public void onItemRangeInserted(ObservableList sender, int positionStart, int itemCount) {
+
+            }
+
+            @Override
+            public void onItemRangeMoved(ObservableList sender, int fromPosition, int toPosition, int itemCount) {
+
+            }
+
+            @Override
+            public void onItemRangeRemoved(ObservableList sender, int positionStart, int itemCount) {
+
+            }
+        });
     }
+
 
     @Override
     protected void initView(View var1) {
@@ -89,6 +130,30 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
                 }
             }
         });
+        pagerSnapHelper = new PagerSnapHelper() {
+            @Override
+            public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
+                targetPos = super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
+                return targetPos;
+            }
+
+            @Nullable
+            @Override
+            public View findSnapView(RecyclerView.LayoutManager layoutManager) {
+                View view = super.findSnapView(layoutManager);
+
+                if (targetPos > mViewModel.mItems.size() - 10 && !mViewModel.loadingState) {
+                    mViewModel.loadData();
+                }
+                if (mViewModel.mItems.size() > targetPos + 1) {
+                    mViewModel.ItemVideoClick((BaseItemModel) mViewModel.mItems.get(targetPos), view);
+                }
+                return view;
+            }
+        };
+        pagerSnapHelper.attachToRecyclerView(mBinding.get().recyclerView);
+
+
     }
 
     @Override
@@ -103,7 +168,6 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
         if (mPlayPosition != -1) {
             AssistPlayer.get().play(null, null);
             AssistPlayer.get().stop();
-            ((VideoEntityVo) mViewModel.mItems.get(mPlayPosition)).setPlayer(false);
             mPlayPosition = -1;
         }
     }
@@ -121,8 +185,8 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
 
     @Override
     public CommonListOptions getArgument() {
-        commonListReq.refreshState = 0;
-        commonListReq.RvUi = 1;
+        commonListReq.refreshState = 2;
+        commonListReq.RvUi = 0;
         commonListReq.ReqParam.put("t", "video");
         commonListReq.ApiUrl = "https://www.jinxitime.com/api.php?m=dynamic.getList";
         return commonListReq;
@@ -217,6 +281,9 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
         switch (eventCode) {
             case OnPlayerEventListener.PLAYER_EVENT_ON_PLAY_COMPLETE:
                 AssistPlayer.get().stop();
+                if (mViewModel.mItems.size() > targetPos + 1) {
+                    mBinding.get().recyclerView.scrollToPosition(targetPos + 1);
+                }
                 break;
         }
     }

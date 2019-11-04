@@ -8,6 +8,7 @@ import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.nitsample.ui.index.IndexFragment;
+import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
 import com.docker.videobasic.ui.VideoListFragment;
 import com.docker.videobasic.util.videolist.BaseVideoListFragment;
@@ -29,6 +30,9 @@ public class MainModule {
 //        fragments.add(SampleFragment.newInstance());
         NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
         fragments.add(containerFragment);
+
+
+//        fragments.add(SampleVideoListFragment.newInstance());
 
         CommonListOptions commonListOptions1 = new CommonListOptions();
         commonListOptions1.falg = 1;

@@ -14,10 +14,10 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class VideoEntityVo extends BaseObservable implements BaseItemModel {
+public class VideoDyEntityVo extends BaseObservable implements BaseItemModel {
     @Override
     public int getItemLayout() {
-        return R.layout.item_video_sample;
+        return R.layout.item_video_dy_sample;
     }
 
     @Override

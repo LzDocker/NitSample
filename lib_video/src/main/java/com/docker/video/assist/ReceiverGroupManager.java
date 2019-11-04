@@ -61,10 +61,20 @@ public class ReceiverGroupManager {
         ReceiverGroup receiverGroup = new ReceiverGroup(groupValue);
         receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
         receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context, false));
-        receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
+//        receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
         receiverGroup.addReceiver(KEY_ERROR_COVER, new ErrorCover(context));
         return receiverGroup;
     }
+
+
+    public ReceiverGroup getDyRecreceiveGroup(Context context, String thumburl) {
+        ReceiverGroup receiverGroup = new ReceiverGroup(null);
+        receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
+        receiverGroup.addReceiver(KEY_ERROR_COVER, new ErrorCover(context));
+        receiverGroup.addReceiver(KEY_THUMB_COVER, new ThumbCover(context, thumburl));
+        return receiverGroup;
+    }
+
 
     public ReceiverGroup getReceiverGroup(Context context) {
         return getReceiverGroup(context, null);
@@ -80,14 +90,14 @@ public class ReceiverGroupManager {
         return receiverGroup;
     }
 
-    public ReceiverGroup getReceiverGroup(Context context, GroupValue groupValue,String thumburl) {
+    public ReceiverGroup getReceiverGroup(Context context, GroupValue groupValue, String thumburl) {
         ReceiverGroup receiverGroup = new ReceiverGroup(groupValue);
         receiverGroup.addReceiver(KEY_LOADING_COVER, new LoadingCover(context));
         receiverGroup.addReceiver(KEY_CONTROLLER_COVER, new ControllerCover(context, true));
         receiverGroup.addReceiver(KEY_GESTURE_COVER, new GestureCover(context));
         receiverGroup.addReceiver(KEY_COMPLETE_COVER, new CompleteCover(context));
         receiverGroup.addReceiver(KEY_ERROR_COVER, new ErrorCover(context));
-        receiverGroup.addReceiver(KEY_THUMB_COVER, new ThumbCover(context,thumburl));
+        receiverGroup.addReceiver(KEY_THUMB_COVER, new ThumbCover(context, thumburl));
         return receiverGroup;
     }
 

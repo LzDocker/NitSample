@@ -71,7 +71,6 @@
         <activity
             android:name=".ui.VideoListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
 
