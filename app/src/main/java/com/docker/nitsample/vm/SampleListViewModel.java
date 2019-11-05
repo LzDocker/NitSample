@@ -66,7 +66,35 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
         SampleItemVo rx_sample = new SampleItemVo("RX", 13);
         mItems.add(rx_sample);
 
+        SampleItemVo pic_sample = new SampleItemVo("图片选择", 14);
+        mItems.add(pic_sample);
 
+        SampleItemVo oss_sample = new SampleItemVo("oss上传", 15);
+        mItems.add(oss_sample);
+
+        SampleItemVo locfile_sample = new SampleItemVo("本地文件管理", 16);
+        mItems.add(locfile_sample);
+
+        SampleItemVo perr_sample = new SampleItemVo("权限管理", 17);
+        mItems.add(perr_sample);
+
+        SampleItemVo train_sample = new SampleItemVo("培训考试模块", 18);
+        mItems.add(train_sample);
+
+        SampleItemVo search_sample = new SampleItemVo("搜索", 19);
+        mItems.add(search_sample);
+
+        SampleItemVo banner_sample = new SampleItemVo("banner", 20);
+        mItems.add(banner_sample);
+
+        SampleItemVo timepicker_sample = new SampleItemVo("时间选择", 21);
+        mItems.add(timepicker_sample);
+
+        SampleItemVo city_sample = new SampleItemVo("省市区选择", 22);
+        mItems.add(city_sample);
+
+        SampleItemVo pdf_sample = new SampleItemVo("pdf..文件预览", 23);
+        mItems.add(pdf_sample);
 
     }
 
