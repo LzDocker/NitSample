@@ -47,14 +47,14 @@ public class MainModule {
         //shopType2=&shopType1=&t=goods&page=1&goodsui=product&uuid=8621e837a2a1579710a95143e5862424&memberid=64&companyid=1
         fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
 
-        fragments.add(VideoListFragment.newInstance());
+//        fragments.add(VideoListFragment.newInstance());
         fragments.add(VideoListFragment.newInstance());
 //        fragments.add(BaseVideoListFragment.newinstance());
 
 
 //        fragments.add(VideoFullListFragment.newInstance());
 //        fragments.add(IndexFragment.newInstance());
-//        fragments.add(FragmentMineIndex.newInstance());
+        fragments.add(FragmentMineIndex.newInstance());
         return fragments;
     }
 

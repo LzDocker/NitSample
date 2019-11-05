@@ -7,7 +7,11 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.video.assist.DataInter;
 import com.docker.video.assist.OnVideoViewEventHandler;
@@ -23,7 +27,7 @@ import com.docker.videobasic.databinding.SingleVideoActivityBinding;
 import com.docker.videobasic.vm.SingleVideoVm;
 import java.util.ArrayList;
 import java.util.List;
-
+@Route(path = AppRouter.VIDEOSINGLE)
 public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, SingleVideoActivityBinding> implements OnPlayerEventListener {
 
     private BaseVideoView mVideoView;
@@ -57,7 +61,7 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
 
     @Override
     public void initRouter() {
-
+        ARouter.getInstance().inject(this);
     }
 
     @Override

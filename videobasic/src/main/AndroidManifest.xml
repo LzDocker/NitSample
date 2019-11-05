@@ -73,6 +73,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/AppTheme" />
 
+        <activity
+            android:name=".ui.index.VideoSampleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme" />
 
 
     </application>

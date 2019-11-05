@@ -84,6 +84,12 @@ public class AppRouter {
 
     public static final String VIDEOMAIN = VIDEOGROUP + "main";
 
+    public static final String VIDEOINDEX = VIDEOGROUP + "index";
+
+    public static final String VIDEOSINGLE = VIDEOGROUP + "single";
+
+    public static final String VIDEOLIST = VIDEOGROUP + "list";
+
 
     public static final String COMMONGROUP = "/common/";
 

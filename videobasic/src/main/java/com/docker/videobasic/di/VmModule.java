@@ -3,6 +3,7 @@ package com.docker.videobasic.di;
 import android.arch.lifecycle.ViewModel;
 
 import com.docker.core.di.scope.ViewModelKey;
+import com.docker.videobasic.vm.SampleListViewModel;
 import com.docker.videobasic.vm.SingleVideoVm;
 import com.docker.videobasic.vm.VideoListViewModel;
 
@@ -27,6 +28,11 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(VideoListViewModel.class)
     abstract ViewModel VideoListViewModel(VideoListViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SampleListViewModel.class)
+    abstract ViewModel SampleListViewModel(SampleListViewModel model);
 
 
 }

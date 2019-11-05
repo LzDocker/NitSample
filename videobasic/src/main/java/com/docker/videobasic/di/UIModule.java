@@ -8,6 +8,7 @@ import com.docker.videobasic.ui.VideoDyListFragment;
 import com.docker.videobasic.ui.VideoFullListFragment;
 import com.docker.videobasic.ui.VideoListActivity;
 import com.docker.videobasic.ui.VideoListFragment;
+import com.docker.videobasic.ui.index.VideoSampleActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -38,6 +39,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract VideoFullListFragment contributeVideoFullListFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract VideoSampleActivity contributeVideoSampleActivityInjector();
 
 
 

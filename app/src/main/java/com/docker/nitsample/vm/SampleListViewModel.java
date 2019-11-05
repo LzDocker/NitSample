@@ -38,8 +38,36 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
 
         SampleItemVo audio_sample = new SampleItemVo("音频", 4);
         mItems.add(audio_sample);
+
         SampleItemVo xPopup_sample = new SampleItemVo("XPopup", 5);
         mItems.add(xPopup_sample);
+
+        SampleItemVo mine_sample = new SampleItemVo("个人中心", 6);
+        mItems.add(mine_sample);
+
+        SampleItemVo message_sample = new SampleItemVo("消息中心", 7);
+        mItems.add(message_sample);
+
+        SampleItemVo loc_sample = new SampleItemVo("定位", 8);
+        mItems.add(loc_sample);
+
+        SampleItemVo im_sample = new SampleItemVo("im", 9);
+        mItems.add(im_sample);
+
+        SampleItemVo pub_sample = new SampleItemVo("发布", 10);
+        mItems.add(pub_sample);
+
+        SampleItemVo version_sample = new SampleItemVo("版本更新", 11);
+        mItems.add(version_sample);
+
+        SampleItemVo don_sample = new SampleItemVo("文件下载", 12);
+        mItems.add(don_sample);
+
+        SampleItemVo rx_sample = new SampleItemVo("RX", 13);
+        mItems.add(rx_sample);
+
+
+
     }
 
     @Override

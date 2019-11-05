@@ -1,17 +1,12 @@
 package com.docker.nitsample.vo;
 
-import android.app.Activity;
-import android.content.Intent;
-
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.vo.bean.StaCirParam;
-import com.dcbfhd.utilcode.utils.ActivityUtils;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.ui.XPopup.XPopupActivity;
 import com.docker.nitsample.R;
-import com.umeng.socialize.utils.ContextUtil;
 
 import timber.log.Timber;
 
@@ -31,7 +26,9 @@ public class SampleItemVo implements BaseItemModel {
                     ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
                     break;
                 case 1:
-                    ARouter.getInstance().build(AppRouter.VIDEOMAIN).navigation();
+//                    ARouter.getInstance().build(AppRouter.VIDEOMAIN).navigation();
+                    ARouter.getInstance().build(AppRouter.VIDEOINDEX).navigation();
+
                     break;
                 case 2:
                     ARouter.getInstance().build(AppRouter.ACCOUNT_COUNTRY).navigation();
@@ -49,6 +46,9 @@ public class SampleItemVo implements BaseItemModel {
 //                    Intent intent = new Intent(ActivityUtils.getTopActivity(), XPopupActivity.class);
 //                    ActivityUtils.getTopActivity().startActivity(intent);
                     ARouter.getInstance().build(AppRouter.COMMON_XPOPUP).navigation();
+                    break;
+                default:
+                    ToastUtils.showShort("功能开发中...");
                     break;
             }
         };
