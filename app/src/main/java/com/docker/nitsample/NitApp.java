@@ -2,7 +2,7 @@ package com.docker.nitsample;
 
 import com.bfhd.circle.base.Constant;
 import com.docker.common.common.config.CommonWidgetModel;
-import com.docker.common.common.config.ThiredPartModel;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.core.base.BaseApp;
 import com.docker.core.di.netmodule.GlobalConfigModule;
 import com.docker.core.di.netmodule.HttpRequestHandler;
@@ -58,6 +58,6 @@ public class NitApp extends BaseApp {
     public void onCreate() {
         super.onCreate();
         CommonWidgetModel.initrefresh();
-        ThiredPartModel.init(this);
+        ThiredPartConfig.init(this);
     }
 }

@@ -10,6 +10,7 @@ import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
+import com.docker.videobasic.ui.VideoFullListFragment;
 import com.docker.videobasic.ui.VideoListFragment;
 import com.docker.videobasic.util.videolist.BaseVideoListFragment;
 
@@ -47,10 +48,12 @@ public class MainModule {
         fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
 
         fragments.add(VideoListFragment.newInstance());
+        fragments.add(VideoListFragment.newInstance());
 //        fragments.add(BaseVideoListFragment.newinstance());
 
 
-        fragments.add(IndexFragment.newInstance());
+//        fragments.add(VideoFullListFragment.newInstance());
+//        fragments.add(IndexFragment.newInstance());
 //        fragments.add(FragmentMineIndex.newInstance());
         return fragments;
     }

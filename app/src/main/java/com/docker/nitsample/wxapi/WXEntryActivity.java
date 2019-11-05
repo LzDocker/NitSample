@@ -2,7 +2,7 @@ package com.docker.nitsample.wxapi;
 
 import android.os.Bundle;
 
-import com.docker.common.common.config.ThiredPartModel;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -15,8 +15,8 @@ public class WXEntryActivity extends WXCallbackActivity implements IWXAPIEventHa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, ThiredPartModel.WxAppid, false);
-        api.registerApp(ThiredPartModel.WxAppid);
+        api = WXAPIFactory.createWXAPI(this, ThiredPartConfig.WxAppid, false);
+        api.registerApp(ThiredPartConfig.WxAppid);
         handleIntent(getIntent());
     }
 

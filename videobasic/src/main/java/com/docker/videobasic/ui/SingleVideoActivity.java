@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.ui.base.NitCommonActivity;
@@ -44,6 +45,7 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
     @Override
     public void initView() {
         mToolbar.hide();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mVideoView = mBinding.videoView;
         initPlay();
     }
@@ -91,7 +93,6 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
 
     private void initPlay() {
         updateVideo(false);
-
         mVideoView.setOnPlayerEventListener(this);
         mVideoView.setEventHandler(mOnEventAssistHandler);
         mReceiverGroup = ReceiverGroupManager.get().getReceiverGroup(this,

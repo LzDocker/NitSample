@@ -36,7 +36,7 @@ import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.LogUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
-import com.docker.common.common.config.ThiredPartModel;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.oss.MyOSSUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
@@ -142,7 +142,7 @@ public class CirclePubRequestionFragment extends CommonFragment<CirclePublishVie
         mHandParam = ((CirclePublishActivity) getHoldingActivity()).getmStartParam();
 
         // 初始化讯飞
-        SpeechUtility.createUtility(this.getHoldingActivity(), SpeechConstant.APPID + ThiredPartModel.IFLAYID);
+        SpeechUtility.createUtility(this.getHoldingActivity(), SpeechConstant.APPID + ThiredPartConfig.IFLAYID);
         initIfly();
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("GroupSelect")) {
@@ -360,12 +360,22 @@ public class CirclePubRequestionFragment extends CommonFragment<CirclePublishVie
                 if (resourceBeans != null && resourceBeans.size() > 0) {
                     for (int i = 0; i < resourceBeans.size(); i++) {
                         LocalMedia localMedia = new LocalMedia();
-                        localMedia.setPictureType("1");
-                        if (!TextUtils.isEmpty(resourceBeans.get(i).getImg())) {
-                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
-                        } else {
+
+                        if (2 == resourceBeans.get(i).getT()) {
+                            localMedia.setPictureType("video/mp4");
                             localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getUrl()));
+                        } else {
+                            localMedia.setPictureType("image/jpeg");
+                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
                         }
+
+
+//                        localMedia.setPictureType("1");
+//                        if (!TextUtils.isEmpty(resourceBeans.get(i).getImg())) {
+//                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
+//                        } else {
+//                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getUrl()));
+//                        }
                         localMediaList.add(localMedia);
                     }
                 }

@@ -16,12 +16,12 @@ import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import static com.docker.common.common.config.ThiredPartModel.FLODER;
-import static com.docker.common.common.config.ThiredPartModel.FLODERVIDEO;
-import static com.docker.common.common.config.ThiredPartModel.P_BUCKETNAME;
-import static com.docker.common.common.config.ThiredPartModel.accessKeyId;
-import static com.docker.common.common.config.ThiredPartModel.accessKeySecret;
-import static com.docker.common.common.config.ThiredPartModel.endpoint;
+import static com.docker.common.common.config.ThiredPartConfig.FLODER;
+import static com.docker.common.common.config.ThiredPartConfig.FLODERVIDEO;
+import static com.docker.common.common.config.ThiredPartConfig.P_BUCKETNAME;
+import static com.docker.common.common.config.ThiredPartConfig.accessKeyId;
+import static com.docker.common.common.config.ThiredPartConfig.accessKeySecret;
+import static com.docker.common.common.config.ThiredPartConfig.endpoint;
 public class MyOSSUtils {
 
 

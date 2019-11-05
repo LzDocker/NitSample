@@ -6,9 +6,12 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.aliyun.vodplayer.media.AliyunVodPlayer;
+import com.aliyun.vodplayer.media.IAliyunVodPlayer;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
@@ -47,8 +50,11 @@ public class VideoListActivity extends NitCommonActivity<SingleVideoVm, VideoLis
     @Override
     public void initView() {
         mToolbar.hide();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         fragments.add(VideoListFragment.newInstance());
         fragments.add(VideoDyListFragment.newInstance());
+//        fragments.add(VideoFullListFragment.newInstance());
+//        fragments.add(VideoFullListFragment.newInstance());
         mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
         mBinding.viewpager.setCurrentItem(0);
 
@@ -77,6 +83,7 @@ public class VideoListActivity extends NitCommonActivity<SingleVideoVm, VideoLis
         } else {
             ((VideoDyListFragment) fragments.get(mBinding.viewpager.getCurrentItem())).onBackPressed();
         }
+
 //        if(fragment!=null){
 //            fragment.onBackPressed();
 //        }else {

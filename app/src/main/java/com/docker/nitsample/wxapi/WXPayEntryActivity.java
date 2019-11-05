@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.docker.common.common.config.ThiredPartModel;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -20,7 +20,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.wxpay_result);
-        api = WXAPIFactory.createWXAPI(this, ThiredPartModel.WxAppid);
+        api = WXAPIFactory.createWXAPI(this, ThiredPartConfig.WxAppid);
         api.handleIntent(getIntent(), this);
     }
 

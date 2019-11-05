@@ -91,4 +91,5 @@ public class AppRouter {
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
 
+    public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
 }

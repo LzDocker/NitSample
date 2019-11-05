@@ -5,12 +5,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewTreeObserver;
-
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.video.assist.AssistPlayer;
@@ -18,12 +16,13 @@ import com.docker.video.assist.DataInter;
 import com.docker.video.assist.ReceiverGroupManager;
 import com.docker.video.cover.GestureCover;
 import com.docker.video.event.OnPlayerEventListener;
-import com.docker.video.player.IPlayer;
 import com.docker.video.receiver.OnReceiverEventListener;
 import com.docker.video.receiver.ReceiverGroup;
 import com.docker.videobasic.R;
+import com.docker.videobasic.util.ImgUrlUtil;
 import com.docker.videobasic.util.videolist.PUtil;
 import com.docker.videobasic.vm.VideoListViewModel;
+import com.docker.videobasic.vo.VideoDyEntityVo;
 import com.docker.videobasic.vo.VideoEntityVo;
 
 public class VideoListFragment extends NitCommonListFragment<VideoListViewModel> implements OnReceiverEventListener, OnPlayerEventListener {
@@ -42,7 +41,6 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
 
     private int mScreenH;
 
-
     private boolean isNeedStop = true;
 
     public static VideoListFragment newInstance() {
@@ -59,9 +57,11 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
         super.onCreate(savedInstanceStates);
         mViewModel.playPosLv.observe(this, integer -> {
             mPlayPosition = integer.intValue();
+//            resetPlayUi();
         });
         mViewModel.onrefresh.observe(this, aBoolean -> {
             stopPlayer();
+            resetPlayUi();
         });
     }
 
@@ -95,15 +95,45 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
     @Override
     public void onInvisible() {
         super.onInvisible();
-        if (isNeedStop) {
-            stopPlayer();
+        AssistPlayer.get().destroy();
+    }
+
+    @Override
+    public void onVisible() {
+        super.onVisible();
+        resetPlayUi();
+
+    }
+
+    public void resetReceiveGroup() {
+        AssistPlayer.get().addOnReceiverEventListener(this);
+        AssistPlayer.get().addOnPlayerEventListener(this);
+        mReceiverGroup = ReceiverGroupManager.get().getReceiverGroup(this.getHoldingActivity(),
+                null, ImgUrlUtil.getCompleteImageUrl((VideoEntityVo) mViewModel.mItems.get(mPlayPosition)));
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_NETWORK_RESOURCE, false);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_SCREEN_SWITCH_ENABLE, false);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
+        mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
+
+    }
+
+    private void resetPlayUi() {
+        if (mPlayPosition == -1) {
+            toDetail = false;
+            AssistPlayer.get().addOnReceiverEventListener(this);
+            AssistPlayer.get().addOnPlayerEventListener(this);
+            mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
+            mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
+            mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_SCREEN_SWITCH_ENABLE, false);
+            AssistPlayer.get().setReceiverGroup(mReceiverGroup);
+        } else {
+            resetReceiveGroup();
         }
     }
 
     private void stopPlayer() {
         if (mPlayPosition != -1) {
-            AssistPlayer.get().play(null, null);
-            AssistPlayer.get().stop();
+            AssistPlayer.get().destroy();
             ((VideoEntityVo) mViewModel.mItems.get(mPlayPosition)).setPlayer(false);
             mPlayPosition = -1;
         }
@@ -154,32 +184,6 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        toDetail = false;
-        mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
-        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
-        AssistPlayer.get().setReceiverGroup(mReceiverGroup);
-        if (isLandScape) {
-            attachFullScreen();
-        } else {
-            attachList();
-        }
-        int state = AssistPlayer.get().getState();
-        if (state != IPlayer.STATE_PLAYBACK_COMPLETE) {
-            AssistPlayer.get().resume();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (!toDetail) {
-            AssistPlayer.get().pause();
-        }
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         AssistPlayer.get().removeReceiverEventListener(this);
@@ -191,17 +195,14 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
     public void onReceiverEvent(int eventCode, Bundle bundle) {
         switch (eventCode) {
             case DataInter.Event.EVENT_CODE_REQUEST_BACK:
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                attachList();
-
+//                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//                attachList();
+                onBackPressed();
                 break;
             case DataInter.Event.EVENT_CODE_REQUEST_TOGGLE_SCREEN:
                 getActivity().setRequestedOrientation(isLandScape ?
                         ActivityInfo.SCREEN_ORIENTATION_PORTRAIT :
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                if (isLandScape) {
-                    attachList();
-                }
                 break;
             case DataInter.Event.CODE_REQUEST_RESUME:
 

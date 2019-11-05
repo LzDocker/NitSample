@@ -5,6 +5,7 @@ import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 import com.docker.videobasic.ui.SingleVideoActivity;
 import com.docker.videobasic.ui.VideoDyListFragment;
+import com.docker.videobasic.ui.VideoFullListFragment;
 import com.docker.videobasic.ui.VideoListActivity;
 import com.docker.videobasic.ui.VideoListFragment;
 
@@ -33,6 +34,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract VideoDyListFragment contributeVideoDyListFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract VideoFullListFragment contributeVideoFullListFragmentInjector();
 
 
 

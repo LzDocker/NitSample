@@ -4,18 +4,24 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.databinding.Observable;
 import android.databinding.ObservableList;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
+import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonListFragment;
+import com.docker.core.util.AppExecutors;
 import com.docker.video.assist.AssistPlayer;
 import com.docker.video.assist.DataInter;
 import com.docker.video.assist.ReceiverGroupManager;
@@ -25,11 +31,20 @@ import com.docker.video.player.IPlayer;
 import com.docker.video.receiver.OnReceiverEventListener;
 import com.docker.video.receiver.ReceiverGroup;
 import com.docker.videobasic.R;
+import com.docker.videobasic.util.ImgUrlUtil;
 import com.docker.videobasic.util.videolist.PUtil;
+import com.docker.videobasic.util.videolist.TestActivity;
 import com.docker.videobasic.vm.VideoListViewModel;
+import com.docker.videobasic.vo.VideoDyEntityVo;
+
+import javax.inject.Inject;
 
 import timber.log.Timber;
 
+/*
+ *
+ * 仿抖音翻页视频界面
+ * */
 public class VideoDyListFragment extends NitCommonListFragment<VideoListViewModel> implements OnReceiverEventListener, OnPlayerEventListener {
 
     CommonListOptions commonListReq = new CommonListOptions();
@@ -40,17 +55,18 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
 
     private boolean toDetail;
 
-    private int mPlayPosition = -1;
-
     private int mVerticalRecyclerStart;
 
     private int mScreenH;
 
-    private boolean isNeedStop = true;
-
     private int targetPos = 0;
 
     private PagerSnapHelper pagerSnapHelper;
+
+    private boolean isFirst = true;
+
+    @Inject
+    AppExecutors appExecutors;
 
     public static VideoDyListFragment newInstance() {
         return new VideoDyListFragment();
@@ -66,41 +82,11 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
         super.onCreate(savedInstanceStates);
         mViewModel.scope = 1;
         mViewModel.playPosLv.observe(this, integer -> {
-            mPlayPosition = integer.intValue();
+            targetPos = integer.intValue();
         });
         mViewModel.onrefresh.observe(this, aBoolean -> {
             stopPlayer();
-        });
-        mViewModel.mItems.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList>() {
-            @Override
-            public void onChanged(ObservableList sender) {
-                Timber.e("=========================11111=========");
-                if (mViewModel.mItems.size() > 0 && mViewModel.mPage == 1) {
-                    Timber.e("=========================222222=========");
-                    View view1 = mBinding.get().recyclerView.getLayoutManager().findViewByPosition(0);
-                    mViewModel.ItemVideoClick((BaseItemModel) mViewModel.mItems.get(targetPos), view1);
-                }
-            }
-
-            @Override
-            public void onItemRangeChanged(ObservableList sender, int positionStart, int itemCount) {
-
-            }
-
-            @Override
-            public void onItemRangeInserted(ObservableList sender, int positionStart, int itemCount) {
-
-            }
-
-            @Override
-            public void onItemRangeMoved(ObservableList sender, int fromPosition, int toPosition, int itemCount) {
-
-            }
-
-            @Override
-            public void onItemRangeRemoved(ObservableList sender, int positionStart, int itemCount) {
-
-            }
+            resetPlayUi();
         });
     }
 
@@ -118,59 +104,88 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
                 mBinding.get().recyclerView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
+        pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(mBinding.get().recyclerView);
         mBinding.get().recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (mPlayPosition != -1) {
-                    int itemVisibleRectHeight = getItemVisibleRectHeight(mPlayPosition);
-                    if (itemVisibleRectHeight <= 0) {
-                        stopPlayer();
+                int itemVisibleRectHeight = getItemVisibleRectHeight(targetPos);
+                if (Math.abs(itemVisibleRectHeight) >= ScreenUtils.getAppScreenHeight() - 100) {
+                    ((VideoDyEntityVo) mViewModel.mItems.get(targetPos)).isPlayer = false;
+                    stopPlayer();
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (!((VideoDyEntityVo) mViewModel.mItems.get(targetPos)).isPlayer) {
+                        ((VideoDyEntityVo) mViewModel.mItems.get(targetPos)).isPlayer = true;
+                        targetPos = recyclerView.getLayoutManager().getPosition(pagerSnapHelper.findSnapView(recyclerView.getLayoutManager()));
+                        if (mViewModel.mItems.size() >= targetPos + 1) {
+                            resetReceiveGroup();
+                            mViewModel.ItemVideoClick((BaseItemModel) mViewModel.mItems.get(targetPos),
+                                    recyclerView.getLayoutManager().findViewByPosition(targetPos));
+                        }
+                        if (targetPos > mViewModel.mItems.size() - 10 && !mViewModel.loadingState) {
+                            mViewModel.loadData();
+                        }
                     }
                 }
             }
         });
-        pagerSnapHelper = new PagerSnapHelper() {
+
+        mBinding.get().recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
             @Override
-            public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {
-                targetPos = super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
-                return targetPos;
+            public void onChildViewAttachedToWindow(@NonNull View view) {
+                targetPos = mBinding.get().recyclerView.getLayoutManager().getPosition(view);
+                Log.d("sss", "onChildViewAttachedToWindow: ====" + targetPos);
+                if (targetPos == 0) { // 第一个
+                    if (!((VideoDyEntityVo) mViewModel.mItems.get(0)).isPlayer && isFirst) {
+                        isFirst = false;
+                        ((VideoDyEntityVo) mViewModel.mItems.get(0)).isPlayer = true;
+                        if (mViewModel.mItems.size() >= targetPos + 1) {
+                            resetReceiveGroup();
+                            view.postDelayed(() -> mViewModel.ItemVideoClick((BaseItemModel) mViewModel.mItems.get(0),
+                                    mBinding.get().recyclerView.getLayoutManager().findViewByPosition(0)), 300);
+                        }
+                    }
+                }
             }
 
-            @Nullable
             @Override
-            public View findSnapView(RecyclerView.LayoutManager layoutManager) {
-                View view = super.findSnapView(layoutManager);
+            public void onChildViewDetachedFromWindow(@NonNull View view) {
 
-                if (targetPos > mViewModel.mItems.size() - 10 && !mViewModel.loadingState) {
-                    mViewModel.loadData();
-                }
-                if (mViewModel.mItems.size() > targetPos + 1) {
-                    mViewModel.ItemVideoClick((BaseItemModel) mViewModel.mItems.get(targetPos), view);
-                }
-                return view;
             }
-        };
-        pagerSnapHelper.attachToRecyclerView(mBinding.get().recyclerView);
+        });
+    }
 
-
+    private void stopPlayer() {
+        AssistPlayer.get().destroy();
+        ((VideoDyEntityVo) mViewModel.mItems.get(targetPos)).isPlayer = false;
     }
 
     @Override
     public void onInvisible() {
         super.onInvisible();
-        if (isNeedStop) {
-            stopPlayer();
-        }
+        AssistPlayer.get().destroy();
     }
 
-    private void stopPlayer() {
-        if (mPlayPosition != -1) {
-//            AssistPlayer.get().play(null, null);
-//            AssistPlayer.get().stop();
-//            AssistPlayer.get().stop();
-            mPlayPosition = -1;
-        }
+    @Override
+    public void onVisible() {
+        super.onVisible();
+        resetPlayUi();
+    }
+
+    private void resetPlayUi() {
+        toDetail = false;
+        AssistPlayer.get().addOnPlayerEventListener(this);
+        mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
+        AssistPlayer.get().setReceiverGroup(mReceiverGroup);
     }
 
     @Override
@@ -178,10 +193,21 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
         super.onStart();
         AssistPlayer.get().addOnReceiverEventListener(this);
         AssistPlayer.get().addOnPlayerEventListener(this);
-        mReceiverGroup = ReceiverGroupManager.get().getLiteReceiverGroup(getContext());
+//        mReceiverGroup = ReceiverGroupManager.get().getLiteReceiverGroup(getContext());
+        mReceiverGroup = ReceiverGroupManager.get().getReceiverGroup(this.getHoldingActivity(),
+                null);
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_NETWORK_RESOURCE, false);
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_SCREEN_SWITCH_ENABLE, false);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
+    }
 
+    public void resetReceiveGroup() {
+        mReceiverGroup = ReceiverGroupManager.get().getReceiverGroup(this.getHoldingActivity(),
+                null, ImgUrlUtil.getCompleteImageUrl((VideoDyEntityVo) mViewModel.mItems.get(targetPos)));
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_NETWORK_RESOURCE, false);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_SCREEN_SWITCH_ENABLE, false);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
+        AssistPlayer.get().addOnPlayerEventListener(this);
     }
 
     @Override
@@ -208,40 +234,17 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
             attachList();
         }
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_IS_LANDSCAPE, isLandScape);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
     }
 
     private void attachFullScreen() {
         mReceiverGroup.addReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER, new GestureCover(getContext()));
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, true);
+        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
         mBinding.get().empty.setVisibility(View.VISIBLE);
         AssistPlayer.get().play(mBinding.get().empty, null);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        toDetail = false;
-        mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
-        mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
-        AssistPlayer.get().setReceiverGroup(mReceiverGroup);
-        if (isLandScape) {
-            attachFullScreen();
-        } else {
-            attachList();
-        }
-        int state = AssistPlayer.get().getState();
-        if (state != IPlayer.STATE_PLAYBACK_COMPLETE) {
-            AssistPlayer.get().resume();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (!toDetail) {
-            AssistPlayer.get().pause();
-        }
-    }
 
     @Override
     public void onDestroy() {
@@ -281,9 +284,8 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
     public void onPlayerEvent(int eventCode, Bundle bundle) {
         switch (eventCode) {
             case OnPlayerEventListener.PLAYER_EVENT_ON_PLAY_COMPLETE:
-                AssistPlayer.get().stop();
                 if (mViewModel.mItems.size() > targetPos + 1) {
-                    mBinding.get().recyclerView.scrollToPosition(targetPos + 1);
+                    mBinding.get().recyclerView.smoothScrollToPosition(targetPos + 1);
                 }
                 break;
         }
@@ -292,6 +294,7 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
     private void attachList() {
         if (mViewModel != null) {
             mReceiverGroup.removeReceiver(DataInter.ReceiverKey.KEY_GESTURE_COVER);
+            mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_COMPLETE_SHOW, false);
             mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, false);
             if (mViewModel.view != null) {
                 AssistPlayer.get().play(mViewModel.view.findViewById(R.id.layoutContainer), null);
@@ -337,7 +340,14 @@ public class VideoDyListFragment extends NitCommonListFragment<VideoListViewMode
             attachList();
             return;
         }
-        isNeedStop = false;
+        AssistPlayer.get().destroy();
         getActivity().finish();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        AssistPlayer.get().destroy();
+        Log.d("sss", "onLowMemory: ====================------===");
     }
 }

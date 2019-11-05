@@ -148,8 +148,9 @@ public class ImgBindingAdapter {
      * */
     @BindingAdapter(value = {"dontTransImg"}, requireAll = false)
     public static void donttransImg(ImageView imageView, String url) {
-        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL).dontTransform();
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        options.diskCacheStrategy(DiskCacheStrategy.ALL).dontTransform();
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).into(imageView);
+        /*.transition(withCrossFade())*/
 
     }
 
