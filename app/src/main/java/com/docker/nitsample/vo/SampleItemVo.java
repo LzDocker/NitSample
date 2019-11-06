@@ -47,6 +47,10 @@ public class SampleItemVo implements BaseItemModel {
 //                    ActivityUtils.getTopActivity().startActivity(intent);
                     ARouter.getInstance().build(AppRouter.COMMON_XPOPUP).navigation();
                     break;
+                case 7:
+                    ARouter.getInstance().build(AppRouter.MESSAGEINDEX).navigation();
+                    break;
+
                 default:
                     ToastUtils.showShort("功能开发中...");
                     break;

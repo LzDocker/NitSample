@@ -60,7 +60,7 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
         SampleItemVo version_sample = new SampleItemVo("版本更新", 11);
         mItems.add(version_sample);
 
-        SampleItemVo don_sample = new SampleItemVo("文件下载", 12);
+        SampleItemVo don_sample = new SampleItemVo("文件下载/上传", 12);
         mItems.add(don_sample);
 
         SampleItemVo rx_sample = new SampleItemVo("RX", 13);
@@ -95,6 +95,27 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
 
         SampleItemVo pdf_sample = new SampleItemVo("pdf..文件预览", 23);
         mItems.add(pdf_sample);
+
+        SampleItemVo staff_sample = new SampleItemVo("成员管理", 24);
+        mItems.add(staff_sample);
+
+        SampleItemVo addre_sample = new SampleItemVo("地址管理", 25);
+        mItems.add(addre_sample);
+
+        SampleItemVo share_sample = new SampleItemVo("分享", 26);
+        mItems.add(share_sample);
+
+        SampleItemVo pay_sample = new SampleItemVo("支付", 27);
+        mItems.add(pay_sample);
+
+        SampleItemVo h5_sample = new SampleItemVo("万能h5", 28);
+        mItems.add(h5_sample);
+
+        SampleItemVo order_sample = new SampleItemVo("订单", 29);
+        mItems.add(order_sample);
+
+        SampleItemVo money_sample = new SampleItemVo("钱包", 30);
+        mItems.add(money_sample);
 
     }
 

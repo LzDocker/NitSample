@@ -3,17 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingDefaultResource">
+
     <data>
 
         <variable
             name="item"
-            type="com.docker.common.common.model.BaseItemModel" />
+            type="com.docker.common.common.model.BaseSampleItem" />
     </data>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:background="@drawable/open_liner_bg_shape"
         android:orientation="vertical">
 
         <TextView
@@ -21,7 +23,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
-            android:text="123" />
+            android:text="@{item.sampleName}" />
 
     </LinearLayout>
 </layout>

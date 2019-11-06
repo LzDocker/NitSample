@@ -21,9 +21,9 @@ android {
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64','armeabi','armeabi-v8a',
         }
         manifestPlaceholders = [
-                JPUSH_PKGNAME      : rootProject.ext.android.applicationId,
-                JPUSH_APPKEY       : rootProject.ext.push.JPUSH_APPKEY,
-                JPUSH_CHANNEL      : rootProject.ext.push.JPUSH_CHANNEL
+                JPUSH_PKGNAME: rootProject.ext.android.applicationId,
+                JPUSH_APPKEY : rootProject.ext.push.JPUSH_APPKEY,
+                JPUSH_CHANNEL: rootProject.ext.push.JPUSH_CHANNEL
         ]
 
     }
@@ -98,4 +98,5 @@ dependencies {
     api project(":circle")
     api project(":account")
     api project(":videobasic")
+    api project(":message")
 }

@@ -1,6 +1,5 @@
 package com.docker.common.common.ui.base;
 
-import android.databinding.Observable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,14 +11,20 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.common.R;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vo.Empty;
 import com.docker.common.common.widget.refresh.SmartRefreshLayout;
 import com.docker.common.databinding.CommonFragmentListBinding;
 import com.docker.core.util.LayoutManager;
 
 import java.util.ArrayList;
-import java.util.Collection;
+
+import javax.inject.Inject;
 
 public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> {
+
+
+    @Inject
+    Empty empty;
 
     protected CommonListOptions commonListReq;
     private SmartRefreshLayout refreshLayout;
