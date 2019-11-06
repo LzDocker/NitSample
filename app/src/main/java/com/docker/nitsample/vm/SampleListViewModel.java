@@ -24,6 +24,17 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
     public void loadData() {
         mEmptycommand.set(EmptyStatus.BdHiden);
 
+
+        /*
+        * todo widget 通用控件
+        *      tool   通用工具
+        *      account (登录/注册/重置密码/第三方登录)
+        *      message (im/系统通知/评论/点赞/关注/收藏)
+        *      mine (card/我购买的/我卖出的/我收藏的/我关注的)
+        *
+        *
+        * */
+
         SampleItemVo account_sample = new SampleItemVo("登录注册", 0);
         mItems.add(account_sample);
 
