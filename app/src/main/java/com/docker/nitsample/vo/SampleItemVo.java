@@ -11,6 +11,9 @@ import com.docker.nitsample.R;
 import timber.log.Timber;
 
 public class SampleItemVo implements BaseItemModel {
+
+
+
     @Override
     public int getItemLayout() {
         return R.layout.item_sample;
@@ -47,6 +50,10 @@ public class SampleItemVo implements BaseItemModel {
 //                    ActivityUtils.getTopActivity().startActivity(intent);
                     ARouter.getInstance().build(AppRouter.COMMON_XPOPUP).navigation();
                     break;
+                case 7:
+                    ARouter.getInstance().build(AppRouter.MESSAGEINDEX).navigation();
+                    break;
+
                 default:
                     ToastUtils.showShort("功能开发中...");
                     break;

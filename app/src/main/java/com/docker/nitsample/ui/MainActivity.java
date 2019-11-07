@@ -128,6 +128,7 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         switch (flag) {
             case 0:
                 nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
+
                 break;
             case 1:
                 nitContainerCommand = (NitContainerCommand) () -> (SampleNetListViewModel.class);
