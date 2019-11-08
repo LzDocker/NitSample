@@ -66,14 +66,6 @@ public class MessageViewModel extends NitCommonContainerViewModel {
         return serverFun;
     }
 
-    /*
-     * 条目点击事件
-     * */
-    public void ItemVideoClick(BaseItemModel item, View view) {
-        Timber.e("=========OnItemClickListene============");
-        Log.d("sss", "ItemVideoClick: ======================");
-    }
-
     @Override
     public Collection<? extends BaseItemModel> formatListData(Collection data) {
         if (serverType == 0) {

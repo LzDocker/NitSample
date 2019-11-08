@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonListOptions;
@@ -76,13 +77,13 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     private void setLoadControl(boolean enable) {
         switch (mCommonListReq.refreshState) {
-            case 0:
+            case Constant.KEY_REFRESH_OWNER:
                 bdenable.set(enable);
                 bdenablemore.set(enable);
                 bdenable.notifyChange();
                 bdenablemore.notifyChange();
                 break;
-            case 1:
+            case Constant.KEY_REFRESH_ONLY_LOADMORE:
                 bdenablemore.set(enable);
                 bdenablemore.notifyChange();
                 break;

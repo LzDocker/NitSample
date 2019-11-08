@@ -1,5 +1,7 @@
 package com.docker.common.common.model;
 
+import com.docker.common.common.config.Constant;
+
 import java.io.Serializable;
 import java.util.HashMap;
 
@@ -15,7 +17,7 @@ public class CommonListOptions implements Serializable {
      *
      *   3  smartc纯滚动
      * */
-    public int refreshState = 3;
+    public int refreshState = Constant.KEY_REFRESH_PURSE;
 
 
     // 请求参数
@@ -27,7 +29,7 @@ public class CommonListOptions implements Serializable {
      *  0  线性
      *  1  流式布局
      * */
-    public int RvUi = 0;
+    public int RvUi = Constant.KEY_RVUI_LINER;
 
 
     /*

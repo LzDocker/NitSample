@@ -9,6 +9,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonListFragment;
@@ -56,8 +57,11 @@ public class MessageFragment extends NitCommonListFragment<MessageViewModel> {
 
     @Override
     public CommonListOptions getArgument() {
-
-        commonListReq.refreshState = 2;
+        if (style == 0) {
+            commonListReq.refreshState = Constant.KEY_REFRESH_NOUSE;
+        } else {
+            commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
+        }
         commonListReq.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
 //        commonListReq.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
         commonListReq.ReqParam.put("memberid", "3");
