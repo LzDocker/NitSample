@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.message.vo.MessageListVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.message.vm.MessageViewModel" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_trans_shape"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:paddingBottom="1dp">
+
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center_vertical"
+            android:src="@{item.icon}" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{item.title}"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="2"
+                android:text="@{item.content}"
+                android:textColor="#666"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="刚刚"
+                android:textColor="#666"
+                android:textSize="12sp" />
+
+            <!-- android:text="@{BdUtils.getStandardDate(item.addtime)}"-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/message_shape_bo"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@{item.notReadMsgNum}"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+            <!--app:visibleGone="@{BdUtils.isShowPop(item.notReadMsgNum)}"-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>
+
+

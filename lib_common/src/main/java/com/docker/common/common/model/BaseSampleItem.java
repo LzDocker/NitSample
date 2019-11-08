@@ -1,6 +1,8 @@
 package com.docker.common.common.model;
 
-public abstract class BaseSampleItem implements BaseItemModel {
+import android.databinding.BaseObservable;
+
+public abstract class BaseSampleItem extends BaseObservable implements BaseItemModel {
 
     public String sampleName;
 

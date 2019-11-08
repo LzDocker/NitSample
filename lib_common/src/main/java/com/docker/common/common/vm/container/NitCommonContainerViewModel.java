@@ -2,7 +2,10 @@ package com.docker.common.common.vm.container;
 
 import android.arch.lifecycle.MediatorLiveData;
 
+import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.NitCommonListVm;
+
+import java.util.Collection;
 
 import javax.inject.Inject;
 
@@ -23,5 +26,15 @@ public class NitCommonContainerViewModel extends NitCommonListVm {
     @Inject
     public NitCommonContainerViewModel() {
 
+    }
+
+    @Override
+    public Collection<? extends BaseItemModel> formatListData(Collection data) {
+        return data;
+    }
+
+    @Override
+    public BaseItemModel formatData(BaseItemModel data) {
+        return data;
     }
 }

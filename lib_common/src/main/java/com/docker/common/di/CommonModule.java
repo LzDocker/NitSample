@@ -8,7 +8,9 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 
-@Module(includes = {UIModule.class, VmModule.class})
+@Module(includes = {UIModule.class,
+        VmModule.class
+})
 public class CommonModule {
 
     @Singleton

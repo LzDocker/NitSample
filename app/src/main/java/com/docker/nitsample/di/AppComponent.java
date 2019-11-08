@@ -26,6 +26,7 @@ import okhttp3.OkHttpClient;
         GlobalConfigModule.class,
         /*app*/
         NitAppModule.class,
+
         /* account*/
         AccountModule.class,
         /*

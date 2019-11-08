@@ -20,13 +20,12 @@ public class SampleItemVo extends BaseSampleItem {
             Timber.e("=========itemclick============");
             switch (((SampleItemVo) item).flag) {
                 case 0:
-                    ARouter.getInstance().build(AppRouter.VIDEOSINGLE).navigation();
+                    Timber.e("=========itemclick========00000====");
+                    ARouter.getInstance().build(AppRouter.MESSAGMAIN).withInt("style", 0).navigation();
                     break;
                 case 1:
-                    ARouter.getInstance().build(AppRouter.VIDEOLIST).navigation();
-                    break;
-                case 2:
-                    ARouter.getInstance().build(AppRouter.VIDEOMAIN).navigation();
+                    Timber.e("=========itemclick======1111======");
+                    ARouter.getInstance().build(AppRouter.MESSAGMAIN).withInt("style", 1).navigation();
                     break;
             }
         };

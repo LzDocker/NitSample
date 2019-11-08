@@ -10,6 +10,7 @@ import android.view.View;
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.model.BaseItemModel;
+import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
@@ -113,6 +114,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                                 mEmptycommand.set(EmptyStatus.BdLoading);
                                 setLoadControl(false);
                             } else {
+                                mEmptycommand.set(EmptyStatus.BdHiden);
                                 setLoadControl(true);
                             }
                         }
@@ -138,21 +140,21 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                                     bdenablenodata.set(false);
                                 }
                                 bdenablenodata.notifyChange();
-                                mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
+//                                mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
+                                mItems.addAll(formatListData((Collection<? extends BaseItemModel>) resource.data));
                             } else {
-                                mItems.add((BaseItemModel) resource.data);
+//                                mItems.add((BaseItemModel) resource.data);
+                                mItems.add(formatData((BaseItemModel) resource.data));
 
                             }
                             mPage++;
-                        } else {
-                            if (mItems.size() == 0) { // 暂无数据
-                                mEmptycommand.set(EmptyStatus.BdEmpty);
-                                setLoadControl(false);
-                            } else {
-                                setLoadControl(true);
-                            }
                         }
-
+                        if (mItems.size() == 0) { // 暂无数据
+                            mEmptycommand.set(EmptyStatus.BdEmpty);
+                            setLoadControl(false);
+                        } else {
+                            setLoadControl(true);
+                        }
                     }
 
                     @Override
@@ -213,6 +215,23 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     }
 
+    /*
+     * 刷新事件
+     * */
     public void refresh() {
+
     }
+
+    /*
+     *
+     *格式化list类型数据
+     * */
+    public abstract Collection<? extends BaseItemModel> formatListData(Collection<? extends BaseItemModel> data);
+
+
+    /*
+     *格式化单个数据
+     * */
+    public abstract BaseItemModel formatData(BaseItemModel data);
+
 }

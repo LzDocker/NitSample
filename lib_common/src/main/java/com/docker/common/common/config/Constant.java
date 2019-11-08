@@ -9,4 +9,7 @@ public class Constant {
 
     // 页面传值key 单fragment activity
     public static final String ContainerCommand = "ContainerCommand";
+
+    // 页面传值key nitlistactivity  /  nitfragment
+    public static final String CommonListParam = "CommonListParam";
 }

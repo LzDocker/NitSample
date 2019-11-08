@@ -1,14 +1,14 @@
 package com.docker.common.common.ui.base;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Pair;
-import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.common.R;
+import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.Empty;
@@ -22,13 +22,16 @@ import javax.inject.Inject;
 
 import static com.docker.common.common.config.Constant.CommonListParam;
 
-public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> {
-
+public abstract class NitCommonListActivity<VM extends NitCommonListVm> extends NitCommonActivity<VM, CommonFragmentListBinding> {
 
     @Inject
     Empty empty;
 
+    @Autowired
+    String title;
+
     protected CommonListOptions commonListReq;
+
     private SmartRefreshLayout refreshLayout;
 
     @Override
@@ -37,21 +40,17 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     @Override
-    protected void initView(View var1) {
-        (mBinding.get()).setViewmodel(mViewModel);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        commonListReq = getArgument();
-        if (commonListReq == null) {
-            commonListReq = (CommonListOptions) getArguments().getSerializable(CommonListParam);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (TextUtils.isEmpty(title)) {
+            mToolbar.hide();
+        } else {
+            mToolbar.setTitle(title);
         }
+        commonListReq = (CommonListOptions) getIntent().getSerializableExtra(CommonListParam);
         if (commonListReq != null) {
-            ARouter.getInstance().inject(this);
             (mViewModel).initParam(commonListReq);
-            mBinding.get().setViewmodel(mViewModel);
+            mBinding.setViewmodel(mViewModel);
             initRvUi();
             initRefreshUi();
             initListener();
@@ -59,9 +58,8 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    public void initRouter() {
+        ARouter.getInstance().inject(this);
     }
 
     public void initListener() {
@@ -70,38 +68,34 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         });
     }
 
-    public CommonListOptions getArgument() {
-        return null;
-    }
-
     protected void initRvUi() {
         if (commonListReq.RvUi == 0) {
-            (mBinding.get()).recyclerView.setLayoutManager(LayoutManager.linear().create((mBinding.get()).recyclerView));
+            (mBinding).recyclerView.setLayoutManager(LayoutManager.linear().create((mBinding).recyclerView));
         } else {
-            (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
+            (mBinding).recyclerView.setLayoutManager(LayoutManager
                     .grid(2)
-                    .create((mBinding.get()).recyclerView));
+                    .create((mBinding).recyclerView));
         }
     }
 
     protected void initRefreshUi() {
         switch (commonListReq.refreshState) {
             case 0:
-                (mBinding.get()).refresh.setEnableRefresh(true);
-                (mBinding.get()).refresh.setEnableLoadMore(true);
+                (mBinding).refresh.setEnableRefresh(true);
+                (mBinding).refresh.setEnableLoadMore(true);
                 break;
             case 1:
-                (mBinding.get()).refresh.setEnableRefresh(true);
-                (mBinding.get()).refresh.setEnableLoadMore(false);
+                (mBinding).refresh.setEnableRefresh(true);
+                (mBinding).refresh.setEnableLoadMore(false);
                 break;
             case 2:
-                (mBinding.get()).refresh.setEnableRefresh(false);
-                (mBinding.get()).refresh.setEnableLoadMore(false);
+                (mBinding).refresh.setEnableRefresh(false);
+                (mBinding).refresh.setEnableLoadMore(false);
                 break;
             case 3:
-                (mBinding.get()).refresh.setEnableRefresh(true);
-                (mBinding.get()).refresh.setEnableLoadMore(true);
-                (mBinding.get()).refresh.setEnablePureScrollMode(true);
+                (mBinding).refresh.setEnableRefresh(true);
+                (mBinding).refresh.setEnableLoadMore(true);
+                (mBinding).refresh.setEnablePureScrollMode(true);
                 break;
         }
     }
@@ -154,18 +148,10 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     @Override
-    public void onVisible() {
-        super.onVisible();
+    protected void onResume() {
+        super.onResume();
         if ((mViewModel).mItems.size() == 0 && (mViewModel).mPage == 1 && !(mViewModel).loadingState) {
             (mViewModel).loadData();
         }
-    }
-
-    @Override
-    public void onReFresh(SmartRefreshLayout refreshLayout) {
-        super.onReFresh(refreshLayout);
-        this.refreshLayout = refreshLayout;
-        (mViewModel).mPage = 1;
-        (mViewModel).mItems.clear();
     }
 }
