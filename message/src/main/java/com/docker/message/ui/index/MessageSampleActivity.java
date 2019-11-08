@@ -1,6 +1,7 @@
 package com.docker.message.ui.index;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;

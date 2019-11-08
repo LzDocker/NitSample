@@ -2,10 +2,12 @@ package com.docker.common.common.vm;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -24,6 +26,16 @@ public class NitSampleListViewModel extends NitCommonListVm {
         mEmptycommand.set(EmptyStatus.BdHiden);
 
 
+    }
+
+    @Override
+    public BaseItemModel formatData(BaseItemModel data) {
+        return data;
+    }
+
+    @Override
+    public Collection<? extends BaseItemModel> formatListData(Collection data) {
+        return data;
     }
 
     @Override

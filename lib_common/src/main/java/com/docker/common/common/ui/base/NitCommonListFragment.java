@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import static com.docker.common.common.config.Constant.CommonListParam;
+
 public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> {
 
 
@@ -43,6 +45,9 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         commonListReq = getArgument();
+        if (commonListReq == null) {
+            commonListReq = (CommonListOptions) getArguments().getSerializable(CommonListParam);
+        }
         if (commonListReq != null) {
             ARouter.getInstance().inject(this);
             (mViewModel).initParam(commonListReq);
@@ -65,7 +70,9 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         });
     }
 
-    public abstract CommonListOptions getArgument();
+    public CommonListOptions getArgument() {
+        return null;
+    }
 
     protected void initRvUi() {
         if (commonListReq.RvUi == 0) {

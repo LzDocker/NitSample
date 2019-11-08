@@ -55,6 +55,11 @@ dependencies {
     api rootProject.ext.dependencies["timber"]
     api rootProject.ext.dependencies["immersionbar"]
     api rootProject.ext.dependencies["immersionbar-fragment"]
+
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["adapter-rxjava2"]
+
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]

@@ -33,4 +33,12 @@ public interface OpenService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<UpdateInfo>>> systemUpdate(@Field("clientType") String clientType, @Field("appType") String appType, @Field("version") String version);
 
+
+    /*
+     * 路由
+     * */
+    @POST
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<Object>>> fetchCommon(@Url String url, @FieldMap HashMap<String, String> paramMap);
+
 }

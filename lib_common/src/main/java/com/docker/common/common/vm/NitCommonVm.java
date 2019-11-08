@@ -3,6 +3,7 @@ package com.docker.common.common.vm;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 
+import com.docker.common.api.OpenService;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.CommonRepository;
@@ -16,6 +17,10 @@ public abstract class NitCommonVm<T> extends NitCommonBaseVm {
 
     @Inject
     CommonRepository commonRepository;
+
+
+    @Inject
+    public OpenService openService;
 
     @Override
     public void initCommand() {

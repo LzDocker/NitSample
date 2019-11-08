@@ -52,12 +52,12 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/anim/view_speed_hide.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/modal_in.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/75b157e3d3e04b722119a7a208f3d596/res/anim/modal_in.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/top_out.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/anim/top_out.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/modal_in.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/75b157e3d3e04b722119a7a208f3d596/res/anim/modal_in.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
@@ -136,12 +136,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/75b157e3d3e04b722119a7a208f3d596/res/anim/down_out.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/ucrop_loader_circle_path.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/anim/ucrop_loader_circle_path.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/enter_anim.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/anim/enter_anim.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/ucrop_loader_circle_path.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/anim/ucrop_loader_circle_path.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_in.xml",

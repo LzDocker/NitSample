@@ -99,9 +99,14 @@ public class AppRouter {
 
     public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
 
-    public static final String MESSAGEGROUP = "/message/";
 
+    public static final String MESSAGEGROUP = "/message/";
     public static final String MESSAGEINDEX = MESSAGEGROUP + "index";
+    public static final String MESSAGMAIN = MESSAGEGROUP + "main";
+
+    public static final String MESSAGELISTACT = MESSAGEGROUP + "list_act";
+
+    public static final String MESSAGELIST = MESSAGEGROUP + "list_frame";
 
 
 }

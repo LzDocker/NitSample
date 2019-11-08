@@ -12,12 +12,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_btn_bg_color_selector.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/mtrl_tabs_ripple_color.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_tabs_ripple_color.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_tint_switch_track.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/mtrl_tabs_ripple_color.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_tabs_ripple_color.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/mtrl_tabs_icon_color_selector_colored.xml",
@@ -84,32 +84,32 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_text_btn_text_color_selector.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_tint_edittext.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_tint_edittext.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_tint_seek_thumb.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_tint_edittext.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_tint_edittext.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_primary_text_material_light.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/mtrl_tabs_icon_color_selector.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_tabs_icon_color_selector.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_tint_btn_checkable.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_tint_btn_checkable.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_primary_text_material_dark.xml"
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/mtrl_tabs_icon_color_selector.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_tabs_icon_color_selector.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_light.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_primary_text_material_dark.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_primary_text_material_dark.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_hint_foreground_material_dark.xml",
@@ -152,12 +152,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_tint_default.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_secondary_text_material_light.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/mtrl_btn_stroke_color_selector.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/color/mtrl_btn_stroke_color_selector.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/color/abc_secondary_text_material_light.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/color/abc_background_cache_hint_selector_material_light.xml",

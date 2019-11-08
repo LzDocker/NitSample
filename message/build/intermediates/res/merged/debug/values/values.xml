@@ -358,9 +358,16 @@
     <color name="chat_item_bg_vip">#B89A58</color>
     <color name="chat_newmsg_tip_bg_color">#E6000000</color>
     <color name="chat_newmsg_tip_color">#FF634E</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="circle_gray">#999</color>
+    <color name="circle_gray_common">#fff5f5f5</color>
+    <color name="circle_level1">#ffc600</color>
+    <color name="circle_level2">#f27b41</color>
+    <color name="circle_level3">#f24141</color>
+    <color name="circle_red">#ff00</color>
+    <color name="circle_white">#fff</color>
+    <color name="colorAccent">#E60012</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorPrimary_alpha_fifteen">#26ffffff</color>
     <color name="colorPrimary_alpha_five">#1affffff</color>
     <color name="colorPrimary_alpha_ten">#0cffffff</color>
@@ -368,6 +375,7 @@
     <color name="colorPrimary_noalpha_fifteen">#40434c</color>
     <color name="colorPrimary_noalpha_five">#292d37</color>
     <color name="colorPrimary_noalpha_ten">#343842</color>
+    <color name="colorTrans">#00000000</color>
     <color name="color_4d">#4d4d4d</color>
     <color name="color_53">#53575e</color>
     <color name="color_69">#999999</color>
@@ -470,6 +478,8 @@
     <color name="tab_color_false">#9b9b9b</color>
     <color name="tab_color_true">#FA632D</color>
     <color name="text_black">#333333</color>
+    <color name="text_black_121212">#000</color>
+    <color name="text_gray">#666</color>
     <color name="text_green">#00c0fb</color>
     <color name="text_white">#ffffffff</color>
     <color name="tooltip_background_dark">#e6616161</color>
@@ -1150,7 +1160,17 @@
     <string name="choose_a_definition_to_download">请选择一个清晰度进行下载</string>
     <string name="choose_download_sharpness">选择清晰度</string>
     <string name="choose_downloaditem">选择下载项</string>
+    <string name="circle_fans_num">关注</string>
+    <string name="circle_person_aten">人气： </string>
+    <string name="circle_person_num">人数  </string>
+    <string name="circle_publish1">发动态，发问答，发新闻，查资料；\n还能建圈子，快来和圈友一起交流学习吧！</string>
+    <string name="circle_publish2">店铺名称:</string>
+    <string name="circle_publish3">联系人:</string>
+    <string name="circle_ren">人</string>
     <string name="clear_logs">清除日志</string>
+    <string name="collect">已收藏</string>
+    <string name="commentUnit">条</string>
+    <string name="commentUnitWj"> </string>
     <string name="download_caching">正在缓存</string>
     <string name="download_downloading">下载中</string>
     <string name="download_error">下载出错</string>
@@ -1173,13 +1193,22 @@
     <string name="encrypted_no">未加密</string>
     <string name="fab_transformation_scrim_behavior" translatable="false">android.support.design.transformation.FabTransformationScrimBehavior</string>
     <string name="fab_transformation_sheet_behavior" translatable="false">android.support.design.transformation.FabTransformationSheetBehavior</string>
+    <string name="fav">点赞</string>
+    <string name="favwj">超赞</string>
+    <string name="fromCircle1">来自“</string>
+    <string name="fromCircle2">”圈子</string>
     <string name="gif_tag">动图</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hide_bottom_view_on_scroll_behavior" translatable="false">android.support.design.behavior.HideBottomViewOnScrollBehavior</string>
     <string name="inout_accesskeyid_here">这里输入临时accesskeyId</string>
     <string name="input_accesskeysecret_here">这里输入临时accesskeySecret</string>
     <string name="input_securitytoken_here">这里输入临时securityToken</string>
     <string name="input_url_here">请输入URL </string>
     <string name="input_vid_here">这里输入视频vid</string>
+    <string name="isCollect">收藏</string>
+    <string name="isFav">已赞</string>
+    <string name="jiaoliu1">有</string>
+    <string name="jiaoliu2">个小伙伴在这里互相交流</string>
     <string name="kickalert">你被主播移出直播间，请注意言行！</string>
     <string name="kickbt">我知道了</string>
     <string name="list_footer_end">Loading done</string>
@@ -1189,6 +1218,7 @@
     <string name="listview_header_hint_release">Refresh when release</string>
     <string name="listview_header_last_time">Last update time：</string>
     <string name="listview_loading">Loading...</string>
+    <string name="liulan">浏览</string>
     <string name="log_change_quality_fail"> 切换清晰度失败</string>
     <string name="log_change_quality_success"> 切换清晰度成功</string>
     <string name="log_first_frame_played"> 第一帧播放完成</string>
@@ -1314,6 +1344,7 @@
     <string name="umeng_socialize_sharetosina">分享到新浪微博</string>
     <string name="umeng_socialize_sharetotencent">分享到腾讯微博</string>
     <string name="umeng_socialize_sharetotwitter">分享到twitter</string>
+    <string name="zan">赞</string>
     <style name="AVLoadingIndicatorView">
         <item name="minWidth">48dip</item>
         <item name="maxWidth">48dip</item>
@@ -1353,6 +1384,13 @@
         <item name="colorPrimary">@color/bar_grey</item>
         <item name="colorPrimaryDark">@color/bar_grey</item>
         <item name="colorAccent">@color/bar_grey</item>
+    </style>
+    <style name="AppTheme.Toolbar" ns1:ignore="ResourceName" parent="Widget.AppCompat.ActionBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <!--<item name="android:layout_height">64dp</item>-->
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
     </style>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -3755,6 +3793,9 @@
         <item name="android:textColor">@color/_xpopup_title_color</item>
         <item name="android:lines">1</item>
         <item name="android:ellipsize">end</item>
+    </style>
+    <style name="circle_CustomCheckBoxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/circle_switch_check_sec</item>
     </style>
     <style name="picture.default.style" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.message.vo.MessageDetailListVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.message.vm.MessageViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="14dp"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+        android:orientation="vertical"
+        android:paddingBottom="1dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/common_sys_mes_shape"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="刚刚"
+            android:textSize="12sp" />
+
+        <!--  android:text="@{BdUtils.getStandardDate(item.addtime)}"-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/open_liner_bg_shape"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="14dp"
+            android:paddingTop="14dp"
+            android:paddingRight="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="@{item.title}"
+                android:textColor="#121212"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="left"
+                android:text="@{item.content}"
+                android:textColor="#666"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_detail_info"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:drawableRight="@mipmap/arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="查看详情"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</layout>
+
+

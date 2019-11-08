@@ -12,6 +12,12 @@
         <activity
             android:name="com.docker.message.ui.index.MessageSampleActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.message.ui.index.MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.message.ui.index.MessageListActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -6,5 +6,11 @@
         <activity
             android:name=".ui.index.MessageSampleActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.index.MessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.index.MessageListActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
