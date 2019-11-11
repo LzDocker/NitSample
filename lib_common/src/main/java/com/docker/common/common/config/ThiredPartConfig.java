@@ -42,6 +42,7 @@ public class ThiredPartConfig {
     public static final String FLODER = "static/var/upload/img";
     public static final String FLODERVIDEO = "static/var/upload/video";
 
+    public static final String BaseServeUrl = "http://htj.wgc360.com/";
 
     public static void init(BaseApp app) {
         Utils.init(app);

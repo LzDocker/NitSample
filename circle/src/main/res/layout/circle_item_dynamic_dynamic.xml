@@ -113,8 +113,8 @@
                           android:scaleType="fitXY"
                           app:errorImg="@{R.mipmap.circle_icon_empty}"
                           app:placeHolder="@{R.mipmap.circle_icon_empty}"
-                          app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}"
-                          app:visibleGone="@{BdUtils.isShowSingleImg(item)}" />-->
+                          app:roundImgUrl="@{CommonBdUtils.getDynamicSingleImg(item)}"
+                          app:visibleGone="@{CommonBdUtils.isShowSingleImg(item)}" />-->
 
             </LinearLayout>
 
@@ -149,7 +149,7 @@
                     <!--android:layout_height="188dp"-->
                     <!--app:errorImg="@{R.mipmap.circle_icon_empty}"-->
                     <!--app:placeHolder="@{R.mipmap.circle_icon_empty}"-->
-                    <!--app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}" />-->
+                    <!--app:roundImgUrl="@{CommonBdUtils.getDynamicSingleImg(item)}" />-->
 
                     <ImageView
                         android:layout_width="match_parent"

@@ -1,1 +1,4 @@
-include ':app', ':lib_core', ':lib_utilcode', ':lib_common', ':lib_opensource', ':circle', ':account', ':lib_video', ':videobasic', ':message'
+include ':app', ':lib_core', ':lib_utilcode', ':lib_common',
+        ':circle', ':account', ':videobasic',
+        ':message', ':lib_im', ":lib_opensource",
+        "lib_video", ":uikit"

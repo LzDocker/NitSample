@@ -1,17 +1,23 @@
 package com.docker.message.vo;
 
+import android.databinding.Bindable;
+
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.CacheMemoryUtils;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.entity.ParamsBean;
+import com.docker.message.BR;
 import com.docker.message.R;
+
+import java.io.Serializable;
 
 import timber.log.Timber;
 
-public class MessageListVo extends BaseSampleItem {
+public class MessageListVo extends BaseSampleItem implements Serializable {
 
     /*
      * UI类型
@@ -41,24 +47,25 @@ public class MessageListVo extends BaseSampleItem {
             options.refreshState = 0;
             options.ReqParam.put("type", ((MessageListVo) item).type);
             options.ReqParam.put("memberid", "3");
-            String title = null;
-            switch (type) {
-                case "1":  // 系统通知
-                    title = "系统通知";
-                    break;
-                case "2":  // 评论列表
-                    title = "评论";
-                    break;
-                case "3": // 点赞列表
-                    title = "点赞";
-                    break;
-                case "4": // 收藏
-                    title = "收藏";
-                    break;
-                case "5": // 关注
-                    title = "关注";
-                    break;
-            }
+//            String title = null;
+//            switch (type) {
+//                case "1":  // 系统通知
+//                    title = "系统通知";
+//                    break;
+//                case "2":  // 评论列表
+//                    title = "评论";
+//                    break;
+//                case "3": // 点赞列表
+//                    title = "点赞";
+//                    break;
+//                case "4": // 收藏
+//                    title = "收藏";
+//                    break;
+//                case "5": // 关注
+//                    title = "关注";
+//                    break;
+//            }
+            ((MessageListVo) item).setNotReadMsgNum("0");
             ARouter.getInstance().build(AppRouter.MESSAGELISTACT)
                     .withSerializable(Constant.CommonListParam, options)
                     .withString("title", title)
@@ -109,7 +116,10 @@ public class MessageListVo extends BaseSampleItem {
     private ParamsBean params;
     private String title;
     private String mid;
+
+    @Bindable
     private String notReadMsgNum;
+
     private int icon;
 
     public int getIcon() {
@@ -216,12 +226,15 @@ public class MessageListVo extends BaseSampleItem {
         this.mid = mid;
     }
 
+    @Bindable
     public String getNotReadMsgNum() {
         return notReadMsgNum;
     }
 
+    @Bindable
     public void setNotReadMsgNum(String notReadMsgNum) {
         this.notReadMsgNum = notReadMsgNum;
+        notifyPropertyChanged(BR.notReadMsgNum);
     }
 
 }

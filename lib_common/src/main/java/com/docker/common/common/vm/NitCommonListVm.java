@@ -131,25 +131,26 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                         if (mPage == 1) {
                             mItems.clear();
                         }
-                        if (resource.data != null) {
-                            setLoadControl(true);
-                            mEmptycommand.set(EmptyStatus.BdHiden);
-                            if (resource.data instanceof List) {
-                                if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
-                                    bdenablenodata.set(true);
-                                } else {
-                                    bdenablenodata.set(false);
-                                }
-                                bdenablenodata.notifyChange();
-//                                mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
-                                mItems.addAll(formatListData((Collection<? extends BaseItemModel>) resource.data));
+                        setLoadControl(true);
+                        mEmptycommand.set(EmptyStatus.BdHiden);
+                        if (resource.data instanceof List) {
+                            if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
+                                bdenablenodata.set(true);
                             } else {
-//                                mItems.add((BaseItemModel) resource.data);
-                                mItems.add(formatData((BaseItemModel) resource.data));
-
+                                bdenablenodata.set(false);
                             }
+                            bdenablenodata.notifyChange();
+//                                mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
+                            mItems.addAll(formatListData((Collection<? extends BaseItemModel>) resource.data));
+                        } else {
+//                                mItems.add((BaseItemModel) resource.data);
+                            mItems.add(formatData((BaseItemModel) resource.data));
+
+                        }
+                        if (resource.data != null) {
                             mPage++;
                         }
+
                         if (mItems.size() == 0) { // 暂无数据
                             mEmptycommand.set(EmptyStatus.BdEmpty);
                             setLoadControl(false);

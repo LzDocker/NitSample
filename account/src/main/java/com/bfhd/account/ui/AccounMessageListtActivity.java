@@ -148,7 +148,7 @@ public class AccounMessageListtActivity extends HivsBaseActivity<AccountViewMode
                 }
                 for (int i = 0; i < messageVoList.size(); i++) {
                     MessageListVo vo = messageVoList.get(i);
-                         /*  MessageVo sysMessage = new MessageVo(1, R.mipmap.account_tongzhi_icon, "系统通知");
+                         /*  MessageVo sysMessage = new MessageVo(1, R.mipmap.message_tongzhi_icon, "系统通知");
                             MessageVo commmentMessage = new MessageVo(2, R.mipmap.account_pinglun_icon, "评论");
                             MessageVo praiseMessage = new MessageVo(3, R.mipmap.account_dianzan_icon, "点赞");
                             MessageVo collectionMessage = new MessageVo(4, R.mipmap.account_shoucangg_icon, "收藏");

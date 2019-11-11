@@ -6,6 +6,7 @@ import com.docker.common.di.CommonModule;
 import com.docker.core.base.BaseApp;
 import com.docker.core.di.netmodule.GlobalConfigModule;
 import com.docker.message.di.MessageModule;
+import com.docker.module_im.di.ImModule;
 import com.docker.videobasic.di.VideoModule;
 import com.google.gson.Gson;
 
@@ -41,6 +42,8 @@ import okhttp3.OkHttpClient;
 
         /*message*/
         MessageModule.class,
+
+//        ImModule.class
 })
 public interface AppComponent {
 

@@ -41,7 +41,7 @@
             <!--android:scaleType="centerCrop"-->
             <!--app:errorImg="@{R.mipmap.circle_icon_empty}"-->
             <!--app:placeHolder="@{R.mipmap.circle_icon_empty}"-->
-            <!--app:roundImgUrl="@{BdUtils.getResourceImgUrl(item)}"-->
+            <!--app:roundImgUrl="@{CommonBdUtils.getResourceImgUrl(item)}"-->
             <!--app:widget_height_percent="1"-->
             <!--app:widget_width_percent="1" />-->
 

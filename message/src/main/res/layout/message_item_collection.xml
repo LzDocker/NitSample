@@ -65,14 +65,14 @@
                 android:layout_marginBottom="14dp"
                 android:textColor="#999"
                 android:textSize="12sp" />
-            <!--  android:text="@{BdUtils.getStandardDate(item.addtime)}"-->
+            <!--  android:text="@{CommonBdUtils.getStandardDate(item.addtime)}"-->
             <FrameLayout
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="14dp">
-                <!--app:visibleGone="@{BdUtils.isShowSingleImg(item.resource)}"-->
+                <!--app:visibleGone="@{CommonBdUtils.isShowSingleImg(item.resource)}"-->
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -82,7 +82,7 @@
 
                 <!--   app:errorImg="@{R.mipmap.circle_icon_empty}"
                     app:placeHolder="@{R.mipmap.circle_icon_empty}"
-                    app:roundImgUrl="@{BdUtils.getCommentSingleImg(item.resource)}"-->
+                    app:roundImgUrl="@{CommonBdUtils.getCommentSingleImg(item.resource)}"-->
 
                 <ImageView
                     android:layout_width="20dp"
@@ -91,7 +91,7 @@
                     android:focusable="false"
                     android:scaleType="centerCrop" />
                 <!--android:src="@mipmap/circle_player_icon"
-                    app:visibleGone="@{BdUtils.isShowCommentVideoImg(item.resource)}"-->
+                    app:visibleGone="@{CommonBdUtils.isShowCommentVideoImg(item.resource)}"-->
             </FrameLayout>
 
         </RelativeLayout>

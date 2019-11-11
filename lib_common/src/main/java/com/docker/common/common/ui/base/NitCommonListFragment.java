@@ -147,7 +147,6 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
                     }
                 }
             }
-
         }
         (mViewModel).mPage = 1;
         (mViewModel).mItems.clear();

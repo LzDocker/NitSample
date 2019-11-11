@@ -1,10 +1,10 @@
 package com.docker.message.ui.index;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -16,11 +16,15 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.message.R;
 import com.docker.message.databinding.MessageActivityBinding;
-import com.docker.message.databinding.MessageSampleActivityBinding;
+import com.docker.message.vm.MessageViewModel;
 import com.docker.message.vm.SampleListViewModel;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.api.model.session.SessionEventListener;
+import com.netease.nim.uikit.business.recent.RecentContactsFragment;
+import com.netease.nimlib.sdk.msg.model.IMMessage;
 
 @Route(path = AppRouter.MESSAGMAIN)
-public class MessageActivity extends NitCommonActivity<SampleListViewModel, MessageActivityBinding> {
+public class MessageActivity extends NitCommonActivity<MessageViewModel, MessageActivityBinding> {
 
     @Autowired
     int style;
@@ -31,8 +35,8 @@ public class MessageActivity extends NitCommonActivity<SampleListViewModel, Mess
     }
 
     @Override
-    public SampleListViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(SampleListViewModel.class);
+    public MessageViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(MessageViewModel.class);
     }
 
     @Override
@@ -40,12 +44,35 @@ public class MessageActivity extends NitCommonActivity<SampleListViewModel, Mess
         super.onCreate(savedInstanceState);
         switch (style) {
             case 0:
-                mBinding.messageFrameList.setVisibility(View.GONE);
+                mToolbar.hide();
+//                mBinding.messageFrameList.setVisibility(View.GONE);
                 FragmentUtils.add(getSupportFragmentManager(),
-                        (Fragment) ARouter.getInstance().build(AppRouter.MESSAGELIST).withInt("style", 0).navigation(),
+                        (Fragment) ARouter.getInstance()
+                                .build(AppRouter.MESSAGELIST)
+                                .withInt("style", 0).navigation(),
                         R.id.message_frame);
+//                RecentContactsFragment sessionListFragment = new RecentContactsFragment();
+//                SessionEventListener listener = new SessionEventListener() {
+//                    @Override
+//                    public void onAvatarClicked(Context context, IMMessage message) {
+//                    }
+//
+//                    @Override
+//                    public void onAvatarLongClicked(Context context, IMMessage message) {
+//                    }
+//
+//                    @Override
+//                    public void onAckMsgClicked(Context context, IMMessage message) {
+//                    }
+//                };
+//                NimUIKit.setSessionListener(listener);
+//                FragmentUtils.add(getSupportFragmentManager(), sessionListFragment, R.id.message_frame_list);
                 break;
             case 1:
+                mToolbar.setTitle("消息中心");
+                mToolbar.setTvRight("全部已读", v -> {
+                    mViewModel.readAllMsg();
+                });
                 mBinding.messageCard.setVisibility(View.GONE);
                 FragmentUtils.add(getSupportFragmentManager(),
                         (Fragment) ARouter.getInstance().build(AppRouter.MESSAGELIST).withInt("style", 1).navigation(),
@@ -56,13 +83,13 @@ public class MessageActivity extends NitCommonActivity<SampleListViewModel, Mess
 
     @Override
     public void initView() {
-        mToolbar.hide();
 
     }
 
     @Override
     public void initObserver() {
-
+        mViewModel.mRearAllLiveData.observe(this, s -> {
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.docker.message.di;
 
 
 import com.docker.message.api.MessageService;
+import com.docker.module_im.di.ImModule;
 
 import javax.inject.Singleton;
 

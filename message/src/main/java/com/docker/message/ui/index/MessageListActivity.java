@@ -11,6 +11,7 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonListActivity;
 import com.docker.message.vm.MessageViewModel;
 import com.docker.message.vm.SampleListViewModel;
+import com.docker.message.vo.MessageListVo;
 
 @Route(path = AppRouter.MESSAGELISTACT)
 public class MessageListActivity extends NitCommonListActivity<MessageViewModel> {
@@ -19,6 +20,7 @@ public class MessageListActivity extends NitCommonListActivity<MessageViewModel>
     public void initView() {
         mViewModel.setServerType(1);
     }
+
     @Override
     public void initObserver() {
 
