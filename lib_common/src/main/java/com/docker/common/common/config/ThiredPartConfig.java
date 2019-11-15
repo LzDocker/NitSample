@@ -35,7 +35,7 @@ public class ThiredPartConfig {
     public static final String Umeng = "5d0300984ca3579a45000b17";
 
     // oss
-    public static final String endpoint = "https://oss-cn-beijing.aliyuncs.com";
+    public static final String endpoint = "http://taijistar.oss-cn-beijing.aliyuncs.com";
     public static final String accessKeyId = "LTAIWijAvXa7BmAt";
     public static final String accessKeySecret = "RYDaCj2um1nlhYgfyVH6JRceq4ypwO";
     public static final String P_BUCKETNAME = "taijistar";

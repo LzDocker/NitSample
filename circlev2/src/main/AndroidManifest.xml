@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.docker.cirlev2">
+
+
+    <application>
+
+        <activity android:name="com.docker.cirlev2.ui.index.CircleSampleActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.index.CircleIndexActivity"></activity>
+        <activity
+            android:name="com.docker.cirlev2.ui.create.CircleCreateActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.docker.cirlev2.ui.create.CircleCreateIndexActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.detail.CircleDetailIndexActivity"></activity>
+
+    </application>
+</manifest>

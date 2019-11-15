@@ -34,10 +34,13 @@ public class SampleItemVo implements BaseItemModel {
                     ARouter.getInstance().build(AppRouter.ACCOUNT_COUNTRY).navigation();
                     break;
                 case 3:
-                    StaCirParam staCirParam = new StaCirParam();
-                    staCirParam.setCircleid("67");
-                    staCirParam.setUtid("482e8892629068523502b63df24bc526");
-                    ARouter.getInstance().build(AppRouter.CIRCLEHOME).withSerializable("mStartParam", staCirParam).navigation();
+//                    StaCirParam staCirParam = new StaCirParam();
+//                    staCirParam.setCircleid("67");
+//                    staCirParam.setUtid("482e8892629068523502b63df24bc526");
+//                    ARouter.getInstance().build(AppRouter.CIRCLEHOME).withSerializable("mStartParam", staCirParam).navigation();
+
+                    ARouter.getInstance().build(AppRouter.CIRCLE_SAMPLE_INDEX).navigation();
+
                     break;
                 case 4:
                     ARouter.getInstance().build(AppRouter.AUDIO_DEMO).navigation();

@@ -42,11 +42,6 @@ public abstract class NitCommonListActivity<VM extends NitCommonListVm> extends 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (TextUtils.isEmpty(title)) {
-            mToolbar.hide();
-        } else {
-            mToolbar.setTitle(title);
-        }
         commonListReq = (CommonListOptions) getIntent().getSerializableExtra(CommonListParam);
         if (commonListReq != null) {
             (mViewModel).initParam(commonListReq);
@@ -85,8 +80,8 @@ public abstract class NitCommonListActivity<VM extends NitCommonListVm> extends 
                 (mBinding).refresh.setEnableLoadMore(true);
                 break;
             case 1:
-                (mBinding).refresh.setEnableRefresh(true);
-                (mBinding).refresh.setEnableLoadMore(false);
+                (mBinding).refresh.setEnableRefresh(false);
+                (mBinding).refresh.setEnableLoadMore(true);
                 break;
             case 2:
                 (mBinding).refresh.setEnableRefresh(false);

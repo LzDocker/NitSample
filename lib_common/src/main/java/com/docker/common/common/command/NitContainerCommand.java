@@ -1,7 +1,5 @@
 package com.docker.common.common.command;
 
-import android.arch.lifecycle.LifecycleObserver;
-
 import java.io.Serializable;
 
 /*

@@ -434,21 +434,20 @@
         </com.docker.common.common.widget.refresh.SmartRefreshLayout>
 
 
-        <!--<View-->
-        <!--android:id="@+id/view_bot"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="28dp"-->
-        <!--android:layout_gravity="bottom|center"-->
-        <!--android:background="@drawable/open_top_liner_shape"-->
-        <!--android:visibility="gone" />-->
+        <View
+            android:id="@+id/view_bot"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_gravity="bottom|center"
+            android:background="@drawable/open_top_liner_shape" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/circle_iv_add"-->
-        <!--android:layout_width="55dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_gravity="bottom|center"-->
-        <!--android:src="@mipmap/circle_add_icon"-->
-        <!--android:visibility="gone" />-->
+        <ImageView
+            android:id="@+id/circle_iv_add"
+            android:layout_width="55dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|center"
+            android:src="@mipmap/circle_add_icon"
+            android:visibility="gone" />
 
 
     </com.docker.common.common.widget.empty.EmptyLayout>

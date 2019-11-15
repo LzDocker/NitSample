@@ -26,7 +26,6 @@ public class EmptyLayout extends FrameLayout {
     private CommonEmptyLayoutLoadingBinding loadingBinding;
     private CommonEmptyLayoutErrorBinding errorBinding;
     private CommonEmptyLayoutNodataBinding nodataBinding;
-    private CommonEmptyLayoutBinding emptyLayoutBinding;
 
     public EmptyLayout(Context context) {
         super(context);

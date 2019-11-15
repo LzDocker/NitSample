@@ -3,14 +3,24 @@ package com.docker.common.common.vo;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import com.docker.common.common.model.BaseSampleItem;
+import com.docker.common.common.model.OnItemClickListener;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class ServiceDataBean extends BaseObservable implements Serializable {
+public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
+    @Override
+    public int getItemLayout() {
+        return 0;
+    }
 
+    @Override
+    public OnItemClickListener getOnItemClickListener() {
+        return null;
+    }
 
     private String country;
     private String province;
@@ -431,6 +441,7 @@ public class ServiceDataBean extends BaseObservable implements Serializable {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
+
 
     public static class ExtDataBean extends BaseObservable implements Serializable {
 

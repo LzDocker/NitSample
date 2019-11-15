@@ -66,6 +66,20 @@ public class AppRouter {
     public static final String CIRCLEHOME = CircleGroup + "CircleHome";
 
 
+    public static final String CircleV2Group = "/Circlev2/";
+
+
+    public static final String CIRCLE_INDEX = CircleV2Group + "index";
+    public static final String CIRCLE_SAMPLE_INDEX = CircleV2Group + "sample_index";
+    public static final String CIRCLE_INDEX_FRAME = CircleV2Group + "index_frame";
+    public static final String CIRCLE_DYNAMIC_LIST_FRAME = CircleV2Group + "dynamic_list_frame";
+    public static final String CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER = CircleV2Group + "dynamic_list_frame_coutainers";
+    public static final String CIRCLE_CREATE_v2_INDEX = CircleV2Group + "circle_create_v2_index";
+    public static final String CIRCLE_CREATE_v2 = CircleV2Group + "circle_create_v2";
+    public static final String CIRCLE_CREATE_v2_frame = CircleV2Group + "circle_create_v2_frame";
+    public static final String CIRCLE_DETAIL_v2_INDEX = CircleV2Group + "circle_detail_v2_index";
+
+
     public static final String ProGroup = "/Pro/";
 
     public static final String STUDY = ProGroup + "study";

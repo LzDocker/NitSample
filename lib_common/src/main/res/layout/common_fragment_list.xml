@@ -25,9 +25,12 @@
             bind:bdcomplete="@={viewmodel.mCompleteCommand}"
             bind:bdenable="@={viewmodel.bdenable}"
             bind:bdenablemore="@={viewmodel.bdenablemore}"
+            bind:srlEnableRefresh="@={viewmodel.bdenablerefresh}"
             bind:bdenablenodata="@={viewmodel.bdenablenodata}"
             bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
             bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}">
+
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"

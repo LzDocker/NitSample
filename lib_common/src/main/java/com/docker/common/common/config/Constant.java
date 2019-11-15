@@ -33,9 +33,11 @@ public class Constant {
     /*
      *  0  线性
      *  1  grid 2  每行两个
+     *  2  横向
      * */
     public static final int KEY_RVUI_LINER = 0;
     public static final int KEY_RVUI_GRID2 = 1;
+    public static final int KEY_RVUI_HOR = 2;
 
 
     //----------------------------end---------------------

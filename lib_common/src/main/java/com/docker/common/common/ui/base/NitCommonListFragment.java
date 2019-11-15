@@ -1,8 +1,11 @@
 package com.docker.common.common.ui.base;
 
+import android.databinding.Observable;
+import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
@@ -21,6 +24,9 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import static com.docker.common.common.config.Constant.CommonListParam;
+import static com.docker.common.common.config.Constant.KEY_RVUI_GRID2;
+import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
+import static com.docker.common.common.config.Constant.KEY_RVUI_LINER;
 
 public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> {
 
@@ -68,6 +74,14 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         mViewModel.mServerLiveData.observe(this, o -> {
 
         });
+        mViewModel.loadingOV.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                if (refreshLayout != null) {
+                    refreshLayout.finishRefresh();
+                }
+            }
+        });
     }
 
     public CommonListOptions getArgument() {
@@ -75,12 +89,21 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     protected void initRvUi() {
-        if (commonListReq.RvUi == 0) {
-            (mBinding.get()).recyclerView.setLayoutManager(LayoutManager.linear().create((mBinding.get()).recyclerView));
-        } else {
-            (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
-                    .grid(2)
-                    .create((mBinding.get()).recyclerView));
+        switch (commonListReq.RvUi) {
+            case KEY_RVUI_LINER:
+                (mBinding.get()).recyclerView.setLayoutManager(LayoutManager.linear().create((mBinding.get()).recyclerView));
+                break;
+
+            case KEY_RVUI_GRID2:
+                (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
+                        .grid(2)
+                        .create((mBinding.get()).recyclerView));
+                break;
+            case KEY_RVUI_HOR:
+                (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
+                        .linear(LinearLayoutManager.HORIZONTAL, false)
+                        .create((mBinding.get()).recyclerView));
+                break;
         }
     }
 
@@ -91,8 +114,8 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
                 (mBinding.get()).refresh.setEnableLoadMore(true);
                 break;
             case 1:
-                (mBinding.get()).refresh.setEnableRefresh(true);
-                (mBinding.get()).refresh.setEnableLoadMore(false);
+                (mBinding.get()).refresh.setEnableRefresh(false);
+                (mBinding.get()).refresh.setEnableLoadMore(true);
                 break;
             case 2:
                 (mBinding.get()).refresh.setEnableRefresh(false);
@@ -165,6 +188,6 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         super.onReFresh(refreshLayout);
         this.refreshLayout = refreshLayout;
         (mViewModel).mPage = 1;
-        (mViewModel).mItems.clear();
+        mViewModel.loadData();
     }
 }

@@ -95,6 +95,7 @@
         <attr name="bdenable" format="boolean" /> <!--是否可用-->
         <attr name="bdenablemore" format="boolean" /> <!--加载更多是否可用-->
         <attr name="bdenablenodata" format="boolean" /> <!--加载更多是否可用-->
+        <attr name="bdenablerefresh" format="boolean" /> <!--刷新是否可用-->
 
     </declare-styleable>
 
