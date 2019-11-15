@@ -95,6 +95,12 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                 bdenablerefresh.set(false);
                 bdenablerefresh.notifyChange();
                 break;
+            case Constant.KEY_REFRESH_NOUSE:
+                bdenablemore.set(false);
+                bdenablemore.notifyChange();
+                bdenablerefresh.set(false);
+                bdenablerefresh.notifyChange();
+                break;
         }
     }
 
@@ -191,7 +197,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     public void onNetworkError(Resource<T> resource) {
                         super.onNetworkError(resource);
                         setLoadControl(false);
-                        if (mPageSize == 1) {
+                        if (mPage == 1) {
                             mEmptycommand.set(EmptyStatus.BdError);
                         }
                     }

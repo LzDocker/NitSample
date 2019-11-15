@@ -18,392 +18,358 @@
     </data>
 
 
-    <FrameLayout
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:srlFooterTranslationViewId="@+id/viewPager">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
+        <com.docker.common.common.widget.refresh.header.ClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="420dp"
-            android:layout_marginTop="-200dp"
-            app:is_auto_play="true" />
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@android:color/black"
+            app:srlDrawableArrowSize="13dp"
+            app:srlDrawableProgressSize="16dp"
+            app:srlDrawableSize="16dp"
+            app:srlFinishDuration="200"
+            app:srlTextSizeTitle="13sp" />
 
-        <com.docker.common.common.widget.refresh.SmartRefreshLayout
-            android:id="@+id/refresh"
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srlFooterTranslationViewId="@+id/viewPager">
+            bind:ignore="MergeRootFrame">
 
-            <com.docker.common.common.widget.refresh.header.ClassicsHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srlAccentColor="@android:color/white"
-                app:srlDrawableArrowSize="13dp"
-                app:srlDrawableProgressSize="16dp"
-                app:srlDrawableSize="16dp"
-                app:srlFinishDuration="100"
-                app:srlTextSizeTitle="13sp" />
-
-
-            <android.support.design.widget.CoordinatorLayout
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                bind:ignore="MergeRootFrame">
+                android:background="@color/white"
+                android:overScrollMode="ifContentScrolls"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_scrollFlags="scroll" />
 
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:elevation="0dp"
+                android:orientation="vertical"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:elevation="0dp">
 
-                <android.support.design.widget.AppBarLayout
-                    android:id="@+id/app_bar"
+                <android.support.design.widget.CollapsingToolbarLayout
+                    android:id="@+id/toolbar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#00000000"
                     android:elevation="0dp"
-                    app:elevation="0dp">
-                    <!--  android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-                    <!--android:background="@color/transparent"-->
+                    app:contentScrim="@color/white"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                    <android.support.design.widget.CollapsingToolbarLayout
-                        android:id="@+id/toolbar_layout"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elevation="0dp"
-                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
-                        <!-- app:contentScrim="@color/white"-->
+                        android:layout_height="match_parent"
+                        android:background="@color/white">
 
-                        <FrameLayout
+                        <com.youth.banner.Banner
+                            android:id="@+id/banner"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-                            <!-- android:background="@color/white"-->
+                            android:layout_height="220dp"
+                            app:is_auto_play="true" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="120dp">
 
 
                             <RelativeLayout
+                                android:id="@+id/rlcoutainer"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-
-                                <RelativeLayout
-                                    android:id="@+id/rlcoutainer"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="220dp"
-                                    android:layout_marginBottom="25dp"
-                                    android:gravity="center_vertical"
-                                    android:paddingLeft="15dp"
-                                    android:paddingRight="15dp">
-
-                                    <ImageView
-                                        android:id="@+id/circle_iv_icon"
-                                        android:layout_width="65dp"
-                                        android:layout_height="65dp"
-                                        android:layout_centerVertical="true"
-                                        android:scaleType="fitXY"
-                                        app:openImgUrl="@{CommonBdUtils.getCompleteImageUrl(circleDetail.logoUrl)}" />
-
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_toRightOf="@+id/circle_iv_icon"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:id="@+id/circle_tv_cirname"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginLeft="5dp"
-                                            android:ellipsize="end"
-                                            android:maxLength="8"
-                                            android:text="@{circleDetail.circleName}"
-                                            android:textColor="@color/white"
-                                            android:textSize="18dp"
-                                            android:textStyle="bold" />
-
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_below="@+id/circle_tv_cirname"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginLeft="5dp"
-                                            android:layout_marginTop="5dp"
-                                            android:layout_toRightOf="@+id/circle_iv_icon"
-                                            android:drawablePadding="10dp"
-                                            android:textColor="#fff" />
-
-                                        <!--         android:text='@{@string/circle_person_aten+circleDetail.seeNum}'-->
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="80dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_marginTop="120dp"
-                                        android:orientation="vertical">
-
-
-                                        <!--     android:onClick="@{(view)->viewmodel.joinCircle(view)}"-->
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:background="@drawable/circlev2_people_top"
-                                            android:gravity="center"
-                                            android:text="已关注"
-                                            android:textColor="@color/colorAccent" />
-                                        <!-- app:visibleGone="@{BdUtils.isShowJoin(viewmodel.detailVo.isJoin)}"-->
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:background="@drawable/circlev2_people_top_attend"
-                                            android:gravity="center"
-                                            android:text="关注"
-                                            android:textColor="@color/white" />
-                                        <!--     app:visibleGone="@{!BdUtils.isShowJoin(viewmodel.detailVo.isJoin)}"-->
-
-                                        <TextView
-                                            android:id="@+id/circle_tv_personnum"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:background="@drawable/circlev2_people_bottom"
-                                            android:gravity="center"
-
-                                            android:textColor="@color/white" />
-
-                                        <!--         android:text='@{viewmodel.detailVo.employeeNum+@string/circle_ren}'-->
-
-
-                                    </LinearLayout>
-
-
-                                    <!--<LinearLayout-->
-                                    <!--android:layout_width="45dp"-->
-                                    <!--android:layout_height="45dp"-->
-                                    <!--android:layout_alignParentRight="true"-->
-                                    <!--android:layout_centerVertical="true"-->
-                                    <!--android:background="@color/common_grey"-->
-                                    <!--android:gravity="center"-->
-                                    <!--android:orientation="vertical">-->
-
-                                    <!--<TextView-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:layout_centerVertical="true"-->
-                                    <!--android:text="已关注" />-->
-
-                                    <!--<TextView-->
-                                    <!--android:layout_width="wrap_content"-->
-                                    <!--android:layout_height="wrap_content"-->
-                                    <!--android:layout_centerVertical="true"-->
-                                    <!--android:text="10人" />-->
-                                    <!--</LinearLayout>-->
-                                </RelativeLayout>
-
-
-                                <RelativeLayout
-                                    android:id="@+id/circle_ll_per_liner"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/rlcoutainer"
-                                    android:background="@drawable/open_liner_bg_shape"
-                                    android:padding="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/circle_ll_user_head"
-                                        android:layout_width="35dp"
-                                        android:layout_height="35dp" />
-
-                                    <!--app:errorImg="@{R.mipmap.circle_default_avatar}"
-                                        app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                                        app:roundImgUrl="@{viewmodel.detailVo.avatar}" -->
-
-                                    <TextView
-                                        android:id="@+id/circle_ll_user_name"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_toRightOf="@id/circle_ll_user_head"
-
-                                        android:textColor="#121212" />
-
-                                    <!--    android:text="@{viewmodel.detailVo.nickname}"-->
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/circle_ll_user_name"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginTop="5dp"
-                                        android:layout_toRightOf="@id/circle_ll_user_head"
-                                        android:background="@drawable/circlev2_people_quanzhu"
-                                        android:text="圈主"
-                                        android:textColor="@color/white"
-                                        android:textSize="8sp" />
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_centerVertical="true"
-                                        android:src="@mipmap/arrow_right" />
-                                </RelativeLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/circle_ll_info"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="45dp"
-                                    android:layout_below="@+id/rlcoutainer"
-                                    android:background="@color/white"
-                                    android:gravity="center_vertical"
-                                    android:orientation="vertical"
-                                    android:paddingLeft="14dp"
-                                    android:paddingRight="14dp"
-                                    android:visibility="gone">
-
-
-                                    <TextView
-                                        android:id="@+id/tv_circle_desc"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:drawableRight="@mipmap/arrow_right"
-                                        android:paddingTop="10dp"
-                                        android:paddingBottom="10dp"
-                                        android:text="【圈子简介】反恐嘴，维护世界和平"
-                                        android:textColor="#333"
-                                        android:visibility="gone" />
-                                </LinearLayout>
-                            </RelativeLayout>
-
-                        </FrameLayout>
-
-                        <android.support.v7.widget.Toolbar
-                            android:id="@+id/toolbar"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_below="@+id/view"
-                            android:elevation="0dp"
-                            app:contentInsetLeft="0dp"
-                            app:contentInsetStart="0dp"
-                            app:contentInsetStartWithNavigation="0dp"
-                            app:layout_collapseMode="pin"
-                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-                            <RelativeLayout
-                                android:id="@+id/rl_title_coutainer"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="25dp"
                                 android:gravity="center_vertical"
-                                android:paddingRight="14dp">
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp">
 
                                 <ImageView
-                                    android:id="@+id/iv_back"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_alignParentLeft="true"
+                                    android:id="@+id/circle_iv_icon"
+                                    android:layout_width="65dp"
+                                    android:layout_height="65dp"
                                     android:layout_centerVertical="true"
-                                    android:layout_marginLeft="14dp"
-                                    android:alpha=".4"
-                                    android:background="@drawable/circlev2_ov_shape_back"
-                                    android:padding="5dp"
-                                    android:scaleType="centerCrop"
-                                    android:src="@mipmap/ic_toolbar_back" />
+                                    android:scaleType="fitXY"
+                                    app:openImgUrl="@{CommonBdUtils.getCompleteImageUrl(circleDetail.logoUrl)}" />
 
-                                <TextView
-                                    android:id="@+id/title"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_centerInParent="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_centerVertical="true"
-                                    android:textColor="#000000"
-                                    android:textSize="18sp" />
-
+                                <!-- app:errorImg="@{R.mipmap.circle_icon_empty}"-->
+                                <!-- app:placeHolder="@{R.mipmap.circle_icon_empty}" -->
                                 <LinearLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toRightOf="@+id/circle_iv_icon"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/circle_tv_cirname"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="5dp"
+                                        android:ellipsize="end"
+                                        android:maxLength="8"
+                                        android:text="@{circleDetail.circleName}"
+                                        android:textColor="@color/white"
+                                        android:textSize="18dp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/circle_tv_cirname"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_toRightOf="@+id/circle_iv_icon"
+                                        android:drawablePadding="10dp"
+
+                                        android:textColor="#fff" />
+                                    <!--          android:text='@{@string/circle_person_aten+circleDetail.seeNum}'-->
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
+                                    android:layout_marginTop="20dp"
+                                    android:orientation="vertical">
+
+                                    <!--  android:onClick="@{(view)->viewmodel.joinCircle(view)}"-->
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/circlev2_people_top"
+                                        android:gravity="center"
+                                        android:text="已关注"
+                                        android:textColor="@color/colorAccent"
+                                         />
+                                    <!--app:visibleGone="@{BdUtils.isShowJoin(viewmodel.detailVo.isJoin)}"-->
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/circlev2_people_top_attend"
+                                        android:gravity="center"
+                                        android:text="关注"
+                                        android:textColor="@color/white"
+                                        />
+                                    <!-- app:visibleGone="@{!BdUtils.isShowJoin(viewmodel.detailVo.isJoin)}"-->
+
+                                    <TextView
+                                        android:id="@+id/circle_tv_personnum"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/circlev2_people_bottom"
+                                        android:gravity="center"
+
+                                        android:textColor="@color/white" />
+
+                                    <!--     android:text='@{viewmodel.detailVo.employeeNum+@string/circle_ren}'-->
+
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:id="@+id/circle_ll_per_liner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/rlcoutainer"
+                                android:background="@drawable/open_liner_bg_shape"
+                                android:padding="10dp">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/circle_ll_user_head"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                 />
+
+                                <!--    app:errorImg="@{R.mipmap.circle_default_avatar}"
+                                    app:placeHolder="@{R.mipmap.circle_default_avatar}"
+                                    app:roundImgUrl="@{viewmodel.detailVo.avatar}"-->
+
+                                <TextView
+                                    android:id="@+id/circle_ll_user_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_toRightOf="@id/circle_ll_user_head"
+                                    android:text="@{circleDetail.nickname}"
+                                    android:textColor="#121212" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/circle_ll_user_name"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toRightOf="@id/circle_ll_user_head"
+                                    android:background="@drawable/circlev2_people_quanzhu"
+                                    android:text="家长"
+                                    android:textColor="@color/white"
+                                    android:textSize="8sp" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:src="@mipmap/arrow_right" />
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/circle_ll_info"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/rlcoutainer"
+                                android:background="@color/white"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingRight="14dp"
+                                android:visibility="gone">
+
+
+                                <TextView
+                                    android:id="@+id/tv_circle_desc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableRight="@mipmap/arrow_right"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="【圈子简介】反恐嘴，维护世界和平"
+                                    android:textColor="#333"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </FrameLayout>
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/view"
+                        android:elevation="0dp"
+                        app:contentInsetLeft="0dp"
+                        app:contentInsetStart="0dp"
+                        app:contentInsetStartWithNavigation="0dp"
+                        app:layout_collapseMode="pin"
+                        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_title_coutainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingRight="14dp">
+
+                            <ImageView
+                                android:id="@+id/iv_back"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="14dp"
+                                android:alpha=".4"
+                                android:background="@drawable/circlev2_ov_shape_back"
+                                android:padding="5dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_toolbar_back" />
+
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:gravity="center_vertical|right"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/iv_share"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_centerVertical="true"
+                                    android:alpha=".4"
+                                    android:background="@drawable/circlev2_ov_shape_back"
+                                    android:padding="6dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@mipmap/circle_icon_sjsb_zf" />
+
+                                <LinearLayout
+                                    android:id="@+id/iv_menu_more"
+                                    android:layout_width="50dp"
+                                    android:layout_height="match_parent"
                                     android:gravity="center_vertical|right"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
 
                                     <ImageView
-                                        android:id="@+id/iv_share"
+                                        android:id="@+id/iv_menu_img"
                                         android:layout_width="25dp"
                                         android:layout_height="25dp"
                                         android:layout_centerVertical="true"
                                         android:alpha=".4"
                                         android:background="@drawable/circlev2_ov_shape_back"
-                                        android:padding="6dp"
-                                        android:scaleType="fitXY"
-                                        android:src="@mipmap/circle_icon_sjsb_zf" />
-
-                                    <LinearLayout
-                                        android:id="@+id/iv_menu_more"
-                                        android:layout_width="50dp"
-                                        android:layout_height="match_parent"
-                                        android:gravity="center_vertical|right"
-                                        android:orientation="vertical"
-                                        android:visibility="gone">
-
-                                        <ImageView
-                                            android:id="@+id/iv_menu_img"
-                                            android:layout_width="25dp"
-                                            android:layout_height="25dp"
-                                            android:layout_centerVertical="true"
-                                            android:alpha=".4"
-                                            android:background="@drawable/circlev2_ov_shape_back"
-                                            android:padding="20dp"
-                                            android:scaleType="centerCrop"
-                                            android:src="@mipmap/open_meun" />
-                                    </LinearLayout>
-
+                                        android:padding="20dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@mipmap/open_meun" />
                                 </LinearLayout>
-                            </RelativeLayout>
-                        </android.support.v7.widget.Toolbar>
-                    </android.support.design.widget.CollapsingToolbarLayout>
 
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </android.support.v7.widget.Toolbar>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                </android.support.design.widget.CollapsingToolbarLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/open_liner_bg_shape">
+
+                    <net.lucode.hackware.magicindicator.MagicIndicator
+                        android:id="@+id/magic_indicator"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        android:paddingRight="10dp" />
+
+                    <TextView
+                        android:id="@+id/circlev2_edit"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/open_liner_bg_shape">
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="14dp"
+                        android:text="编辑分类"
+                        android:textColor="@color/blue" />
 
-                        <net.lucode.hackware.magicindicator.MagicIndicator
-                            android:id="@+id/magic_indicator"
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:layout_weight="1"
-                            android:paddingRight="10dp" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/circlev2_edit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginRight="14dp"
-                            android:text="编辑分类"
-                            android:textColor="@color/blue" />
-
-                    </LinearLayout>
-
-                </android.support.design.widget.AppBarLayout>
-
-
-                <!--<android.support.v4.view.ViewPager-->
-                    <!--android:id="@+id/viewPager"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:background="@color/white"-->
-                    <!--android:overScrollMode="ifContentScrolls"-->
-                    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-                    <!--app:layout_scrollFlags="scroll" />-->
-            </android.support.design.widget.CoordinatorLayout>
-
-        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
-
-    </FrameLayout>
-
-
-    <!--<ImageView--><!--android:id="@+id/circle_iv_add"--><!--android:layout_width="55dp"--><!--android:layout_height="50dp"--><!--android:layout_gravity="bottom|center"--><!--android:src="@mipmap/circle_add_icon"--><!--android:visibility="gone" />-->
-
+            </android.support.design.widget.AppBarLayout>
+        </android.support.design.widget.CoordinatorLayout>
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
 
 </layout>
 

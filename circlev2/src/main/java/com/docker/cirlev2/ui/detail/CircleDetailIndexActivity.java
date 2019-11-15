@@ -95,7 +95,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
     }
 
     private void initAppBar() {
-        int mScreenWidth = ScreenUtils.getScreenWidth();
+//        int mScreenWidth = ScreenUtils.getScreenWidth();
         mBinding.appBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -136,24 +136,24 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
             @Override
             public void onHeaderMoving(RefreshHeader header, boolean isDragging, float percent, int offset, int headerHeight, int maxDragHeight) {
                 //设置图片向下移动
-                mBinding.banner.setTranslationY(offset);
+//                mBinding.banner.setTranslationY(offset);
                 //设置title渐变效果
                 mBinding.rlTitleCoutainer.setAlpha(1 - Math.min(percent, 1));
                 //设置图片宽度变化   当达到指定设置的指定值后  宽度停止  只向下移动
-                if (offset <= 100) {
-                    ViewGroup.LayoutParams layoutParams = mBinding.banner.getLayoutParams();
-                    layoutParams.width = (mScreenWidth + offset);
-                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(-(layoutParams.width - mScreenWidth) / 2, -ConvertUtils.dp2px(200), 0, 0);
-                    mBinding.banner.requestLayout();
-                }
+//                if (offset <= 100) {
+//                    ViewGroup.LayoutParams layoutParams = mBinding.banner.getLayoutParams();
+//                    layoutParams.width = (mScreenWidth + offset);
+//                    ((ViewGroup.MarginLayoutParams) layoutParams).setMargins(-(layoutParams.width - mScreenWidth) / 2, -ConvertUtils.dp2px(200), 0, 0);
+//                    mBinding.banner.requestLayout();
+//                }
             }
         });
         mBinding.appBar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
             int scrollRangle = appBarLayout.getTotalScrollRange();
             /**
-             * 如果是verticalOffset改成负数   有不一样的效果，可以模拟试试
+             * 如果是verticalOffset改成负数   有不一样的效果，
              */
-            mBinding.banner.setTranslationY(verticalOffset);
+//            mBinding.banner.setTranslationY(verticalOffset);
             int mAlpha = (int) Math.abs(255f / scrollRangle * verticalOffset);
             //顶部title渐变效果
             mBinding.toolbar.setBackgroundColor(Color.argb(mAlpha, 255, 255, 255));
