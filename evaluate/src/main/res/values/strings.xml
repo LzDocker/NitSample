@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="item_kejian">个课件</string>
+    <string name="item_chakan">人查看</string>
+    <string name="p_money">+%s元</string>
+    <string name="p_score">+%s分</string>
+    <string name="p_time">分钟</string>
+</resources>

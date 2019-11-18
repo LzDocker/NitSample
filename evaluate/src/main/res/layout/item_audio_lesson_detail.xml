@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.evaluate.vo.LessonDetailVo.SortContentBean" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/common_dp_12"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/study_read_en"
+            style="@style/common_txt_16_12"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/common_dp_10"
+            android:layout_marginBottom="@dimen/common_dp_16"
+            android:text="@{item.en}"
+            android:textSize="@dimen/common_sp_24"
+            app:textIsChoose="@{item.isChoose}" />
+
+
+        <TextView
+            android:id="@+id/study_read_show"
+            style="@style/common_txt_14_99"
+            android:layout_marginTop="@dimen/common_dp_10"
+            android:gravity="center"
+            android:paddingTop="@dimen/common_dp_10"
+            android:paddingBottom="@dimen/common_dp_6"
+            android:text="点击显示译文"
+            android:textSize="@dimen/common_sp_18"
+            app:visibleGone="@{!item.cH}" />
+
+        <TextView
+            android:id="@+id/study_read_ch"
+            style="@style/common_txt_14_99"
+            android:layout_marginTop="@dimen/common_dp_15"
+            android:text="@{item.text}"
+            android:textSize="@dimen/common_sp_18"
+            app:visibleGone="@{item.cH}" />
+    </LinearLayout>
+</layout>

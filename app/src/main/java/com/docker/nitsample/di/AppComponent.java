@@ -2,6 +2,7 @@ package com.docker.nitsample.di;
 
 import com.bfhd.account.di.AccountModule;
 import com.bfhd.circle.di.CircleModule;
+import com.bfhd.evaluate.di.EvaluateModule;
 import com.docker.common.di.CommonModule;
 import com.docker.core.base.BaseApp;
 import com.docker.core.di.netmodule.GlobalConfigModule;
@@ -43,6 +44,8 @@ import okhttp3.OkHttpClient;
 
         /*message*/
         MessageModule.class,
+
+        EvaluateModule.class
 })
 public interface AppComponent {
 

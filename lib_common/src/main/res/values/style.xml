@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 输入框 15sp 颜色为333333-->
+    <style name="common_edit_theme_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_15</item>
+        <item name="android:textColor">@color/common_txt_color_33</item>
+        <item name="android:layout_marginLeft">@dimen/common_dp_12</item>
+        <item name="android:layout_marginRight">@dimen/common_dp_12</item>
+        <item name="android:textColorHint">@color/common_txt_color_99</item>
+        <item name="android:background">@null</item>
+    </style>
+    <!-- 输入框 15sp 颜色为333333-->
+    <style name="common_edit_14_99">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/common_txt_color_33</item>
+        <item name="android:layout_marginLeft">@dimen/common_dp_12</item>
+        <item name="android:layout_marginRight">@dimen/common_dp_12</item>
+        <item name="android:textColorHint">@color/common_txt_color_99</item>
+        <item name="android:background">@null</item>
+    </style>
+    <!-- 输入框 14sp 输入框禁止点击-->
+    <style name="common_edit_none_14_99">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/common_txt_color_33</item>
+        <item name="android:layout_marginRight">@dimen/common_dp_12</item>
+        <item name="android:textColorHint">@color/common_txt_color_99</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:drawablePadding">@dimen/common_dp_10</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:paddingLeft">@dimen/common_dp_6</item>
+    </style>
+
+
+    <!-- 文本13sp 颜色为666666-->
+    <style name="common_txt_13_66">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_13</item>
+        <item name="android:textColor">@color/common_txt_color_66</item>
+    </style>
+    <!-- 文本14sp 颜色为666666-->
+    <style name="common_txt_14_66">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/common_txt_color_66</item>
+    </style>
+
+    <style name="common_txt_15_66">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_15</item>
+        <item name="android:textColor">@color/common_txt_color_66</item>
+    </style>
+
+    <style name="common_txt_15_33">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_15</item>
+        <item name="android:textColor">@color/common_txt_color_33</item>
+    </style>
+    <!-- 文本14sp 颜色为666666-->
+    <style name="common_txt_14_white">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!-- 文本17sp 颜色为333333-->
+    <style name="common_txt_17_66">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_17</item>
+        <item name="android:textColor">@color/common_txt_color_33</item>
+    </style>
+    <!-- 文本17sp 颜色为白-->
+    <style name="common_txt_17_ff">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_17</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <!-- 文本13sp 颜色为99999-->
+    <style name="common_txt_13_99">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_13</item>
+        <item name="android:textColor">@color/common_txt_color_99</item>
+    </style> <!-- 文本13sp 颜色为99999-->
+    <style name="common_txt_14_99">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/common_txt_color_99</item>
+    </style>
+    <!-- 文本16sp 颜色为121212-->
+    <style name="common_txt_16_12">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_16</item>
+        <item name="android:textColor">@color/common_txt_color_12</item>
+    </style>
+    <!-- 文本16sp 颜色为121212-->
+    <style name="common_txt_18_12">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_18</item>
+        <item name="android:textColor">@color/common_txt_color_12</item>
+    </style>
+    <!-- 文本16sp 颜色为121212-->
+    <style name="common_txt_16_33">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_16</item>
+        <item name="android:textColor">@color/common_ff333333</item>
+    </style>
+
+    <!-- 文本16sp 颜色为121212-->
+    <style name="common_txt_18_33">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_18</item>
+        <item name="android:textColor">@color/common_ff333333</item>
+    </style>
+    <!-- 文本16sp 颜色为121212-->
+    <style name="common_txt_12_85">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_12</item>
+        <item name="android:textColor">@color/common_txt_color_85</item>
+    </style>
+    <!-- 文本14sp 颜色为121212-->
+    <style name="common_txt_14_12">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">#121212</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+    <!-- 文本14sp 颜色为333-->
+    <style name="common_txt_14_33">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/common_sp_14</item>
+        <item name="android:textColor">@color/common_ff333333</item>
+    </style>
+
+</resources>
