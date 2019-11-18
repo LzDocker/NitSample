@@ -350,6 +350,9 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
     //<editor-fold desc="生命周期 life cycle">
 
 
+
+    ///////////////////=============================
+
     public boolean getmEnableRefresh() {
         return mEnableRefresh;
     }
@@ -377,6 +380,9 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
         return view.getmEnableRefresh();
     }
 
+
+
+    //===================================
     public boolean getmEnableLoadMore() {
         return mEnableLoadMore;
     }
@@ -400,12 +406,13 @@ public class SmartRefreshLayout extends ViewGroup implements RefreshLayout, Nest
         view.setmEnableLoadMore(setSrlEnableLoadMore);
     }
 
-    @InverseBindingAdapter(attribute = "srlEnableRefresh", event = "srlEnableRefreshAttrChanged")
+    @InverseBindingAdapter(attribute = "SrlEnableLoadMore", event = "SrlEnableLoadMoreAttrChanged")
     public static boolean getmEnableLoadMoreAttrChanged(SmartRefreshLayout view) {
         return view.getmEnableLoadMore();
     }
 
 
+    ////==============================
     public boolean getBdenablemore() {
         return bdenablemore;
     }

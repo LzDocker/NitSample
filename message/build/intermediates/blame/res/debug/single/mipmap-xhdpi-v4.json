@@ -116,16 +116,20 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/circle_jianjie_mingcheng_icon.png"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/editor_image44.png",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/editor_image44.png"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/circle_icon_edit.png",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/circle_icon_edit.png"
     },
     {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/editor_image44.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/editor_image44.png"
+    },
+    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/circle_pdf.png",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/circle_pdf.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/message_guanzhu_icon.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/message/src/main/res/mipmap-xhdpi/message_guanzhu_icon.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/circle_ssjg_sx.png",
@@ -166,6 +170,10 @@
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/editor_image4.png",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/editor_image4.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/message_shoucangg_icon.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/message/src/main/res/mipmap-xhdpi/message_shoucangg_icon.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/circle_wj_ly.png",
@@ -276,6 +284,10 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/class_check_true.png"
     },
     {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/message_tongzhi_icon.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/message/src/main/res/mipmap-xhdpi/message_tongzhi_icon.png"
+    },
+    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/editor_text55.png",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/editor_text55.png"
     },
@@ -312,6 +324,10 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/editor_image8.png"
     },
     {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/message_pinglun_icon.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/message/src/main/res/mipmap-xhdpi/message_pinglun_icon.png"
+    },
+    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/circle_icon_dz1.png",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/circle_icon_dz1.png"
     },
@@ -346,6 +362,10 @@
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/circle_invite_coutainer_bg.png",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/mipmap-xhdpi-v4/circle_invite_coutainer_bg.png"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/message_dianzan_icon.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/message/src/main/res/mipmap-xhdpi/message_dianzan_icon.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/message/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/editor_text_bac_color.png",

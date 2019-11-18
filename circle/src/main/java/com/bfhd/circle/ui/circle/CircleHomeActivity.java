@@ -328,13 +328,13 @@ public class CircleHomeActivity extends HivsBaseActivity<CircleViewModel, Circle
             mBinding.ivMenuMore.setVisibility(View.VISIBLE);
         }
 
-        if ("1".equals(mViewModel.detailVo.get().getIsJoin()) && "1".equals(mViewModel.detailVo.get().getIsPublishDynamic())) {
-            mBinding.viewBot.setVisibility(View.VISIBLE);
-            mBinding.circleIvAdd.setVisibility(View.VISIBLE);
-        } else {
-            mBinding.viewBot.setVisibility(View.GONE);
-            mBinding.circleIvAdd.setVisibility(View.GONE);
-        }
+//        if ("1".equals(mViewModel.detailVo.get().getIsJoin()) && "1".equals(mViewModel.detailVo.get().getIsPublishDynamic())) {
+//            mBinding.viewBot.setVisibility(View.VISIBLE);
+//            mBinding.circleIvAdd.setVisibility(View.VISIBLE);
+//        } else {
+//            mBinding.viewBot.setVisibility(View.GONE);
+//            mBinding.circleIvAdd.setVisibility(View.GONE);
+//        }
 
 
 //        commonpagerAdapter.notifyDataSetChanged();

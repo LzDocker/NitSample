@@ -99,4 +99,5 @@ dependencies {
     api project(":account")
     api project(":videobasic")
     api project(":message")
+    api project(":circlev2")
 }

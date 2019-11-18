@@ -2,12 +2,18 @@ package com.docker.common.common.binding;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.utils.TextUtils;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.dcbfhd.utilcode.utils.ArrayUtils;
 import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
@@ -39,7 +45,10 @@ public class ImgBindingAdapter {
                 .placeholder(resHolderId)
                 .error(resErrId)
                 .centerCrop();
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView)
+                 .applyDefaultRequestOptions(options)
+                .load(url).transition(withCrossFade()).into(imageView);
+
     }
 
     /*

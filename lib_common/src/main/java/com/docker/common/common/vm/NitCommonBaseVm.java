@@ -20,6 +20,8 @@ public abstract class NitCommonBaseVm extends BaseVm {
         mEmptycommand.set(EmptyStatus.BdLoading);
     }
 
+
+
     public abstract void initCommand();
 
     public ObservableInt mEmptycommand = new ObservableInt();

@@ -6,7 +6,9 @@ import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.core.base.BaseApp;
 import com.docker.core.di.netmodule.GlobalConfigModule;
 import com.docker.core.di.netmodule.HttpRequestHandler;
+import com.docker.module_im.init.NimInitManagerCore;
 import com.docker.nitsample.di.DaggerAppComponent;
+
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
@@ -59,5 +61,9 @@ public class NitApp extends BaseApp {
         super.onCreate();
         CommonWidgetModel.initrefresh();
         ThiredPartConfig.init(this);
+
+        // 网易云信初始化
+        NimInitManagerCore nimInitManagerCore = new NimInitManagerCore();
+        nimInitManagerCore.init(this);
     }
 }

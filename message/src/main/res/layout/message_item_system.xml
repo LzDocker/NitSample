@@ -13,6 +13,8 @@
             name="viewmodel"
             type="com.docker.message.vm.MessageViewModel" />
 
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
+
     </data>
 
     <LinearLayout
@@ -34,10 +36,10 @@
             android:background="@drawable/common_sys_mes_shape"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="刚刚"
+            android:text="@{CommonBdUtils.getStandardDate(item.addtime)}"
+            android:textColor="@color/transparent_white"
             android:textSize="12sp" />
 
-        <!--  android:text="@{BdUtils.getStandardDate(item.addtime)}"-->
 
         <LinearLayout
             android:layout_width="match_parent"

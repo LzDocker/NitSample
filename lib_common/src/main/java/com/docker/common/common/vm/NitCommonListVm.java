@@ -7,6 +7,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
 import android.view.View;
 
+import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.config.Constant;
@@ -39,9 +40,14 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public final MediatorLiveData<Object> mServerLiveData = new MediatorLiveData<Object>();
 
     public CommonListOptions mCommonListReq;
+
     public ObservableBoolean bdenable = new ObservableBoolean(false);
     public ObservableBoolean bdenablemore = new ObservableBoolean(false);
     public ObservableBoolean bdenablenodata = new ObservableBoolean(false);
+    public ObservableBoolean bdenablerefresh = new ObservableBoolean(true);
+
+    public ObservableBoolean loadingOV = new ObservableBoolean(false);
+
 
     public void initParam(CommonListOptions commonListReq) {
         this.mCommonListReq = commonListReq;
@@ -86,6 +92,14 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
             case Constant.KEY_REFRESH_ONLY_LOADMORE:
                 bdenablemore.set(enable);
                 bdenablemore.notifyChange();
+                bdenablerefresh.set(false);
+                bdenablerefresh.notifyChange();
+                break;
+            case Constant.KEY_REFRESH_NOUSE:
+                bdenablemore.set(false);
+                bdenablemore.notifyChange();
+                bdenablerefresh.set(false);
+                bdenablerefresh.notifyChange();
                 break;
         }
     }
@@ -105,11 +119,12 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     public void onLoading(Call call) {
                         super.onLoading(call);
                     }
-
                     @Override
                     public void onLoading() {
                         super.onLoading();
                         loadingState = true;
+                        loadingOV.set(true);
+                        loadingOV.notifyChange();
                         if (mPage == 1) {
                             if (mIsfirstLoad) {
                                 mEmptycommand.set(EmptyStatus.BdLoading);
@@ -124,6 +139,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     @Override
                     public void onComplete(Resource<T> resource) {
                         super.onComplete(resource);
+                        loadingOV.set(false);
+                        loadingOV.notifyChange();
                         mCompleteCommand.set(true);
                         mCompleteCommand.notifyChange();
                         loadingState = false;
@@ -131,23 +148,24 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                         if (mPage == 1) {
                             mItems.clear();
                         }
-                        if (resource.data != null) {
-                            setLoadControl(true);
-                            mEmptycommand.set(EmptyStatus.BdHiden);
-                            if (resource.data instanceof List) {
-                                if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
-                                    bdenablenodata.set(true);
-                                } else {
-                                    bdenablenodata.set(false);
-                                }
-                                bdenablenodata.notifyChange();
-//                                mItems.addAll((Collection<? extends BaseItemModel>) resource.data);
-                                mItems.addAll(formatListData((Collection<? extends BaseItemModel>) resource.data));
+                        setLoadControl(true);
+                        mEmptycommand.set(EmptyStatus.BdHiden);
+                        if (resource.data instanceof List) {
+                            if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
+                                bdenablenodata.set(true);
                             } else {
-//                                mItems.add((BaseItemModel) resource.data);
-                                mItems.add(formatData((BaseItemModel) resource.data));
-
+                                bdenablenodata.set(false);
                             }
+                            bdenablenodata.notifyChange();
+                            if (!CollectionUtils.isEmpty((Collection) resource.data)) {
+                                mItems.addAll(formatListData((Collection<? extends BaseItemModel>) resource.data));
+                            }
+                        } else {
+                            if (resource.data != null) {
+                                mItems.add(formatData((BaseItemModel) resource.data));
+                            }
+                        }
+                        if (resource.data != null) {
                             mPage++;
                         }
                         if (mItems.size() == 0) { // 暂无数据
@@ -162,6 +180,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     public void onComplete() {
                         super.onComplete();
                         loadingState = false;
+                        loadingOV.set(false);
+                        loadingOV.notifyChange();
                         mCompleteCommand.set(true);
                         mCompleteCommand.notifyChange();
                     }
@@ -176,7 +196,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     public void onNetworkError(Resource<T> resource) {
                         super.onNetworkError(resource);
                         setLoadControl(false);
-                        if (mPageSize == 1) {
+                        if (mPage == 1) {
                             mEmptycommand.set(EmptyStatus.BdError);
                         }
                     }

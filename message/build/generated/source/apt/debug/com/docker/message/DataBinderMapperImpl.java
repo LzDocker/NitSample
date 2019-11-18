@@ -150,19 +150,20 @@ public class DataBinderMapperImpl extends DataBinderMapper {
 
   @Override
   public List<DataBinderMapper> collectDependencies() {
-    ArrayList<DataBinderMapper> result = new ArrayList<DataBinderMapper>(7);
+    ArrayList<DataBinderMapper> result = new ArrayList<DataBinderMapper>(8);
     result.add(new com.android.databinding.library.baseAdapters.DataBinderMapperImpl());
     result.add(new com.bfhd.circle.DataBinderMapperImpl());
     result.add(new com.dcbfhd.utilcode.DataBinderMapperImpl());
     result.add(new com.docker.common.DataBinderMapperImpl());
     result.add(new com.docker.core.DataBinderMapperImpl());
+    result.add(new com.docker.module_im.DataBinderMapperImpl());
     result.add(new me.tatarka.bindingcollectionadapter2.DataBinderMapperImpl());
     result.add(new me.tatarka.bindingcollectionadapter2.recyclerview.DataBinderMapperImpl());
     return result;
   }
 
   private static class InnerBrLookup {
-    static final SparseArray<String> sKeys = new SparseArray<String>(23);
+    static final SparseArray<String> sKeys = new SparseArray<String>(24);
 
     static {
       sKeys.put(0, "_all");
@@ -187,6 +188,7 @@ public class DataBinderMapperImpl extends DataBinderMapper {
       sKeys.put(19, "vo");
       sKeys.put(20, "img2");
       sKeys.put(21, "img1");
+      sKeys.put(22, "notReadMsgNum");
     }
   }
 

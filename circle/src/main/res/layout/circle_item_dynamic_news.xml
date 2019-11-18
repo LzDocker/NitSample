@@ -112,7 +112,7 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_marginTop="20dp"-->
                 <!--android:gravity="bottom"-->
-                <!--android:text="@{BdUtils.getStandardDate(item.inputtime)}"-->
+                <!--android:text="@{CommonBdUtils.getStandardDate(item.inputtime)}"-->
                 <!--android:textColor="#858585"-->
                 <!--android:textSize="12sp" />-->
 

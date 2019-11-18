@@ -144,7 +144,7 @@ public class AccounMoneyDetailListActivity extends HivsBaseActivity<AccountViewM
 //            @Override
 //            public void onTimeSelect(Date date, View v) {//选中事件回调
 //                mBinding.tvTime.setText(getTime(date));
-//                timeStamp = BdUtils.DateTimeStamp(getTime(date), "yyyy.MM");
+//                timeStamp = CommonBdUtils.DateTimeStamp(getTime(date), "yyyy.MM");
 //                mViewModel.mPage = 1;
 //                mViewModel.getMoneyDetailList(timeStamp);
 //            }

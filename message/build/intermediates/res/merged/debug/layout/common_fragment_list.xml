@@ -25,15 +25,19 @@
             android:tag="binding_1"                         
                                                   
                                                           
+                                                                 
                                                               
                                                                           
                                                                             >
+
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="false"
+                android:overScrollMode="never"
                 app:fastScrollEnabled="false"
                 android:tag="binding_2"                   
                                                 />

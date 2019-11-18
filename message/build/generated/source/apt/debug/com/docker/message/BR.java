@@ -44,4 +44,6 @@ public class BR {
   public static int img2 = 20;
 
   public static int img1 = 21;
+
+  public static int notReadMsgNum = 22;
 }

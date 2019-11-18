@@ -100,9 +100,9 @@ public abstract class BaseActivity<VM extends BaseVm, VB extends ViewDataBinding
 
     public void initImmersionBar() {
         if (isOverrideContentView) {
-            ImmersionBar.with(this).init();
+            ImmersionBar.with(this).statusBarDarkFont(true).init();
         } else {
-            ImmersionBar.with(this).fitsSystemWindows(true).titleBar(getToolBar()).statusBarColor(R.color.colorPrimary).init();
+            ImmersionBar.with(this).fitsSystemWindows(true).statusBarDarkFont(true).titleBar(getToolBar()).statusBarColor(R.color.colorPrimary).init();
         }
     }
 

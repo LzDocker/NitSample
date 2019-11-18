@@ -6,4 +6,6 @@ public abstract class BaseSampleItem extends BaseObservable implements BaseItemM
 
     public String sampleName;
 
+
+
 }
