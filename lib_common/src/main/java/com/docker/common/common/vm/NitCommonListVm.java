@@ -119,7 +119,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     public void onLoading(Call call) {
                         super.onLoading(call);
                     }
-
                     @Override
                     public void onLoading() {
                         super.onLoading();
