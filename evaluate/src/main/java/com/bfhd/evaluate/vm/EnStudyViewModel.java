@@ -307,54 +307,6 @@ public class EnStudyViewModel extends NitCommonContainerViewModel {
             }
         }));
     }
-    public void testRxCon(String memberid, String uuid) {
-        HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("memberid", memberid);
-        paramMap.put("uuid", uuid);
-        commonService.tttt1(paramMap).doOnNext(new Consumer<BaseResponse<List<RadioMenuVo>>>() {
-            @Override
-            public void accept(BaseResponse<List<RadioMenuVo>> listBaseResponse) throws Exception {
-                LogUtils.e(JSON.toJSONString(listBaseResponse.getRst().get(0)));
-            }
-        }).concatMap(new Function<BaseResponse<List<RadioMenuVo>>, ObservableSource<?>>() {
-            @Override
-            public ObservableSource<?> apply(BaseResponse<List<RadioMenuVo>> listBaseResponse) throws Exception {
-                RadioMenuVo vo = listBaseResponse.getRst().get(0);
-                paramMap.put("lession_dubbing_id", vo.getId());
-                return commonService.tttt2(paramMap);
-            }
-        }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).cast(BaseResponse.class).subscribe(
-                new Consumer<BaseResponse>() {
-                    @Override
-                    public void accept(BaseResponse baseResponse) throws Exception {
-                        List<RadioLessonVo> radioLessonVos = (List<RadioLessonVo>) baseResponse.getRst();
-                        LogUtils.e(radioLessonVos.get(0).getName());
-                    }
-                });
-
-    }
-
-    public void testRxCon2(String memberid, String uuid) {
-        HashMap<String, Object> paramMap = new HashMap<>();
-        paramMap.put("memberid", memberid);
-        paramMap.put("uuid", uuid);
-        Observable.merge(commonService.tttt1(paramMap), commonService.ttttt3(paramMap)).observeOn(Schedulers.newThread()).subscribeOn(Schedulers.newThread()).subscribe(new Consumer<BaseResponse<? extends List<? extends Object>>>() {
-            @Override
-            public void accept(BaseResponse<? extends List<? extends Object>> baseResponse) throws Exception {
-                List d = baseResponse.getRst();
-                if (d.get(0) instanceof RadioMenuVo) {
-                    List<RadioMenuVo> radioMenuVos = d;
-                    LogUtils.e(JSON.toJSONString(radioMenuVos));
-
-                } else {
-                    List<BookListVo> radioMenuVos = d;
-                    LogUtils.e(JSON.toJSONString(radioMenuVos));
-
-                }
-            }
-        });
-
-    }
 
 
 }

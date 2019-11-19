@@ -13,6 +13,7 @@
             android:label="新概念详情"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity android:name="com.bfhd.rxdemo.RxDemoActivity" />
 
     </application>
 

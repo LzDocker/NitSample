@@ -112,5 +112,6 @@ public class AppRouter {
     public static final String EVALUATE_DEMO = EVALUATE + "demo";
     public static final String EVALUATE_DETAIL = EVALUATE + "detail";
     public static final String EVALUATE_LESSON_LIST = EVALUATE + "lessonList";
+    public static final String EVALUATE_RXJAVA = EVALUATE + "rxjava";
 
 }
