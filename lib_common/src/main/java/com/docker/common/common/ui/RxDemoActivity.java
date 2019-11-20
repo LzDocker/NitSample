@@ -1,4 +1,4 @@
-package com.bfhd.rxdemo;
+package com.docker.common.common.ui;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
@@ -7,35 +7,31 @@ import android.os.Bundle;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSON;
-import com.bfhd.evaluate.R;
-import com.bfhd.evaluate.databinding.ActivityRxdemoBinding;
-import com.bfhd.evaluate.vm.EnStudyRxViewModel;
-import com.bfhd.evaluate.vo.RadioLessonVo;
-import com.bfhd.evaluate.vo.RadioMenuVo;
+import com.docker.common.R;
 import com.docker.common.common.binding.ViewOnClickBindingAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
-
-import java.util.List;
+import com.docker.common.common.vm.RxDemoViewModel;
+import com.docker.common.databinding.CommonActivityRxdemoBinding;
 
 import javax.inject.Inject;
 
 ///评测------新概念英语课程列表
-@Route(path = AppRouter.EVALUATE_RXJAVA)
-public class RxDemoActivity extends NitCommonActivity<EnStudyRxViewModel, ActivityRxdemoBinding> {
+@Route(path = AppRouter.COMMON_RXJAVA)
+public class RxDemoActivity extends NitCommonActivity<RxDemoViewModel, CommonActivityRxdemoBinding> {
 
     @Inject
     ViewModelProvider.Factory factory;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_rxdemo;
+        return R.layout.common_activity_rxdemo;
     }
 
     @Override
-    public EnStudyRxViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(EnStudyRxViewModel.class);
+    public RxDemoViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(RxDemoViewModel.class);
     }
 
 
@@ -70,24 +66,14 @@ public class RxDemoActivity extends NitCommonActivity<EnStudyRxViewModel, Activi
     @Override
     public void initObserver() {
         mViewModel.mContainerLiveData.observe(this, object -> {
-            if (object instanceof RadioLessonVo) {
-                mBinding.rxdemoData.setText("\n\n\n" + JSON.toJSONString((RadioLessonVo) object));
-            } else {
-                List list = (List) object;
-                if (list.get(0) instanceof RadioMenuVo) {
-                    mBinding.rxdemoData.setText(mBinding.rxdemoData.getText() + "\n\n\n" + JSON.toJSONString(object));
-                } else {
-                    mBinding.rxdemoData.setText(mBinding.rxdemoData.getText() + "\n\n\n" + JSON.toJSONString(object));
-                }
-            }
-
+                mBinding.rxdemoData.setText("\n\n\n" + JSON.toJSONString(object));
         });
     }
 
 
     @Override
     public NitContainerCommand providerNitContainerCommand(int flag) {
-        return (NitContainerCommand) () -> (EnStudyRxViewModel.class);
+        return (NitContainerCommand) () -> (RxDemoViewModel.class);
     }
 
 

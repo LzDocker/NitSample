@@ -30,6 +30,7 @@ import com.chivox.AIRecorder;
 import com.chivox.ChivoxUtils;
 import com.dcbfhd.utilcode.utils.LogUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.binding.ViewOnClickBindingAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
@@ -69,6 +70,9 @@ public class AudioLessonActivity extends NitCommonActivity<EnStudyViewModel, Act
     public void onCreate(Bundle savedInstanceState) {
         isOverrideContentView = true;
         super.onCreate(savedInstanceState);
+        ViewOnClickBindingAdapter.onClick(mBinding.lessonAudioBack, v -> {
+            this.finish();
+        });
         mViewModel.getLessonBookList("44", "37c0fc402ba039c78b07065bfd4d114c");
         initChivox();
 

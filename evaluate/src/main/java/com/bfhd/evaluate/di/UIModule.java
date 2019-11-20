@@ -7,7 +7,6 @@ import com.bfhd.evaluate.ui.AudioLessonDetailFragment;
 import com.bfhd.evaluate.ui.AudioLessonFragment;
 import com.bfhd.evaluate.ui.AudioLessonGenDuFragment;
 import com.bfhd.evaluate.ui.AudioLessonQuanWenFragment;
-import com.bfhd.rxdemo.RxDemoActivity;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
@@ -70,13 +69,6 @@ public abstract class UIModule {
     @ContributesAndroidInjector//(modules = LoginModule.class)
     abstract AudioLessonGenDuFragment audioLessonGenDuFragment();
 
-    /**
-     * RX示例 页面
-     *
-     * @return
-     */
-    @ActivityScope
-    @ContributesAndroidInjector//(modules = LoginModule.class)
-    abstract RxDemoActivity rxDemoActivity();
+
 }
 

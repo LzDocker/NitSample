@@ -65,4 +65,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-android-compiler"]
     api project(':lib_utilcode')
+    api rootProject.ext.dependencies["fastjson"]
+
 }

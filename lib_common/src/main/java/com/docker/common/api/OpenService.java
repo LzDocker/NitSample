@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -40,5 +41,17 @@ public interface OpenService {
     @POST
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<Object>>> fetchCommon(@Url String url, @FieldMap HashMap<String, String> paramMap);
+
+    @POST("http://www.hanfengyishu.cn/api.php?m=lession.book_list")
+    @FormUrlEncoded
+    Observable<BaseResponse<List>> tttt1(@FieldMap HashMap<String, Object> map);
+
+    @POST("http://www.hanfengyishu.cn/api.php?m=lession.lession_list")
+    @FormUrlEncoded
+    Observable<BaseResponse<List>> tttt2(@FieldMap HashMap<String, Object> map);
+
+    @POST("http://www.hanfengyishu.cn/api.php?m=book.book_list")
+    @FormUrlEncoded
+    Observable<BaseResponse<List>> ttttt3(@FieldMap HashMap<String, Object> map);
 
 }

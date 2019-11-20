@@ -57,7 +57,7 @@ public class SampleItemVo implements BaseItemModel {
                     ARouter.getInstance().build(AppRouter.EVALUATE_DEMO).navigation();
                     break;
                 case 13:
-                    ARouter.getInstance().build(AppRouter.EVALUATE_RXJAVA).navigation();
+                    ARouter.getInstance().build(AppRouter.COMMON_RXJAVA).navigation();
                     break;
 
                 default:

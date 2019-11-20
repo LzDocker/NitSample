@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.docker.common.common.vm.NitEmptyVm;
 import com.docker.common.common.vm.NitSampleListViewModel;
+import com.docker.common.common.vm.RxDemoViewModel;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
@@ -32,5 +33,11 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(NitCommonContainerViewModel.class)
     abstract ViewModel NitCommonContainerViewModel(NitCommonContainerViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RxDemoViewModel.class)
+    abstract ViewModel rxDemoViewModel(RxDemoViewModel model);
+
 
 }
