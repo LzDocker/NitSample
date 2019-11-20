@@ -12,6 +12,7 @@ import com.bfhd.evaluate.databinding.ActivityRxdemoBinding;
 import com.bfhd.evaluate.vm.EnStudyRxViewModel;
 import com.bfhd.evaluate.vo.RadioLessonVo;
 import com.bfhd.evaluate.vo.RadioMenuVo;
+import com.docker.common.common.binding.ViewOnClickBindingAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
@@ -41,11 +42,15 @@ public class RxDemoActivity extends NitCommonActivity<EnStudyRxViewModel, Activi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding.rxdemoConcat.setOnClickListener(v -> {
+        ViewOnClickBindingAdapter.onClick(mBinding.rxdemoConcat,v -> {
             mViewModel.rxConcatMap("44", "37c0fc402ba039c78b07065bfd4d114c");
 
         });
-        mBinding.rxdemoMerge.setOnClickListener(v -> {
+//        mBinding.rxdemoConcat.setOnClickListener(v -> {
+//            mViewModel.rxConcatMap("44", "37c0fc402ba039c78b07065bfd4d114c");
+//
+//        });
+        ViewOnClickBindingAdapter.onClick(mBinding.rxdemoMerge,v-> {
             mViewModel.rxMerge("44", "37c0fc402ba039c78b07065bfd4d114c");
         });
 

@@ -359,7 +359,10 @@ public class EnStudyRxViewModel extends NitCommonContainerViewModel {
             }
         });
 
-        //超时 c
+        /**
+         *  发射数据 超时 ,超时后的也不会发生
+         */
+
         Observable.create(new ObservableOnSubscribe<Integer>() {
 
             @Override
@@ -391,6 +394,69 @@ public class EnStudyRxViewModel extends NitCommonContainerViewModel {
         });
     }
 
+    /**
+     *debounce 发射数据 超过一定时间不发送
+     * 1 3 5
+     */
+    private void t7() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+                Thread.sleep(500);
+                emitter.onNext(2);
+                Thread.sleep(100);
+                emitter.onNext(3);
+                Thread.sleep(200);
+                emitter.onNext(4);
+                Thread.sleep(10);
+                emitter.onNext(5);
+                Thread.sleep(500);
+                emitter.onNext(6);
+            }
+        }).observeOn(Schedulers.newThread())
+                .unsubscribeOn(Schedulers.newThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .debounce(150, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Integer>() {
+
+            @Override
+            public void accept(Integer t) throws Exception {
+                PrintLog(t);
+            }
+        });
+
+    }
+
+    /**
+     * throttleFirst 大于设置的再次发射数据
+     *
+     *1 2 4 6
+     */
+    private void t8() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                emitter.onNext(1);
+                Thread.sleep(500);
+                emitter.onNext(2);
+                Thread.sleep(100);
+                emitter.onNext(3);
+                Thread.sleep(200);
+                emitter.onNext(4);
+                Thread.sleep(10);
+                emitter.onNext(5);
+                Thread.sleep(500);
+                emitter.onNext(6);
+            }
+        }).throttleFirst(150, TimeUnit.MILLISECONDS).subscribe(new Consumer<Integer>() {
+
+            @Override
+            public void accept(Integer t) throws Exception {
+                PrintLog("  sddd:"+t);
+            }
+        });
+    }
     private List<TestEn1> ttt1() {
         List<TestEn1> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {

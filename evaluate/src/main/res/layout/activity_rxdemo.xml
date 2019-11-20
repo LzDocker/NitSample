@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 总结在 EnStudyRxViewModel中 \n rx创建: interval，range，create，just \n rx变换操作符 map,flatMap,cast,merge ,concatMap,zip,buffer,filter,startWith,timeout"
+            android:text=" 总结在 EnStudyRxViewModel中 \n rx创建: interval，range，create，just \n rx变换操作符 map,flatMap,cast,merge ,concatMap,zip,buffer,filter,startWith,timeout,debounce"
             android:textSize="@dimen/common_sp_18" />
 
 
