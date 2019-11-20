@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.CircleGroupPerssionVo.Group" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_title_coutainer"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="14dp"
+                android:text="@{item.groupName}"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:paddingLeft="14dp"
+                android:text="您可以对此分组设置权限"
+                android:textColor="#666"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:src="@mipmap/arrow_right" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_coutainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:visibleGone="@{item.isExpand}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="允许评论"
+                    android:textColor="#333"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:id="@+id/circle_comment_check"
+                    style="@style/circlev2_CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="@{item.isComment == 1}"
+                    android:gravity="center"
+                    android:paddingRight="14dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="10dp"
+                android:text="关闭后，该分组不能评论此商圈内容" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="允许发布动态"
+                    android:textColor="#333"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <CheckBox
+                    android:id="@+id/circle_pub_check"
+                    style="@style/circlev2_CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:checked="@{item.isPublishDynamic == 1}"
+                    android:gravity="center"
+                    android:paddingRight="14dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="24dp"
+                android:text="关闭后，该分组不能在此商圈发布动态" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

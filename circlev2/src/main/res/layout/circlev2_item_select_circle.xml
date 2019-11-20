@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CirlcleSelectViewModel" />
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.CirclePubSelectVo" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
+
+        <import type="com.docker.cirlev2.R" />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_shape"
+        android:onClick="@{(view)->viewmodel.onItemClick(item,view,viewmodel)}"
+        android:orientation="horizontal"
+        android:paddingTop="14dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="14dp">
+
+        <ImageView
+            android:id="@+id/img_thumb"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="centerCrop"
+            app:roundImgUrl="@{item.logoUrl}" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_select_circle_list_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.circleName}"
+                android:textColor="@color/text_black_121212"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.industryStr}"
+                android:textColor="#666"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@{item.selectsource}" />
+
+    </LinearLayout>
+</layout>

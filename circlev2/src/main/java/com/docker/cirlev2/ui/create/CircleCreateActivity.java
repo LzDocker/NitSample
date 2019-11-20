@@ -1,6 +1,7 @@
 package com.docker.cirlev2.ui.create;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,27 +29,11 @@ import timber.log.Timber;
 import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
 import static com.docker.common.common.config.Constant.KEY_RVUI_LINER;
 
-
-/*
-*     编辑圈子
-*
-*   ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2)
-                    .withString("circleid", "245")
-                    .withString("utid", "98699115f2260ef14486f745fc72dbd1")
-                    .navigation();
-* */
-
-
-/*  创建圈子
-flag 1 企业    2 兴趣    3国别
-*   ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2)
-                    .withInt("flag", ((CircleCreateCardVo) item).flag)
-                    .navigation();
-* */
-
 @Route(path = AppRouter.CIRCLE_CREATE_v2)
 public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel, Circlev2CreateActivityBinding> {
-
+    public static final int CIRCLE_TYPE_COMPANY = 1;    // 企业圈
+    public static final int CIRCLE_TYPE_ACTIVE = 2;    // 兴趣圈
+    public static final int CIRCLE_TYPE_COUNTRY = 3;    // 国别圈
 
     @Autowired
     int flag;  // 创建圈子类型
@@ -72,32 +57,41 @@ public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel,
     @Override
     public void initView() {
         mToolbar.hide();
-
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        CommonListOptions commonListOptions = new CommonListOptions();
-        commonListOptions.RvUi = KEY_RVUI_LINER;
-        commonListOptions.falg = 101;
-        commonListOptions.ReqParam.put("flag", String.valueOf(flag));
-        commonListOptions.ReqParam.put("circleid", circleid);
-        commonListOptions.ReqParam.put("utid", utid);
-        NitCommonContainerFragment createCircleFragment = NitCommonContainerFragment.newinstance(commonListOptions);
-        FragmentUtils.add(getSupportFragmentManager(), createCircleFragment, R.id.circlev2_frame);
-    }
-
-    private void processCreateFrame() {
+        if (TextUtils.isEmpty(utid)) {
+            mToolbar.setTitle("创建圈子");
+        } else {
+            mToolbar.setTitle("编辑圈子");
+        }
         switch (flag) {
-            case 1:
+            case CIRCLE_TYPE_COMPANY:
+                FragmentUtils.add(getSupportFragmentManager(), CircleCompanyFragment.newInstance(utid, circleid), R.id.circlev2_frame);
                 break;
-            case 2:
+            case CIRCLE_TYPE_ACTIVE:
+                FragmentUtils.add(getSupportFragmentManager(), CircleActiveFragment.newInstance(utid, circleid), R.id.circlev2_frame);
                 break;
-            case 3:
+            case CIRCLE_TYPE_COUNTRY:
+                FragmentUtils.add(getSupportFragmentManager(), CircleConutryFragment.newInstance(utid, circleid), R.id.circlev2_frame);
                 break;
         }
 
+        mBinding.activityCreatcircleBtn.setOnClickListener(v -> {
+            switch (flag) {
+                case CIRCLE_TYPE_COMPANY:
+                    ((CircleCompanyFragment) FragmentUtils.findFragment(getSupportFragmentManager(), CircleCompanyFragment.class)).create();
+                    break;
+                case CIRCLE_TYPE_ACTIVE:
+                    ((CircleActiveFragment) FragmentUtils.findFragment(getSupportFragmentManager(), CircleActiveFragment.class)).create();
+                    break;
+                case CIRCLE_TYPE_COUNTRY:
+                    ((CircleConutryFragment) FragmentUtils.findFragment(getSupportFragmentManager(), CircleConutryFragment.class)).create();
+                    break;
+            }
+        });
     }
 
     @Override
@@ -113,13 +107,24 @@ public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel,
 
     @Override
     public NitContainerCommand providerNitContainerCommand(int flag) {
-        NitContainerCommand nitContainerCommand = null;
+        return null;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (flag) {
-            case 101:
-                nitContainerCommand = (NitContainerCommand) () -> CircleCreateViewModel.class;
+            case CIRCLE_TYPE_COMPANY:
+                FragmentUtils.findFragment(getSupportFragmentManager(), CircleCompanyFragment.class).onActivityResult(requestCode, resultCode, data);
+                break;
+            case CIRCLE_TYPE_ACTIVE:
+                FragmentUtils.findFragment(getSupportFragmentManager(), CircleActiveFragment.class).onActivityResult(requestCode, resultCode, data);
+                break;
+            case CIRCLE_TYPE_COUNTRY:
+                FragmentUtils.findFragment(getSupportFragmentManager(), CircleConutryFragment.class).onActivityResult(requestCode, resultCode, data);
                 break;
         }
-        return nitContainerCommand;
     }
 
 }

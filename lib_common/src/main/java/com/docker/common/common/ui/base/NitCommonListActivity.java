@@ -42,7 +42,9 @@ public abstract class NitCommonListActivity<VM extends NitCommonListVm> extends 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        commonListReq = (CommonListOptions) getIntent().getSerializableExtra(CommonListParam);
+        if (commonListReq == null) {
+            commonListReq = (CommonListOptions) getIntent().getSerializableExtra(CommonListParam);
+        }
         if (commonListReq != null) {
             (mViewModel).initParam(commonListReq);
             mBinding.setViewmodel(mViewModel);

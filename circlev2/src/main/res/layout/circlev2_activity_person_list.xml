@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CirclePersionViewModel" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+    </data>
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:srlEnablePureScrollMode="true">
+
+        <com.docker.common.common.widget.empty.EmptyLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:text="内部成员" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_inner_title_coutainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
+
+                        <ImageView
+                            android:id="@+id/iv_out_arrow"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@mipmap/arrow_right" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="10dp"
+                            android:gravity="center_vertical"
+                            android:text="团队成员" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tv_inner_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:gravity="center_vertical" />
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingLeft="28dp"
+                        android:paddingRight="14dp"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:text="外部成员" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:nestedScrollingEnabled="false"
+                        android:paddingLeft="28dp"
+                        android:paddingRight="14dp"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </com.docker.common.common.widget.empty.EmptyLayout>
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+</layout>
+
+

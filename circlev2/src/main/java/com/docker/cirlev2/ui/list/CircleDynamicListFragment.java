@@ -41,12 +41,7 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        if (style == 0) {
-//            mBinding.get()
-//                    .recyclerView
-//                    .setLayoutManager(com.docker.core.util.LayoutManager.grid(5)
-//                            .create(mBinding.get().recyclerView));
-//        }
+
     }
 
     @Override

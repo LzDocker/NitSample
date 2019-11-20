@@ -38,7 +38,17 @@ public class CommonBdUtils {
         } else if (url.contains("http")) {
             return url;
         } else {
-            return ThiredPartConfig.endpoint + url;
+            return ThiredPartConfig.BaseImageUrl + url;
+        }
+    }
+
+    public static String getServerImageUrl(String url) {//云端的图片
+        if (TextUtils.isEmpty(url)) {
+            return "";
+        } else if (url.contains("http")) {
+            return url;
+        } else {
+            return ThiredPartConfig.BaseServeUrl + url;
         }
     }
 

@@ -4,6 +4,7 @@ import android.databinding.Bindable;
 import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.BaseSampleItem;
@@ -105,7 +106,18 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
         this.intro = intro;
     }
 
+    @Bindable
     public boolean isCheck = false; // 前段使用字段
+
+    @Bindable
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+        notifyPropertyChanged(BR.isCheck);
+    }
 
     public String getMemberid() {
         return memberid;

@@ -142,7 +142,7 @@ public class ImgBindingAdapter {
     }
 
     /*
-     * 圆形图片
+     *
      * */
     @BindingAdapter(value = {"imageUrl"}, requireAll = false)
     public static void loadcirlceimage(ImageView imageView, String url) {

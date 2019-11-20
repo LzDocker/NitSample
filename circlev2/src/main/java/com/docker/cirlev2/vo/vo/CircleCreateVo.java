@@ -1,41 +1,19 @@
 package com.docker.cirlev2.vo.vo;
 
+import android.databinding.BaseObservable;
+
 import com.docker.cirlev2.R;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 
 import java.io.Serializable;
 
-public class CircleCreateVo extends BaseSampleItem implements Serializable {
+public class CircleCreateVo extends BaseObservable implements Serializable {
 
 
     public int flag;
 
-    public CircleCreateVo(int flag) {
-        this.flag = flag;
-    }
-
-    @Override
-    public int getItemLayout() {
-
-        int lay = R.layout.circlev2_item_create_company;
-        switch (flag) {
-            case 1:
-                lay = R.layout.circlev2_item_create_company;
-                break;
-            case 2:
-                lay = R.layout.circlev2_item_create_active;
-                break;
-            case 3:
-                lay = R.layout.circlev2_item_create_country;
-                break;
-        }
-        return lay;
-    }
-
-    @Override
-    public OnItemClickListener getOnItemClickListener() {
-        return null;
+    public CircleCreateVo() {
     }
 
     /**

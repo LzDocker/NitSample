@@ -2,8 +2,8 @@
     package="com.docker.cirlev2">
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application>
-
         <activity android:name="com.docker.cirlev2.ui.index.CircleSampleActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.index.CircleIndexActivity"></activity>
         <activity
@@ -11,6 +11,19 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.docker.cirlev2.ui.create.CircleCreateIndexActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.detail.CircleDetailIndexActivity"></activity>
-
+        <activity android:name="com.docker.cirlev2.ui.publish.CirclePublishActivity" />
+        <activity android:name="com.docker.cirlev2.ui.common.CircleCoverActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.publish.select.CirclePerssionSelectActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.publish.select.CircleShareSelectActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.publish.select.CircleShareGroupSelectActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.detail.CircleInviteActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.detail.CircleGroupListActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.detail.CircleEditMemberGroupActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.persion.CirclePersonListActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.persion.CircleModifyActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.persion.CirclePersionSettingActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.persion.CirclePersonDetailActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.persion.CirclePersonPerssionActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.persion.CircleGroupPerssionActivity"></activity>
     </application>
 </manifest>

@@ -35,18 +35,17 @@ public class ThiredPartConfig {
     public static final String Umeng = "5d0300984ca3579a45000b17";
 
     // oss
-    public static final String endpoint = "http://taijistar.oss-cn-beijing.aliyuncs.com";
+    public static final String BaseImageUrl = "http://taijistar.oss-cn-beijing.aliyuncs.com";
+    public static final String endpoint = "https://oss-cn-beijing.aliyuncs.com";
     public static final String accessKeyId = "LTAIWijAvXa7BmAt";
     public static final String accessKeySecret = "RYDaCj2um1nlhYgfyVH6JRceq4ypwO";
     public static final String P_BUCKETNAME = "taijistar";
     public static final String FLODER = "static/var/upload/img";
     public static final String FLODERVIDEO = "static/var/upload/video";
-
     public static final String BaseServeUrl = "http://htj.wgc360.com/";
 
     public static void init(BaseApp app) {
         Utils.init(app);
-
         // 友盟
         UMConfigure.init(app, Umeng
                 , "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0

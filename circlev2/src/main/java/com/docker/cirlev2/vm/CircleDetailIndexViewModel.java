@@ -3,14 +3,24 @@ package com.docker.cirlev2.vm;
 import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
+import android.view.View;
 
+import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.cirlev2.BR;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
+import com.docker.cirlev2.vo.entity.MemberGroupingVo;
+import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.cirlev2.vo.entity.ShareVo;
+import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.vo.ShareBean;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.repository.NitBoundCallback;
@@ -19,6 +29,7 @@ import com.docker.core.repository.Resource;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,6 +52,10 @@ public class CircleDetailIndexViewModel extends NitCommonVm {
      * 圈子栏目
      * */
     public final MediatorLiveData<List<CircleTitlesVo>> mCircleClassLv = new MediatorLiveData();
+    public final MediatorLiveData<ShareBean> mShareLv = new MediatorLiveData();
+    public final MediatorLiveData<String> mJoninLv = new MediatorLiveData();
+    public final MediatorLiveData<List<MemberGroupingVo>> mMemberGroupLv = new MediatorLiveData();
+    public final MediatorLiveData<List<MemberGroupingVo>> mUpdateMemberGroupLv = new MediatorLiveData();
 
 
     @Inject
@@ -106,4 +121,167 @@ public class CircleDetailIndexViewModel extends NitCommonVm {
                     }
                 }));
     }
+
+
+    public void FetchShareData(HashMap<String, String> params) {
+        mShareLv.addSource(RequestServer(circleApiService.share(params)),
+                new NitNetBoundObserver<>(new NitBoundCallback<ShareBean>() {
+                    @Override
+                    public void onNetworkError(Resource<ShareBean> resource) {
+                        super.onNetworkError(resource);
+                        ToastUtils.showShort("网络错误请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<ShareBean> resource) {
+                        super.onComplete(resource);
+                        mShareLv.setValue(resource.data);
+                        mEmptycommand.set(EmptyStatus.BdHiden);
+                    }
+                }));
+    }
+
+    public void joinCircle(View view) {
+        if (mCircleDetailLv.getValue().getRole() > 0) {
+            ToastUtils.showShort("圈主不能退出圈子");
+            return;
+        }
+        if ("1".equals(mCircleDetailLv.getValue().getIsJoin())) {
+            quitCirlce();
+        } else {
+            joinCircle();
+        }
+    }
+
+
+    public void quitCirlce() {
+        showDialogWait("退出中..", false);
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        Map<String, String> parms = new HashMap<>();
+        parms.put("circleid", circleid);
+        parms.put("utid", utid);
+        parms.put("memberid", userInfoVo.uid);
+        parms.put("uuid", userInfoVo.uuid);
+        mJoninLv.addSource(RequestServer(circleApiService.quitCircle(parms)),
+                new NitNetBoundObserver<>(new NitBoundCallback<String>() {
+                    @Override
+                    public void onNetworkError(Resource<String> resource) {
+                        super.onNetworkError(resource);
+                        hideDialogWait();
+                        ToastUtils.showShort("网络问题，修改失败！请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<String> resource) {
+                        super.onComplete(resource);
+                        mJoninLv.setValue(resource.data);
+                        hideDialogWait();
+                        ToastUtils.showShort("退出成功！");
+                        mCircleDetailLv.getValue().setIsJoin("0");
+                        mCircleDetailLv.getValue().notifyPropertyChanged(BR.isJoin);
+                        mCircleDetailLv.getValue().setEmployeeNum(String.valueOf(Integer.parseInt(mCircleDetailLv.getValue().getEmployeeNum()) - 1));
+                        mCircleDetailLv.getValue().notifyPropertyChanged(BR.employeeNum);
+                        RxBus.getDefault().post(new RxEvent<>("refresh_circle_myjoin", "111")); // 刷新我的圈子
+                    }
+                }));
+    }
+
+    public void joinCircle() {
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("memberid", userInfoVo.uid);
+        params.put("uuid", userInfoVo.uuid);
+        params.put("utid", utid);
+        if (TextUtils.isEmpty(userInfoVo.nickname)) {
+            params.put("fullName", "匿名");
+        } else {
+            params.put("fullName", userInfoVo.nickname);
+        }
+        params.put("circleid", circleid);
+        showDialogWait("加入中...", false);
+        mJoninLv.addSource(RequestServer(circleApiService.joinCircle(params)),
+                new NitNetBoundObserver<>(new NitBoundCallback<String>() {
+                    @Override
+                    public void onNetworkError(Resource<String> resource) {
+                        super.onNetworkError(resource);
+                        hideDialogWait();
+                        ToastUtils.showShort("网络问题，修改失败！请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<String> resource) {
+                        super.onComplete(resource);
+                        mJoninLv.setValue(resource.data);
+                        hideDialogWait();
+                        ToastUtils.showShort("加入成功！");
+                        mCircleDetailLv.getValue().setIsJoin("1");
+                        mCircleDetailLv.getValue().notifyPropertyChanged(BR.isJoin);
+                        mCircleDetailLv.getValue().setEmployeeNum(String.valueOf(Integer.parseInt(mCircleDetailLv.getValue().getEmployeeNum()) + 1));
+                        mCircleDetailLv.getValue().notifyPropertyChanged(BR.employeeNum);
+                        RxBus.getDefault().post(new RxEvent<>("refresh_circle_myjoin", "111")); // 刷新我的圈子
+                    }
+                }));
+    }
+
+
+    public void invite(HashMap<String, String> param) {
+//        showDialogWait("请稍后...", false);
+        mShareLv.addSource(RequestServer(circleApiService.invite(param)),
+                new NitNetBoundObserver<>(new NitBoundCallback<ShareBean>() {
+                    @Override
+                    public void onNetworkError(Resource<ShareBean> resource) {
+                        super.onNetworkError(resource);
+                        ToastUtils.showShort("网络错误请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<ShareBean> resource) {
+                        super.onComplete(resource);
+                        mShareLv.setValue(resource.data);
+                    }
+                }));
+    }
+
+    /*
+     * 成员分组
+     * */
+    public void getMemberGroup(StaCirParam mStartParam) {
+        mMemberGroupLv.addSource(RequestServer(circleApiService.fechMemberGroup(mStartParam.getCircleid(), mStartParam.getUtid())),
+                new NitNetBoundObserver<>(new NitBoundCallback<List<MemberGroupingVo>>() {
+                    @Override
+                    public void onNetworkError(Resource<List<MemberGroupingVo>> resource) {
+                        super.onNetworkError(resource);
+                        ToastUtils.showShort("网络错误请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<List<MemberGroupingVo>> resource) {
+                        super.onComplete(resource);
+                        mMemberGroupLv.setValue(resource.data);
+                    }
+                }));
+    }
+
+    /*
+     * 成员分组
+     * */
+    public void updateMemberGroup(HashMap<String, String> params) {
+        showDialogWait("保存中...", false);
+        mUpdateMemberGroupLv.addSource(RequestServer(circleApiService.updateMemberGroup(params)),
+                new NitNetBoundObserver<>(new NitBoundCallback<List<MemberGroupingVo>>() {
+                    @Override
+                    public void onNetworkError(Resource<List<MemberGroupingVo>> resource) {
+                        super.onNetworkError(resource);
+                        ToastUtils.showShort("网络错误请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<List<MemberGroupingVo>> resource) {
+                        super.onComplete(resource);
+                        mUpdateMemberGroupLv.setValue(resource.data);
+                    }
+                }));
+    }
+
+
 }

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+            name="personVo"
+            type="com.docker.cirlev2.vo.entity.MemberSettingsVo" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
+
+
+    </data>
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlEnablePureScrollMode="true">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="102dp"
+                    android:background="@color/white"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/round_icon"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        app:roundImgUrl="@{CommonBdUtils.getCompleteImageUrl(personVo.avatar)}" />
+
+                    <!--      app:errorImg="@{R.mipmap.circle_default_avatar}"
+                        app:placeHolder="@{R.mipmap.circle_default_avatar}"-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@+id/round_icon"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_nname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@{personVo.nickname}"
+                            android:textColor="#121212"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tv_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="10dp"
+                            android:text='@{personVo.fansNum+@string/circlev2_fans_num}'
+                            android:textColor="#666"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="备注"
+                        android:textColor="#121212"
+                        android:textSize="16sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tv_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:drawableRight="@mipmap/arrow_right"
+                        android:drawablePadding="10dp"
+                        android:text="@{personVo.fullName}"
+                        android:textColor="#666"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_pers_liner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_manager_coutainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/open_liner_bg_shape"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="分组"
+                                android:textColor="#121212"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/tv_group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:drawableRight="@mipmap/arrow_right"
+                                android:drawablePadding="10dp"
+                                android:text="@{personVo.groupName}"
+                                android:textColor="#666"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_perssion"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/open_liner_bg_shape"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="设置权限"
+                                android:textColor="#121212"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:drawableRight="@mipmap/arrow_right"
+                                android:drawablePadding="10dp"
+                                android:text=""
+                                android:textColor="#666"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_friend_resouce"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/open_liner_bg_shape"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="好友来源"
+                                android:textColor="#121212"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:drawablePadding="10dp"
+                                android:text="@{personVo.inviter}"
+                                android:textColor="#666"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/open_liner_bg_shape"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="加入时间"
+                                android:textColor="#121212"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:drawablePadding="10dp"
+                                android:text="@{CommonBdUtils.getStandardDate(personVo.inputtime)}"
+                                android:textColor="#666"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginRight="12dp"
+                    android:background="#B41D23"
+                    android:gravity="center"
+                    android:text="保存设置"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_del"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:text="删除成员"
+                    android:textColor="#333"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+</layout>

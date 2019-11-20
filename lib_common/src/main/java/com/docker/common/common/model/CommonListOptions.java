@@ -43,4 +43,7 @@ public class CommonListOptions implements Serializable {
      * */
     public int falg = 0;
 
+
+    // 参数
+    public HashMap<String, Object> externs = new HashMap<>();
 }
