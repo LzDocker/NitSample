@@ -515,7 +515,7 @@
             <!--android:text="@{myinfo.notReadMsgNum}"-->
             <!--android:textColor="#fff"-->
             <!--android:textSize="12sp"-->
-            <!--app:visibleGone="@{BdUtils.isShowPop(myinfo.notReadMsgNum)}" />-->
+            <!--app:visibleGone="@{CommonBdUtils.isShowPop(myinfo.notReadMsgNum)}" />-->
 
             <!--<ImageView-->
             <!--android:layout_width="wrap_content"-->
@@ -673,7 +673,7 @@
             <!--android:drawableRight="@mipmap/account_lxwm_icon"-->
             <!--android:drawablePadding="14dp"-->
             <!--android:gravity="center"-->
-            <!--android:text="@{BdUtils.getConstus(myinfo.contact_us)}"-->
+            <!--android:text="@{CommonBdUtils.getConstus(myinfo.contact_us)}"-->
             <!--android:visibility="gone" />-->
         </LinearLayout>
 

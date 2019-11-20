@@ -10,13 +10,14 @@ import com.docker.message.vo.MessageListVo;
 import java.util.HashMap;
 import java.util.List;
 
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Url;
 
 public interface MessageService {
-    
+
     /*
      * 消息列表
      * */
@@ -30,4 +31,9 @@ public interface MessageService {
     @POST(MessageApiConfig.apiBaseUrl + "api.php?m=get.msgTypeList")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<MessageDetailListVo>>>> FetchMessageList(@FieldMap HashMap<String, String> paramMap);
+
+
+    @POST("api.php?m=user.readAllMsg")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> readAllMsg(@Field("memberid") String memberid);
 }

@@ -273,32 +273,32 @@ public class CircleDetailActivity extends HivsBaseActivity<CircleViewModel, Circ
         });
 
         //
-//        mBinding.circleIvAdd.setOnClickListener(vs -> {
-////            CommonDialog.newInstance()
-////                    .setLayoutId(R.layout.circle_dialog_publish)
-////                    .setConvertListener((ViewConvertListener) (holder, dialog) -> {
-////                        holder.setOnClickListener(R.id.circle_active, v -> {
-////                            dialog.dismiss();
-////                            // 动态
-////                            processCirclePublish(CirclePublishActivity.PUBLISH_TYPE_ACTIVE);
-////                        });
-////                        holder.setOnClickListener(R.id.circle_news, v -> {
-////                            dialog.dismiss();
-////                            // 新闻
-////                            processCirclePublish(CirclePublishActivity.PUBLISH_TYPE_NEWS);
-////                        });
-////                        holder.setOnClickListener(R.id.circle_queastion, v -> {
-////                            dialog.dismiss();
-////                            // 问答
-////                            processCirclePublish(CirclePublishActivity.PUBLISH_TYPE_QREQUESTION);
-////                        });
-////                        holder.setOnClickListener(R.id.circle_close, v -> dialog.dismiss());
-////                    })
-////                    .setOutCancel(true)
-////                    .setShowBottom(true)
-////                    .show(getSupportFragmentManager());
+        mBinding.circleIvAdd.setOnClickListener(vs -> {
+//            CommonDialog.newInstance()
+//                    .setLayoutId(R.layout.circle_dialog_publish)
+//                    .setConvertListener((ViewConvertListener) (holder, dialog) -> {
+//                        holder.setOnClickListener(R.id.circle_active, v -> {
+//                            dialog.dismiss();
+//                            // 动态
+//                            processCirclePublish(CirclePublishActivity.PUBLISH_TYPE_ACTIVE);
+//                        });
+//                        holder.setOnClickListener(R.id.circle_news, v -> {
+//                            dialog.dismiss();
+//                            // 新闻
+//                            processCirclePublish(CirclePublishActivity.PUBLISH_TYPE_NEWS);
+//                        });
+//                        holder.setOnClickListener(R.id.circle_queastion, v -> {
+//                            dialog.dismiss();
+//                            // 问答
+//                            processCirclePublish(CirclePublishActivity.PUBLISH_TYPE_QREQUESTION);
+//                        });
+//                        holder.setOnClickListener(R.id.circle_close, v -> dialog.dismiss());
+//                    })
+//                    .setOutCancel(true)
+//                    .setShowBottom(true)
+//                    .show(getSupportFragmentManager());
 //            showPopMenu();
-//        });
+        });
 
         mBinding.ivBack.setOnClickListener(v -> {
             finish();

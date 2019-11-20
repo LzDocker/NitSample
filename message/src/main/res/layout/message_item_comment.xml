@@ -12,6 +12,8 @@
         <variable
             name="viewmodel"
             type="com.docker.message.vm.MessageViewModel" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
     </data>
 
 
@@ -28,10 +30,8 @@
             android:id="@+id/iv_avater"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginLeft="14dp" />
-        <!--   app:errorImg="@{R.mipmap.circle_default_avatar}"
-            app:placeHolder="@{R.mipmap.circle_default_avatar}"
-            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}"-->
+            android:layout_marginLeft="14dp"
+            app:roundImgUrl="@{CommonBdUtils.getCompleteImageUrl(item.avatar)}" />
 
 
         <RelativeLayout
@@ -65,39 +65,38 @@
                 android:layout_below="@+id/tv_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="14dp"
+                android:text="@{CommonBdUtils.getStandardDate(item.addtime)}"
                 android:textColor="#999"
                 android:textSize="12sp" />
 
-            <!--    android:text="@{BdUtils.getStandardDate(item.addtime)}"-->
+
             <FrameLayout
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="14dp">
-
-                <!--  app:visibleGone="@{BdUtils.isShowSingleImg(item.resource)}"-->
+                android:layout_marginRight="14dp"
+                app:visibleGone="@{CommonBdUtils.isShowSingleImg(item.resource)}">
 
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:focusable="false"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    app:roundImgUrl="@{CommonBdUtils.getCommentSingleImg(item.resource)}" />
 
-                <!--   app:errorImg="@{R.mipmap.circle_icon_empty}"
-                    app:placeHolder="@{R.mipmap.circle_icon_empty}"
-                    app:roundImgUrl="@{BdUtils.getCommentSingleImg(item.resource)}"-->
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
                     android:focusable="false"
-                    android:scaleType="centerCrop" />
-                <!--  android:src="@mipmap/circle_player_icon"
-                    app:visibleGone="@{BdUtils.isShowCommentVideoImg(item.resource)}" -->
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/circle_player_icon"
+                    app:visibleGone="@{CommonBdUtils.isShowCommentVideoImg(item.resource)}" />
+
             </FrameLayout>
 
         </RelativeLayout>

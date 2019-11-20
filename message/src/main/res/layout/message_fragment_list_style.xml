@@ -12,6 +12,8 @@
         <variable
             name="viewmodel"
             type="com.docker.message.vm.MessageViewModel" />
+        
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
 
     </data>
 
@@ -72,11 +74,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:gravity="center"
-                android:text="刚刚"
+                android:text="@{CommonBdUtils.getStandardDate(item.addtime)}"
                 android:textColor="#666"
                 android:textSize="12sp" />
 
-            <!-- android:text="@{BdUtils.getStandardDate(item.addtime)}"-->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,8 +89,9 @@
                 android:paddingRight="5dp"
                 android:text="@{item.notReadMsgNum}"
                 android:textColor="#fff"
-                android:textSize="12sp" />
-            <!--app:visibleGone="@{BdUtils.isShowPop(item.notReadMsgNum)}"-->
+                android:textSize="12sp"
+                app:visibleGone="@{CommonBdUtils.isShowPop(item.notReadMsgNum)}" />
+
 
         </LinearLayout>
 

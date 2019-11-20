@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.vo.DynamicListVo" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></LinearLayout>
+
+    <!--mPerisonAttenEmptycommand-->
+
+    <!--<com.docker.common.common.widget.empty.EmptyLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--bind:onRetryCommand="@{viewmodel.mPerisonAttenretrycommand}"-->
+    <!--bind:status="@{viewmodel.mPerisonAttenEmptycommand}">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="#ffffff"-->
+    <!--android:orientation="vertical"-->
+    <!--app:visibleGone="@{item.observableList.size >0}">-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:paddingLeft="14dp"-->
+    <!--android:text="他们也在用和玩家"-->
+    <!--android:textColor="#333"-->
+    <!--android:textSize="14sp" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:focusable="false"-->
+    <!--android:overScrollMode="never"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:paddingTop="5dp"-->
+    <!--android:paddingBottom="5dp"-->
+    <!--app:itemBinding="@{viewmodel.itemPersionBinding}"-->
+    <!--app:items="@{item.observableList}"-->
+    <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"-->
+    <!--bind:layoutManager="@{LayoutManager.linear(0,false)}">-->
+
+    <!--&lt;!&ndash;     app:items="@{viewmodel.getPersionData(item)}"&ndash;&gt;-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+    <!--</LinearLayout>-->
+    <!--</com.docker.common.common.widget.empty.EmptyLayout>-->
+
+
+</layout>
