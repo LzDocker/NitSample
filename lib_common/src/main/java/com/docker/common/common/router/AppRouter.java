@@ -78,6 +78,7 @@ public class AppRouter {
     public static final String CIRCLE_CREATE_v2 = CircleV2Group + "circle_create_v2";
     public static final String CIRCLE_CREATE_v2_frame = CircleV2Group + "circle_create_v2_frame";
     public static final String CIRCLE_DETAIL_v2_INDEX = CircleV2Group + "circle_detail_v2_index";
+    public static final String CIRCLE_PUBLISH_v2_INDEX = CircleV2Group + "circle_publish_v2_index";
 
 
     public static final String ProGroup = "/Pro/";

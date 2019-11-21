@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="circle_red">#ff00</color>
+    <color name="circle_gray">#999</color>
+    <color name="circle_white">#fff</color>
+    <color name="circle_gray_common">#fff5f5f5</color>
+
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#E60012</color>
+
+
+    <color name="circle_level1">#ffc600</color>
+    <color name="circle_level2">#f27b41</color>
+    <color name="circle_level3">#f24141</color>
+
+    <color name="text_gray">#666</color>
+    <color name="text_black_121212">#000</color>
+
+    <color name="colorTrans">#00000000</color>
+
+</resources>

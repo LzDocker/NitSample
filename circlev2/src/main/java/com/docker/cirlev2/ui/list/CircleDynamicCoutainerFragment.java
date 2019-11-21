@@ -80,7 +80,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
     /*
      * 获取当前child 位置
      * */
-    private int getCurrenTab() {
+    public int getCurrenTab() {
         if (circleTitlesVo.get(pos).getChildClass() != null && titles.
                 length > 0 && Arrays.asList(titles).contains("全部")) {
             if (mBinding.get().viewpager.getCurrentItem() == 0) {
@@ -97,7 +97,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
         if (isAddTotalTab) {  // 添加 全部
             mBinding.get().magicIndicator.setVisibility(View.VISIBLE);
             if (CollectionUtils.isEmpty(circleTitlesVos)) {
-                titles = new String[]{"全部","全部","全部"};
+                titles = new String[]{"全部", "全部", "全部"};
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
                         .navigation());

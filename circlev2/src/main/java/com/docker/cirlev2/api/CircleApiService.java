@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 
 import com.docker.cirlev2.vo.entity.CircleCountpageVo;
 import com.docker.cirlev2.vo.entity.CircleCreateRst;
+import com.docker.cirlev2.vo.entity.CirclePubSelectVo;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleGroupPerssionVo;
@@ -100,6 +101,13 @@ public interface CircleApiService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<CircleListVo>>>> fechJoinCircle(@FieldMap Map<String, String> params);
 
+
+    /*
+     * 已加入的圈子
+     * */
+    @POST(CommonApiConfig.apiBaseUrlZHA + "api.php?m=circle.getMyJoin")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<CirclePubSelectVo>>>> fechJoinSelectCircle(@FieldMap Map<String, String> params);
 
     /*
      * 圈子详情 圈子主页
@@ -355,7 +363,7 @@ public interface CircleApiService {
 
     @POST("api.php?m=circle.invitation")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<ShareVo>>> invite(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<ShareBean>>> invite(@FieldMap Map<String, String> params);
 
     @POST("api.php?m=dynamic.replyList")
     @FormUrlEncoded

@@ -8,7 +8,10 @@ import com.docker.cirlev2.vm.CircleDetailIndexViewModel;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vm.CircleIndexViewModel;
 import com.docker.cirlev2.vm.CircleMinesViewModel;
+import com.docker.cirlev2.vm.CirclePersionViewModel;
+import com.docker.cirlev2.vm.CirlcleSelectViewModel;
 import com.docker.cirlev2.vm.CreateListViewModel;
+import com.docker.cirlev2.vm.PublishViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
@@ -55,6 +58,20 @@ public abstract class VmModule {
     @ViewModelKey(CircleDynamicListViewModel.class)
     abstract ViewModel CircleDynamicListViewModel(CircleDynamicListViewModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(PublishViewModel.class)
+    abstract ViewModel PublishViewModel(PublishViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CirlcleSelectViewModel.class)
+    abstract ViewModel CirlcleSelectViewModel(CirlcleSelectViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CirclePersionViewModel.class)
+    abstract ViewModel CirclePersionViewModel(CirclePersionViewModel model);
 
 
 }

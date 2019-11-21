@@ -44,7 +44,7 @@ public class EmptyLayout extends FrameLayout {
 
     private void init(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.empty_layout);
-        status = ta.getInt(R.styleable.empty_layout_status, EmptyStatus.BdHiden);
+        status = ta.getInt(R.styleable.empty_layout_status, EmptyStatus.BdLoading);
         loadingBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.common_empty_layout_loading, this, false);
         errorBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.common_empty_layout_error, this, false);
         nodataBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.common_empty_layout_nodata, this, false);

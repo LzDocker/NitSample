@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.MemberGroupingVo" />
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/open_liner_bg_shape"
+        android:gravity="center_vertical"
+        android:paddingLeft="14dp"
+        android:text="@{item.groupName}"
+        android:textColor="#333" />
+</layout>

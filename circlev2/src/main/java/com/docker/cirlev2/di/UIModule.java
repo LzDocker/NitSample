@@ -1,14 +1,36 @@
 package com.docker.cirlev2.di;
 
 
+import com.docker.cirlev2.ui.common.CircleCoverActivity;
+import com.docker.cirlev2.ui.common.CircleCovertFragment;
+import com.docker.cirlev2.ui.common.CircleSourceUpFragment;
+import com.docker.cirlev2.ui.create.CircleActiveFragment;
+import com.docker.cirlev2.ui.create.CircleCompanyFragment;
+import com.docker.cirlev2.ui.create.CircleConutryFragment;
 import com.docker.cirlev2.ui.create.CircleCreateActivity;
 import com.docker.cirlev2.ui.create.CircleCreateIndexActivity;
 import com.docker.cirlev2.ui.detail.CircleDetailIndexActivity;
+import com.docker.cirlev2.ui.detail.CircleEditMemberGroupActivity;
+import com.docker.cirlev2.ui.detail.CircleGroupListActivity;
+import com.docker.cirlev2.ui.detail.CircleInviteActivity;
 import com.docker.cirlev2.ui.index.CircleIndexActivity;
 import com.docker.cirlev2.ui.index.CircleIndexFragment;
 import com.docker.cirlev2.ui.index.CircleSampleActivity;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.ui.list.CircleDynamicListFragment;
+import com.docker.cirlev2.ui.persion.CircleGroupPerssionActivity;
+import com.docker.cirlev2.ui.persion.CircleModifyActivity;
+import com.docker.cirlev2.ui.persion.CirclePersionSettingActivity;
+import com.docker.cirlev2.ui.persion.CirclePersonDetailActivity;
+import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
+import com.docker.cirlev2.ui.persion.CirclePersonPerssionActivity;
+import com.docker.cirlev2.ui.publish.CirclePubActiveFragment;
+import com.docker.cirlev2.ui.publish.CirclePubNewsFragment;
+import com.docker.cirlev2.ui.publish.CirclePubRequestionFragment;
+import com.docker.cirlev2.ui.publish.CirclePublishActivity;
+import com.docker.cirlev2.ui.publish.select.CirclePerssionSelectActivity;
+import com.docker.cirlev2.ui.publish.select.CircleShareGroupSelectActivity;
+import com.docker.cirlev2.ui.publish.select.CircleShareSelectActivity;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
@@ -54,8 +76,96 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleDynamicCoutainerFragment contributeCircleDynamicCoutainerFragmentInjector();
 
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePublishActivity contributeCirclePublishActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePubNewsFragment contributeCirclePubNewsFragmentInjector();
 
 
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleCovertFragment contributeCircleCovertFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleSourceUpFragment contributeCircleSourceUpFragmentInjector();
+
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleCoverActivity contributeCircleCoverActivityInjector();
+
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePubRequestionFragment contributeCirclePubRequestionFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePubActiveFragment contributeCirclePubActiveFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePerssionSelectActivity contributeCirclePerssionSelectActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleShareSelectActivity contributeCircleShareSelectActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleShareGroupSelectActivity contributeCircleShareGroupSelectActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleInviteActivity contributeCircleInviteActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleGroupListActivity contributeCircleGroupListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleEditMemberGroupActivity contributeCircleEditMemberGroupActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleActiveFragment contributeCircleCircleActiveFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleCompanyFragment contributeCircleCompanyFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleConutryFragment contributeCircleConutryFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePersonListActivity contributeCirclePersonListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleModifyActivity contributeCircleModifyActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePersionSettingActivity contributeCirclePersionSettingActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePersonDetailActivity contributeCirclePersonDetailActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CirclePersonPerssionActivity contributeCirclePersonPerssionActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleGroupPerssionActivity contributeCircleGroupPerssionActivityInjector();
 
 }
 

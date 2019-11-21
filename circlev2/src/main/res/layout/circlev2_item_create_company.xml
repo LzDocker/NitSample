@@ -9,6 +9,10 @@
 
     </data>
 
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
     <LinearLayout
         android:id="@+id/ll_createCircle_root"
@@ -210,4 +214,5 @@
 
         </LinearLayout>
     </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

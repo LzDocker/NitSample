@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">cirlev2</string>
+
+    <string name="circlev2_ren">人</string>
+    <string name="circlev2_person_num">人数  </string>
+    <string name="circlev2_person_aten">人气： </string>
+    <string name="circlev2_fans_num">关注</string>
+    <string name="circlev2_isFav">已赞</string>
+    <string name="circlev2_fav">点赞</string>
+    <string name="circlev2_favwj">超赞</string>
+    <string name="circlev2_commentUnit">条</string>
+    <string name="circlev2_commentUnitWj"> </string>
+    <string name="circlev2_isCollect">收藏</string>
+    <string name="circlev2_collect">已收藏</string>
+    <string name="circlev2_zan">赞</string>
+    <string name="circlev2_liulan">浏览</string>
+    <string name="circlev2_jiaoliu1">有</string>
+    <string name="circlev2_jiaoliu2">个小伙伴在这里互相交流</string>
+    <string name="circlev2_fromCircle1">来自“</string>
+    <string name="circlev2_fromCircle2">”圈子</string>
+    <string name="circlev2_publish1">发动态，发问答，发新闻，查资料；\n还能建圈子，快来和圈友一起交流学习吧！</string>
+    <string name="circlev2_publish2">店铺名称:</string>
+    <string name="circlev2_publish3">联系人:</string>
+
 </resources>
