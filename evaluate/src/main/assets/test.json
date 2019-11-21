@@ -1,0 +1,451 @@
+{
+  "1": [
+    {
+      "order": 1,
+      "timestamp": "00:00:00",
+      "timestamps": "00:00:00-00:04:44",
+      "text": "你好，我想买些名片。",
+      "en": "Hello: I would like to buy some business cards.",
+      "hashvalue": "YGhDbPBfJRdM1RmfDtO/8y2AycM="
+    },
+    {
+      "order": 1,
+      "timestamp": "00:04:44",
+      "timestamps": "00:04:44-00:06:71",
+      "text": "太好了。你想要多少？",
+      "en": "Excellent. How many would you like?",
+      "hashvalue": "9l6oy2GtqLD6zgWVzrfie3kJwpI="
+    },
+    {
+      "order": 2,
+      "timestamp": "00:06:71",
+      "timestamps": "00:06:71-00:08:23",
+      "text": "二千张就好了。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "hoZebUWNlFKC95DMBEe73KRoKCQ="
+    },
+    {
+      "order": 2,
+      "timestamp": "00:08:23",
+      "timestamps": "00:08:23-00:11:60",
+      "text": "你需要填这张表格。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "gC6wOPr4wEkzo7wDnQ1+1HlDCYs="
+    },
+    {
+      "order": 3,
+      "timestamp": "00:11:60",
+      "timestamps": "00:11:60-00:13:73",
+      "text": "我想要做的样子和这张表上的一样。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "ydnUex5+Wf8livSLIWQIDu/yWJA="
+    },
+    {
+      "order": 3,
+      "timestamp": "00:13:73",
+      "timestamps": "00:13:73-00:15:59",
+      "text": "没问题,先生",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "jn5zgsGeGr8l+2ylSP28Mm+lw58="
+    },
+    {
+      "order": 4,
+      "timestamp": "00:15:59",
+      "timestamps": "00:15:59-00:20:03",
+      "text": "好的，我做好了给你表哥",
+      "en": ". . . Okay, I'm finished. Here's your form and my old card.",
+      "hashvalue": "gB5k9EglT4xg2lX2U//VGUM3ne4="
+    },
+    {
+      "order": 4,
+      "timestamp": "00:20:03",
+      "timestamps": "00:20:03-00:23:59",
+      "en": "Very good, sir. Your order will be ready in one week.",
+      "text": "非常好一个星期能制作完成",
+      "hashvalue": "gBaGs/qaZSfzFOFtNpiPMyxwcpA="
+    },
+    {
+      "order": 5,
+      "timestamp": "00:23:59",
+      "timestamps": "00:23:59-00:26:31",
+      "text": "你觉得三天做好可能吗",
+      "en": "Do you think you could finish it in three days?",
+      "hashvalue": "tluEWEtCNu7t7PYkgWfETr04keE="
+    },
+    {
+      "order": 5,
+      "timestamp": "00:26:31",
+      "timestamps": "00:26:31-99:99:99:99",
+      "text": "没问题，先生但是要加钱",
+      "en": "No problem, sir. But it will cost you extra.",
+      "hashvalue": "dUCP6v17fDEn6AUpDmh2cTySGhU="
+    }
+  ],
+  "2": [
+    {
+      "order": 1,
+      "timestamp": "00:00:00",
+      "timestamps": "00:00:00-00:03:31",
+      "text": "我需要买一些名片。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "r/vOfv7eS2+2WHVSmRnPaOdjKmE="
+    },
+    {
+      "order": 1,
+      "timestamp": "00:03:31",
+      "timestamps": "00:03:31-00:06:48",
+      "text": "没问题，你想卖多少？",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "6e1hy6vsh3Kcl3CtPsFOBKzWINE="
+    },
+    {
+      "order": 2,
+      "timestamp": "00:06:48",
+      "timestamps": "00:06:48-00:08:74",
+      "text": "我想2000张就可以了。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "D3brQSQ01pFySB5xBQKxOx5e8uo="
+    },
+    {
+      "order": 2,
+      "timestamp": "00:08:74",
+      "timestamps": "00:08:74-00:11:63",
+      "text": "请先填一下这张表格。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "MXhoIL0i8vW3f4nvxnqu4EY+Jrw="
+    },
+    {
+      "order": 3,
+      "timestamp": "00:11:63",
+      "timestamps": "00:11:63-00:15:07",
+      "text": "我希望新的名片的样子和这张一样。",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "qwKQEGDD89QQYqEejSauVxYs980="
+    },
+    {
+      "order": 3,
+      "timestamp": "00:15:07",
+      "timestamps": "00:15:07-00:17:01",
+      "text": "这对我们来说很容易",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "nz0/HW8WbOwuEQ4zz8+rIAPdJt8="
+    },
+    {
+      "order": 4,
+      "timestamp": "00:17:01",
+      "timestamps": "00:17:01-00:21:20",
+      "text": "好的我填完了,给你表哥和hi爱去哪的名片",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "H5McoegnnQzJEt5qV5Yl2qe8iQg="
+    },
+    {
+      "order": 4,
+      "timestamp": "00:21:20",
+      "timestamps": "00:21:20-00:24:17",
+      "text": "你的名片一周可以完成",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "aDP8TckT4s4DgbA24pBXosJtysU="
+    },
+    {
+      "order": 5,
+      "timestamp": "00:24:17",
+      "timestamps": "00:24:17-00:28:61",
+      "text": "我想如果三之后能拿就最好了",
+      "en": "That will be no problem, sir.",
+      "hashvalue": "VXrvEUixzsMxzyPd2j8YcHp95Tg="
+    },
+    {
+      "order": 5,
+      "timestamp": "00:28:61",
+      "timestamps": "00:28:61-99:99:99:99",
+      "text": "这个我们可以做到,但是这样会贵些",
+      "en": "We can do that. It'll just cost you extra.",
+      "hashvalue": "JDvOQShN/ispHXaka/QzU3USp2A="
+    }
+  ],
+  "3": [
+    {
+      "order": 1,
+      "timestamp": "00:00:38",
+      "timestamps": "00:00:38-00:04:18",
+      "text": "凯蒂一家刚搬进新家。",
+      "en": "That will be no problem, sir:",
+      "hashvalue": "EFV/3xLxWfTkkEeW4gKcNFUEano="
+    },
+    {
+      "order": 2,
+      "timestamp": "00:04:18",
+      "timestamps": "00:04:18-00:08:16",
+      "text": "这是他们搬过去的第一个春天。",
+      "en": "We can do that: It'll just cost you extra:",
+      "hashvalue": "8Am0s46hTrwlz0cHVbCj7wV/wL8="
+    },
+    {
+      "order": 3,
+      "timestamp": "00:08:16",
+      "timestamps": "00:08:16-00:13:96",
+      "text": "凯蒂很兴奋，因为今天是妈妈的生日。",
+      "en": "That will be no problem, sir:",
+      "hashvalue": "QuHtbWEyFXki4tjFpCw2ELC15+Q="
+    },
+    {
+      "order": 4,
+      "timestamp": "00:13:96",
+      "timestamps": "00:13:96-00:21:78",
+      "en": "We can do that: It'll just cost you extra:",
+      "text": "她想种一个有许多漂亮花的小花园，作为送给妈妈的生日礼物。",
+      "hashvalue": "J7o08ApT7uCyHquJqoS6Tf0/h2A="
+    },
+    {
+      "order": 5,
+      "timestamp": "00:21:78",
+      "timestamps": "00:21:78-00:28:76",
+      "en": "We can do that: It'll just cost you extra:",
+      "text": "所以她去了一家花店，用她所有的零花钱买了一些花。",
+      "hashvalue": "sXByxJoZJz5CuwndKGMYIGhUbHU="
+    },
+    {
+      "order": 6,
+      "timestamp": "00:28:76",
+      "timestamps": "00:28:76-00:33:89",
+      "en": "Excellent: How many would you like?",
+      "text": "她想种一个有许多漂亮花的小花园，作为送给妈妈的生日礼物。",
+      "hashvalue": "kDDJMM11KcMn8a0Fxlr/LshuC7E="
+    },
+    {
+      "order": 7,
+      "timestamp": "00:33:89",
+      "timestamps": "00:33:89-00:36:57",
+      "text": "这是他们搬过去的第一个春天。",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "qtxiYilEoHfwXjhupDv8vS66Fqw="
+    },
+    {
+      "order": 8,
+      "timestamp": "00:36:57",
+      "timestamps": "00:36:57-00:42:26",
+      "text": "凯蒂一家刚搬进新家。",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "RAnVrVEQuteLrR16dLro7fhNDN0="
+    },
+    {
+      "order": 9,
+      "timestamp": "00:42:26",
+      "timestamps": "00:42:26-00:44:59",
+      "en": "Excellent: How many would you like?",
+      "text": "凯蒂一家刚搬进新家。sdiID就到家哦哦啊i",
+      "hashvalue": "ilTUnRzQbqEKMKpZtsH6X9XmPqs="
+    },
+    {
+      "order": 10,
+      "timestamp": "00:44:59",
+      "timestamps": "00:44:59-00:49:63",
+      "text": "sdiID就到家哦哦啊i 我觉得",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "vWcYwBfBlo8XUw9glTdmVggj5tA="
+    },
+    {
+      "order": 11,
+      "timestamp": "00:49:63",
+      "timestamps": "00:49:63-00:53:69",
+      "text": "死都去哦的年纪",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "Amh7HEVDTe6PMB38NM6qIBJ2Xxc="
+    },
+    {
+      "order": 12,
+      "timestamp": "00:53:69",
+      "timestamps": "00:53:69-01:00:00",
+      "text": "sdjdi大家都是看 i经典款式",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "nb2AL+LPPsJmMXQTzaaUv3wCObE="
+    },
+    {
+      "order": 13,
+      "timestamp": "01:00:00",
+      "timestamps": "01:00:00-01:03:67",
+      "text": "23jsjsismnj还是",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "7ITUyKIQozNxt2wwz3WIpe5/qvs="
+    },
+    {
+      "order": 14,
+      "timestamp": "01:03:67",
+      "timestamps": "01:03:67-01:08:85",
+      "text": "henhaodjskjnasn a",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "+BWB2Fy41lRy07zkMrfabfLxW8s="
+    },
+    {
+      "order": 15,
+      "timestamp": "01:08:85",
+      "timestamps": "01:08:85-01:12:79",
+      "text": "我饿了",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "7VJSVTuDWSfX5YwYyizrwIUkaEc="
+    },
+    {
+      "order": 16,
+      "timestamp": "01:12:79",
+      "timestamps": "01:12:79-01:19:75",
+      "text": "bizuiba",
+      "en": "Excellent: How many would you like?",
+      "hashvalue": "OXJCabNMAvRxLKQG6ZkRk8nHFE4="
+    },
+    {
+      "order": 17,
+      "timestamp": "01:19:75",
+      "timestamps": "01:19:75-01:26:50",
+      "text": "你说是",
+      "en": "Excellent. How many would you like?",
+      "hashvalue": "8uxPauA3eN4yPKfZDg9QUqXvwf4="
+    },
+    {
+      "order": 18,
+      "timestamp": "01:26:50",
+      "timestamps": "01:26:50-99:99:99:99",
+      "text": "n你回到家看到大的空间",
+      "en": "Excellent. How many would you like?",
+      "hashvalue": "klV8VTfA7vGWn88vwISQ/Fn7iDI="
+    }
+  ],
+  "4": [
+    {
+      "order": 1,
+      "en": "I read a study yesterday. It said that last year, more than half of us actually chose not to take our full vacations from our jobs.",
+      "timestamp": "00:00.00",
+      "timestamps": "00:00:00-00:22:37",
+      "text": "我昨天读了一篇研究。上面显示去年，我们之中超过一半的人竟然选择不远离工作把自己的假期用完。",
+      "hashvalue": "q0anvU+IOz2CJz5v7qow3dwEkkE="
+    },
+    {
+      "order": 2,
+      "timestamp": "00:22.37",
+      "timestamps": "00:22:37-00:41:54",
+      "en": "Question Don't you think it's crazy that so many of us go into work even when we don't need to be there? Times we could be on the beach buried in sand or traveling the earth, we spend it in the office, traveling from desk to desk, buried in paperwork.",
+      "text": "问题是 你不觉得我们之中这么多人就算不需要也还是要去工作很疯狂吗？我们可以待在沙滩上被埋在沙里或环游世界的时光，我们把它耗在办公室里，环游在办公桌间，被文件数据掩埋。",
+      "hashvalue": "1aB+6Tljdo0haqkXpM6Q9mLdnEo="
+    },
+    {
+      "order": 3,
+      "timestamp": "00:41.54",
+      "timestamps": "00:41:54-01:00:63",
+      "en": "See, in this chaotic world, everything goes so fast. We're so busy seems like everyone's middle name is  Multitask. But now, now before you go and act all holier than thou, how many extra tabs do you have open on your computer right now?",
+      "text": "瞧，在这纷乱的世界里，一起都进行的如此快速。我们如此忙碌--就好像每个人的中间名都是[一心多用]，但现在，在你表现得自以为高人一等前，你的计算机上目前开着几个多余的分页。",
+      "hashvalue": "Wgu6jsaalLaEiHUn8QdtseeBtDs="
+    },
+    {
+      "order": 4,
+      "timestamp": "01:00.63",
+      "timestamps": "01:00:63-01:16:87",
+      "en": "See, we all need time to get away from the race, for our family, friends, for the sake of our mental state, time to rewind, recharge, and reconnect not reporting to the office on emails that should be on redirect.",
+      "text": "看，为了我们的精神状态，为了我们的家人、朋友，为了我们的比赛，为了我们的时间，我们都需要离开比赛，为了我们的家人、朋友，为了我们的时间倒带、充电和重新连接——不要在应该重新定向的电子邮件上向办公室报告。",
+      "hashvalue": "QEzLQLbCfQ3al0y8SO8XutrDHLE="
+    },
+    {
+      "order": 5,
+      "timestamp": "01:16.87",
+      "en": "Because life, ladies and gentlemen, is all about moments. No one in history has ever been able to hold on to one not a single soul. And you never get them back. See, there one goes!",
+      "text": "因为生活，女士们先生们，都是关于瞬间的。历史上没有一个人能坚持住一个灵魂。你再也拿不回来了。看，有一个去了！",
+      "timestamps": "01:16:87-01:31:71",
+      "hashvalue": "sD4anxVpo6lww8jaFUsvcjlpb/Q="
+    },
+    {
+      "order": 6,
+      "timestamp": "01:31.71",
+      "timestamps": "01:31:71-01:50:36",
+      "en": "o do over, no rewind, no DVD root menu to skip to a previous scene. Ask yourself, How many trips did you almost take? How many sights have you almost seen? How many moments have you lost thinking about the next one? Thinking that once you get this or get there, maybe that will be the best one?",
+      "text": "不重复，不倒带，没有DVD根菜单跳到上一个场景。扪心自问，你几乎跑了多少次？你几乎看过多少景点？你错过了多少时间去想下一个？以为一旦你得到了这个或是到了那里，也许那会是最好的一个？",
+      "hashvalue": "CJ0IJPquF1cb4CK3GeaNgJNTLmM="
+    }
+  ],
+  "5": [
+    {
+      "order": 7,
+      "timestamp": "01:50.36",
+      "timestamps": "01:50.36-02:05.80",
+      "en": "Life has taught me that all we will ever have is  now. But let me be perfectly clear, I'm not saying to quit your job, even though I know you deserve a six month vacation, twice a year.",
+      "text": "生活教会了我，我们将拥有的只有“现在”，但让我明确一点，我并不是说要辞职，尽管我知道你应该有半年的假期，一年两次。",
+      "hashvalue": "N1dNxqFmtuwoIUpsJbAPK709iDQ="
+    },
+    {
+      "order": 8,
+      "timestamp": "02:05.80",
+      "timestamps": "02:05.80-02:28.76",
+      "en": "But how about small steps? Short trips with long dances, no distractions. Spend time with family instead of coworkers, meditation instead of aggravation. Replace our screen savers with sunrises, Palm Pilots with palm trees, jammed copy machines with  man, I really hate jammed copy machines.",
+      "text": "但是小步走怎么样？短途旅行，长舞，不分心。花时间和家人在一起而不是和同事在一起，冥想而不是生气。用日出来代替我们的屏保，棕榈树飞行员，棕榈树，卡纸机，我真的讨厌被卡住的复印机。",
+      "hashvalue": "ijsmIU3yj8rvfYA2gxpuAAdJ8KE="
+    },
+    {
+      "order": 9,
+      "timestamp": "02:28.76",
+      "timestamps": "02:28.76-02:40.36",
+      "en": "The most precious thing we have in life are moments. Let's make the most of them before they disappear. Let's see the world while we still can and cherish those while they're still here.",
+      "text": "我们生命中最珍贵的东西就是瞬间。让我们在它们消失之前充分利用它们。让我们趁现在还可以看到这个世界，趁他们还在的时候珍惜他们。",
+      "hashvalue": "btkBMEvDyPn21w9aLwF2NRzwYZQ="
+    },
+    {
+      "order": 10,
+      "timestamp": "02:40.36",
+      "timestamps": "02:40.36-02:48.87",
+      "en": "cause when our lives are almost over, it won't matter how much money we made, or hours we worked, or times we got Employee of the Month.",
+      "text": "因为当我们的生活快结束的时候，我们赚了多少钱，工作了多少小时，或者我们得到了本月最佳员工的次数都无关紧要。",
+      "hashvalue": "PON8qyRh+rlaqM9uLKrF+eRTzOY="
+    },
+    {
+      "order": 11,
+      "timestamp": "02:48.87",
+      "timestamps": "02:48.87-02:58.52",
+      "en": "What we will look back on are the memories we made, the hours we spent with those we loved, and were we Father of the Month, Mother of the Year, Friend of a Lifetime.",
+      "text": "我们要回顾的是我们所做的回忆，和我们所爱的人一起度过的时光，我们是这个月模范父亲，年模范母亲，一生的朋友。",
+      "hashvalue": "FTxA0n1VnPlGowVH9O24tXdcwDY="
+    },
+    {
+      "order": 12,
+      "timestamp": "02:58.52",
+      "timestamps": "02:58.52-03:04.37",
+      "en": "Holidays should be a time where we go away and come together. From now on, let's take our whole vacation and be fully present creating memories that will last forever.",
+      "text": "假期应该是一个我们走到一起的时间。从现在起，让我们带着整个假期，充分的现在-创造将永远持续的记忆。",
+      "hashvalue": "ZowlrB8TJ0D+KnRBkfFHzYJH29Y="
+    }
+  ],
+  "6": [
+    {
+      "order": 1,
+      "timestamp": "00:00:00",
+      "timestamps": "00:00:00-00:06:71",
+      "text": "你好，我想买些名片。太好了。你想要多少？",
+      "en": "Hello: I would like to buy some business cards.Excellent. How many would you like?",
+      "img": "https://chaoyangtiyuju.oss-cn-beijing.aliyuncs.com/20190626/A/%E4%B9%B0%E5%90%8D%E7%89%87/img/1.jpg",
+      "hashvalue": "YGhDbPBfJRdM1RmfDtO/8y2AycM="
+    },
+
+    {
+      "order": 2,
+      "timestamp": "00:06:71",
+      "timestamps": "00:06:71-00:13:73",
+      "text": "二千张就好了。你需要填这张表格.",
+      "en": "That will be no problem, sir.That will be no problem, sir.",
+      "img": "https://chaoyangtiyuju.oss-cn-beijing.aliyuncs.com/20190626/A/%E4%B9%B0%E5%90%8D%E7%89%87/img/2.jpg",
+      "hashvalue": "hoZebUWNlFKC95DMBEe73KRoKCQ="
+    },
+    {
+      "order": 4,
+      "timestamp": "00:15:59",
+      "timestamps": "00:15:59-00:23:59",
+      "text": "好的，我做好了给你表哥,非常好一个星期能制作完成",
+      "img": "https://chaoyangtiyuju.oss-cn-beijing.aliyuncs.com/20190626/A/%E4%B9%B0%E5%90%8D%E7%89%87/img/3.jpg",
+      "en": ". . . Okay, I'm finished. Here's your form and my old card.Very good, sir. Your order will be ready in one week.",
+      "hashvalue": "gB5k9EglT4xg2lX2U//VGUM3ne4="
+    },
+    {
+      "order": 5,
+      "timestamp": "00:23:59",
+      "timestamps": "00:23:59-00:27:11",
+      "text": "你觉得三天做好可能吗,没问题，先生但是要加钱",
+      "img": "https://chaoyangtiyuju.oss-cn-beijing.aliyuncs.com/20190626/A/%E4%B9%B0%E5%90%8D%E7%89%87/img/4.jpg",
+      "en": "Do you think you could finish it in three days?No problem, sir. But it will cost you extra.",
+      "hashvalue": "tluEWEtCNu7t7PYkgWfETr04keE="
+    }
+  ]
+}

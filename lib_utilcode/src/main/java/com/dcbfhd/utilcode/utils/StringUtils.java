@@ -4,6 +4,9 @@ import android.content.res.Resources;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.StringRes;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * <pre>
  *     author: Blankj
@@ -237,4 +240,43 @@ public final class StringUtils {
             return new String[0];
         }
     }
+
+    /**
+     * 圆角转换,为评测提供
+     * @param string
+     * @return
+     */
+    public static String full2Half(String string) {
+        if (null == string || "".equals(string)) {
+            return "";
+        }
+        string = string.trim();
+        StringBuilder builder = new StringBuilder();
+        char[] charArr = string.toCharArray();
+        for (int i = 0; i < charArr.length; i++) {
+            if (charArr[i] >= 65281 && charArr[i] <= 65374) {
+                charArr[i] = (char) (charArr[i] - 65248);
+            } else if (charArr[i] == 12288) {
+                charArr[i] = (char) 32;
+            } else if (charArr[i] == 12290) {
+                charArr[i] = (char) 46;
+            } else if (charArr[i] == 8216 || charArr[i] == 8217) {
+                charArr[i] = (char) 39;
+            } else if (charArr[i] == 96) {
+                charArr[i] = (char) 39;
+            } else if (charArr[i] == 8218) {
+                charArr[i] = (char) 44;
+            }
+            builder.append(charArr[i]);
+        }
+        string = new String(charArr);
+        Pattern p = Pattern.compile("[-]{2,3}");
+        Matcher m = p.matcher(string);
+        string = m.replaceAll("—");
+        string = string.replaceAll("\"", "'");
+        return string;
+    }
+
+
+
 }

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:id="@+id/audio_detail_frame"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_dp_0"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/study_read_bliner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_dp_50"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/common_dp_5">
+
+                <TextView
+                    android:id="@+id/study_read_beisu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="1.0倍速" />
+
+                <TextView
+                    android:id="@+id/study_read_xunhuan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/radio_sxbf"
+                    android:gravity="center"
+                    android:text="单篇循环" />
+
+                <TextView
+                    android:id="@+id/study_read_gendu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/radio_gdlx"
+                    android:gravity="center"
+                    android:text="跟读对比" />
+
+                <TextView
+                    android:id="@+id/study_read_qwkh"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/radio_qwkh"
+                    android:gravity="center"
+                    android:text="全文跟读" />
+
+                <TextView
+                    android:id="@+id/study_read_qwzs"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/radio_qwzs"
+                    android:gravity="center"
+                    android:text="全文注释" />
+
+                <TextView
+                    android:id="@+id/study_read_kcsp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@mipmap/radio_kcsp"
+                    android:gravity="center"
+                    android:text="课程视频" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/study_read_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_dp_10"
+                tools:max="100"
+                tools:progress="0" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/common_dp_50"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/study_read_hide"
+                    android:layout_width="@dimen/common_dp_19"
+                    android:layout_height="@dimen/common_dp_17"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:src="@mipmap/radio_zj" />
+
+                <!--                android:tint="@color/common_theme_color"-->
+
+
+                <LinearLayout
+                    android:id="@+id/study_read_shang_lin"
+                    android:layout_width="@dimen/common_dp_26"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/common_dp_18"
+                    android:layout_weight="1"
+
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/study_read_shang"
+                        android:layout_width="@dimen/common_dp_23"
+                        android:layout_height="@dimen/common_dp_20"
+                        android:src="@mipmap/radio_pre" />
+                </LinearLayout>
+
+                <com.bfhd.evaluate.view.PlayPauseView
+                    android:id="@+id/study_read_resume"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    app:anim_duration="200"
+                    app:btn_color="@color/black"
+                    app:gap_width="10" />
+
+                <LinearLayout
+                    android:id="@+id/study_read_next_lin"
+                    android:layout_width="@dimen/common_dp_26"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/common_dp_18"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/study_read_next"
+                        android:layout_width="@dimen/common_dp_23"
+                        android:layout_height="@dimen/common_dp_20"
+                        android:src="@mipmap/radio_next" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>

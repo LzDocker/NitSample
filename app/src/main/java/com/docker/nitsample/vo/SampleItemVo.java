@@ -11,6 +11,9 @@ import com.docker.nitsample.R;
 import timber.log.Timber;
 
 public class SampleItemVo implements BaseItemModel {
+
+
+
     @Override
     public int getItemLayout() {
         return R.layout.item_sample;
@@ -52,6 +55,12 @@ public class SampleItemVo implements BaseItemModel {
                     break;
                 case 7:
                     ARouter.getInstance().build(AppRouter.MESSAGEINDEX).navigation();
+                    break;
+                case 31:
+                    ARouter.getInstance().build(AppRouter.EVALUATE_DEMO).navigation();
+                    break;
+                case 13:
+                    ARouter.getInstance().build(AppRouter.COMMON_RXJAVA).navigation();
                     break;
 
                 default:

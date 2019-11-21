@@ -3,6 +3,8 @@ package com.docker.video.AlivcLiveRoom;
  * Copyright (C) 2010-2018 Alibaba Group Holding Limited.
  */
 
+import android.text.TextUtils;
+
 /**
  * 时间格式化工具类
  */
@@ -44,5 +46,68 @@ public class TimeFormater {
         }
 
         return msBuilder.toString();
+    }
+
+    /**
+     * 分：秒：毫秒
+     * 00:00:00-》m
+     *
+     * @param time
+     * @return
+     */
+    public static double timeToSecond(String time) {
+        if (TextUtils.isEmpty(time))
+            return 0;
+        String p[] = time.split(":");
+        double fen = 0, miao = 0, hao = 0;
+        if (p == null)
+            return 0;
+        if (p.length > 0)
+            if (p[0].equals("00")) {
+                fen = 0;
+            } else {
+                if (TextUtils.isEmpty(p[0]))
+                    fen = Double.parseDouble("0") * 60;
+                else
+                    fen = Double.parseDouble(p[0]) * 60;
+            }
+        if (p.length > 1)
+            if (TextUtils.isEmpty(p[1]))
+                miao = Double.parseDouble("0") * 60;
+            else
+                miao = Double.parseDouble(p[1]);
+
+        if (p.length > 2)
+            if (TextUtils.isEmpty(p[2]))
+                hao = Double.parseDouble("0") * 60;
+            else
+                hao = Double.parseDouble(p[2]) / 100;
+        return fen + hao + miao;
+    }
+
+    public static double[] getSETime(String time) {
+        String be[] = time.split("-");
+        String p[] = be[0].split(":");
+        double fen, miao, hao;
+        if (p[0].equals("00")) {
+            fen = 0;
+        } else {
+            fen = Double.parseDouble(p[0]) * 60;
+        }
+        miao = Double.parseDouble(p[1]);
+        hao = Double.parseDouble(p[2]) / 100;
+
+        String p2[] = be[1].split(":");
+        double fen2, miao2, hao2;
+
+
+        if (p2[0].equals("00")) {
+            fen2 = 0;
+        } else {
+            fen2 = Double.parseDouble(p2[0]) * 60;
+        }
+        miao2 = Double.parseDouble(p2[1]);
+        hao2 = Double.parseDouble(p2[2]) / 100;
+        return new double[]{fen + hao + miao, fen2 + hao2 + miao2};
     }
 }

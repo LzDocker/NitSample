@@ -2,6 +2,7 @@ package com.docker.nitsample.di;
 
 import com.bfhd.account.di.AccountModule;
 import com.bfhd.circle.di.CircleModule;
+import com.bfhd.evaluate.di.EvaluateModule;
 import com.docker.cirlev2.di.CircleV2Module;
 import com.docker.common.di.CommonModule;
 import com.docker.core.base.BaseApp;
@@ -26,6 +27,7 @@ import okhttp3.OkHttpClient;
         AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         GlobalConfigModule.class,
+
         /*app*/
         NitAppModule.class,
 
@@ -34,6 +36,7 @@ import okhttp3.OkHttpClient;
         /*
          * circle*/
         CircleModule.class,
+
         /*common*/
         CommonModule.class,
 
@@ -45,9 +48,11 @@ import okhttp3.OkHttpClient;
         MessageModule.class,
 
         /*circle*/
-        CircleV2Module.class
+        CircleV2Module.class,
 
 //        ImModule.class
+
+        EvaluateModule.class
 })
 public interface AppComponent {
 

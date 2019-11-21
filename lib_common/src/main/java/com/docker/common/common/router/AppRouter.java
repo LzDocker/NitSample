@@ -113,6 +113,7 @@ public class AppRouter {
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
 
     public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
+    public static final String COMMON_RXJAVA = COMMONGROUP + "rxjava";
 
 
     public static final String MESSAGEGROUP = "/message/";
@@ -123,5 +124,9 @@ public class AppRouter {
 
     public static final String MESSAGELIST = MESSAGEGROUP + "list_frame";
 
+    public static final String EVALUATE = "/evaluate/";
+    public static final String EVALUATE_DEMO = EVALUATE + "demo";
+    public static final String EVALUATE_DETAIL = EVALUATE + "detail";
+    public static final String EVALUATE_LESSON_LIST = EVALUATE + "lessonList";
 
 }
