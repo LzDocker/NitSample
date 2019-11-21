@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+
+    
+
+                 
+                            
+                                                        
+
+                                                       
+
+                                           
+
+                                                            
+           
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:tag="layout/circle_activity_circle_cover_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlEnableRefresh="false"
+            app:srlFooterTranslationViewId="@+id/viewPager">
+
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:ignore="MergeRootFrame">
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="ifContentScrolls"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_scrollFlags="scroll" />
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:elevation="0dp"
+                    android:orientation="vertical"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:elevation="0dp">
+
+                    <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/toolbar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="0dp"
+                        app:contentScrim="?attr/colorAccent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                        app:toolbarId="@+id/toolbar">
+
+                        <LinearLayout
+                            android:id="@+id/circle_top_select"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:id="@+id/tv_camera"
+
+                                android:gravity="center_vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingRight="14dp"
+                                android:text="拍照"
+                                android:textColor="#333" />
+
+                            <!--  android:background="@drawable/open_liner_bg_shape"
+                                android:drawableRight="@mipmap/arrow_right"-->
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:id="@+id/tv_graly"
+
+                                android:gravity="center_vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingRight="14dp"
+                                android:text="从相册选择"
+                                android:textColor="#333" />
+                            <!--    android:background="@drawable/open_liner_bg_shape"
+                                android:drawableRight="@mipmap/arrow_right"-->
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="7dp"
+                                android:layout_below="@+id/circle_ll_info"
+                                android:background="#f5f5f5" />
+
+                        </LinearLayout>
+
+                    </android.support.design.widget.CollapsingToolbarLayout>
+
+
+                    <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/tab_circle_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@android:color/white"
+                        android:tag="fixed"
+                        tl:tl_divider_color="#00000000"
+                        tl:tl_divider_padding="10dp"
+                        tl:tl_divider_width="0.1dp"
+                        tl:tl_indicator_color="#333"
+                        tl:tl_indicator_width="18dp"
+                        tl:tl_indicator_width_equal_title="true"
+                        tl:tl_tab_padding="5dp"
+                        tl:tl_tab_space_equal="true"
+                        tl:tl_textSelectColor="#333"
+                        tl:tl_textUnselectColor="#666"
+                        tl:tl_textsize="13sp"
+                        tl:tl_underline_color="@color/common_grey"
+                        tl:tl_underline_height="0.1dp" />
+
+
+                    <LinearLayout
+                        android:id="@+id/circle_ll_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp"
+                        android:tag="fixed">
+
+                        <EditText
+                            android:id="@+id/circle_ed_search"
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:paddingLeft="10dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/open_white_corner8_shape"
+                            android:drawableLeft="@mipmap/serch_icon_nor"
+                            android:drawablePadding="5dp"
+                            android:hint="请输入搜索内容"
+                            android:textColor="#333"
+                            android:textColorHint="#6666"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_submit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="14dp"
+                            android:text="搜索"
+                            android:textColor="@color/circle_red"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </android.support.design.widget.AppBarLayout>
+            </android.support.design.widget.CoordinatorLayout>
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="确定"
+            android:id="@+id/tv_complete"
+            android:textColor="#fff" />
+    </FrameLayout>
+
+
+         
+

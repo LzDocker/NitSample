@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                            
+
+    
+                                                       
+
+                 
+                       
+                                                        
+           
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:tag="layout/item_radio_lesson_0"                                         
+        android:paddingTop="@dimen/common_dp_10"  xmlns:app="http://schemas.android.com/apk/res-auto">
+        <ImageView
+            android:id="@+id/item_radio_i1"
+            android:layout_width="@dimen/common_dp_27"
+            android:layout_height="@dimen/common_dp_33"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/common_dp_16"
+            android:layout_marginTop="@dimen/common_dp_14"
+            android:layout_marginBottom="@dimen/common_dp_14"
+            android:src="@mipmap/radio_kb" />
+
+        <TextView
+            android:id="@+id/item_radio_name"
+            style="@style/common_txt_16_33"
+            android:layout_marginLeft="@dimen/common_dp_18"
+            android:layout_marginTop="@dimen/common_dp_10"
+            android:layout_toRightOf="@id/item_radio_i1"
+            android:tag="binding_1"     />
+
+
+        <TextView
+            android:id="@+id/item_radio_status"
+            style="@style/common_txt_12_85"
+            android:layout_below="@id/item_radio_name"
+            android:layout_marginLeft="@dimen/common_dp_18"
+            android:layout_marginTop="@dimen/common_dp_6"
+            android:layout_toRightOf="@id/item_radio_i1"
+            android:drawablePadding="@dimen/common_dp_6"
+            android:tag="binding_2"           />
+
+        <TextView
+            android:id="@+id/item_radio_num"
+            style="@style/common_txt_12_85"
+            android:layout_below="@id/item_radio_name"
+            android:layout_marginLeft="@dimen/common_dp_18"
+            android:layout_marginTop="@dimen/common_dp_6"
+            android:layout_toRightOf="@id/item_radio_status"
+            android:drawableLeft="@mipmap/radio_ckrs"
+            android:drawablePadding="@dimen/common_dp_6"
+            android:tag="binding_3"                        />
+
+        <ImageView
+            android:id="@+id/item_radio_lw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_dp_12"
+            android:padding="@dimen/common_dp_20"
+            android:src="@mipmap/radio_lw"
+            android:tag="binding_4"                />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_dp_20"
+            android:tag="binding_5"                                        
+            android:textColor="#ffff0000"
+            android:textSize="12sp"
+                                                   />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/common_dp_1"
+            android:layout_below="@id/item_radio_i1"
+            android:layout_marginTop="@dimen/common_dp_10"
+            android:background="@color/common_line_gray" />
+
+    </RelativeLayout>
+         

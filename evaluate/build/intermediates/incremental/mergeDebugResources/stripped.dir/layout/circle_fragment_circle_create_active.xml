@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                 
+                                                   
+
+    
+
+                 
+                           
+                                                       
+                                                            
+           
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:tag="layout/circle_fragment_circle_create_active_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools" xmlns:tools="http://schemas.android.com/tools">
+
+            <android.support.v4.widget.NestedScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="60dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/common_grey" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_createCircle_root"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:id="@+id/chang_menu_ll_photo"
+                            android:layout_width="match_parent"
+                            android:layout_height="153.6dp"
+                            android:background="#f0f0f0"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:id="@+id/activity_creatcircle_cover"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                               />
+
+
+                            <FrameLayout
+                                android:id="@+id/frame_surf"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:id="@+id/activity_creatcircle_coverhint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:text="添加一张封面"
+                                android:textColor="#999"
+                                android:textSize="16sp" />
+                        </RelativeLayout>
+
+                        <EditText
+                            android:id="@+id/et_circle_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14.4dp"
+                            android:background="@color/white"
+                            android:gravity="center"
+                            android:hint="兴趣圈名称"
+                            android:maxLength="16"
+                            android:minHeight="67.2dp"
+                            android:tag="binding_1"               
+                            android:textColor="#999"
+                            android:textSize="30dp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.1dp"
+                            android:background="#D5D5D5" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:paddingLeft="14dp">
+
+                            <TextView
+                                android:id="@+id/tv_title_logo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="48dp"
+                                android:text="圈子LOGO"
+                                android:textColor="#333"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/circle_iv_teamlogo"
+                                android:layout_width="69.6dp"
+                                android:layout_height="69.6dp"
+                                android:layout_marginTop="28.8dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/open_up_pic_icon"
+                              />
+
+
+                            <FrameLayout
+                                android:id="@+id/frame_logo"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="38.4dp"
+                                android:text="圈子简介"
+                                android:textColor="#333"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/activity_creatcircle_et_brief"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:background="@color/white"
+                                android:hint="请输入圈子简介"
+                                android:lineSpacingExtra="3dp"
+                                android:paddingBottom="6dp"
+                                android:tag="binding_2"          
+                                android:textColor="#333"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.1dp"
+                                android:background="#D5D5D5" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="38.4dp"
+                                android:text="完善信息"
+                                android:textColor="#333"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="38.4dp"
+                                android:text="所在地址"
+                                android:textColor="#333"
+                                android:textSize="16sp" />
+
+                            <EditText
+                                android:id="@+id/et_createCircle_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:background="@color/white"
+                                android:hint="请完善地址"
+                                android:lineSpacingExtra="3dp"
+                                android:paddingBottom="6dp"
+                                android:tag="binding_3"            
+                                android:textColor="#333"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.1dp"
+                                android:background="#D5D5D5" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="38.4dp"
+                                android:text="联系电话"
+                                android:textColor="#333"
+                                android:textSize="16sp" />
+
+                            <EditText
+                                android:id="@+id/et_createCircle_phoneNo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:background="@color/white"
+                                android:hint="请输入联系电话"
+                                android:lineSpacingExtra="3dp"
+                                android:paddingBottom="6dp"
+                                android:tag="binding_4"            
+                                android:textColor="#333"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.1dp"
+                                android:background="#D5D5D5" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="10dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/activity_creatcircle_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:background="#B41D23"
+                    android:gravity="center"
+                    android:text="确定"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </RelativeLayout>
+         

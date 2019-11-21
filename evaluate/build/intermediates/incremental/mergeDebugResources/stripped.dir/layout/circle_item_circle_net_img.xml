@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+                                          
+
+    
+
+                 
+                       
+                                                 
+
+                                                       
+
+                                           
+           
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:tag="layout/circle_item_circle_net_img_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
+
+        <LinearLayout
+            android:id="@+id/item_baidu_image_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/item_baidu_image_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="160dp"
+                android:scaleType="fitXY"
+                android:tag="binding_1"                     
+                                                                               
+                                                                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_baidu_image_tv_isselected"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="3dp"
+            android:background="@drawable/circle_selector_choose_image"
+            android:gravity="center"
+            android:tag="binding_2"      
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+                                                 />
+    </RelativeLayout>
+
+
+         

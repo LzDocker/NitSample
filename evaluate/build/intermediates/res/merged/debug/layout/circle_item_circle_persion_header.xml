@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                        
+                              
+                                                               
+
+                                                 
+
+           
+
+
+    <LinearLayout
+        android:id="@+id/ll_out_title_coutainer"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingRight="14dp" android:tag="layout/circle_item_circle_persion_header_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView
+            android:id="@+id/iv_out_arrow"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical" />
+        <!--android:text="@{item.groupName}"-->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center_vertical" />
+        <!--       android:text="@{String.valueOf(item.employee.size())}" -->
+
+    </LinearLayout>
+         

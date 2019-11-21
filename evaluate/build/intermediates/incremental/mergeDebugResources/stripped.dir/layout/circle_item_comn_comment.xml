@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                       
+                                                   
+           
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" android:tag="layout/circle_item_comn_comment_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_icon"
+            android:background="#fff000" />
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="尼克"
+             android:id="@+id/tv_name"
+             android:textSize="15sp"
+             android:textColor="#333"
+             android:layout_toRightOf="@+id/iv_icon"
+             android:layout_marginLeft="5dp"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3个小时前"
+            android:textSize="12sp"
+            android:id="@+id/tv_time"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tv_name"
+            android:textColor="#999"
+            android:layout_toRightOf="@+id/iv_icon"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:textSize="12sp"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tv_name"
+            android:textColor="#E94242"
+            android:layout_toRightOf="@+id/tv_time"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2222222"
+            android:layout_alignParentRight="true"
+            android:textSize="12sp"
+            android:id="@+id/tv_num"
+            android:layout_marginTop="3dp"
+            android:layout_toLeftOf="@+id/iv_zan"
+            android:textColor="#999"
+            />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/iv_zan"
+            android:background="#fff000" />
+
+    </RelativeLayout>
+         

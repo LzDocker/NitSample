@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+                 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical" android:tag="layout/common_activity_xpopup_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/center"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:gravity="center"
+            android:text="中间弹框"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:gravity="center"
+            android:text="底部弹框"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+         

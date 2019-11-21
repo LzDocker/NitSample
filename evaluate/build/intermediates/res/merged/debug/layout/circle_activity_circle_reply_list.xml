@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+
+    
+
+                                                            
+
+                 
+                       
+                                                  
+
+                                           
+
+                                                       
+
+                                                       
+
+                 
+                            
+                                                               
+
+           
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" android:tag="layout/circle_activity_circle_reply_list_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/white"-->
+        <!--android:onClick="@{(view)->viewmodel.ItemCommentClick(item,view)}"-->
+        <!--android:orientation="vertical"-->
+        <!--android:paddingLeft="14dp"-->
+        <!--android:paddingRight="14dp">-->
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingTop="10dp">-->
+
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/iv_user_icon"-->
+        <!--android:layout_width="35dp"-->
+        <!--android:layout_height="35dp"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--app:errorImg="@{R.mipmap.circle_default_avatar}"-->
+        <!--app:placeHolder="@{R.mipmap.circle_default_avatar}"-->
+        <!--app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />-->
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_username"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_toRightOf="@+id/iv_user_icon"-->
+        <!--android:text="@{item.nickname}"-->
+        <!--android:textColor="#121212"-->
+        <!--android:textSize="16sp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_pub_time"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/tv_username"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_toRightOf="@+id/iv_user_icon"-->
+        <!--android:text="@{CommonBdUtils.getStandardDate(item.inputtime)}"-->
+        <!--android:textColor="#979797"-->
+        <!--android:textSize="11sp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_del"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/tv_username"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_toRightOf="@+id/tv_pub_time"-->
+        <!--android:onClick="@{(view)->viewmodel.DelCommentClick(item,view)}"-->
+        <!--android:text="删除"-->
+        <!--android:textColor="#E94242"-->
+        <!--android:textSize="11sp"-->
+        <!--app:visibleGone="@{CommonBdUtils.isShowDel(item)}" />-->
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:onClick="@{(view)->viewmodel.PariseCommentClick(item,view)}"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:layout_marginRight="3dp"-->
+        <!--android:layout_toLeftOf="@+id/iv_zan"-->
+        <!--android:text="@{item.praiseNum}"-->
+        <!--android:textSize="11sp" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/iv_dz"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:src="@{item.isDo == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />-->
+        <!--</LinearLayout>-->
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/tv_pub_time"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_toRightOf="@+id/iv_user_icon"-->
+        <!--android:orientation="vertical"-->
+        <!--android:paddingBottom="10dp">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:letterSpacing="0.05"-->
+        <!--android:lineSpacingExtra="5dp"-->
+        <!--android:text="@{item.content}"-->
+        <!--android:textColor="#666"-->
+        <!--android:textSize="16sp" />-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/activity_answer_ll_audio"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="9.6dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:onClick="@{(view)->viewmodel.AudioCommentClick(item.audio,view)}"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:visibleGone="@{CommonBdUtils.isShowAudio(item)}">-->
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/activity_answer_ll_play"-->
+        <!--android:layout_width="156dp"-->
+        <!--android:layout_height="38.4dp"-->
+        <!--android:background="@drawable/circle_shape_voice"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="16.8dp">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/activity_answer_iv_spinner"-->
+        <!--android:layout_width="12dp"-->
+        <!--android:layout_height="15.84dp"-->
+        <!--android:src="@drawable/circle_audio_spinner"-->
+        <!--android:visibility="gone" />-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/activity_answer_iv_play1"-->
+        <!--android:layout_width="12dp"-->
+        <!--android:layout_height="15.84dp"-->
+        <!--android:src="@mipmap/icon_voice_play" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/activity_answer_tv_play"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="24dp"-->
+        <!--android:text="点击播放"-->
+        <!--android:textColor="@color/text_black_121212"-->
+        <!--android:textSize="16sp"-->
+        <!--android:textStyle="bold" />-->
+        <!--</LinearLayout>-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/activity_answer_tv_audioTime"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="12dp"-->
+        <!--android:text="@{CommonBdUtils.audioDuration(item)}"-->
+        <!--android:textColor="#999"-->
+        <!--android:textSize="14sp" />-->
+        <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+        <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title"
+            android:layout_marginBottom="50dp"
+            app:srlEnableRefresh="false">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/edit_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btn_commit"
+                android:background="@color/white"
+                android:hint="请输入您的评论："
+                android:lineSpacingExtra="2dp"
+                android:padding="5dp"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/open_green_corner2_shape"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/common_white" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+         
+

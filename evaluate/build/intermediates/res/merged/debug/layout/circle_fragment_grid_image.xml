@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+
+    
+
+                 
+                            
+                                                                 
+
+                                                           
+           
+
+
+    <android.support.v7.widget.RecyclerView
+        android:padding="14dp"
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:nestedScrollingEnabled="false"
+                                                     
+         android:tag="layout/circle_fragment_grid_image_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools"/>
+
+         
+

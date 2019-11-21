@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+    
+                 
+                       
+                                                     
+
+                                           
+           
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:id="@+id/tv_title"
+                                    
+        android:textColor="#333"
+        android:textSize="15sp"  android:tag="layout/circle_item_circle_type_title_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools"/>
+         

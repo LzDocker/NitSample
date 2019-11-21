@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                        
+
+    
+
+                                                       
+
+                                           
+
+                 
+                       
+                                                        
+
+                                                       
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/open_liner_bg_shape"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" android:tag="layout/circle_item_circle_persion_content_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/round_icon"
+                android:layout_width="39dp"
+                android:layout_height="39dp"
+                android:background="@drawable/circle_ov_shape"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:tag="binding_1"                    
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/trading_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:tag="binding_2"        
+            android:textColor="#333"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+         

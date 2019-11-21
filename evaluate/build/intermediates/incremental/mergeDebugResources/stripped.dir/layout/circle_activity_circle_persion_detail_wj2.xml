@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+
+    
+
+                 
+                            
+                                                        
+
+                                                       
+
+                                           
+
+                                                            
+
+                 
+                       
+                                                          
+           
+
+    <com.docker.common.common.widget.empty.EmptyLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" android:tag="layout/circle_activity_circle_persion_detail_wj2_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/parallax"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginTop="-200dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                android:src="@mipmap/circle_persion_head" />
+            <!--   app:errorImg="@{R.mipmap.circle_persion_head}"
+                            app:placeHolder="@{R.mipmap.circle_persion_head}"
+                            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.backgroundImg)}"-->
+
+            <com.docker.common.common.widget.refresh.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srlFooterTranslationViewId="@+id/viewpager">
+
+                <com.docker.common.common.widget.refresh.header.ClassicsHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srlAccentColor="@android:color/black"
+                    app:srlDrawableArrowSize="13dp"
+                    app:srlDrawableProgressSize="16dp"
+                    app:srlDrawableSize="16dp"
+                    app:srlFinishDuration="200"
+                    app:srlTextSizeTitle="13sp" />
+
+                <android.support.design.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_scrollFlags="scroll">
+
+                    </android.support.v4.view.ViewPager>
+
+
+                    <android.support.design.widget.AppBarLayout
+                        android:id="@+id/appbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:orientation="vertical"
+                        app:elevation="0dp">
+
+                        <android.support.design.widget.CollapsingToolbarLayout
+                            android:id="@+id/toolbarLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:contentScrim="@color/white"
+                            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_scrollFlags="scroll">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="165dp">
+
+                                    <RelativeLayout
+                                        android:id="@+id/rlcoutainer"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="65dp"
+                                        android:layout_marginTop="5dp"
+                                        android:gravity="center_vertical"
+                                        android:paddingLeft="15dp"
+                                        android:paddingRight="15dp">
+
+                                        <de.hdodenhof.circleimageview.CircleImageView
+                                            android:id="@+id/circle_iv_icon"
+                                            android:layout_width="60dp"
+                                            android:layout_height="60dp"
+                                            android:layout_centerVertical="true"
+                                            android:layout_gravity="center_vertical"
+                                            android:scaleType="centerCrop"
+                                            android:tag="binding_1"                         
+                                                                                               
+                                                                                                           />
+
+                                        <LinearLayout
+                                            android:id="@+id/ll_focu_cou"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentBottom="true">
+
+                                            <TextView
+                                                android:id="@+id/tv_alerFocus"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="5dp"
+                                                android:background="@drawable/circle_lable_shape_gray"
+                                                android:clickable="false"
+                                                android:gravity="center"
+                                                android:paddingLeft="10dp"
+                                                android:paddingTop="5dp"
+                                                android:paddingRight="10dp"
+                                                android:paddingBottom="5dp"
+                                                android:text="已关注"
+                                                android:textColor="#333"
+                                                android:textSize="12sp"
+                                                android:tag="binding_2"                />
+
+                                            <TextView
+                                                android:id="@+id/tv_Focu"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="5dp"
+                                                android:background="#F8391A"
+                                                android:gravity="center"
+                                                android:paddingLeft="10dp"
+                                                android:paddingTop="5dp"
+                                                android:paddingRight="10dp"
+                                                android:paddingBottom="5dp"
+                                                android:text="关注"
+                                                android:textColor="#ffffff"
+                                                android:textSize="12sp"
+                                                android:tag="binding_3"                />
+
+
+                                        </LinearLayout>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/circle_ll_info"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/rlcoutainer"
+                                        android:background="@color/white"
+                                        android:gravity="center_vertical"
+                                        android:orientation="vertical"
+                                        android:overScrollMode="never"
+                                        android:paddingLeft="14dp"
+                                        android:paddingTop="14dp"
+                                        android:paddingRight="14dp"
+                                        app:layout_scrollFlags="scroll">
+
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center_vertical"
+                                                android:tag="binding_4"        
+                                                android:textColor="#000"
+                                                android:textSize="17sp" />
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginLeft="14dp"
+                                                android:background="@drawable/circle_shape_con_gray_14"
+                                                android:orientation="horizontal"
+                                                android:padding="1dp">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:background="@drawable/circle_shape_red_14"
+                                                    android:paddingLeft="5dp"
+                                                    android:paddingTop="3dp"
+                                                    android:paddingRight="5dp"
+                                                    android:paddingBottom="3dp"
+                                                    android:text="和太极家"
+                                                    android:textColor="#fff" />
+
+                                                <TextView
+                                                    android:id="@+id/circle_tv_home"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="4dp"
+                                                    android:drawableRight="@mipmap/arrow_right"
+                                                    android:drawablePadding="5dp"
+                                                    android:paddingLeft="5dp"
+                                                    android:paddingTop="3dp"
+                                                    android:paddingRight="5dp"
+                                                    android:paddingBottom="3dp"
+                                                    android:text="和太极家族"
+                                                    android:textColor="#666" />
+
+                                            </LinearLayout>
+
+
+                                        </LinearLayout>
+
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginLeft="20dp"
+                                                android:gravity="center_vertical"
+                                                android:tag="binding_5"       
+                                                android:textColor="#333" />
+
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center_vertical"
+                                                android:text="粉丝"
+                                                android:textColor="#666" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginLeft="20dp"
+                                                android:gravity="center_vertical"
+                                                android:tag="binding_6"        
+                                                android:textColor="#333" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center_vertical"
+                                                android:text="关注"
+                                                android:textColor="#666" />
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <View
+                                        android:id="@+id/divier"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="4dp"
+                                        android:layout_below="@+id/circle_ll_info"
+                                        android:background="#f5f5f5"
+                                        android:overScrollMode="never"
+                                        app:layout_scrollFlags="scroll" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <android.support.v7.widget.Toolbar
+                                android:id="@+id/toolbar"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_below="@+id/view"
+                                android:elevation="0dp"
+                                app:contentInsetLeft="0dp"
+                                app:contentInsetStart="0dp"
+                                app:contentInsetStartWithNavigation="0dp"
+                                app:layout_collapseMode="pin"
+                                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                                <RelativeLayout
+                                    android:id="@+id/rl_title_coutainer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical"
+                                    android:paddingRight="14dp">
+
+                                    <ImageView
+                                        android:id="@+id/iv_back"
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="14dp"
+                                        android:alpha=".5"
+                                        android:background="@drawable/circle_ov_shape_back"
+                                        android:padding="5dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@mipmap/ic_toolbar_back" />
+
+                                    <TextView
+                                        android:id="@+id/title"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_centerVertical="true"
+                                        android:textColor="#000"
+                                        android:textSize="18sp" />
+                                </RelativeLayout>
+                            </android.support.v7.widget.Toolbar>
+                        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+                    </android.support.design.widget.AppBarLayout>
+                </android.support.design.widget.CoordinatorLayout>
+            </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+        </FrameLayout>
+
+
+    </com.docker.common.common.widget.empty.EmptyLayout>
+
+         
+
+
+
+

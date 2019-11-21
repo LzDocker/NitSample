@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                  
+
+    
+
+                 
+                            
+                                                             
+
+                                                            
+                                                 
+
+           
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlFooterTranslationViewId="@+id/viewpager" android:tag="layout/circle_fragment_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:bind="http://schemas.android.com/tools">
+
+        <!-- bind:SrlEnableLoadMore="@{viewmodel.mEnableLoadmore}"
+        bind:bdcomplete="@={viewmodel.mCompleteCommand}"
+        bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
+        bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}"
+        bind:srlEnableRefresh="@{viewmodel.mEnableRefresh}"-->
+
+
+        <com.docker.common.common.widget.empty.EmptyLayout
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:tag="binding_1"                                 
+                                                    >
+
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_scrollFlags="scroll" />
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    app:elevation="0dp">
+
+                    <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/toolbarLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_scrollFlags="scroll">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/circle_my_more"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:orientation="horizontal"
+                                android:paddingLeft="14dp"
+                                android:paddingRight="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="我的圈子" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:drawableRight="@mipmap/arrow_right"
+                                    android:drawablePadding="10dp"
+                                    android:foreground="?android:attr/selectableItemBackground"
+                                    android:gravity="center"
+                                    android:text="更多" />
+                                <!--  android:foreground="?android:attr/selectableItemBackground"-->
+                            </LinearLayout>
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/recyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                            <!-- bind:layoutManager="@{LayoutManager.linear(0,false)}"-->
+                        </LinearLayout>
+
+                    </android.support.design.widget.CollapsingToolbarLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/open_liner_bg_shape"
+                        android:paddingRight="14dp">
+
+                        <com.flyco.tablayout.SlidingTabLayout xmlns:tl="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/tab_circle_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@+id/tv_circle_more"
+                            android:tag="fixed"
+                            tl:tl_divider_color="#00000000"
+                            tl:tl_divider_padding="10dp"
+                            tl:tl_divider_width="0.1dp"
+                            tl:tl_indicator_color="#333"
+                            tl:tl_indicator_width="18dp"
+                            tl:tl_indicator_width_equal_title="true"
+                            tl:tl_tab_padding="5dp"
+                            tl:tl_tab_space_equal="true"
+                            tl:tl_tab_width="90dp"
+                            tl:tl_textSelectColor="#333"
+                            tl:tl_textUnselectColor="#666"
+                            tl:tl_textsize="13sp"
+                            tl:tl_underline_color="#E1E1E1"
+                            tl:tl_underline_height="0.1dp" />
+
+
+                        <TextView
+                            android:id="@+id/tv_circle_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dp"
+                            android:layout_alignParentRight="true"
+                            android:drawableRight="@mipmap/arrow_right"
+                            android:drawablePadding="10dp"
+                            android:gravity="center"
+                            android:text="更多" />
+
+                        <!--    android:foreground="?android:attr/selectableItemBackground"-->
+
+                    </RelativeLayout>
+                </android.support.design.widget.AppBarLayout>
+
+            </android.support.design.widget.CoordinatorLayout>
+
+        </com.docker.common.common.widget.empty.EmptyLayout>
+
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+         
+
