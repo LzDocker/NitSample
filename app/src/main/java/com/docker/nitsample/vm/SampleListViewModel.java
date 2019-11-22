@@ -131,6 +131,8 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
         SampleItemVo evaluate_sample = new SampleItemVo("评测", 31);
         mItems.add(evaluate_sample);
 
+        SampleItemVo livedate_sample = new SampleItemVo("Livedata", 32);
+        mItems.add(livedate_sample);
     }
 
     @Override

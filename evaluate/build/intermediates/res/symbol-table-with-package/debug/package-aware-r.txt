@@ -2924,6 +2924,7 @@ id tv_lable1
 id tv_lable2
 id tv_lianjie
 id tv_load_more_message
+id tv_log
 id tv_long_chart
 id tv_musicStatus
 id tv_musicTime
@@ -3201,6 +3202,7 @@ layout circle_stick_test
 layout circle_tab_item_lable
 layout common_activity_audio_demo
 layout common_activity_container
+layout common_activity_livedatademo
 layout common_activity_rxdemo
 layout common_activity_xpopup
 layout common_dialog_waiting

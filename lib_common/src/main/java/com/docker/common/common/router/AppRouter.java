@@ -114,6 +114,7 @@ public class AppRouter {
 
     public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
     public static final String COMMON_RXJAVA = COMMONGROUP + "rxjava";
+    public static final String COMMON_LIVEDATA = COMMONGROUP + "livedata";
 
 
     public static final String MESSAGEGROUP = "/message/";

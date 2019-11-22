@@ -1,6 +1,7 @@
 package com.docker.cirlev2.vm;
 
 import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.Transformations;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.BR;
