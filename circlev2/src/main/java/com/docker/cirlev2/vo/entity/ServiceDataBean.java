@@ -2,8 +2,7 @@ package com.docker.cirlev2.vo.entity;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
+import android.databinding.ObservableField;
 
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
@@ -14,12 +13,45 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+import me.tatarka.bindingcollectionadapter2.ItemBinding;
+
 public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
 
+    public final ItemBinding<ResourceBean> itemImgBinding = ItemBinding.<ServiceDataBean.ResourceBean>of(BR.item,
+            R.layout.circlev2_item_dynamic_img_inner) // 单一view 有点击事件
+            .bindExtra(BR.serverdata, this);
+
     @Override
     public int getItemLayout() {
-        return R.layout.circlev2_item_dynamic_answer;
+        int lay = R.layout.circlev2_item_dynamic_answer;
+        switch (this.getType()) {
+            case "car":
+            case "datetime":
+            case "product":
+            case "goods":
+                lay = R.layout.circlev2_item_dynamic_goods;
+                break;
+            case "dynamic": //dynamic
+                lay = R.layout.circlev2_item_dynamic_active;
+                break;
+            case "news":
+                lay = R.layout.circlev2_item_dynamic_news;
+                break;
+            case "answer":
+                lay = R.layout.circlev2_item_dynamic_answer;
+                break;
+        }
+        return lay;
+    }
+
+
+    public ObservableField<List<ResourceBean>> getInnerResource() {
+        ObservableField<List<ResourceBean>> listObservableField = new ObservableField<>();
+        if (this.getExtData() != null && this.getExtData().getResource() != null && this.getExtData().getResource().size() > 0) {
+            listObservableField.set(this.getExtData().getResource());
+        }
+        return listObservableField;
     }
 
     @Override
@@ -27,7 +59,6 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
         return null;
     }
 
-    public final ObservableList<CircleUserVo> observableList = new ObservableArrayList<>();
 
     private String country;
     private String province;
@@ -642,25 +673,28 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
 
         private List<TagsBean> tags;
+
         private List<ResourceBean> resource;
+
+//        private List<ResourceBean> resource;
 
 //        private Map<String, ResourceBean> resource;
 
-        public List<ResourceBean> getResourceList() {
-//            List<ResourceBean> resourceList = new ArrayList<>();
-//            if (this.getResource() == null || this.getResource().size() == 0) {
-//                return resourceList;
-//            } else {
+//        public List<ResourceBean> getResourceList() {
+////            List<ResourceBean> resourceList = new ArrayList<>();
+////            if (this.getResource() == null || this.getResource().size() == 0) {
+////                return resourceList;
+////            } else {
+////
+////                for (String key : this.getResource().keySet()) {
+////                    resourceList.add(this.getResource().get(key));
+////                }
+////                return resourceList;
+////            }
 //
-//                for (String key : this.getResource().keySet()) {
-//                    resourceList.add(this.getResource().get(key));
-//                }
-//                return resourceList;
-//            }
-
-
-            return this.resource;
-        }
+//
+//            return this.resource;
+//        }
 
 
         private String ISBN;

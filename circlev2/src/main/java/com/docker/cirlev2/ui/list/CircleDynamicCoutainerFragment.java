@@ -38,6 +38,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
     private List<CircleTitlesVo> circleTitlesVo;
     @Autowired
     int pos;   // tab pos
+
     @Autowired
     int role;  // 角色
 

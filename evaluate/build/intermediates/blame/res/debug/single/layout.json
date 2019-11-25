@@ -16,12 +16,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/layout/ucrop_aspect_ratio.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/layout/design_layout_snackbar_include.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_item_edit_memebr_group.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_item_edit_memebr_group.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/design_layout_snackbar_include.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/layout/design_layout_snackbar_include.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_gendu_compare.xml",
@@ -32,12 +32,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/855e37b394787dad29d2bbc610b703cf/res/layout/notification_action_tombstone.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_pop_goods_sort_list.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_pop_goods_sort_list.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow_custom.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/0d9897a87649f02c9df622b7df4d1129/res/layout/notification_template_big_media_narrow_custom.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_pop_goods_sort_list.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_pop_goods_sort_list.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_item_goods_type.xml",
@@ -100,20 +100,20 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/layout/design_navigation_item_subheader.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/layout/abc_expanded_menu_layout.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_item_mutipart_text.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_item_mutipart_text.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_activity_circle_replay_question.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_activity_circle_replay_question.xml"
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/layout/abc_expanded_menu_layout.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/item_choose_options.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_core/build/intermediates/packaged_res/debug/layout/item_choose_options.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_activity_circle_replay_question.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_activity_circle_replay_question.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_fragment_grid_image.xml",
@@ -168,20 +168,20 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_fragment_circle_detailt.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/ucrop_controls.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/layout/ucrop_controls.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/open_dialog_comment.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/open_dialog_comment.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_fragment_recommand_persion_list.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_fragment_recommand_persion_list.xml"
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/ucrop_controls.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/layout/ucrop_controls.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/common_empty_layout_loading.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/layout/common_empty_layout_loading.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_fragment_recommand_persion_list.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_fragment_recommand_persion_list.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_fragment_circle_create_active.xml",

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.vo.SampleItemVo;
+import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
@@ -33,5 +34,11 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         return circleApiService.fechCircleInfoList(param);
     }
 
+    // 点赞
+    public OnItemClickListener onItemDz() {
+        return (item, view) -> {
+
+        };
+    }
 
 }

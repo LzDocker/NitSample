@@ -6,7 +6,7 @@ public class RouterParam {
 
 
     /*
-     * key  路由注册的key  对应 routerinfo 中的属性  必须参数
+     * key  路由注册的key  对应 /routerinfo/ 改为Approuter 中的属性  必须参数
      *
      * param 跳转界面传递的参数 非必填  在到达的界面 使用  Constant.ParamTrans 作为key 来获取
      *

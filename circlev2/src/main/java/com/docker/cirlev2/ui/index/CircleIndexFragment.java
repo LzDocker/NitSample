@@ -82,7 +82,6 @@ public class CircleIndexFragment extends NitCommonFragment<CircleIndexViewModel,
         commonListOptions1.falg = 102;
         commonListOptions1.ReqParam.put("memberid", "3");
         commonListOptions1.ReqParam.put("isrecommend", "1");
-        ;
         commonListOptions1.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
         NitCommonContainerFragment containerFragment1 = NitCommonContainerFragment.newinstance(commonListOptions1);
         fragments.add(containerFragment1);
