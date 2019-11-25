@@ -30,8 +30,6 @@
                                                                           
                                                                             >
 
-
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
@@ -42,9 +40,5 @@
                 android:tag="binding_2"                   
                                                 />
         </com.docker.common.common.widget.refresh.SmartRefreshLayout>
-
-
     </com.docker.common.common.widget.empty.EmptyLayout>
-
-
          

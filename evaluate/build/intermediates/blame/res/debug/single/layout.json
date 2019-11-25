@@ -864,6 +864,10 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/layout/common_empty_layout.xml"
     },
     {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/common_tab_coutainer_fragment.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/layout/common_tab_coutainer_fragment.xml"
+    },
+    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/layout/circle_fragment_circle_pub_active.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/layout/circle_fragment_circle_pub_active.xml"
     },

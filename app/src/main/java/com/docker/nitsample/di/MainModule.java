@@ -26,14 +26,14 @@ public class MainModule {
     @Provides
     List<Fragment> providerFragments() {
         List<Fragment> fragments = new ArrayList<>();
+
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.falg = 0;
-//        fragments.add(SampleFragment.newInstance());
         NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
         fragments.add(containerFragment);
 
 
-//        fragments.add(SampleVideoListFragment.newInstance());
+//        fragments.add(IndexFragment.newInstance());
 
         CommonListOptions commonListOptions1 = new CommonListOptions();
         commonListOptions1.falg = 1;

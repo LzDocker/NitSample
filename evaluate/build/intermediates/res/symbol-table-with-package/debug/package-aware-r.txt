@@ -2040,7 +2040,7 @@ drawable icon_empty
 drawable icon_error
 drawable icon_exit_full_screen
 drawable icon_full_screen
-drawable icon_loading
+drawable icon_loading_empty
 drawable icon_player_back
 drawable icon_video_restart_bg
 drawable image_placeholder
@@ -3212,6 +3212,7 @@ layout common_empty_layout_loading
 layout common_empty_layout_nodata
 layout common_fragment_list
 layout common_item_sample
+layout common_tab_coutainer_fragment
 layout common_tab_frame_layout
 layout common_view_document
 layout common_xpopup_bottom

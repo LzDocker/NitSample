@@ -4,10 +4,13 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.core.base.BaseActivity;
 import com.docker.core.base.BaseVm;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -30,6 +33,12 @@ public abstract class NitCommonActivity<VM extends BaseVm, VB extends ViewDataBi
 
     public abstract void initRouter();
 
-    public abstract NitContainerCommand providerNitContainerCommand(int flag);
+    public NitContainerCommand providerNitContainerCommand(int flag) {
+        return null;
+    }
+
+    public ArrayList<Fragment> providerNitContainerFragment() {
+        return null;
+    }
 
 }

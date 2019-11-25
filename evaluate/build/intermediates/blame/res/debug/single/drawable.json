@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/list_spinner.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_core/build/intermediates/packaged_res/debug/drawable/list_spinner.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/design_snackbar_background.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/drawable/design_snackbar_background.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/list_spinner.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_core/build/intermediates/packaged_res/debug/drawable/list_spinner.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_people_quanzhu.xml",
@@ -72,12 +72,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/drawable/ucrop_oval_true.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/editor_src15.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/editor_src15.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/abc_ratingbar_indicator_material.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/drawable/abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/editor_src15.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/editor_src15.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/open_white_corner8_shape.xml",
@@ -136,24 +136,24 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/75b157e3d3e04b722119a7a208f3d596/res/drawable/btn_right_true.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_pay_shape.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/circle_pay_shape.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/ic_mtrl_chip_close_circle.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/1db0787498719ea1802f86a9e49a6369/res/drawable/ic_mtrl_chip_close_circle.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_pay_shape.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/circle_pay_shape.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/btn_right_bottom_selector.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/75b157e3d3e04b722119a7a208f3d596/res/drawable/btn_right_bottom_selector.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/alivc_dialog_gesture_bg.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_video/build/intermediates/packaged_res/debug/drawable/alivc_dialog_gesture_bg.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/editor_src7.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/editor_src7.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/alivc_dialog_gesture_bg.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_video/build/intermediates/packaged_res/debug/drawable/alivc_dialog_gesture_bg.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/mtrl_snackbar_background.xml",
@@ -192,12 +192,12 @@
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/75b157e3d3e04b722119a7a208f3d596/res/drawable/image_placeholder.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_ov_shape1.xml",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/circle_ov_shape1.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/editor_src4.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/editor_src4.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_ov_shape1.xml",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/circle_ov_shape1.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/btn_left_bottom_selector.xml",
@@ -220,12 +220,12 @@
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_core/build/intermediates/packaged_res/debug/drawable/selector_options.xml"
     },
     {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
-        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/drawable/abc_list_selector_holo_dark.xml"
-    },
-    {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/ucrop_vector_loader.xml",
         "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/94d92e7c8984f81ffdbcc99255497794/res/drawable/ucrop_vector_loader.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/abc_list_selector_holo_dark.xml",
+        "source": "/Users/zhangxindang/.gradle/caches/transforms-2/files-2.1/ebbbeaca665c8220c1af972482c07df5/res/drawable/abc_list_selector_holo_dark.xml"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/common_bg_blue.xml",
@@ -242,6 +242,10 @@
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/editor_src6.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/editor_src6.xml"
+    },
+    {
+        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/icon_loading_empty.png",
+        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/drawable/icon_loading_empty.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_people_top.xml",
@@ -262,10 +266,6 @@
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_selector_dynamic01.xml",
         "source": "/Users/zhangxindang/Desktop/workspace/NitSample/circle/build/intermediates/packaged_res/debug/drawable/circle_selector_dynamic01.xml"
-    },
-    {
-        "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/icon_loading.png",
-        "source": "/Users/zhangxindang/Desktop/workspace/NitSample/lib_common/build/intermediates/packaged_res/debug/drawable/icon_loading.png"
     },
     {
         "merged": "/Users/zhangxindang/Desktop/workspace/NitSample/evaluate/build/intermediates/res/merged/debug/drawable/circle_lable_shape2.xml",

@@ -44,7 +44,7 @@ public class GLBusyIndicatorView extends AppCompatImageView {
     }
 
     private void init() {
-        setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.icon_loading));
+        setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.icon_loading_empty));
     }
 
     public void setAnimEnabled(boolean animEnabled){
