@@ -120,6 +120,8 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
         // 搜索
         mBinding.get().edSerchs.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "search").navigation();
+
+
         });
         // 菜单
         // 地址

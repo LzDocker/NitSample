@@ -19,10 +19,12 @@ import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.ui.XPopup.XPopupActivity;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
+import com.docker.common.common.widget.XPopup.QQMsgPopup;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
@@ -36,6 +38,7 @@ import com.docker.videobasic.ui.VideoListFragment;
 import com.docker.videobasic.util.videolist.TestActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
+import com.lxj.xpopup.XPopup;
 
 import java.util.List;
 

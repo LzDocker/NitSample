@@ -4,6 +4,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Pair;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -20,7 +23,10 @@ import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.vm.NitCommonVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.indector.CommonIndector;
+import com.docker.common.common.widget.refresh.SmartRefreshLayout;
 import com.docker.common.databinding.CommonTabCoutainerFragmentBinding;
+
+import java.util.ArrayList;
 
 /*
  * 通用容器单一fragment  包含tab
@@ -34,6 +40,7 @@ public class NitTabContainerFragment extends NitCommonFragment<NitCommonVm, Comm
 
     private String[] titles;
     private boolean scrollFlag;
+    private ArrayList<Fragment> fragments;
 
     public static NitTabContainerFragment newinstance(String[] titles, boolean scrollFlag) {
         NitTabContainerFragment nitCommonContainerFragment = new NitTabContainerFragment();
@@ -58,7 +65,7 @@ public class NitTabContainerFragment extends NitCommonFragment<NitCommonVm, Comm
     protected void initView(View var1) {
 
     }
-    
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -67,7 +74,8 @@ public class NitTabContainerFragment extends NitCommonFragment<NitCommonVm, Comm
         scrollFlag = getArguments().getBoolean("scrollFlag");
         mBinding.get().empty.hide();
         // magic
-        mBinding.get().viewpager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), ((NitCommonActivity) getHoldingActivity()).providerNitContainerFragment(), titles));
+        fragments = ((NitCommonActivity) getHoldingActivity()).providerNitContainerFragment();
+        mBinding.get().viewpager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         if (scrollFlag) {
             commonIndector.initMagicIndicatorScroll(titles, mBinding.get().viewpager, mBinding.get().magicIndicator, this.getHoldingActivity());
@@ -88,8 +96,23 @@ public class NitTabContainerFragment extends NitCommonFragment<NitCommonVm, Comm
 
     }
 
-    @Override
-    public void onVisible() {
-        super.onVisible();
+
+    // 外部更改请求接口的参数
+    // isall 是否全量更改
+    public void UpdateReqParam(boolean isAll, Pair<String, String> pair) {
+        ((NitCommonListFragment) fragments.get(mBinding.get().viewpager.getCurrentItem())).UpdateReqParam(isAll, pair);
     }
+
+    // 外部更改请求接口的参数
+    // isall 是否全量更改
+    public void UpdateReqParam(boolean isAll, ArrayList<Pair<String, String>> pairList) {
+        ((NitCommonListFragment) fragments.get(mBinding.get().viewpager.getCurrentItem())).UpdateReqParam(isAll, pairList);
+    }
+
+    @Override
+    public void onReFresh(SmartRefreshLayout refreshLayout) {
+        super.onReFresh(refreshLayout);
+        ((NitCommonFragment) fragments.get(mBinding.get().viewpager.getCurrentItem())).onReFresh(refreshLayout);
+    }
+
 }
