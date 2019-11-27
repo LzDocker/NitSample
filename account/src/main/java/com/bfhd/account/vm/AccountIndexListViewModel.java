@@ -7,6 +7,7 @@ import com.bfhd.account.api.AccountService;
 import com.bfhd.account.vo.MyInfoVo;
 import com.bfhd.account.vo.index.AccountHeadVo;
 import com.bfhd.account.vo.index.AccountIndexItemVo;
+import com.bfhd.account.vo.index.setting.AccountHeadVoStyleCard;
 import com.bfhd.circle.base.HivsNetBoundObserver;
 import com.bfhd.circle.base.NetBoundCallback;
 import com.docker.common.common.utils.cache.CacheUtils;
@@ -28,7 +29,7 @@ public class AccountIndexListViewModel extends NitCommonContainerViewModel {
 
     public final MediatorLiveData<MyInfoVo> infoVoMutableLiveData = new MediatorLiveData<>();
 
-    private AccountHeadVo accountHeadVo;
+    private AccountHeadVoStyleCard accountHeadVo;
     @Inject
     AccountService accountService;
 
@@ -39,9 +40,8 @@ public class AccountIndexListViewModel extends NitCommonContainerViewModel {
     @Override
     public void loadData() {
         mEmptycommand.set(EmptyStatus.BdHiden);
-        accountHeadVo = new AccountHeadVo();
+        accountHeadVo = new AccountHeadVoStyleCard();
         mItems.add(accountHeadVo);
-
         AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo();
         mItems.add(accountIndexItemVo);
         fetchMyInfo();
@@ -69,7 +69,6 @@ public class AccountIndexListViewModel extends NitCommonContainerViewModel {
                     }
                 }));
     }
-
 
     @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {

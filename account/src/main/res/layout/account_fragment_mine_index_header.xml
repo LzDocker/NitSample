@@ -15,6 +15,10 @@
 
         <import type="com.bfhd.circle.utils.BdUtils" />
 
+        <variable
+            name="viewmodel"
+            type="com.bfhd.account.vm.AccountIndexListViewModel" />
+
     </data>
 
     <LinearLayout
@@ -102,6 +106,18 @@
                 android:text="@{item.myinfo.nicakname}"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginBottom="14dp"
+                android:layout_toRightOf="@+id/account_iv_user_icon"
+                android:onClick="@{(view) -> item.onItemClick(item,view,viewmodel)}"
+                android:text="切换风格"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/account_tv_sign"

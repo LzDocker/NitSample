@@ -1,4 +1,4 @@
-package com.bfhd.account.vo.index;
+package com.bfhd.account.vo.index.setting;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.vm.AccountIndexListViewModel;
 import com.bfhd.account.vo.MyInfoVo;
-import com.bfhd.account.vo.index.setting.AccountHeadVoStyleCard;
+import com.bfhd.account.vo.index.AccountHeadVo;
 import com.bfhd.circle.BR;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.BaseItemModel;
@@ -19,17 +19,19 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 
-public class AccountHeadVo extends BaseObservable implements BaseItemModel {
+public class AccountHeadVoStyleCard extends BaseObservable implements BaseItemModel {
 
 
     @Override
     public int getItemLayout() {
-        return R.layout.account_fragment_mine_index_header;
+        return R.layout.account_headvo_style_card;
     }
 
     @Override
     public OnItemClickListener getOnItemClickListener() {
         return (item, view) -> {
+
+
             if (view.getId() == R.id.account_iv_setting) { // 设置界面
 //                ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_SETTING).navigation();
                 CommonContainerOptions options = new CommonContainerOptions();
@@ -58,8 +60,14 @@ public class AccountHeadVo extends BaseObservable implements BaseItemModel {
         };
     }
 
-    public MyInfoVo myinfo;
+    public void onItemClick(AccountHeadVoStyleCard item, View view, AccountIndexListViewModel viewModel) {
+        AccountHeadVo accountHeadVo = new AccountHeadVo();
+        accountHeadVo.setMyinfo(((AccountHeadVoStyleCard) viewModel.mItems.get(0)).myinfo);
+        viewModel.mItems.remove(0);
+        viewModel.mItems.add(0, accountHeadVo);
+    }
 
+    public MyInfoVo myinfo;
 
     @Bindable
     public MyInfoVo getMyinfo() {
@@ -70,12 +78,4 @@ public class AccountHeadVo extends BaseObservable implements BaseItemModel {
         this.myinfo = myinfo;
         notifyPropertyChanged(BR.myinfo);
     }
-
-    public void onItemClick(AccountHeadVo item, View view, AccountIndexListViewModel viewModel) {
-        AccountHeadVoStyleCard accountHeadVo = new AccountHeadVoStyleCard();
-        accountHeadVo.setMyinfo(item.myinfo);
-        viewModel.mItems.remove(0);
-        viewModel.mItems.add(0, accountHeadVo);
-    }
-
 }

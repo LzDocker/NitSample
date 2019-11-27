@@ -112,6 +112,7 @@ public class AppRouter {
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
     public static final String COMMON_TAB_CONTAINER_FRAGMENT = COMMONGROUP + "tab_container_fragment";
+    public static final String COMMON_LIST_CONTAINER_FRAGMENT = COMMONGROUP + "LIST_container_fragment";
 
     public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
     public static final String COMMON_RXJAVA = COMMONGROUP + "rxjava";
