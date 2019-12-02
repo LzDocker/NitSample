@@ -26,7 +26,6 @@ public interface VideoService {
     LiveData<ApiResponse<BaseResponse<List<VideoEntityVo>>>> fechCircleInfoList(@Url String url, @FieldMap Map<String, String> params);
 
 
-
     /*
      * 圈子详情tab列表数据
      * */

@@ -1,37 +1,54 @@
-package com.bfhd.account.vo.index;
+package com.bfhd.account.vo.module.mine;
 
-import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.view.View;
-
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.account.BR;
 import com.bfhd.account.R;
-import com.bfhd.account.vm.AccountIndexListViewModel;
 import com.bfhd.account.vo.MyInfoVo;
-import com.bfhd.account.vo.index.setting.AccountHeadVoStyleCard;
-import com.bfhd.circle.BR;
 import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.BaseItemModel;
+import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonContainerOptions;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
+import com.docker.common.common.vm.NitCommonListVm;
 
-public class AccountHeadVo extends BaseObservable implements BaseItemModel {
+public class AccountHeadCardVo extends BaseSampleItem {
 
+    /*
+     * 最多支持的样式
+     * */
+    public final int supportMax = 2;
+
+    /*
+     * 0 中海安样式
+     * */
+    public int style = 0;
+
+    public MyInfoVo myinfo;
 
     @Override
     public int getItemLayout() {
-        return R.layout.account_fragment_mine_index_header;
+        int lay = R.layout.account_headvo_style_card;
+        switch (style) {
+            case 0:
+                lay = R.layout.account_headvo_style_card;
+                break;
+            case 1:
+                lay = R.layout.account_fragment_mine_index_header;
+                break;
+        }
+        return lay;
     }
 
     @Override
     public OnItemClickListener getOnItemClickListener() {
         return (item, view) -> {
+
             if (view.getId() == R.id.account_iv_setting) { // 设置界面
-//                ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_SETTING).navigation();
                 CommonContainerOptions options = new CommonContainerOptions();
                 options.title = "设置";
                 options.commonListOptions = new CommonListOptions();
@@ -58,8 +75,9 @@ public class AccountHeadVo extends BaseObservable implements BaseItemModel {
         };
     }
 
-    public MyInfoVo myinfo;
-
+    public AccountHeadCardVo(int style) {
+        this.style = style;
+    }
 
     @Bindable
     public MyInfoVo getMyinfo() {
@@ -71,11 +89,17 @@ public class AccountHeadVo extends BaseObservable implements BaseItemModel {
         notifyPropertyChanged(BR.myinfo);
     }
 
-    public void onItemClick(AccountHeadVo item, View view, AccountIndexListViewModel viewModel) {
-        AccountHeadVoStyleCard accountHeadVo = new AccountHeadVoStyleCard();
-        accountHeadVo.setMyinfo(item.myinfo);
-        viewModel.mItems.remove(0);
-        viewModel.mItems.add(0, accountHeadVo);
+    public void onChangeStyleClick(AccountHeadCardVo item, View view, NitCommonListVm viewModel) {
+        int style = 0;
+        if (supportMax - 1 > item.style) {
+            style++;
+        } else {
+            style--;
+        }
+        AccountHeadCardVo mineInfoCard = new AccountHeadCardVo(style);
+        mineInfoCard.setMyinfo(item.myinfo);
+        int pos = viewModel.mItems.indexOf(item);
+        viewModel.mItems.remove(item);
+        viewModel.mItems.add(pos, mineInfoCard);
     }
-
 }

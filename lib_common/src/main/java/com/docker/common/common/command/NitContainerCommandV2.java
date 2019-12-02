@@ -10,11 +10,8 @@ import java.io.Serializable;
  *
  * T  真实的viewmodel  集成自
  * */
-public interface NitContainerCommand extends Serializable/*, LifecycleObserver*/ {
+public interface NitContainerCommandV2 extends NitContainerCommand/*, LifecycleObserver*/ {
 
-    /*
-     * 提供viewmodel  在inactivitycreated中被调用
-     * */
-    Class exectue();
 
+    void next(NitCommonListVm commonListVm);
 }

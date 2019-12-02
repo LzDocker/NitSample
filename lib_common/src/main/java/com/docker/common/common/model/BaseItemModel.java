@@ -7,4 +7,6 @@ public interface BaseItemModel {
     public OnItemClickListener getOnItemClickListener();
 
 
+
+
 }

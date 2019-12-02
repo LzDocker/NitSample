@@ -7,38 +7,31 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.account.utils.provider.ProviderAccountHeadCard;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.command.NitContainerCommandV2;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.ui.XPopup.XPopupActivity;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
-import com.docker.common.common.widget.XPopup.QQMsgPopup;
+import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
-import com.docker.nitsample.vm.SampleNetListViewModel;
-import com.docker.video.assist.DataInter;
-import com.docker.videobasic.ui.SingleVideoActivity;
 import com.docker.videobasic.ui.VideoListActivity;
 import com.docker.videobasic.ui.VideoListFragment;
-import com.docker.videobasic.util.videolist.TestActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
-import com.lxj.xpopup.XPopup;
 
 import java.util.List;
 
@@ -126,15 +119,33 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
 
     @Override
     public NitContainerCommand providerNitContainerCommand(int flag) {
-
-        NitContainerCommand nitContainerCommand = null;
+        NitContainerCommandV2 nitContainerCommand = null;
         switch (flag) {
             case 0:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
+                nitContainerCommand = new NitContainerCommandV2() {
+                    @Override
+                    public void next(NitCommonListVm commonListVm) {
+                        ProviderAccountHeadCard.providerAccountHead(MainActivity.this, factory, commonListVm, 10);
+                    }
+
+                    @Override
+                    public Class exectue() {
+                        return SampleListViewModel.class;
+                    }
+                };
 
                 break;
             case 1:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleNetListViewModel.class);
+                nitContainerCommand = new NitContainerCommandV2() {
+                    @Override
+                    public void next(NitCommonListVm commonListVm) {
+                    }
+
+                    @Override
+                    public Class exectue() {
+                        return SampleListViewModel.class;
+                    }
+                };
                 break;
         }
         return nitContainerCommand;

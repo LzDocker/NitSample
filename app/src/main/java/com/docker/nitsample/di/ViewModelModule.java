@@ -40,6 +40,7 @@ public abstract class ViewModelModule {
     abstract ViewModel SampleNetListViewModel(SampleNetListViewModel model);
 
 
+
 //
 //    @Binds
 //    @IntoMap

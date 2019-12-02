@@ -24,6 +24,7 @@ import com.docker.core.repository.Resource;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 import me.tatarka.bindingcollectionadapter2.OnItemBind;
@@ -40,14 +41,11 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public final MediatorLiveData<Object> mServerLiveData = new MediatorLiveData<Object>();
 
     public CommonListOptions mCommonListReq;
-
     public ObservableBoolean bdenable = new ObservableBoolean(false);
     public ObservableBoolean bdenablemore = new ObservableBoolean(false);
     public ObservableBoolean bdenablenodata = new ObservableBoolean(false);
     public ObservableBoolean bdenablerefresh = new ObservableBoolean(true);
-
     public ObservableBoolean loadingOV = new ObservableBoolean(false);
-
 
     public void initParam(CommonListOptions commonListReq) {
         this.mCommonListReq = commonListReq;
@@ -71,7 +69,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     // 列表数据源
     public ObservableList<BaseItemModel> mItems = new ObservableArrayList<>();
-
     // 多类型条目适配
     public OnItemBind<BaseItemModel> mutipartItemsBinding = (itemBinding, position, item) -> {
         itemBinding.set(BR.item, item.getItemLayout());
@@ -119,6 +116,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     public void onLoading(Call call) {
                         super.onLoading(call);
                     }
+
                     @Override
                     public void onLoading() {
                         super.onLoading();
@@ -254,5 +252,20 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      *格式化单个数据
      * */
     public abstract BaseItemModel formatData(BaseItemModel data);
+
+    public void addCardVo(BaseSampleItem sampleItem, int position) {
+        if (mItems.size() == 0 && !loadingOV.get()) {
+            loadData();
+        }
+        if (mItems.size() > 0 && mItems.size() >= position) {
+            mItems.add(position, sampleItem);
+        } else {
+            mItems.add(sampleItem);
+        }
+    }
+
+    public void loadCardData(CommonListOptions commonListOptions) {
+
+    }
 
 }

@@ -7,9 +7,10 @@ import com.bfhd.account.R;
 import com.bfhd.account.vo.MyInfoVo;
 import com.bfhd.circle.BR;
 import com.docker.common.common.model.BaseItemModel;
+import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 
-public class AccountIndexItemVo extends BaseObservable implements BaseItemModel {
+public class AccountIndexItemVo extends BaseSampleItem {
 
     @Override
     public int getItemLayout() {

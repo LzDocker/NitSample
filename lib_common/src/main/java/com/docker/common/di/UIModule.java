@@ -10,11 +10,8 @@ import com.docker.common.common.ui.container.NitTabContainerFragment;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
-import dagger.android.FragmentKey;
-import dagger.multibindings.IntoMap;
 
 @Module(subcomponents = {BaseActComponent.class})
 public abstract class UIModule {
@@ -42,6 +39,5 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract NitTabContainerFragment NitTabContainerFragment();
-
 
 }

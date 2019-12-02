@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.bfhd.account.vo.index.AccountHeadVo" />
+            type="com.bfhd.account.vo.module.mine.AccountHeadCardVo" />
 
         <import type="com.bfhd.circle.R" />
 
@@ -17,7 +17,7 @@
 
         <variable
             name="viewmodel"
-            type="com.bfhd.account.vm.AccountIndexListViewModel" />
+            type="com.docker.common.common.vm.NitCommonListVm" />
 
     </data>
 
@@ -114,7 +114,7 @@
                 android:layout_marginLeft="14dp"
                 android:layout_marginBottom="14dp"
                 android:layout_toRightOf="@+id/account_iv_user_icon"
-                android:onClick="@{(view) -> item.onItemClick(item,view,viewmodel)}"
+                android:onClick="@{(view) -> item.onChangeStyleClick(item,view,viewmodel)}"
                 android:text="切换风格"
                 android:textColor="@color/white"
                 android:textSize="16sp" />

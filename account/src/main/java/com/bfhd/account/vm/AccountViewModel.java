@@ -77,12 +77,10 @@ public class AccountViewModel extends HivsBaseViewModel {
 
     }
 
-
     @Override
     public void initCommand() {
 
     }
-
 
     public LiveData<Resource<UpdateInfo>> checkUpData() {
         return new NetworkBoundResourceAuto<UpdateInfo>() {

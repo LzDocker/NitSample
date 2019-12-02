@@ -1,30 +1,22 @@
 package com.docker.nitsample.ui.index;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.bfhd.account.utils.provider.ProviderAccountHeadCard;
 import com.bfhd.circle.base.CommonFragment;
 import com.bfhd.circle.ui.safe.DynamicFragment;
 import com.bfhd.circle.vo.StaDynaVo;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.dcbfhd.utilcode.utils.ConvertUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.router.AppRouter;
@@ -33,20 +25,10 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.location.LocationManager;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.WorldNumList;
-import com.docker.common.common.widget.ColorFlipPagerTitleView;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.FragmentIndexBinding;
 import com.docker.nitsample.vm.MainViewModel;
-import com.youth.banner.loader.ImageLoader;
-
-import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +98,10 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
 
     @Override
     protected void initView(View var1) {
+
+
+        ProviderAccountHeadCard.providerAccountHeadForFrame(getChildFragmentManager(), R.id.frame_mine);
+
 
         // 搜索
         mBinding.get().edSerchs.setOnClickListener(v -> {

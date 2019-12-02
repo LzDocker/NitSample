@@ -6,7 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.bfhd.account.utils.provider.ProviderAccountHeadCard;
+import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.bfhd.account.vm.AccountIndexListViewModel;
+import com.bfhd.account.vo.index.AccountIndexItemVo;
 import com.bfhd.circle.vo.ShareVo;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.model.CommonListOptions;
@@ -32,6 +35,9 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
 
     private Disposable disposable;
 
+    AccountHeadCardViewModel accountHeadCardViewModel;
+
+
     @Override
     public AccountIndexListViewModel getViewModel() {
         return ViewModelProviders.of(this, factory).get(AccountIndexListViewModel.class);
@@ -40,12 +46,24 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        accountHeadCardViewModel = ProviderAccountHeadCard.providerAccountHead(this, factory, mViewModel, 0);
+
+//        accountHeadCardViewModel = ViewModelProviders.of(this, factory).get(AccountHeadCardViewModel.class);
+//        mViewModel.addCardVo(accountHeadCardViewModel.accountHeadCardVo);
+//        this.getLifecycle().addObserver(accountHeadCardViewModel);
+//        accountHeadCardViewModel.mServerLiveData.observe(this, null);
+
+
+        AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo();
+        mViewModel.addCardVo(accountIndexItemVo);
+
+
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("refresh_focus") || rxEvent.getT().equals("refresh_card")) {
-                mViewModel.fetchMyInfo();
+                accountHeadCardViewModel.loadData();
             }
         });
-        mViewModel.infoVoMutableLiveData.observe(this, myInfoVo -> { });
+
     }
 
     @Override
@@ -59,7 +77,7 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
     @Override
     public void onVisible() {
         super.onVisible();
-        mViewModel.fetchMyInfo();
+        accountHeadCardViewModel.fetchMyInfo();
     }
 
     @Override
