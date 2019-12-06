@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:a_zhon="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,10 +50,13 @@
             android:id="@+id/iv_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginRight="30dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
+
 
             <ImageView
                 android:layout_width="42dp"
@@ -64,8 +69,7 @@
                 android:layout_height="15dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="5dp"
-                android:gravity="center|bottom"
-                android:text="全球发布"
+                android:text="菜单"
                 android:textColor="#000000"
                 android:textSize="11sp" />
         </LinearLayout>

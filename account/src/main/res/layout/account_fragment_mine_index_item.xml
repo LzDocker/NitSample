@@ -5,12 +5,15 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.index.AccountIndexItemVo" />
     </data>
 
     <LinearLayout
-        android:id="@+id/ll_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView

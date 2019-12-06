@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
+import android.util.Log;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.CollectionUtils;
@@ -14,6 +15,7 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
@@ -21,10 +23,11 @@ import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 import me.tatarka.bindingcollectionadapter2.OnItemBind;
@@ -46,6 +49,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public ObservableBoolean bdenablenodata = new ObservableBoolean(false);
     public ObservableBoolean bdenablerefresh = new ObservableBoolean(true);
     public ObservableBoolean loadingOV = new ObservableBoolean(false);
+    public LiveData<ApiResponse<BaseResponse<T>>> servicefun = null;
 
     public void initParam(CommonListOptions commonListReq) {
         this.mCommonListReq = commonListReq;
@@ -77,7 +81,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public ItemBinding<BaseItemModel> itemBinding = ItemBinding.of(mutipartItemsBinding)
             .bindExtra(BR.viewmodel, this);
 
-
     private void setLoadControl(boolean enable) {
         switch (mCommonListReq.refreshState) {
             case Constant.KEY_REFRESH_OWNER:
@@ -102,7 +105,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     }
 
     public void loadData() {
-        LiveData<ApiResponse<BaseResponse<T>>> servicefun = null;
         mCommonListReq.ReqParam.put("page", String.valueOf(mPage));
         servicefun = getServicefun(mCommonListReq.ApiUrl, mCommonListReq.ReqParam);
         if (servicefun == null) {
@@ -163,6 +165,23 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                                 mItems.add(formatData((BaseItemModel) resource.data));
                             }
                         }
+                        // 添加card
+                        if (mCardTreeMap.size() > 0) {
+                            ArrayList<Integer> keysAddList = new ArrayList();
+                            Iterator<Integer> treemap = mCardTreeMap.keySet().iterator();
+                            while (treemap.hasNext()) {
+                                int position = treemap.next();
+                                BaseSampleItem sampleItem = mCardTreeMap.get(position);
+                                if (mItems.size() > 0 && mItems.size() >= position) {
+                                    mItems.add(position, sampleItem);
+                                    keysAddList.add(position);
+                                }
+                            }
+                            for (int i = 0; i < keysAddList.size(); i++) {
+                                mCardTreeMap.remove(keysAddList.get(i));
+                            }
+                        }
+                        //
                         if (resource.data != null) {
                             mPage++;
                         }
@@ -253,15 +272,63 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      * */
     public abstract BaseItemModel formatData(BaseItemModel data);
 
+
+    public HashMap<Integer, BaseSampleItem> mCardTreeMap = new HashMap<>();
+
     public void addCardVo(BaseSampleItem sampleItem, int position) {
+        Log.d("zxd", "addCardVo:===========position =====" + position);
+
+        int i = 0;
         if (mItems.size() == 0 && !loadingOV.get()) {
             loadData();
-        }
-        if (mItems.size() > 0 && mItems.size() >= position) {
-            mItems.add(position, sampleItem);
+            if (servicefun == null) {
+                mItems.add(sampleItem);
+                i = 1;
+            } else {
+                if (mCardTreeMap.containsKey(position)) {
+                    position++;
+                    ((BaseCardVo) sampleItem).position = position;
+                }
+                mCardTreeMap.put(position, sampleItem);
+                i = 2;
+            }
+        } else if (mItems.size() > 0 && servicefun != null) {
+            mCardTreeMap.put(position, sampleItem);
+            i = 3;
         } else {
-            mItems.add(sampleItem);
+            if (mItems.size() >= position && servicefun == null) {
+                mItems.add(position, sampleItem);
+                i = 4;
+            } else {
+                if (sampleItem instanceof BaseCardVo) {
+                    i = 5;
+                    if (mCardTreeMap.size() > 0) {
+                        if (mCardTreeMap.containsKey(position)) {
+                            position++;
+                            ((BaseCardVo) sampleItem).position = position;
+                        }
+                        mCardTreeMap.put(position, sampleItem);
+                    } else {
+                        if (loadingOV.get()) {
+                            if (mCardTreeMap.containsKey(position)) {
+                                position++;
+                                ((BaseCardVo) sampleItem).position = position;
+                            }
+                            mCardTreeMap.put(position, sampleItem);
+                            i = 7;
+                        } else {
+                            mItems.add(sampleItem);
+                            i = 8;
+                        }
+                    }
+                } else {
+                    i = 6;
+                    mItems.add(sampleItem);
+                }
+            }
         }
+
+        Log.d("zxd", "addCardVo: ====================" + i);
     }
 
     public void loadCardData(CommonListOptions commonListOptions) {

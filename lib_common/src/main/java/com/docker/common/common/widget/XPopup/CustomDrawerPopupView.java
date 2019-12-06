@@ -29,12 +29,7 @@ public class CustomDrawerPopupView extends DrawerPopupView {
         super.onCreate();
         Log.e("tag", "CustomDrawerPopupView onCreate");
         text = findViewById(R.id.text);
-        findViewById(R.id.btn).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        findViewById(R.id.btn).setOnClickListener(v -> dismiss());
         text.setText(new Random().nextInt()+"");
 
         //通过设置topMargin，可以让Drawer弹窗进行局部阴影展示

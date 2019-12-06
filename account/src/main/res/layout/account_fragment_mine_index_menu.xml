@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.index.AccountIndexItemVo" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/account_lin_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/open_liner_bg_shape"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/account_message_icon"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="消息中心"
+                android:textColor="#333" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/account_shape_bo"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="14dp"
+                android:background="@mipmap/arrow_right" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/account_tv_order"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_order_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="我的订单"
+            android:textColor="#333"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/account_tv_jfsc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_jfsc_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="积分商城"
+            android:textColor="#333"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/account_tv_wdsc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_wdsc_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="我的收藏"
+            android:textColor="#333" />
+
+        <TextView
+            android:id="@+id/account_tv_onekeysos"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_sos_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="一键呼救设置"
+            android:textColor="#333"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/account_tv_signlist"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_qdjl_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="签到记录"
+            android:textColor="#333"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/account_tv_join_friend"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_yqhy_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="邀请好友"
+            android:textColor="#333" />
+
+        <TextView
+            android:id="@+id/account_tv_segusstion"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_yjfk_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="意见反馈"
+            android:textColor="#333" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="#fff6f6f6" />
+
+        <TextView
+            android:id="@+id/account_setting"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_sz_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="设置"
+            android:textColor="#333" />
+
+    </LinearLayout>
+
+
+</layout>

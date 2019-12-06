@@ -10,6 +10,7 @@ import com.bfhd.account.ui.index.FragmentMineIndex;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.vm.NitCommonListVm;
 
 public class ProviderAccountHeadCard {
@@ -18,7 +19,6 @@ public class ProviderAccountHeadCard {
                                                                ViewModelProvider.Factory factory,
                                                                NitCommonListVm outListVm,
                                                                CommonListOptions commonListOptions) {
-
         AccountHeadCardViewModel accountHeadCardViewModel = ViewModelProviders.of(activity, factory).get(AccountHeadCardViewModel.class);
         int position = 0;
         if (commonListOptions.externs.get("position") != null) {
@@ -34,7 +34,6 @@ public class ProviderAccountHeadCard {
         return accountHeadCardViewModel;
     }
 
-
     public static AccountHeadCardViewModel providerAccountHead(FragmentActivity activity,
                                                                ViewModelProvider.Factory factory,
                                                                NitCommonListVm outListVm,
@@ -47,6 +46,7 @@ public class ProviderAccountHeadCard {
         return accountHeadCardViewModel;
     }
 
+
     public static AccountHeadCardViewModel providerAccountHead(Fragment fragment,
                                                                ViewModelProvider.Factory factory,
                                                                NitCommonListVm outListVm,
@@ -57,13 +57,6 @@ public class ProviderAccountHeadCard {
         accountHeadCardViewModel.mServerLiveData.observe(fragment, null);
         accountHeadCardViewModel.fetchMyInfo();
         return accountHeadCardViewModel;
-    }
-
-
-    public static void providerAccountHeadForFrame(FragmentManager fragmentManager,
-                                                   int layid) {
-        FragmentUtils.add(fragmentManager, FragmentMineIndex.newInstance(), layid);
-
     }
 
 

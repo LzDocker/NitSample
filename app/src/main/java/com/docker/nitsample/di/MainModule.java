@@ -6,7 +6,11 @@ import android.support.v4.app.Fragment;
 import com.bfhd.account.ui.index.FragmentMineIndex;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
+import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
+import com.docker.nitsample.ui.edit.EditListFragment;
+import com.docker.nitsample.ui.edit.EditSpaFragment;
 import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
@@ -27,13 +31,18 @@ public class MainModule {
     List<Fragment> providerFragments() {
         List<Fragment> fragments = new ArrayList<>();
 
-        CommonListOptions commonListOptions = new CommonListOptions();
-        commonListOptions.falg = 0;
-        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
-        fragments.add(containerFragment);
+
+//        fragments.add(IndexFragment.newInstance());  //11
+        fragments.add(EditSpaFragment.getInstance("", true));  //11
 
 
-        fragments.add(IndexFragment.newInstance());
+//        CommonListOptions commonListOptions = new CommonListOptions();
+//        commonListOptions.falg = 0;
+//        commonListOptions.refreshState = 3;
+//        commonListOptions.isActParent = true;
+//        NitCommonContainerFragmentV2 containerFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+////        NitCommonCardFragment containerFragment = NitCommonCardFragment.newinstance(commonListOptions);
+//        fragments.add(containerFragment);  // 11
 
 //        CommonListOptions commonListOptions1 = new CommonListOptions();
 //        commonListOptions1.falg = 1;
@@ -48,13 +57,14 @@ public class MainModule {
 //        fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
 
 //        fragments.add(VideoListFragment.newInstance());
-        fragments.add(VideoListFragment.newInstance());
-//        fragments.add(BaseVideoListFragment.newinstance());
+//        fragments.add(VideoListFragment.newInstance()); //22
+//        fragments.add(BaseVideoListFragment.newinstance());s
 
 
 //        fragments.add(VideoFullListFragment.newInstance());
 //        fragments.add(IndexFragment.newInstance());
-        fragments.add(FragmentMineIndex.newInstance());
+//        fragments.add(FragmentMineIndex.newInstance()); //33
+        fragments.add(EditListFragment.newInstance()); //33
         return fragments;
     }
 

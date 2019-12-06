@@ -1,49 +1,52 @@
 package com.bfhd.account.vo.index;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
+import android.view.View;
 
 import com.bfhd.account.R;
-import com.bfhd.account.vo.MyInfoVo;
-import com.bfhd.circle.BR;
-import com.docker.common.common.model.BaseItemModel;
-import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
+import com.docker.common.common.vo.card.BaseCardVo;
 
-public class AccountIndexItemVo extends BaseSampleItem {
+public class AccountIndexItemVo extends BaseCardVo<String> {
+
+    public AccountIndexItemVo(int style, int position) {
+        super(style, position);
+        maxSupport = 2;
+    }
 
     @Override
     public int getItemLayout() {
-        return R.layout.account_fragment_mine_index_item;
+        int lay = R.layout.account_fragment_mine_index_item;
+        switch (style) {
+            case 0:
+                lay = R.layout.account_fragment_mine_index_menu;
+
+                break;
+            case 1:
+                lay = R.layout.account_fragment_mine_index_item;
+                break;
+        }
+        return lay;
     }
 
     @Override
-    public OnItemClickListener getOnItemClickListener() {
-        return (item, view) -> {
-            if (view.getId() == R.id.tv_isent) {
+    public void onItemClick(BaseCardVo item, View view) {
 
-            }
-            if (view.getId() == R.id.tv_ipay) {
-
-            }
-            if (view.getId() == R.id.tv_icollec) {
-
-            }
-            if (view.getId() == R.id.tv_iattend) {
-
-            }
-            if (view.getId() == R.id.tv_imoney_box) {
-
-            }
-            if (view.getId() == R.id.tv_ihome) {
-
-            }
-            if (view.getId() == R.id.tv_point) {
-
-            }
-            if (view.getId() == R.id.tv_help) {
-
-            }
-        };
+        if (view.getId() == R.id.tv_isent) {
+        }
+        if (view.getId() == R.id.tv_ipay) {
+        }
+        if (view.getId() == R.id.tv_icollec) {
+        }
+        if (view.getId() == R.id.tv_iattend) {
+        }
+        if (view.getId() == R.id.tv_imoney_box) {
+        }
+        if (view.getId() == R.id.tv_ihome) {
+        }
+        if (view.getId() == R.id.tv_point) {
+        }
+        if (view.getId() == R.id.tv_help) {
+        }
     }
+
 }

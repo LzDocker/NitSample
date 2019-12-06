@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.core.base.BaseActivity;
 import com.docker.core.base.BaseVm;
 
@@ -38,6 +39,15 @@ public abstract class NitCommonActivity<VM extends BaseVm, VB extends ViewDataBi
     }
 
     public ArrayList<Fragment> providerNitContainerFragment() {
+        return null;
+    }
+
+
+    /*
+     *
+     * 提供给内层 listfragment vm代理
+     * */
+    public NitDelegetCommand providerNitDelegetCommand(int flag) {
         return null;
     }
 

@@ -9,6 +9,8 @@ import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.repository.Resource;
 
@@ -18,10 +20,10 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class AccountHeadCardViewModel extends NitCommonListVm {
+public class AccountHeadCardViewModel extends NitcommonCardViewModel {
 
 
-    public AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(1);
+    public AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(1, 0);
 
     @Inject
     AccountService accountService;
@@ -32,6 +34,7 @@ public class AccountHeadCardViewModel extends NitCommonListVm {
     }
 
     public void fetchMyInfo() {
+
         UserInfoVo userInfoVo = CacheUtils.getUser();
         mServerLiveData.addSource(RequestServer(accountService.featchMineData(userInfoVo.uid, userInfoVo.uuid)),
                 new HivsNetBoundObserver<>(new NetBoundCallback<MyInfoVo>() {

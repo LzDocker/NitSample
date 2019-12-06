@@ -122,7 +122,7 @@
             android:process=":dexopt" />
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.docker.nitsample.ui.edit.EditIndexActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -131,6 +131,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.docker.nitsample.ui.edit.PreviewEditActivity" />
+        <activity android:name="com.docker.nitsample.ui.MainActivity" />
+
+        <!--<activity android:name="com.docker.nitsample.ui.edit.EditIndexActivity" />-->
     </application>
 
 </manifest>

@@ -46,4 +46,8 @@ public class CommonListOptions implements Serializable {
 
     // 参数
     public HashMap<String, Object> externs = new HashMap<>();
+
+
+    // card 或 list fragment 使用的父容器是否是activity
+    public boolean isActParent = false;
 }

@@ -35,7 +35,7 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
 
     private Disposable disposable;
 
-    AccountHeadCardViewModel accountHeadCardViewModel;
+//    AccountHeadCardViewModel accountHeadCardViewModel;
 
 
     @Override
@@ -46,7 +46,10 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        accountHeadCardViewModel = ProviderAccountHeadCard.providerAccountHead(this, factory, mViewModel, 0);
+
+
+
+//        accountHeadCardViewModel = ProviderAccountHeadCard.providerAccountHead(this, factory, mViewModel, 0);
 
 //        accountHeadCardViewModel = ViewModelProviders.of(this, factory).get(AccountHeadCardViewModel.class);
 //        mViewModel.addCardVo(accountHeadCardViewModel.accountHeadCardVo);
@@ -54,13 +57,13 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
 //        accountHeadCardViewModel.mServerLiveData.observe(this, null);
 
 
-        AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo();
-        mViewModel.addCardVo(accountIndexItemVo);
+//        AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo();
+//        mViewModel.addCardVo(accountIndexItemVo);
 
 
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("refresh_focus") || rxEvent.getT().equals("refresh_card")) {
-                accountHeadCardViewModel.loadData();
+//                accountHeadCardViewModel.loadData();
             }
         });
 
@@ -77,7 +80,7 @@ public class FragmentMineIndex extends NitCommonListFragment<AccountIndexListVie
     @Override
     public void onVisible() {
         super.onVisible();
-        accountHeadCardViewModel.fetchMyInfo();
+//        accountHeadCardViewModel.fetchMyInfo();
     }
 
     @Override

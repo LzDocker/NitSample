@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@mipmap/account_mine_bg"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical"
         android:paddingBottom="14dp">
 
@@ -38,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/account_iv_message"
-                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp">
@@ -106,18 +106,7 @@
                 android:text="@{item.myinfo.nicakname}"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="14dp"
-                android:layout_marginBottom="14dp"
-                android:layout_toRightOf="@+id/account_iv_user_icon"
-                android:onClick="@{(view) -> item.onChangeStyleClick(item,view,viewmodel)}"
-                android:text="切换风格"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+            
 
             <TextView
                 android:id="@+id/account_tv_sign"

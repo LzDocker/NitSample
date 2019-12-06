@@ -1,5 +1,4 @@
 package com.bfhd.account.vo.module.mine;
-
 import android.databinding.Bindable;
 import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -7,28 +6,22 @@ import com.bfhd.account.BR;
 import com.bfhd.account.R;
 import com.bfhd.account.vo.MyInfoVo;
 import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonContainerOptions;
 import com.docker.common.common.model.CommonListOptions;
-import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
-import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vo.card.BaseCardVo;
 
-public class AccountHeadCardVo extends BaseSampleItem {
+public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
 
-    /*
-     * 最多支持的样式
-     * */
-    public final int supportMax = 2;
-
-    /*
-     * 0 中海安样式
-     * */
-    public int style = 0;
 
     public MyInfoVo myinfo;
+
+    public AccountHeadCardVo(int style, int position) {
+        super(style, position);
+        maxSupport = 2;
+    }
 
     @Override
     public int getItemLayout() {
@@ -45,39 +38,29 @@ public class AccountHeadCardVo extends BaseSampleItem {
     }
 
     @Override
-    public OnItemClickListener getOnItemClickListener() {
-        return (item, view) -> {
-
-            if (view.getId() == R.id.account_iv_setting) { // 设置界面
-                CommonContainerOptions options = new CommonContainerOptions();
-                options.title = "设置";
-                options.commonListOptions = new CommonListOptions();
-                ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
-                        .withSerializable(Constant.ContainerParam, options)
-                        .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountIndexListViewModel")
-                        .navigation();
-            }
-            if (view.getId() == R.id.account_iv_message) {
-                RxBus.getDefault().post(new RxEvent<>("change", 3));
-            }
-            if (view.getId() == R.id.account_iv_user_icon) {
-
-            }
-            if (view.getId() == R.id.ll_mine_dynamic) {
-
-            }
-            if (view.getId() == R.id.ll_mine_company_dz) {
-
-            }
-            if (view.getId() == R.id.ll_mine_comment) {
-
-            }
-        };
+    public void onItemClick(BaseCardVo item, View view) {
+        if (view.getId() == R.id.account_iv_setting) { // 设置界面
+            CommonContainerOptions options = new CommonContainerOptions();
+            options.title = "设置";
+            options.commonListOptions = new CommonListOptions();
+            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
+                    .withSerializable(Constant.ContainerParam, options)
+                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountIndexListViewModel")
+                    .navigation();
+        }
+        if (view.getId() == R.id.account_iv_message) {
+            RxBus.getDefault().post(new RxEvent<>("change", 3));
+        }
+        if (view.getId() == R.id.account_iv_user_icon) {
+        }
+        if (view.getId() == R.id.ll_mine_dynamic) {
+        }
+        if (view.getId() == R.id.ll_mine_company_dz) {
+        }
+        if (view.getId() == R.id.ll_mine_comment) {
+        }
     }
 
-    public AccountHeadCardVo(int style) {
-        this.style = style;
-    }
 
     @Bindable
     public MyInfoVo getMyinfo() {
@@ -89,17 +72,4 @@ public class AccountHeadCardVo extends BaseSampleItem {
         notifyPropertyChanged(BR.myinfo);
     }
 
-    public void onChangeStyleClick(AccountHeadCardVo item, View view, NitCommonListVm viewModel) {
-        int style = 0;
-        if (supportMax - 1 > item.style) {
-            style++;
-        } else {
-            style--;
-        }
-        AccountHeadCardVo mineInfoCard = new AccountHeadCardVo(style);
-        mineInfoCard.setMyinfo(item.myinfo);
-        int pos = viewModel.mItems.indexOf(item);
-        viewModel.mItems.remove(item);
-        viewModel.mItems.add(pos, mineInfoCard);
-    }
 }

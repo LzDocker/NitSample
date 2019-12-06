@@ -141,16 +141,4 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
         return null;
     }
-
-
-//    public void addCardVo(BaseSampleItem sampleItem) {
-//
-//        loadData();
-//        mEmptycommand.set(EmptyStatus.BdHiden);
-//        Random random = new Random();
-//        int pos = random.nextInt(mItems.size());
-//        mItems.add(pos, sampleItem);
-//
-//    }
-
 }

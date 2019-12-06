@@ -7,7 +7,7 @@ import com.flyco.tablayout.CommonTabLayout;
 
 public class NitCommonTabLayout extends CommonTabLayout {
 
-    public int Speicaltab = 2;
+//    public int Speicaltab = 2;
 
     public NitCommonTabLayout(Context context) {
         super(context);
@@ -23,8 +23,8 @@ public class NitCommonTabLayout extends CommonTabLayout {
 
     @Override
     public void setCurrentTab(int currentTab) {
-        if (currentTab != Speicaltab) {
-            super.setCurrentTab(currentTab);
-        }
+//        if (currentTab != Speicaltab) {
+        super.setCurrentTab(currentTab);
+//        }
     }
 }

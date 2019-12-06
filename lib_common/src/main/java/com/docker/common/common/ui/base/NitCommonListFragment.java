@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
@@ -15,11 +16,14 @@ import com.docker.common.R;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.Empty;
+import com.docker.common.common.widget.recycledrag.ItemTouchHelperAdapter;
+import com.docker.common.common.widget.recycledrag.ItemTouchHelperCallback;
 import com.docker.common.common.widget.refresh.SmartRefreshLayout;
 import com.docker.common.databinding.CommonFragmentListBinding;
 import com.docker.core.util.LayoutManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -28,7 +32,7 @@ import static com.docker.common.common.config.Constant.KEY_RVUI_GRID2;
 import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
 import static com.docker.common.common.config.Constant.KEY_RVUI_LINER;
 
-public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> {
+public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> implements ItemTouchHelperAdapter {
 
 
     @Inject
@@ -36,6 +40,9 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
 
     protected CommonListOptions commonListReq;
     private SmartRefreshLayout refreshLayout;
+
+    private ItemTouchHelperCallback itemTouchHelperCallback;
+    private ItemTouchHelper touchHelper;
 
     @Override
     protected int getLayoutId() {
@@ -50,6 +57,11 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         commonListReq = getArgument();
         if (commonListReq == null) {
             commonListReq = (CommonListOptions) getArguments().getSerializable(CommonListParam);
@@ -62,12 +74,6 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
             initRefreshUi();
             initListener();
         }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
     public void initListener() {
@@ -105,6 +111,10 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
                         .create((mBinding.get()).recyclerView));
                 break;
         }
+        itemTouchHelperCallback = new ItemTouchHelperCallback(this);
+        touchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+        itemTouchHelperCallback.setLongPressDragEnabled(true);
+        touchHelper.attachToRecyclerView(mBinding.get().recyclerView);
     }
 
     protected void initRefreshUi() {
@@ -189,5 +199,37 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         this.refreshLayout = refreshLayout;
         (mViewModel).mPage = 1;
         mViewModel.loadData();
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(mViewModel.mItems, fromPosition, toPosition);
+        mBinding.get().recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+        int rang = 0;
+        if (fromPosition > toPosition) {
+            rang = fromPosition;
+        } else {
+            rang = toPosition;
+        }
+        mBinding.get().recyclerView.getAdapter().notifyItemRangeChanged(0, mViewModel.mItems.size());
+//        mBinding.get().recyclerView.getAdapter().notifyItemRangeChanged(0, rang);
+
+//        if (fromPosition < toPosition) {
+//            for (int i = fromPosition; i < toPosition; i++) {
+//                Collections.swap(mViewModel.mItems, i, i + 1);
+//            }
+//        } else {
+//            for (int i = fromPosition; i > toPosition; i--) {
+//                Collections.swap(mViewModel.mItems, i, i - 1);
+//            }
+//        }
+//        mBinding.get().recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+
+        return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        mViewModel.mItems.remove(position);
     }
 }

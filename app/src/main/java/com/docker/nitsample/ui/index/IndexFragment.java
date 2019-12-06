@@ -13,22 +13,31 @@ import android.view.ViewGroup;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
-import com.bfhd.account.utils.provider.ProviderAccountHeadCard;
+import com.bfhd.account.vm.card.ProviderAccountCard;
+import com.bfhd.account.vm.card.AccountCardViewModel;
+import com.bfhd.account.vo.module.mine.AccountHeadCardVo;
 import com.bfhd.circle.base.CommonFragment;
 import com.bfhd.circle.ui.safe.DynamicFragment;
 import com.bfhd.circle.vo.StaDynaVo;
 import com.dcbfhd.utilcode.utils.ConvertUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.location.LocationManager;
+import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.WorldNumList;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.FragmentIndexBinding;
 import com.docker.nitsample.vm.MainViewModel;
+import com.docker.nitsample.vm.card.AppCardViewModel;
+import com.docker.nitsample.vm.card.ProviderAppCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +54,8 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
     private DynamicFragment dangrousPushFragment;
     private List<Fragment> fragments;
     private WorldNumList.WorldEnty mCurWorldEntity;
+    private NitCommonListVm[] innerArr;
+    private NitCommonListVm outer;
 
     private float LL_SEARCH_MIN_TOP_MARGIN,
             LL_SEARCH_MAX_TOP_MARGIN,
@@ -96,12 +107,50 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
         );
     }
 
+
+    @Override
+    public NitDelegetCommand providerNitDelegetCommand(int flag) {
+        NitDelegetCommand nitDelegetCommand = null;
+        switch (flag) {
+            case 1002:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
+
+                    @Override
+                    public Class[] providerInnerVm() {
+                        Class[] classes = new Class[]{AccountCardViewModel.class, AppCardViewModel.class};
+                        return classes;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonListVm[] innerArr, NitCommonListFragment nitCommonListFragment) {
+
+                        IndexFragment.this.innerArr = innerArr;
+                        IndexFragment.this.outer = commonListVm;
+
+                        ProviderAccountCard.providerAccountDefaultCard(commonListVm, innerArr[0], nitCommonListFragment);
+                        ProviderAppCard.providerAppDefaultCard(commonListVm, innerArr[1], nitCommonListFragment);
+                    }
+                };
+                break;
+        }
+        return nitDelegetCommand;
+    }
+
+
     @Override
     protected void initView(View var1) {
 
 
-        ProviderAccountHeadCard.providerAccountHeadForFrame(getChildFragmentManager(), R.id.frame_mine);
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.refreshState = Constant.KEY_REFRESH_PURSE;
+        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+        commonListOptions.falg = 1002;
 
+        ProviderAccountCard.providerCardForFrame(getChildFragmentManager(), R.id.frame_mine, commonListOptions);
 
         // 搜索
         mBinding.get().edSerchs.setOnClickListener(v -> {
@@ -119,6 +168,16 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
         mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
             if (fragments != null && fragments.size() > 0) {
                 ((CommonFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).OnRefresh(mBinding.get().refresh);
+
+
+                for (int i = 0; i < innerArr.length; i++) {
+                    ((AccountCardViewModel) (innerArr[i])).onJustRefresh();
+                    ((AccountHeadCardVo) outer.mItems.get(0)).setStyle(0);
+//                    ((AccountHeadCardVo) outer.mItems.get(0)).myinfo.setNicakname("=====加载中...======");
+                    ((AccountHeadCardVo) outer.mItems.get(0)).setMyinfo(null);
+                }
+
+
 //                mViewModel.getIndexBanner("1");
             } else {
                 mBinding.get().refresh.finishRefresh();

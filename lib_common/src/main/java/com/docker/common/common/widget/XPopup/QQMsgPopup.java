@@ -29,4 +29,10 @@ public class QQMsgPopup extends PositionPopupView {
     protected PopupAnimator getPopupAnimator() {
         return new TranslateAnimator(getPopupContentView(), PopupAnimation.TranslateFromTop);
     }
+
+    @Override
+    protected void onCreate() {
+        super.onCreate();
+
+    }
 }

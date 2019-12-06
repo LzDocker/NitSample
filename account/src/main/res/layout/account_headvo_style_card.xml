@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         tools:ignore="MissingDefaultResource">
@@ -66,16 +67,6 @@
                     android:textColor="#121212"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginBottom="14dp"
-                    android:layout_toRightOf="@+id/account_iv_user_icon"
-                    android:onClick="@{(view) -> item.onChangeStyleClick(item,view,viewmodel)}"
-                    android:text="切换风格"
-                    android:textColor="@color/open_read"
-                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/account_company_name"
