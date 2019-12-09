@@ -1,62 +1,26 @@
 package com.docker.nitsample.ui.edit;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.vm.card.AccountCardViewModel;
-import com.bfhd.account.vm.card.ProviderAccountCard;
-import com.bfhd.circle.widget.popmenu.PopmenuWj;
-import com.dcbfhd.utilcode.utils.ActivityUtils;
-import com.dcbfhd.utilcode.utils.AppUtils;
-import com.dcbfhd.utilcode.utils.ImageUtils;
-import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
-import com.docker.common.common.model.BaseItemModel;
-import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
-import com.docker.common.common.ui.base.NitCommonListFragment;
-import com.docker.common.common.utils.cache.DbCacheUtils;
-import com.docker.common.common.utils.rxbus.RxBus;
-import com.docker.common.common.utils.rxbus.RxEvent;
-import com.docker.common.common.utils.versionmanager.AppVersionManager;
-import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
-import com.docker.nitsample.card.CardProvideDispatcher;
 import com.docker.nitsample.databinding.ActivityEditIndexBinding;
-import com.docker.nitsample.databinding.ActivityMainBinding;
-import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleEditSpaViewModel;
-import com.docker.nitsample.vm.SampleListViewModel;
-import com.docker.nitsample.vm.card.AppCardViewModel;
-import com.docker.nitsample.vm.card.ProviderAppCard;
 import com.docker.videobasic.ui.VideoListFragment;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.core.BasePopupView;
-import com.lxj.xpopup.enums.PopupPosition;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import io.reactivex.disposables.Disposable;
-
-import static com.docker.common.common.router.AppRouter.HOME;
 import static com.docker.common.common.router.AppRouter.HOME_edit_index;
 
 @Route(path = HOME_edit_index)

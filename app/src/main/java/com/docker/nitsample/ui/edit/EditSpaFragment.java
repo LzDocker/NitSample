@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.vm.card.AccountCardViewModel;
 import com.bfhd.account.vm.card.ProviderAccountCard;
 import com.dcbfhd.utilcode.utils.AppUtils;
 import com.dcbfhd.utilcode.utils.FileUtils;
+import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.ImageUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.command.NitDelegetCommand;
@@ -23,9 +22,8 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListFragment;
+import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.utils.cache.DbCacheUtils;
-import com.docker.common.common.utils.rxbus.RxBus;
-import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.dialog.ConfirmDialog;
@@ -33,7 +31,6 @@ import com.docker.nitsample.R;
 import com.docker.nitsample.card.CardProvideDispatcher;
 import com.docker.nitsample.databinding.FragmentEditSpaBinding;
 import com.docker.nitsample.vm.SampleEditSpaViewModel;
-import com.docker.nitsample.vm.card.AppCardViewModel;
 import com.docker.nitsample.vm.card.ProviderAppCard;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
@@ -46,7 +43,6 @@ import javax.inject.Inject;
 
 public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, FragmentEditSpaBinding> {
 
-    private NitCommonListVm[] innerArr;
     private NitCommonListVm outervm;
     private NitCommonListFragment nitCardFragment;
 
@@ -91,8 +87,6 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
 
     @Override
     protected void initView(View var1) {
-
-
         mBinding.get().ivEditMenu.setOnClickListener(v -> {
             if (editMenu == null) {
                 editMenu = new XPopup.Builder(EditSpaFragment.this.getHoldingActivity())
@@ -108,13 +102,13 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
                                         case 0:
                                             break;
                                         case 1:
-                                            CardProvideDispatcher.dispatcherCardDefault(outervm, innerArr, nitCardFragment);
+                                            CardProvideDispatcher.dispatcherCardDefault(outervm, nitCardFragment);
                                             break;
                                         case 2:
-                                            ProviderAccountCard.providerAccountDefaultCard(outervm, innerArr[0], nitCardFragment);
+                                            ProviderAccountCard.providerAccountDefaultCard(outervm, nitCardFragment);
                                             break;
                                         case 3:
-                                            ProviderAppCard.providerAppDefaultCard(outervm, innerArr[1], nitCardFragment);
+                                            ProviderAppCard.providerAppDefaultCard(outervm, nitCardFragment);
                                             break;
                                     }
                                 })
@@ -148,8 +142,6 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
                                                 if (baseCardVos.size() > 0) {
                                                     if (!TextUtils.isEmpty(dbtabid)) {
                                                         dbCacheUtils.clearCache("db_tab_" + dbtabid, () -> save(dbtabid, baseCardVos));
-
-
                                                     } else {
                                                         ConfirmDialog.newInstance("提示", "保存页面").setConfimLietener(new ConfirmDialog.ConfimLietener() {
                                                             @Override
@@ -204,9 +196,7 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
                 popMenu.show();
             }
         });
-
     }
-
 
     private void save(String edit, ArrayList<BaseCardVo> baseCardVos) {
         FileUtils.delete(Environment.getExternalStorageDirectory() + "/" + AppUtils.getAppName() + "/chache/db_tab_" + edit + ".jpg");
@@ -241,10 +231,15 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
         super.onActivityCreated(savedInstanceState);
 
         CommonListOptions commonListOptions = new CommonListOptions();
-        commonListOptions.refreshState = Constant.KEY_REFRESH_PURSE;
+//        commonListOptions.refreshState = Constant.KEY_REFRESH_PURSE;
+        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.falg = 1002;
         ProviderAccountCard.providerCardForFrame(getChildFragmentManager(), R.id.frame_spa, commonListOptions);
+//
+//        NitCommonCardFragment nitCommonCardFragment = NitCommonCardFragment.newinstance(commonListOptions);
+//        FragmentUtils.add(getChildFragmentManager(), nitCommonCardFragment, R.id.frame_spa);
+
 
         isEdit = getArguments().getBoolean("isEdit");
         dbtabid = getArguments().getString("dbtabid");
@@ -262,46 +257,30 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
 
     @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
-        NitDelegetCommand nitDelegetCommand = null;
-        switch (flag) {
-            case 1002:
-                nitDelegetCommand = new NitDelegetCommand() {
-                    @Override
-                    public Class providerOuterVm() {
-                        return null;
-                    }
-
-                    @Override
-                    public Class[] providerInnerVm() {
-                        Class[] classes = new Class[]{AccountCardViewModel.class, AppCardViewModel.class};
-                        return classes;
-                    }
-
-                    @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonListVm[] innerArr, NitCommonListFragment nitCommonListFragment) {
-
-                        EditSpaFragment.this.innerArr = innerArr;
-                        EditSpaFragment.this.outervm = commonListVm;
-                        EditSpaFragment.this.nitCardFragment = nitCommonListFragment;
-
-                        if (!TextUtils.isEmpty(dbtabid)) {
-
-                            dbCacheUtils.loadFromDb("db_tab_" + dbtabid).observe(EditSpaFragment.this, o -> {
-                                if (o != null) {
-                                    ArrayList<BaseItemModel> arrayList = (ArrayList<BaseItemModel>) o;
-                                    CardProvideDispatcher.dispatcherCard(commonListVm, innerArr, nitCommonListFragment, arrayList);
-                                }
-                            });
-
+        NitDelegetCommand nitDelegetCommand;
+        nitDelegetCommand = new NitDelegetCommand() {
+            @Override
+            public Class providerOuterVm() {
+                return null;
+            }
+            @Override
+            public void next(NitCommonListVm commonListVm,  NitCommonListFragment nitCommonListFragment) {
+                outervm = commonListVm;
+                nitCardFragment = nitCommonListFragment;
+                if (!TextUtils.isEmpty(dbtabid)) {
+                    dbCacheUtils.loadFromDb("db_tab_" + dbtabid).observe(EditSpaFragment.this, o -> {
+                        if (o != null) {
+                            ArrayList<BaseItemModel> arrayList = (ArrayList<BaseItemModel>) o;
+                            CardProvideDispatcher.dispatcherCard(commonListVm, nitCommonListFragment, arrayList);
                         }
+                    });
+                }
+                if (config != null && config.size() > 0) {
+                    CardProvideDispatcher.dispatcherCard(commonListVm, nitCommonListFragment, config);
+                }
+            }
+        };
 
-                        if (config != null && config.size() > 0) {
-                            CardProvideDispatcher.dispatcherCard(commonListVm, innerArr, nitCommonListFragment, config);
-                        }
-                    }
-                };
-                break;
-        }
         return nitDelegetCommand;
     }
 

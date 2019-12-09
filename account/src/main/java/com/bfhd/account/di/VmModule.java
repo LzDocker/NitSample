@@ -5,8 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import com.bfhd.account.vm.AccountIndexListViewModel;
 import com.bfhd.account.vm.AccountSettingViewModel;
 import com.bfhd.account.vm.AccountViewModel;
-import com.bfhd.account.vm.card.AccountCardViewModel;
-import com.bfhd.account.vm.card.AccountCardViewModelV2;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
@@ -41,18 +39,4 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(AccountHeadCardViewModel.class)
     abstract ViewModel MineCardInfoViewModel(AccountHeadCardViewModel model);
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(AccountCardViewModel.class)
-    abstract ViewModel AccountCardViewModel(AccountCardViewModel model);
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(AccountCardViewModelV2.class)
-    abstract ViewModel AccountCardViewModelV2(AccountCardViewModelV2 model);
-
-
-
-
 }

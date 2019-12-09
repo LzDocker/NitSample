@@ -1,15 +1,13 @@
 package com.docker.nitsample.vm.card;
 
-import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
-import com.docker.common.common.widget.card.mark.CardMark;
 import com.docker.nitsample.vo.card.AppBannerCardVo;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class AppCardViewModel extends NitcommonCardViewModel implements CardMark.AppCardMark {
+public class AppCardViewModel extends NitcommonCardViewModel {
 
     public ArrayList<AppBannerCardVo> appBannerCardVos = new ArrayList<>();
 
@@ -40,16 +38,16 @@ public class AppCardViewModel extends NitcommonCardViewModel implements CardMark
 //                }));
 //    }
 
-    @Override
-    public void onOuterVmRefresh(NitCommonListVm outerVm) {
-        super.onOuterVmRefresh(outerVm);
-
-        for (int i = 0; i < appBannerCardVos.size(); i++) {
-            outerVm.addCardVo(appBannerCardVos.get(i), appBannerCardVos.get(i).position);
-//            fetchAccountHeaderCard(accountHeadCardVos.get(i));
-        }
-
-    }
+//    @Override
+//    public void onOuterVmRefresh(NitCommonListVm outerVm) {
+//        super.onOuterVmRefresh(outerVm);
+//
+//        for (int i = 0; i < appBannerCardVos.size(); i++) {
+//            outerVm.addCardVo(appBannerCardVos.get(i), appBannerCardVos.get(i).position);
+////            fetchAccountHeaderCard(accountHeadCardVos.get(i));
+//        }
+//
+//    }
 
 
     // 只刷新不添加

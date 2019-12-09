@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableList;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -38,6 +39,9 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     public int mPage = 1;
     public int mPageSize = 20;
+
+
+    public ArrayList<BaseCardVo> mProvideredCardVos = new ArrayList<>();
     /*
      * vm 数据源
      * */
@@ -257,7 +261,9 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
      * 刷新事件
      * */
     public void refresh() {
-
+        if (mProvideredCardVos.size() > 0) {
+            onOuterVmRefresh();
+        }
     }
 
     /*
@@ -275,9 +281,11 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     public HashMap<Integer, BaseSampleItem> mCardTreeMap = new HashMap<>();
 
-    public void addCardVo(BaseSampleItem sampleItem, int position) {
+    public void addCardVo(BaseSampleItem sampleItem, int position, boolean isadd) {
         Log.d("zxd", "addCardVo:===========position =====" + position);
-
+        if (sampleItem instanceof BaseCardVo && isadd) {
+            mProvideredCardVos.add((BaseCardVo) sampleItem);
+        }
         int i = 0;
         if (mItems.size() == 0 && !loadingOV.get()) {
             loadData();
@@ -331,8 +339,34 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
         Log.d("zxd", "addCardVo: ====================" + i);
     }
 
-    public void loadCardData(CommonListOptions commonListOptions) {
+    public void loadCardData(BaseCardVo baseCardVo) {
 
     }
 
+    public void onOuterVmRefresh() {
+        for (int i = 0; i < mProvideredCardVos.size(); i++) {
+            this.addCardVo(mProvideredCardVos.get(i), mProvideredCardVos.get(i).position, false);
+            if (!TextUtils.isEmpty(mProvideredCardVos.get(i).mVmPath) && mProvideredCardVos.get(i).mNitcommonCardViewModel != null) {
+                mProvideredCardVos.get(i).mNitcommonCardViewModel.loadCardData(mProvideredCardVos.get(i));
+            }
+        }
+    }
+
+    // 只刷新不添加
+    public void onJustRefresh() {
+        for (int i = 0; i < mProvideredCardVos.size(); i++) {
+            if (!TextUtils.isEmpty(mProvideredCardVos.get(i).mVmPath) && mProvideredCardVos.get(i).mNitcommonCardViewModel != null) {
+                mProvideredCardVos.get(i).mNitcommonCardViewModel.loadCardData(mProvideredCardVos.get(i));
+            }
+        }
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mProvideredCardVos.clear();
+        mProvideredCardVos = null;
+        mItems.clear();
+        mItems = null;
+    }
 }

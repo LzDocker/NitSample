@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -14,8 +15,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.bfhd.account.vm.card.ProviderAccountCard;
-import com.bfhd.account.vm.card.AccountCardViewModel;
-import com.bfhd.account.vo.module.mine.AccountHeadCardVo;
 import com.bfhd.circle.base.CommonFragment;
 import com.bfhd.circle.ui.safe.DynamicFragment;
 import com.bfhd.circle.vo.StaDynaVo;
@@ -32,11 +31,11 @@ import com.docker.common.common.utils.location.LocationManager;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.WorldNumList;
+import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.FragmentIndexBinding;
 import com.docker.nitsample.vm.MainViewModel;
-import com.docker.nitsample.vm.card.AppCardViewModel;
 import com.docker.nitsample.vm.card.ProviderAppCard;
 
 import java.util.ArrayList;
@@ -120,19 +119,12 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
                     }
 
                     @Override
-                    public Class[] providerInnerVm() {
-                        Class[] classes = new Class[]{AccountCardViewModel.class, AppCardViewModel.class};
-                        return classes;
-                    }
+                    public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
 
-                    @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonListVm[] innerArr, NitCommonListFragment nitCommonListFragment) {
-
-                        IndexFragment.this.innerArr = innerArr;
                         IndexFragment.this.outer = commonListVm;
 
-                        ProviderAccountCard.providerAccountDefaultCard(commonListVm, innerArr[0], nitCommonListFragment);
-                        ProviderAppCard.providerAppDefaultCard(commonListVm, innerArr[1], nitCommonListFragment);
+//                        ProviderAccountCard.providerAccountDefaultCard(commonListVm, innerArr[0], nitCommonListFragment);
+                        ProviderAppCard.providerAppDefaultCard(commonListVm, nitCommonListFragment);
                     }
                 };
                 break;
@@ -168,17 +160,9 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
         mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
             if (fragments != null && fragments.size() > 0) {
                 ((CommonFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).OnRefresh(mBinding.get().refresh);
-
-
-                for (int i = 0; i < innerArr.length; i++) {
-                    ((AccountCardViewModel) (innerArr[i])).onJustRefresh();
-                    ((AccountHeadCardVo) outer.mItems.get(0)).setStyle(0);
-//                    ((AccountHeadCardVo) outer.mItems.get(0)).myinfo.setNicakname("=====加载中...======");
-                    ((AccountHeadCardVo) outer.mItems.get(0)).setMyinfo(null);
-                }
-
-
 //                mViewModel.getIndexBanner("1");
+
+
             } else {
                 mBinding.get().refresh.finishRefresh();
             }

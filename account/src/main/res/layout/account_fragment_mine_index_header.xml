@@ -38,6 +38,7 @@
                 android:id="@+id/account_iv_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
                 android:layout_toLeftOf="@+id/account_iv_message"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"

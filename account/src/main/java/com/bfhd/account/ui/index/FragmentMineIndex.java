@@ -6,10 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.bfhd.account.utils.provider.ProviderAccountHeadCard;
-import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.bfhd.account.vm.AccountIndexListViewModel;
-import com.bfhd.account.vo.index.AccountIndexItemVo;
 import com.bfhd.circle.vo.ShareVo;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.model.CommonListOptions;

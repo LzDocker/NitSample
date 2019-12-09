@@ -27,16 +27,16 @@ public class NitNetBoundObserver<T> implements android.arch.lifecycle.Observer<R
                 }
                 break;
             case SUCCESS:
-                nitBoundCallback.onComplete();
                 nitBoundCallback.onComplete(tResource);
+                nitBoundCallback.onComplete();
                 break;
             case BUSSINESSERROR:
-                nitBoundCallback.onComplete();
                 nitBoundCallback.onBusinessError(tResource);
+                nitBoundCallback.onComplete();
                 break;
             case ERROR:
-                nitBoundCallback.onComplete();
                 nitBoundCallback.onNetworkError(tResource);
+                nitBoundCallback.onComplete();
                 break;
         }
     }

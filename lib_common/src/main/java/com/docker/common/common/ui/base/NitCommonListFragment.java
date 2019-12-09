@@ -77,9 +77,12 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     }
 
     public void initListener() {
-        mViewModel.mServerLiveData.observe(this, o -> {
+        try {
+            mViewModel.mServerLiveData.observe(this, o -> {
+            });
+        } catch (Exception e) {
 
-        });
+        }
         mViewModel.loadingOV.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {

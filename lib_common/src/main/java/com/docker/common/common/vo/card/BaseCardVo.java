@@ -8,6 +8,7 @@ import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.utils.lv.MserialMedatorLv;
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vm.container.NitcommonCardViewModel;
 
 import java.util.HashMap;
 
@@ -17,7 +18,9 @@ import java.util.HashMap;
  * */
 public abstract class BaseCardVo<T> extends BaseSampleItem {
 
+    public transient NitcommonCardViewModel mNitcommonCardViewModel;
 
+    public String mVmPath;
     /*
      * card 请求服务端的参数
      * */

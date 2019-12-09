@@ -15,12 +15,12 @@ import com.docker.common.common.vo.card.BaseCardVo;
 
 public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
 
-
     public MyInfoVo myinfo;
 
     public AccountHeadCardVo(int style, int position) {
         super(style, position);
         maxSupport = 2;
+        mVmPath = "com.bfhd.account.vm.card.AccountHeadCardViewModel";
     }
 
     @Override

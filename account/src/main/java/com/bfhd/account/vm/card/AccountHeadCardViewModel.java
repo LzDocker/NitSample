@@ -1,29 +1,25 @@
 package com.bfhd.account.vm.card;
 
+import android.arch.lifecycle.LiveData;
+
 import com.bfhd.account.api.AccountService;
-import com.bfhd.account.vo.MyInfoVo;
+import com.bfhd.account.vo.MyInfoDispatcherVo;
 import com.bfhd.account.vo.module.mine.AccountHeadCardVo;
-import com.bfhd.circle.base.HivsNetBoundObserver;
-import com.bfhd.circle.base.NetBoundCallback;
 import com.docker.common.common.model.BaseItemModel;
-import com.docker.common.common.model.CommonListOptions;
-import com.docker.common.common.utils.cache.CacheUtils;
-import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
-import com.docker.common.common.vo.UserInfoVo;
+import com.docker.common.common.vo.card.BaseCardVo;
+import com.docker.core.repository.NitBoundCallback;
+import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
 import java.util.Collection;
 
 import javax.inject.Inject;
 
-import timber.log.Timber;
-
 public class AccountHeadCardViewModel extends NitcommonCardViewModel {
 
 
-    public AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(1, 0);
+    public AccountHeadCardVo accountHeadCardVo;
 
     @Inject
     AccountService accountService;
@@ -33,24 +29,55 @@ public class AccountHeadCardViewModel extends NitcommonCardViewModel {
 
     }
 
-    public void fetchMyInfo() {
-
-        UserInfoVo userInfoVo = CacheUtils.getUser();
-        mServerLiveData.addSource(RequestServer(accountService.featchMineData(userInfoVo.uid, userInfoVo.uuid)),
-                new HivsNetBoundObserver<>(new NetBoundCallback<MyInfoVo>() {
+    public void fetchAccountHeaderCard(AccountHeadCardVo accountHeadCardVo) {
+        this.accountHeadCardVo = accountHeadCardVo;
+        LiveData<Resource<MyInfoDispatcherVo>> responseLiveData = RequestServer(accountService.featchMineData(accountHeadCardVo.mRepParamMap));
+        accountHeadCardVo.mCardVoLiveData.addSource(responseLiveData,
+                new NitNetBoundObserver<>(new NitBoundCallback<MyInfoDispatcherVo>() {
                     @Override
-                    public void onComplete(Resource<MyInfoVo> resource) {
+                    public void onComplete(Resource<MyInfoDispatcherVo> resource) {
                         super.onComplete(resource);
-                        Timber.e("========" + resource.data.getFullName());
-                        accountHeadCardVo.setMyinfo(resource.data);
+                        accountHeadCardVo.mCardVoLiveData.setValue(resource.data.member);
+                        accountHeadCardVo.mCardVoLiveData.removeSource(responseLiveData);
+                        accountHeadCardVo.setMyinfo(resource.data.member);
+                        if (resource.data.extData != null) {
+                            accountHeadCardVo.myinfo.setCircleNum(resource.data.extData.dynamicNum);
+                            accountHeadCardVo.myinfo.setCommentNum(resource.data.extData.plNum);
+                            accountHeadCardVo.myinfo.setLikeNum(resource.data.extData.dzNum);
+                        }
+                    }
+
+                    @Override
+                    public void onNetworkError(Resource<MyInfoDispatcherVo> resource) {
+                        super.onNetworkError(resource);
+                        accountHeadCardVo.mCardVoLiveData.setValue(null);
                     }
                 }));
+
+//        accountHeadCardVo.mCardVoLiveData.addSource(RequestServer(responseLiveData),
+//                new NitNetBoundObserver<>(new NitBoundCallback<MyInfoDispatcherVo>() {
+//                    @Override
+//                    public void onNetworkError(Resource<MyInfoDispatcherVo> resource) {
+//                        super.onNetworkError(resource);
+//                        accountHeadCardVo.mCardVoLiveData.setValue(null);
+//                    }
+//
+//                    @Override
+//                    public void onComplete(Resource<MyInfoDispatcherVo> resource) {
+//                        super.onComplete(resource);
+//                        accountHeadCardVo.mCardVoLiveData.setValue(resource.data.member);
+//                        accountHeadCardVo.setMyinfo(resource.data.member);
+//                        if (resource.data.extData != null) {
+//                            accountHeadCardVo.myinfo.setCircleNum(resource.data.extData.dynamicNum);
+//                            accountHeadCardVo.myinfo.setCommentNum(resource.data.extData.plNum);
+//                            accountHeadCardVo.myinfo.setLikeNum(resource.data.extData.dzNum);
+//                        }
+//                    }
+//                }));
+
+
     }
 
-    @Override
-    public void initCommand() {
-        fetchMyInfo();
-    }
 
     @Override
     public BaseItemModel formatData(BaseItemModel data) {
@@ -64,12 +91,14 @@ public class AccountHeadCardViewModel extends NitcommonCardViewModel {
 
     @Override
     public void loadData() {
-        fetchMyInfo();
+        if (accountHeadCardVo != null) {
+            fetchAccountHeaderCard(accountHeadCardVo);
+        }
     }
 
     @Override
-    public void loadCardData(CommonListOptions commonListOptions) {
-        fetchMyInfo();
+    public void loadCardData(BaseCardVo accountHeadCardVo) {
+        fetchAccountHeaderCard((AccountHeadCardVo) accountHeadCardVo);
     }
 
 

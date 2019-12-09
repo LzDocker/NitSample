@@ -7,6 +7,7 @@ import com.docker.common.common.command.ReplyCommand;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.NitCommonListVm;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.inject.Inject;
@@ -20,7 +21,9 @@ import javax.inject.Inject;
 public class NitCommonContainerViewModel extends NitCommonListVm {
 
 
-    public NitcommonCardViewModel[] mNitcommonCardViewModelArr;
+
+
+
     /*
      * vm 数据源
      * */
@@ -44,10 +47,5 @@ public class NitCommonContainerViewModel extends NitCommonListVm {
     @Override
     public void refresh() {
         super.refresh();
-        if (mNitcommonCardViewModelArr != null) {
-            for (int i = 0; i < mNitcommonCardViewModelArr.length; i++) {
-                mNitcommonCardViewModelArr[i].onOuterVmRefresh(this);
-            }
-        }
     }
 }

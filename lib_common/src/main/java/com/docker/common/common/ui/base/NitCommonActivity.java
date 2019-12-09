@@ -50,5 +50,4 @@ public abstract class NitCommonActivity<VM extends BaseVm, VB extends ViewDataBi
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
         return null;
     }
-
 }

@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.vm.card.AccountCardViewModel;
-import com.bfhd.account.vm.card.ProviderAccountCard;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.AppUtils;
@@ -35,11 +33,9 @@ import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
-import com.docker.nitsample.card.CardProvideDispatcher;
 import com.docker.nitsample.databinding.ActivityMainBinding;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
-import com.docker.nitsample.vm.card.AppCardViewModel;
 import com.docker.nitsample.vm.card.ProviderAppCard;
 import com.docker.videobasic.ui.VideoListFragment;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -204,15 +200,8 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
                     }
 
                     @Override
-                    public Class[] providerInnerVm() {
-                        Class[] classes = new Class[]{AccountCardViewModel.class, AppCardViewModel.class};
-                        return classes;
-                    }
-
-                    @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonListVm[] innerArr, NitCommonListFragment nitCommonListFragment) {
+                    public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
                         outervm = commonListVm;
-                        MainActivity.this.innerArr = innerArr;
                         MainActivity.this.nitCommonListFragment = nitCommonListFragment;
 
 //                        dbCacheUtils.loadFromDb("main_tab_01").observe(MainActivity.this, o -> {
@@ -304,13 +293,13 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
                                             case 0:
                                                 break;
                                             case 1:
-                                                CardProvideDispatcher.dispatcherCardDefault(outervm, innerArr, nitCommonListFragment);
+//                                                CardProvideDispatcher.dispatcherCardDefault(outervm, innerArr, nitCommonListFragment);
                                                 break;
                                             case 2:
-                                                ProviderAccountCard.providerAccountDefaultCard(outervm, innerArr[0], nitCommonListFragment);
+//                                                ProviderAccountCard.providerAccountDefaultCard(outervm, innerArr[0], nitCommonListFragment);
                                                 break;
                                             case 3:
-                                                ProviderAppCard.providerAppDefaultCard(outervm, innerArr[1], nitCommonListFragment);
+//                                                ProviderAppCard.providerAppDefaultCard(outervm,  nitCommonListFragment);
                                                 break;
                                         }
                                     })

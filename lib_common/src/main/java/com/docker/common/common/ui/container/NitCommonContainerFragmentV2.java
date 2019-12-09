@@ -30,7 +30,6 @@ import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
 public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommonContainerViewModel> {
 
     private NitDelegetCommand delegetCommand;
-    private NitcommonCardViewModel[] nitcommonCardViewModelArr;
 
     public static NitCommonContainerFragmentV2 newinstance(CommonListOptions commonListReq) {
         NitCommonContainerFragmentV2 nitCommonContainerFragment = new NitCommonContainerFragmentV2();
@@ -58,19 +57,9 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
         //
         if (commonListReq.isActParent) {
             delegetCommand = ((NitCommonActivity) getHoldingActivity()).providerNitDelegetCommand(commonListReq.falg);
-            Class[] inners = delegetCommand.providerInnerVm();
-            nitcommonCardViewModelArr = new NitcommonCardViewModel[inners.length];
-            for (int i = 0; i < inners.length; i++) {
-                nitcommonCardViewModelArr[i] = (NitcommonCardViewModel) ViewModelProviders.of(this, factory).get(inners[i]);
-                this.getLifecycle().addObserver(nitcommonCardViewModelArr[i]);
-            }
+
         } else {
             delegetCommand = ((NitCommonFragment) (NitCommonContainerFragmentV2.this.getParentFragment())).providerNitDelegetCommand(commonListReq.falg);
-            Class[] inners = delegetCommand.providerInnerVm();
-            nitcommonCardViewModelArr = new NitcommonCardViewModel[inners.length];
-            for (int i = 0; i < inners.length; i++) {
-                nitcommonCardViewModelArr[i] = (NitcommonCardViewModel) ViewModelProviders.of(this, factory).get(inners[i]);
-            }
         }
         mViewModel = (NitCommonContainerViewModel) ViewModelProviders.of(this, factory).get(delegetCommand.providerOuterVm());
         this.getLifecycle().addObserver(mViewModel);
@@ -81,9 +70,7 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
         initRvUi();
         initRefreshUi();
         initListener();
-        delegetCommand.next(mViewModel, nitcommonCardViewModelArr, this);
-        mViewModel.mNitcommonCardViewModelArr = nitcommonCardViewModelArr;
-
+        delegetCommand.next(mViewModel, this);
     }
 
     @Override
