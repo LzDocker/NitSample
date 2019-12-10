@@ -39,35 +39,50 @@ public class SampleEditCoutainerViewModel extends NitCommonContainerViewModel {
         mEmptycommand.set(EmptyStatus.BdHiden);
 
         AppBannerCardVo appBannerCardVo = new AppBannerCardVo(0, 0);
-        SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
-        sampleCardVo.setmCardData(appBannerCardVo);
-        mItems.add(sampleCardVo);
-
+        for (int i = 0; i < appBannerCardVo.maxSupport; i++) {
+            AppBannerCardVo appBannerCardVo1 = new AppBannerCardVo(i, 0);
+            appBannerCardVo1.sampleName = "AppBannerCardVo_style_" + i;
+            SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
+            sampleCardVo.setmCardData(appBannerCardVo1);
+            mItems.add(sampleCardVo);
+        }
 
         AccountHeadCardVo baseCardVo = new AccountHeadCardVo(0, 0);
-        HashMap<String, String> postArrMap = new HashMap<>();
-        postArrMap.put("uuid", CacheUtils.getUser().uuid);
-        baseCardVo.mRepParamMap.put("postArray", GsonUtils.toJson(postArrMap));
-        HashMap<String, Object> disArrMap = new HashMap<>();
-        String[] userarr = new String[]{"all"};
-        disArrMap.put("member", userarr);
-        String[] exarr = new String[]{"dynamicNum", "dzNum", "plNum"};
-        disArrMap.put("extData", exarr);
-        baseCardVo.mRepParamMap.put("dispatcherArray", GsonUtils.toJson(disArrMap));
-        SampleCardVo sampleCardVo1 = new SampleCardVo(0, 0);
-        sampleCardVo1.setmCardData(baseCardVo);
-        mItems.add(sampleCardVo1);
+        for (int i = 0; i < baseCardVo.maxSupport; i++) {
+            AccountHeadCardVo baseCardVo1 = new AccountHeadCardVo(i, 0);
+            HashMap<String, String> postArrMap = new HashMap<>();
+            postArrMap.put("uuid", CacheUtils.getUser().uuid);
+            baseCardVo1.mRepParamMap.put("postArray", GsonUtils.toJson(postArrMap));
+            HashMap<String, Object> disArrMap = new HashMap<>();
+            String[] userarr = new String[]{"all"};
+            disArrMap.put("member", userarr);
+            String[] exarr = new String[]{"dynamicNum", "dzNum", "plNum"};
+            disArrMap.put("extData", exarr);
+            baseCardVo1.mRepParamMap.put("dispatcherArray", GsonUtils.toJson(disArrMap));
+            baseCardVo1.sampleName = "AccountHeadCardVo_style_" + i;
+            SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
+            sampleCardVo.setmCardData(baseCardVo1);
+            mItems.add(sampleCardVo);
+        }
 
 
         AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo(0, 0);
-        SampleCardVo sampleCardVo2 = new SampleCardVo(0, 0);
-        sampleCardVo2.setmCardData(accountIndexItemVo);
-        mItems.add(sampleCardVo2);
+        for (int i = 0; i < accountIndexItemVo.maxSupport; i++) {
+            AccountIndexItemVo accountIndexItemVo1 = new AccountIndexItemVo(i, 0);
+            accountIndexItemVo1.sampleName = "AccountIndexItemVo_style_" + i;
+            SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
+            sampleCardVo.setmCardData(accountIndexItemVo1);
+            mItems.add(sampleCardVo);
+        }
 
 
         AccountSettingCardVo accountSettingCardVo = new AccountSettingCardVo(0, 0);
-        SampleCardVo sampleCardVo3 = new SampleCardVo(0, 0);
-        sampleCardVo3.setmCardData(accountSettingCardVo);
-        mItems.add(sampleCardVo3);
+        for (int i = 0; i < accountSettingCardVo.maxSupport; i++) {
+            AccountSettingCardVo accountSettingCardVo1 = new AccountSettingCardVo(i, 0);
+            accountSettingCardVo1.sampleName = "AccountSettingCardVo_style_" + i;
+            SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
+            sampleCardVo.setmCardData(accountSettingCardVo1);
+            mItems.add(sampleCardVo);
+        }
     }
 }

@@ -209,12 +209,9 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
                 arrayList.add("db_tab_" + edit);
             }
             dbCacheUtils.save("edit", arrayList, () -> ToastUtils.showShort("保存完成"));
-            //refresh_spa
-//            RxBus.getDefault().post(new RxEvent<>("refresh_spa", ""));
             if (!TextUtils.isEmpty(dbtabid)) {
                 getHoldingActivity().finish();
             }
-
         });
     }
 
@@ -273,7 +270,6 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
                 }
             }
         };
-
         return nitDelegetCommand;
     }
 

@@ -3,8 +3,11 @@ package com.docker.common.common.widget.card;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+import android.view.View;
 
+import com.dcbfhd.utilcode.utils.CloneUtils;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
+import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.ui.container.NitCommonCardFragment;
@@ -13,6 +16,7 @@ import com.docker.common.common.utils.lv.MserialMedatorLv;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.card.BaseCardVo;
+import com.google.gson.reflect.TypeToken;
 
 public class NitBaseProviderCard {
 
