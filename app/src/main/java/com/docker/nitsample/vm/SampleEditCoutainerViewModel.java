@@ -13,6 +13,7 @@ import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.nitsample.api.SampleService;
 import com.docker.nitsample.vo.card.AppBannerCardVo;
+import com.docker.nitsample.vo.card.AppRecycleCardVo;
 import com.docker.nitsample.vo.card.SampleCardVo;
 
 import java.util.HashMap;
@@ -82,6 +83,15 @@ public class SampleEditCoutainerViewModel extends NitCommonContainerViewModel {
             accountSettingCardVo1.sampleName = "AccountSettingCardVo_style_" + i;
             SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
             sampleCardVo.setmCardData(accountSettingCardVo1);
+            mItems.add(sampleCardVo);
+        }
+
+        AppRecycleCardVo appRecycleCardVo = new AppRecycleCardVo(0, 0);
+        for (int i = 0; i < appRecycleCardVo.maxSupport; i++) {
+            AppRecycleCardVo appRecycleCardVo1 = new AppRecycleCardVo(i, 0);
+            appRecycleCardVo1.sampleName = "AppRecycleCardVo_style_" + i;
+            SampleCardVo sampleCardVo = new SampleCardVo(0, 0);
+            sampleCardVo.setmCardData(appRecycleCardVo1);
             mItems.add(sampleCardVo);
         }
     }

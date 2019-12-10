@@ -1,22 +1,38 @@
 package com.docker.nitsample.vo.card;
 
 import android.databinding.ObservableField;
+import android.util.Log;
 import android.view.View;
-
-import com.docker.cirlev2.BR;
+import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.tatarka.bindingcollectionadapter2.ItemBinding;
-
 public class AppBannerCardVo extends BaseCardVo<String> {
+
+
+    /*
+     * banner 点击事件
+     * */
+    public ReplyCommandParam replyCommandParam = new ReplyCommandParam() {
+        @Override
+        public void exectue(Object o) {
+            Log.d("sss", "exectue: ===========popopo==========" + o);
+        }
+    };
+
+    public ObservableField<List<BannerVo>> bannerVos = new ObservableField<>();
 
     public AppBannerCardVo(int style, int position) {
         super(style, position);
         maxSupport = 1;
+        ArrayList<BannerVo> arrayList = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            arrayList.add(new BannerVo());
+        }
+        bannerVos.set(arrayList);
     }
 
     @Override
@@ -29,34 +45,10 @@ public class AppBannerCardVo extends BaseCardVo<String> {
         return R.layout.app_banner_card;
     }
 
-
-    public transient ItemBinding<String> itemImgBinding = ItemBinding.<String>of(BR.item,
-            R.layout.app_card_img_inner); // 单一view 有点击事件;
-//
-
-
-    public ItemBinding<String> getItemImgBinding() {
-        if (itemImgBinding == null) {
-            itemImgBinding = ItemBinding.<String>of(BR.item,
-                    R.layout.app_card_img_inner);
-        }
-        return itemImgBinding;
+    public class BannerVo implements Serializable {
+        public String img = "http://taijistar.oss-cn-beijing.aliyuncs.com/static/var/upload/img20191029/upload/image/1572354265340_536x451.png";
+        public String url;
+        public String type;
     }
-
-    private ObservableField<List<String>> InnerResource = new ObservableField<>();
-
-    public void setInnerResource(ObservableField<List<String>> innerResource) {
-        InnerResource = innerResource;
-    }
-
-    public ObservableField<List<String>> getInnerResource() {
-        ArrayList<String> arrayList = new ArrayList();
-        for (int i = 0; i < 9; i++) {
-            arrayList.add(i + "===");
-        }
-        InnerResource.set(arrayList);
-        return InnerResource;
-    }
-
 
 }

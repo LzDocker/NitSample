@@ -6,11 +6,20 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:paddingTop="30dp"
+        android:text="card_menu"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="italic" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
         app:tabIndicator="@color/colorAccent"
         app:tabIndicatorHeight="3dp"
         app:tabMode="scrollable"
