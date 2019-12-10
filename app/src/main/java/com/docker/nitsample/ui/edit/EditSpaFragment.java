@@ -30,6 +30,7 @@ import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.XPopup.PagerDrawerPopup;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.dialog.ConfirmDialog;
+import com.docker.common.databinding.CommonFragmentListBinding;
 import com.docker.nitsample.R;
 import com.docker.nitsample.card.CardProvideDispatcher;
 import com.docker.nitsample.databinding.FragmentEditSpaBinding;
@@ -235,6 +236,7 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("card_edit")) {
                 NitBaseProviderCard.providerCard(outervm, ((SampleCardVo) rxEvent.getR()).mCardData, nitCardFragment);
+                ((CommonFragmentListBinding) nitCardFragment.mBinding.get()).recyclerView.scrollToPosition(0);
             }
         });
     }
