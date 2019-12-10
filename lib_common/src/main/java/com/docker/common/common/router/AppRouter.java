@@ -8,6 +8,8 @@ public class AppRouter {
     public static final String App_SEARCH = AppGroup + "search";
 
     public static final String HOME = AppGroup + "home";
+    public static final String HOME_preview = AppGroup + "home_preview";
+    public static final String HOME_edit_index = AppGroup + "home_edit_index";
 
     public static final String COMPANY_GROUP = AppGroup + "companygroup";
 
@@ -111,9 +113,14 @@ public class AppRouter {
     public static final String COMMON_CONTAINER = COMMONGROUP + "container";
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
+    public static final String COMMON_CONTAINER_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2";
+    public static final String COMMON_CARD_FRAGMENT = COMMONGROUP + "card_fragment";
+    public static final String COMMON_TAB_CONTAINER_FRAGMENT = COMMONGROUP + "tab_container_fragment";
+    public static final String COMMON_LIST_CONTAINER_FRAGMENT = COMMONGROUP + "LIST_container_fragment";
 
     public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
     public static final String COMMON_RXJAVA = COMMONGROUP + "rxjava";
+    public static final String COMMON_LIVEDATA = COMMONGROUP + "livedata";
 
 
     public static final String MESSAGEGROUP = "/message/";

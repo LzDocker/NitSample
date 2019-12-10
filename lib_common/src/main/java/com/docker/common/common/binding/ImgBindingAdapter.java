@@ -1,15 +1,21 @@
 package com.docker.common.common.binding;
 
+import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.Resource;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -18,6 +24,9 @@ import com.dcbfhd.utilcode.utils.ArrayUtils;
 import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.docker.common.common.config.GlideApp;
+
+import java.io.File;
+import java.security.MessageDigest;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -46,7 +55,7 @@ public class ImgBindingAdapter {
                 .error(resErrId)
                 .centerCrop();
         GlideApp.with(imageView)
-                 .applyDefaultRequestOptions(options)
+                .applyDefaultRequestOptions(options)
                 .load(url).transition(withCrossFade()).into(imageView);
 
     }
@@ -153,14 +162,23 @@ public class ImgBindingAdapter {
     }
 
     /*
+     *
+     * */
+    @BindingAdapter(value = {"imageLocalUrl"}, requireAll = false)
+    public static void loadlocalimage(ImageView imageView, String url) {
+        options.dontTransform();
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(Uri.fromFile(new File(url))).transition(withCrossFade()).into(imageView);
+
+    }
+
+    /*
      * 圆形图片
      * */
     @BindingAdapter(value = {"dontTransImg"}, requireAll = false)
     public static void donttransImg(ImageView imageView, String url) {
-        options.diskCacheStrategy(DiskCacheStrategy.ALL).dontTransform();
+        options.diskCacheStrategy(DiskCacheStrategy.ALL);
         GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).into(imageView);
         /*.transition(withCrossFade())*/
-
     }
 
 

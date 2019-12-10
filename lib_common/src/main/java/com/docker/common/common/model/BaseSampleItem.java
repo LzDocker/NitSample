@@ -2,10 +2,11 @@ package com.docker.common.common.model;
 
 import android.databinding.BaseObservable;
 
-public abstract class BaseSampleItem extends BaseObservable implements BaseItemModel {
+import java.io.Serializable;
 
-    public String sampleName;
+public abstract class BaseSampleItem extends BaseObservable implements BaseItemModel, Serializable {
 
+    public String sampleName = getClass().getSimpleName() + "style_0";
 
 
 }

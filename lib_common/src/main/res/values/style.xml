@@ -155,4 +155,13 @@
         <item name="android:textColor">@color/common_ff333333</item>
     </style>
 
+    <!--BaseDialog样式-->
+    <style name="common_BaseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowSoftInputMode">adjustNothing</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
 </resources>

@@ -30,6 +30,29 @@ public class ParamUtils {
         return map;
     }
 
+    public static Map objectToMapRest(Object obj, boolean keepNullVal) {
+        if (obj == null) {
+            return null;
+        }
+        HashMap<String, String> map = new HashMap<>();
+        try {
+            Field[] declaredFields = obj.getClass().getDeclaredFields();
+            for (Field field : declaredFields) {
+                field.setAccessible(true);
+                if (keepNullVal == true) {
+                    map.put((String) field.get(obj), field.getName());
+                } else {
+                    if (field.get(obj) != null && !"".equals(field.get(obj).toString())) {
+                        map.put((String) field.get(obj), field.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
 
     public static Object mapToObject(Map<String, String> map, Object obj, boolean keepNullVal) {
         if (map == null || map.size() == 0) {

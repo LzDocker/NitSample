@@ -1,20 +1,13 @@
 package com.docker.common.common.vm.container;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.arch.lifecycle.Observer;
-import android.databinding.ObservableField;
-import android.support.annotation.Nullable;
+import android.util.Log;
 
-import com.docker.common.common.command.ReplyCommandParam;
+import com.docker.common.common.command.ReplyCommand;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.widget.empty.EmptyStatus;
-import com.docker.core.repository.NitBoundCallback;
-import com.docker.core.repository.NitNetBoundObserver;
-import com.docker.core.repository.Resource;
-import com.docker.core.repository.Status;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.inject.Inject;
@@ -26,6 +19,10 @@ import javax.inject.Inject;
  * 只做继承使用
  * */
 public class NitCommonContainerViewModel extends NitCommonListVm {
+
+
+
+
 
     /*
      * vm 数据源
@@ -47,4 +44,8 @@ public class NitCommonContainerViewModel extends NitCommonListVm {
         return data;
     }
 
+    @Override
+    public void refresh() {
+        super.refresh();
+    }
 }

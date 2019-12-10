@@ -68,10 +68,11 @@ public class EmptyLayout extends FrameLayout {
     }
 
     public void showLoading() {
+        loadingBinding.getRoot().bringToFront();
         loadingBinding.getRoot().setVisibility(VISIBLE);
         errorBinding.getRoot().setVisibility(GONE);
         nodataBinding.getRoot().setVisibility(GONE);
-        loadingBinding.getRoot().bringToFront();
+
     }
 
     public void showError() {

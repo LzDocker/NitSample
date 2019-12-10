@@ -6,6 +6,7 @@ import com.docker.common.common.vm.NitEmptyVm;
 import com.docker.common.common.vm.NitSampleListViewModel;
 import com.docker.common.common.vm.RxDemoViewModel;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
 import dagger.Binds;
@@ -38,6 +39,11 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(RxDemoViewModel.class)
     abstract ViewModel rxDemoViewModel(RxDemoViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NitcommonCardViewModel.class)
+    abstract ViewModel NitcommonCardViewModel(NitcommonCardViewModel model);
 
 
 }

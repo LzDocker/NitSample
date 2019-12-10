@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:a_zhon="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.docker.common.common.widget.NoScrollViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.docker.common.common.widget.boottomBar.NitCommonTabLayout
+            android:id="@+id/tl_home_tab"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            app:tl_divider_color="#ffeeeeee"
+            tl:tl_iconHeight="20dp"
+            tl:tl_iconWidth="20dp"
+            tl:tl_indicator_color="@color/colorAccent"
+            tl:tl_indicator_height="0dp"
+            tl:tl_textSelectColor="@color/colorAccent"
+            tl:tl_textUnselectColor="#66000000"
+            tl:tl_textsize="11sp"
+            tl:tl_underline_color="#DDDDDD"
+            tl:tl_underline_gravity="TOP"
+            tl:tl_underline_height="0.1dp" />
+    </LinearLayout>
+</layout>

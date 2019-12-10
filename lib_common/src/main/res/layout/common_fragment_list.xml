@@ -30,8 +30,6 @@
             bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
             bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}">
 
-
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
@@ -42,9 +40,5 @@
                 app:itemBinding="@{viewmodel.itemBinding}"
                 app:items="@{viewmodel.mItems}" />
         </com.docker.common.common.widget.refresh.SmartRefreshLayout>
-
-
     </com.docker.common.common.widget.empty.EmptyLayout>
-
-
 </layout>

@@ -3,29 +3,138 @@
 
     <data></data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/center"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/open_liner_bg_shape"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="中间弹框"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/bottom"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/open_liner_bg_shape"
-            android:gravity="center"
-            android:text="底部弹框"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/center"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="中间弹框"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="底部弹框"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/part_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="局部阴影"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/confim"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="confim"
+                android:textSize="16sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/pop_hor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:gravity="center"
+                    android:text="横向pop"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/pop_vir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="90dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:gravity="center"
+                    android:text="竖向pop"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/fullscreen"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="全屏弹窗"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/input_up"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="弹起输入法"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/custom_pos"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="自定义位置"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/drawer_left"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="drawer_left"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/drawer_right"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="drawer_right"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/notice"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/open_liner_bg_shape"
+                android:gravity="center"
+                android:text="notice"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </layout>

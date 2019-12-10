@@ -16,7 +16,6 @@ public class ViewOnClickBindingAdapter {
     public static void onClick(final View view, final View.OnClickListener listener) {
         new ViewClickObservable(view).throttleFirst(1000, TimeUnit.MILLISECONDS)
                 .subscribe(v -> {
-
                     listener.onClick(view);
                 });
     }

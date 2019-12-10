@@ -1,4 +1,5 @@
 package com.bfhd.account.api;
+
 import android.arch.lifecycle.LiveData;
 
 import com.bfhd.account.vo.AllLinkageVo;
@@ -9,6 +10,7 @@ import com.bfhd.account.vo.FansVo;
 import com.bfhd.account.vo.FavVo;
 import com.bfhd.account.vo.HelpUserVo;
 import com.bfhd.account.vo.MessageListVo;
+import com.bfhd.account.vo.MyInfoDispatcherVo;
 import com.bfhd.account.vo.NoSeeVo;
 import com.bfhd.account.vo.MsgVo;
 import com.bfhd.account.vo.MyInfoVo;
@@ -116,6 +118,14 @@ public interface AccountService {
     @POST("api.php?m=my")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<MyInfoVo>>> featchMineData(@Field("memberid") String memberid, @Field("uuid") String uuid);
+
+    /*
+     *
+     * */
+    @POST("api.php?m=member")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<MyInfoDispatcherVo>>> featchMineData(@FieldMap HashMap<String, String> paramMap);
+
 
     /*
      * 粉丝列表

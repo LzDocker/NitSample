@@ -83,8 +83,10 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         mBinding.ivCenter.setOnClickListener(v -> {
 //            showPopMenu();
 
-            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
-            startActivity(intent);
+            ARouter.getInstance().build(AppRouter.HOME_edit_index).navigation();
+
+//            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
+//            startActivity(intent);
 
 //            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
 //            startActivity(intent);
@@ -256,3 +258,4 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         }
     }
 }
+

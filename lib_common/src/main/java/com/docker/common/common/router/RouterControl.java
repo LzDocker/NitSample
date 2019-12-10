@@ -1,8 +1,10 @@
 package com.docker.common.common.router;
+
 import android.app.Activity;
 import android.arch.lifecycle.LifecycleOwner;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -16,10 +18,14 @@ import com.docker.core.di.module.cachemodule.CacheDatabase;
 import com.docker.core.di.module.cachemodule.CacheEntity;
 import com.docker.core.util.AppExecutors;
 import com.docker.core.util.IOUtils;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -27,7 +33,9 @@ import javax.inject.Singleton;
  * 路由控制
  *
  * 路由初始化-----》跳转控制
- *routerControl.Jump(new RouterParam.RouterBuilder(RouterInfo.CIRCLE_DETAIL).withParam(staDetailParam).create());
+ *
+ * //RouterInfo.CIRCLE_DETAIL 去掉routerinfo  继续使用approuter 即可
+ *routerControl.Jump(new RouterParam.RouterBuilder().withParam(staDetailParam).create());
  * */
 @Singleton
 public class RouterControl {
@@ -52,9 +60,20 @@ public class RouterControl {
 
     private static HashMap<String, Router> routerMap = new HashMap<>();
 
+    // approuter 属性指 属性
+    private static HashMap<String, String> restMap = new HashMap<>();
+
     private RoutersServerVo routersServerVo = new RoutersServerVo();
 
+    private void initKeysSet() {
+        if (restMap.size() == 0) {
+            AppRouter appRouter = new AppRouter();
+            restMap = (HashMap<String, String>) ParamUtils.objectToMapRest(appRouter, false);
+        }
+    }
+
     public void initRouterData(LifecycleOwner lifecycleOwner, ReplyCommandParam replyCommand) {
+        initKeysSet();
         dbCacheUtils.loadFromDb("router_version").observe(lifecycleOwner, o -> {
             mtime = (String) o;
             HashMap<String, String> param = new HashMap<>();
@@ -90,6 +109,7 @@ public class RouterControl {
 
     // 初始化路由数据
     public void initData(ReplyCommand replyCommand, boolean ischeck) {
+        initKeysSet();
         if (ischeck) {
             if (routerMap.size() > 0) {
                 return;
@@ -129,6 +149,7 @@ public class RouterControl {
     // 更新内存中的 路由数据
     public void updateData(ReplyCommand replyCommand) {
         appExecutors.diskIO().execute(() -> {
+            initKeysSet();
             CacheEntity souce = cacheDatabase.cacheEntityDao().LoadCacheSync("router_db");
             if (souce != null) {
                 routersServerVo = (RoutersServerVo) IOUtils.toObject(souce.getData());
@@ -182,19 +203,20 @@ public class RouterControl {
      *
      * */
     public void Jump(RouterParam routerParam) {
+        initKeysSet();
         if (routerMap.size() == 0) {
             initData(() -> {
                 if (routerMap.size() == 0) {
                     return;
                 }
-                if (routerMap.containsKey(routerParam.key)) {
+                if (routerMap.containsKey(restMap.get(routerParam.key))) {
                     processJump(routerParam);
                 } else {
                     ToastUtils.showShort("功能暂未开放，敬请期待...");
                 }
             }, true);
         } else {
-            if (routerMap.containsKey(routerParam.key)) {
+            if (routerMap.containsKey(restMap.get(routerParam.key))) {
                 processJump(routerParam);
             } else {
                 ToastUtils.showShort("功能暂未开放，敬请期待...");
@@ -203,7 +225,7 @@ public class RouterControl {
     }
 
     private void processJump(RouterParam routerParam) {
-        Router routerEntry = routerMap.get(routerParam.key);
+        Router routerEntry = routerMap.get(restMap.get(routerParam.key));
         Object param = routerParam.param;
         boolean isPush = routerParam.ispush;
         boolean isfromH5 = routerParam.isFormH5;

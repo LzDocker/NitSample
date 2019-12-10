@@ -69,7 +69,9 @@ public class AppVersionManager implements LifecycleObserver {
     public AppVersionManager() {
     }
 
-    public AppVersionManager Bind(Context context, LifecycleOwner lifecycleOwner, LiveData<Resource<UpdateInfo>> updateLiveData, int type, String packagename) {
+    public AppVersionManager Bind(Context context, LifecycleOwner lifecycleOwner,
+                                  LiveData<Resource<UpdateInfo>> updateLiveData,
+                                  int type, String packagename) {
         this.owner = (Activity) context;
         this.updateLiveData = updateLiveData;
         this.type = type;

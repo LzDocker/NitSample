@@ -61,7 +61,6 @@ public class NitApp extends BaseApp {
         super.onCreate();
         CommonWidgetModel.initrefresh();
         ThiredPartConfig.init(this);
-
         // 网易云信初始化
         NimInitManagerCore nimInitManagerCore = new NimInitManagerCore();
         nimInitManagerCore.init(this);

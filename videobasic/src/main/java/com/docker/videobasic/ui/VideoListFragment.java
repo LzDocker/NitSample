@@ -272,6 +272,6 @@ public class VideoListFragment extends NitCommonListFragment<VideoListViewModel>
             return;
         }
         isNeedStop = false;
-        getActivity().finish();
+        getHoldingActivity().finish();
     }
 }

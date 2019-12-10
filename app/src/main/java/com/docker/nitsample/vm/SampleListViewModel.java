@@ -2,6 +2,7 @@ package com.docker.nitsample.vm;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
@@ -9,6 +10,7 @@ import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.nitsample.vo.SampleItemVo;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -26,14 +28,14 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
 
 
         /*
-        * todo widget 通用控件
-        *      tool   通用工具
-        *      account (登录/注册/重置密码/第三方登录)
-        *      message (im/系统通知/评论/点赞/关注/收藏)
-        *      mine (card/我购买的/我卖出的/我收藏的/我关注的)
-        *
-        *
-        * */
+         * todo widget 通用控件
+         *      tool   通用工具
+         *      account (登录/注册/重置密码/第三方登录)
+         *      message (im/系统通知/评论/点赞/关注/收藏)
+         *      mine (card/我购买的/我卖出的/我收藏的/我关注的)
+         *
+         *
+         * */
 
         SampleItemVo account_sample = new SampleItemVo("登录注册", 0);
         mItems.add(account_sample);
@@ -131,12 +133,12 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
         SampleItemVo evaluate_sample = new SampleItemVo("评测", 31);
         mItems.add(evaluate_sample);
 
+        SampleItemVo livedate_sample = new SampleItemVo("Livedata", 32);
+        mItems.add(livedate_sample);
     }
 
     @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
         return null;
     }
-
-
 }

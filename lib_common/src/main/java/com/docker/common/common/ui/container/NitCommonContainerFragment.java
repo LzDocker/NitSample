@@ -2,12 +2,14 @@ package com.docker.common.common.ui.container;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.command.NitContainerCommandV2;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
@@ -55,12 +57,16 @@ public class NitCommonContainerFragment extends NitCommonListFragment<NitCommonC
         mViewModel = (NitCommonContainerViewModel) ViewModelProviders.of(this, factory).get(containerCommand.exectue());
         this.getLifecycle().addObserver(mViewModel);
         mViewModel.initParam(commonListReq);
+        mViewModel.initCommand();
         mBinding.get().setViewmodel(mViewModel);
         initRvUi();
         initRefreshUi();
         initListener();
         mViewModel.mContainerLiveData.observe(this, o -> {
         });
+        if (containerCommand instanceof NitContainerCommandV2) {
+            ((NitContainerCommandV2) containerCommand).next(mViewModel);
+        }
     }
 
     @Override

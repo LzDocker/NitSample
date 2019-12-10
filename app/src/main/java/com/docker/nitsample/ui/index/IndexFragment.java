@@ -1,9 +1,7 @@
 package com.docker.nitsample.ui.index;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,41 +10,33 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.bfhd.account.vm.card.ProviderAccountCard;
 import com.bfhd.circle.base.CommonFragment;
 import com.bfhd.circle.ui.safe.DynamicFragment;
 import com.bfhd.circle.vo.StaDynaVo;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.dcbfhd.utilcode.utils.ConvertUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.location.LocationManager;
+import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.WorldNumList;
-import com.docker.common.common.widget.ColorFlipPagerTitleView;
+import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.FragmentIndexBinding;
 import com.docker.nitsample.vm.MainViewModel;
-import com.youth.banner.loader.ImageLoader;
-
-import net.lucode.hackware.magicindicator.ViewPagerHelper;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
+import com.docker.nitsample.vm.card.ProviderAppCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +53,8 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
     private DynamicFragment dangrousPushFragment;
     private List<Fragment> fragments;
     private WorldNumList.WorldEnty mCurWorldEntity;
+    private NitCommonListVm[] innerArr;
+    private NitCommonListVm outer;
 
     private float LL_SEARCH_MIN_TOP_MARGIN,
             LL_SEARCH_MAX_TOP_MARGIN,
@@ -114,12 +106,49 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
         );
     }
 
+
+    @Override
+    public NitDelegetCommand providerNitDelegetCommand(int flag) {
+        NitDelegetCommand nitDelegetCommand = null;
+        switch (flag) {
+            case 1002:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
+
+                        IndexFragment.this.outer = commonListVm;
+
+//                        ProviderAccountCard.providerAccountDefaultCard(commonListVm, innerArr[0], nitCommonListFragment);
+                        ProviderAppCard.providerAppDefaultCard(commonListVm, nitCommonListFragment);
+                    }
+                };
+                break;
+        }
+        return nitDelegetCommand;
+    }
+
+
     @Override
     protected void initView(View var1) {
+
+
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.refreshState = Constant.KEY_REFRESH_PURSE;
+        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+        commonListOptions.falg = 1002;
+
+        ProviderAccountCard.providerCardForFrame(getChildFragmentManager(), R.id.frame_mine, commonListOptions);
 
         // 搜索
         mBinding.get().edSerchs.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "search").navigation();
+
+
         });
         // 菜单
         // 地址
@@ -132,6 +161,8 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
             if (fragments != null && fragments.size() > 0) {
                 ((CommonFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).OnRefresh(mBinding.get().refresh);
 //                mViewModel.getIndexBanner("1");
+
+
             } else {
                 mBinding.get().refresh.finishRefresh();
             }
