@@ -1,4 +1,4 @@
-package com.bfhd.account.vo.index;
+package com.bfhd.account.vo.card;
 
 import android.view.View;
 

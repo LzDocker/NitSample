@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.bfhd.account.vo.module.mine.AccountHeadCardVo" />
+            type="com.bfhd.account.vo.card.AccountHeadCardVo" />
 
         <import type="com.bfhd.circle.R" />
 

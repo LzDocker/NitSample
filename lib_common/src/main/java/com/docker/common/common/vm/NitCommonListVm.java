@@ -1,5 +1,6 @@
 package com.docker.common.common.vm;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.CollectionUtils;
+import com.dcbfhd.utilcode.utils.NetworkUtils;
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.config.Constant;

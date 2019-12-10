@@ -4,6 +4,7 @@ package com.docker.nitsample.di;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 import com.docker.nitsample.ui.MainActivity;
+import com.docker.nitsample.ui.edit.EditCoutainerFragment;
 import com.docker.nitsample.ui.edit.EditIndexActivity;
 import com.docker.nitsample.ui.edit.EditListFragment;
 import com.docker.nitsample.ui.edit.EditSpaFragment;
@@ -58,5 +59,9 @@ public abstract class UIMoudle {
     @ActivityScope
     @ContributesAndroidInjector
     abstract EditIndexActivity contributeEditIndexActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract EditCoutainerFragment contributeEditCoutainerFragmentInjector();
 
 }

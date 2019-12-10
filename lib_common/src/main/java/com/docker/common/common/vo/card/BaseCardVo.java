@@ -9,6 +9,7 @@ import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.utils.lv.MserialMedatorLv;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
+import com.docker.common.common.widget.card.McardObserver;
 
 import java.util.HashMap;
 
@@ -29,8 +30,7 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
     /*
      * 服务端数据存储的lv
      * */
-    public final MserialMedatorLv<T> mCardVoLiveData = new MserialMedatorLv<>();
-
+    public transient MserialMedatorLv<T> mCardVoLiveData = new MserialMedatorLv<>();
 
     public BaseCardVo(int style, int position) {
         this.style = style;
@@ -42,7 +42,6 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
     public int position = 0;
 
     public int maxSupport = 1;
-
 
     public void onChangeStyleClick(BaseCardVo item, View view, NitCommonListVm viewModel) {
         if (AppUtils.isAppDebug()) {

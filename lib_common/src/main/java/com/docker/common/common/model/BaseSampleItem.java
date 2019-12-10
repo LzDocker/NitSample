@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public abstract class BaseSampleItem extends BaseObservable implements BaseItemModel, Serializable {
 
-    public String sampleName;
+    public String sampleName = getClass().getSimpleName();
 
 
 }

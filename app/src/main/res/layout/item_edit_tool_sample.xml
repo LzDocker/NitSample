@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.nitsample.vo.card.SampleCardVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.nitsample.vm.SampleEditCoutainerViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/ll_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_shape"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:text="@{item.mCardData.sampleName}" />
+    </LinearLayout>
+
+</layout>

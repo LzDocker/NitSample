@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.bfhd.account.vo.module.mine.AccountHeadCardVo" />
+            type="com.bfhd.account.vo.card.AccountHeadCardVo" />
 
         <import type="com.bfhd.circle.R" />
 
@@ -30,6 +30,7 @@
         android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
+        app:visibleGone="@{item.myinfo!=null}"
         tools:ignore="MissingDefaultResource">
 
         <LinearLayout

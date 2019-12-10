@@ -1,8 +1,8 @@
 package com.bfhd.account.vm.card;
 
-import com.bfhd.account.vo.index.AccountIndexItemVo;
-import com.bfhd.account.vo.index.setting.AccountSettingCardVo;
-import com.bfhd.account.vo.module.mine.AccountHeadCardVo;
+import com.bfhd.account.vo.card.AccountIndexItemVo;
+import com.bfhd.account.vo.card.AccountSettingCardVo;
+import com.bfhd.account.vo.card.AccountHeadCardVo;
 import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.utils.cache.CacheUtils;

@@ -123,7 +123,6 @@
 
         <activity
             android:name="com.docker.nitsample.ui.edit.EditIndexActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -132,8 +131,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.docker.nitsample.ui.edit.PreviewEditActivity" />
-        <activity android:name="com.docker.nitsample.ui.MainActivity" />
+        <activity
+            android:name="com.docker.nitsample.ui.edit.PreviewEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.nitsample.ui.MainActivity"
+            android:screenOrientation="portrait" />
 
         <!--<activity android:name="com.docker.nitsample.ui.edit.EditIndexActivity" />-->
     </application>

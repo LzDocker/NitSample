@@ -1,10 +1,11 @@
 package com.bfhd.account.vm.card;
 
 import android.arch.lifecycle.LiveData;
+import android.util.Log;
 
 import com.bfhd.account.api.AccountService;
 import com.bfhd.account.vo.MyInfoDispatcherVo;
-import com.bfhd.account.vo.module.mine.AccountHeadCardVo;
+import com.bfhd.account.vo.card.AccountHeadCardVo;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.card.BaseCardVo;
@@ -53,29 +54,10 @@ public class AccountHeadCardViewModel extends NitcommonCardViewModel {
                         accountHeadCardVo.mCardVoLiveData.setValue(null);
                     }
                 }));
+    }
 
-//        accountHeadCardVo.mCardVoLiveData.addSource(RequestServer(responseLiveData),
-//                new NitNetBoundObserver<>(new NitBoundCallback<MyInfoDispatcherVo>() {
-//                    @Override
-//                    public void onNetworkError(Resource<MyInfoDispatcherVo> resource) {
-//                        super.onNetworkError(resource);
-//                        accountHeadCardVo.mCardVoLiveData.setValue(null);
-//                    }
-//
-//                    @Override
-//                    public void onComplete(Resource<MyInfoDispatcherVo> resource) {
-//                        super.onComplete(resource);
-//                        accountHeadCardVo.mCardVoLiveData.setValue(resource.data.member);
-//                        accountHeadCardVo.setMyinfo(resource.data.member);
-//                        if (resource.data.extData != null) {
-//                            accountHeadCardVo.myinfo.setCircleNum(resource.data.extData.dynamicNum);
-//                            accountHeadCardVo.myinfo.setCommentNum(resource.data.extData.plNum);
-//                            accountHeadCardVo.myinfo.setLikeNum(resource.data.extData.dzNum);
-//                        }
-//                    }
-//                }));
-
-
+    public void process(){
+        Log.d("sss", "process: ===============================");
     }
 
 

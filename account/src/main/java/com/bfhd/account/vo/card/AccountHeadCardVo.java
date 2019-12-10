@@ -1,9 +1,12 @@
-package com.bfhd.account.vo.module.mine;
+package com.bfhd.account.vo.card;
+
 import android.databinding.Bindable;
 import android.view.View;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
+import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.bfhd.account.vo.MyInfoVo;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonContainerOptions;
@@ -14,9 +17,7 @@ import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.card.BaseCardVo;
 
 public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
-
-    public MyInfoVo myinfo;
-
+    public transient MyInfoVo myinfo;
     public AccountHeadCardVo(int style, int position) {
         super(style, position);
         maxSupport = 2;
@@ -47,6 +48,7 @@ public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
                     .withSerializable(Constant.ContainerParam, options)
                     .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountIndexListViewModel")
                     .navigation();
+            ((AccountHeadCardViewModel) mNitcommonCardViewModel).process();
         }
         if (view.getId() == R.id.account_iv_message) {
             RxBus.getDefault().post(new RxEvent<>("change", 3));
@@ -61,7 +63,6 @@ public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
         }
     }
 
-
     @Bindable
     public MyInfoVo getMyinfo() {
         return myinfo;
@@ -71,5 +72,4 @@ public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
         this.myinfo = myinfo;
         notifyPropertyChanged(BR.myinfo);
     }
-
 }

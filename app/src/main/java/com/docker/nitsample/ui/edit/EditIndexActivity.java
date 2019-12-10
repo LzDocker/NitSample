@@ -85,6 +85,8 @@ public class EditIndexActivity extends NitCommonActivity<SampleEditSpaViewModel,
         });
         mBinding.tlHomeTab.setCurrentTab(0);
         mBinding.viewpager.setOffscreenPageLimit(2);
+
+//        fragments.add(EditCoutainerFragment.getInstance("", true));
         fragments.add(EditSpaFragment.getInstance("", true));
         fragments.add(EditListFragment.newInstance());
         mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));

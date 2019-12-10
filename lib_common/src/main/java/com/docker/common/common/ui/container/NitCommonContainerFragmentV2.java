@@ -1,5 +1,6 @@
 package com.docker.common.common.ui.container;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -57,13 +58,14 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
         //
         if (commonListReq.isActParent) {
             delegetCommand = ((NitCommonActivity) getHoldingActivity()).providerNitDelegetCommand(commonListReq.falg);
-
         } else {
             delegetCommand = ((NitCommonFragment) (NitCommonContainerFragmentV2.this.getParentFragment())).providerNitDelegetCommand(commonListReq.falg);
         }
         mViewModel = (NitCommonContainerViewModel) ViewModelProviders.of(this, factory).get(delegetCommand.providerOuterVm());
         this.getLifecycle().addObserver(mViewModel);
-        mViewModel.mContainerLiveData.observe(this, null);
+        mViewModel.mContainerLiveData.observe(this, o -> {
+
+        });
         mViewModel.initParam(commonListReq);
         mViewModel.initCommand();
         mBinding.get().setViewmodel(mViewModel);

@@ -1,42 +1,22 @@
 package com.bfhd.account.ui;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivitySettingBinding;
-import com.bfhd.account.vm.AccountIndexListViewModel;
-import com.bfhd.account.vm.AccountSettingViewModel;
 import com.bfhd.account.vm.AccountViewModel;
-import com.bfhd.account.vo.MyInfoVo;
-import com.bfhd.circle.base.Constant;
 import com.bfhd.circle.base.HivsBaseActivity;
-import com.bfhd.circle.ui.common.CommonH5Activity;
-import com.dcbfhd.utilcode.utils.ActivityUtils;
-import com.dcbfhd.utilcode.utils.AppUtils;
-import com.dcbfhd.utilcode.utils.FragmentUtils;
-import com.docker.common.common.command.ReponseInterface;
-import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.ui.base.NitCommonListInstanceFragment;
-import com.docker.common.common.utils.GlideCacheUtil;
-import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
-import com.docker.core.base.BaseFragment;
 import com.docker.core.widget.BottomSheetDialog;
 
 import javax.inject.Inject;
-
-import cn.jpush.android.api.JPushInterface;
 
 /*
  * 设置

@@ -8,6 +8,7 @@ import com.docker.core.di.scope.ViewModelKey;
 import com.docker.nitsample.vm.EditListViewModel;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.PreviewViewModel;
+import com.docker.nitsample.vm.SampleEditCoutainerViewModel;
 import com.docker.nitsample.vm.SampleEditSpaViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
@@ -62,6 +63,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PreviewViewModel.class)
     abstract ViewModel PreviewViewModel(PreviewViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SampleEditCoutainerViewModel.class)
+    abstract ViewModel SampleEditCoutainerViewModel(SampleEditCoutainerViewModel model);
 
 
 //
