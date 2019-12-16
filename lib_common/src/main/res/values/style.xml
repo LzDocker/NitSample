@@ -164,4 +164,8 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+    <style name="common_right_pop_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/view_speed_show</item>
+        <item name="android:windowExitAnimation">@anim/view_speed_hide</item>
+    </style>
 </resources>

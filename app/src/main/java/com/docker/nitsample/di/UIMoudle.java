@@ -3,6 +3,7 @@ package com.docker.nitsample.di;
 
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
+import com.docker.nitsample.ui.IndexSearchActivity;
 import com.docker.nitsample.ui.MainActivity;
 import com.docker.nitsample.ui.edit.EditCoutainerFragment;
 import com.docker.nitsample.ui.edit.EditIndexActivity;
@@ -63,5 +64,8 @@ public abstract class UIMoudle {
     @ActivityScope
     @ContributesAndroidInjector
     abstract EditCoutainerFragment contributeEditCoutainerFragmentInjector();
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract IndexSearchActivity indexSearchActivity();
 
 }
