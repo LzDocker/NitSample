@@ -13,15 +13,17 @@
             name="viewmodel"
             type="com.docker.cirlev2.vm.CircleDynamicListViewModel" />
 
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
         android:orientation="vertical">
 
-        <!-- android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,8 +60,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:text="还没有人回答哦！"
-                        android:textSize="11sp" />
-                    <!--      app:visibleGone="@{item.commentUsers.size == 0}" -->
+                        android:textSize="11sp"
+                        app:visibleGone="@{item.commentUsers.size == 0}" />
+
 
                 </LinearLayout>
 
@@ -68,11 +71,10 @@
                     android:layout_width="85dp"
                     android:layout_height="65dp"
                     android:layout_marginLeft="15dp"
-                    android:scaleType="centerCrop" />
-                <!-- app:errorImg="@{R.mipmap.circle_icon_empty}"
-                    app:openImgUrl="@{item.extData.getResourceImg()}"
-                    app:placeHolder="@{R.mipmap.circle_icon_empty}"
-                    app:visibleGone="@{item.extData.resource.size() != 0}"-->
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{BdUtils.getResourceImgUrl(item.extData.resource.get(0))}"
+                    app:visibleGone="@{item.extData.resource.size() != 0}" />
+
 
             </LinearLayout>
 
@@ -81,19 +83,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <!--     app:visibleGone="@{item.commentUsers.size != 0}"-->
+                android:orientation="horizontal"
+                app:visibleGone="@{item.commentUsers.size != 0}">
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/round_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:scaleType="centerCrop" />
-                <!--   app:errorImg="@{R.mipmap.circle_default_avatar}"
-                    app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                    app:roundImgUrl="@{BdUtils.getAnswerIcon(item)}"
-                    app:visibleGone="@{BdUtils.isShowAnswerIcon(item)}"-->
+                    android:scaleType="centerCrop"
+                    app:avaterImageUrl="@{BdUtils.getAnswerIcon(item)}"
+                    app:visibleGone="@{BdUtils.isShowAnswerIcon(item)}"
+
+                    />
+
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,10 +105,9 @@
                     android:layout_below="@+id/tv_username"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/iv_user_icon"
+                    android:text="@{BdUtils.getAnswerName(item)}"
                     android:textColor="#979797"
                     android:textSize="14sp" />
-
-                <!--        android:text="@{BdUtils.getAnswerName(item)}"-->
 
             </LinearLayout>
 
@@ -123,8 +126,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:orientation="horizontal">
-                <!-- app:visibleGone="@{item.commentUsers.size != 0}"-->
+                android:orientation="horizontal"
+                app:visibleGone="@{item.commentUsers.size != 0}">
+
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -133,18 +137,8 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="3"
-
+                    android:text="@{BdUtils.getAnswer(item)}"
                     android:textColor="#333" />
-
-                <!--    android:text="@{BdUtils.getAnswer(item)}"-->
-
-
-                <!--<ImageView-->
-                <!--android:layout_width="85dp"-->
-                <!--android:layout_height="65dp"-->
-                <!--android:layout_marginLeft="15dp"-->
-                <!--android:background="@color/colorPrimary"-->
-                <!--app:visibleGone="@{item.imglist.size()==1}" />-->
 
             </LinearLayout>
 
@@ -175,7 +169,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="2dp"
             android:background="#fff4f5f6" />
     </LinearLayout>
 </layout>

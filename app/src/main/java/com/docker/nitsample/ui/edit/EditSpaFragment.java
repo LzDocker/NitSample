@@ -256,9 +256,9 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
             }
 
             @Override
-            public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
+            public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonListFragment) {
                 outervm = commonListVm;
-                nitCardFragment = nitCommonListFragment;
+                nitCardFragment = (NitCommonListFragment) nitCommonListFragment;
                 if (!TextUtils.isEmpty(dbtabid)) {
                     dbCacheUtils.loadFromDb("db_tab_" + dbtabid).observe(EditSpaFragment.this, o -> {
                         if (o != null) {

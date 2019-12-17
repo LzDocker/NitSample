@@ -65,12 +65,21 @@ public class CircleDynamicDetailActivity extends HivsBaseActivity<CircleDynamicV
     private Disposable disposable;
     private boolean isInit = false;
     private CommonFragment curCommonFragment;
+    private String dynamicid;
 
     //    private int type;
     public static void startMe(Context context, StaDetailParam mStaparam) {
         Intent intent = new Intent(context, CircleDynamicDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("mStaparam", mStaparam);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    public static void startMe(Context context, String dynamicid) {
+        Intent intent = new Intent(context, CircleDynamicDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("dynamicid", dynamicid);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
@@ -93,6 +102,12 @@ public class CircleDynamicDetailActivity extends HivsBaseActivity<CircleDynamicV
     @Override
     public void onCreate(Bundle savedInstanceState) {
         mStaparam = (StaDetailParam) getIntent().getSerializableExtra("mStaparam");
+        dynamicid = getIntent().getStringExtra("dynamicid");
+        if (mStaparam == null) {
+            mStaparam = new StaDetailParam();
+            mStaparam.dynamicId = dynamicid;
+        }
+
         super.onCreate(savedInstanceState);
         mToolbar.hide();
         mBinding.setViewmodel(mViewModel);

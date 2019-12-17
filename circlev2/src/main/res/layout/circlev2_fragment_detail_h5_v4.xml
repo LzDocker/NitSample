@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleDynamicDetailViewModel" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+    </data>
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_scrollFlags="scroll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_dynamic_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/open_liner_bg_shape"
+                android:paddingLeft="14dp"
+                android:paddingTop="10dp"
+                android:paddingRight="14dp"
+                android:paddingBottom="10dp">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_user_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_toRightOf="@+id/iv_user_icon"
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
+                    android:text="@{item.nickname}"
+                    android:textColor="#121212"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_pub_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_username"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@+id/iv_user_icon"
+                    android:text="@{BdUtils.getStandardDate(item.inputtime)}"
+                    android:textColor="#979797"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_username"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@+id/tv_pub_time"
+                    android:text="发布"
+                    android:textColor="#979797"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tv_cityname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_username"
+                    android:layout_marginTop="7dp"
+                    android:text="@{item.cityName}"
+                    android:textColor="#979797"
+                    android:textSize="11sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/tv_attention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/circle_red"
+                        android:onClick="@{(view)->viewmodel.attention(item,view)}"
+                        android:paddingLeft="14dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="14dp"
+                        android:paddingBottom="5dp"
+                        android:text="关注"
+                        android:textColor="@color/white"
+                        app:visibleGone="@{item.isFocus ==0}" />
+
+                    <TextView
+                        android:id="@+id/tv_attentioned"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_lable_shape_gray"
+                        android:onClick="@{(view)->viewmodel.attention(item,view)}"
+                        android:paddingLeft="14dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="14dp"
+                        android:paddingBottom="5dp"
+                        android:text="已关注"
+                        app:visibleGone="@{item.isFocus !=0}" />
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <com.tencent.smtt.sdk.WebView
+                android:id="@+id/pro_webview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:datasource="@{item}" />
+
+            <FrameLayout
+                android:id="@+id/frame_bot_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>

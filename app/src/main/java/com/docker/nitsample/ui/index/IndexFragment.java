@@ -119,7 +119,7 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
                     }
 
                     @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonListFragment) {
 
                         IndexFragment.this.outer = commonListVm;
 

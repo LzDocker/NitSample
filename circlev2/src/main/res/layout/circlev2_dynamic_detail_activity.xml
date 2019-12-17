@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleDynamicDetailViewModel" />
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/open_liner_bg_shape">
+
+            <RelativeLayout
+                android:id="@+id/circle_header_bar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_back" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:alpha=".4"
+                    android:gravity="center_vertical|right"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/circle_jubao"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <!-- android:onClick="@{(view)->viewmodel.circleReport(item,view)}"-->
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/circlev2_ov_shape_back"
+                            android:padding="20dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/circle_icon_jb" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_share"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/circlev2_ov_shape_back"
+                        android:padding="8dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/circle_icon_sjsb_zf" />
+
+                    <LinearLayout
+                        android:id="@+id/iv_menu_more"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/circlev2_ov_shape_back"
+                        android:gravity="center_vertical|right"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"
+                            android:layout_centerVertical="true"
+                            android:padding="8dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/open_meun" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/frame_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/dynamic_detail_foot"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/common_top_liner_shape"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/circle_common_bar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!--  android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"-->
+
+                    <ImageView
+                        android:id="@+id/iv_dz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <!--          android:src="@{item.isFav == 1?R.mipmap.circle_icon_hd_dz2:R.mipmap.circle_zan_icon}" -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="#333" />
+
+                    <!--      android:text='@{item.isFav == 1? @string/isFav : @string/fav}'-->
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:text="评论"
+                    android:textColor="#333" />
+                <!--      android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"-->
+                <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+
+                    android:orientation="horizontal">
+                    <!--       android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"-->
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" />
+                    <!-- android:src="@{item.isCollect == 1?R.mipmap.circle_store_colleced:R.mipmap.circle_store_collec}"-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="#333" />
+                    <!--         android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'-->
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/cirlce_goods_foot"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:visibility="gone">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight=".15"
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+                    <!--    android:onClick="@{(view)->viewmodel.ItemDZGoodsClick(item,view)}"-->
+
+                    <ImageView
+                        android:id="@+id/iv_dz_wj"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp" />
+                    <!--   android:src="@{item.isFav == 1?R.mipmap.circle_wj_dz:R.mipmap.circle_wj_dzz}"-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#666"
+                        android:textSize="10sp" />
+
+                    <!-- android:text='@{item.isFav == 1? @string/isFav : @string/favwj}'-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_weight=".15"
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+                    <!--      android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"-->
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp" />
+                    <!--  android:src="@mipmap/circle_wj_ly"-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="留言"
+                        android:textColor="#666"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_weight=".15"
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+                    <!--              android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"-->
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp" />
+                    <!--   android:src="@{item.isCollect == 1?R.mipmap.circle_wj_sc:R.mipmap.circle_store_collec}"-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#666"
+                        android:textSize="10sp" />
+
+                    <!--     android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".55"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circlev2_shape_gray_14"
+
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="聊一聊"
+                        android:textColor="#000" />
+
+                    <!--   android:onClick="@{(view)->viewmodel.ItemTalkClick(item,view)}"-->
+
+                    <Space
+                        android:id="@+id/circle_space"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/circle_tv_want"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_shape_red_14"
+
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="25dp"
+                        android:paddingBottom="10dp"
+                        android:text="我想要"
+                        android:textColor="#fff" />
+
+                    <!--                        android:onClick="@{(view)->viewmodel.ItemBuyClick(item,view)}"-->
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+
+    <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/frame_h5"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:overScrollMode="never" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.CoordinatorLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="0dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:focusable="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:focusableInTouchMode="true">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<FrameLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/frame_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:layout_behavior="@string/appbar_scrolling_view_behavior"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:layout_scrollFlags="scroll" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<android.support.design.widget.AppBarLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/appbar"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:background="@color/common_bg"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:elevation="0dp">&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;<android.support.design.widget.CollapsingToolbarLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/toolbarLayout"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;app:layout_scrollFlags="scroll">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_gravity="center_vertical"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:gravity="center_vertical"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;<android.support.v4.widget.NestedScrollView&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:fillViewport="true"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;app:layout_behavior="@string/appbar_scrolling_view_behavior">&ndash;&gt;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;&lt;!&ndash;<com.tencent.smtt.sdk.WebView&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:id="@+id/pro_webview"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;android:overScrollMode="never"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;app:datasource="@{item}" />&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;</android.support.v4.widget.NestedScrollView>&ndash;&gt;&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</android.support.design.widget.CollapsingToolbarLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginBottom="8dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/tv_circle_more"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="45dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_alignParentRight="true"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginLeft="14dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:drawablePadding="10dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="留言"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:textColor="@color/common_black"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:textSize="14sp" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+    <!--&lt;!&ndash;</android.support.design.widget.AppBarLayout>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;</android.support.design.widget.CoordinatorLayout>&ndash;&gt;-->
+
+    <!---->
+
+    <!--</LinearLayout>-->
+
+
+</layout>

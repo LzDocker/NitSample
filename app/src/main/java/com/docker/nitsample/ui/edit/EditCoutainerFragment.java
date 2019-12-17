@@ -66,7 +66,7 @@ public class EditCoutainerFragment extends NitCommonFragment<SampleEditCoutainer
             }
 
             @Override
-            public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
+            public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonListFragment) {
 
             }
         };

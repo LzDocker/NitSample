@@ -3,13 +3,28 @@ package com.docker.cirlev2.vo.entity;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
+import com.docker.cirlev2.R;
+import com.docker.common.common.model.BaseSampleItem;
+import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.utils.cache.CacheUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentVo extends BaseObservable implements Serializable {
+public class CommentVo extends BaseSampleItem implements Serializable {
+
+
+    @Override
+    public int getItemLayout() {
+        return R.layout.circlev2_item_comment;
+    }
+
+    @Override
+    public OnItemClickListener getOnItemClickListener() {
+        return null;
+    }
+
 
     /*
     * "commentid": "",
@@ -36,6 +51,8 @@ public class CommentVo extends BaseObservable implements Serializable {
 
     public String replyNum;
     public String inputtime;
+
+    @Bindable
     public List<Reply> reply;
     public String audio;
     public String audio_duration;
@@ -153,6 +170,7 @@ public class CommentVo extends BaseObservable implements Serializable {
         this.inputtime = inputtime;
     }
 
+    @Bindable
     public List<Reply> getReply() {
         if (reply == null) {
             reply = new ArrayList<>();
@@ -163,6 +181,7 @@ public class CommentVo extends BaseObservable implements Serializable {
     public void setReply(List<Reply> reply) {
         this.reply = reply;
     }
+
 
     public static class Reply extends BaseObservable implements Serializable {
 
