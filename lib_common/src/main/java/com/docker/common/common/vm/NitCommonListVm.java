@@ -1,6 +1,5 @@
 package com.docker.common.common.vm;
 
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.databinding.ObservableArrayList;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.CollectionUtils;
-import com.dcbfhd.utilcode.utils.NetworkUtils;
 import com.docker.common.BR;
 import com.docker.common.common.command.ReponseCommand;
 import com.docker.common.common.config.Constant;
@@ -87,7 +85,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public ItemBinding<BaseItemModel> itemBinding = ItemBinding.of(mutipartItemsBinding)
             .bindExtra(BR.viewmodel, this);
 
-    private void setLoadControl(boolean enable) {
+    public void setLoadControl(boolean enable) {
         switch (mCommonListReq.refreshState) {
             case Constant.KEY_REFRESH_OWNER:
                 bdenable.set(enable);
@@ -303,7 +301,11 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                 i = 2;
             }
         } else if (mItems.size() > 0 && servicefun != null) {
-            mCardTreeMap.put(position, sampleItem);
+            if (mItems.size() > position) {
+                mItems.add(position, sampleItem);
+            } else {
+                mCardTreeMap.put(position, sampleItem);
+            }
             i = 3;
         } else {
             if (mItems.size() >= position && servicefun == null) {

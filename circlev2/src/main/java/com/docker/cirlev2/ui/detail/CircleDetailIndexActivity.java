@@ -508,5 +508,13 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
                     }
                 }).open(config);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
 }
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+
+    </data>
+
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlFooterTranslationViewId="@+id/rv_list">
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_scrollFlags="scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:background="@color/black"
+                    android:gravity="center"
+                    android:text="不可滑动的view"
+                    android:textColor="@color/white" />
+
+                <WebView
+                    android:id="@+id/web_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:tag="nested_scroll_webview" />
+
+                <com.docker.common.common.widget.refresh.SmartRefreshLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srlFooterTranslationViewId="@+id/rv_list">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:tag="nested_scroll_recyclerview"
+                        app:fastScrollEnabled="false" />
+                </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+</layout>

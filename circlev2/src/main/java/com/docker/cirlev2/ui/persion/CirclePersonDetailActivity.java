@@ -1,31 +1,26 @@
 package com.docker.cirlev2.ui.persion;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2PersionDetailActivityBinding;
-import com.docker.cirlev2.ui.list.CircleDynamicListFragment;
 import com.docker.cirlev2.vm.CirclePersionViewModel;
 import com.docker.cirlev2.vo.entity.CircleCountpageVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.entity.StaDynaVo;
-import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.param.StaPersionDetail;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
@@ -53,14 +48,12 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import io.reactivex.disposables.Disposable;
 
 /*
  * 成员主页
  * */
-//@Route(path = AppRouter.CIRCLE_persion_detail)
+@Route(path = AppRouter.CIRCLE_persion_v2_detail)
 public class CirclePersonDetailActivity extends NitCommonActivity<CirclePersionViewModel, Circlev2PersionDetailActivityBinding> {
     public StaPersionDetail mStartParam;
     private CircleCountpageVo vo;

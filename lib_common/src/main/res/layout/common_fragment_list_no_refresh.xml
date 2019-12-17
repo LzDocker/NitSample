@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.common.common.vm.NitCommonListVm" />
+    </data>
+
+
+    <com.docker.common.common.widget.empty.EmptyLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        bind:onRetryCommand="@{viewmodel.mCommand.retrycommand}"
+        bind:status="@{viewmodel.mEmptycommand}">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="nested_scroll_recyclerview"
+            app:itemBinding="@{viewmodel.itemBinding}"
+            app:items="@{viewmodel.mItems}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </com.docker.common.common.widget.empty.EmptyLayout>
+</layout>

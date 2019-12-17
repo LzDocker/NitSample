@@ -13,6 +13,11 @@ import com.docker.cirlev2.ui.detail.CircleDetailIndexActivity;
 import com.docker.cirlev2.ui.detail.CircleEditMemberGroupActivity;
 import com.docker.cirlev2.ui.detail.CircleGroupListActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicBotContentFragment;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragment;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragmentv2;
 import com.docker.cirlev2.ui.index.CircleIndexActivity;
 import com.docker.cirlev2.ui.index.CircleIndexFragment;
 import com.docker.cirlev2.ui.index.CircleSampleActivity;
@@ -166,6 +171,26 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleGroupPerssionActivity contributeCircleGroupPerssionActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleDynamicDetailActivity contributeCircleDynamicDetailActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicH5Fragment contributeDynamicH5FragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicH5Fragmentv2 contributeDynamicH5Fragmentv2Injector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicBotContentFragment contributeDynamicBotContentFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleReplyListActivity contributeCircleReplyListActivityInjector();
 
 }
 
