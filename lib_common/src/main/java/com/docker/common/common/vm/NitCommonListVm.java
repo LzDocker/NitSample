@@ -257,6 +257,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     }
 
+
     /*
      * 刷新事件
      * */

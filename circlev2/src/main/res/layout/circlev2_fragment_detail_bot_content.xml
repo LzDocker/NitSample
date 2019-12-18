@@ -9,9 +9,19 @@
             name="item"
             type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
 
+        <!--<variable-->
+        <!--name="commentVm"-->
+        <!--type="com.docker.common.common.vm.NitCommonListVm" />-->
+
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleDynamicDetailViewModel" />
+        .
+
         <variable
             name="commentVm"
-            type="com.docker.common.common.vm.NitCommonListVm" />
+            type="com.docker.cirlev2.vm.CircleCommentListViewModel" />
 
     </data>
 
@@ -49,12 +59,11 @@
                 android:drawableRight="@mipmap/arrow_right"
                 android:drawablePadding="14dp"
                 android:gravity="center_vertical"
+                android:onClick="@{(view)->viewmodel.moreCommentClick(item,view)}"
                 android:text="查看更多"
                 android:textColor="#999999"
                 android:textSize="12sp"
                 app:visibleGone="@{commentVm.mItems.size() > 20}" />
-
-
         </LinearLayout>
 
         <LinearLayout

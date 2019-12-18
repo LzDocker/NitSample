@@ -31,5 +31,10 @@
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"></activity>
+        <activity
+            android:name="com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
+
     </application>
 </manifest>
