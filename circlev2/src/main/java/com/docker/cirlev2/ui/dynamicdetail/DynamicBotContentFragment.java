@@ -73,7 +73,7 @@ public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewM
                         OuterCommentVm = commonListVm;
                         mBinding.get().setCommentVm(OuterCommentVm);
                         CommonListOptions commonListReq = new CommonListOptions();
-//        commonListReq.ReqParam.put("t", "dynamic");
+                        //commonListReq.ReqParam.put("t", "dynamic");
                         commonListReq.ReqParam.put("dynamicid", serviceDataBean.getDynamicid());
                         commonListReq.ReqParam.put("page", "1");
                         commonListReq.externs.put("serverdata", serviceDataBean);
