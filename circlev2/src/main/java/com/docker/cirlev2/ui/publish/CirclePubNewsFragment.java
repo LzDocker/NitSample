@@ -210,18 +210,18 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
             }
         });
 
-//        KeyboardUtils.registerSoftInputChangedListener(CirclePubNewsFragment.this.getHoldingActivity(),
-//                new KeyboardUtils.OnSoftInputChangedListener() {
-//            @Override
-//            public void onSoftInputChanged(int height) {
-//                Log.d("sss", "onSoftInputChanged: he" + height);
-//                if (height > 0) {
-//                    mBinding.get().llSelsectCoutainer.setVisibility(View.GONE);
-//                } else {
-//                    mBinding.get().llSelsectCoutainer.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+        KeyboardUtils.registerSoftInputChangedListener(CirclePubNewsFragment.this.getHoldingActivity(),
+                new KeyboardUtils.OnSoftInputChangedListener() {
+                    @Override
+                    public void onSoftInputChanged(int height) {
+                        Log.d("sss", "onSoftInputChanged: he" + height);
+                        if (height > 0) {
+                            mBinding.get().llSelsectCoutainer.setVisibility(View.GONE);
+                        } else {
+                            mBinding.get().llSelsectCoutainer.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
 
         mBinding.get().imageView1.setOnClickListener(v -> {
             mBinding.get().richEditor.undo();

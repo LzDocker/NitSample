@@ -1,30 +1,33 @@
 package com.docker.cirlev2.vm;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
+import com.dcbfhd.utilcode.utils.KeyboardUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.api.CircleApiService;
+import com.docker.cirlev2.ui.comment.CommentDialogFragment;
 import com.docker.cirlev2.util.BdUtils;
-import com.docker.cirlev2.vo.entity.RstVo;
+import com.docker.cirlev2.vo.entity.CommentRstVo;
+import com.docker.cirlev2.vo.entity.CommentVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.StaPersionDetail;
-import com.docker.cirlev2.vo.vo.SampleItemVo;
+import com.docker.common.BR;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.vo.ShareBean;
 import com.docker.common.common.vo.UserInfoVo;
-import com.docker.common.common.widget.empty.EmptyStatus;
-import com.docker.core.BR;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
@@ -47,8 +50,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import static com.docker.common.common.router.AppRouter.CIRCLE_comment_v2_ANSWER;
+
 public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
+
+    public final MediatorLiveData<CommentRstVo> mCommentVoMLiveData = new MediatorLiveData<>();
+    public final MediatorLiveData<String> mCollectLv = new MediatorLiveData<>();
 
     @Inject
     CircleApiService circleApiService;
@@ -151,13 +159,12 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         showDialogWait("加载中...", false);
         mServerLiveData.addSource(
                 RequestServer(circleApiService.share(params))
-                , new NitNetBoundObserver(new NitBoundCallback<ServiceDataBean.ShareBean>() {
+                , new NitNetBoundObserver(new NitBoundCallback<ShareBean>() {
                     @Override
-                    public void onComplete(Resource<ServiceDataBean.ShareBean> resource) {
+                    public void onComplete(Resource<ShareBean> resource) {
                         super.onComplete(resource);
                         hideDialogWait();
                         showShare(resource.data);
-//                        RxBus.getDefault().post(new RxEvent<>("show_share", resource.data));
                     }
 
                     @Override
@@ -169,7 +176,7 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     }
 
-    public void showShare(ServiceDataBean.ShareBean shareBean) {
+    public void showShare(ShareBean shareBean) {
         if (shareBean == null) {
             return;
         }
@@ -212,13 +219,212 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                 }).open(config);
     }
 
+    CommentDialogFragment dialogFragment;
+
     //
-    public void ItemPLClick(ServiceDataBean item, View view) {
+    public void ItemPLClick(ServiceDataBean serviceDataBean, View view) {
+
+        if (serviceDataBean == null) {
+            return;
+        }
+        if (serviceDataBean.getType().equals("answer")) { // 问答
+            ARouter.getInstance().build(CIRCLE_comment_v2_ANSWER).withSerializable("datasource", serviceDataBean).navigation();
+        } else {
+            if (dialogFragment == null) {
+                dialogFragment = new CommentDialogFragment();
+            }
+            dialogFragment.setDataCallback(new CommentDialogFragment.DialogFragmentDataCallback() {
+                @Override
+                public void setCommentText(String commentTextTemp) {
+                    KeyboardUtils.hideSoftInput(ActivityUtils.getTopActivity());
+                }
+
+                @Override
+                public void sendComment(String commentTextTemp) {
+                    KeyboardUtils.hideSoftInput(ActivityUtils.getTopActivity());
+                    HashMap<String, String> params = new HashMap<>();
+                    UserInfoVo userInfoVo = CacheUtils.getUser();
+                    params.put("circleid", serviceDataBean.getCircleid());
+                    params.put("utid", serviceDataBean.getUtid());
+                    params.put("dynamicid", serviceDataBean.getDynamicid());
+                    params.put("push_uuid", serviceDataBean.getUuid());
+                    params.put("push_memberid", serviceDataBean.getMemberid());
+                    params.put("memberid", userInfoVo.uid);
+                    params.put("uuid", userInfoVo.uuid);
+                    if (TextUtils.isEmpty(userInfoVo.avatar)) {
+                        userInfoVo.avatar = "/var/upload/image/section/logo3.png";
+                    }
+                    params.put("avatar", userInfoVo.avatar);
+                    if (TextUtils.isEmpty(userInfoVo.nickname)) {
+                        params.put("nickname", "匿名");
+                    } else {
+                        params.put("nickname", userInfoVo.nickname);
+                    }
+                    params.put("content", commentTextTemp);
+                    params.put("cid", "0");
+                    params.put("reply_memberid", "");
+                    params.put("reply_uuid", "");
+                    params.put("reply_nickname", "");
+                    commentDynamic(params);
+                }
+            });
+            dialogFragment.setText("", "发表评论..");
+            dialogFragment.show(((FragmentActivity) ActivityUtils.getTopActivity()).getSupportFragmentManager(), "CommentDialogFragment");
+        }
+    }
+
+
+    public void commentDynamic(HashMap<String, String> params) {
+
+        showDialogWait("发送中...", false);
+        mCommentVoMLiveData.addSource(
+                RequestServer(
+                        circleApiService.commentDynamic(params)), new NitNetBoundObserver(new NitBoundCallback<CommentRstVo>() {
+                    @Override
+                    public void onComplete(Resource<CommentRstVo> resource) {
+                        super.onComplete(resource);
+                        hideDialogWait();
+                        if (resource.data != null) {
+                            mCommentVoMLiveData.setValue(resource.data);
+//                            mVmEventSouce.setValue(new ViewEventResouce(211, "", resource.data));
+                            KeyboardUtils.hideSoftInput(ActivityUtils.getTopActivity());
+                            CommentVo commentVo = new CommentVo();
+                            commentVo.setCommentid(((CommentRstVo) resource.data).commentid);
+                            UserInfoVo userInfoVo = CacheUtils.getUser();
+                            commentVo.setMemberid(userInfoVo.uid);
+                            commentVo.setUuid(userInfoVo.uuid);
+                            commentVo.setNickname(TextUtils.isEmpty(userInfoVo.nickname) ? "匿名" : userInfoVo.nickname);
+                            commentVo.setAvatar(userInfoVo.avatar);
+                            commentVo.setContent(params.get("content"));
+                            commentVo.setPraiseNum("0");
+                            commentVo.setInputtime(String.valueOf(System.currentTimeMillis()).substring(0, String.valueOf(System.currentTimeMillis()).length() - 3));
+                            RxBus.getDefault().post(new RxEvent("comment", commentVo));
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        hideDialogWait();
+                    }
+                }));
+    }
+
+    // 收藏
+    public void ItemStoreClick(ServiceDataBean item, View view) {
+        if (item == null) {
+            return;
+        }
+        showDialogWait("加载中...", false);
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        HashMap<String, String> paramap = new HashMap<>();
+        paramap.put("memberid", userInfoVo.uid);
+        paramap.put("uuid", userInfoVo.uuid);
+        paramap.put("dataid", item.getDataid());
+        paramap.put("dynamicid", item.getDynamicid());
+        paramap.put("type", item.getType());
+        paramap.put("push_uuid", item.getUuid());
+        paramap.put("push_memberid", item.getMemberid());
+        if (!TextUtils.isEmpty(userInfoVo.nickname)) {
+            paramap.put("nickname", userInfoVo.nickname);
+        } else {
+            paramap.put("nickname", "匿名");
+        }
+        if (item.getIsCollect() == 1) {
+            paramap.put("status", "0");
+        } else {
+            paramap.put("status", "1");
+        }
+        mCollectLv.addSource(RequestServer(circleApiService.collect(paramap)),
+                new NitNetBoundObserver<>(new NitBoundCallback<String>() {
+                    @Override
+                    public void onComplete(Resource<String> resource) {
+                        super.onComplete(resource);
+                        this.onComplete();
+                        mCollectLv.setValue(resource.data);
+                        hideDialogWait();
+                        if (item.getIsCollect() == 1) {
+                            item.setIsCollect(0);
+                        } else {
+                            item.setIsCollect(1);
+                        }
+                        item.notifyPropertyChanged(BR.isCollect);
+                        RxBus.getDefault().post(new RxEvent<>("refresh_collect", item));
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        hideDialogWait();
+                    }
+
+                    @Override
+                    public void onNetworkError(Resource<String> resource) {
+//                        super.onNetworkError(resource);
+                        hideDialogWait();
+                        if (item.getIsCollect() == 1) {
+                            item.setIsCollect(0);
+                        } else {
+                            item.setIsCollect(1);
+                        }
+                        item.notifyPropertyChanged(BR.isCollect);
+                    }
+                }));
+        //
+    }
+
+    // 条目中的评论 进入详情
+    public void ItemPLClick(ServiceDataBean item) {
         ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", item.getDynamicid()).navigation();
     }
 
     //
     public void ItemDZClick(ServiceDataBean item, View view) {
+        if (item == null) {
+            return;
+        }
+        showDialogWait("加载中...", false);
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        Map<String, String> params = new HashMap<>();
+        params.put("memberid", userInfoVo.uid);
+        params.put("uuid", userInfoVo.uuid);
+        params.put("dynamicid", item.getDynamicid());
+        params.put("status", item.getIsFav() == 1 ? "0" : "1");
+        params.put("push_uuid", item.getUuid());
+        params.put("push_memberid", item.getMemberid());
+        if (!TextUtils.isEmpty(userInfoVo.nickname)) {
+            params.put("nickname", "匿名");
+        }
+        mServerLiveData.addSource(
+                RequestServer(circleApiService.dynamicParise(params))
+                , new NitNetBoundObserver(new NitBoundCallback<ServiceDataBean.ShareBean>() {
+                    @Override
+                    public void onComplete(Resource<ServiceDataBean.ShareBean> resource) {
+                        super.onComplete(resource);
+                        hideDialogWait();
+                        item.notifyPropertyChanged(BR.isFav);
+                        item.notifyPropertyChanged(BR.favourNum);
+                        if (item.getIsFav() == 1) { //1赞 0取消赞
+                            item.setIsFav(0);
+                            item.setFavourNum((item.getFavourNum()) - 1);
+                        } else {
+                            showDzGoodsView(view);
+                            item.setIsFav(1);
+                            item.setFavourNum(item.getFavourNum() + 1);
+                        }
+                        RxBus.getDefault().post(new RxEvent<>("dz", item));
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        hideDialogWait();
+                    }
+                }));
+    }
+
+    //
+    public void ItemDZGoodsClick(ServiceDataBean item, View view) {
         if (item == null) {
             return;
         }
@@ -275,17 +481,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         goodView2.show(view);
     }
 
-    public boolean checkLoginState() {
-        if (("-1".equals(CacheUtils.getUser().memberid))) {
-            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     // 内部九宫格点击
-    public static void imgclick(ServiceDataBean.ResourceBean item, View view, ServiceDataBean serviceDataBean) {
+    public static void imgclick(ServiceDataBean.ResourceBean item, View view, ServiceDataBean
+            serviceDataBean) {
         if (serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getResource() != null) {
             int index = serviceDataBean.getInnerResource().get().indexOf(item);
             if (serviceDataBean.getExtData().getResource().get(index).getT() == 2) {

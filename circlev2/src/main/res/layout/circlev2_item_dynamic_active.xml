@@ -194,7 +194,7 @@
                     android:drawableLeft="@mipmap/circle_pinglun_icon"
                     android:drawablePadding="5dp"
                     android:gravity="center"
-                    android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
+                    android:onClick="@{()->viewmodel.ItemPLClick(item)}"
                     android:text="评论" />
                 <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
 

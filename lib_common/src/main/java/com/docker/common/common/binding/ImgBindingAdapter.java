@@ -158,8 +158,9 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"imageUrl"}, requireAll = false)
     public static void loadcirlceimage(ImageView imageView, String url) {
         url = CommonBdUtils.getImgUrl(url);
-        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
+        options.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .priority(Priority.HIGH)
+                .centerCrop()
                 .transform(new BitmapTransformation() {
                     @Override
                     protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
@@ -217,6 +218,16 @@ public class ImgBindingAdapter {
     public static void donttransImg(ImageView imageView, String url) {
         options.diskCacheStrategy(DiskCacheStrategy.ALL);
         GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).dontTransform().transition(withCrossFade()).into(imageView);
+
+    }
+
+
+    @BindingAdapter(value = {"rvImgUrl"}, requireAll = false)
+    public static void loadrvimage(ImageView imageView, String url) {
+        options.diskCacheStrategy(DiskCacheStrategy.ALL);
+        GlideApp.with(imageView)
+                .applyDefaultRequestOptions(options)
+                .load(url).transition(withCrossFade()).into(imageView);
 
     }
 

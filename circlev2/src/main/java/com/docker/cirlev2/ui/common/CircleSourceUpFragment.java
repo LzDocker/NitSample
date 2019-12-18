@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 
 import com.alibaba.sdk.android.oss.OSS;
 import com.bumptech.glide.Glide;
+import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.LogUtils;
 import com.dcbfhd.utilcode.utils.NetworkUtils;
@@ -51,6 +53,7 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -474,10 +477,10 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                             releaseDyamicBean.setT("2");
                             releaseDyamicBean.setVideoUrl(localMedia.getPath().substring(localMedia.getPath().lastIndexOf(ThiredPartConfig.BaseImageUrl) + ThiredPartConfig.BaseImageUrl.length()));
                             releaseDyamicBean.setLocVideoPath(localMedia.getPath());
-
+                            releaseDyamicBean.duration = localMedia.getDuration();
                             try {
                                 MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-                                mmr.setDataSource(localMedia.getPath());
+                                mmr.setDataSource(ActivityUtils.getTopActivity(), Uri.parse(localMedia.getPath()));
                                 Bitmap bitmap = mmr.getFrameAtTime((long) (1) * 1000 * 1000, MediaMetadataRetriever.OPTION_CLOSEST);
                                 String vfname = String.valueOf(System.currentTimeMillis()) + "video" + i;
                                 if (bitmap != null) {
@@ -517,6 +520,7 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
 
     public void upLoad(List<ReleaseDyamicBean> releaseDyamicBeanList) {
         mSourceUpParam.imgList.clear();
+        mSourceUpParam.upLoadVideoList.clear();
         if (releaseDyamicBeanList.size() > 0) {
             if ("1".equals(releaseDyamicBeanList.get(0).getT())) { // 图片上传
                 upImg(releaseDyamicBeanList);
@@ -549,10 +553,17 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
 //                int finalI = i;
                 if (releaseDyamicBeanList.get(i).getImgPath().startsWith("http")) {
                     releaseDyamicBeanList.get(i).setUpLoaded(true);
-                    mSourceUpParam.imgList.add(releaseDyamicBeanList.get(i).getImgPath());
+                    treeMap.put(i, releaseDyamicBeanList.get(i).getImgPath());
+//                    mSourceUpParam.imgList.add(releaseDyamicBeanList.get(i).getImgPath());
                     if (mSourceUpParam.imgList.size() == releaseDyamicBeanList.size()) {
-                        hidWaitDialog();
-                        pushStatusToUser(2);// 完成
+
+                        appExecutors.mainThread().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                hidWaitDialog();
+                                pushStatusToUser(2);// 完成
+                            }
+                        });
 //                        selectList.clear();
                     }
                 } else {
@@ -592,7 +603,13 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                             for (int key : treeMap.keySet()) {
                                 mSourceUpParam.imgList.add(treeMap.get(key));
                             }
-                            pushStatusToUser(2);// 完成
+                            appExecutors.mainThread().execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    hidWaitDialog();
+                                    pushStatusToUser(2);// 完成
+                                }
+                            });
                         }
                     });
                 } else {
@@ -684,6 +701,8 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
             });
         } else {
             for (int i = 0; i < releaseDyamicBeanList.size(); i++) {
+
+
                 if (releaseDyamicBeanList.get(i).isUpLoaded()) {
                     if (i == releaseDyamicBeanList.size()) {
                         appExecutors.mainThread().execute(new Runnable() {
@@ -696,6 +715,22 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                     }
                     continue;
                 }
+
+                if (releaseDyamicBeanList.get(i).getVideoUrl().contains("http")) {
+                    ReleaseDyamicBean releaseDyamicBean = releaseDyamicBeanList.get(i);
+                    mSourceUpParam.upLoadVideoList.add(releaseDyamicBean);
+                    if (mSourceUpParam.upLoadVideoList.size() == releaseDyamicBeanList.size()) {
+                        appExecutors.mainThread().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                hidWaitDialog();
+                                pushStatusToUser(2);// 完成
+                            }
+                        });
+                    }
+                    continue;
+                }
+
                 int finalI = i;
                 MyOSSUtils.getInstance().upVideo(this.getHoldingActivity(), FileUtils.getFileName(releaseDyamicBeanList.get(i).getLocVideoPath()), releaseDyamicBeanList.get(i).getLocVideoPath(), new MyOSSUtils.OssUpCallback() {
                     @Override
@@ -710,12 +745,18 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                             String videourl[] = video_url.split("com");
                             releaseDyamicBean.setVideoUrl(videourl[1]);
                             mSourceUpParam.upLoadVideoList.add(releaseDyamicBean);
+
                             if (TextUtils.isEmpty(releaseDyamicBeanList.get(finalI).getVideoImgPath())) {
                                 releaseDyamicBean.setUpLoaded(true);
                                 releaseDyamicBean.setVideoImgUrl("");
                                 if (mSourceUpParam.upLoadVideoList.size() == releaseDyamicBeanList.size()) {
-                                    hidWaitDialog();
-                                    pushStatusToUser(2);// 完成
+                                    appExecutors.mainThread().execute(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            hidWaitDialog();
+                                            pushStatusToUser(2);// 完成
+                                        }
+                                    });
                                 }
                             } else {
                                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -735,12 +776,22 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                                                 releaseDyamicBean.setUpLoaded(true);
                                                 releaseDyamicBean.setVideoImgUrl(imgurl[1]);
                                                 if (mSourceUpParam.upLoadVideoList.size() == releaseDyamicBeanList.size()) {
-                                                    hidWaitDialog();
-                                                    pushStatusToUser(2);// 完成
+                                                    appExecutors.mainThread().execute(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            hidWaitDialog();
+                                                            pushStatusToUser(2);// 完成
+                                                        }
+                                                    });
                                                 }
                                             } else {
-                                                hidWaitDialog();
-                                                pushStatusToUser(3);//失败
+                                                appExecutors.mainThread().execute(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        hidWaitDialog();
+                                                        pushStatusToUser(3);// 失败
+                                                    }
+                                                });
                                                 ToastUtils.showShort("视频图片上传失败请重试！");
                                             }
                                         });

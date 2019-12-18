@@ -3,34 +3,33 @@ package com.docker.cirlev2.ui.dynamicdetail;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2FragmentDetailBotContentBinding;
-import com.docker.cirlev2.databinding.Circlev2FragmentDetailH5Binding;
 import com.docker.cirlev2.vm.CircleCommentListViewModel;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
-import com.docker.cirlev2.vm.CircleMinesViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
-import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
+import com.docker.common.databinding.CommonFragmentListBinding;
 
-import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
+import io.reactivex.disposables.Disposable;
 
 public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewModel, Circlev2FragmentDetailBotContentBinding> {
 
     public ServiceDataBean serviceDataBean;
 
     public NitCommonListVm OuterCommentVm;
+
+    private Disposable disposable;
 
     public static DynamicBotContentFragment getInstance(ServiceDataBean serviceDataBean) {
         DynamicBotContentFragment dynamicH5Fragment = new DynamicBotContentFragment();
@@ -108,6 +107,15 @@ public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewM
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("comment")) {
+                if (OuterCommentVm != null) {
+                    OuterCommentVm.mItems.add(rxEvent.getR());
+
+                }
+            }
+        });
+
         serviceDataBean = (ServiceDataBean) getArguments().getSerializable("dataSource");
         mBinding.get().setItem(serviceDataBean);
 
@@ -134,4 +142,11 @@ public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewM
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(disposable!=null){
+            disposable.dispose();
+        }
+    }
 }
