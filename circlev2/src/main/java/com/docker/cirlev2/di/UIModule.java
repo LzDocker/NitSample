@@ -58,6 +58,11 @@ public abstract class UIModule {
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicDetailFragment contributeDynamicDetailFragmentInjector();
+
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleIndexActivity contributeCircleIndexActivityInjector();
 
     @ActivityScope
@@ -194,9 +199,6 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleReplyListActivity contributeCircleReplyListActivityInjector();
 
-    @ActivityScope
-    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract DynamicDetailFragment contributeDynamicDetailFragmentInjector();
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/

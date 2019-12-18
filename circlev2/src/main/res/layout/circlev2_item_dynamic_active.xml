@@ -17,6 +17,8 @@
 
         <import type="com.docker.common.common.binding.CommonBdUtils" />
 
+        <import type="com.docker.cirlev2.R" />
+
         <import type="com.docker.cirlev2.util.BdUtils" />
 
     </data>
@@ -179,21 +181,20 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-
-                    android:drawablePadding="10dp"
+                    android:drawableLeft="@mipmap/circle_zhuanfa_icon"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
                     android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"
                     android:text="转发" />
-                <!-- android:drawableLeft="@mipmap/circle_zhuanfa_icon"-->
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:drawablePadding="10dp"
+                    android:drawableLeft="@mipmap/circle_pinglun_icon"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
-                    android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
-
+                    android:onClick="@{()->viewmodel.ItemPLClick(item)}"
                     android:text="评论" />
                 <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
 
@@ -207,19 +208,20 @@
                     android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
                     android:orientation="horizontal">
 
-
                     <ImageView
                         android:id="@+id/iv_dz"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <!--                    android:src="@{item.isFav == 1?R.mipmap.circlev2_icon_hd_dz2:R.mipmap.circlev2_zan_icon}"-->
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/circle_icon_dz1"
+                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp" />
-                    <!--   android:text="@{item.favourNum == 0?BdUtils.getFavNum(item.favourNum):BdUtils.getFavNum(item.favourNum)}"-->
+                        android:layout_marginLeft="5dp"
+                        android:text="@{item.favourNum == 0?BdUtils.getFavNum(item.favourNum):BdUtils.getFavNum(item.favourNum)}" />
+
                 </LinearLayout>
 
             </RelativeLayout>

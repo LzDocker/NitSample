@@ -13,6 +13,8 @@
             name="item"
             type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
 
+        <import type="com.docker.cirlev2.R" />
+
     </data>
 
 
@@ -164,17 +166,18 @@
                     <ImageView
                         android:id="@+id/iv_dz"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <!--          android:src="@{item.isFav == 1?R.mipmap.circle_icon_hd_dz2:R.mipmap.circle_zan_icon}" -->
+                        android:layout_height="wrap_content"
+                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_hd_dz2:R.mipmap.circle_zan_icon}" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="点赞"
+                        android:text='@{item.isFav == 1? @string/isFav : @string/fav}'
                         android:textColor="#333" />
 
-                    <!--      android:text='@{item.isFav == 1? @string/isFav : @string/fav}'-->
+
                 </LinearLayout>
 
 
@@ -183,13 +186,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:drawableLeft="@mipmap/circle_pinglun_icon"
                     android:drawablePadding="10dp"
                     android:gravity="center"
                     android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
                     android:text="评论"
                     android:textColor="#333" />
-
-                <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
 
 
                 <LinearLayout
@@ -204,16 +206,17 @@
 
                     <ImageView
                         android:layout_width="20dp"
-                        android:layout_height="20dp" />
-                    <!-- android:src="@{item.isCollect == 1?R.mipmap.circle_store_colleced:R.mipmap.circle_store_collec}"-->
+                        android:layout_height="20dp"
+                        android:src="@{item.isCollect == 1?R.mipmap.circle_store_colleced:R.mipmap.circle_store_collec}" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="收藏"
+                        android:text='@{item.isCollect == 1? @string/collect : @string/isCollect}'
                         android:textColor="#333" />
-                    <!--         android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'-->
+
                 </LinearLayout>
 
             </RelativeLayout>
@@ -236,25 +239,27 @@
                     android:layout_centerVertical="true"
                     android:layout_weight=".15"
                     android:gravity="center"
-
+                    android:onClick="@{(view)->viewmodel.ItemDZGoodsClick(item,view)}"
                     android:orientation="vertical">
-                    <!--    android:onClick="@{(view)->viewmodel.ItemDZGoodsClick(item,view)}"-->
+
 
                     <ImageView
                         android:id="@+id/iv_dz_wj"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="5dp" />
-                    <!--   android:src="@{item.isFav == 1?R.mipmap.circle_wj_dz:R.mipmap.circle_wj_dzz}"-->
+                        android:layout_marginBottom="5dp"
+                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text='@{item.isFav == 1? @string/isFav : @string/favwj}'
                         android:textColor="#666"
                         android:textSize="10sp" />
 
-                    <!-- android:text='@{item.isFav == 1? @string/isFav : @string/favwj}'-->
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -263,16 +268,17 @@
                     android:layout_centerVertical="true"
                     android:layout_weight=".15"
                     android:gravity="center"
-
+                    android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
                     android:orientation="vertical">
-                    <!--      android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"-->
+
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="5dp" />
-                    <!--  android:src="@mipmap/circle_wj_ly"-->
+                        android:layout_marginBottom="5dp"
+                        android:src="@mipmap/circle_pinglun_icon" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -290,24 +296,25 @@
                     android:layout_centerVertical="true"
                     android:layout_weight=".15"
                     android:gravity="center"
-
+                    android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
                     android:orientation="vertical">
-                    <!--              android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"-->
+
 
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="5dp" />
-                    <!--   android:src="@{item.isCollect == 1?R.mipmap.circle_wj_sc:R.mipmap.circle_store_collec}"-->
+                        android:layout_marginBottom="5dp"
+                        android:src="@{item.isCollect == 1?R.mipmap.circle_store_colleced:R.mipmap.circle_store_collec}" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'
                         android:textColor="#666"
                         android:textSize="10sp" />
 
-                    <!--     android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'-->
                 </LinearLayout>
 
                 <LinearLayout

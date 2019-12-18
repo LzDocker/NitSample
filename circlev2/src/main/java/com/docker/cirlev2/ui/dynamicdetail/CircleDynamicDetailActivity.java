@@ -1,7 +1,9 @@
 package com.docker.cirlev2.ui.dynamicdetail;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -74,6 +76,9 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         });
 
         mViewModel.mCommentVoMLiveData.observe(this, commentRstVo -> {
+        });
+        mViewModel.mCollectLv.observe(this, s -> {
+
         });
     }
 

@@ -53,6 +53,7 @@ import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.SpeechUtility;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.luck.picture.lib.permissions.RxPermissions;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -368,8 +369,6 @@ public class CirclePubRequestionFragment extends CommonFragment<CirclePublishVie
                             localMedia.setPictureType("image/jpeg");
                             localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));
                         }
-
-
 //                        localMedia.setPictureType("1");
 //                        if (!TextUtils.isEmpty(resourceBeans.get(i).getImg())) {
 //                            localMedia.setPath(Constant.getCompleteImageUrl(resourceBeans.get(i).getImg()));

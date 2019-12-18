@@ -43,6 +43,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
 public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentIndexBinding> {
     public static IndexFragment newInstance() {
         return new IndexFragment();
