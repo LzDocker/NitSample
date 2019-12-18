@@ -84,6 +84,7 @@ public class AppRouter {
     public static final String CIRCLE_dynamic_v2_detail = CircleV2Group + "circle_dynamic_v2_detail";
     public static final String CIRCLE_persion_v2_detail = CircleGroup + "CIRCLE_persion_v2_detail";
     public static final String CIRCLE_comment_v2_reply = CircleGroup + "CIRCLE_comment_v2_reply";
+    public static final String CIRCLE_comment_v2_ANSWER = CircleGroup + "CIRCLE_comment_v2_ANSWER";
 
     public static final String ProGroup = "/Pro/";
 

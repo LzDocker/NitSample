@@ -2,37 +2,33 @@ package com.docker.cirlev2.ui.dynamicdetail;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Color;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
-import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2DynamicDetailActivityBinding;
 import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
-import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.databinding.CommonFragmentListBinding;
-import com.umeng.socialize.ShareAction;
+import com.docker.common.common.widget.dialog.ConfirmDialog;
+import com.docker.core.widget.BottomSheetDialog;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.ShareBoardConfig;
 
 import java.util.HashMap;
 
-import io.reactivex.disposables.Disposable;
-
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
 import static com.docker.common.common.router.AppRouter.CIRCLE_dynamic_v2_detail;
 
 @Route(path = CIRCLE_dynamic_v2_detail)
@@ -41,7 +37,6 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     @Autowired
     String dynamicId;
     public ServiceDataBean mDynamicDetailVo;
-    private Disposable disposable;
 
     @Override
     protected int getLayoutId() {
@@ -57,11 +52,7 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     public void initView() {
         mToolbar.hide();
         dynamicId = getIntent().getStringExtra("dynamicId");
-        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
-            if (rxEvent.getT().equals("show_share")) {
-                showShare((ServiceDataBean.ShareBean) rxEvent.getR());
-            }
-        });
+        mBinding.setViewmodel(mViewModel);
     }
 
 
@@ -77,18 +68,145 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
             processData();
             processView();
         });
+        mViewModel.mDynamicDelLv.observe(this, s -> finish());
+
+        mViewModel.mServerLiveData.observe(this, o -> {
+        });
+
+        mViewModel.mCommentVoMLiveData.observe(this, commentRstVo -> {
+        });
     }
 
     private void processView() {
         if (mDynamicDetailVo != null) {
             // ui
+            mBinding.setItem(mDynamicDetailVo);
+            if (!mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
+                mBinding.circleJubao.setVisibility(View.VISIBLE); // 举报
+            }
+//            if (mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
+//                mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
+//            }
+            mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
 
+            mBinding.ivShare.setOnClickListener(v -> {
+                mViewModel.ItemZFClick(mDynamicDetailVo, null); // 转发
+            });
+            mBinding.circleJubao.setOnClickListener(v -> {
+                processReportUi();
+            });
+            mBinding.ivBack.setOnClickListener(v -> finish()); // 返回
+            mBinding.ivMenuMore.setOnClickListener(v -> {  // 更多
+                showCircleMenu();
+            });
 
         } else {
 
 
         }
+
+
     }
+
+    public void processReportUi() {
+        String[] title = new String[]{"举报", "拉黑"};
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        bottomSheetDialog.setDataCallback(title, position -> {
+            bottomSheetDialog.dismiss();
+            switch (position) {
+                case 0:
+                    processReportUiStep2();
+                    break;
+                case 1:
+                    mViewModel.circleBlackList(mDynamicDetailVo.getMemberid());
+                    break;
+            }
+        });
+        bottomSheetDialog.show(this);
+    }
+
+    public void processReportUiStep2() {
+        String[] title = new String[]{"色情、赌博、毒品", "谣言、社会负面、诈骗", "邪教、非法集会、传销", "医药、整型、虚假广告", "有奖集赞和关注转发", "违反国家政策和法律"};
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        bottomSheetDialog.setDataCallback(title, position -> {
+            bottomSheetDialog.dismiss();
+            mViewModel.circlePersionReport(mDynamicDetailVo.getMemberid(), title[position]);
+        });
+        bottomSheetDialog.show(this);
+    }
+
+
+    public void showCircleMenu() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        bottomSheetDialog.setDataCallback(new String[]{"编辑", "删除"}, position -> {
+            bottomSheetDialog.dismiss();
+            int type = 0;
+            switch (position) {
+                case 0:
+                    switch (mDynamicDetailVo.getType()) {
+                        case "news":
+                            type = PUBLISH_TYPE_NEWS;
+                            break;
+
+                        case "dynamic":
+                            type = PUBLISH_TYPE_ACTIVE;
+                            break;
+
+                        case "goods":
+//                            UserInfoVo userInfoVo = CacheUtils.getUser();
+//                            String weburl = Constant.BaseServeTest + "index.php?m=publish.push_dynamic" +
+//                                    "&t=" + serviceDataBean.getType() + "&memberid=" + userInfoVo.uid + "&uuid=" + userInfoVo.uuid + "" +
+//                                    "&lat=" + lat + "&lng=" + lng + "&area1=" + province + "&area2=" + city + "&area3=" + district + "&id=" + serviceDataBean.getDynamicid();
+//                            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", weburl).withString("title", "编辑").navigation();
+                            break;
+
+                        case "answer":
+                            type = PUBLISH_TYPE_QREQUESTION;
+                            break;
+                    }
+
+                    if (type != 0) {
+                        StaCirParam staCirParam = new StaCirParam();
+                        staCirParam.serviceDataBean = mDynamicDetailVo;
+                        ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX).withSerializable("mStartParam", staCirParam).withInt("editType", 2).withInt("type", type).navigation();
+                    }
+
+                    break;
+
+                case 1:
+                    showConfirmdialog();
+                    break;
+            }
+        });
+        bottomSheetDialog.show(this);
+    }
+
+    private void showConfirmdialog() {
+        String tip = "";
+        if ("dynamic".equals(mDynamicDetailVo.getType())) {
+            tip = "确定删除该动态?";
+        } else {
+            tip = "确定删除该商品?";
+        }
+        ConfirmDialog.newInstance(tip, "删除后无法恢复，请谨慎删除").setConfimLietener(new ConfirmDialog.ConfimLietener() {
+            @Override
+            public void onCancle() {
+
+            }
+
+            @Override
+            public void onConfim() {
+                mViewModel.dynamicDel(mDynamicDetailVo.getCircleid(), mDynamicDetailVo.getDynamicid(), mDynamicDetailVo.getUtid());
+                RxBus.getDefault().post(new RxEvent<>("dynamic_refresh", ""));
+            }
+
+            @Override
+            public void onConfim(String edit) {
+
+            }
+        }).setMargin(24).show(getSupportFragmentManager());
+    }
+
 
     @Override
     public void initRouter() {
@@ -113,50 +231,6 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                     break;
             }
         }
-    }
-
-
-    public void showShare(ServiceDataBean.ShareBean shareBean) {
-        if (shareBean == null) {
-            return;
-        }
-        ShareBoardConfig config = new ShareBoardConfig();//新建ShareBoardConfig
-        config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR);
-        config.setTitleVisibility(false);
-        config.setIndicatorVisibility(false);
-        config.setCancelButtonVisibility(false);
-        config.setCancelButtonVisibility(false);
-        config.setShareboardBackgroundColor(Color.WHITE);
-        UMImage image = new UMImage(this, shareBean.getShareImg());//网络图片
-        image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
-        image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分
-        UMWeb web = new UMWeb(shareBean.getShareUrl());
-        web.setTitle(shareBean.getShareTit());//标题
-        web.setThumb(image);  //缩略图
-        web.setDescription(shareBean.getShareDesc());//描述
-        new ShareAction(this).withMedia(web)
-                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
-                .setCallback(new UMShareListener() {
-                    @Override
-                    public void onStart(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                        ToastUtils.showShort("分享失败请重试");
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                }).open(config);
     }
 
     @Override

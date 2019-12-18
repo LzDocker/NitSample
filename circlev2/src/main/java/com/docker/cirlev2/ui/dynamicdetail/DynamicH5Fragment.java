@@ -3,16 +3,20 @@ package com.docker.cirlev2.ui.dynamicdetail;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
-import com.docker.cirlev2.databinding.Circlev2FragmentDetailH5Binding;
 import com.docker.cirlev2.databinding.Circlev2FragmentDetailH5V4Binding;
 import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
+
+import io.reactivex.disposables.Disposable;
 
 public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailViewModel, Circlev2FragmentDetailH5V4Binding> {
 
@@ -41,6 +45,8 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
 
     }
 
+    private Disposable disposable;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -49,6 +55,17 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
         FragmentUtils.add(getChildFragmentManager(), DynamicBotContentFragment.getInstance(serviceDataBean), R.id.frame_bot_content);
 
         mBinding.get().setViewmodel(mViewModel);
+
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("comment")) {
+                mBinding.get().netSpeed.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN);
+                    }
+                }, 500);
+            }
+        });
     }
 
     @Override
@@ -56,4 +73,11 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by gk on 2017/12/3 0003.
  */
 
-public class ReleaseDyamicBean implements Serializable{
+public class ReleaseDyamicBean implements Serializable {
     private String t;
     private String img;
     private String url;
@@ -22,7 +22,7 @@ public class ReleaseDyamicBean implements Serializable{
     private String videoUrl;
     private String videoImgPath;
     private String videoImgUrl;
-
+    public Long duration;
 
 
     public boolean isUpLoaded() {

@@ -43,7 +43,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_back" />
+                    android:src="@mipmap/ic_toolbar_back" />
 
                 <TextView
                     android:id="@+id/title"
@@ -149,8 +149,7 @@
                 android:layout_height="45dp"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:visibility="gone">
+                android:paddingRight="20dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -158,9 +157,9 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
+                    android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
                     android:orientation="horizontal">
 
-                    <!--  android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"-->
 
                     <ImageView
                         android:id="@+id/iv_dz"
@@ -172,6 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:text="点赞"
                         android:textColor="#333" />
 
                     <!--      android:text='@{item.isFav == 1? @string/isFav : @string/fav}'-->
@@ -185,9 +185,10 @@
                     android:layout_centerInParent="true"
                     android:drawablePadding="10dp"
                     android:gravity="center"
+                    android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
                     android:text="评论"
                     android:textColor="#333" />
-                <!--      android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"-->
+
                 <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
 
 
@@ -197,9 +198,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-
+                    android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
                     android:orientation="horizontal">
-                    <!--       android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"-->
+
 
                     <ImageView
                         android:layout_width="20dp"
@@ -210,6 +211,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:text="收藏"
                         android:textColor="#333" />
                     <!--         android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'-->
                 </LinearLayout>

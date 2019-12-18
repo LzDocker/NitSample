@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,6 +52,7 @@ import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -474,10 +476,14 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                             releaseDyamicBean.setT("2");
                             releaseDyamicBean.setVideoUrl(localMedia.getPath().substring(localMedia.getPath().lastIndexOf(ThiredPartConfig.BaseImageUrl) + ThiredPartConfig.BaseImageUrl.length()));
                             releaseDyamicBean.setLocVideoPath(localMedia.getPath());
-
+                            releaseDyamicBean.duration = localMedia.getDuration();
                             try {
                                 MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-                                mmr.setDataSource(localMedia.getPath());
+                                if (Build.VERSION.SDK_INT >= 14) {
+                                    mmr.setDataSource(localMedia.getPath(), new HashMap<String, String>());
+                                } else {
+                                    mmr.setDataSource(localMedia.getPath());
+                                }
                                 Bitmap bitmap = mmr.getFrameAtTime((long) (1) * 1000 * 1000, MediaMetadataRetriever.OPTION_CLOSEST);
                                 String vfname = String.valueOf(System.currentTimeMillis()) + "video" + i;
                                 if (bitmap != null) {
@@ -549,7 +555,8 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
 //                int finalI = i;
                 if (releaseDyamicBeanList.get(i).getImgPath().startsWith("http")) {
                     releaseDyamicBeanList.get(i).setUpLoaded(true);
-                    mSourceUpParam.imgList.add(releaseDyamicBeanList.get(i).getImgPath());
+                    treeMap.put(i, releaseDyamicBeanList.get(i).getImgPath());
+//                    mSourceUpParam.imgList.add(releaseDyamicBeanList.get(i).getImgPath());
                     if (mSourceUpParam.imgList.size() == releaseDyamicBeanList.size()) {
                         hidWaitDialog();
                         pushStatusToUser(2);// 完成
@@ -684,6 +691,8 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
             });
         } else {
             for (int i = 0; i < releaseDyamicBeanList.size(); i++) {
+
+
                 if (releaseDyamicBeanList.get(i).isUpLoaded()) {
                     if (i == releaseDyamicBeanList.size()) {
                         appExecutors.mainThread().execute(new Runnable() {
@@ -696,6 +705,17 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                     }
                     continue;
                 }
+
+                if (releaseDyamicBeanList.get(i).getVideoUrl().contains("http")) {
+                    ReleaseDyamicBean releaseDyamicBean = releaseDyamicBeanList.get(i);
+                    mSourceUpParam.upLoadVideoList.add(releaseDyamicBean);
+                    if (mSourceUpParam.upLoadVideoList.size() == releaseDyamicBeanList.size()) {
+                        hidWaitDialog();
+                        pushStatusToUser(2);// 完成
+                    }
+                    continue;
+                }
+
                 int finalI = i;
                 MyOSSUtils.getInstance().upVideo(this.getHoldingActivity(), FileUtils.getFileName(releaseDyamicBeanList.get(i).getLocVideoPath()), releaseDyamicBeanList.get(i).getLocVideoPath(), new MyOSSUtils.OssUpCallback() {
                     @Override
@@ -710,6 +730,7 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                             String videourl[] = video_url.split("com");
                             releaseDyamicBean.setVideoUrl(videourl[1]);
                             mSourceUpParam.upLoadVideoList.add(releaseDyamicBean);
+
                             if (TextUtils.isEmpty(releaseDyamicBeanList.get(finalI).getVideoImgPath())) {
                                 releaseDyamicBean.setUpLoaded(true);
                                 releaseDyamicBean.setVideoImgUrl("");
