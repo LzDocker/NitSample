@@ -41,8 +41,10 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
 
     @Override
     protected void initView(View var1) {
-
+        mViewModel.mAttenLv.observe(this, s -> {
+        });
     }
+
     private Disposable disposable;
 
     @Override
@@ -52,18 +54,11 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
         mBinding.get().setItem(serviceDataBean);
         FragmentUtils.add(getChildFragmentManager(), DynamicBotContentFragment.getInstance(serviceDataBean), R.id.frame_bot_content);
         mBinding.get().setViewmodel(mViewModel);
-
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("comment")) {
-                mBinding.get().netSpeed.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN);
-                    }
-                }, 500);
+                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN), 500);
             }
         });
-
     }
 
     @Override
@@ -74,7 +69,7 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(disposable!=null){
+        if (disposable != null) {
             disposable.dispose();
         }
     }

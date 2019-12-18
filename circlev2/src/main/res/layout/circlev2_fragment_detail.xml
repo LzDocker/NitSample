@@ -21,10 +21,10 @@
 
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/net_speed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:id="@+id/net_speed"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_scrollFlags="scroll">
 
@@ -72,6 +72,7 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@+id/iv_user_icon"
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
                     android:text="@{BdUtils.getStandardDate(item.inputtime)}"
                     android:textColor="#979797"
                     android:textSize="11sp" />
@@ -288,10 +289,7 @@
                         android:textColor="#999"
                         android:textSize="14sp" />
                 </LinearLayout>
-
-
             </LinearLayout>
-
 
             <FrameLayout
                 android:id="@+id/frame_bot_content"

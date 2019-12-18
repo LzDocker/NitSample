@@ -126,12 +126,19 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/frame_content"
+            <com.docker.common.common.widget.empty.EmptyLayout
+                android:id="@+id/empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/frame_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </FrameLayout>
+            </com.docker.common.common.widget.empty.EmptyLayout>
+
 
         </LinearLayout>
 
@@ -159,7 +166,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
+                    android:onClick="@{(view)->viewmodel.ItemDZGoodsClick(item,view)}"
                     android:orientation="horizontal">
 
 

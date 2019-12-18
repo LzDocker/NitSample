@@ -90,7 +90,7 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
 //        }
 
         commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-        commonListReq.ReqParam.put("t", "dynamic");
+//        commonListReq.ReqParam.put("t", "dynamic");
         commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
         commonListReq.ReqParam.put("memberid", "67");
         commonListReq.ReqParam.put("companyid", "1");

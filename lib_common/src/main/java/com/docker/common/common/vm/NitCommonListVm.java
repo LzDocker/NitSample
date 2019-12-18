@@ -79,11 +79,13 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public ObservableList<BaseItemModel> mItems = new ObservableArrayList<>();
     // 多类型条目适配
     public OnItemBind<BaseItemModel> mutipartItemsBinding = (ItemBinding itemBinding, int position, BaseItemModel item) -> {
+        if (item instanceof BaseSampleItem ) {
+            ((BaseSampleItem) item).index = position;
+        }
         itemBinding.set(BR.item, item.getItemLayout());
     };
     // itembinding
-    public ItemBinding<BaseItemModel> itemBinding = ItemBinding.of(mutipartItemsBinding)
-            .bindExtra(BR.viewmodel, this);
+    public ItemBinding<BaseItemModel> itemBinding = ItemBinding.of(mutipartItemsBinding).bindExtra(BR.viewmodel, this);
 
     public void setLoadControl(boolean enable) {
         switch (mCommonListReq.refreshState) {
