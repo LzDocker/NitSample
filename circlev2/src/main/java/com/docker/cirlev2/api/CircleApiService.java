@@ -28,7 +28,6 @@ import com.docker.cirlev2.vo.entity.TradingCommonVo;
 import com.docker.cirlev2.vo.entity.TypeVo;
 import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.RstServerVo;
-import com.docker.common.common.vo.ShareBean;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
@@ -334,7 +333,9 @@ public interface CircleApiService {
      * */
     @POST("api.php?m=dynamic.share")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<ShareBean>>> share(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<ServiceDataBean.ShareBean>>> share(@FieldMap Map<String, String> params);
+
+
 
     /*
      * 关注
@@ -363,7 +364,7 @@ public interface CircleApiService {
 
     @POST("api.php?m=circle.invitation")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<ShareBean>>> invite(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<ServiceDataBean.ShareBean>>> invite(@FieldMap Map<String, String> params);
 
     @POST("api.php?m=dynamic.replyList")
     @FormUrlEncoded
