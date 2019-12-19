@@ -19,18 +19,20 @@
 
     </data>
 
-    <RelativeLayout
+    <com.docker.common.common.widget.CustomLinearLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
 
         <com.docker.common.common.widget.refresh.SmartRefreshLayout
             android:id="@+id/refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_below="@+id/title"
-            android:layout_marginBottom="50dp"
             bind:bdcomplete="@={viewmodel.mCompleteCommand}"
             bind:bdenable="@={viewmodel.bdenable}"
             bind:bdenablemore="@={viewmodel.bdenablemore}"
@@ -51,14 +53,17 @@
         </com.docker.common.common.widget.refresh.SmartRefreshLayout>
 
         <RelativeLayout
+            android:id="@+id/rv_bottom"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="5dp"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:visibility="visible">
 
-            <TextView
+            <EditText
                 android:id="@+id/edit_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,7 +86,7 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+    </com.docker.common.common.widget.CustomLinearLayout>
 
 
 </layout>

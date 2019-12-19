@@ -25,6 +25,7 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.SoftKeyBroadManager;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.UserInfoVo;
@@ -46,7 +47,7 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
     private String replay;
     private ServiceDataBean serviceDataBean;
 
-    public static void startMe(Context context,  ServiceDataBean serviceDataBean) {
+    public static void startMe(Context context, ServiceDataBean serviceDataBean) {
         Intent intent = new Intent(context, CircleMoreReplyListActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("serviceDataBean", serviceDataBean);
@@ -83,7 +84,8 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.falg = 1002;
         commonListOptions.ReqParam.put("dynamicid", serviceDataBean.getDynamicid());
-        NitBaseProviderCard.providerCoutainerForFrame(getSupportFragmentManager(),R.id.frame_comment,commonListOptions);
+        commonListOptions.externs.put("serverdata", serviceDataBean);
+        NitBaseProviderCard.providerCoutainerForFrame(getSupportFragmentManager(), R.id.frame_comment, commonListOptions);
 //        FragmentUtils.add(CircleMoreReplyListActivity.this.getSupportFragmentManager(), DynamicBotContentFragment.getInstance(serviceDataBean), R.id.frame_comment);
 
 
@@ -108,7 +110,8 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
     @Override
     public void initView() {
         mToolbar.setTitle("评论列表");
-
+        SoftKeyBroadManager softKeyBroadManager = new SoftKeyBroadManager(mBinding.root);
+        softKeyBroadManager.addSoftKeyboardStateListener(softKeyboardStateListener);
 
         mBinding.btnCommit.setOnClickListener(v -> {
             replay = mBinding.editInput.getText().toString().trim();
@@ -135,8 +138,8 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
                 params.put("nickname", userInfoVo.nickname);
             }
             params.put("content", replay);
-//            params.put("cid", commentVo.getCommentid());
-//            params.put("reply_memberid", commentVo.getMemberid());
+            params.put("cid", serviceDataBean.getDynamicid());
+            params.put("reply_memberid", serviceDataBean.getMemberid());
 //            params.put("reply_uuid", commentVo.getUuid());
 //            params.put("reply_nickname", commentVo.getNickname());
 //            mViewModel.replayComment(commentVo, params);
@@ -153,4 +156,17 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
     public void initRouter() {
         ARouter.getInstance().inject(this);
     }
+
+    SoftKeyBroadManager.SoftKeyboardStateListener softKeyboardStateListener = new SoftKeyBroadManager.SoftKeyboardStateListener() {
+
+        @Override
+        public void onSoftKeyboardOpened(int keyboardHeightInPx) {
+            mBinding.rvBottom.requestLayout();
+        }
+
+        @Override
+        public void onSoftKeyboardClosed() {
+            mBinding.rvBottom.requestLayout();
+        }
+    };
 }

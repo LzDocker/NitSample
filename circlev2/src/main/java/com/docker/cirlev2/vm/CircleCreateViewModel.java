@@ -3,9 +3,11 @@ package com.docker.cirlev2.vm;
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
 
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.entity.CircleCreateRst;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
+import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.common.common.utils.ParamUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
@@ -18,6 +20,7 @@ import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,6 +44,7 @@ public class CircleCreateViewModel extends NitCommonVm {
     @Inject
     CircleApiService circleApiService;
 
+    //获取圈子详情
     public void getCircleDetailVo(String utid, String circleid) {
         mCircleDetailLv.addSource(RequestServer(circleApiService.fechCircleDetailVo(utid, circleid)),
                 new NitNetBoundObserver<>(new NitBoundCallback<CircleCreateVo>() {
@@ -112,6 +116,31 @@ public class CircleCreateViewModel extends NitCommonVm {
             params.put("fullName", userInfoVo.nickname);
         }
         mCircleEditLv.addSource(RequestServer(circleApiService.createCircle(params)),
+                new NitNetBoundObserver<>(new NitBoundCallback<CircleCreateRst>() {
+                    @Override
+                    public void onNetworkError(Resource<CircleCreateRst> resource) {
+                        super.onNetworkError(resource);
+                    }
+
+                    @Override
+                    public void onComplete(Resource<CircleCreateRst> resource) {
+                        super.onComplete(resource);
+                        mCircleEditLv.setValue(resource.data);
+                    }
+                }));
+    }
+
+
+    public void quitCircle(StaCirParam mStartParam) {
+        showDialogWait("退出中..", false);
+        Map<String, String> parms = new HashMap<>();
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        parms.put("circleid", mStartParam.getCircleid());
+        parms.put("utid", mStartParam.getUtid());
+        parms.put("memberid", userInfoVo.uid);
+        parms.put("uuid", userInfoVo.uuid);
+
+        mCircleEditLv.addSource(RequestServer(circleApiService.quitCircle(parms)),
                 new NitNetBoundObserver<>(new NitBoundCallback<CircleCreateRst>() {
                     @Override
                     public void onNetworkError(Resource<CircleCreateRst> resource) {

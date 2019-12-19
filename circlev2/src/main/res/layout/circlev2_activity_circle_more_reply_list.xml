@@ -14,9 +14,11 @@
             type="com.docker.common.common.vm.NitCommonListVm" />
     </data>
 
-    <LinearLayout
+    <com.docker.common.common.widget.CustomLinearLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
         <FrameLayout
@@ -26,11 +28,14 @@
             android:layout_weight="1" />
 
         <RelativeLayout
+            android:id="@+id/rv_bottom"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
             android:visibility="visible">
 
             <EditText
@@ -55,7 +60,7 @@
                 android:textColor="@color/common_white" />
 
         </RelativeLayout>
-    </LinearLayout>
+    </com.docker.common.common.widget.CustomLinearLayout>
 </layout>
 
 
