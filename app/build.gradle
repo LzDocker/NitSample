@@ -95,7 +95,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api project(':lib_common')
-    api project(":circle")
+//    api project(":circle")
     api project(":account")
     api project(":videobasic")
     api project(":message")
