@@ -15,6 +15,8 @@ import com.docker.cirlev2.vm.CircleIndexViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonContainerOptions;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
@@ -27,6 +29,8 @@ import java.util.List;
 
 import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
 import static com.docker.common.common.config.Constant.KEY_RVUI_LINER;
+import static com.docker.common.common.router.AppRouter.CIRCLE_CLASS_LIST;
+import static com.docker.common.common.router.AppRouter.COMMON_CONTAINER;
 
 /*
  *
@@ -61,6 +65,29 @@ public class CircleIndexFragment extends NitCommonFragment<CircleIndexViewModel,
 
         initTab();
 
+        // 更多圈子
+        mBinding.get().tvCircleMore.setOnClickListener(v -> {
+            ARouter.getInstance().build(CIRCLE_CLASS_LIST).navigation();
+        });
+
+        // 我的圈子
+        mBinding.get().tvMineMore.setOnClickListener(v -> {
+
+            CommonContainerOptions commonContainerOptions = new CommonContainerOptions();
+            commonContainerOptions.title = "我的圈子";
+            CommonListOptions commonOptions = new CommonListOptions();
+            commonOptions.falg = 103;
+            commonOptions.ReqParam.put("memberid", "3");
+            commonOptions.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
+            commonOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+
+            commonContainerOptions.commonListOptions = commonOptions;
+            ARouter.getInstance().build(COMMON_CONTAINER)
+                    .withSerializable(Constant.ContainerParam, commonContainerOptions)
+                    .withString(Constant.ContainerCommand, "com.docker.cirlev2.vm.CircleMinesViewModel").navigation();
+        });
+
+        //tv_mine_more
 
     }
 

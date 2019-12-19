@@ -10,6 +10,10 @@
 
         <import type="com.docker.common.common.binding.CommonBdUtils" />
 
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleMinesViewModel" />
+
     </data>
 
 
@@ -65,7 +69,7 @@
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/circlev2_iv_news"
-            android:background="@drawable/circle_lable_shape"
+            android:background="@drawable/circlev2_lable_shape"
             android:paddingLeft="7dp"
             android:paddingRight="7dp"
             android:text="@{item.classStr}"
@@ -80,7 +84,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/tv_lable1"
-            android:background="@drawable/circle_lable_shape"
+            android:background="@drawable/circlev2_lable_shape"
             android:paddingLeft="7dp"
             android:paddingRight="7dp"
             android:text="@{item.classStr1}"
@@ -95,6 +99,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:background="#FFC600"
+            android:onClick="@{()->viewmodel.joinCircle(item.circleid,item.utid,item.index)}"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="加入"

@@ -71,6 +71,7 @@
                                 android:layout_weight="1" />
 
                             <TextView
+                                android:id="@+id/tv_mine_more"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:drawableRight="@mipmap/arrow_right"
