@@ -77,7 +77,6 @@ public interface CircleApiService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> joinCircle(@FieldMap Map<String, String> params);
 
-
     /*
      * 圈子详情
      * */

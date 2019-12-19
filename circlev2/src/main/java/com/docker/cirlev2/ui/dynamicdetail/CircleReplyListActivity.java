@@ -5,11 +5,15 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.ViewTreeObserver;
+import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -26,6 +30,8 @@ import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.utils.DisplayUtil;
+import com.docker.common.common.utils.SoftKeyBroadManager;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.refresh.api.RefreshLayout;
@@ -50,6 +56,7 @@ public class CircleReplyListActivity extends NitCommonActivity<CircleCommentList
     //    NitAbsSampleAdapter adapter;
     private String replay;
     private ServiceDataBean serviceDataBean;
+    private RelativeLayout relativeLayout;
 
     public static void startMe(Context context, CommentVo commentVo, ServiceDataBean serviceDataBean) {
         Intent intent = new Intent(context, CircleReplyListActivity.class);
@@ -73,6 +80,8 @@ public class CircleReplyListActivity extends NitCommonActivity<CircleCommentList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SoftKeyBroadManager softKeyBroadManager = new SoftKeyBroadManager(mBinding.root);
+        softKeyBroadManager.addSoftKeyboardStateListener(softKeyboardStateListener);
         commentVo = (CommentVo) getIntent().getSerializableExtra("commentVo");
         serviceDataBean = (ServiceDataBean) getIntent().getSerializableExtra("serviceDataBean");
         mBinding.setViewmodel(mViewModel);
@@ -83,6 +92,8 @@ public class CircleReplyListActivity extends NitCommonActivity<CircleCommentList
         mViewModel.setTopCommon(commentVo);
         mBinding.setItem(commentVo);
         mViewModel.loadData();
+
+
 //        mToolbar.setTitle(commentVo.getReplyNum() + "条回复");
 
 //        mViewModel.replatLv.observe(this, new Observer<List<CommentVo>>() {
@@ -169,4 +180,17 @@ public class CircleReplyListActivity extends NitCommonActivity<CircleCommentList
     public void initRouter() {
         ARouter.getInstance().inject(this);
     }
+
+    SoftKeyBroadManager.SoftKeyboardStateListener softKeyboardStateListener = new SoftKeyBroadManager.SoftKeyboardStateListener() {
+
+        @Override
+        public void onSoftKeyboardOpened(int keyboardHeightInPx) {
+            mBinding.rvBottom.requestLayout();
+        }
+
+        @Override
+        public void onSoftKeyboardClosed() {
+            mBinding.rvBottom.requestLayout();
+        }
+    };
 }

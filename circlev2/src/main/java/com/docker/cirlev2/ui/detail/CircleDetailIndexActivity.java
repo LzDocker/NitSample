@@ -26,6 +26,7 @@ import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2DetailIndexActivityBinding;
+import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.ui.publish.CirclePublishActivity;
@@ -204,7 +205,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
                             mStartParam.setCircleid(circleid);
                             mStartParam.setUtid(utid);
                             mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
-//                            CircleInfoActivity.startMe(CircleDetailIndexActivity.this, mStartParam);
+                            CircleInfoActivity.startMe(CircleDetailIndexActivity.this, mStartParam);
                         }
                         break;
                 }

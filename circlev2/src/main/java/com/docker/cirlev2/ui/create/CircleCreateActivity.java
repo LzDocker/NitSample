@@ -1,6 +1,7 @@
 package com.docker.cirlev2.ui.create;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,9 +15,11 @@ import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2CreateActivityBinding;
 import com.docker.cirlev2.databinding.Circlev2SampleActivityBinding;
+import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.vm.CircleCreateViewModel;
 import com.docker.cirlev2.vm.CircleMinesViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
+import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.model.CommonListOptions;
@@ -43,7 +46,15 @@ public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel,
 
     @Autowired
     String utid; // 要编辑的圈子
-
+    public static void startMe(Context context, int type, String utid,String circleID) {
+        Intent intent = new Intent(context, CircleCreateActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("TYPE", type);
+        bundle.putSerializable("mUtid", utid);
+        bundle.putSerializable("circleID", circleID);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.circlev2_create_activity;

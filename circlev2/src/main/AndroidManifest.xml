@@ -11,7 +11,9 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name="com.docker.cirlev2.ui.create.CircleCreateIndexActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.detail.CircleDetailIndexActivity"></activity>
-        <activity android:name="com.docker.cirlev2.ui.publish.CirclePublishActivity" />
+        <activity
+            android:name="com.docker.cirlev2.ui.publish.CirclePublishActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="com.docker.cirlev2.ui.common.CircleCoverActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.publish.select.CirclePerssionSelectActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.publish.select.CircleShareSelectActivity"></activity>
@@ -27,13 +29,12 @@
         <activity android:name="com.docker.cirlev2.ui.persion.CircleGroupPerssionActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity"></activity>
+        <activity android:name=".ui.CircleInfoActivity"></activity>
         <activity
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"></activity>
 
     </application>

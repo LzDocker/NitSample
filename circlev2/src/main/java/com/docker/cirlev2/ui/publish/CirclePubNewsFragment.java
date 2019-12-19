@@ -1,16 +1,22 @@
 package com.docker.cirlev2.ui.publish;
 
 import android.Manifest;
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.dcbfhd.utilcode.utils.KeyboardUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -26,6 +32,8 @@ import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.widget.ColorPickerDialog;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.DisplayUtil;
+import com.docker.common.common.utils.SoftKeyBroadManager;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
@@ -92,7 +100,8 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mBinding.get().setViewmodel(mViewModel);
-
+        SoftKeyBroadManager softKeyBroadManager = new SoftKeyBroadManager(mBinding.get().root);
+        softKeyBroadManager.addSoftKeyboardStateListener(softKeyboardStateListener);
         mViewModel.mImageUploadLV.observe(this, s -> {
             mBinding.get().richEditor.insertImage(CommonBdUtils.getServerImageUrl(s), "");
         });
@@ -129,6 +138,7 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
         }
         processStaparam();
     }
+
 
 
     public void processStaparam() {
@@ -209,6 +219,7 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
                 }
             }
         });
+
 
         KeyboardUtils.registerSoftInputChangedListener(CirclePubNewsFragment.this.getHoldingActivity(),
                 new KeyboardUtils.OnSoftInputChangedListener() {
@@ -325,6 +336,8 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
     }
 
 
+
+
     private void applyPerssion() {
 
         RxPermissions rxPermissions = new RxPermissions(this.getHoldingActivity());
@@ -439,6 +452,19 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
 
         mViewModel.publishNews(paramMap);
     }
+
+    SoftKeyBroadManager.SoftKeyboardStateListener softKeyboardStateListener = new SoftKeyBroadManager.SoftKeyboardStateListener() {
+
+        @Override
+        public void onSoftKeyboardOpened(int keyboardHeightInPx) {
+            mBinding.get().horizontalScrollView.requestLayout();
+        }
+
+        @Override
+        public void onSoftKeyboardClosed() {
+            mBinding.get().horizontalScrollView.requestLayout();
+        }
+    };
 
     @Override
     public void onDestroy() {
