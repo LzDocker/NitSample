@@ -23,7 +23,9 @@ import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.dialog.ConfirmDialog;
+import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.core.widget.BottomSheetDialog;
+import com.gyf.immersionbar.ImmersionBar;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
@@ -65,11 +67,22 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         param.put("dynamicid", dynamicId);
         param.put("memberid", userInfoVo.uid);
         param.put("uuid", userInfoVo.uuid);
-        mViewModel.fechDynamicDetail(param).observe(CircleDynamicDetailActivity.this, serviceDataBean -> {
+        mViewModel.fechDynamicDetail(param);
+        mViewModel.mDynamicDetailLv.observe(this, serviceDataBean -> {
             mDynamicDetailVo = serviceDataBean;
+            if (mDynamicDetailVo != null) {
+                mBinding.empty.postDelayed(() -> mBinding.empty.hide(), 400);
+            } else {
+                mBinding.empty.showError();
+                mBinding.empty.setOnretryListener(() -> {
+                    mViewModel.fechDynamicDetail(param);
+                });
+                return;
+            }
             processData();
             processView();
         });
+
         mViewModel.mDynamicDelLv.observe(this, s -> finish());
 
         mViewModel.mServerLiveData.observe(this, o -> {
@@ -83,32 +96,27 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     }
 
     private void processView() {
-        if (mDynamicDetailVo != null) {
-            // ui
-            mBinding.setItem(mDynamicDetailVo);
-            if (!mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
-                mBinding.circleJubao.setVisibility(View.VISIBLE); // 举报
-            }
+
+        // ui
+        mBinding.setItem(mDynamicDetailVo);
+        if (!mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
+            mBinding.circleJubao.setVisibility(View.VISIBLE); // 举报
+        }
 //            if (mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
 //                mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
 //            }
-            mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
+        mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
 
-            mBinding.ivShare.setOnClickListener(v -> {
-                mViewModel.ItemZFClick(mDynamicDetailVo, null); // 转发
-            });
-            mBinding.circleJubao.setOnClickListener(v -> {
-                processReportUi();
-            });
-            mBinding.ivBack.setOnClickListener(v -> finish()); // 返回
-            mBinding.ivMenuMore.setOnClickListener(v -> {  // 更多
-                showCircleMenu();
-            });
-
-        } else {
-
-
-        }
+        mBinding.ivShare.setOnClickListener(v -> {
+            mViewModel.ItemZFClick(mDynamicDetailVo, null); // 转发
+        });
+        mBinding.circleJubao.setOnClickListener(v -> {
+            processReportUi();
+        });
+        mBinding.ivBack.setOnClickListener(v -> finish()); // 返回
+        mBinding.ivMenuMore.setOnClickListener(v -> {  // 更多
+            showCircleMenu();
+        });
 
 
     }
@@ -243,4 +251,5 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
+
 }

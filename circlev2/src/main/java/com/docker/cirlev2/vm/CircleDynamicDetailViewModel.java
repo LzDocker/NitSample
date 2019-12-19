@@ -46,7 +46,7 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
     }
 
     // 动态详情
-    public MediatorLiveData<ServiceDataBean> fechDynamicDetail(HashMap<String, String> param) {
+    public void fechDynamicDetail(HashMap<String, String> param) {
         mDynamicDetailLv.addSource(RequestServer(circleApiService.fechDynamicDetail(param)), new NitNetBoundObserver<ServiceDataBean>(new NitBoundCallback<ServiceDataBean>() {
             @Override
             public void onComplete(Resource<ServiceDataBean> resource) {
@@ -66,7 +66,6 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
                 mDynamicDetailLv.setValue(null);
             }
         }));
-        return mDynamicDetailLv;
     }
 
     public void dynamicDel(String circleid, String dynamicid, String utid) {

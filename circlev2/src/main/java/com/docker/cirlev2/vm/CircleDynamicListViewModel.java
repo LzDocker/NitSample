@@ -57,6 +57,7 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     public final MediatorLiveData<CommentRstVo> mCommentVoMLiveData = new MediatorLiveData<>();
     public final MediatorLiveData<String> mCollectLv = new MediatorLiveData<>();
+    public final MediatorLiveData<String> mAttenLv = new MediatorLiveData<>();
 
     @Inject
     CircleApiService circleApiService;
@@ -102,8 +103,44 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
 
     // 关注
-    public void attention(ServiceDataBean item, View view) {
+    public void attention(ServiceDataBean serviceDataBean, View view) {
+        HashMap<String, String> params = new HashMap<>();
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        params.put("memberid", userInfoVo.uid);
+        params.put("memberid2", serviceDataBean.getMemberid());
+        params.put("uuid2", serviceDataBean.getUuid());
+        params.put("uuid", userInfoVo.uuid);
+        if (!TextUtils.isEmpty(userInfoVo.nickname)) {
+            params.put("nickname", userInfoVo.nickname);
+        } else {
+            params.put("nickname", "匿名");
+        }
+        if (serviceDataBean.getIsFocus() == 1) {
+            params.put("status", "0");
+        } else {
+            params.put("status", "1");
+        }
+        mAttenLv.addSource(
+                RequestServer(
+                        circleApiService.attention(params)), new NitNetBoundObserver<>(new NitBoundCallback<String>() {
+                    @Override
+                    public void onComplete(Resource<String> resource) {
+                        super.onComplete(resource);
+                        hideDialogWait();
+                        if (serviceDataBean.getIsFocus() == 1) {
+                            serviceDataBean.setIsFocus(0);
+                        } else {
+                            serviceDataBean.setIsFocus(1);
+                        }
+                        serviceDataBean.notifyPropertyChanged(BR.isFocus);
+                    }
 
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        hideDialogWait();
+                    }
+                }));
     }
 
 
@@ -453,7 +490,7 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                             item.setIsFav(0);
                             item.setFavourNum((item.getFavourNum()) - 1);
                         } else {
-                            showDzGoodsView(view);
+                            showDzGoodsView2(view);
                             item.setIsFav(1);
                             item.setFavourNum(item.getFavourNum() + 1);
                         }
@@ -473,9 +510,27 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         goodView.setDistance(100);
         goodView.setImage(R.mipmap.circle_icon_dz2);
         GoodView goodView1 = new GoodView(view.getContext());
+        goodView1.setDistance(110);
         goodView1.setImage(R.mipmap.circle_icon_dz2);
         GoodView goodView2 = new GoodView(view.getContext());
+        goodView2.setDistance(140);
         goodView2.setImage(R.mipmap.circle_icon_dz2);
+        goodView.show(view);
+        goodView1.show(view);
+        goodView2.show(view);
+    }
+
+    private void showDzGoodsView2(View view) {
+
+        GoodView goodView = new GoodView(view.getContext());
+        goodView.setDistance(100);
+        goodView.setImage(R.mipmap.circle_icon_hd_dz2);
+        GoodView goodView1 = new GoodView(view.getContext());
+        goodView.setDistance(110);
+        goodView1.setImage(R.mipmap.circle_icon_hd_dz2);
+        GoodView goodView2 = new GoodView(view.getContext());
+        goodView2.setDistance(140);
+        goodView2.setImage(R.mipmap.circle_icon_hd_dz2);
         goodView.show(view);
         goodView1.show(view);
         goodView2.show(view);
