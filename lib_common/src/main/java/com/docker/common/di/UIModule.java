@@ -5,9 +5,11 @@ import com.docker.common.common.ui.RxDemoActivity;
 import com.docker.common.common.ui.ViewDocumentActivity;
 import com.docker.common.common.ui.base.NitCommonListInstanceFragment;
 import com.docker.common.common.ui.container.NitCommonCardFragment;
+import com.docker.common.common.ui.container.NitCommonCardNoRefreshFragment;
 import com.docker.common.common.ui.container.NitCommonContainerActivity;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
+import com.docker.common.common.ui.container.NitCommonContainerNoRefreshFragmentV2;
 import com.docker.common.common.ui.container.NitTabContainerFragment;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
@@ -49,5 +51,13 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract NitCommonContainerFragmentV2 NitCommonContainerFragmentV2();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract NitCommonCardNoRefreshFragment NitCommonCardNoRefreshFragment();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract NitCommonContainerNoRefreshFragmentV2 NitCommonContainerNoRefreshFragmentV2();
 
 }

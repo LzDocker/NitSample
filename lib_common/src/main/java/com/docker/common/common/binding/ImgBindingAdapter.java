@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.alibaba.android.arouter.utils.TextUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.Resource;
@@ -24,6 +25,7 @@ import com.dcbfhd.utilcode.utils.ArrayUtils;
 import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.docker.common.common.config.GlideApp;
+import com.docker.common.common.utils.BitmapCut;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -155,6 +157,45 @@ public class ImgBindingAdapter {
      * */
     @BindingAdapter(value = {"imageUrl"}, requireAll = false)
     public static void loadcirlceimage(ImageView imageView, String url) {
+        url = CommonBdUtils.getImgUrl(url);
+        options.diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
+                .centerCrop()
+                .transform(new BitmapTransformation() {
+                    @Override
+                    protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+                        Bitmap endbitmap = null;
+                        //调用裁剪图片工具类进行裁剪
+                        endbitmap = BitmapCut.cutBitmap(toTransform);
+                        return endbitmap;
+                    }
+
+                    @Override
+                    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+
+                    }
+                });
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+
+    }
+
+
+    /*
+     *
+     * */
+    @BindingAdapter(value = {"imageNomUrl"}, requireAll = false)
+    public static void loadceimage(ImageView imageView, String url) {
+        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+
+    }
+
+
+    /*
+     *
+     * */
+    @BindingAdapter(value = {"avaterImageUrl"}, requireAll = false)
+    public static void loadavaterimage(ImageView imageView, String url) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop();
         GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
@@ -172,13 +213,22 @@ public class ImgBindingAdapter {
     }
 
     /*
-     * 圆形图片
      * */
     @BindingAdapter(value = {"dontTransImg"}, requireAll = false)
     public static void donttransImg(ImageView imageView, String url) {
         options.diskCacheStrategy(DiskCacheStrategy.ALL);
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).into(imageView);
-        /*.transition(withCrossFade())*/
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).dontTransform().transition(withCrossFade()).into(imageView);
+
+    }
+
+
+    @BindingAdapter(value = {"rvImgUrl"}, requireAll = false)
+    public static void loadrvimage(ImageView imageView, String url) {
+        options.diskCacheStrategy(DiskCacheStrategy.ALL);
+        GlideApp.with(imageView)
+                .applyDefaultRequestOptions(options)
+                .load(url).transition(withCrossFade()).into(imageView);
+
     }
 
 

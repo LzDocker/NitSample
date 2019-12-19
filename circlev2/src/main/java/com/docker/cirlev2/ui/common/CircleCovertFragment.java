@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
@@ -85,7 +87,8 @@ public class CircleCovertFragment extends NitCommonFragment<PublishViewModel, Ci
 //                netImgBinding.itemBaiduImageIv.setLayoutParams(params);//把params设置给itemView布局
             }
         };
-        mBinding.get().recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+//        mBinding.get().recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        mBinding.get().recyclerView.setLayoutManager(new GridLayoutManager(this.getHoldingActivity(),2));
         mBinding.get().recyclerView.setAdapter(adapter);
         mBinding.get().recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override

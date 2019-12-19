@@ -17,15 +17,19 @@
 
         <import type="com.docker.common.common.binding.CommonBdUtils" />
 
+        <import type="com.docker.cirlev2.R" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
         android:orientation="vertical">
 
-        <!--        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,17 +45,15 @@
                 android:layout_height="wrap_content">
 
 
-                <!--android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"-->
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_user_icon"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="centerCrop"
-                    app:roundImgUrl="@{CommonBdUtils.getCompleteImageUrl(item.avatar)}" />
-                <!--    app:errorImg="@{R.mipmap.circle_default_avatar}"
-                    app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                  -->
+                    android:id="@+id/circle_iv_avater"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/ll_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="8dp"
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
+                    app:avaterImageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
 
                 <TextView
                     android:id="@+id/tv_username"
@@ -59,11 +61,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/iv_user_icon"
-
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
                     android:text="@{item.nickname}"
                     android:textColor="#121212"
                     android:textSize="14sp" />
-                <!--android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"-->
+
 
                 <TextView
                     android:id="@+id/tv_pub_time"
@@ -132,29 +134,23 @@
                     android:overScrollMode="never"
                     app:itemBinding="@{item.itemImgBinding}"
                     app:items="@{item.getInnerResource()}"
+                    app:visibleGone="@{BdUtils.isShowRvImg(item)}"
                     bind:layoutManager="@{LayoutManager.grid(3)}" />
-                <!--   app:visibleGone="@{BdUtils.isShowRvImg(item)}"-->
 
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                   >
+                    android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"
+                    app:visibleGone="@{BdUtils.isshowBottomImg(item)}">
 
-                    <!-- app:visibleGone="@{BdUtils.isshowBottomImg(item)}"-->
-
-                    <!--     android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"-->
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="188dp"
+                        android:layout_height="250dp"
                         android:focusable="false"
                         android:scaleType="centerCrop"
-
-                         />
-                    <!--app:roundImgUrl="@{CommonBdUtils.getDynamicSingleImg(item)}"-->
-                    <!--   app:errorImg="@{R.mipmap.circle_icon_empty}"
-                        app:placeHolder="@{R.mipmap.circle_icon_empty}"-->
+                        app:imageUrl="@{BdUtils.getDynamicSingleImg(item)}" />
 
 
                     <ImageView
@@ -163,8 +159,9 @@
                         android:layout_gravity="center"
                         android:focusable="false"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/circle_player_icon" />
-                    <!--   app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" -->
+                        android:src="@mipmap/circle_player_icon"
+                        app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" />
+
                 </FrameLayout>
 
             </LinearLayout>
@@ -179,28 +176,27 @@
                 android:paddingRight="20dp">
 
 
-                <!--  android:drawableLeft="@mipmap/circle_zhuanfa_icon"-->
-                <!--      android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:drawablePadding="10dp"
+                    android:drawableLeft="@mipmap/circle_zhuanfa_icon"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
+                    android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"
                     android:text="转发" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-
-                    android:drawablePadding="10dp"
+                    android:drawableLeft="@mipmap/circle_pinglun_icon"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
-
+                    android:onClick="@{()->viewmodel.ItemPLClick(item)}"
                     android:text="评论" />
                 <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
-                <!--android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"-->
 
 
                 <LinearLayout
@@ -209,20 +205,23 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
+                    android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
                     android:orientation="horizontal">
-                    <!--     android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"-->
 
                     <ImageView
                         android:id="@+id/iv_dz"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <!--    android:src="@{item.isFav == 1?R.mipmap.circlev2_icon_hd_dz2:R.mipmap.circlev2_zan_icon}"-->
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@mipmap/circle_icon_dz1"
+                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp" />
-                    <!--   android:text="@{item.favourNum == 0?BdUtils.getFavNum(item.favourNum):BdUtils.getFavNum(item.favourNum)}"-->
+                        android:layout_marginLeft="5dp"
+                        android:text="@{item.favourNum == 0?BdUtils.getFavNum(item.favourNum):BdUtils.getFavNum(item.favourNum)}" />
+
                 </LinearLayout>
 
             </RelativeLayout>

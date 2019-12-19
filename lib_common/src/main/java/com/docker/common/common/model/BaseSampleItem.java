@@ -8,5 +8,6 @@ public abstract class BaseSampleItem extends BaseObservable implements BaseItemM
 
     public String sampleName = getClass().getSimpleName() + "style_0";
 
+    public int index;
 
 }

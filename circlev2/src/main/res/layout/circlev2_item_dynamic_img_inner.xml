@@ -13,7 +13,11 @@
         <!--name="viewmodel"-->
         <!--type="com.docker.cirlev2.vm.CircleDynamicListViewModel" />-->
 
+        <import type="com.docker.cirlev2.vm.CircleDynamicListViewModel" />
+
         <import type="com.docker.common.common.binding.CommonBdUtils" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
 
         <variable
             name="serverdata"
@@ -25,9 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="3dp"
+        android:onClick="@{(view)->CircleDynamicListViewModel.imgclick(item,view,serverdata)}"
         android:orientation="horizontal">
 
-        <!--        android:onClick="@{(view)->viewmodel.imgclick(item,view,BdUtils.getResourceImgUrl(item))}"-->
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -38,13 +42,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="2dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@color/blue" />
+                android:scaleType="centerCrop"
+                app:imageUrl="@{BdUtils.getResourceImgUrl(item)}" />
 
-
-            <!--        app:roundImgUrl="@{CommonBdUtils.getResourceImgUrl(item)}"-->
-            <!--          app:errorImg="@{R.mipmap.circle_icon_empty}"
-                app:placeHolder="@{R.mipmap.circle_icon_empty}"-->
 
             <ImageView
                 android:layout_width="40dp"

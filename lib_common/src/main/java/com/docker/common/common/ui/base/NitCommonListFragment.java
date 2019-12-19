@@ -116,8 +116,8 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         }
         itemTouchHelperCallback = new ItemTouchHelperCallback(this);
         touchHelper = new ItemTouchHelper(itemTouchHelperCallback);
-        itemTouchHelperCallback.setLongPressDragEnabled(true);
-        touchHelper.attachToRecyclerView(mBinding.get().recyclerView);
+//        itemTouchHelperCallback.setLongPressDragEnabled(true);
+//        touchHelper.attachToRecyclerView(mBinding.get().recyclerView);
     }
 
     protected void initRefreshUi() {
@@ -215,19 +215,6 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
             rang = toPosition;
         }
         mBinding.get().recyclerView.getAdapter().notifyItemRangeChanged(0, mViewModel.mItems.size());
-//        mBinding.get().recyclerView.getAdapter().notifyItemRangeChanged(0, rang);
-
-//        if (fromPosition < toPosition) {
-//            for (int i = fromPosition; i < toPosition; i++) {
-//                Collections.swap(mViewModel.mItems, i, i + 1);
-//            }
-//        } else {
-//            for (int i = fromPosition; i > toPosition; i--) {
-//                Collections.swap(mViewModel.mItems, i, i - 1);
-//            }
-//        }
-//        mBinding.get().recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
-
         return true;
     }
 

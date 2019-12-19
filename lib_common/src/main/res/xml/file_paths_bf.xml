@@ -6,9 +6,6 @@
             name="camera_photos"
             path="" />
         <external-path
-            name="files_root"
-            path="Android/data/com.docker.nitsample/" />
-        <external-path
             name="external_storage_root"
             path="." />
         <external-path
@@ -20,8 +17,5 @@
         <external-path
             name="apk"
             path="." />
-        <external-path
-            name="files_root"
-            path="Android/data/com.docker.nitsample/" />
     </paths>
 </resources>

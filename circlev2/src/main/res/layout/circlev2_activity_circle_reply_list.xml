@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.CommentVo" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.common.common.vm.NitCommonListVm" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title"
+            android:layout_marginBottom="50dp"
+            bind:bdcomplete="@={viewmodel.mCompleteCommand}"
+            bind:bdenable="@={viewmodel.bdenable}"
+            bind:bdenablemore="@={viewmodel.bdenablemore}"
+            bind:bdenablenodata="@={viewmodel.bdenablenodata}"
+            bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
+            bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}"
+            bind:srlEnableRefresh="@={viewmodel.bdenablerefresh}">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:itemBinding="@{viewmodel.itemBinding}"
+                app:items="@{viewmodel.mItems}">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/edit_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btn_commit"
+                android:background="@color/white"
+                android:hint="请输入您的评论："
+                android:lineSpacingExtra="2dp"
+                android:padding="5dp"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/circle_shape_red_14"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/common_white" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</layout>
+
+

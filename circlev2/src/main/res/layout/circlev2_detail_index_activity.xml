@@ -362,7 +362,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginRight="14dp"
                             android:text="编辑分类"
-                            android:textColor="@color/blue" />
+                            android:textColor="@color/blue"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 

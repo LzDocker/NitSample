@@ -1,5 +1,9 @@
 package com.docker.common.common.config;
 
+import android.os.Environment;
+
+import com.dcbfhd.utilcode.utils.AppUtils;
+
 public class Constant {
     // 页面传值共用key
     public static final String ParamTrans = "ParamTrans";
@@ -41,6 +45,8 @@ public class Constant {
 
 
     //----------------------------end---------------------
+
+    public static String BaseFileFloder = Environment.getExternalStorageDirectory() + "/" + AppUtils.getAppName() + "/chache/";
 
 
 }

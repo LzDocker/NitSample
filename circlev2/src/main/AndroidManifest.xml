@@ -25,5 +25,16 @@
         <activity android:name="com.docker.cirlev2.ui.persion.CirclePersonDetailActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.persion.CirclePersonPerssionActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.persion.CircleGroupPerssionActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity"></activity>
+        <activity
+            android:name="com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity
+            android:name="com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"></activity>
+
     </application>
 </manifest>

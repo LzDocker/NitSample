@@ -73,6 +73,11 @@ public class CircleIndexFragment extends NitCommonFragment<CircleIndexViewModel,
         commonListOptions.falg = 102;
         commonListOptions.ReqParam.put("memberid", "3");
         commonListOptions.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
+
+//        commonListOptions.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
+//        commonListOptions.ReqParam.put("memberid", "67");
+//        commonListOptions.ReqParam.put("companyid", "1");
+
         NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
         fragments.add(containerFragment);
 
@@ -83,6 +88,11 @@ public class CircleIndexFragment extends NitCommonFragment<CircleIndexViewModel,
         commonListOptions1.ReqParam.put("memberid", "3");
         commonListOptions1.ReqParam.put("isrecommend", "1");
         commonListOptions1.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
+
+//        commonListOptions1.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
+//        commonListOptions1.ReqParam.put("memberid", "67");
+//        commonListOptions1.ReqParam.put("companyid", "1");
+
         NitCommonContainerFragment containerFragment1 = NitCommonContainerFragment.newinstance(commonListOptions1);
         fragments.add(containerFragment1);
 
@@ -90,9 +100,15 @@ public class CircleIndexFragment extends NitCommonFragment<CircleIndexViewModel,
         commonListOptions2.RvUi = KEY_RVUI_LINER;
         commonListOptions2.refreshState = 1;
         commonListOptions2.falg = 102;
+
         commonListOptions2.ReqParam.put("memberid", "3");
         commonListOptions2.ReqParam.put("type", "3");
         commonListOptions2.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
+
+//        commonListOptions2.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
+//        commonListOptions2.ReqParam.put("memberid", "67");
+//        commonListOptions2.ReqParam.put("companyid", "1");
+
         NitCommonContainerFragment containerFragment2 = NitCommonContainerFragment.newinstance(commonListOptions2);
         fragments.add(containerFragment2);
 

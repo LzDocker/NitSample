@@ -13,6 +13,14 @@ import com.docker.cirlev2.ui.detail.CircleDetailIndexActivity;
 import com.docker.cirlev2.ui.detail.CircleEditMemberGroupActivity;
 import com.docker.cirlev2.ui.detail.CircleGroupListActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity;
+import com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicBotContentFragment;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicDetailFragment;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragment;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragmentv2;
 import com.docker.cirlev2.ui.index.CircleIndexActivity;
 import com.docker.cirlev2.ui.index.CircleIndexFragment;
 import com.docker.cirlev2.ui.index.CircleSampleActivity;
@@ -48,6 +56,11 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleIndexFragment contributeCircleIndexFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicDetailFragment contributeDynamicDetailFragmentInjector();
+
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
@@ -166,6 +179,35 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleGroupPerssionActivity contributeCircleGroupPerssionActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleDynamicDetailActivity contributeCircleDynamicDetailActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicH5Fragment contributeDynamicH5FragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicH5Fragmentv2 contributeDynamicH5Fragmentv2Injector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicBotContentFragment contributeDynamicBotContentFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleReplyListActivity contributeCircleReplyListActivityInjector();
+
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleMoreReplyListActivity contributeCircleMoreReplyListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract Circlev2ReplayQuestionActivity contributeCirclev2ReplayQuestionActivityInjector();
 
 }
 

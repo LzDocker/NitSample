@@ -82,7 +82,11 @@ public class AppRouter {
     public static final String CIRCLE_CREATE_v2_frame = CircleV2Group + "circle_create_v2_frame";
     public static final String CIRCLE_DETAIL_v2_INDEX = CircleV2Group + "circle_detail_v2_index";
     public static final String CIRCLE_PUBLISH_v2_INDEX = CircleV2Group + "circle_publish_v2_index";
-
+    public static final String CIRCLE_dynamic_v2_detail = CircleV2Group + "circle_dynamic_v2_detail";
+    public static final String CIRCLE_persion_v2_detail = CircleGroup + "CIRCLE_persion_v2_detail";
+    public static final String CIRCLE_comment_v2_reply = CircleGroup + "CIRCLE_comment_v2_reply";
+    public static final String CIRCLE_more_comment_v2_reply = CircleGroup + "CIRCLE_more_comment_v2_reply";
+    public static final String CIRCLE_comment_v2_ANSWER = CircleGroup + "CIRCLE_comment_v2_ANSWER";
 
     public static final String ProGroup = "/Pro/";
 
@@ -115,7 +119,9 @@ public class AppRouter {
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
     public static final String COMMON_CONTAINER_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2";
+    public static final String COMMON_CONTAINER_NO_REFRESH_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2_no_refresh";
     public static final String COMMON_CARD_FRAGMENT = COMMONGROUP + "card_fragment";
+    public static final String COMMON_CARD_FRAGMENT_NO_REFRESH = COMMONGROUP + "card_fragment_no_refresh";
     public static final String COMMON_TAB_CONTAINER_FRAGMENT = COMMONGROUP + "tab_container_fragment";
     public static final String COMMON_LIST_CONTAINER_FRAGMENT = COMMONGROUP + "LIST_container_fragment";
 

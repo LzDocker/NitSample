@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+
+    </data>
+
+
+    <!--<android.support.constraint.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context=".activity.MainActivity">-->
+
+    <!--<com.docker.cirlev2.widget.nested.NestedScrollingDetailContainer-->
+    <!--android:id="@+id/nested_container"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="0dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--<com.docker.cirlev2.widget.nested.NestedScrollingWebView-->
+    <!--android:id="@+id/web_container"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:tag="nested_scroll_webview" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_ttt"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="400dp"-->
+    <!--android:background="@color/colorAccent"-->
+    <!--android:gravity="center"-->
+    <!--android:text="不可滑动的View"-->
+    <!--android:textSize="30dp" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_list"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:tag="nested_scroll_recyclerview" />-->
+
+    <!--</com.docker.cirlev2.widget.nested.NestedScrollingDetailContainer>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/v_tool_bar"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingTop="3dp"-->
+    <!--android:paddingBottom="3dp"-->
+    <!--android:text="快速滑动到评论"-->
+    <!--android:textSize="15dp"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <com.docker.cirlev2.widget.nested.NestedScrollingDetailContainer
+            android:id="@+id/nested_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.docker.cirlev2.widget.nested.NestedScrollingWebView
+                android:id="@+id/web_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="nested_scroll_webview" />
+
+            <TextView
+                android:id="@+id/tv_ttt"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="不可滑动的View"
+                android:textSize="30dp" />
+
+            <com.docker.common.common.widget.refresh.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srlEnableRefresh="false"
+                app:srlFooterTranslationViewId="@id/rv_list">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:tag="nested_scroll_recyclerview"
+                    app:fastScrollEnabled="false" />
+
+            </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+        </com.docker.cirlev2.widget.nested.NestedScrollingDetailContainer>
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</layout>

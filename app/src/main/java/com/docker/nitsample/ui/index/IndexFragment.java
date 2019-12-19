@@ -43,6 +43,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+
 public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentIndexBinding> {
     public static IndexFragment newInstance() {
         return new IndexFragment();
@@ -119,7 +120,7 @@ public class IndexFragment extends NitCommonFragment<MainViewModel, FragmentInde
                     }
 
                     @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonListFragment nitCommonListFragment) {
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonListFragment) {
 
                         IndexFragment.this.outer = commonListVm;
 

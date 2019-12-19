@@ -17,14 +17,18 @@
 
         <import type="com.docker.common.common.binding.CommonBdUtils" />
 
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
         android:orientation="vertical">
-        <!--        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,17 +43,14 @@
                 android:layout_height="wrap_content">
 
 
-                <!--android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"-->
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_user_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
                     android:scaleType="centerCrop"
-                    app:roundImgUrl="@{CommonBdUtils.getCompleteImageUrl(item.avatar)}" />
-                <!--    app:errorImg="@{R.mipmap.circle_default_avatar}"
-                    app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                  -->
+                    app:avaterImageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
 
                 <TextView
                     android:id="@+id/tv_username"
@@ -57,11 +58,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/iv_user_icon"
-
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
                     android:text="@{item.nickname}"
                     android:textColor="#121212"
                     android:textSize="14sp" />
-                <!--android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"-->
+
 
                 <TextView
                     android:id="@+id/tv_pub_time"
@@ -109,11 +110,8 @@
                     android:layout_height="75dp"
                     android:layout_marginLeft="15dp"
                     android:scaleType="fitXY"
-                    android:src="@color/blue" />
-                <!--app:errorImg="@{R.mipmap.circle_icon_empty}"
-                    app:placeHolder="@{R.mipmap.circle_icon_empty}"
-                    app:roundImgUrl="@{BdUtils.getDynamicSingleImg(item)}"
-                    app:visibleGone="@{BdUtils.isShowSingleImg(item)}"-->
+                    app:imageUrl="@{BdUtils.getDynamicSingleImg(item)}"
+                    app:visibleGone="@{BdUtils.isShowSingleImg(item)}" />
 
             </LinearLayout>
 
@@ -123,13 +121,14 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
+                android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp">
 
+                <!--android:drawableLeft="@mipmap/circlev2_zhuanfa_icon"-->
 
-                <!--  android:drawableLeft="@mipmap/circle_zhuanfa_icon"-->
-                <!--      android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"-->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,9 +144,9 @@
                     android:layout_centerInParent="true"
                     android:drawablePadding="10dp"
                     android:gravity="center"
+                    android:onClick="@{()->viewmodel.ItemPLClick(item)}"
                     android:text="评论" />
                 <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
-                <!--android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"-->
 
 
                 <LinearLayout
@@ -156,8 +155,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
+                    android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
                     android:orientation="horizontal">
-                    <!--     android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"-->
+
 
                     <ImageView
                         android:id="@+id/iv_dz"

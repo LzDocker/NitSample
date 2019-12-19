@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.common.common.command.NitContainerCommand;
@@ -25,8 +26,10 @@ import com.docker.video.widget.BaseVideoView;
 import com.docker.videobasic.R;
 import com.docker.videobasic.databinding.SingleVideoActivityBinding;
 import com.docker.videobasic.vm.SingleVideoVm;
+
 import java.util.ArrayList;
 import java.util.List;
+
 @Route(path = AppRouter.VIDEOSINGLE)
 public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, SingleVideoActivityBinding> implements OnPlayerEventListener {
 
@@ -35,6 +38,13 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
     private boolean isLandscape;
     private long mDataSourceId;
     private boolean userPause;
+
+
+    @Autowired
+    String thumbUrl;
+
+    @Autowired
+    String videoUrl;
 
     @Override
     protected int getLayoutId() {
@@ -74,10 +84,16 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
 
         MonitorDataProvider dataProvider = new MonitorDataProvider();
         List<VideoBean> videoBeans = new ArrayList<>();
+//        videoBeans.add(new VideoBean(
+//                "你欠缺的也许并不是能力",
+//                "http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg",
+//                "https://mov.bn.netease.com/open-movie/nos/mp4/2016/06/22/SBP8G92E3_hd.mp4"));
         videoBeans.add(new VideoBean(
-                "你欠缺的也许并不是能力",
-                "http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg",
-                "https://mov.bn.netease.com/open-movie/nos/mp4/2016/06/22/SBP8G92E3_hd.mp4"));
+                "",
+                getIntent().getStringExtra("thumbUrl"),
+                getIntent().getStringExtra("videoUrl")));
+
+
         dataProvider.setTestData(videoBeans);
         mVideoView.setDataProvider(dataProvider);
         mVideoView.setDataSource(generatorDataSource(mDataSourceId));
@@ -101,7 +117,7 @@ public class SingleVideoActivity extends NitCommonActivity<SingleVideoVm, Single
         mVideoView.setEventHandler(mOnEventAssistHandler);
         mReceiverGroup = ReceiverGroupManager.get().getReceiverGroup(this,
                 null,
-                "http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg");
+                getIntent().getStringExtra("thumbUrl"));
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_NETWORK_RESOURCE, true);
         mReceiverGroup.getGroupValue().putBoolean(DataInter.Key.KEY_IS_HAS_NEXT, false);
         mVideoView.setReceiverGroup(mReceiverGroup);

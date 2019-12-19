@@ -461,6 +461,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
     @Override
     public void initImmersionBar() {
         ImmersionBar.with(CircleDetailIndexActivity.this)
+                .navigationBarColor("#ffffff")
                 .statusBarDarkFont(true)
                 .titleBarMarginTop(mBinding.toolbar)
                 .init();
@@ -507,6 +508,14 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
                     }
                 }).open(config);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 }
 

@@ -35,7 +35,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
     private boolean isAddTotalTab = false;
     private ArrayList<Fragment> fragments = new ArrayList<>();
     // 外部传参数
-    private List<CircleTitlesVo> circleTitlesVo;
+    private List<CircleTitlesVo> mCircleTitlesVo;
     @Autowired
     int pos;   // tab pos
 
@@ -62,13 +62,14 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
 
     @Override
     protected void initView(View var1) {
-        circleTitlesVo = (List<CircleTitlesVo>) getArguments().getSerializable("tabVo");
+        mCircleTitlesVo = (List<CircleTitlesVo>) getArguments().getSerializable("tabVo");
 
         // 动态默认添加 "全部" tab
-        isAddTotalTab = "动态".equals(circleTitlesVo.get(pos).getName());
+//        isAddTotalTab = "动态".equals(circleTitlesVo.get(pos).getName());
         // 动态可以编辑栏目
-        mBinding.get().commonTvEdit.setVisibility(("1".equals(circleTitlesVo.get(pos).getIsedit()) && role > 0) ? View.VISIBLE : View.GONE);
-        processTab(circleTitlesVo.get(pos).getChildClass());
+//        mBinding.get().commonTvEdit.setVisibility(("1".equals(circleTitlesVo.get(pos).getIsedit()) && role > 0) ? View.VISIBLE : View.GONE);
+
+        processTab(mCircleTitlesVo.get(pos).getChildClass());
 
         /*
          * 编辑 todo
@@ -82,7 +83,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
      * 获取当前child 位置
      * */
     public int getCurrenTab() {
-        if (circleTitlesVo.get(pos).getChildClass() != null && titles.
+        if (mCircleTitlesVo.get(pos).getChildClass() != null && titles.
                 length > 0 && Arrays.asList(titles).contains("全部")) {
             if (mBinding.get().viewpager.getCurrentItem() == 0) {
                 return mBinding.get().viewpager.getCurrentItem();
@@ -124,6 +125,8 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 titles = new String[]{""};
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                        .withSerializable("param", mCircleTitlesVo.get(pos))
+                        .withInt("childPosition", -1)
                         .navigation());
             } else {
                 mBinding.get().magicIndicator.setVisibility(View.VISIBLE);
@@ -132,6 +135,8 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                     titles[i] = circleTitlesVos.get(i).getName();
                     fragments.add((Fragment) ARouter.getInstance()
                             .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                            .withSerializable("param", mCircleTitlesVo.get(pos))
+                            .withInt("childPosition", i)
                             .navigation());
                 }
             }
