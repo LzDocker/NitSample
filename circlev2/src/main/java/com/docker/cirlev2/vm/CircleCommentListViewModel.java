@@ -256,7 +256,7 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
         HashMap<String, String> params = new HashMap<>();
         params.put("commentid", commentVo.getCommentid());
         params.put("status", commentVo.getIsDo() == 1 ? "0" : "1");
-        showDialogWait("点赞中...", false);
+//        showDialogWait("点赞中...", false);
 
         mServerLiveData.addSource(RequestServer(circleApiService.pariseComment(params)), new NitNetBoundObserver(new NitBoundCallback() {
             @Override

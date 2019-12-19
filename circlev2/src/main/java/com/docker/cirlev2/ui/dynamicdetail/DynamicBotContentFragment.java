@@ -8,6 +8,7 @@ import android.view.View;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2FragmentDetailBotContentBinding;
 import com.docker.cirlev2.vm.CircleCommentListViewModel;
+import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
@@ -23,11 +24,11 @@ import com.docker.common.databinding.CommonFragmentListBinding;
 
 import io.reactivex.disposables.Disposable;
 
-public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewModel, Circlev2FragmentDetailBotContentBinding> {
+public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDetailViewModel, Circlev2FragmentDetailBotContentBinding> {
 
     public ServiceDataBean serviceDataBean;
 
-    public NitCommonListVm OuterCommentVm;
+    public CircleCommentListViewModel OuterCommentVm;
 
     private Disposable disposable;
 
@@ -45,13 +46,13 @@ public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewM
     }
 
     @Override
-    protected SampleListViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(SampleListViewModel.class);
+    protected CircleDynamicDetailViewModel getViewModel() {
+        return ViewModelProviders.of(this, factory).get(CircleDynamicDetailViewModel.class);
     }
 
     @Override
     protected void initView(View var1) {
-
+      mBinding.get().setViewmodel(mViewModel);
     }
 
 
@@ -69,10 +70,10 @@ public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewM
 
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                        OuterCommentVm = commonListVm;
+                        OuterCommentVm = (CircleCommentListViewModel) commonListVm;
                         mBinding.get().setCommentVm(OuterCommentVm);
                         CommonListOptions commonListReq = new CommonListOptions();
-//        commonListReq.ReqParam.put("t", "dynamic");
+                        //commonListReq.ReqParam.put("t", "dynamic");
                         commonListReq.ReqParam.put("dynamicid", serviceDataBean.getDynamicid());
                         commonListReq.ReqParam.put("page", "1");
                         commonListReq.externs.put("serverdata", serviceDataBean);
@@ -90,7 +91,7 @@ public class DynamicBotContentFragment extends NitCommonFragment<SampleListViewM
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                         CommonListOptions commonListReq = new CommonListOptions();
-//        commonListReq.ReqParam.put("t", "dynamic");
+                       // commonListReq.ReqParam.put("t", "dynamic");
                         commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
                         commonListReq.ReqParam.put("memberid", "67");
                         commonListReq.ReqParam.put("companyid", "1");

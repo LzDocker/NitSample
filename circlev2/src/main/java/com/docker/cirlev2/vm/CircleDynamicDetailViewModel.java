@@ -1,23 +1,30 @@
 package com.docker.cirlev2.vm;
 
 import android.arch.lifecycle.MediatorLiveData;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.util.AudioPlayerUtils;
 import com.docker.cirlev2.util.BdUtils;
+import com.docker.cirlev2.vo.entity.CommentVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.BR;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -106,6 +113,21 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
         }
         playerUtils.AudioDetailClick(BdUtils.getAudioUrl(audioUrl), view);
     }
+
+
+    /**
+     * 评论 查看更多的点击事件
+     */
+    public void moreCommentClick(ServiceDataBean item, View view) {
+        if (item == null) {
+            return;
+        }
+        ARouter.getInstance().build(AppRouter.CIRCLE_more_comment_v2_reply)
+                .withSerializable("serviceDataBean", item)
+                .navigation();
+    }
+
+
 
 
     public void circleBlackList(String memberid) {
