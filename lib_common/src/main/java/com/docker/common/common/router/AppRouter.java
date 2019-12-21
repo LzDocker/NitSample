@@ -91,6 +91,10 @@ public class AppRouter {
     public static final String CIRCLE_more_comment_v2_reply = CircleV2Group + "CIRCLE_more_comment_v2_reply";
     public static final String CIRCLE_comment_v2_ANSWER = CircleV2Group + "CIRCLE_comment_v2_ANSWER";
 
+    public static final String CIRCLE_DETAIL_v2_INDEX_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_default";
+
+    public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";
+
     public static final String ProGroup = "/Pro/";
 
     public static final String STUDY = ProGroup + "study";

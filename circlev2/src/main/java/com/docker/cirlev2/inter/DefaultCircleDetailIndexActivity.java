@@ -1,22 +1,17 @@
-package com.docker.cirlev2.ui.detail;
+package com.docker.cirlev2.inter;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
@@ -25,93 +20,57 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
-import com.docker.cirlev2.databinding.Circlev2DetailIndexActivityBinding;
-import com.docker.cirlev2.ui.CircleInfoActivity;
+import com.docker.cirlev2.databinding.Circlev2DefaultDetailIndexActivityBinding;
+import com.docker.cirlev2.inter.frame.DefaultDetailIndexViewModel;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
-import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
-import com.docker.cirlev2.ui.publish.CirclePublishActivity;
-import com.docker.cirlev2.vm.CircleDetailIndexViewModel;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
-import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.StaCirParam;
-import com.docker.cirlev2.vo.vo.CircleCreateCardVo;
-import com.docker.cirlev2.widget.popmen.Popmenu;
+import com.docker.cirlev2.widget.popmen.SuperPopmenu;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.command.NitContainerCommand;
-import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.utils.cache.CacheUtils;
-import com.docker.common.common.utils.rxbus.RxBus;
-import com.docker.common.common.utils.rxbus.RxEvent;
-import com.docker.common.common.vo.ShareBean;
-import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.appbar.AppBarStateChangeListener;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.common.widget.refresh.api.RefreshHeader;
 import com.docker.common.common.widget.refresh.listener.SimpleMultiPurposeListener;
-import com.docker.core.widget.BottomSheetDialog;
 import com.gyf.immersionbar.ImmersionBar;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.youth.banner.loader.ImageLoader;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import io.reactivex.disposables.Disposable;
-
-/*/
- * 圈子详情
+/*
+ * 默认圈子详情
  * */
-@Route(path = AppRouter.CIRCLE_DETAIL_v2_INDEX)
-public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailIndexViewModel, Circlev2DetailIndexActivityBinding> {
+@Route(path = AppRouter.CIRCLE_DETAIL_v2_INDEX_default)
+public class DefaultCircleDetailIndexActivity extends AbsCircleDetailIndexActivity<DefaultDetailIndexViewModel, Circlev2DefaultDetailIndexActivityBinding> {
 
-    @Autowired
-    String utid;
 
-    @Autowired
-    String circleid;
     private ArrayList<Fragment> fragments = new ArrayList<>();
-    private Popmenu myPubMenu;
-    private Disposable disposable;
+    private SuperPopmenu myPubMenu;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mViewModel.FetchCircleDetail(utid, circleid);
-        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
-            if (rxEvent.getT().equals("refresh_circle_myjoin") && TextUtils.isEmpty((String) rxEvent.getR())) { // 创建圈子成功后返回
-                mViewModel.FetchCircleDetail(utid, circleid);
-            }
-            if (rxEvent.getR() != null && mBinding != null) {
-                mBinding.circleTvPersonnum.setText(mViewModel.mCircleDetailLv.getValue().getEmployeeNum() + "人");
-                if ("1".equals(mViewModel.mCircleDetailLv.getValue().getIsJoin())) {
-                    mBinding.circlev2IvPublish.setVisibility(View.VISIBLE);
-                } else {
-                    mBinding.circlev2IvPublish.setVisibility(View.GONE);
-                }
-            }
-//            if (rxEvent.getT().equals("login_state_change")) {
-//                finish();
-//                ARouter.getInstance().build(AppRouter.CIRCLEHOME).withSerializable("mStartParam", mStartParam).navigation();
-//            }
-        });
+    public void UpdateCircleJoinState() {
+        mBinding.circleTvPersonnum.setText(mViewModel.mCircleDetailLv.getValue().getEmployeeNum() + "人");
+        if ("1".equals(mViewModel.mCircleDetailLv.getValue().getIsJoin())) {
+            mBinding.circlev2IvPublish.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.circlev2IvPublish.setVisibility(View.GONE);
+        }
     }
 
     @Override
-    public void initView() {
-        mToolbar.hide();
+    public void setmViewmodel() {
         mBinding.setViewmodel(mViewModel);
+    }
+
+
+    @Override
+    public void initRefershUi() {
         mBinding.refresh.setEnableLoadMore(false);
         mBinding.refresh.setOnRefreshListener(refreshLayout -> {
             if (CollectionUtils.isEmpty(fragments)) {
@@ -121,16 +80,36 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
             ((NitCommonFragment) fragments.get(mBinding.viewPager.getCurrentItem())).onReFresh(mBinding.refresh);
         });
 
+
+    }
+
+    @Override
+    public void showPublishPop() {
+
+        if (fragments.size() == 0) {
+            return;
+        }
+
+        if (myPubMenu == null) {
+            myPubMenu = new SuperPopmenu(this);
+            myPubMenu.init(mBinding.getRoot());
+        }
+        myPubMenu.showMoreWindow(mBinding.getRoot());
+
+//            processPublish(mPubLishType, 1);
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+
+        initAppBar();
         /*
          * 编辑 todo
          * */
         mBinding.circlev2Edit.setOnClickListener(v -> {
-            StaCirParam staCirParam = new StaCirParam(circleid, utid, "");
-            staCirParam.type = 2;
-            CircleEditTabActivity.startMe(this, staCirParam, CircleEditTabActivity.LEVEL_1_EDITCODE);
-
+            processEditLevel1Click();
         });
-        initAppBar();
 
         // 发布
         mBinding.circlev2IvPublish.setOnClickListener(v -> {
@@ -139,16 +118,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
         // 分享
         mBinding.ivShare.setOnClickListener(v -> {
-            if (mViewModel.mCircleDetailLv.getValue() != null && mViewModel.mCircleDetailLv.getValue().getShare() != null) {
-//                showShare(mViewModel.detailVo.get().getShare());
-                HashMap<String, String> params = new HashMap<>();
-                UserInfoVo userInfoVo = CacheUtils.getUser();
-                params.put("type", "circle");
-                params.put("circleid", circleid);
-                params.put("memberid", userInfoVo.uid);
-                params.put("uuid", userInfoVo.uuid);
-                mViewModel.FetchShareData(params);
-            }
+            processShare();
         });
 
         mBinding.ivBack.setOnClickListener(v -> {
@@ -157,88 +127,12 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
         // 进入成员管理
         mBinding.circleLlPerLiner.setOnClickListener(v -> {
-            if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.detailVo.get().getRole()> 0*/) {
-                StaCirParam mStartParam = new StaCirParam();
-                mStartParam.setCircleid(circleid);
-                mStartParam.setUtid(utid);
-                mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
-                CirclePersonListActivity.startMe(CircleDetailIndexActivity.this, mStartParam, mViewModel.mCircleDetailLv.getValue());
-            }
+            processEnterPersionManager();
         });
 
         // 菜单
         mBinding.ivMenuMore.setOnClickListener(v -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-            bottomSheetDialog.setDataCallback(new String[]{"邀请新成员", "编辑圈子", "成员列表", "圈子简介"}, position -> {
-                bottomSheetDialog.dismiss();
-                switch (position) {
-                    case 0: //邀请新成员
-                        if (mViewModel.mCircleDetailLv.getValue() != null) {//"邀请新成员",
-                            StaCirParam mStartParam = new StaCirParam();
-                            mStartParam.setCircleid(circleid);
-                            mStartParam.setUtid(utid);
-                            CircleInviteActivity.startMe(CircleDetailIndexActivity.this, mStartParam,
-                                    mViewModel.mCircleDetailLv.getValue().getCircleName(),
-                                    mViewModel.mCircleDetailLv.getValue().getLogoUrl());
-                        }
-                        break;
-                    case 1: //编辑圈子
-                        if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.mCircleDetailLv.getValue().getRole()> 0*/) {
-                            ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2)
-                                    .withInt("flag", Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType()))
-                                    .withString("circleid", "245")
-                                    .withString("utid", "98699115f2260ef14486f745fc72dbd1")
-                                    .navigation();
-                        }
-                        break;
-                    case 2: //成员列表
-                        if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.detailVo.get().getRole()> 0*/) {
-                            StaCirParam mStartParam = new StaCirParam();
-                            mStartParam.setCircleid(circleid);
-                            mStartParam.setUtid(utid);
-                            mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
-                            CirclePersonListActivity.startMe(CircleDetailIndexActivity.this, mStartParam, mViewModel.mCircleDetailLv.getValue());
-                        }
-                        break;
-                    case 3: //圈子简介
-                        if (mViewModel.mCircleDetailLv.getValue() != null) {
-                            StaCirParam mStartParam = new StaCirParam();
-                            mStartParam.setCircleid(circleid);
-                            mStartParam.setUtid(utid);
-                            mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
-                            CircleInfoActivity.startMe(CircleDetailIndexActivity.this, mStartParam);
-                        }
-                        break;
-                }
-            });
-            bottomSheetDialog.show(this);
-        });
-    }
-
-
-    @Override
-    public void initObserver() {
-        mViewModel.mCircleDetailLv.observe(this, circleDetailVo -> {
-            if (circleDetailVo != null) {
-                mViewModel.FetchCircleClass();
-                mBinding.setCircleDetail(circleDetailVo);
-                processBanner(circleDetailVo);
-                processView(circleDetailVo);
-            }
-        });
-
-        mViewModel.mCircleClassLv.observe(this, circleTitlesVos -> {
-            if (circleTitlesVos != null) {
-                processTab(circleTitlesVos);
-            }
-        });
-
-        mViewModel.mShareLv.observe(this, shareBean -> {
-            showShare(shareBean);
-        });
-
-        mViewModel.mJoninLv.observe(this, s -> {
-
+            processCircleMenu();
         });
     }
 
@@ -252,33 +146,16 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
     }
 
-    private void showPublishPop() {
 
-        if (fragments.size() == 0) {
-            return;
-        }
+    @Override
+    public void onCircleDetailFetched(CircleDetailVo circleDetailVo) {
+        mBinding.setCircleDetail(circleDetailVo);
+        processBanner(circleDetailVo);
+    }
 
-        if (myPubMenu == null) {
-            myPubMenu = new Popmenu(this);
-            myPubMenu.init(mBinding.getRoot());
-        }
-        myPubMenu.showMoreWindow(mBinding.getRoot());
-        myPubMenu.setReplyCommand(o -> {
-            int type = (int) o;
-            int mPubLishType = CirclePublishActivity.PUBLISH_TYPE_NEWS;
-            switch (type) {
-                case 1:
-                    mPubLishType = CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
-                    break;
-                case 2:
-                    mPubLishType = CirclePublishActivity.PUBLISH_TYPE_NEWS;
-                    break;
-                case 3:
-                    mPubLishType = CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
-                    break;
-            }
-            processPublish(mPubLishType, 1);
-        });
+    @Override
+    public void onCircleTabFetched(List<CircleTitlesVo> circleDetailVo) {
+        processTab(circleDetailVo);
     }
 
     private void processPublish(int type, int editType) {
@@ -395,12 +272,12 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
     @Override
     protected int getLayoutId() {
-        return R.layout.circlev2_detail_index_activity;
+        return R.layout.circlev2_default_detail_index_activity;
     }
 
     @Override
-    public CircleDetailIndexViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(CircleDetailIndexViewModel.class);
+    public DefaultDetailIndexViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(DefaultDetailIndexViewModel.class);
     }
 
     private void processBanner(CircleDetailVo circleDetailVo) {
@@ -446,7 +323,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
             public void displayImage(Context context, Object path, ImageView imageView) {
                 RequestOptions options = new RequestOptions();
                 options.transforms(new CenterCrop());
-                Glide.with(CircleDetailIndexActivity.this)
+                Glide.with(DefaultCircleDetailIndexActivity.this)
                         .load(CommonBdUtils.getCompleteImageUrl((String) path))
                         .apply(options)
                         .into(imageView);
@@ -462,62 +339,17 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
     @Override
     public void initImmersionBar() {
-        ImmersionBar.with(CircleDetailIndexActivity.this)
+        ImmersionBar.with(DefaultCircleDetailIndexActivity.this)
                 .navigationBarColor("#ffffff")
                 .statusBarDarkFont(true)
                 .titleBarMarginTop(mBinding.toolbar)
                 .init();
     }
 
-    public void showShare(ShareBean shareBean) {
-        if (shareBean == null) {
-            return;
-        }
-        ShareBoardConfig config = new ShareBoardConfig();//新建ShareBoardConfig
-        config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR);
-        config.setTitleVisibility(false);
-        config.setIndicatorVisibility(false);
-        config.setCancelButtonVisibility(false);
-        config.setCancelButtonVisibility(false);
-        config.setShareboardBackgroundColor(Color.WHITE);
-        UMImage image = new UMImage(this, shareBean.getShareImg());//网络图片
-        image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
-        image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分
-        UMWeb web = new UMWeb(shareBean.getShareUrl());
-        web.setTitle(shareBean.getShareTit());//标题
-        web.setThumb(image);  //缩略图
-        web.setDescription(shareBean.getShareDesc());//描述
-        new ShareAction(this).withMedia(web)
-                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)
-                .setCallback(new UMShareListener() {
-                    @Override
-                    public void onStart(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-
-                    }
-
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                        ToastUtils.showShort("分享失败请重试");
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                }).open(config);
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (disposable != null) {
-            disposable.dispose();
-        }
     }
 }
 
