@@ -18,6 +18,7 @@ import timber.log.Timber;
 
 public class CircleListVo extends BaseSampleItem implements Serializable {
 
+    public int style = 0;
 
     @Override
     public OnItemClickListener getOnItemClickListener() {
@@ -41,8 +42,13 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
 
     @Override
     public int getItemLayout() {
-
-        return R.layout.circlev2_item_mycircle;
+        int lay = R.layout.circlev2_item_mycircle;
+        switch (style) {
+            case 1:
+                lay = R.layout.circlev2_item_nomal_circle;
+                break;
+        }
+        return lay;
     }
 
     //        * teamid : 1

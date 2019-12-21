@@ -12,8 +12,10 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.CollectionUtils;
+import com.docker.cirlev2.ui.detail.CircleEditTabActivity;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
+import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
@@ -30,7 +32,6 @@ import java.util.List;
 
 @Route(path = AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
 public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDynamicListViewModel, CommonTabFrameLayoutBinding> {
-
 
     private boolean isAddTotalTab = false;
     private ArrayList<Fragment> fragments = new ArrayList<>();
@@ -75,7 +76,9 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
          * 编辑 todo
          * */
         mBinding.get().commonTvEdit.setOnClickListener(v -> {
-
+            StaCirParam staCirParam = new StaCirParam(mCircleTitlesVo.get(0).getCircleid(), mCircleTitlesVo.get(0).getUtid(), pos + "");
+            staCirParam.type = 2;
+            CircleEditTabActivity.startMe(this.getHoldingActivity(), staCirParam, CircleEditTabActivity.LEVEL_2_EDITCODE);
         });
     }
 
@@ -122,6 +125,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
         } else {
             if (CollectionUtils.isEmpty(circleTitlesVos)) {
                 mBinding.get().magicIndicator.setVisibility(View.GONE);
+                mBinding.get().commonTvEdit.setVisibility(View.GONE);
                 titles = new String[]{""};
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)

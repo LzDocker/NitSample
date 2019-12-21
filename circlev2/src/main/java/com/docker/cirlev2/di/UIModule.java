@@ -12,6 +12,7 @@ import com.docker.cirlev2.ui.create.CircleCreateActivity;
 import com.docker.cirlev2.ui.create.CircleCreateIndexActivity;
 import com.docker.cirlev2.ui.detail.CircleDetailIndexActivity;
 import com.docker.cirlev2.ui.detail.CircleEditMemberGroupActivity;
+import com.docker.cirlev2.ui.detail.CircleEditTabActivity;
 import com.docker.cirlev2.ui.detail.CircleGroupListActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
@@ -25,8 +26,10 @@ import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragmentv2;
 import com.docker.cirlev2.ui.index.CircleIndexActivity;
 import com.docker.cirlev2.ui.index.CircleIndexFragment;
 import com.docker.cirlev2.ui.index.CircleSampleActivity;
+import com.docker.cirlev2.ui.list.CircleClassListActivity;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.ui.list.CircleDynamicListFragment;
+import com.docker.cirlev2.ui.list.CircleSearchListActivity;
 import com.docker.cirlev2.ui.persion.CircleGroupPerssionActivity;
 import com.docker.cirlev2.ui.persion.CircleModifyActivity;
 import com.docker.cirlev2.ui.persion.CirclePersionSettingActivity;
@@ -210,7 +213,17 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract Circlev2ReplayQuestionActivity contributeCirclev2ReplayQuestionActivityInjector();
 
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleClassListActivity contributeCircleClassListActivityInjector();
 
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleSearchListActivity contributeCircleSearchListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleEditTabActivity contributeCircleEditTabActivityInjector();
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/

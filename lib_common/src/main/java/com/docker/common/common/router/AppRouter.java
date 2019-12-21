@@ -72,6 +72,9 @@ public class AppRouter {
 
 
     public static final String CIRCLE_INDEX = CircleV2Group + "index";
+    public static final String CIRCLE_CLASS_LIST = CircleV2Group + "CLASS_LIST";
+    public static final String CIRCLE_SEARCH_LIST = CircleV2Group + "CIRCLE_SEARCH_LIST";
+    public static final String CIRCLE_MINE_LIST = CircleV2Group + "MINE_LIST";
     public static final String CIRCLE_SAMPLE_INDEX = CircleV2Group + "sample_index";
     public static final String CIRCLE_INDEX_FRAME = CircleV2Group + "index_frame";
     public static final String CIRCLE_DYNAMIC_LIST_FRAME = CircleV2Group + "dynamic_list_frame";
@@ -83,10 +86,10 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_INDEX = CircleV2Group + "circle_detail_v2_index";
     public static final String CIRCLE_PUBLISH_v2_INDEX = CircleV2Group + "circle_publish_v2_index";
     public static final String CIRCLE_dynamic_v2_detail = CircleV2Group + "circle_dynamic_v2_detail";
-    public static final String CIRCLE_persion_v2_detail = CircleGroup + "CIRCLE_persion_v2_detail";
-    public static final String CIRCLE_comment_v2_reply = CircleGroup + "CIRCLE_comment_v2_reply";
-    public static final String CIRCLE_more_comment_v2_reply = CircleGroup + "CIRCLE_more_comment_v2_reply";
-    public static final String CIRCLE_comment_v2_ANSWER = CircleGroup + "CIRCLE_comment_v2_ANSWER";
+    public static final String CIRCLE_persion_v2_detail = CircleV2Group + "CIRCLE_persion_v2_detail";
+    public static final String CIRCLE_comment_v2_reply = CircleV2Group + "CIRCLE_comment_v2_reply";
+    public static final String CIRCLE_more_comment_v2_reply = CircleV2Group + "CIRCLE_more_comment_v2_reply";
+    public static final String CIRCLE_comment_v2_ANSWER = CircleV2Group + "CIRCLE_comment_v2_ANSWER";
 
     public static final String ProGroup = "/Pro/";
 

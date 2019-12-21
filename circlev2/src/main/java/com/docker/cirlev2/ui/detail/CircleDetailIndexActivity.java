@@ -127,6 +127,9 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
          * 编辑 todo
          * */
         mBinding.circlev2Edit.setOnClickListener(v -> {
+            StaCirParam staCirParam = new StaCirParam(circleid, utid, "");
+            staCirParam.type = 2;
+            CircleEditTabActivity.startMe(this, staCirParam, CircleEditTabActivity.LEVEL_1_EDITCODE);
 
         });
         initAppBar();
@@ -248,6 +251,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 //        } else {
 //            mBinding.ivMenuMore.setVisibility(View.GONE);
 //        }
+
     }
 
 

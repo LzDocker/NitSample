@@ -29,6 +29,9 @@
         <activity android:name="com.docker.cirlev2.ui.persion.CircleGroupPerssionActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.list.CircleClassListActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.list.CircleSearchListActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.detail.CircleEditTabActivity"></activity>
         <activity android:name=".ui.CircleInfoActivity"></activity>
         <activity
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity"
