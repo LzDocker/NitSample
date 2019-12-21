@@ -126,8 +126,8 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
             params.put("dynamicid", serviceDataBean.getDynamicid());
             params.put("memberid", userInfoVo.uid);
             params.put("uuid", userInfoVo.uuid);
-//            params.put("push_uuid", commentVo.getUuid());
-//            params.put("push_memberid", commentVo.getMemberid());
+            params.put("push_uuid", serviceDataBean.getUuid());
+            params.put("push_memberid", serviceDataBean.getMemberid());
             if (TextUtils.isEmpty(userInfoVo.avatar)) {
                 userInfoVo.avatar = "/var/upload/image/section/logo3.png";
             }
@@ -138,11 +138,11 @@ public class CircleMoreReplyListActivity extends NitCommonActivity<CircleComment
                 params.put("nickname", userInfoVo.nickname);
             }
             params.put("content", replay);
-            params.put("cid", serviceDataBean.getDynamicid());
-            params.put("reply_memberid", serviceDataBean.getMemberid());
-//            params.put("reply_uuid", commentVo.getUuid());
-//            params.put("reply_nickname", commentVo.getNickname());
-//            mViewModel.replayComment(commentVo, params);
+            params.put("cid", "0");
+            params.put("reply_memberid", "");
+            params.put("reply_uuid", "");
+            params.put("reply_nickname", "");
+            mViewModel.replayComment(null, params);
         });
     }
 

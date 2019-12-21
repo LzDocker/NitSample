@@ -58,7 +58,8 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
 
     @Override
     protected void initView(View var1) {
-        mViewModel.mAttenLv.observe(this, s -> { });
+        mViewModel.mAttenLv.observe(this, s -> {
+        });
     }
 
     private Disposable disposable;
@@ -169,7 +170,9 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
             @Override
             public void onProgressChanged(com.tencent.smtt.sdk.WebView view, int newProgress) {
                 if (newProgress > 75) {
-                    mBinding.get().empty.hide();
+                    if (mBinding.get() != null) {
+                        mBinding.get().empty.hide();
+                    }
                 }
             }
         });

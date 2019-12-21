@@ -166,14 +166,20 @@ public class CircleReplyListActivity extends NitCommonActivity<CircleCommentList
             params.put("reply_memberid", commentVo.getMemberid());
             params.put("reply_uuid", commentVo.getUuid());
             params.put("reply_nickname", commentVo.getNickname());
-            mViewModel.replayComment(commentVo, params);
+            mViewModel.replayComment(null, params);
         });
     }
 
     @Override
     public void initObserver() {
         mViewModel.mServerLiveData.observe(this, o -> {
+            if (o != null) {
+                if ("0".equals(o)) {
+                    mBinding.editInput.setText("");
+                }
+            }
         });
+
     }
 
     @Override
