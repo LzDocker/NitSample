@@ -3,6 +3,7 @@ package com.docker.cirlev2.di;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.docker.cirlev2.inter.frame.DefaultDetailIndexViewModel;
 import com.docker.cirlev2.vm.CircleCommentListViewModel;
 import com.docker.cirlev2.vm.CircleCreateViewModel;
 import com.docker.cirlev2.vm.CircleDetailIndexViewModel;
@@ -96,6 +97,11 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(CircleEditTabViewModel.class)
     abstract ViewModel CircleEditTabViewModel(CircleEditTabViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DefaultDetailIndexViewModel.class)
+    abstract ViewModel DefaultDetailIndexViewModel(DefaultDetailIndexViewModel model);
 
 
 }

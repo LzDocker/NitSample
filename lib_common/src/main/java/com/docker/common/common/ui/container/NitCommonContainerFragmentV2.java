@@ -72,7 +72,9 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
         initRvUi();
         initRefreshUi();
         initListener();
-        delegetCommand.next(mViewModel, this);
+        if (delegetCommand != null) {
+            delegetCommand.next(mViewModel, this);
+        }
     }
 
     @Override

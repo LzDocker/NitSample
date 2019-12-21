@@ -65,7 +65,9 @@ public class NitCommonContainerNoRefreshFragmentV2 extends NitCommonListNoRefres
         initRvUi();
         initRefreshUi();
         initListener();
-        delegetCommand.next(mViewModel, this);
+        if (delegetCommand != null) {
+            delegetCommand.next(mViewModel, this);
+        }
     }
 
     @Override

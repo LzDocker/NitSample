@@ -48,7 +48,9 @@ public class NitCommonCardNoRefreshFragment extends NitCommonListNoRefreshFragme
         } else {
             delegetCommand = ((NitCommonFragment) (NitCommonCardNoRefreshFragment.this.getParentFragment())).providerNitDelegetCommand(commonListReq.falg);
         }
-        delegetCommand.next(mViewModel, this);
+        if (delegetCommand != null) {
+            delegetCommand.next(mViewModel, this);
+        }
     }
 
 

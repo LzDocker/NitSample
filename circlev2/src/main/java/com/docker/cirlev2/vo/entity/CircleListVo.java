@@ -32,7 +32,8 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
                         .withSerializable(Constant.CommonListParam, options)
                         .navigation();
             } else {  // 进入详情
-                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX)
+//                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_default)
+                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
                         .withString("circleid", "245")
                         .withString("utid", "98699115f2260ef14486f745fc72dbd1")
                         .navigation();
