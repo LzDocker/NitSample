@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.docker.nitsample.vo.card.AppRecycleCard2Vo" />
+            type="com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo" />
 
         <import type="com.docker.core.util.LayoutManager" />
 
@@ -20,10 +20,31 @@
         android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="title" />
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="热门活动"
+                android:textColor="#121212"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableRight="@mipmap/arrow_right"
+                android:drawablePadding="10dp"
+                android:text="更多"
+                android:textColor="#939393" />
+
+        </RelativeLayout>
+
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -33,7 +54,7 @@
             android:overScrollMode="never"
             app:itemBinding="@{item.getItemImgBinding()}"
             app:items="@{item.getInnerResource()}"
-            bind:layoutManager="@{LayoutManager.grid(4)}" />
+            bind:layoutManager="@{LayoutManager.linear}" />
     </LinearLayout>
 
 

@@ -3,7 +3,6 @@ package com.docker.nitsample.vo.card;
 import android.databinding.ObservableField;
 import android.view.View;
 
-import com.dcbfhd.utilcode.utils.IntentUtils;
 import com.docker.cirlev2.BR;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
@@ -13,9 +12,9 @@ import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class AppRecycleCardVo extends BaseCardVo<String> {
+public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
 
-    public AppRecycleCardVo(int style, int position) {
+    public AppRecycleHorizontalCardVo(int style, int position) {
         super(style, position);
         maxSupport = 1;
     }
@@ -27,7 +26,7 @@ public class AppRecycleCardVo extends BaseCardVo<String> {
 
     @Override
     public int getItemLayout() {
-        return R.layout.app_recycle_card;
+        return R.layout.app_recycle_horizontal_card;
     }
 
 

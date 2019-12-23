@@ -20,7 +20,7 @@
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             app:banne_click_command="@{item.replyCommandParam}"
             app:banner_head_items="@{item.bannerVos}"
             app:is_auto_play="true" />

@@ -28,9 +28,7 @@ public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragme
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 outerVm = commonListVm;
                 AppImgHeaderCardVo appImgHeaderCardVo = new AppImgHeaderCardVo(0, 1);
-
                 AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
-
                 NitBaseProviderCard.providerCard(commonListVm, appImgHeaderCardVo, nitCommonFragment);
                 NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
             }

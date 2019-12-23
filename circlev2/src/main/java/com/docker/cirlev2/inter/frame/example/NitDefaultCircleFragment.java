@@ -41,8 +41,7 @@ import java.util.List;
 public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetailIndexViewModel, Circlev2DefaultDetailIndexFragmentBinding> {
 
 
-    public static int temple = 2;
-
+    public static int temple = 1;
 
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
