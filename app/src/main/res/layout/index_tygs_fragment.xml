@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.inter.frame.DefaultDetailIndexViewModel" />
+
+        <variable
+            name="circleDetail"
+            type="com.docker.cirlev2.vo.entity.CircleDetailVo" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
+
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlFooterTranslationViewId="@+id/viewPager">
+
+            <com.docker.common.common.widget.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@android:color/black"
+                app:srlDrawableArrowSize="13dp"
+                app:srlDrawableProgressSize="16dp"
+                app:srlDrawableSize="16dp"
+                app:srlFinishDuration="200"
+                app:srlTextSizeTitle="13sp" />
+
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                bind:ignore="MergeRootFrame">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:overScrollMode="ifContentScrolls"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_scrollFlags="scroll" />
+
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:elevation="0dp"
+                    android:orientation="vertical"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:elevation="0dp">
+
+                    <android.support.design.widget.CollapsingToolbarLayout
+                        android:id="@+id/toolbar_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="0dp"
+                        app:contentScrim="@color/white"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <FrameLayout
+                            android:id="@+id/frame_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"/>
+
+                        <android.support.v7.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_below="@+id/view"
+                            android:elevation="0dp"
+                            app:contentInsetLeft="0dp"
+                            app:contentInsetStart="0dp"
+                            app:contentInsetStartWithNavigation="0dp"
+                            app:layout_collapseMode="pin"
+                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+                        </android.support.v7.widget.Toolbar>
+
+                    </android.support.design.widget.CollapsingToolbarLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_stick_coutainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/open_liner_bg_shape">
+
+                        <net.lucode.hackware.magicindicator.MagicIndicator
+                            android:id="@+id/magic_indicator"
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:paddingRight="10dp" />
+
+                    </LinearLayout>
+
+                </android.support.design.widget.AppBarLayout>
+            </android.support.design.widget.CoordinatorLayout>
+
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+
+    </FrameLayout>
+
+
+</layout>

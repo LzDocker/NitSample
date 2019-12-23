@@ -43,9 +43,9 @@ public class XPopupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.common_activity_xpopup);
-        ItemVo itemVo = new ItemVo("1", "编辑");
-        ItemVo itemVo1 = new ItemVo("2", "删除");
-        ItemVo itemVo2 = new ItemVo("3", "取消");
+        ItemVo itemVo = new ItemVo(1, "编辑");
+        ItemVo itemVo1 = new ItemVo(2, "删除");
+        ItemVo itemVo2 = new ItemVo(3, "取消");
         List<ItemVo> itemVoList = new ArrayList<>();
         itemVoList.add(itemVo);
         itemVoList.add(itemVo1);

@@ -78,8 +78,6 @@ public class CircleInfoActivity extends NitCommonActivity<CircleCreateViewModel,
         });
 
         mViewModel.getCircleDetailVo(mStartParam.getUtid(), mStartParam.getCircleid());
-
-
         mBinding.circleInfoQuit.setOnClickListener(v -> {
             CircleCreateVo circleCreateVo = mBinding.getVo();
             mViewModel.quitCircle(mStartParam);

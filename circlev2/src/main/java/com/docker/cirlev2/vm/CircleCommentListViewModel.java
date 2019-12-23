@@ -160,7 +160,7 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
                     }
                     params.put("content", commentTextTemp);
                     if (TopCommentVo != null) {
-                        replayComment(TopCommentVo, params);
+                        replayComment(null, params);
                     } else {
                         replayComment(commentVo, params);
                     }
@@ -182,28 +182,29 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
                 hideDialogWait();
                 KeyboardUtils.hideSoftInput(ActivityUtils.getTopActivity());
                 UserInfoVo userInfoVo = CacheUtils.getUser();
-                CommentVo commentVo1 = new CommentVo();
-                commentVo1.setCommentid(((CommentRstVo) resource.data).commentid);
-                commentVo1.setContent(params.get("content"));
+                if (commentVo == null) {
+                    CommentVo commentVo1 = new CommentVo();
+                    commentVo1.setCommentid(((CommentRstVo) resource.data).commentid);
+                    commentVo1.setContent(params.get("content"));
 //                commentVo1.setNickname(userInfoVo.nickname);
-                commentVo1.setMemberid(userInfoVo.uid);
-                commentVo1.setUuid(userInfoVo.uuid);
-                commentVo1.setNickname(userInfoVo.nickname);
-//                CommentVo.Reply reply = new CommentVo.Reply();
-//                reply.setCommentid(((CommentRstVo) resource.data).commentid);
-//                reply.setContent(params.get("content"));
-//                reply.setReply_nickname(userInfoVo.nickname);
-//                reply.setMemberid(userInfoVo.uid);
-//                reply.setUuid(userInfoVo.uuid);
-//                reply.setNickname(userInfoVo.nickname);
-                mItems.add(commentVo1);
-//                commentVo.getReply().add(reply);
-//                commentVo.notifyChange();
+                    commentVo1.setMemberid(userInfoVo.uid);
+                    commentVo1.setInputtime(String.valueOf(System.currentTimeMillis() / 1000));
+                    commentVo1.setUuid(userInfoVo.uuid);
+                    commentVo1.setNickname(userInfoVo.nickname);
+                    mItems.add(commentVo1);
+                } else {
+                    CommentVo.Reply reply = new CommentVo.Reply();
+                    reply.setCommentid(((CommentRstVo) resource.data).commentid);
+                    reply.setContent(params.get("content"));
+                    reply.setReply_nickname(userInfoVo.nickname);
+                    reply.setMemberid(userInfoVo.uid);
+                    reply.setUuid(userInfoVo.uuid);
+                    reply.setNickname(userInfoVo.nickname);
+                    commentVo.getReply().add(reply);
+                    commentVo.notifyChange();
 
-
-
-
-
+                }
+                mServerLiveData.setValue(resource.status);
             }
 
             @Override

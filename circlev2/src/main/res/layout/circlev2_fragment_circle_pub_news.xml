@@ -11,7 +11,7 @@
     </data>
 
 
-    <LinearLayout
+    <com.docker.common.common.widget.CustomLinearLayout
         android:id="@+id/root"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
@@ -367,7 +367,7 @@
 
 
         </LinearLayout>
-    </LinearLayout>
+    </com.docker.common.common.widget.CustomLinearLayout>
 
 </layout>
 

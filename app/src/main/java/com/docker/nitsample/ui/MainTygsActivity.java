@@ -1,16 +1,12 @@
 package com.docker.nitsample.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -26,15 +22,10 @@ import com.docker.common.common.utils.versionmanager.AppVersionManager;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
-import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
-import com.docker.video.assist.DataInter;
-import com.docker.videobasic.ui.SingleVideoActivity;
-import com.docker.videobasic.ui.VideoListActivity;
 import com.docker.videobasic.ui.VideoListFragment;
-import com.docker.videobasic.util.videolist.TestActivity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -47,7 +38,7 @@ import io.reactivex.disposables.Disposable;
 import static com.docker.common.common.router.AppRouter.HOME;
 
 @Route(path = HOME)
-public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
+public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject
     AppVersionManager versionManager;
@@ -129,16 +120,26 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         NitContainerCommand nitContainerCommand = null;
         switch (flag) {
             case 0:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleNetListViewModel.class);
+                nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
                 break;
             case 1:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
+
+                nitContainerCommand = new NitContainerCommand() {
+                    @Override
+                    public Class exectue() {
+                        return (SampleNetListViewModel.class);
+                    }
+                };
 
                 break;
             case 2:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleNetListViewModel.class);
-                break;
-            case 3:
+                nitContainerCommand = new NitContainerCommand() {
+                    @Override
+                    public Class exectue() {
+                        return (SampleNetListViewModel.class);
+                    }
+                };
+
                 break;
         }
         return nitContainerCommand;
@@ -154,11 +155,11 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
                 }
                 mBinding.viewpager.setCurrentItem(position, false);
                 if (position == 3) {
-                    ImmersionBar.with(MainActivity.this)
+                    ImmersionBar.with(MainTygsActivity.this)
                             .fitsSystemWindows(true)
                             .init();
                 } else {
-                    ImmersionBar.with(MainActivity.this)
+                    ImmersionBar.with(MainTygsActivity.this)
                             .fitsSystemWindows(true)
                             .statusBarColor(com.docker.core.R.color.colorPrimary)
                             .init();

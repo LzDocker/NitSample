@@ -20,7 +20,5 @@ public class PagerRecycleBindAdapter {
             pagerSnapHelper = new PagerSnapHelper();
         }
         pagerSnapHelper.attachToRecyclerView(recyclerView);
-
     }
-
 }

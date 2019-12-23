@@ -7,16 +7,23 @@ import com.docker.common.common.widget.refresh.header.ClassicsHeader;
 
 public class CommonWidgetModel {
     public static final String[] mMainBottomTitles = {
-
-            "编辑页面",
-
-            "我编辑的",
+            "公社首页",
+            "公社优选",
+            "",
+            "江湖消息",
+            "个人中心",
     };
     public static final int[] mIconUnselectIds = {
             R.mipmap.open_up_pic_icon,
             R.mipmap.open_up_pic_icon,
+            R.mipmap.dot,
+            R.mipmap.open_up_pic_icon,
+            R.mipmap.open_up_pic_icon,
     };
     public static final int[] mIconSelectIds = {
+            R.mipmap.close_icon,
+            R.mipmap.close_icon,
+            R.mipmap.dot,
             R.mipmap.close_icon,
             R.mipmap.close_icon,
     };

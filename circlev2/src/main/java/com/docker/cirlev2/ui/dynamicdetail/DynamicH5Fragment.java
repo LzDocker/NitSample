@@ -171,7 +171,7 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
             public void onProgressChanged(com.tencent.smtt.sdk.WebView view, int newProgress) {
                 if (mBinding.get() != null && newProgress > 75) {
                     mBinding.get().empty.hide();
-                }
+                    }
             }
         });
         processLoad();

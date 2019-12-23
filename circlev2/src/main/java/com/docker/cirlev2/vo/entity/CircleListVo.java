@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
+import com.docker.cirlev2.inter.CircleConfig;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.CommonListOptions;
@@ -31,10 +32,20 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
                         .navigation();
             } else {  // 进入详情
 //                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_default)
-                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
-                        .withString("circleid", ((CircleListVo) item).circleid)
-                        .withString("utid", ((CircleListVo) item).utid)
-                        .withString("circletype", ((CircleListVo) item).type)
+//                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
+//                        .withString("circleid", ((CircleListVo) item).circleid)
+//                        .withString("utid", ((CircleListVo) item).utid)
+//                        .withString("circletype", ((CircleListVo) item).type)
+//                        .navigation();
+
+                CircleConfig circleConfig = new CircleConfig();
+                circleConfig.circleid = ((CircleListVo) item).circleid;
+                circleConfig.utid = ((CircleListVo) item).utid;
+                circleConfig.circleType = ((CircleListVo) item).type;
+                circleConfig.Temple = 0;
+                ARouter.getInstance()
+                        .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
+                        .withSerializable("circleConfig", circleConfig)
                         .navigation();
             }
         };

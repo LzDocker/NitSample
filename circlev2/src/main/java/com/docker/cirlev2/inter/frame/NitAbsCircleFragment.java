@@ -267,6 +267,7 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
      * */
     public void onAppClick(AppVo appVo) {
 
+
         if ("0".equals(appVo.id)) {
             ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                     .withInt("editType", 1)
