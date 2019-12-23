@@ -26,16 +26,15 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
             Timber.e("=========================");
 
             if (TextUtils.isEmpty(((CircleListVo) item).circleid)) { // 创建
-                CommonListOptions options = new CommonListOptions();
-                options.refreshState = Constant.KEY_REFRESH_PURSE;
+
                 ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2_INDEX)
-                        .withSerializable(Constant.CommonListParam, options)
                         .navigation();
             } else {  // 进入详情
 //                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_default)
                 ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
-                        .withString("circleid", "245")
-                        .withString("utid", "98699115f2260ef14486f745fc72dbd1")
+                        .withString("circleid", ((CircleListVo) item).circleid)
+                        .withString("utid", ((CircleListVo) item).utid)
+                        .withString("circletype", ((CircleListVo) item).type)
                         .navigation();
             }
         };

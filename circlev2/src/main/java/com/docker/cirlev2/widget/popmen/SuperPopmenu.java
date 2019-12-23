@@ -24,11 +24,10 @@ import android.widget.RelativeLayout;
 
 import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.docker.cirlev2.R;
+import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.common.BR;
 import com.docker.common.common.adapter.NitAbsSampleAdapter;
-import com.docker.common.common.command.ReplyCommand;
 import com.docker.common.common.command.ReplyCommandParam;
-import com.docker.core.util.adapter.SimpleCommonRecyclerAdapter;
 
 public class SuperPopmenu extends PopupWindow implements OnClickListener {
 
@@ -98,9 +97,16 @@ public class SuperPopmenu extends PopupWindow implements OnClickListener {
         recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), 4));
         recyclerView.setAdapter(absSampleAdapter);
 
-        for (int i = 0; i < 10; i++) {
-            absSampleAdapter.add(i + "==========");
-        }
+        AppVo appManagerVo = new AppVo();
+        appManagerVo.name = "应用管理";
+        appManagerVo.id = "-1";
+        absSampleAdapter.add(appManagerVo);
+
+        AppVo appVo = new AppVo();
+        appVo.name = "动态";
+        appVo.id = "0";
+        absSampleAdapter.add(appVo);
+
         absSampleAdapter.notifyDataSetChanged();
         absSampleAdapter.setOnItemClickListener((view1, position) -> {
             if (replyCommandParam != null) {
@@ -136,31 +142,28 @@ public class SuperPopmenu extends PopupWindow implements OnClickListener {
     public void showMoreWindow(View anchor) {
 
         showAtLocation(anchor, Gravity.TOP | Gravity.START, 0, 0);
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //圆形扩展的动画
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                        int x = mWidth / 2;
-                        int y = (int) (mHeight - fromDpToPx(25));
-                        Animator animator = ViewAnimationUtils.createCircularReveal(bgView, x,
-                                y, 0, bgView.getHeight());
-                        animator.addListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationStart(Animator animation) {
-                            }
+        mHandler.post(() -> {
+            try {
+                //圆形扩展的动画
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    int x = mWidth / 2;
+                    int y = (int) (mHeight - fromDpToPx(25));
+                    Animator animator = ViewAnimationUtils.createCircularReveal(bgView, x,
+                            y, 0, bgView.getHeight());
+                    animator.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                        }
 
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                            }
-                        });
-                        animator.setDuration(300);
-                        animator.start();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                        }
+                    });
+                    animator.setDuration(300);
+                    animator.start();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
         showAnimation(layout);

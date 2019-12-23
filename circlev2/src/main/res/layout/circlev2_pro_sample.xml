@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="String" />
+            type="com.docker.cirlev2.vo.pro.AppVo" />
 
     </data>
 
@@ -17,14 +17,19 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:src="@mipmap/circle_pub_active_icon" />
+
         <TextView
             android:id="@+id/circle_active"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableTop="@mipmap/circle_pub_active_icon"
-            android:drawablePadding="19dp"
             android:gravity="center"
-            android:text="动态" />
+            android:text="@{item.name}" />
     </LinearLayout>
 
 </layout>

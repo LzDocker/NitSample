@@ -52,16 +52,24 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
         super.onCreate(savedInstanceState);
         utid = getIntent().getStringExtra("utid");
         circleid = getIntent().getStringExtra("circleid");
-        fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType);
-//        switch (circleType) {
-//            case "company":  // 企业圈
-//
-//
-//                break;
-//            case "country": // 国别圈
-//
-//                break;
-//        }
+        circleType = getIntent().getStringExtra("circletype");
+
+        fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType, 0);
+//        官方圈0 兴趣圈1 企业圈|2
+//        fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType);
+        switch (circleType) {
+            case "0":  // 官方圈0
+                fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType, 0);
+                break;
+            case "1": // 兴趣圈1
+                fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType, 1);
+                break;
+
+            case "2": // 企业圈2
+                fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType, 2);
+                break;
+
+        }
         FragmentUtils.add(getSupportFragmentManager(), fragment, R.id.frame_circle_detail);
     }
 

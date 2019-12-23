@@ -1,6 +1,8 @@
 package com.docker.cirlev2.ui.create;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -12,6 +14,8 @@ import com.docker.cirlev2.vm.CircleMinesViewModel;
 import com.docker.cirlev2.vm.CreateListViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonListActivity;
@@ -31,7 +35,15 @@ public class CircleCreateIndexActivity extends NitCommonListActivity<CreateListV
     }
 
     @Override
-    public void initObserver() { }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        commonListReq = new CommonListOptions();
+        commonListReq.refreshState = Constant.KEY_REFRESH_PURSE;
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void initObserver() {
+    }
 
     @Override
     public NitContainerCommand providerNitContainerCommand(int flag) {

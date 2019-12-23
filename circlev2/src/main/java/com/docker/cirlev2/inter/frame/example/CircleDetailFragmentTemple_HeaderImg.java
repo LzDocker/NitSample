@@ -2,20 +2,26 @@ package com.docker.cirlev2.inter.frame.example;
 
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
-import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.card.AppImgHeaderCardVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.pro.AppVo;
+import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.core.widget.BottomSheetDialog;
 
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
+
 public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragment {
 
-    private  NitCommonListVm outerVm;
+    private NitCommonListVm outerVm;
+
     @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
         NitDelegetCommand nitDelegetCommand = new NitDelegetCommand() {
@@ -29,10 +35,10 @@ public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragme
                 outerVm = commonListVm;
                 AppImgHeaderCardVo appImgHeaderCardVo = new AppImgHeaderCardVo(0, 1);
 
-                AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
+//                AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
 
                 NitBaseProviderCard.providerCard(commonListVm, appImgHeaderCardVo, nitCommonFragment);
-                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
+//                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
             }
         };
         return nitDelegetCommand;
@@ -80,5 +86,20 @@ public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragme
             }
         });
         bottomSheetDialog.show(this.getHoldingActivity());
+    }
+
+    @Override
+    public void processPro(NitAbsSampleAdapter mAdapter) {
+        super.processPro(mAdapter);
+
+        AppVo appVo = new AppVo();
+        appVo.name = "文章";
+        appVo.id = "1";
+        mAdapter.add(appVo);
+    }
+
+    @Override
+    public void onAppClick(AppVo appVo) {
+        super.onAppClick(appVo);
     }
 }

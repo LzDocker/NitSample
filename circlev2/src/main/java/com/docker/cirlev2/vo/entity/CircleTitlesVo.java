@@ -1,13 +1,25 @@
 package com.docker.cirlev2.vo.entity;
 
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 
+import com.docker.cirlev2.BR;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class CircleTitlesVo extends BaseObservable implements Serializable {
+
+    @Bindable
+    public boolean getIsEditPro() {
+        return isEditPro;
+    }
+
+    public void setIsEditPro(boolean editPro) {
+        isEditPro = editPro;
+        notifyPropertyChanged(BR.isEditPro);
+    }
 
     /**
      * classid : 12
@@ -16,6 +28,10 @@ public class CircleTitlesVo extends BaseObservable implements Serializable {
      * listorder : 0
      * child : [{"classid":"13","className":"二级分类1","listorder":"0","update":"0"},{"classid":"14","className":"二级分类3","listorder":"1","update":"0"}]
      */
+
+
+    @Bindable
+    private boolean isEditPro = false;
 
     private String classid;
     private String isedit;//是否可编辑TitleListBean

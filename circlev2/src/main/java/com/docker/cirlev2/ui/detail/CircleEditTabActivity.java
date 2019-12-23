@@ -32,9 +32,6 @@ import javax.inject.Inject;
  * */
 public class CircleEditTabActivity extends NitCommonActivity<CircleEditTabViewModel, Circlev2ActivityCircleEditClassBinding> {
 
-    @Inject
-    ViewModelProvider.Factory factory;
-
     private StaCirParam mStartParam;
 
     public static final int LEVEL_1_EDITCODE = 1001;
