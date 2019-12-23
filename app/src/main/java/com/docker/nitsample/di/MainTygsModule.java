@@ -57,12 +57,17 @@ public class MainTygsModule {
 
         //个人中心
 //        fragments.add(VideoListFragment.newInstance());
-        fragments.add(VideoListFragment.newInstance());
+//        fragments.add(VideoListFragment.newInstance());
 //        fragments.add(BaseVideoListFragment.newinstance());
 //        fragments.add(VideoFullListFragment.newInstance());
 //        fragments.add(IndexFragment.newInstance());
-        fragments.add(FragmentMineIndex.newInstance());
+//        fragments.add(FragmentMineIndex.newInstance());
 
+        CommonListOptions commonListOptions0 = new CommonListOptions();
+        commonListOptions0.falg = 0;
+//        fragments.add(SampleFragment.newInstance());
+        NitCommonContainerFragment containerFragment0 = NitCommonContainerFragment.newinstance(commonListOptions0);
+        fragments.add(containerFragment0);
 
         return fragments;
     }

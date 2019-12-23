@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2NitAbsDetailIndexActivityBinding;
+import com.docker.cirlev2.inter.CircleConfig;
 import com.docker.cirlev2.inter.frame.example.NitDefaultCircleFragment;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
@@ -37,6 +38,10 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
     public Fragment fragment;
 
 
+    public CircleConfig circleConfig;
+
+    public int temp = 0;
+
     @Override
     protected int getLayoutId() {
         return R.layout.circlev2_nit_abs_detail_index_activity;
@@ -50,19 +55,37 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        utid = getIntent().getStringExtra("utid");
-        circleid = getIntent().getStringExtra("circleid");
-        fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType);
-//        switch (circleType) {
-//            case "company":  // 企业圈
-//
-//
-//                break;
-//            case "country": // 国别圈
-//
-//                break;
-//        }
+
+        circleConfig = (CircleConfig) getIntent().getSerializableExtra("circleConfig");
+        if (circleConfig == null) {
+            utid = getIntent().getStringExtra("utid");
+            circleid = getIntent().getStringExtra("circleid");
+            circleType = getIntent().getStringExtra("circletype");
+            circleConfig = new CircleConfig();
+            circleConfig.utid = utid;
+            circleConfig.circleid = circleid;
+            circleConfig.circleType = circleType;
+
+        } else {
+            utid = circleConfig.utid;
+            circleid = circleConfig.circleid;
+            circleType = circleConfig.circleType;
+        }
+
+        switch (circleType) {
+            case "0":// 官方圈0
+            case "1":// 兴趣圈1
+            case "2":// 企业圈2
+                fragment = NitDefaultCircleFragment.getInstance(circleConfig);
+                break;
+            default:
+                fragment = NitDefaultCircleFragment.getInstance(circleConfig);
+                break;
+        }
         FragmentUtils.add(getSupportFragmentManager(), fragment, R.id.frame_circle_detail);
+
+//        官方圈0 兴趣圈1 企业圈|2
+//        fragment = NitDefaultCircleFragment.getInstance(circleid, utid, circleType);
     }
 
     @Override

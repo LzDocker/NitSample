@@ -81,6 +81,7 @@ public class CircleDetailIndexActivity extends NitCommonActivity<CircleDetailInd
 
     @Autowired
     String circleid;
+
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private Popmenu myPubMenu;
     private Disposable disposable;

@@ -8,8 +8,12 @@
             name="item"
             type="com.docker.common.common.vo.ItemVo" />
         <!--<variable-->
-            <!--name="item"-->
-            <!--type="String" />-->
+        <!--name="item"-->
+        <!--type="String" />-->
+
+        <variable
+            name="parent"
+            type="com.docker.nitsample.vo.card.AppRecycleCard2Vo" />
 
     </data>
 
@@ -18,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:gravity="center"
+        android:onClick="@{()->parent.onChildClick(item)}"
         android:orientation="vertical">
 
 
@@ -26,7 +31,7 @@
             android:layout_height="45dp"
             android:layout_marginRight="2dp"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@{item.id}" />
 
         <TextView

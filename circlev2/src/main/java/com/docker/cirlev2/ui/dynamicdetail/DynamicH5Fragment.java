@@ -169,11 +169,9 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
         webView.setWebChromeClient(new com.tencent.smtt.sdk.WebChromeClient() {
             @Override
             public void onProgressChanged(com.tencent.smtt.sdk.WebView view, int newProgress) {
-                if (newProgress > 75) {
-                    if (mBinding.get() != null) {
-                        mBinding.get().empty.hide();
+                if (mBinding.get() != null && newProgress > 75) {
+                    mBinding.get().empty.hide();
                     }
-                }
             }
         });
         processLoad();

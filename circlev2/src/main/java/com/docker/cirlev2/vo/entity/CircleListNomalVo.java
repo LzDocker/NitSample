@@ -16,6 +16,7 @@ public class CircleListNomalVo extends CircleListVo {
             ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_INDEX)
                     .withString("circleid", ((CircleListNomalVo) item).circleid)
                     .withString("utid", ((CircleListNomalVo) item).getUtid())
+                    .withString("circletype", ((CircleListNomalVo) item).getType())
                     .navigation();
         };
     }

@@ -22,7 +22,7 @@ public class SampleItemVo extends BaseSampleItem {
                     ARouter.getInstance().build(AppRouter.CIRCLE_INDEX).navigation();
                     break;
                 case 1:
-                    ARouter.getInstance().build(AppRouter.MESSAGMAIN).withInt("style", 1).navigation();
+                    ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2_INDEX).navigation();
                     break;
             }
         };

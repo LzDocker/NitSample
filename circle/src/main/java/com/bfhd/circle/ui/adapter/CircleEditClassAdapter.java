@@ -27,7 +27,6 @@ public class CircleEditClassAdapter extends SimpleCommonRecyclerAdapter<CircleTi
             CircleEditClassAdapter.this.notifyItemRemoved(position);
             CircleEditClassAdapter.this.notifyItemRangeChanged(position,getmObjects().size()-position);
         });
-
     }
 
     @Override

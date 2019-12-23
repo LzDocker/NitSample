@@ -16,10 +16,15 @@ import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.cirlev2.widget.popmen.SuperPopmenu;
+import com.docker.common.common.adapter.NitAbsSampleAdapter;
+import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.ShareBean;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.widget.BottomSheetDialog;
@@ -33,18 +38,43 @@ import com.umeng.socialize.shareboard.ShareBoardConfig;
 import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
+
 public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewModel, VB extends ViewDataBinding> extends NitCommonFragment<VM, VB> {
 
     public String circleid;
     public String utid;
     public String circletype;
     public SuperPopmenu mPublishMenu;
+    Disposable disposable;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel.FetchCircleDetail(utid, circleid);
         initObserver();
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("pro_add")) {
+                if (mPublishMenu != null && mPublishMenu.getAdapter() != null) {
+                    if (mPublishMenu.getAdapter().getmObjects().contains(rxEvent.getR())) {
+                        return;
+                    }
+                    mPublishMenu.getAdapter().add(rxEvent.getR());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 
     public void initObserver() {
@@ -214,11 +244,56 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
             mPublishMenu = new SuperPopmenu(this.getHoldingActivity());
         }
         mPublishMenu.init(mBinding.get().getRoot());
+        processPro(mPublishMenu.getAdapter());
+        mPublishMenu.setReplyCommandParam((ReplyCommandParam) o -> {
+            if (mViewModel.mCircleDetailLv.getValue() != null) {
+                onAppClick((AppVo) o);
+            }
+
+        });
         mPublishMenu.showMoreWindow(mBinding.get().getRoot());
     }
 
-    public void onPublish() {
+    /*
+     *
+     * 处理应用列表
+     * */
+    public void processPro(NitAbsSampleAdapter mAdapter) {
 
+    }
+
+    /*
+     * app 点击事件
+     * */
+    public void onAppClick(AppVo appVo) {
+
+
+        if ("0".equals(appVo.id)) {
+            ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withInt("type", PUBLISH_TYPE_ACTIVE)
+                    .navigation();
+        }
+
+        if ("1".equals(appVo.id)) {
+            ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withInt("type", PUBLISH_TYPE_NEWS)
+                    .navigation();
+        }
+
+        if ("2".equals(appVo.id)) {
+            ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withInt("type", PUBLISH_TYPE_QREQUESTION)
+                    .navigation();
+        }
+
+        if ("-1".equals(appVo.id)) {
+            // 应用管理
+            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MANAGER)
+                    .navigation();
+        }
     }
 
 }

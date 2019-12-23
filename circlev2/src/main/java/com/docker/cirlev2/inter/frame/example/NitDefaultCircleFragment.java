@@ -13,13 +13,18 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.CollectionUtils;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2DefaultDetailIndexFragmentBinding;
+import com.docker.cirlev2.inter.CircleConfig;
 import com.docker.cirlev2.inter.frame.DefaultDetailIndexViewModel;
 import com.docker.cirlev2.inter.frame.NitAbsCircleFragment;
+import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
+import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
@@ -38,14 +43,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
+
 public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetailIndexViewModel, Circlev2DefaultDetailIndexFragmentBinding> {
 
 
+    public CircleConfig circleConfig;
     public static int temple = 1;
 
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
-    public static NitAbsCircleFragment getInstance(String circleid, String utid, String circletype) {
+    public static NitAbsCircleFragment getInstance(String circleid, String utid, String circletype, int temple) {
         NitDefaultCircleFragment nitDefaultCircleFragment = null;
         switch (temple) {
             case 0:
@@ -66,11 +76,40 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         return nitDefaultCircleFragment;
     }
 
+    public static NitAbsCircleFragment getInstance(CircleConfig circleConfig) {
+        NitDefaultCircleFragment nitDefaultCircleFragment = null;
+        switch (circleConfig.Temple) {
+            case 0:
+                nitDefaultCircleFragment = new NitDefaultCircleFragment();
+                break;
+            case 1:
+                nitDefaultCircleFragment = new CircleDetailFragmentTemple_HeaderImg();
+                break;
+            case 2:
+                nitDefaultCircleFragment = new CircleDetailFragmentTemple_HeaderNone();
+                break;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("circleConfig", circleConfig);
+        nitDefaultCircleFragment.setArguments(bundle);
+        return nitDefaultCircleFragment;
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         circleid = getArguments().getString("circleid");
         utid = getArguments().getString("utid");
         circletype = getArguments().getString("circletype");
+        circleConfig = (CircleConfig) getArguments().getSerializable("circleConfig");
+        if (circleConfig != null) {
+            circleid = circleConfig.circleid;
+            utid = circleConfig.utid;
+            circletype = circleConfig.circleType;
+        } else {
+            circleid = getArguments().getString("circleid");
+            utid = getArguments().getString("utid");
+            circletype = getArguments().getString("circletype");
+        }
         super.onActivityCreated(savedInstanceState);
         mBinding.get().setViewmodel(mViewModel);
     }
@@ -142,12 +181,17 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
     }
 
     public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
+        int refresh = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        if(temple == 2){
+            refresh = Constant.KEY_REFRESH_OWNER;
+        }
         String[] titles = new String[circleTitlesVos.size()];
         for (int i = 0; i < circleTitlesVos.size(); i++) {
             titles[i] = circleTitlesVos.get(i).getName();
             fragments.add((Fragment) ARouter.getInstance()
                     .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
                     .withSerializable("tabVo", (Serializable) circleTitlesVos)
+                    .withInt("refresh",refresh)
                     .withInt("pos", i)
                     .withInt("role", mViewModel.mCircleDetailLv.getValue().getRole())
                     .navigation());
@@ -155,7 +199,11 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         // magic
         mBinding.get().viewPager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
-        commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
+        if (fragments.size() > 4) {
+            commonIndector.initMagicIndicatorScroll(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
+        } else {
+            commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
+        }
         // magic
     }
 
@@ -283,5 +331,68 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         return nitDelegetCommand;
     }
 
+    @Override
+    public void onAppClick(AppVo appVo) {
+//        super.onAppClick(appVo);
+
+
+        int level1 = mBinding.get().viewPager.getCurrentItem();  // classid
+        CircleDynamicCoutainerFragment circleDetailFragment = (CircleDynamicCoutainerFragment) fragments.get(level1);
+        int level2 = circleDetailFragment.getCurrenTab();
+        // count == 1的时候就是 "全部" tab
+        StaCirParam staCirParam = null;
+
+        if (mViewModel.mCircleClassLv.getValue() != null && mViewModel.mCircleClassLv.getValue().size() > 0 && mViewModel.mCircleDetailLv.getValue() != null) {
+            CircleTitlesVo titlesVo = mViewModel.mCircleClassLv.getValue().get(level1);
+            staCirParam = new StaCirParam(circleid, utid, mViewModel.mCircleDetailLv.getValue().getCircleName());
+            staCirParam.getExtenMap().put("classid1", titlesVo.getClassid());
+            staCirParam.getExtenMap().put("classname1", titlesVo.getName());
+            if (titlesVo.getChildClass() != null && titlesVo.getChildClass().size() > 0) {
+                CircleTitlesVo bean = titlesVo.getChildClass().get(level2);
+                staCirParam.getExtenMap().put("classid2", bean.getClassid());
+                staCirParam.getExtenMap().put("classname2", bean.getName());
+            }
+        } else {
+            ToastUtils.showShort("数据问题,请稍后");
+        }
+
+        if (staCirParam != null) {
+            if ("0".equals(appVo.id)) {
+                ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                        .withInt("editType", 1)
+                        .withInt("type", PUBLISH_TYPE_ACTIVE)
+                        .withSerializable("mStartParam", staCirParam)
+                        .navigation();
+            }
+
+            if ("1".equals(appVo.id)) {
+                ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                        .withInt("editType", 1)
+                        .withInt("type", PUBLISH_TYPE_NEWS)
+                        .withSerializable("mStartParam", staCirParam)
+                        .navigation();
+            }
+
+            if ("2".equals(appVo.id)) {
+                ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                        .withInt("editType", 1)
+                        .withInt("type", PUBLISH_TYPE_QREQUESTION)
+                        .withSerializable("mStartParam", staCirParam)
+                        .navigation();
+            }
+
+            if ("-1".equals(appVo.id)) {
+                // 应用管理
+                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MANAGER)
+                        .withSerializable("mStartParam", staCirParam)
+                        .navigation();
+            }
+
+        } else {
+            ToastUtils.showShort("数据问题,请稍后");
+        }
+
+
+    }
 }
 

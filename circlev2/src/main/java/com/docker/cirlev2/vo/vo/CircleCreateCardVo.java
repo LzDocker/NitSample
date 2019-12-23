@@ -33,8 +33,8 @@ public class CircleCreateCardVo extends BaseSampleItem implements Serializable {
         return (item, view) -> {
             ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2)
                     .withInt("flag", ((CircleCreateCardVo) item).flag)
-                    .withString("circleid", "245")
-                    .withString("utid", "98699115f2260ef14486f745fc72dbd1")
+//                    .withString("circleid", "245")
+//                    .withString("utid", "98699115f2260ef14486f745fc72dbd1")
                     .navigation();
         };
     }

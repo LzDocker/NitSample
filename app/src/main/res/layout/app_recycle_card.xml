@@ -20,10 +20,10 @@
         android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="title" />
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="title" />-->
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

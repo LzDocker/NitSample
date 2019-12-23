@@ -31,6 +31,7 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
     public CircleTitlesVo mCircleTitlesVo;
     public int mChildPos = 0;
 
+    private int refresh = -1;
 
     @Override
     public CircleDynamicListViewModel getViewModel() {
@@ -48,6 +49,12 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
 
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        refresh = getArguments().getInt("refresh");
+        super.onActivityCreated(savedInstanceState);
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -89,8 +96,12 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
 //            commonListReq.ReqParam.remove("t");
 //        }
 
-//        commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-        commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
+        if (refresh == -1) {
+            commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        } else {
+            commonListReq.refreshState = refresh;
+        }
+//        commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
 //        commonListReq.ReqParam.put("t", "dynamic");
         commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
         commonListReq.ReqParam.put("memberid", "67");

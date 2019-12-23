@@ -41,6 +41,7 @@ import com.docker.cirlev2.ui.persion.CirclePersionSettingActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonDetailActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonPerssionActivity;
+import com.docker.cirlev2.ui.pro.CircleProListActivity;
 import com.docker.cirlev2.ui.publish.CirclePubActiveFragment;
 import com.docker.cirlev2.ui.publish.CirclePubNewsFragment;
 import com.docker.cirlev2.ui.publish.CirclePubRequestionFragment;
@@ -254,6 +255,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleDetailFragmentTemple_HeaderNone contributeCircleDetailFragmentTemple_HeaderNoneInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleProListActivity contributeCircleProListActivityInjector();
 
 
 }
