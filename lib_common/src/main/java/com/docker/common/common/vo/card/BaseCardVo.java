@@ -43,6 +43,10 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
 
     public int maxSupport = 1;
 
+
+
+
+
     public void onChangeStyleClick(BaseCardVo item, View view, NitCommonListVm viewModel) {
         if (AppUtils.isAppDebug()) {
             int style = item.style;

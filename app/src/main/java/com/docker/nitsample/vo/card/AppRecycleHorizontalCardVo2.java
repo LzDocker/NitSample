@@ -15,13 +15,13 @@ import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
+public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
 
     public int managerStyle;
     public LayoutManagerVo managerStyleVo;
     public RecycleTopLayout recycleTopLayout;
 
-    public AppRecycleHorizontalCardVo(int style, int position, LayoutManagerVo managerStyleVo, RecycleTopLayout recycleTopLayout) {
+    public AppRecycleHorizontalCardVo2(int style, int position, LayoutManagerVo managerStyleVo, RecycleTopLayout recycleTopLayout) {
         super(style, position);
         this.managerStyleVo = managerStyleVo;
         maxSupport = 1;
@@ -30,7 +30,7 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
 
     @Override
     public int getItemLayout() {
-        return R.layout.app_recycle_horizontal_card;
+        return R.layout.app_recycle_horizontal_card2;
     }
 
     @Override
@@ -40,13 +40,13 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
     }
 
     public transient ItemBinding<CarRvHorizontalVo> itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
-            R.layout.app_card_horizontal_img_inner);// 单一view 有点击事件;
+            R.layout.app_card_horizontal_img_inner2);// 单一view 有点击事件;
 
 
     public ItemBinding<CarRvHorizontalVo> getItemImgBinding() {
         if (itemImgBinding == null) {
             itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
-                    R.layout.app_card_horizontal_img_inner);
+                    R.layout.app_card_horizontal_img_inner2);
 
         }
         return itemImgBinding;
@@ -62,7 +62,7 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
 
     public ObservableField<List<CarRvHorizontalVo>> getInnerResource() {
         ArrayList<CarRvHorizontalVo> arrayList = new ArrayList();
-        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "2019桃源公社黔酒封坛大典圆满礼成！封一坛老2019桃源公社黔酒封坛大典圆满礼成！封一坛老", "北京海淀", "活动日期：11/5", 1);
+        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "七律分舵", "舵主：石慧杰", "", 1);
         arrayList.add(carRvHorizontalVo);
         arrayList.add(carRvHorizontalVo);
         arrayList.add(carRvHorizontalVo);

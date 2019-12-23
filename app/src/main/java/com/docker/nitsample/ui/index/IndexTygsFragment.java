@@ -6,9 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.docker.cirlev2.inter.frame.example.NitDefaultCircleFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
-import com.docker.cirlev2.vo.card.AppImgHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
@@ -16,16 +14,17 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.ui.base.NitCommonListFragment;
-import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
+import com.docker.nitsample.vo.LayoutManagerVo;
+import com.docker.nitsample.vo.RecycleTopLayout;
 import com.docker.nitsample.vo.card.AppRecycleCard2Vo;
-import com.docker.nitsample.vo.card.AppRecycleCardVo;
+import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo;
+import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,10 +60,19 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
                 outerVm = commonListVm;
                 AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
 //                AppRecycleCardVo appRecycleCardVo = new AppRecycleCardVo(0, 0);
-                AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 0);
+                AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 1);
+                AppRecycleHorizontalCardVo appRecycleHorizontalCardVo = new AppRecycleHorizontalCardVo(0, 2,
+                        new LayoutManagerVo(0, 0, false),
+                        new RecycleTopLayout("热门活动", "更多", true));
+                AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
+                        new LayoutManagerVo(0, 0, false),
+                        new RecycleTopLayout("分舵推荐", "", false));
+
+
                 NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
                 NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
-
+                NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
+                NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
             }
         };
         return nitDelegetCommand;
