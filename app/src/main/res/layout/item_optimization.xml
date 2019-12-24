@@ -26,16 +26,15 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            app:banne_click_command="@{item.replyCommandParam}"
             app:banner_items="@{item.bannerVo}"
             app:is_auto_play="true" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
             app:itemBinding="@{item.itemBinding}"
             app:items="@{item.serviceDataBean}"
             app:layoutManager="@{LayoutManager.grid(2)}"></android.support.v7.widget.RecyclerView>

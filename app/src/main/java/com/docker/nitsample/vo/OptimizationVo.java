@@ -1,11 +1,13 @@
 package com.docker.nitsample.vo;
 
 import android.databinding.ObservableField;
+import android.util.Log;
 import android.view.View;
 
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.vo.card.BaseCardVo;
@@ -21,7 +23,12 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
 public class OptimizationVo extends BaseCardVo {
     private ObservableField<List<BannerVo>> bannerVo;
     private ObservableField<List<ServiceDataBean>> serviceDataBean;
-
+    public ReplyCommandParam replyCommandParam = new ReplyCommandParam() {
+        @Override
+        public void exectue(Object o) {
+            Log.d("sss", "exectue: ===========popopo==========" + o);
+        }
+    };
     public OptimizationVo(int style, int position) {
         super(style, position);
 
