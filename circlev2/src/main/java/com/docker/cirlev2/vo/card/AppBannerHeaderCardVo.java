@@ -30,7 +30,7 @@ public class AppBannerHeaderCardVo extends BaseCardVo<String> {
         super(style, position);
         maxSupport = 1;
         ArrayList<BannerVo> arrayList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             arrayList.add(new BannerVo());
         }
         bannerVos.set(arrayList);

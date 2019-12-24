@@ -11,27 +11,34 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.account.vo.card.AccountHeadCardVo;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
+import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.boottomBar.Bottombar;
+import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
+import com.docker.nitsample.ui.mine.MineProcess;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
+import com.docker.nitsample.vo.card.SampleCardVo;
 import com.docker.videobasic.ui.VideoListFragment;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,13 +53,16 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
     @Inject
     AppVersionManager versionManager;
     private boolean isExit;
-
     @Inject
     List<Fragment> fragments;
-
     private PopmenuWj mpopMenu;
     private String type;
     private Disposable disposable;
+
+    /*
+     个人中心的vm
+    * */
+    private NitCommonListVm mineVm;
 
     @Override
     protected int getLayoutId() {
@@ -157,7 +167,8 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-
+                        mineVm = commonListVm;
+                        MineProcess.processMineFrame(mineVm,nitCommonFragment);
                     }
                 };
                 break;

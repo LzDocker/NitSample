@@ -63,7 +63,7 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
     public OnItemClickListener getOnItemClickListener() {
         return (item, view) -> {
             BaseCardVo.this.onItemClick((BaseCardVo) item, view);
-            onChangeStyleClick((BaseCardVo) item, view, null);
+//            onChangeStyleClick((BaseCardVo) item, view, null);
         };
     }
 

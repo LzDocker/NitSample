@@ -145,6 +145,7 @@ public class AppRouter {
     public static final String MESSAGELISTACT = MESSAGEGROUP + "list_act";
 
     public static final String MESSAGELIST = MESSAGEGROUP + "list_frame";
+    public static final String MESSAGELIST_IM = MESSAGEGROUP + "MESSAGELIST_IM";
 
     public static final String EVALUATE = "/evaluate/";
     public static final String EVALUATE_DEMO = EVALUATE + "demo";

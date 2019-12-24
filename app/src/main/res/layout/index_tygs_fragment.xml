@@ -18,10 +18,41 @@
     </data>
 
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp">
+
+            <ImageView
+                android:layout_width="114dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/logo_tygs" />
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:layout_weight="1"
+                android:background="@drawable/open_white_corner8_shape"
+                android:drawableLeft="@mipmap/serch_icon_nor"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:hint="请输入搜索内容"
+                android:paddingLeft="10dp"
+                android:textSize="13sp" />
+
+        </LinearLayout>
 
         <com.docker.common.common.widget.refresh.SmartRefreshLayout
             android:id="@+id/refresh"
@@ -76,7 +107,8 @@
                         android:id="@+id/ll_stick_coutainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/open_liner_bg_shape">
+                        android:background="@color/white"
+                        android:paddingBottom="5dp">
 
                         <net.lucode.hackware.magicindicator.MagicIndicator
                             android:id="@+id/magic_indicator"
@@ -92,8 +124,7 @@
 
         </com.docker.common.common.widget.refresh.SmartRefreshLayout>
 
-
-    </FrameLayout>
+    </LinearLayout>
 
 
 </layout>
