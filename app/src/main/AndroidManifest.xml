@@ -140,6 +140,9 @@
         <activity
             android:name="com.docker.nitsample.ui.edit.EditIndexActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.nitsample.ui.IndexSearchActivity"
+            android:screenOrientation="portrait" />
 
         <!--<activity android:name="com.docker.nitsample.ui.edit.EditIndexActivity" />-->
     </application>

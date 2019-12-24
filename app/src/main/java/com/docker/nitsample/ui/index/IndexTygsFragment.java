@@ -104,6 +104,10 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         circleTitlesVos.add(circleTitlesVo2);
         circleTitlesVos.add(circleTitlesVo3);
         peocessTab(circleTitlesVos);
+
+        mBinding.get().tvSearch.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.App_SEARCH_index).navigation();
+        });
     }
 
     @Override

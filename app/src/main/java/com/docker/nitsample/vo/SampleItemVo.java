@@ -65,6 +65,10 @@ public class SampleItemVo implements BaseItemModel {
                     ARouter.getInstance().build(AppRouter.COMMON_RXJAVA).navigation();
                     break;
 
+                case 19:
+                    ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "search").navigation();
+                    break;
+
                 default:
                     ToastUtils.showShort("功能开发中...");
                     break;

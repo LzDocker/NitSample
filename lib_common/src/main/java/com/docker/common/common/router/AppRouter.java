@@ -6,6 +6,7 @@ public class AppRouter {
     public static final String AppGroup = "/App/";
 
     public static final String App_SEARCH = AppGroup + "search";
+    public static final String App_SEARCH_index = AppGroup + "search_index";
 
     public static final String HOME = AppGroup + "home";
     public static final String HOME_preview = AppGroup + "home_preview";
