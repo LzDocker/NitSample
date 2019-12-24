@@ -3,9 +3,11 @@ package com.docker.nitsample.di;
 
 import android.support.v4.app.Fragment;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.ui.index.FragmentMineIndex;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
@@ -48,16 +50,20 @@ public class MainTygsModule {
 
 
         //江湖消息
-        CommonListOptions commonListOptions2 = new CommonListOptions();
-        commonListOptions2.falg = 2;
-        commonListOptions2.refreshState = 0;
-        commonListOptions2.isActParent = true;
-        commonListOptions2.RvUi = 0;
-        commonListOptions2.ReqParam.put("t", "goods");
-        commonListOptions2.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions2.ReqParam.put("memberid", "64");
-        commonListOptions2.ReqParam.put("companyid", "1");
-        fragments.add(NitCommonContainerFragmentV2.newinstance(commonListOptions2));
+//        CommonListOptions commonListOptions2 = new CommonListOptions();
+//        commonListOptions2.falg = 2;
+//        commonListOptions2.refreshState = 0;
+//        commonListOptions2.isActParent = true;
+//        commonListOptions2.RvUi = 0;
+//        commonListOptions2.ReqParam.put("t", "goods");
+//        commonListOptions2.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
+//        commonListOptions2.ReqParam.put("memberid", "64");
+//        commonListOptions2.ReqParam.put("companyid", "1");
+//        fragments.add(NitCommonContainerFragmentV2.newinstance(commonListOptions2));
+
+
+//        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.MESSAGELIST).withInt("style", 0).navigation());
+        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.MESSAGELIST_IM).navigation());
 
 
         //个人中心

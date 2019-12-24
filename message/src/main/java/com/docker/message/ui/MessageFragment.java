@@ -47,11 +47,18 @@ public class MessageFragment extends NitCommonListFragment<MessageViewModel> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
+    protected void initRvUi() {
         if (style == 0) {
             mBinding.get()
                     .recyclerView
                     .setLayoutManager(com.docker.core.util.LayoutManager.grid(5)
                             .create(mBinding.get().recyclerView));
+        } else {
+            super.initRvUi();
         }
     }
 

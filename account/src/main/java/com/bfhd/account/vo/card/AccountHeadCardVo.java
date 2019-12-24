@@ -18,9 +18,10 @@ import com.docker.common.common.vo.card.BaseCardVo;
 
 public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
     public transient MyInfoVo myinfo;
+
     public AccountHeadCardVo(int style, int position) {
         super(style, position);
-        maxSupport = 2;
+        maxSupport = 3;
         mVmPath = "com.bfhd.account.vm.card.AccountHeadCardViewModel";
     }
 
@@ -33,6 +34,9 @@ public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
                 break;
             case 1:
                 lay = R.layout.account_fragment_mine_index_header;
+                break;
+            case 2:
+                lay = R.layout.account_fragment_mine_index_header_tygs;
                 break;
         }
         return lay;

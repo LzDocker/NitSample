@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.card.AccountHeadCardVo" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.common.common.vm.NitCommonListVm" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+        android:orientation="vertical"
+        android:paddingBottom="14dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14dp">
+
+            <LinearLayout
+                android:id="@+id/account_iv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/account_iv_message"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/account_setting" />
+
+            </LinearLayout>
+
+
+            <FrameLayout
+                android:id="@+id/account_iv_message"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/account_message" />
+
+                <TextView
+                    android:id="@+id/tv_notreadmsgnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="14dp"
+                    android:background="@drawable/account_sys_mes_shape"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
+                    android:text="@{item.myinfo.notReadMsgNum}"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="9sp" />
+            </FrameLayout>
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/account_iv_user_icon"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/account_iv_message"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:scaleType="centerCrop"
+                app:errorImg="@{R.mipmap.circle_default_avatar}"
+                app:placeHolder="@{R.mipmap.circle_default_avatar}"
+                app:roundImgUrl="@{Constant.getCompleteImageUrl(item.myinfo.avatar)}" />
+
+            <TextView
+                android:id="@+id/account_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/account_iv_message"
+                android:layout_marginLeft="14dp"
+                android:layout_marginBottom="14dp"
+                android:layout_toRightOf="@+id/account_iv_user_icon"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{item.myinfo.nicakname}"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+
+            <LinearLayout
+                android:id="@+id/account_ll_cou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/account_user_name"
+                android:layout_toRightOf="@+id/account_iv_user_icon"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingTop="3dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="3dp">
+
+                <TextView
+                    android:id="@+id/account_tv_ids"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="知名律师，诸葛七律联合创始人 "
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_mine_dynamic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_mine_dynamic_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.myinfo.point}"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="我的积分"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_mine_company_dz"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_mine_circle_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.myinfo.likeNum}"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="我的收益"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_mine_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_mine_follow_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.myinfo.commentNum}"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="推广的人"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

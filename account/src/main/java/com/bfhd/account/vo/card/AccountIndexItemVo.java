@@ -10,7 +10,7 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
 
     public AccountIndexItemVo(int style, int position) {
         super(style, position);
-        maxSupport = 2;
+        maxSupport = 4;
     }
 
     @Override
@@ -19,10 +19,15 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
         switch (style) {
             case 0:
                 lay = R.layout.account_fragment_mine_index_menu;
-
                 break;
             case 1:
                 lay = R.layout.account_fragment_mine_index_item;
+                break;
+            case 2:
+                lay = R.layout.account_fragment_mine_index_item_tygs;
+                break;
+            case 3:
+                lay = R.layout.account_fragment_mine_index_menu_tygs;
                 break;
         }
         return lay;

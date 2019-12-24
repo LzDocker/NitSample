@@ -20,11 +20,15 @@
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             app:banne_click_command="@{item.replyCommandParam}"
             app:banner_head_items="@{item.bannerVos}"
+            app:indicator_height="1dp"
+            app:indicator_margin="5dp"
+            app:indicator_width="15dp"
             app:is_auto_play="true" />
 
+        <!--  app:indicator_drawable_selected=""-->
     </LinearLayout>
 
 

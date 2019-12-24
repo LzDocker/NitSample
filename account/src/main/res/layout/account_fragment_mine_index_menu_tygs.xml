@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.card.AccountIndexItemVo" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/account_lin_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/open_liner_bg_shape"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/account_message_icon"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:text="桃源文化"
+                android:textColor="#333" />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="14dp"
+                android:background="@mipmap/arrow_right" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/account_tv_wdsc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_wdsc_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="公社介绍"
+            android:textColor="#333" />
+
+        <TextView
+            android:id="@+id/account_tv_onekeysos"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_sos_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="积分制度"
+            android:textColor="#333" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:background="#fff6f6f6" />
+
+        <TextView
+            android:id="@+id/account_tv_signlist"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_qdjl_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="成为桃源公社合伙人"
+            android:textColor="#333" />
+
+        <TextView
+            android:id="@+id/account_tv_join_friend"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_yqhy_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="邀请朋友"
+            android:textColor="#333" />
+
+        <TextView
+            android:id="@+id/account_tv_segusstion"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:drawableLeft="@mipmap/account_yjfk_icon"
+            android:drawableRight="@mipmap/arrow_right"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:text="服务支持"
+            android:textColor="#333" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:background="#fff6f6f6" />
+
+    </LinearLayout>
+
+
+</layout>
