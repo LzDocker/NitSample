@@ -68,7 +68,6 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
                         new LayoutManagerVo(0, 0, false),
                         new RecycleTopLayout("分舵推荐", "", false));
 
-
                 NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
                 NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
                 NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);

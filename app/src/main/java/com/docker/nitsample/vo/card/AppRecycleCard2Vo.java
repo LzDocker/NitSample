@@ -63,7 +63,6 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
 
     private ObservableField<List<ItemVo>> InnerResource = new ObservableField<>();
 
-
     public void setInnerResource(ObservableField<List<ItemVo>> innerResource) {
         InnerResource = innerResource;
     }
