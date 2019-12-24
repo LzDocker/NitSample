@@ -4,8 +4,11 @@ package com.docker.nitsample.di;
 import android.support.v4.app.Fragment;
 
 import com.bfhd.account.ui.index.FragmentMineIndex;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
+import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.videobasic.ui.VideoListFragment;
 
@@ -35,29 +38,37 @@ public class MainTygsModule {
 
         //公社优选
         CommonListOptions commonListOptions1 = new CommonListOptions();
-        commonListOptions.falg = 1;
-        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
+        commonListOptions1.falg = 1;
+        commonListOptions1.isActParent = true;
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
+        commonListOptions1.ReqParam.put("", "");
+        NitCommonContainerFragmentV2 containerFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(containerFragment);
 
 
         //江湖消息
         CommonListOptions commonListOptions2 = new CommonListOptions();
-        commonListOptions1.falg = 2;
-        commonListOptions1.refreshState = 0;
-        commonListOptions1.RvUi = 0;
-        commonListOptions1.ReqParam.put("t", "goods");
-        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions1.ReqParam.put("memberid", "64");
-        commonListOptions1.ReqParam.put("companyid", "1");
-        fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
+        commonListOptions2.falg = 2;
+        commonListOptions2.refreshState = 0;
+        commonListOptions2.isActParent = true;
+        commonListOptions2.RvUi = 0;
+        commonListOptions2.ReqParam.put("t", "goods");
+        commonListOptions2.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
+        commonListOptions2.ReqParam.put("memberid", "64");
+        commonListOptions2.ReqParam.put("companyid", "1");
+        fragments.add(NitCommonContainerFragmentV2.newinstance(commonListOptions2));
 
 
         //个人中心
 
         CommonListOptions commonListOptions3 = new CommonListOptions();
         commonListOptions3.falg = 3;
-        NitCommonContainerFragment containerFragment0 = NitCommonContainerFragment.newinstance(commonListOptions3);
-        fragments.add(containerFragment0);
+        commonListOptions3.isActParent = true;
+        commonListOptions3.RvUi = Constant.KEY_RVUI_LINER;
+        commonListOptions3.refreshState = Constant.KEY_REFRESH_PURSE;
+        NitCommonCardFragment nitCommonCardFragment = NitCommonCardFragment.newinstance(commonListOptions3);
+        fragments.add(nitCommonCardFragment);
 
 //        // 框架index     SampleListViewModel
 //        CommonListOptions commonListOptions0 = new CommonListOptions();
