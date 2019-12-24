@@ -64,10 +64,17 @@ public class NitBaseProviderCard {
         }
         outer.addCardVo(baseCardVo, baseCardVo.position, true);
         baseCardVo.mCardVoLiveData.observe(nitCommonListFragment, o -> {
-            if (o == null) {
-                outer.mItems.remove(baseCardVo);
+            if (!baseCardVo.isNoNetNeed) {
+                if (o == null) {
+                    outer.mItems.remove(baseCardVo);
+                } else {
+                    if (!outer.mItems.contains(baseCardVo)) {
+                        outer.addCardVo(baseCardVo, baseCardVo.position, true);
+                    }
+                }
             }
         });
+
         return baseCardVo;
     }
 

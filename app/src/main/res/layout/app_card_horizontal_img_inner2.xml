@@ -40,10 +40,11 @@
                     android:src="#be3131" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/iv_close"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
                     android:layout_gravity="right"
-                    android:src="@drawable/nim_grey_delete_icon" />
+                    android:src="@mipmap/close_icon" />
 
             </FrameLayout>
 

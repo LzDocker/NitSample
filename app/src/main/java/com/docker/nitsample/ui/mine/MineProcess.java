@@ -14,6 +14,7 @@ public class MineProcess {
 
     public static void processMineFrame(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
         AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(2, 0);
+        accountHeadCardVo.isNoNetNeed = true;
         HashMap<String, String> postArrMap = new HashMap<>();
         postArrMap.put("uuid", CacheUtils.getUser().uuid);
         accountHeadCardVo.mRepParamMap.put("postArray", GsonUtils.toJson(postArrMap));

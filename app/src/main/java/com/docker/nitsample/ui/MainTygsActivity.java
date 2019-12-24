@@ -129,6 +129,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     public Class providerOuterVm() {
                         return OptimizationModel.class;
                     }
+
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
 //                        AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
@@ -159,7 +160,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                         mineVm = commonListVm;
-                        MineProcess.processMineFrame(mineVm,nitCommonFragment);
+                        MineProcess.processMineFrame(mineVm, nitCommonFragment);
                     }
                 };
                 break;
