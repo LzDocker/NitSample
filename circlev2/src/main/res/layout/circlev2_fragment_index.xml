@@ -35,77 +35,69 @@
                 android:orientation="vertical"
                 app:elevation="0dp">
 
-                <android.support.design.widget.CollapsingToolbarLayout
-                    android:id="@+id/toolbarLayout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
                     app:layout_scrollFlags="scroll">
 
-
                     <LinearLayout
+                        android:id="@+id/circle_my_more"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        android:layout_height="45dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="14dp"
+                        android:paddingRight="14dp">
 
-                        <LinearLayout
-                            android:id="@+id/circle_my_more"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:orientation="horizontal"
-                            android:paddingLeft="14dp"
-                            android:paddingRight="14dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="我的圈子"
+                            android:textColor="@color/common_black"
+                            android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:text="我的圈子"
-                                android:textColor="@color/common_black"
-                                android:textSize="14sp" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
 
-                            <Space
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1" />
-
-                            <TextView
-                                android:id="@+id/tv_mine_more"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:drawableRight="@mipmap/arrow_right"
-                                android:drawablePadding="10dp"
-                                android:foreground="?android:attr/selectableItemBackground"
-                                android:gravity="center"
-                                android:text="更多"
-                                android:textColor="@color/common_black"
-                                android:textSize="14sp" />
-                            <!--  android:foreground="?android:attr/selectableItemBackground"-->
-                        </LinearLayout>
-
-                        <FrameLayout
-                            android:id="@+id/circlev2_mine"
-                            android:layout_width="match_parent"
-                            android:layout_height="185dp"
-                            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-                        <!--<android.support.v4.widget.NestedScrollView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
-
-                        <!--<com.tencent.smtt.sdk.WebView-->
-                        <!--android:id="@+id/pro_webview"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:overScrollMode="never"-->
-                        <!--app:datasource="@{null}" />-->
-                        <!--</android.support.v4.widget.NestedScrollView>-->
-
+                        <TextView
+                            android:id="@+id/tv_mine_more"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:drawableRight="@mipmap/arrow_right"
+                            android:drawablePadding="10dp"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:text="更多"
+                            android:textColor="@color/common_black"
+                            android:textSize="14sp" />
+                        <!--  android:foreground="?android:attr/selectableItemBackground"-->
                     </LinearLayout>
 
-                </android.support.design.widget.CollapsingToolbarLayout>
+                    <FrameLayout
+                        android:id="@+id/circlev2_mine"
+                        android:layout_width="match_parent"
+                        android:layout_height="185dp"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                    <!--<android.support.v4.widget.NestedScrollView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+                    <!--<com.tencent.smtt.sdk.WebView-->
+                    <!--android:id="@+id/pro_webview"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:overScrollMode="never"-->
+                    <!--app:datasource="@{null}" />-->
+                    <!--</android.support.v4.widget.NestedScrollView>-->
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
