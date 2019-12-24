@@ -7,6 +7,7 @@ import android.view.View;
 import com.docker.cirlev2.R;
 import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.vo.card.BaseCardVo;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,5 +52,4 @@ public class AppBannerHeaderCardVo extends BaseCardVo<String> {
         public String url;
         public String type;
     }
-
 }

@@ -7,6 +7,7 @@ import com.bfhd.circle.base.EmptyVm;
 import com.docker.core.di.scope.ViewModelKey;
 import com.docker.nitsample.vm.EditListViewModel;
 import com.docker.nitsample.vm.MainViewModel;
+import com.docker.nitsample.vm.OptimizationModel;
 import com.docker.nitsample.vm.PreviewViewModel;
 import com.docker.nitsample.vm.SampleEditCoutainerViewModel;
 import com.docker.nitsample.vm.SampleEditSpaViewModel;
@@ -68,6 +69,12 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SampleEditCoutainerViewModel.class)
     abstract ViewModel SampleEditCoutainerViewModel(SampleEditCoutainerViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OptimizationModel.class)
+    abstract ViewModel OptimizationModel(OptimizationModel model);
+
 
 
 //

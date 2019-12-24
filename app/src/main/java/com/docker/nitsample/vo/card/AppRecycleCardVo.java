@@ -47,6 +47,7 @@ public class AppRecycleCardVo extends BaseCardVo<String> {
     private ObservableField<List<String>> InnerResource = new ObservableField<>();
     private ObservableField<List<Integer>> ImgResource = new ObservableField<>();
 
+
     public void setInnerResource(ObservableField<List<String>> innerResource) {
         InnerResource = innerResource;
     }
@@ -54,6 +55,7 @@ public class AppRecycleCardVo extends BaseCardVo<String> {
     public void setImgResource(ObservableField<List<Integer>> imgResource) {
         ImgResource = imgResource;
     }
+
 
     public ObservableField<List<String>> getInnerResource() {
         ArrayList<String> arrayList = new ArrayList();

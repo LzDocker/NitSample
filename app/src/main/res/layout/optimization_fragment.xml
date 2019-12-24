@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.nitsample.vm.OptimizationModel" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="公社优选"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlFooterTranslationViewId="@+id/viewPager">
+
+            <com.docker.common.common.widget.refresh.header.ClassicsHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlAccentColor="@android:color/black"
+                app:srlDrawableArrowSize="13dp"
+                app:srlDrawableProgressSize="16dp"
+                app:srlDrawableSize="16dp"
+                app:srlFinishDuration="200"
+                app:srlTextSizeTitle="13sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                bind:layoutManager="@{LayoutManager.linear}"></android.support.v7.widget.RecyclerView>
+
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+    </LinearLayout>
+
+
+</layout>

@@ -15,6 +15,7 @@ import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
+import com.docker.nitsample.ui.optimization.OptimizationFragment;
 //import com.docker.nitsample.ui.index.IndexFragment;
 
 import dagger.Module;
@@ -79,5 +80,9 @@ public abstract class UIMoudle {
     @ActivityScope
     @ContributesAndroidInjector
     abstract MessageImFragment contributeMessageImFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract OptimizationFragment contributeOptimizationFragmentInjector();
 
 }

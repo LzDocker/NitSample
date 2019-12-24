@@ -3,15 +3,16 @@ package com.docker.nitsample.vo.card;
 import android.databinding.ObservableField;
 import android.util.Log;
 import android.view.View;
+
 import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AppBannerCardVo extends BaseCardVo<String> {
-
 
     /*
      * banner 点击事件
@@ -22,7 +23,6 @@ public class AppBannerCardVo extends BaseCardVo<String> {
             Log.d("sss", "exectue: ===========popopo==========" + o);
         }
     };
-
     public ObservableField<List<BannerVo>> bannerVos = new ObservableField<>();
 
     public AppBannerCardVo(int style, int position) {
