@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
+import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.command.NitContainerCommandV2;
@@ -24,9 +25,11 @@ import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.boottomBar.Bottombar;
+import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
 import com.docker.nitsample.vm.MainViewModel;
+import com.docker.nitsample.vm.OptimizationModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
 import com.docker.videobasic.ui.VideoListFragment;
@@ -118,34 +121,19 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
     }
 
-    @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
         NitDelegetCommand nitDelegetCommand = null;
-
         switch (flag) {
-            case 0:
-                nitDelegetCommand = new NitDelegetCommand() {
-                    @Override
-                    public Class providerOuterVm() {
-                        return null;
-                    }
-
-                    @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-
-                    }
-                };
-                break;
             case 1:
                 nitDelegetCommand = new NitDelegetCommand() {
                     @Override
                     public Class providerOuterVm() {
-                        return null;
+                        return OptimizationModel.class;
                     }
-
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-
+//                        AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
+//                        NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
                     }
                 };
                 break;
@@ -153,7 +141,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                 nitDelegetCommand = new NitDelegetCommand() {
                     @Override
                     public Class providerOuterVm() {
-                        return null;
+                        return SampleListViewModel.class;
                     }
 
                     @Override
@@ -175,45 +163,8 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     }
                 };
                 break;
-
         }
-
         return nitDelegetCommand;
-    }
-
-    @Override
-    public NitContainerCommand providerNitContainerCommand(int flag) {
-
-        NitContainerCommand nitContainerCommand = null;
-        switch (flag) {
-            case 0:
-                nitContainerCommand = new NitContainerCommand() {
-                    @Override
-                    public Class exectue() {
-                        return (SampleListViewModel.class);
-                    }
-                };
-                break;
-            case 1:
-                nitContainerCommand = new NitContainerCommand() {
-                    @Override
-                    public Class exectue() {
-                        return (SampleNetListViewModel.class);
-                    }
-                };
-
-                break;
-            case 2:
-                nitContainerCommand = new NitContainerCommand() {
-                    @Override
-                    public Class exectue() {
-                        return (SampleNetListViewModel.class);
-                    }
-                };
-
-                break;
-        }
-        return nitContainerCommand;
     }
 
     private void initMainTab() {

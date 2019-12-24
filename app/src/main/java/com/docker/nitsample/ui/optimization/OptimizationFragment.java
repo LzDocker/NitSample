@@ -4,16 +4,20 @@ import android.view.View;
 
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
+import com.docker.nitsample.databinding.OptimizationFragmentBinding;
 
 /**
  * 公社优选
  */
-public class OptimizationFragment extends NitCommonFragment<NitCommonContainerViewModel, IndexTygsFragmentBinding> {
+public class OptimizationFragment extends NitCommonFragment<NitCommonContainerViewModel, OptimizationFragmentBinding> {
+
+
 
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.optimization_fragment;
     }
 
     @Override

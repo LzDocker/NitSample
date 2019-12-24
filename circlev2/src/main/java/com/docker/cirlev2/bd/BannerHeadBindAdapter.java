@@ -24,4 +24,6 @@ public class BannerHeadBindAdapter {
         });
         banner.start();
     }
+
+
 }
