@@ -30,6 +30,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 公社首页
+ */
 public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewModel, IndexTygsFragmentBinding> {
     private NitCommonListVm outerVm;
     public ArrayList<Fragment> fragments = new ArrayList<>();

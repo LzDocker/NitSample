@@ -14,11 +14,15 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.command.NitContainerCommandV2;
+import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
+import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
@@ -115,15 +119,82 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
     }
 
     @Override
+    public NitDelegetCommand providerNitDelegetCommand(int flag) {
+        NitDelegetCommand nitDelegetCommand = null;
+
+        switch (flag) {
+            case 0:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+
+                    }
+                };
+                break;
+            case 1:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+
+                    }
+                };
+                break;
+            case 2:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+
+                    }
+                };
+                break;
+            case 3:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+
+                    }
+                };
+                break;
+
+        }
+
+        return nitDelegetCommand;
+    }
+
+    @Override
     public NitContainerCommand providerNitContainerCommand(int flag) {
 
         NitContainerCommand nitContainerCommand = null;
         switch (flag) {
             case 0:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
+                nitContainerCommand = new NitContainerCommand() {
+                    @Override
+                    public Class exectue() {
+                        return (SampleListViewModel.class);
+                    }
+                };
                 break;
             case 1:
-
                 nitContainerCommand = new NitContainerCommand() {
                     @Override
                     public Class exectue() {

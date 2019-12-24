@@ -4,8 +4,10 @@ package com.docker.nitsample.di;
 import android.support.v4.app.Fragment;
 
 import com.bfhd.account.ui.index.FragmentMineIndex;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
+import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.videobasic.ui.VideoListFragment;
 
@@ -35,9 +37,13 @@ public class MainTygsModule {
 
         //公社优选
         CommonListOptions commonListOptions1 = new CommonListOptions();
-        commonListOptions.falg = 1;
+        commonListOptions1.falg = 1;
+        commonListOptions1.isActParent = true;
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
+        commonListOptions1.ReqParam.put("","");
 //        fragments.add(SampleFragment.newInstance());
-        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
+        NitCommonContainerFragmentV2 containerFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(containerFragment);
 //        fragments.add(SampleVideoListFragment.newInstance());
 
