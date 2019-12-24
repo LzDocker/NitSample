@@ -36,10 +36,8 @@ public class MainTygsModule {
         //公社优选
         CommonListOptions commonListOptions1 = new CommonListOptions();
         commonListOptions.falg = 1;
-//        fragments.add(SampleFragment.newInstance());
         NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
         fragments.add(containerFragment);
-//        fragments.add(SampleVideoListFragment.newInstance());
 
 
         //江湖消息
@@ -51,23 +49,21 @@ public class MainTygsModule {
         commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
         commonListOptions1.ReqParam.put("memberid", "64");
         commonListOptions1.ReqParam.put("companyid", "1");
-
-        //shopType2=&shopType1=&t=goods&page=1&goodsui=product&uuid=8621e837a2a1579710a95143e5862424&memberid=64&companyid=1
         fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
 
-        //个人中心
-//        fragments.add(VideoListFragment.newInstance());
-//        fragments.add(VideoListFragment.newInstance());
-//        fragments.add(BaseVideoListFragment.newinstance());
-//        fragments.add(VideoFullListFragment.newInstance());
-//        fragments.add(IndexFragment.newInstance());
-//        fragments.add(FragmentMineIndex.newInstance());
 
-        CommonListOptions commonListOptions0 = new CommonListOptions();
-        commonListOptions0.falg = 0;
-//        fragments.add(SampleFragment.newInstance());
-        NitCommonContainerFragment containerFragment0 = NitCommonContainerFragment.newinstance(commonListOptions0);
+        //个人中心
+
+        CommonListOptions commonListOptions3 = new CommonListOptions();
+        commonListOptions3.falg = 3;
+        NitCommonContainerFragment containerFragment0 = NitCommonContainerFragment.newinstance(commonListOptions3);
         fragments.add(containerFragment0);
+
+//        // 框架index     SampleListViewModel
+//        CommonListOptions commonListOptions0 = new CommonListOptions();
+//        commonListOptions0.falg = 0;
+//        NitCommonContainerFragment containerFragment0 = NitCommonContainerFragment.newinstance(commonListOptions0);
+//        fragments.add(containerFragment0);
 
         return fragments;
     }
