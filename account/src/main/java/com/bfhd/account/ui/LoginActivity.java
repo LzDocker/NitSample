@@ -375,7 +375,6 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             public void onStart(SHARE_MEDIA share_media) {
                 showWaitDialog("加载中...");
             }
-
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
                 hidWaitDialog();

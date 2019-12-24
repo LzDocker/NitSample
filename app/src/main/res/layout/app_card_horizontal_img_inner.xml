@@ -1,64 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
 
         <variable
             name="item"
-            type="com.docker.common.common.vo.ItemVo" />
-        <!--<variable-->
-        <!--name="item"-->
-        <!--type="String" />-->
+            type="com.docker.nitsample.vo.CarRvHorizontalVo" />
+
 
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/white"
+        app:cardCornerRadius="5dp">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:src="#be3131" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="70dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:text="
-                                2019桃源公社黔酒封坛大
-典圆满礼成！封一坛老...
-                            "
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{item.title}"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        visibleGone="@{item.status == 1}"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:background="#EA523E"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="进行中"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
 
+                    <TextView
+                        visibleGone="@{item.status == 2}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:background="#EA523E"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="已结束"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.address}"
+                        android:textColor="#999999"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="@{item.time}"
+                        android:textColor="#999999"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
 
+        </LinearLayout>
 
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 
 </layout>

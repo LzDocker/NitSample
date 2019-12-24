@@ -63,36 +63,14 @@
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     app:elevation="0dp">
 
-                    <android.support.design.widget.CollapsingToolbarLayout
-                        android:id="@+id/toolbar_layout"
+
+                    <FrameLayout
+                        android:id="@+id/frame_header"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:elevation="0dp"
-                        app:contentScrim="@color/white"
-                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                        android:background="@color/white"
+                        app:layout_scrollFlags="scroll" />
 
-                        <FrameLayout
-                            android:id="@+id/frame_header"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white"></FrameLayout>
-
-                        <android.support.v7.widget.Toolbar
-                            android:id="@+id/toolbar"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_below="@+id/view"
-                            android:elevation="0dp"
-                            app:contentInsetLeft="0dp"
-                            app:contentInsetStart="0dp"
-                            app:contentInsetStartWithNavigation="0dp"
-                            app:layout_collapseMode="pin"
-                            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-
-                        </android.support.v7.widget.Toolbar>
-
-                    </android.support.design.widget.CollapsingToolbarLayout>
 
                     <LinearLayout
                         android:id="@+id/ll_stick_coutainer"
