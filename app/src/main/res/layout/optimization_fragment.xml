@@ -33,29 +33,15 @@
             android:textStyle="bold" />
 
 
-        <com.docker.common.common.widget.refresh.SmartRefreshLayout
-            android:id="@+id/refresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srlFooterTranslationViewId="@+id/viewPager">
 
-            <com.docker.common.common.widget.refresh.header.ClassicsHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srlAccentColor="@android:color/black"
-                app:srlDrawableArrowSize="13dp"
-                app:srlDrawableProgressSize="16dp"
-                app:srlDrawableSize="16dp"
-                app:srlFinishDuration="200"
-                app:srlTextSizeTitle="13sp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+          <FrameLayout
+              android:layout_width="match_parent"
+              android:id="@+id/frame"
+              android:layout_height="match_parent">
 
-                bind:layoutManager="@{LayoutManager.linear}"></android.support.v7.widget.RecyclerView>
+          </FrameLayout>
 
-        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
     </LinearLayout>
 
 

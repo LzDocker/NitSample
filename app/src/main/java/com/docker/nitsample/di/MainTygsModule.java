@@ -12,6 +12,7 @@ import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
+import com.docker.nitsample.ui.optimization.OptimizationFragment;
 import com.docker.videobasic.ui.VideoListFragment;
 
 import java.util.ArrayList;
@@ -41,12 +42,12 @@ public class MainTygsModule {
         //公社优选
         CommonListOptions commonListOptions1 = new CommonListOptions();
         commonListOptions1.falg = 1;
-        commonListOptions1.isActParent = true;
         commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions1.ReqParam.put("", "");
-        NitCommonContainerFragmentV2 containerFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
-        fragments.add(containerFragment);
+        fragments.add(OptimizationFragment.newinstance(commonListOptions));
+//        NitCommonContainerFragmentV2 containerFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
+//        fragments.add(containerFragment);
 
 
         //江湖消息
