@@ -74,6 +74,7 @@ public class MainTygsModule {
         commonListOptions3.isActParent = true;
         commonListOptions3.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions3.refreshState = Constant.KEY_REFRESH_PURSE;
+        commonListOptions3.externs.put("NeedVisibleRefresh", "yes");
         NitCommonCardFragment nitCommonCardFragment = NitCommonCardFragment.newinstance(commonListOptions3);
         fragments.add(nitCommonCardFragment);
 

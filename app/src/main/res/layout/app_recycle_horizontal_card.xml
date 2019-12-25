@@ -73,6 +73,7 @@
             android:layout_height="wrap_content"
             android:background="#F8F8F8"
             android:paddingLeft="10dp"
+            android:overScrollMode="always"
             android:paddingRight="10dp"
             app:itemBinding="@{item.getItemImgBinding()}"
             app:items="@{item.getInnerResource()}"

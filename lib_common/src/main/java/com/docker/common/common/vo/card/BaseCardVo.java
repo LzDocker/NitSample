@@ -21,6 +21,13 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
 
     public transient NitcommonCardViewModel mNitcommonCardViewModel;
 
+    /*
+    * 请求失败默认remove掉card    false
+    *
+    * 请求失败也展示card
+    * */
+    public boolean isNoNetNeed = false;
+
     public String mVmPath;
     /*
      * card 请求服务端的参数
@@ -42,9 +49,6 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
     public int position = 0;
 
     public int maxSupport = 1;
-
-
-
 
 
     public void onChangeStyleClick(BaseCardVo item, View view, NitCommonListVm viewModel) {

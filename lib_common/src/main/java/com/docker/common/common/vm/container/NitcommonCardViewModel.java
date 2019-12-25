@@ -1,6 +1,7 @@
 package com.docker.common.common.vm.container;
 
 import android.arch.lifecycle.LiveData;
+import android.text.TextUtils;
 
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.NitCommonListVm;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 public class NitcommonCardViewModel extends NitCommonListVm {
-
 
 
     @Inject
@@ -44,6 +44,10 @@ public class NitcommonCardViewModel extends NitCommonListVm {
         return null;
     }
 
-
+    public void onCardFrameVisible() {
+        if (!TextUtils.isEmpty((CharSequence) mCommonListReq.externs.get("NeedVisibleRefresh"))) {
+            onJustRefresh();
+        }
+    }
 
 }

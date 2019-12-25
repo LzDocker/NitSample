@@ -61,5 +61,6 @@ public class NitCommonCardFragment extends NitCommonListFragment<NitcommonCardVi
     @Override
     public void onVisible() {
         super.onVisible();
+        mViewModel.onCardFrameVisible();
     }
 }
