@@ -2,6 +2,7 @@ package com.docker.common.common.utils.cache;
 
 
 import android.text.TextUtils;
+
 import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.dcbfhd.utilcode.utils.SPUtils;
 import com.docker.common.common.vo.SearchVo;
@@ -69,7 +70,8 @@ public class CacheUtils {
         ArrayList<String> list = new ArrayList<>();
         SearchVo searchVo = null;
         if (!TextUtils.isEmpty(SPUtils.getInstance("searchVo").getString("searchVo"))) {
-            searchVo = GsonUtils.fromJson(SPUtils.getInstance("searchVo").getString("searchVo"), SearchVo.class);
+            String string = SPUtils.getInstance("searchVo").getString("searchVo");
+            searchVo = GsonUtils.fromJson(string, SearchVo.class);
             if (searchVo != null && searchVo.getResource() != null && searchVo.getResource().get(t) != null) {
                 list = (ArrayList<String>) searchVo.getResource().get(t);
             }

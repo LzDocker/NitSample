@@ -1,8 +1,34 @@
 package com.docker.common.common.vo;
 
+import android.view.View;
+
+import com.docker.common.R;
+import com.docker.common.common.vo.card.BaseCardVo;
+import com.docker.core.BR;
+
 import java.io.Serializable;
 
-public class AddressVo implements Serializable {
+import me.tatarka.bindingcollectionadapter2.ItemBinding;
+
+public class AddressVo extends BaseCardVo {
+
+    public AddressVo(int style, int position) {
+        super(style, position);
+    }
+
+    @Override
+    public void onItemClick(BaseCardVo item, View view) {
+
+
+    }
+
+    @Override
+    public int getItemLayout() {
+        return R.layout.common_item_address;
+    }
+
+    public transient ItemBinding<AddressVo> itemBinding = ItemBinding.<AddressVo>of(BR.item,
+            R.layout.common_item_address_inner);// 单一view 有点击事件;
 
     private String id;
     private String name;
@@ -96,4 +122,6 @@ public class AddressVo implements Serializable {
     public void setIs_moren(String is_moren) {
         this.is_moren = is_moren;
     }
+
+
 }

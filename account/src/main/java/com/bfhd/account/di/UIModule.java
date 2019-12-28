@@ -4,6 +4,9 @@ package com.bfhd.account.di;
 import com.bfhd.account.ui.AccounAddAddressActivity;
 import com.bfhd.account.ui.AccounAddressListActivity;
 import com.bfhd.account.ui.AccounAttentionListActivity;
+import com.bfhd.account.ui.tygs.AccounRewardActivity;
+import com.bfhd.account.ui.tygs.AccounTygsAttentionListActivity;
+
 import com.bfhd.account.ui.AccounCommentListActivity;
 import com.bfhd.account.ui.AccounFansListActivity;
 import com.bfhd.account.ui.AccounMessageDetailActivity;
@@ -16,7 +19,7 @@ import com.bfhd.account.ui.AccounParseListActivity;
 import com.bfhd.account.ui.AccounPrivacySettingActivity;
 import com.bfhd.account.ui.AccounSelectCountryNumActivity;
 import com.bfhd.account.ui.AccounSettingActivity;
-import com.bfhd.account.ui.index.setting.AccounSettingFragment;
+import com.bfhd.account.ui.tygs.setting.AccounSettingFragment;
 import com.bfhd.account.ui.AccounSuggestionActivity;
 import com.bfhd.account.ui.AccounSystemMessageActivity;
 import com.bfhd.account.ui.AccountAddConstActivity;
@@ -81,7 +84,7 @@ public abstract class UIModule {
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
-    abstract AccounAttentionListActivity contributeAccounAttentionListActivityInjector();
+    abstract AccounTygsAttentionListActivity contributeAccounAttentionListActivityInjector();
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
@@ -239,6 +242,15 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounSettingFragment contributAccounSettingFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounAttentionListActivity contributAccounAttentionListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounRewardActivity contributAccounRewardActivityInjector();
+
 
 }
 

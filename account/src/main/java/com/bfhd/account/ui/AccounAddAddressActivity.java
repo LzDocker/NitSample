@@ -110,7 +110,7 @@ public class AccounAddAddressActivity extends HivsBaseActivity<AccountViewModel,
         } else {
             mBinding.tvDeleteAddress.setVisibility(View.GONE);
             mToolbar.setTitle("新增收货地址");
-            addressVo = new AddressVo();
+            addressVo = new AddressVo(1,1);
             addressVo.setIs_moren("0");
             mBinding.setItem(addressVo);
         }

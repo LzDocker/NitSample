@@ -31,11 +31,15 @@
         <activity android:name="com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.list.CircleClassListActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.list.CircleSearchListActivity"></activity>
-        <activity android:name="com.docker.cirlev2.ui.detail.CircleEditTabActivity" android:windowSoftInputMode="adjustResize"></activity>
+        <activity
+            android:name="com.docker.cirlev2.ui.detail.CircleEditTabActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="com.docker.cirlev2.inter.DefaultCircleDetailIndexActivity"></activity>
         <activity android:name="com.docker.cirlev2.inter.frame.NitAbsCircleDetailIndexActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProListActivity"></activity>
         <activity android:name=".ui.CircleInfoActivity"></activity>
+        <activity android:name=".ui.dynamicdetail.CircleShoppingCarListActivity"></activity>
+
         <activity
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity"
             android:windowSoftInputMode="adjustResize"></activity>

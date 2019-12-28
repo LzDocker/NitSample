@@ -2,8 +2,10 @@ package com.bfhd.account.vo.card;
 
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.docker.common.common.model.OnItemClickListener;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 
 public class AccountIndexItemVo extends BaseCardVo<String> {
@@ -38,6 +40,17 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
 
         if (view.getId() == R.id.tv_isent) {
         }
+        if (view.getId() == R.id.tv_iattend) {//我关注的
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_LISt).withString("type","attention").navigation();
+
+        }
+
+        if (view.getId() == R.id.tv_fans) {//我的粉丝
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_LISt).withString("type","fans").navigation();
+
+        }
+
+
         if (view.getId() == R.id.tv_ipay) {
         }
         if (view.getId() == R.id.tv_icollec) {

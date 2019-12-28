@@ -70,7 +70,7 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
 
     public ObservableField<List<ItemVo>> getInnerResource() {
         ItemVo itemVo = new ItemVo(R.mipmap.dzgl_true, "桃源志");
-        ItemVo itemVo1 = new ItemVo(R.mipmap.dzgl_true, "分舵说");
+        ItemVo itemVo1 = new ItemVo(R.mipmap.dzgl_true, "分部说");
         ItemVo itemVo2 = new ItemVo(R.mipmap.dzgl_true, "积分榜");
         ItemVo itemVo3 = new ItemVo((R.mipmap.dzgl_true), "股东汇");
         ItemVo itemVo4 = new ItemVo((R.mipmap.dzgl_true), "购酒·优选");

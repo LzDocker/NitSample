@@ -27,8 +27,10 @@ public class MineProcess {
         accountHeadCardVo.sampleName = "AccountHeadCardVo_style_";
         NitBaseProviderCard.providerCard(commonListVm, accountHeadCardVo, nitCommonFragment);
 
+
         AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo(2, 1);
         NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo, nitCommonFragment);
+
 
         AccountIndexItemVo accountIndexItemVo2 = new AccountIndexItemVo(3, 2);
         NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo2, nitCommonFragment);

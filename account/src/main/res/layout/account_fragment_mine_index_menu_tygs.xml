@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/account_lin_message"
+            android:id="@+id/account_lin_tywh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/open_liner_bg_shape"
@@ -31,7 +31,7 @@
                 android:layout_marginLeft="14dp"
                 android:layout_marginRight="14dp"
                 android:layout_weight="1"
-                android:drawableLeft="@mipmap/account_message_icon"
+                android:drawableLeft="@mipmap/my_tywh"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:text="桃源文化"
@@ -49,7 +49,7 @@
 
 
         <TextView
-            android:id="@+id/account_tv_wdsc"
+            android:id="@+id/account_tv_gsjs"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/open_liner_bg_shape"
@@ -63,11 +63,11 @@
             android:textColor="#333" />
 
         <TextView
-            android:id="@+id/account_tv_onekeysos"
+            android:id="@+id/account_tv_jfzd"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/open_liner_bg_shape"
-            android:drawableLeft="@mipmap/account_sos_icon"
+            android:drawableLeft="@mipmap/my_jfzd"
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
@@ -82,11 +82,11 @@
             android:background="#fff6f6f6" />
 
         <TextView
-            android:id="@+id/account_tv_signlist"
+            android:id="@+id/account_tv_hhr"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/open_liner_bg_shape"
-            android:drawableLeft="@mipmap/account_qdjl_icon"
+            android:drawableLeft="@mipmap/my_hhr"
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
@@ -100,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/open_liner_bg_shape"
-            android:drawableLeft="@mipmap/account_yqhy_icon"
+            android:drawableLeft="@mipmap/my_yqpy"
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
@@ -110,11 +110,11 @@
             android:textColor="#333" />
 
         <TextView
-            android:id="@+id/account_tv_segusstion"
+            android:id="@+id/account_tv_fwzc"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/open_liner_bg_shape"
-            android:drawableLeft="@mipmap/account_yjfk_icon"
+            android:drawableLeft="@mipmap/my_fwzc"
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"

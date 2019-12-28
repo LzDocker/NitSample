@@ -5,6 +5,11 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.index.setting.SettingItemVo" />
+
+        <import type="com.bfhd.circle.R" />
     </data>
 
 
@@ -51,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/open_liner_bg_shape"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:orientation="horizontal"
             android:paddingLeft="14dp"
             android:paddingRight="14dp">
@@ -73,7 +79,8 @@
             android:background="@drawable/open_liner_bg_shape"
             android:orientation="horizontal"
             android:paddingLeft="14dp"
-            android:paddingRight="14dp">
+            android:paddingRight="14dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -91,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/open_liner_bg_shape"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:orientation="horizontal"
             android:paddingLeft="14dp"
             android:paddingRight="14dp">
@@ -163,8 +171,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_chache_clear"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:background="@drawable/open_liner_bg_shape"
             android:orientation="horizontal"
             android:paddingLeft="14dp"
@@ -179,13 +189,10 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_chache_clear"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
                 android:layout_weight="1"
-                android:background="@null"
-                android:drawableRight="@mipmap/arrow_right"
                 android:drawablePadding="5dp"
                 android:gravity="right|center"
                 android:textSize="14sp" />
@@ -198,7 +205,8 @@
             android:background="@drawable/open_liner_bg_shape"
             android:orientation="horizontal"
             android:paddingLeft="14dp"
-            android:paddingRight="14dp">
+            android:paddingRight="14dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -206,6 +214,7 @@
                 android:drawableRight="@mipmap/arrow_right"
                 android:gravity="center_vertical"
                 android:text="隐私设置"
+
                 android:textColor="#333"
                 android:textSize="14sp" />
 
@@ -218,7 +227,8 @@
             android:background="@drawable/open_liner_bg_shape"
             android:orientation="horizontal"
             android:paddingLeft="14dp"
-            android:paddingRight="14dp">
+            android:paddingRight="14dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"
@@ -266,8 +276,11 @@
             android:id="@+id/tv_go_out"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
-            android:background="#B41D23"
+            android:layout_marginRight="20dp"
+            android:background="#611C93"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:gravity="center"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"

@@ -27,7 +27,6 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
             .bindExtra(BR.serverdata, this);
 
 
-
     @Override
     public int getItemLayout() {
         int lay = R.layout.circlev2_item_dynamic_answer;
@@ -65,12 +64,20 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
         return null;
     }
 
-
+    private boolean isSelect;
     private String country;
     private String province;
     private String city;
     private String district;
     public String autotrophy;   //1 自营
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getCountry() {
         return country;

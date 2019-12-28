@@ -69,7 +69,7 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
                         new RecycleTopLayout("热门活动", "更多", true));
                 AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
                         new LayoutManagerVo(0, 0, false),
-                        new RecycleTopLayout("分舵推荐", "", false));
+                        new RecycleTopLayout("分部推荐", "", false));
 
                 NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
                 NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
@@ -98,7 +98,7 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         CircleTitlesVo circleTitlesVo2 = new CircleTitlesVo();
         circleTitlesVo2.setName("公社活动");
         CircleTitlesVo circleTitlesVo3 = new CircleTitlesVo();
-        circleTitlesVo3.setName("全部分舵");
+        circleTitlesVo3.setName("全部分部");
         circleTitlesVos.add(circleTitlesVo);
         circleTitlesVos.add(circleTitlesVo1);
         circleTitlesVos.add(circleTitlesVo2);
@@ -106,7 +106,7 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         peocessTab(circleTitlesVos);
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.App_SEARCH_index).navigation();
+            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t","-1").navigation();
         });
     }
 

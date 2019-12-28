@@ -26,6 +26,11 @@
             android:name=".common.ui.RxDemoActivity"
             android:configChanges="orientation" />
 
+        <activity
+            android:name=".common.ui.CommonAddressListv2Activity"
+            android:configChanges="orientation" />
+
+
 
         <activity android:name="com.docker.common.common.ui.ArouterSchemeActivity">
             <intent-filter>

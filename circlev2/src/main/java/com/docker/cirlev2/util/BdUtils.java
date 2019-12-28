@@ -38,6 +38,7 @@ public class BdUtils {
         return utl;
 
     }
+
     private static SimpleDateFormat sdf = null;
     private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
         @Override
@@ -51,7 +52,6 @@ public class BdUtils {
             return new SimpleDateFormat("yyyy-MM-dd");
         }
     };
-
 
 
     /*
@@ -1147,5 +1147,18 @@ public class BdUtils {
         } else {
             return false;
         }
+    }
+
+    public static int detailFootStyle(ServiceDataBean serviceDataBean) {
+
+        if (CheckServerData(serviceDataBean)) {
+            if ("goods".equals(serviceDataBean.getType())) {
+                return 1;
+            }else if ("news".equals(serviceDataBean.getType())) {
+                return 2;
+            }
+
+        }
+        return 1;
     }
 }

@@ -51,6 +51,7 @@
                     android:drawableTop="@mipmap/account_payfor"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="我关注的"
                     android:textColor="#333"
                     android:textSize="12sp" />
@@ -75,6 +76,7 @@
                     android:drawableTop="@mipmap/account_atten"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="我的粉丝"
                     android:textColor="#000"
                     android:textSize="12sp" />
@@ -119,7 +121,7 @@
                     android:drawableTop="@mipmap/account_home"
                     android:drawablePadding="8dp"
                     android:gravity="center"
-                    android:text="我的分舵"
+                    android:text="我的分部"
                     android:textColor="#000"
                     android:textSize="12sp" />
 
@@ -131,7 +133,7 @@
                     android:drawableTop="@mipmap/account_wd_jfsc"
                     android:drawablePadding="8dp"
                     android:gravity="center"
-                    android:text="报名活动"
+                    android:text="活动报名"
                     android:textColor="#000"
                     android:textSize="12sp" />
 
@@ -143,7 +145,7 @@
                     android:drawableTop="@mipmap/account_custom"
                     android:drawablePadding="8dp"
                     android:gravity="center"
-                    android:text="发布活动"
+                    android:text="活动管理"
                     android:textColor="#000"
                     android:textSize="12sp" />
 

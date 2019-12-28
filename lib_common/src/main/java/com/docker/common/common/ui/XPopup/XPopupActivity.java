@@ -99,7 +99,7 @@ public class XPopupActivity extends AppCompatActivity {
         findViewById(R.id.bottom).
                 setOnClickListener(v ->
                 {
-                    BottomPopup bottomPopup = new BottomPopup(this);
+                    BottomPopup bottomPopup = new BottomPopup(this,"demo_style");
                     basePopupView = new XPopup.Builder(this).setPopupCallback(new XPopupCallback() {
                         @Override
                         public void onCreated() {
@@ -238,7 +238,7 @@ public class XPopupActivity extends AppCompatActivity {
         findViewById(R.id.input_up).setOnClickListener(v -> {
             new XPopup.Builder(XPopupActivity.this)
                     .autoOpenSoftInput(true)
-                    .asCustom(new BottomPopup(XPopupActivity.this))
+                    .asCustom(new BottomPopup(XPopupActivity.this,"demo_style"))
                     .show();
         });
 

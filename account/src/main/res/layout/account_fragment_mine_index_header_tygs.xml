@@ -24,7 +24,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@mipmap/account_head_bg"
         android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical"
         android:paddingBottom="14dp">
@@ -34,13 +34,34 @@
             android:layout_height="wrap_content"
             android:padding="14dp">
 
+
+            <LinearLayout
+                android:id="@+id/account_iv_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_toStartOf="@+id/account_iv_setting"
+                android:layout_toLeftOf="@+id/account_iv_setting"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/account_setting" />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/account_iv_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/account_iv_message"
                 android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
-                android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingRight="10dp">
 
@@ -141,16 +162,15 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/ll_mine_dynamic"
+                android:id="@+id/ll_mine_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:onClick="@{(view) -> item.onItemClick(item,view)}"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_mine_dynamic_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{item.myinfo.point}"
@@ -167,16 +187,15 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_mine_company_dz"
+                android:id="@+id/ll_mine_earn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+                android:onClick="@{(view) -> item.onItemClick(item,view)}"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_mine_circle_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{item.myinfo.likeNum}"

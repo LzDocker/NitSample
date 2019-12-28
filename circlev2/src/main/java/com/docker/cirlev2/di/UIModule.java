@@ -23,6 +23,7 @@ import com.docker.cirlev2.ui.detail.CircleInviteActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleShoppingCarListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicBotContentFragment;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicDetailFragment;
@@ -258,7 +259,14 @@ public abstract class UIModule {
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract CircleProListActivity contributeCircleProListActivityInjector();
+    abstract CircleProListActivity contributeCircleProListActivityInjector();@ActivityScope
+
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleShoppingCarListActivity contributeCircleShoppingCarListActivityInjector();
+
+   ;
+
 
 
 }

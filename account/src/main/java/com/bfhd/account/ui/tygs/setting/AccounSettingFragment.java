@@ -1,4 +1,4 @@
-package com.bfhd.account.ui.index.setting;
+package com.bfhd.account.ui.tygs.setting;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;

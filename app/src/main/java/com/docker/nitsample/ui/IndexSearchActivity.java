@@ -331,7 +331,7 @@ public class IndexSearchActivity extends HivsBaseActivity<CircleDynamicViewModel
         });
         mBinding.tvDelAll.setOnClickListener(v -> {
             if (hivsSampleAdapter.getmObjects().size() > 0) {
-                ConfirmDialog.newInstance("提示", "是否确定删除所有历史记录")
+                ConfirmDialog.newInstance("提示", "是否确定清除所有历史记录")
                         .setConfimLietener(new ConfirmDialog.ConfimLietener() {
                             @Override
                             public void onCancle() {

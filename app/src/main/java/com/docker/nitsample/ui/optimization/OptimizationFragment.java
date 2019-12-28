@@ -83,8 +83,6 @@ public class OptimizationFragment extends NitCommonFragment<OptimizationModel, O
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 outerVm = commonListVm;
-
-
             }
         };
         return nitDelegetCommand;
