@@ -156,6 +156,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                         }
                         setLoadControl(true);
                         mEmptycommand.set(EmptyStatus.BdHiden);
+                        formartData(resource);
                         if (resource.data instanceof List) {
                             if (((List) resource.data).size() == 0 || ((List) resource.data).size() < mPageSize) {
                                 bdenablenodata.set(true);
@@ -227,6 +228,9 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     }
 
+    public void formartData(Resource<T> resource) {
+    }
+
 
     public void addData(BaseItemModel baseItemModel) {
         mItems.add(baseItemModel);
@@ -282,6 +286,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public abstract BaseItemModel formatData(BaseItemModel data);
 
 
+
     public HashMap<Integer, BaseSampleItem> mCardTreeMap = new HashMap<>();
 
     public void addCardVo(BaseSampleItem sampleItem, int position, boolean isadd) {
@@ -293,7 +298,11 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
         if (mItems.size() == 0 && !loadingOV.get()) {
             loadData();
             if (servicefun == null) {
-                mItems.add(sampleItem);
+                if(mItems.size()>=position){
+                    mItems.add(position,sampleItem);
+                }else {
+                    mItems.add(sampleItem);
+                }
                 i = 1;
             } else {
                 if (mCardTreeMap.containsKey(position)) {

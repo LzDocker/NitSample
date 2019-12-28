@@ -66,29 +66,18 @@ public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
         if (view.getId() == R.id.account_iv_user_icon) {
         }
         if (view.getId() == R.id.ll_mine_point) {
-            CommonContainerOptions options = new CommonContainerOptions();
-            options.title = "积分收益";
-            options.commonListOptions = new CommonListOptions();
-            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
-                    .withSerializable(Constant.ContainerParam, options)
-                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountPointViewModel")
-                    .navigation();
+
+            ARouter.getInstance().build(AppRouter.ACCOUNT_point).withString("type","point").navigation();
 //            ((AccountPointViewModel) mNitcommonCardViewModel).process();
         }
         if (view.getId() == R.id.ll_mine_earn) {
-            CommonContainerOptions options = new CommonContainerOptions();
-            options.title = "我的收益";
-            options.commonListOptions = new CommonListOptions();
-            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
-                    .withSerializable(Constant.ContainerParam, options)
-                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountPointViewModel")
-                    .navigation();
-//            ((AccountPointViewModel) mNitcommonCardViewModel).process();
+            ARouter.getInstance().build(AppRouter.ACCOUNT_point).withString("type","earn").navigation();
         }
 
         if (view.getId() == R.id.ll_mine_company_dz) {
         }
-        if (view.getId() == R.id.ll_mine_comment) {
+        if (view.getId() == R.id.ll_mine_reward) {//推广的人 ---  我的收益
+            ARouter.getInstance().build(AppRouter.ACCOUNT_reward).navigation();
         }
     }
 

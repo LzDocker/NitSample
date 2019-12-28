@@ -1,5 +1,6 @@
 package com.bfhd.account.ui.tygs;
 
+import android.accounts.Account;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -10,8 +11,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityRewardBinding;
-import com.bfhd.account.vm.AccountAttentionViewModel;
+import com.bfhd.account.vm.card.AccountPointRecycleViewModel;
+import com.bfhd.account.vo.tygs.AccountEarnHeadVo;
+import com.bfhd.account.vo.tygs.AccountPointHeadVo;
 import com.bfhd.account.vo.tygs.AccountRewardHeadVo;
+import com.docker.cirlev2.vm.CircleShoppingCarViewModel;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
@@ -20,8 +24,8 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.ui.base.NitCommonListActivity;
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vm.NitEmptyViewModel;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
@@ -33,25 +37,26 @@ import java.util.List;
 import javax.inject.Inject;
 
 /*
- * 推广的人====我的奖励
+ * 我的积分
  **/
 
-@Route(path = AppRouter.ACCOUNT_reward)
-public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerViewModel, AccountActivityRewardBinding> {
-    public ArrayList<Fragment> fragments = new ArrayList<>();
+@Route(path = AppRouter.ACCOUNT_point)
+public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, AccountActivityRewardBinding> {
 
     @Inject
     ViewModelProvider.Factory factory;
+    private NitCommonListVm outerVm;
+    private String type;
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.account_activity_reward;
+        return R.layout.account_activity_point;
     }
 
     @Override
-    public NitCommonContainerViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(NitCommonContainerViewModel.class);
+    public NitEmptyViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(NitEmptyViewModel.class);
     }
 
 
@@ -69,37 +74,42 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
 
     @Override
     public void initView() {
-        mToolbar.setTitle("我的奖励");
+
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
+        if ("point".equals(type)) {
+            mToolbar.setTitle("积分收益");
+        } else if ("earn".equals(type)) {
+            mToolbar.setTitle("我的收益");
+        }
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.falg = 0;
+        commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         commonListOptions.isActParent = true;
-        NitBaseProviderCard.providerCardNoRefreshForFrame(this.getSupportFragmentManager(), R.id.frame_header, commonListOptions);
-        List<CircleTitlesVo> circleTitlesVos = new ArrayList<>();
-        CircleTitlesVo circleTitlesVo = new CircleTitlesVo();
-        circleTitlesVo.setName("已邀请");
-        CircleTitlesVo circleTitlesVo1 = new CircleTitlesVo();
-        circleTitlesVo1.setName("已完成");
-        circleTitlesVos.add(circleTitlesVo);
-        circleTitlesVos.add(circleTitlesVo1);
-        peocessTab(circleTitlesVos);
-
+        NitBaseProviderCard.providerCoutainerForFrame(this.getSupportFragmentManager(), R.id.frame_header, commonListOptions);
     }
-
 
     @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
         NitDelegetCommand nitDelegetCommand = new NitDelegetCommand() {
             @Override
             public Class providerOuterVm() {
-                return null;
+                return AccountPointRecycleViewModel.class;
             }
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                AccountRewardHeadVo accountRewardHeadVo = new AccountRewardHeadVo(0, 0);
-                NitBaseProviderCard.providerCard(commonListVm, accountRewardHeadVo, nitCommonFragment);
 
+                if ("point".equals(type)) {
+                    AccountPointHeadVo accountPointHeadVo = new AccountPointHeadVo(0, 0);
+                    NitBaseProviderCard.providerCard(commonListVm, accountPointHeadVo, nitCommonFragment);
+                    accountPointHeadVo.setPoint("111");
+                } else if ("earn".equals(type)) {
+                    AccountEarnHeadVo accountEarnHeadVo = new AccountEarnHeadVo(0, 0);
+                    NitBaseProviderCard.providerCard(commonListVm, accountEarnHeadVo, nitCommonFragment);
+                    accountEarnHeadVo.setPoint("111");
+                }
             }
         };
         return nitDelegetCommand;
@@ -114,22 +124,6 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
     @Override
     public void initRouter() {
 
-    }
-
-    public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
-        String[] titles = new String[circleTitlesVos.size()];
-        for (int i = 0; i < circleTitlesVos.size(); i++) {
-            titles[i] = circleTitlesVos.get(i).getName();
-            fragments.add((Fragment) ARouter.getInstance()
-                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
-                    .withSerializable("tabVo", (Serializable) circleTitlesVos)
-                    .withInt("pos", i)
-                    .navigation());
-        }
-        // magic
-        mBinding.viewPager.setAdapter(new CommonpagerAdapter(this.getSupportFragmentManager(), fragments, titles));
-        CommonIndector commonIndector = new CommonIndector();
-        commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
     }
 
 }

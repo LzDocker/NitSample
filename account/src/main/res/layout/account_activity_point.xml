@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="myinfo"
+            type="com.bfhd.account.vo.MyInfoVo" />
+
+        <import type="com.bfhd.circle.R" />
+
+        <import type="com.bfhd.circle.base.Constant" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/frame_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+
+</layout>

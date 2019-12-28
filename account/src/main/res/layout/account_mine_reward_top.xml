@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.bfhd.account.vo.tygs.PointVo" />
+            type="com.bfhd.account.vo.tygs.AccountRewardHeadVo" />
 
         <import type="com.docker.core.util.LayoutManager" />
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:background="#F2F2F2"
             android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:paddingBottom="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -84,14 +84,25 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_yuan"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:background="@color/white"
-                    android:text="1000 + @string/yuan"
+                    android:text="@{1000 + @string/empty}"
                     android:textColor="#333333"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_yuan"
+                    android:layout_toRightOf="@id/tv_yuan"
+                    android:background="@color/white"
+                    android:text="元"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
+
 
                 <TextView
                     android:id="@+id/tv_qbtx"
@@ -100,9 +111,9 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/account_attention_no_shape"
                     android:paddingLeft="12dp"
-                    android:paddingTop="8dp"
+                    android:paddingTop="5dp"
                     android:paddingRight="12dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="5dp"
                     android:text="全部提现"
                     android:textColor="#A1A1A1"
                     android:textSize="15sp" />
@@ -112,10 +123,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:padding="15dp"
+                android:lineSpacingExtra="3dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
                 android:text="提现金额预计在2-3小时内到账，具体请以平台通知为准"
                 android:textColor="#9B9B9B"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
 
             <RelativeLayout
@@ -155,14 +169,25 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_jf"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+
                     android:background="@color/white"
-                    android:text="1000 + @string/jifen"
+                    android:text="@{1000+@string/empty}"
                     android:textColor="#333333"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/tv_jf"
+                    android:layout_toRightOf="@id/tv_jf"
+                    android:background="@color/white"
+                    android:text="积分"
+                    android:textColor="#333333"
+                    android:textSize="15sp" />
             </RelativeLayout>
 
         </LinearLayout>

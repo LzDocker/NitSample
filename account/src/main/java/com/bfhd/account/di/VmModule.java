@@ -9,6 +9,9 @@ import com.bfhd.account.vm.AccountPointViewModel;
 import com.bfhd.account.vm.AccountSettingViewModel;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
+import com.bfhd.account.vm.card.AccountPointHeadCardViewModel;
+import com.bfhd.account.vm.card.AccountPointRecycleViewModel;
+import com.bfhd.account.vm.card.AccountRewardHeadCardViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
 import dagger.Binds;
@@ -59,6 +62,18 @@ public abstract class VmModule {
     @ViewModelKey(AccountPointViewModel.class)
     abstract ViewModel AccountPointViewModel(AccountPointViewModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountRewardHeadCardViewModel.class)
+    abstract ViewModel AccountRewardHeadCardViewModel(AccountRewardHeadCardViewModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountPointHeadCardViewModel.class)
+    abstract ViewModel AccountPointHeadCardViewModel(AccountPointHeadCardViewModel model);
+@Binds
+    @IntoMap
+    @ViewModelKey(AccountPointRecycleViewModel.class)
+    abstract ViewModel AccountPointRecycleViewModel(AccountPointRecycleViewModel model);
 
 }
