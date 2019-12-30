@@ -4,6 +4,7 @@ package com.bfhd.account.di;
 import com.bfhd.account.ui.AccounAddAddressActivity;
 import com.bfhd.account.ui.AccounAddressListActivity;
 import com.bfhd.account.ui.AccounAttentionListActivity;
+import com.bfhd.account.ui.tygs.AccounPointActivity;
 import com.bfhd.account.ui.tygs.AccounRewardActivity;
 import com.bfhd.account.ui.tygs.AccounTygsAttentionListActivity;
 
@@ -250,6 +251,12 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounRewardActivity contributAccounRewardActivityInjector();
+
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounPointActivity contributAccounPointActivityInjector();
+
 
 
 }

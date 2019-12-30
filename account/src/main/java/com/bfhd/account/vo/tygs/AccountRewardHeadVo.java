@@ -22,7 +22,7 @@ public class AccountRewardHeadVo extends BaseCardVo<MyInfoVo> {
     public AccountRewardHeadVo(int style, int position) {
         super(style, position);
         maxSupport = 3;
-        mVmPath = "com.bfhd.account.vm.card.AccountHeadCardViewModel";
+        mVmPath = "com.bfhd.account.vm.card.AccountRewardHeadCardViewModel";
     }
 
     @Override

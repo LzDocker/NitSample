@@ -70,4 +70,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api project(':lib_common')
     api project(":circle")
+    api project(":circlev2")
 }

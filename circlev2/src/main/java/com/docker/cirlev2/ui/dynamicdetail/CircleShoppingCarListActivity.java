@@ -131,6 +131,7 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 outerVm = commonListVm;
+                mBinding.setViewmodel((CircleShoppingCarViewModel) commonListVm);
             }
         };
         return nitDelegetCommand;

@@ -24,6 +24,9 @@ public class AppRouter {
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
 
     public static final String ACCOUNT_reward = AccountGroup + "account_reward";
+    public static final String ACCOUNT_point = AccountGroup + "account_point";
+    public static final String ACCOUNT_invitation = AccountGroup + "account_invitation";
+
 
 
     /*

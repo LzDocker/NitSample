@@ -19,7 +19,7 @@ public class Resource<T> {
     @NonNull
     public final Status status;
     @Nullable
-    public final T data;
+    public  T data;
     @Nullable
     public final String message;
 
