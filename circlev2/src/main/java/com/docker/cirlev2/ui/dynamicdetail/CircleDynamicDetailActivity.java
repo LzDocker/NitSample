@@ -5,6 +5,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -22,10 +24,14 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
+import com.docker.common.common.widget.XPopup.BottomPopup;
 import com.docker.common.common.widget.dialog.ConfirmDialog;
 import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.core.widget.BottomSheetDialog;
 import com.gyf.immersionbar.ImmersionBar;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.interfaces.XPopupCallback;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
@@ -41,6 +47,7 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     @Autowired
     String dynamicId;
     public ServiceDataBean mDynamicDetailVo;
+    private BasePopupView basePopupView;
 
     @Override
     protected int getLayoutId() {
@@ -93,6 +100,8 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         mViewModel.mCollectLv.observe(this, s -> {
 
         });
+
+
     }
 
     private void processView() {
@@ -118,6 +127,76 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
             showCircleMenu();
         });
 
+        //购物车的点击事件
+        mBinding.tvShoppingCart.setOnClickListener(view -> {
+            if (basePopupView == null) {
+                initBottomPopup();
+            } else {
+                basePopupView.show();
+            }
+
+        });
+
+
+    }
+
+    private void initBottomPopup() {
+        BottomPopup bottomPopup = new BottomPopup(this, "detail_foot_style");
+        basePopupView = new XPopup.Builder(this).setPopupCallback(new XPopupCallback() {
+            @Override
+            public void onCreated() {
+                TextView tv_add = bottomPopup.findViewById(com.docker.common.R.id.tv_add);
+                TextView tv_reduce = bottomPopup.findViewById(com.docker.common.R.id.tv_reduce);
+                TextView tv_num = bottomPopup.findViewById(com.docker.common.R.id.tv_num);
+                TextView tv_shopping_cart = bottomPopup.findViewById(com.docker.common.R.id.tv_shopping_cart);
+                TextView tv_buy = bottomPopup.findViewById(com.docker.common.R.id.tv_buy);
+
+                ImageView iv_close = bottomPopup.findViewById(com.docker.common.R.id.iv_close);
+
+                tv_add.setOnClickListener(view -> {
+                    String num = tv_num.getText().toString();
+                    tv_num.setText(String.valueOf(Integer.valueOf(num) + 1));
+                });
+                tv_reduce.setOnClickListener(view -> {
+                    String num = tv_num.getText().toString();
+                    if (!"1".equals(num)) {
+                        tv_num.setText(String.valueOf(Integer.valueOf(num) - 1));
+                    }
+                });
+                tv_shopping_cart.setOnClickListener(view -> {
+                    basePopupView.dismiss();
+                    ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+                });
+                tv_buy.setOnClickListener(view -> {
+                    basePopupView.dismiss();
+                });
+
+                iv_close.setOnClickListener(view -> {
+                    basePopupView.dismiss();
+                });
+
+            }
+
+            @Override
+            public void beforeShow() {
+
+            }
+
+            @Override
+            public void onShow() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+
+            @Override
+            public boolean onBackPressed() {
+                return false;
+            }
+        }).asCustom(bottomPopup).show();
 
     }
 
@@ -235,6 +314,8 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         if (mDynamicDetailVo != null) {
             switch (mDynamicDetailVo.getType()) {
                 case "goods":
+                    FragmentUtils.add(getSupportFragmentManager(), DynamicH5Fragment.getInstance(mDynamicDetailVo), R.id.frame_content);
+                    break;
                 case "news":
                     FragmentUtils.add(getSupportFragmentManager(), DynamicH5Fragment.getInstance(mDynamicDetailVo), R.id.frame_content);
                     break;

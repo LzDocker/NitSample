@@ -99,6 +99,12 @@
             android:label="我的粉丝"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing" />
+
+        <activity
+            android:name=".ui.tygs.AccounTygsAttentionListActivity"
+            android:label="我的关注"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".ui.FindPwdActivity"
             android:label="我的粉丝"
@@ -151,6 +157,11 @@
 
         <activity
             android:name=".ui.AccounNoSeeActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".ui.tygs.AccounRewardActivity"
             android:screenOrientation="portrait" />
 
     </application>

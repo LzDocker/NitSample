@@ -30,16 +30,30 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
     }
 
     public void onChildClick(ItemVo itemVo) {
-        CircleConfig circleConfig = new CircleConfig();
-        circleConfig.circleid = "255";
-        circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
-        circleConfig.circleType = "1";
-        circleConfig.Temple = 2;
-        circleConfig.extens.put("title", "桃源志");
-        ARouter.getInstance()
-                .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
-                .withSerializable("circleConfig", circleConfig)
-                .navigation();
+
+
+        switch (itemVo.getName()) {
+            case "桃源志":
+                CircleConfig circleConfig = new CircleConfig();
+                circleConfig.circleid = "255";
+                circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
+                circleConfig.circleType = "1";
+                circleConfig.Temple = 2;
+                circleConfig.extens.put("title", "桃源志");
+                ARouter.getInstance()
+                        .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
+                        .withSerializable("circleConfig", circleConfig)
+                        .navigation();
+                break;
+            case "分部说":
+                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX).navigation();
+
+                break;
+            case "沙龙·活动":
+                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX).navigation();
+                break;
+        }
+
     }
 
     @Override
@@ -70,7 +84,7 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
 
     public ObservableField<List<ItemVo>> getInnerResource() {
         ItemVo itemVo = new ItemVo(R.mipmap.dzgl_true, "桃源志");
-        ItemVo itemVo1 = new ItemVo(R.mipmap.dzgl_true, "分舵说");
+        ItemVo itemVo1 = new ItemVo(R.mipmap.dzgl_true, "分部说");
         ItemVo itemVo2 = new ItemVo(R.mipmap.dzgl_true, "积分榜");
         ItemVo itemVo3 = new ItemVo((R.mipmap.dzgl_true), "股东汇");
         ItemVo itemVo4 = new ItemVo((R.mipmap.dzgl_true), "购酒·优选");

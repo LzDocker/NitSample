@@ -82,7 +82,7 @@ public class AccounAddressListActivity extends HivsBaseActivity<AccountViewModel
         hivsSampleAdapter.notifyDataSetChanged();
 
         mBinding.tvAddAddress.setOnClickListener(v -> {
-            AddressVo addressVo = new AddressVo();
+            AddressVo addressVo = new AddressVo(0,0);
             AccounAddAddressActivity.startMe(AccounAddressListActivity.this, "2", addressVo);
         });
 

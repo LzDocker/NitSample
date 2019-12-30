@@ -23,6 +23,7 @@ import com.docker.cirlev2.ui.detail.CircleInviteActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity;
+import com.docker.cirlev2.ui.dynamicdetail.CircleShoppingCarListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicBotContentFragment;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicDetailFragment;
@@ -42,6 +43,9 @@ import com.docker.cirlev2.ui.persion.CirclePersonDetailActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonPerssionActivity;
 import com.docker.cirlev2.ui.pro.CircleProListActivity;
+import com.docker.cirlev2.ui.pro.index.MutipartIndexActivity;
+import com.docker.cirlev2.ui.pro.index.active.ActiveContainerFragment;
+import com.docker.cirlev2.ui.pro.index.active.ActiveIndexActivity;
 import com.docker.cirlev2.ui.publish.CirclePubActiveFragment;
 import com.docker.cirlev2.ui.publish.CirclePubNewsFragment;
 import com.docker.cirlev2.ui.publish.CirclePubRequestionFragment;
@@ -259,6 +263,22 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleProListActivity contributeCircleProListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleShoppingCarListActivity contributeCircleShoppingCarListActivityInjector();
+
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract MutipartIndexActivity contributeMutipartIndexActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveContainerFragment contributeActiveContainerFragmentInjector();
+
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveIndexActivity contributeActiveIndexActivityInjector();
+
 
 
 }

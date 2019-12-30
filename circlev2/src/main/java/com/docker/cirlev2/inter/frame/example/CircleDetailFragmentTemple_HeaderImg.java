@@ -1,5 +1,6 @@
 package com.docker.cirlev2.inter.frame.example;
 
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -15,6 +16,7 @@ import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.core.widget.BottomSheetDialog;
+import com.gyf.immersionbar.ImmersionBar;
 
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
 
@@ -101,5 +103,19 @@ public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragme
     @Override
     public void onAppClick(AppVo appVo) {
         super.onAppClick(appVo);
+    }
+
+    @Override
+    public void initImmersionBar() {
+//        super.initImmersionBar();
+        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
+            ImmersionBar.with(this)
+                    .navigationBarColor("#ffffff")
+                    .statusBarDarkFont(true)
+                    .titleBarMarginTop(mBinding.get().toolbar)
+                    .init();
+        } else {
+            mBinding.get().toolbar.setVisibility(View.GONE);
+        }
     }
 }

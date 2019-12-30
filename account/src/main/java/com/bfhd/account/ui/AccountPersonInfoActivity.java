@@ -31,6 +31,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
 /*
  * 个人信息
  **/
+
 public class AccountPersonInfoActivity extends HivsBaseActivity<AccountViewModel, AccountActivityPersonInfoBinding> {
     @Inject
     ViewModelProvider.Factory factory;

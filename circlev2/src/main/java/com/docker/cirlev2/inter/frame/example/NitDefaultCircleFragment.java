@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -112,6 +113,10 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         }
         super.onActivityCreated(savedInstanceState);
         mBinding.get().setViewmodel(mViewModel);
+
+        if (TextUtils.isEmpty(circleConfig.extens.get("title"))) {
+            mBinding.get().toolbar.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -156,11 +161,16 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 
     @Override
     public void initImmersionBar() {
-        ImmersionBar.with(this)
-                .navigationBarColor("#ffffff")
-                .statusBarDarkFont(true)
-                .titleBarMarginTop(mBinding.get().toolbar)
-                .init();
+        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
+            ImmersionBar.with(this)
+                    .navigationBarColor("#ffffff")
+                    .statusBarDarkFont(true)
+                    .titleBarMarginTop(mBinding.get().toolbar)
+                    .init();
+        } else {
+
+        }
+
     }
 
     @Override
@@ -182,7 +192,7 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 
     public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
         int refresh = Constant.KEY_REFRESH_ONLY_LOADMORE;
-        if(temple == 2){
+        if (temple == 2) {
             refresh = Constant.KEY_REFRESH_OWNER;
         }
         String[] titles = new String[circleTitlesVos.size()];
@@ -191,7 +201,7 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
             fragments.add((Fragment) ARouter.getInstance()
                     .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
                     .withSerializable("tabVo", (Serializable) circleTitlesVos)
-                    .withInt("refresh",refresh)
+                    .withInt("refresh", refresh)
                     .withInt("pos", i)
                     .withInt("role", mViewModel.mCircleDetailLv.getValue().getRole())
                     .navigation());

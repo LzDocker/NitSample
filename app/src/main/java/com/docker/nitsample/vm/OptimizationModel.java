@@ -88,9 +88,6 @@ public class OptimizationModel extends NitCommonContainerViewModel {
         mItems.addAll(optimizationVoList);
     }
 
-    // 公社优选 列表样式
-    public final ItemBinding<CommentVo> commentBinding = ItemBinding.<CommentVo>of(BR.item, com.bfhd.circle.R.layout.circle_item_comment)
-            .bindExtra(BR.viewmodel, this);
 
     @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {

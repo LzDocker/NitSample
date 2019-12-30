@@ -2,7 +2,10 @@ package com.bfhd.account.di;
 
 import android.arch.lifecycle.ViewModel;
 
+import com.bfhd.account.vm.AccountAttentionViewModel;
 import com.bfhd.account.vm.AccountIndexListViewModel;
+import com.bfhd.account.vm.AccountPersonInfoViewModel;
+import com.bfhd.account.vm.AccountPointViewModel;
 import com.bfhd.account.vm.AccountSettingViewModel;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
@@ -39,4 +42,23 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(AccountHeadCardViewModel.class)
     abstract ViewModel MineCardInfoViewModel(AccountHeadCardViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountPersonInfoViewModel.class)
+    abstract ViewModel AccountPersonInfoViewModel(AccountPersonInfoViewModel model);
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountAttentionViewModel.class)
+    abstract ViewModel AccountAttentionViewModel(AccountAttentionViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountPointViewModel.class)
+    abstract ViewModel AccountPointViewModel(AccountPointViewModel model);
+
+
+
 }

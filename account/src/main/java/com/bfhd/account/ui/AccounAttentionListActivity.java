@@ -23,7 +23,7 @@ import javax.inject.Inject;
  * 关注列表
  **/
 
-@Route(path = AppRouter.ACCOUNT_ATTEN_LISt)
+//@Route(path = AppRouter.ACCOUNT_ATTEN_LISt)
 public class AccounAttentionListActivity extends HivsBaseActivity<AccountViewModel, AccountActivityAttentionListBinding> {
 
 
@@ -73,7 +73,7 @@ public class AccounAttentionListActivity extends HivsBaseActivity<AccountViewMod
                 msta.uuid = fvo.getUuid();
                 msta.uid = fvo.getMemberid();
                 msta.name = fvo.getNickname();
-//                CirclePersonDetailActivity.startMe(AccounAttentionListActivity.this, msta);
+//                CirclePersonDetailActivity.startMe(AccounTygsAttentionListActivity.this, msta);
                 ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
             }
         });

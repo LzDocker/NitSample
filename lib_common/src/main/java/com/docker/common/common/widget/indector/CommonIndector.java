@@ -38,7 +38,7 @@ public class CommonIndector {
                 ((ColorFlipPagerTitleView) simplePagerTitleView).setSelectTextSize(15f);
                 simplePagerTitleView.setSelectedColor(Color.BLACK);
                 simplePagerTitleView.setNormalColor(Color.GRAY);
-                simplePagerTitleView.setOnClickListener(v -> viewPager.setCurrentItem(index,false));
+                simplePagerTitleView.setOnClickListener(v -> viewPager.setCurrentItem(index, false));
                 return simplePagerTitleView;
             }
 
@@ -76,7 +76,7 @@ public class CommonIndector {
                 ((ColorFlipPagerTitleView) simplePagerTitleView).setSelectTextSize(15f);
                 simplePagerTitleView.setSelectedColor(Color.BLACK);
                 simplePagerTitleView.setNormalColor(Color.GRAY);
-                simplePagerTitleView.setOnClickListener(v -> viewPager.setCurrentItem(index,false));
+                simplePagerTitleView.setOnClickListener(v -> viewPager.setCurrentItem(index, false));
                 return simplePagerTitleView;
             }
 

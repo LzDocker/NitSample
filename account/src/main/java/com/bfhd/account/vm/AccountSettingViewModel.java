@@ -22,7 +22,7 @@ public class AccountSettingViewModel extends NitCommonContainerViewModel {
     @Override
     public void loadData() {
         mEmptycommand.set(EmptyStatus.BdHiden);
-        SettingItemVo settingItemVo = new SettingItemVo();
+        SettingItemVo settingItemVo = new SettingItemVo(0,0);
         mItems.add(settingItemVo);
 
     }

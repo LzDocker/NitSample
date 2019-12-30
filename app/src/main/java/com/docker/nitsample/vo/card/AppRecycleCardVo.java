@@ -60,7 +60,7 @@ public class AppRecycleCardVo extends BaseCardVo<String> {
     public ObservableField<List<String>> getInnerResource() {
         ArrayList<String> arrayList = new ArrayList();
         arrayList.add("桃源志");
-        arrayList.add("分舵说");
+        arrayList.add("分部说");
         arrayList.add("积分榜");
         arrayList.add("股东汇");
         arrayList.add("购酒·优选");

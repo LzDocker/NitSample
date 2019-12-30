@@ -40,6 +40,7 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
         super.initView(var1);
         mBinding.get().ivShare.setVisibility(View.GONE);
         mBinding.get().circlev2Edit.setVisibility(View.GONE);
+        mBinding.get().toolbarLayout.setVisibility(View.GONE);
     }
 
     @Override
@@ -108,14 +109,17 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
         View view = null;
         if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
             view = mBinding.get().toolbar;
+            mBinding.get().toolbarLayout.setVisibility(View.VISIBLE);
+            ImmersionBar.with(this)
+                    .navigationBarColor("#ffffff")
+                    .statusBarColor("#ffffff")
+                    .statusBarDarkFont(true)
+                    .titleBarMarginTop(view)
+                    .init();
         } else {
-            view = mBinding.get().llStickCoutainer;
+//            view = mBinding.get().llStickCoutainer;
         }
-        ImmersionBar.with(this)
-                .navigationBarColor("#ffffff")
-                .statusBarColor("#ffffff")
-                .statusBarDarkFont(true)
-                .titleBarMarginTop(view)
-                .init();
+
+
     }
 }

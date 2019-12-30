@@ -62,7 +62,7 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
 
     public ObservableField<List<CarRvHorizontalVo>> getInnerResource() {
         ArrayList<CarRvHorizontalVo> arrayList = new ArrayList();
-        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "七律分舵", "舵主：石慧杰", "", 1);
+        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "七律分部", "CEO：石慧杰", "", 1);
         arrayList.add(carRvHorizontalVo);
         arrayList.add(carRvHorizontalVo);
         arrayList.add(carRvHorizontalVo);

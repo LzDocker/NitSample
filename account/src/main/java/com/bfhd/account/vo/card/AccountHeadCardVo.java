@@ -6,6 +6,7 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
+import com.bfhd.account.vm.AccountPointViewModel;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.bfhd.account.vo.MyInfoVo;
 import com.docker.common.common.config.Constant;
@@ -50,17 +51,41 @@ public class AccountHeadCardVo extends BaseCardVo<MyInfoVo> {
             options.commonListOptions = new CommonListOptions();
             ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
                     .withSerializable(Constant.ContainerParam, options)
-                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountIndexListViewModel")
+                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountSettingViewModel")
                     .navigation();
             ((AccountHeadCardViewModel) mNitcommonCardViewModel).process();
+        }
+
+
+        if (view.getId() == R.id.account_iv_help) {
+
         }
         if (view.getId() == R.id.account_iv_message) {
             RxBus.getDefault().post(new RxEvent<>("change", 3));
         }
         if (view.getId() == R.id.account_iv_user_icon) {
         }
-        if (view.getId() == R.id.ll_mine_dynamic) {
+        if (view.getId() == R.id.ll_mine_point) {
+            CommonContainerOptions options = new CommonContainerOptions();
+            options.title = "积分收益";
+            options.commonListOptions = new CommonListOptions();
+            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
+                    .withSerializable(Constant.ContainerParam, options)
+                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountPointViewModel")
+                    .navigation();
+//            ((AccountPointViewModel) mNitcommonCardViewModel).process();
         }
+        if (view.getId() == R.id.ll_mine_earn) {
+            CommonContainerOptions options = new CommonContainerOptions();
+            options.title = "我的收益";
+            options.commonListOptions = new CommonListOptions();
+            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
+                    .withSerializable(Constant.ContainerParam, options)
+                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountPointViewModel")
+                    .navigation();
+//            ((AccountPointViewModel) mNitcommonCardViewModel).process();
+        }
+
         if (view.getId() == R.id.ll_mine_company_dz) {
         }
         if (view.getId() == R.id.ll_mine_comment) {

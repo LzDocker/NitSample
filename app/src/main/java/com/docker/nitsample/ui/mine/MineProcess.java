@@ -1,8 +1,10 @@
 package com.docker.nitsample.ui.mine;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.vo.card.AccountHeadCardVo;
 import com.bfhd.account.vo.card.AccountIndexItemVo;
 import com.dcbfhd.utilcode.utils.GsonUtils;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
@@ -13,6 +15,11 @@ import java.util.HashMap;
 public class MineProcess {
 
     public static void processMineFrame(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
+            return;
+        }
+
         AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(2, 0);
         accountHeadCardVo.isNoNetNeed = true;
         HashMap<String, String> postArrMap = new HashMap<>();
@@ -27,8 +34,10 @@ public class MineProcess {
         accountHeadCardVo.sampleName = "AccountHeadCardVo_style_";
         NitBaseProviderCard.providerCard(commonListVm, accountHeadCardVo, nitCommonFragment);
 
+
         AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo(2, 1);
         NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo, nitCommonFragment);
+
 
         AccountIndexItemVo accountIndexItemVo2 = new AccountIndexItemVo(3, 2);
         NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo2, nitCommonFragment);

@@ -181,7 +181,7 @@ public class MineFragmentWj extends CommonFragment<AccountViewModel, AccountFrag
 
         // 关注
 //        mBinding.get().llMineLiked.setOnClickListener(v -> {
-//            Intent intent = new Intent(MineFragmentWj.this.getHoldingActivity(), AccounAttentionListActivity.class);
+//            Intent intent = new Intent(MineFragmentWj.this.getHoldingActivity(), AccounTygsAttentionListActivity.class);
 //            startActivity(intent);
 //
 //        });

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <variable
+            name="item"
+            type="com.docker.common.common.vo.AddressVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.common.common.vm.CommonAddressViewModel" />
+    </data>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:itemBinding="@{item.itemBinding}"
+        app:items="@{viewmodel.mItems}"
+        app:layoutManager="@{LayoutManager.linear}"></android.support.v7.widget.RecyclerView>
+</layout>

@@ -2,6 +2,7 @@ package com.docker.common.common.widget.XPopup;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.widget.ThemedSpinnerAdapter;
 
 import com.docker.common.R;
 import com.lxj.xpopup.animator.PopupAnimator;
@@ -10,25 +11,30 @@ import com.lxj.xpopup.core.BottomPopupView;
 
 public class BottomPopup extends BottomPopupView {
     private Context context;
+    private String style;
 
     //注意：自定义弹窗本质是一个自定义View，但是只需重写一个参数的构造，其他的不要重写，所有的自定义弹窗都是这样。
-    public BottomPopup(@NonNull Context context) {
+    public BottomPopup(@NonNull Context context, String style) {
         super(context);
         this.context = context;
+        this.style = style;
     }
 
     // 返回自定义弹窗的布局
     @Override
     protected int getImplLayoutId() {
-        return R.layout.common_xpopup_bottom;
+        if ("detail_foot_style".equals(style)) {
+            return R.layout.common_xpopup_bottom_detail;
+        } else if ("demo_style".equals(style)) {
+            return R.layout.common_xpopup_bottom;
+        }
+        return 0;
     }
 
     // 执行初始化操作，比如：findView，设置点击，或者任何你弹窗内的业务逻辑
     @Override
     protected void onCreate() {
         super.onCreate();
-
-
 
 
 //        findViewById(R.id.tv_close).setOnClickListener(new OnClickListener() {
@@ -38,7 +44,6 @@ public class BottomPopup extends BottomPopupView {
 //            }
 //        });
     }
-
 
 
     // 设置最大宽度，看需要而定

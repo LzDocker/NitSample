@@ -1,6 +1,7 @@
 package com.docker.common.di;
 
 
+import com.docker.common.common.ui.CommonAddressListv2Activity;
 import com.docker.common.common.ui.RxDemoActivity;
 import com.docker.common.common.ui.ViewDocumentActivity;
 import com.docker.common.common.ui.base.NitCommonListInstanceFragment;
@@ -59,5 +60,11 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract NitCommonContainerNoRefreshFragmentV2 NitCommonContainerNoRefreshFragmentV2();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CommonAddressListv2Activity CommonAddressListv2Activity();
+
+
 
 }

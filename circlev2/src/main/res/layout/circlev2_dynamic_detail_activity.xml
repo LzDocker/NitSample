@@ -15,6 +15,8 @@
 
         <import type="com.docker.cirlev2.R" />
 
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
     </data>
 
 
@@ -145,12 +147,12 @@
 
         <LinearLayout
             android:id="@+id/dynamic_detail_foot"
+            visibleGone="@{BdUtils.detailFootStyle(item) == 2}"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/common_top_liner_shape"
             android:orientation="vertical">
-
 
             <RelativeLayout
                 android:id="@+id/circle_common_bar"
@@ -227,155 +229,110 @@
                 </LinearLayout>
 
             </RelativeLayout>
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/cirlce_goods_foot"
+        <LinearLayout
+            android:id="@+id/dynamic_detail_foot_goods"
+            visibleGone="@{BdUtils.detailFootStyle(item) == 1}"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/common_top_liner_shape"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:visibility="gone">
-
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/lin_kf"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:layout_weight=".15"
                     android:gravity="center"
                     android:onClick="@{(view)->viewmodel.ItemDZGoodsClick(item,view)}"
                     android:orientation="vertical">
 
-
                     <ImageView
-                        android:id="@+id/iv_dz_wj"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />
-
+                        android:src="@mipmap/circle_zan_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text='@{item.isFav == 1? @string/isFav : @string/favwj}'
-                        android:textColor="#666"
-                        android:textSize="10sp" />
-
-
+                        android:text="联系客服"
+                        android:textColor="#FF979797"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_weight=".15"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/lin_kf"
                     android:gravity="center"
-                    android:onClick="@{(view)->viewmodel.ItemPLClick(item,view)}"
+                    android:onClick="@{(view)->viewmodel.ItemDZGoodsClick(item,view)}"
                     android:orientation="vertical">
 
-
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:src="@mipmap/circle_pinglun_icon" />
-
+                        android:src="@mipmap/circle_zan_icon" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="留言"
-                        android:textColor="#666"
-                        android:textSize="10sp" />
+                        android:text="购物车"
+                        android:textColor="#FF979797"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentLeft="true"
+                <TextView
+                    android:id="@+id/tv_shopping_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_weight=".15"
-                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/tv_buy"
+                    android:background="@drawable/circle_red_btn_shape"
                     android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
-                    android:orientation="vertical">
+                    android:paddingLeft="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="8dp"
+                    android:text="加入购物车"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/circle_btn_shape"
+                    android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="8dp"
+                    android:text="立即购买"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
 
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:src="@{item.isCollect == 1?R.mipmap.circle_store_colleced:R.mipmap.circle_store_collec}" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text='@{item.isCollect == 1? @string/isCollect : @string/collect}'
-                        android:textColor="#666"
-                        android:textSize="10sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".55"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/circlev2_shape_gray_14"
-
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:paddingRight="25dp"
-                        android:paddingBottom="10dp"
-                        android:text="聊一聊"
-                        android:textColor="#000" />
-
-                    <!--   android:onClick="@{(view)->viewmodel.ItemTalkClick(item,view)}"-->
-
-                    <Space
-                        android:id="@+id/circle_space"
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/circle_tv_want"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/circle_shape_red_14"
-
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:paddingRight="25dp"
-                        android:paddingBottom="10dp"
-                        android:text="我想要"
-                        android:textColor="#fff" />
-
-                    <!--                        android:onClick="@{(view)->viewmodel.ItemBuyClick(item,view)}"-->
-                </LinearLayout>
-
-
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
 

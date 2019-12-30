@@ -23,6 +23,9 @@ public class AppRouter {
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
 
+    public static final String ACCOUNT_reward = AccountGroup + "account_reward";
+
+
     /*
      * 设置*/
     public static final String ACCOUNT_ATTEN_SETTING = AccountGroup + "setting";
@@ -90,12 +93,14 @@ public class AppRouter {
     public static final String CIRCLE_persion_v2_detail = CircleV2Group + "CIRCLE_persion_v2_detail";
     public static final String CIRCLE_comment_v2_reply = CircleV2Group + "CIRCLE_comment_v2_reply";
     public static final String CIRCLE_more_comment_v2_reply = CircleV2Group + "CIRCLE_more_comment_v2_reply";
+    public static final String CIRCLE_shopping_car = CircleV2Group + "CIRCLE_shopping_car";
     public static final String CIRCLE_comment_v2_ANSWER = CircleV2Group + "CIRCLE_comment_v2_ANSWER";
-
     public static final String CIRCLE_DETAIL_v2_INDEX_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_default";
-
     public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";
     public static final String CIRCLE_DETAIL_v2_PRO_MANAGER = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER";
+    public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
+    public static final String CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX";
+
 
     public static final String ProGroup = "/Pro/";
 
@@ -125,6 +130,7 @@ public class AppRouter {
     public static final String COMMONGROUP = "/common/";
 
     public static final String COMMON_CONTAINER = COMMONGROUP + "container";
+    public static final String COMMON_address_list = COMMONGROUP + "COMMON_address_list";
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
     public static final String COMMON_CONTAINER_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2";

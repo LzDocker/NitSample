@@ -57,11 +57,9 @@ public class CircleProListActivity extends NitCommonActivity<SampleListViewModel
     @Override
     public void initView() {
         mToolbar.setTitle("应用管理");
-
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.isActParent = true;
         NitBaseProviderCard.providerCardNoRefreshForFrame(getSupportFragmentManager(), R.id.frame_pro, commonListOptions);
-
 
     }
 
