@@ -4,9 +4,8 @@ import android.databinding.ObservableField;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.cirlev2.BR;
-import com.docker.cirlev2.inter.CircleConfig;
+import com.docker.cirlev2.ui.detail.home.CircleConfig;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.ItemVo;
 import com.docker.common.common.vo.card.BaseCardVo;
@@ -52,8 +51,10 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
             case "沙龙·活动":
                 ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX).navigation();
                 break;
+            case "积分榜":
+                ARouter.getInstance().build(AppRouter.POINT_SORT_INDEX).navigation();
+                break;
         }
-
     }
 
     @Override

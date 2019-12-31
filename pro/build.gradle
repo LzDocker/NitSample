@@ -48,7 +48,7 @@ android {
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
-    resourcePrefix "pro_"
+    resourcePrefix "apps_"
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -67,6 +67,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
-    api project(':lib_common')
-    api project(":circlev2")
+    implementation project(':circlev2')
 }

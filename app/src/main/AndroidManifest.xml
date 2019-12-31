@@ -122,7 +122,7 @@
             android:process=":dexopt" />
 
         <activity
-            android:name="com.docker.nitsample.ui.MainTygsActivity"
+            android:name="com.docker.nitsample.ui.MainActivity"
 
             android:screenOrientation="portrait">
             <intent-filter>

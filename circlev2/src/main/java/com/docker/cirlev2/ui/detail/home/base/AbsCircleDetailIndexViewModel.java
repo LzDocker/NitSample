@@ -1,4 +1,4 @@
-package com.docker.cirlev2.inter.frame;
+package com.docker.cirlev2.ui.detail.home.base;
 
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;

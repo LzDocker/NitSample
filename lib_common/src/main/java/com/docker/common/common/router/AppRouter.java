@@ -28,7 +28,6 @@ public class AppRouter {
     public static final String ACCOUNT_invitation = AccountGroup + "account_invitation";
 
 
-
     /*
      * 设置*/
     public static final String ACCOUNT_ATTEN_SETTING = AccountGroup + "setting";
@@ -104,21 +103,6 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
     public static final String CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX";
 
-
-    public static final String ProGroup = "/Pro/";
-
-    public static final String STUDY = ProGroup + "study";
-
-    public static final String Video_Pro_Training = ProGroup + "pro_video_player";
-
-    public static final String Pro_Country_select = ProGroup + "country_select";
-
-    public static final String Pro_Training_collect = ProGroup + "pro_training_collect";
-
-
-    public static final String HomeGroup = "/Home/";
-
-
     public static final String VIDEOGROUP = "/video/";
 
     public static final String VIDEOMAIN = VIDEOGROUP + "main";
@@ -161,5 +145,20 @@ public class AppRouter {
     public static final String EVALUATE_DEMO = EVALUATE + "demo";
     public static final String EVALUATE_DETAIL = EVALUATE + "detail";
     public static final String EVALUATE_LESSON_LIST = EVALUATE + "lessonList";
+
+
+    public static final String ProGroup = "/Pro/";
+
+    public static final String STUDY = ProGroup + "study";
+
+    public static final String Video_Pro_Training = ProGroup + "pro_video_player";
+
+    public static final String Pro_Country_select = ProGroup + "country_select";
+
+    public static final String Pro_Training_collect = ProGroup + "pro_training_collect";
+
+
+    public static final String POINT_GROUP = ProGroup + "/point/";
+    public static final String POINT_SORT_INDEX = POINT_GROUP + "POINT_SORT_INDEX";
 
 }

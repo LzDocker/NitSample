@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.docker.cirlev2.inter.frame.DefaultDetailIndexViewModel" />
+            type="com.docker.cirlev2.ui.detail.home.temp.defaults.DefaultDetailIndexViewModel" />
 
         <variable
             name="circleDetail"

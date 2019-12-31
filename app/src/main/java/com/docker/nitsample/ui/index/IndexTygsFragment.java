@@ -2,6 +2,7 @@ package com.docker.nitsample.ui.index;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -18,6 +19,8 @@ import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
+import com.docker.common.common.widget.refresh.api.RefreshLayout;
+import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
 import com.docker.nitsample.vo.LayoutManagerVo;
@@ -106,8 +109,12 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         peocessTab(circleTitlesVos);
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t","-1").navigation();
+            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();
         });
+
+//        mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
+////            outerVm.onJustRefresh();
+//        });
     }
 
     @Override
@@ -134,6 +141,6 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         mBinding.get().viewPager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
-
     }
+
 }

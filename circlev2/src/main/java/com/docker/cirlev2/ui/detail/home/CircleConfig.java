@@ -1,4 +1,4 @@
-package com.docker.cirlev2.inter;
+package com.docker.cirlev2.ui.detail.home;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -25,10 +25,10 @@ public class CircleConfig implements Serializable {
 
 
     /*
-    *
-    * 扩展字段  title
-    *
-    *
-    * */
+     *
+     * 扩展字段  title  影响toobar和沉浸式
+     *          fmrouter 应用自己的详情fragment的访问路径（arouter）
+     *
+     * */
     public HashMap<String, String> extens = new HashMap<>();
 }

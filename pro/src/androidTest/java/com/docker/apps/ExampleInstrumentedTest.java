@@ -1,4 +1,4 @@
-package com.docker.pro;
+package com.docker.apps;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.docker.pro.test", appContext.getPackageName());
+        assertEquals("com.docker.apps.test", appContext.getPackageName());
     }
 }

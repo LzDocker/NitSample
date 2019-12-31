@@ -1,4 +1,4 @@
-package com.docker.pro;
+package com.docker.apps;
 
 import org.junit.Test;
 

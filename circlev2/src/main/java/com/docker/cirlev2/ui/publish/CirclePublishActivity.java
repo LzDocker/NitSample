@@ -167,7 +167,6 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
                 break;
             case PUBLISH_TYPE_ACTIVE:
                 FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubActiveFragment.class).onActivityResult(requestCode, resultCode, data);
-
                 break;
             case PUBLISH_TYPE_QREQUESTION:
                 FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubRequestionFragment.class).onActivityResult(requestCode, resultCode, data);

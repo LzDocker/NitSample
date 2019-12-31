@@ -1,4 +1,4 @@
-package com.docker.cirlev2.inter.frame.example;
+package com.docker.cirlev2.ui.detail.home.temp.defaults;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
@@ -17,9 +17,8 @@ import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2DefaultDetailIndexFragmentBinding;
-import com.docker.cirlev2.inter.CircleConfig;
-import com.docker.cirlev2.inter.frame.DefaultDetailIndexViewModel;
-import com.docker.cirlev2.inter.frame.NitAbsCircleFragment;
+import com.docker.cirlev2.ui.detail.home.CircleConfig;
+import com.docker.cirlev2.ui.detail.home.base.NitAbsCircleFragment;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;

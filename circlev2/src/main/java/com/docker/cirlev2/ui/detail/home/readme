@@ -1,0 +1,21 @@
+圈子详情默认模版  xml circlev2_default_detail_index_fragment
+                NitDefaultCircleFragment
+
+//
+CircleDetailFragmentTemple_HeaderImg
+
+CircleDetailFragmentTemple_HeaderNone// 是对默认模版的扩展
+
+
+新开发应用的圈子详情，在默认模版不能满足的情况下，需要新增模版
+
+新增圈子详情模版方法
+
+1。在应用内自己创建新的模版(容器)fragment，继承自 NitAbsCircleFragment，加载自己的xml，处理方式参考 NitDefaultCircleFragment
+
+2。进入圈子详情界面在circleconfig 中 extens 中传入自己新建模版的 aroute path,接收字段为 fmrouter,circleconfig 其他必传字段照常传
+
+3。把比较通用的模版（容器迁移到circlev2中）
+
+
+注：应用基于圈子，统一圈子详情的入口，分离应用中圈子详情的具体实现，降低应用间的依赖
