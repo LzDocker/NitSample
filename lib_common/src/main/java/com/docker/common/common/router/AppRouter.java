@@ -7,6 +7,7 @@ public class AppRouter {
 
     public static final String App_SEARCH = AppGroup + "search";
     public static final String App_SEARCH_index = AppGroup + "search_index";
+    public static final String App_SEARCH_index_TYGS = AppGroup + "App_SEARCH_index_TYGS";
 
     public static final String HOME = AppGroup + "home";
     public static final String HOME_preview = AppGroup + "home_preview";
@@ -22,6 +23,10 @@ public class AppRouter {
     public static final String ACCOUNT_COUNTRY = AccountGroup + "country";
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
+    public static final String ACCOUNT_BRANCH_LIST = AccountGroup + "attention_branch_list";
+    public static final String ACCOUNT_ACT_REGIST_LIST = AccountGroup + "ACCOUNT_ACT_REGIST_LIST";
+    public static final String ACCOUNT_ACT_MANAGER_LIST = AccountGroup + "ACCOUNT_ACT_MANAGER_LIST";
+    public static final String ACCOUNT_ORDER_LIST = AccountGroup + "ACCOUNT_ORDER_LIST";
 
     public static final String ACCOUNT_reward = AccountGroup + "account_reward";
     public static final String ACCOUNT_point = AccountGroup + "account_point";
@@ -96,6 +101,7 @@ public class AppRouter {
     public static final String CIRCLE_comment_v2_reply = CircleV2Group + "CIRCLE_comment_v2_reply";
     public static final String CIRCLE_more_comment_v2_reply = CircleV2Group + "CIRCLE_more_comment_v2_reply";
     public static final String CIRCLE_shopping_car = CircleV2Group + "CIRCLE_shopping_car";
+    public static final String CIRCLE_person_info = CircleV2Group + "CIRCLE_person_info";
     public static final String CIRCLE_comment_v2_ANSWER = CircleV2Group + "CIRCLE_comment_v2_ANSWER";
     public static final String CIRCLE_DETAIL_v2_INDEX_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_default";
     public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";

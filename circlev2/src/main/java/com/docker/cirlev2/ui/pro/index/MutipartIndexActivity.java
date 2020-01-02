@@ -34,6 +34,7 @@ public class MutipartIndexActivity extends NitCommonActivity<NitEmptyViewModel, 
         circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
         circleConfig.circleType = "1";
         circleConfig.Temple = 0;
+        circleConfig.isNeedToobar = false;
         fragments.add(NitDefaultCircleFragment.getInstance(circleConfig));
 
         CircleConfig circleConfig1 = new CircleConfig();
@@ -41,14 +42,15 @@ public class MutipartIndexActivity extends NitCommonActivity<NitEmptyViewModel, 
         circleConfig1.utid = "62fe4a4647e39d823677c40fa8fff5f1";
         circleConfig1.circleType = "1";
         circleConfig1.Temple = 0;
+        circleConfig1.isNeedToobar = false;
         fragments.add(NitDefaultCircleFragment.getInstance(circleConfig1));
-
 
         CircleConfig circleConfig2 = new CircleConfig();
         circleConfig2.circleid = "255";
         circleConfig2.utid = "62fe4a4647e39d823677c40fa8fff5f1";
         circleConfig2.circleType = "1";
         circleConfig2.Temple = 0;
+        circleConfig2.isNeedToobar = false;
         fragments.add(NitDefaultCircleFragment.getInstance(circleConfig2));
 
 

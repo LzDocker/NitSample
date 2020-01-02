@@ -13,7 +13,8 @@ import com.docker.cirlev2.vm.CircleEditTabViewModel;
 import com.docker.cirlev2.vm.CircleIndexViewModel;
 import com.docker.cirlev2.vm.CircleMinesViewModel;
 import com.docker.cirlev2.vm.CirclePersionViewModel;
-import com.docker.cirlev2.vm.CircleShoppingCarViewModel;
+import com.docker.cirlev2.vm.CirclePersonInfoViewModel;
+import com.docker.cirlev2.vm.CircleShoppingViewModel;
 import com.docker.cirlev2.vm.CirlcleSelectViewModel;
 import com.docker.cirlev2.vm.CreateListViewModel;
 import com.docker.cirlev2.vm.PublishViewModel;
@@ -107,9 +108,13 @@ public abstract class VmModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CircleShoppingCarViewModel.class)
-    abstract ViewModel CircleShoppingCarViewModel(CircleShoppingCarViewModel model);
+    @ViewModelKey(CircleShoppingViewModel.class)
+    abstract ViewModel CircleShoppingCarViewModel(CircleShoppingViewModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(CirclePersonInfoViewModel.class)
+    abstract ViewModel CirclePersonInfoViewModel(CirclePersonInfoViewModel model);
 
 
 

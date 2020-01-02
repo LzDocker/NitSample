@@ -67,14 +67,14 @@ public class AccountRewardHeadCardViewModel extends NitcommonCardViewModel {
 
     @Override
     public void loadData() {
-        if (accountRewardHeadVo != null) {
-            fetchAccountHeaderCard(accountRewardHeadVo);
-        }
+//        if (accountRewardHeadVo != null) {
+//            fetchAccountHeaderCard(accountRewardHeadVo);
+//        }
     }
 
     @Override
     public void loadCardData(BaseCardVo accountRewardHeadVo) {
-        fetchAccountHeaderCard((AccountRewardHeadVo) accountRewardHeadVo);
+//        fetchAccountHeaderCard((AccountRewardHeadVo) accountRewardHeadVo);
     }
 
 }

@@ -179,14 +179,14 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     position = position - 1;
                 }
                 mBinding.viewpager.setCurrentItem(position, false);
-                if (position == 3) {
+                if (position <= 1) {
                     ImmersionBar.with(MainTygsActivity.this)
-                            .fitsSystemWindows(true)
+                            .statusBarColor("#ffffff")
                             .init();
                 } else {
                     ImmersionBar.with(MainTygsActivity.this)
                             .fitsSystemWindows(true)
-                            .statusBarColor(com.docker.core.R.color.colorPrimary)
+                            .statusBarColor(R.color.colorPrimaryDark)
                             .init();
                 }
             }

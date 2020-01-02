@@ -38,6 +38,7 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
                 circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
                 circleConfig.circleType = "1";
                 circleConfig.Temple = 2;
+                circleConfig.isNeedToobar = false;
                 circleConfig.extens.put("title", "桃源志");
                 ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)

@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityRewardBinding;
 import com.bfhd.account.vm.AccountAttentionViewModel;
+import com.bfhd.account.vm.AccountRewardViewModel;
 import com.bfhd.account.vo.tygs.AccountRewardHeadVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
@@ -21,6 +22,7 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListActivity;
+import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
@@ -42,6 +44,7 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
 
     @Inject
     ViewModelProvider.Factory factory;
+    private String[] titles;
 
 
     @Override
@@ -75,6 +78,7 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
         commonListOptions.falg = 0;
         commonListOptions.isActParent = true;
         NitBaseProviderCard.providerCardNoRefreshForFrame(this.getSupportFragmentManager(), R.id.frame_header, commonListOptions);
+
         List<CircleTitlesVo> circleTitlesVos = new ArrayList<>();
         CircleTitlesVo circleTitlesVo = new CircleTitlesVo();
         circleTitlesVo.setName("已邀请");
@@ -82,6 +86,10 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
         circleTitlesVo1.setName("已完成");
         circleTitlesVos.add(circleTitlesVo);
         circleTitlesVos.add(circleTitlesVo1);
+        titles = new String[circleTitlesVos.size()];
+        for (int i = 0; i < circleTitlesVos.size(); i++) {
+            titles[i] = circleTitlesVos.get(i).getName();
+        }
         peocessTab(circleTitlesVos);
 
     }
@@ -89,19 +97,41 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
 
     @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
-        NitDelegetCommand nitDelegetCommand = new NitDelegetCommand() {
-            @Override
-            public Class providerOuterVm() {
-                return null;
-            }
+        NitDelegetCommand nitDelegetCommand = null;
+        switch (flag) {
+            case 0:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return null;
+                    }
 
-            @Override
-            public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                AccountRewardHeadVo accountRewardHeadVo = new AccountRewardHeadVo(0, 0);
-                NitBaseProviderCard.providerCard(commonListVm, accountRewardHeadVo, nitCommonFragment);
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+                        AccountRewardHeadVo accountRewardHeadVo = new AccountRewardHeadVo(0, 0);
+                        NitBaseProviderCard.providerCard(commonListVm, accountRewardHeadVo, nitCommonFragment);
 
-            }
-        };
+                    }
+                };
+                break;
+            case 1:
+            case 2:
+                nitDelegetCommand = new NitDelegetCommand() {
+                    @Override
+                    public Class providerOuterVm() {
+                        return AccountRewardViewModel.class;
+                    }
+
+                    @Override
+                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+                    }
+                };
+                break;
+
+        }
+
+
+
         return nitDelegetCommand;
     }
 
@@ -117,15 +147,23 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
     }
 
     public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
-        String[] titles = new String[circleTitlesVos.size()];
-        for (int i = 0; i < circleTitlesVos.size(); i++) {
-            titles[i] = circleTitlesVos.get(i).getName();
-            fragments.add((Fragment) ARouter.getInstance()
-                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
-                    .withSerializable("tabVo", (Serializable) circleTitlesVos)
-                    .withInt("pos", i)
-                    .navigation());
-        }
+
+
+
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions.isActParent = true;
+        commonListOptions.falg = 1;
+        NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+        fragments.add(nitCommonContainerFragmentV2);
+
+        CommonListOptions commonListOptions1 = new CommonListOptions();
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions1.isActParent = true;
+        commonListOptions1.falg = 2;
+        NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+        fragments.add(nitCommonContainerFragmentV21);
+
         // magic
         mBinding.viewPager.setAdapter(new CommonpagerAdapter(this.getSupportFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();

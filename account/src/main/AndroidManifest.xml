@@ -168,6 +168,22 @@
             android:name=".ui.tygs.AccounPointActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.tygs.AccounTygsBranchListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tygs.AccounActRegistListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tygs.AccounActManagerActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tygs.AccounOrderListActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 

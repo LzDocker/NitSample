@@ -66,7 +66,8 @@ public class SampleItemVo implements BaseItemModel {
                     break;
 
                 case 19:
-                    ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "search").navigation();
+//                    ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "search").navigation();
+                    ARouter.getInstance().build(AppRouter.App_SEARCH_index_TYGS).withString("t", "search").navigation();
                     break;
 
                 default:

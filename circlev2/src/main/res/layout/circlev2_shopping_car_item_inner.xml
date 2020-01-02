@@ -8,6 +8,10 @@
             name="item"
             type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
 
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleShoppingViewModel" />
+
         <import type="com.docker.cirlev2.R" />
 
         <import type="com.docker.cirlev2.util.BdUtils" />
@@ -48,6 +52,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:layout_alignTop="@id/iv_shop_logo"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -87,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@id/tv_num"
+                        android:onClick="@{(view)->viewmodel.reduceNumClick(item,view)}"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="-"
@@ -114,6 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
+                        android:onClick="@{(view)->viewmodel.addNumClick(item,view)}"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="+"

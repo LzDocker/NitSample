@@ -109,7 +109,8 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         peocessTab(circleTitlesVos);
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();
+//            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();
+            ARouter.getInstance().build(AppRouter.App_SEARCH_index_TYGS).withString("t", "-1").navigation();
         });
 
 //        mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {

@@ -1,14 +1,12 @@
 package com.docker.cirlev2.di;
 
-
-//import com.docker.cirlev2.inter.DefaultCircleDetailIndexActivity;
-
 import com.docker.cirlev2.ui.detail.CircleAddTabActivity;
 import com.docker.cirlev2.ui.detail.index.base.NitAbsCircleDetailIndexActivity;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderImg;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderNone;
 import com.docker.cirlev2.ui.CircleInfoActivity;
+import com.docker.cirlev2.ui.PersonInfoActivity;
 import com.docker.cirlev2.ui.common.CircleCoverActivity;
 import com.docker.cirlev2.ui.common.CircleCovertFragment;
 import com.docker.cirlev2.ui.common.CircleSourceUpFragment;
@@ -247,7 +245,6 @@ public abstract class UIModule {
 //    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
 //    abstract DefaultCircleDetailIndexActivity contributeDefaultCircleDetailIndexActivityInjector();
 
-
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract NitDefaultCircleFragment contributeNitDefaultCircleFragmentInjector();
@@ -271,6 +268,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleShoppingCarListActivity contributeCircleShoppingCarListActivityInjector();
+
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract PersonInfoActivity contributePersonInfoActivityInjector();
 
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
