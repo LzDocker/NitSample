@@ -14,12 +14,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_shape"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:src="@mipmap/circle_pub_active_icon" />
 
@@ -36,6 +38,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+
+        <CheckBox
+            android:id="@+id/check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="@={item.checked}" />
+
         <TextView
             android:id="@+id/circle_status"
             android:layout_width="wrap_content"
@@ -48,7 +57,8 @@
             android:paddingRight="14dp"
             android:paddingBottom="5dp"
             android:text="启用"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="gone" />
     </LinearLayout>
 
 </layout>

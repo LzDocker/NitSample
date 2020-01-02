@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.card.ProRecycleCardVo" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="14dp"
+            android:text="title" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            app:itemBinding="@{item.getItemImgBinding()}"
+            app:items="@{item.getInnerResource()}"
+            bind:layoutManager="@{LayoutManager.linear()}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:background="#f5f5f5" />
+    </LinearLayout>
+
+
+</layout>

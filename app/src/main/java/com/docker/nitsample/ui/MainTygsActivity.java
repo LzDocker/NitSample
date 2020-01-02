@@ -41,7 +41,7 @@ import io.reactivex.disposables.Disposable;
 
 import static com.docker.common.common.router.AppRouter.HOME;
 
-//@Route(path = HOME)
+@Route(path = HOME)
 public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject

@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.docker.cirlev2.ui.detail.home.temp.defaults.DefaultDetailIndexViewModel" />
+            type="com.docker.cirlev2.ui.detail.index.temp.defaults.DefaultDetailIndexViewModel" />
 
         <variable
             name="circleDetail"
@@ -57,7 +57,7 @@
                     android:id="@+id/app_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/transparent"
+                    android:background="@color/white"
                     android:elevation="0dp"
                     android:orientation="vertical"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -71,193 +71,45 @@
                         app:contentScrim="@color/white"
                         app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                        <FrameLayout
-                            android:id="@+id/frame_header"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            <!--<com.youth.banner.Banner-->
-                            <!--android:id="@+id/banner"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="220dp"-->
-                            <!--app:is_auto_play="true" />-->
-
-                            <!--<RelativeLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginTop="120dp">-->
+                            <FrameLayout
+                                android:id="@+id/frame_header"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/white">
 
 
-                            <!--<RelativeLayout-->
-                            <!--android:id="@+id/rlcoutainer"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginBottom="25dp"-->
-                            <!--android:gravity="center_vertical"-->
-                            <!--android:paddingLeft="15dp"-->
-                            <!--android:paddingRight="15dp">-->
+                            </FrameLayout>
 
-                            <!--<ImageView-->
-                            <!--android:id="@+id/circle_iv_icon"-->
-                            <!--android:layout_width="65dp"-->
-                            <!--android:layout_height="65dp"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--app:openImgUrl="@{CommonBdUtils.getCompleteImageUrl(circleDetail.logoUrl)}" />-->
-
-                            <!--&lt;!&ndash; app:errorImg="@{R.mipmap.circle_icon_empty}"&ndash;&gt;-->
-                            <!--&lt;!&ndash; app:placeHolder="@{R.mipmap.circle_icon_empty}" &ndash;&gt;-->
-                            <!--<LinearLayout-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_toRightOf="@+id/circle_iv_icon"-->
-                            <!--android:orientation="vertical">-->
-
-                            <!--<TextView-->
-                            <!--android:id="@+id/circle_tv_cirname"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:ellipsize="end"-->
-                            <!--android:maxLength="8"-->
-                            <!--android:text="@{circleDetail.circleName}"-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="18dp"-->
-                            <!--android:textStyle="bold" />-->
+                            <LinearLayout
+                                android:id="@+id/circle_ll_info"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_below="@+id/rlcoutainer"
+                                android:background="@color/white"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingLeft="14dp"
+                                android:paddingRight="14dp"
+                                android:visibility="gone">
 
 
-                            <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_below="@+id/circle_tv_cirname"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:layout_marginLeft="5dp"-->
-                            <!--android:layout_marginTop="5dp"-->
-                            <!--android:layout_toRightOf="@+id/circle_iv_icon"-->
-                            <!--android:drawablePadding="10dp"-->
-                            <!--android:text='@{@string/circlev2_person_aten+circleDetail.seeNum}'-->
-                            <!--android:textColor="#fff" />-->
+                                <TextView
+                                    android:id="@+id/tv_circle_desc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableRight="@mipmap/arrow_right"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:text="【圈子简介】反恐嘴，维护世界和平"
+                                    android:textColor="#333" />
+                            </LinearLayout>
 
-                            <!--</LinearLayout>-->
-
-                            <!--<LinearLayout-->
-                            <!--android:layout_width="80dp"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_marginTop="20dp"-->
-                            <!--android:onClick="@{(view)->viewmodel.joinCircle(view)}"-->
-                            <!--android:orientation="vertical">-->
-
-
-                            <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:background="@drawable/circlev2_people_top"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="已关注"-->
-                            <!--android:textColor="@color/colorAccent"-->
-                            <!--app:visibleGone="@{CommonBdUtils.isShowJoin(circleDetail.isJoin)}" />-->
-
-
-                            <!--<TextView-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:background="@drawable/circlev2_people_top_attend"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text="关注"-->
-                            <!--android:textColor="@color/white"-->
-                            <!--app:visibleGone="@{!CommonBdUtils.isShowJoin(circleDetail.isJoin)}" />-->
-
-
-                            <!--<TextView-->
-                            <!--android:id="@+id/circle_tv_personnum"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:background="@drawable/circlev2_people_bottom"-->
-                            <!--android:gravity="center"-->
-                            <!--android:text='@{circleDetail.employeeNum+@string/circlev2_ren}'-->
-                            <!--android:textColor="@color/white" />-->
-
-
-                            <!--</LinearLayout>-->
-
-                            <!--</RelativeLayout>-->
-
-
-                            <!--<RelativeLayout-->
-                            <!--android:id="@+id/circle_ll_per_liner"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_below="@id/rlcoutainer"-->
-                            <!--android:background="@drawable/open_liner_bg_shape"-->
-                            <!--android:padding="10dp">-->
-
-                            <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                            <!--android:id="@+id/circle_ll_user_head"-->
-                            <!--android:layout_width="35dp"-->
-                            <!--android:layout_height="35dp" />-->
-
-                            <!--&lt;!&ndash;    app:errorImg="@{R.mipmap.circle_default_avatar}"-->
-                            <!--app:placeHolder="@{R.mipmap.circle_default_avatar}"-->
-                            <!--app:roundImgUrl="@{viewmodel.detailVo.avatar}"&ndash;&gt;-->
-
-                            <!--<TextView-->
-                            <!--android:id="@+id/circle_ll_user_name"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_marginLeft="10dp"-->
-                            <!--android:layout_toRightOf="@id/circle_ll_user_head"-->
-                            <!--android:text="@{circleDetail.nickname}"-->
-                            <!--android:textColor="#121212" />-->
-
-                            <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_below="@id/circle_ll_user_name"-->
-                            <!--android:layout_marginLeft="10dp"-->
-                            <!--android:layout_marginTop="5dp"-->
-                            <!--android:layout_toRightOf="@id/circle_ll_user_head"-->
-                            <!--android:background="@drawable/circlev2_people_quanzhu"-->
-                            <!--android:text="家长"-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="8sp" />-->
-
-                            <!--<ImageView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:layout_alignParentRight="true"-->
-                            <!--android:layout_centerVertical="true"-->
-                            <!--android:src="@mipmap/arrow_right" />-->
-                            <!--</RelativeLayout>-->
-
-                            <!--<LinearLayout-->
-                            <!--android:id="@+id/circle_ll_info"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="45dp"-->
-                            <!--android:layout_below="@+id/rlcoutainer"-->
-                            <!--android:background="@color/white"-->
-                            <!--android:gravity="center_vertical"-->
-                            <!--android:orientation="vertical"-->
-                            <!--android:paddingLeft="14dp"-->
-                            <!--android:paddingRight="14dp"-->
-                            <!--android:visibility="gone">-->
-
-
-                            <!--<TextView-->
-                            <!--android:id="@+id/tv_circle_desc"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:drawableRight="@mipmap/arrow_right"-->
-                            <!--android:paddingTop="10dp"-->
-                            <!--android:paddingBottom="10dp"-->
-                            <!--android:text="【圈子简介】反恐嘴，维护世界和平"-->
-                            <!--android:textColor="#333"-->
-                            <!--android:visibility="gone" />-->
-                            <!--</LinearLayout>-->
-                            <!--</RelativeLayout>-->
-
-                        </FrameLayout>
+                        </LinearLayout>
 
                         <android.support.v7.widget.Toolbar
                             android:id="@+id/toolbar"
@@ -265,6 +117,7 @@
                             android:layout_height="50dp"
                             android:layout_below="@+id/view"
                             android:elevation="0dp"
+                            android:visibility="gone"
                             app:contentInsetLeft="0dp"
                             app:contentInsetStart="0dp"
                             app:contentInsetStartWithNavigation="0dp"

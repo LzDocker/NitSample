@@ -1,78 +1,55 @@
-package com.docker.nitsample.vo.card;
+package com.docker.cirlev2.vo.card;
 
 import android.databinding.ObservableField;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.BR;
-import com.docker.cirlev2.ui.detail.index.CircleConfig;
+import com.docker.cirlev2.R;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.ItemVo;
 import com.docker.common.common.vo.card.BaseCardVo;
-import com.docker.nitsample.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class AppRecycleCard2Vo extends BaseCardVo<String> {
+public class ProRecycleCardVo extends BaseCardVo<String> {
 
-    public AppRecycleCard2Vo(int style, int position) {
+    public ProRecycleCardVo(int style, int position) {
         super(style, position);
-        maxSupport = 1;
+        maxSupport = 2;
     }
 
     @Override
     public void onItemClick(BaseCardVo item, View view) {
-
-    }
-
-    public void onChildClick(ItemVo itemVo) {
-
-
-        switch (itemVo.getName()) {
-            case "桃源志":
-                CircleConfig circleConfig = new CircleConfig();
-                circleConfig.circleid = "255";
-                circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
-                circleConfig.circleType = "1";
-                circleConfig.Temple = 2;
-                circleConfig.extens.put("title", "桃源志");
-                ARouter.getInstance()
-                        .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
-                        .withSerializable("circleConfig", circleConfig)
-                        .navigation();
-                break;
-            case "分部说":
-                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX).navigation();
-
-                break;
-            case "沙龙·活动":
-                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX).navigation();
-                break;
-            case "积分榜":
-                ARouter.getInstance().build(AppRouter.POINT_SORT_INDEX).navigation();
-                break;
+        if (view.getId() == R.id.tv_use) { // 开通
+            //
+            Log.d("sss", "onItemClick: ===========开通===============");
+            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_INFO).navigation();
         }
     }
 
     @Override
     public int getItemLayout() {
-        return R.layout.app_recycle_card;
+        return R.layout.circlev2_pro_recycle_card;
     }
 
 
-    public transient ItemBinding<ItemVo> itemImgBinding = ItemBinding.<ItemVo>of(BR.item,
-            R.layout.app_card_img_inner).bindExtra(BR.parent, this); // 单一view 有点击事件;
-//
-
+    public transient ItemBinding<ItemVo> itemImgBinding;
 
     public ItemBinding<ItemVo> getItemImgBinding() {
-        if (itemImgBinding == null) {
+        if (style == 0) {
             itemImgBinding = ItemBinding.<ItemVo>of(BR.item,
-                    R.layout.app_card_img_inner);
+                    R.layout.circlev2_pro_item_inner).bindExtra(BR.parent, this);
+        } else {
+            itemImgBinding = ItemBinding.<ItemVo>of(BR.item,
+                    R.layout.circlev2_pro_item_use_inner).bindExtra(BR.parent, this);
         }
+
+        Log.d("sss", "getItemImgBinding: ======style==========" + style);
         return itemImgBinding;
     }
 

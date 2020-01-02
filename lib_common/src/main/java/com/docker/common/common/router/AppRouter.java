@@ -100,6 +100,8 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_INDEX_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_default";
     public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";
     public static final String CIRCLE_DETAIL_v2_PRO_MANAGER = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER";
+    public static final String CIRCLE_DETAIL_v2_PRO_INFO = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER_info";
+
     public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
     public static final String CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX";
 

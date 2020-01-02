@@ -1,4 +1,4 @@
-package com.docker.cirlev2.ui.detail.home;
+package com.docker.cirlev2.ui.detail.index;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -25,8 +25,17 @@ public class CircleConfig implements Serializable {
 
 
     /*
+     *toobar
+     * */
+    public boolean isNeedToobar = true;
+    /*
+     *简介
+     * */
+    public boolean isNeedIntroduce = true;
+
+    /*
      *
-     * 扩展字段  title  影响toobar和沉浸式
+     * 扩展字段  title
      *          fmrouter 应用自己的详情fragment的访问路径（arouter）
      *
      * */

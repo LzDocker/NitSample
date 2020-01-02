@@ -122,14 +122,18 @@
             android:process=":dexopt" />
 
         <activity
-            android:name="com.docker.nitsample.ui.MainActivity"
-
+            android:name="com.docker.nitsample.ui.MainTygsActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.docker.nitsample.ui.MainActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
 

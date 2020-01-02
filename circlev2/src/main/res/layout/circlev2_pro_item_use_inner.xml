@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <!--<variable-->
+        <!--name="item"-->
+        <!--type="com.docker.common.common.vo.ItemVo" />-->
+
+        <variable
+            name="item"
+            type="com.docker.common.common.vo.ItemVo" />
+
+        <variable
+            name="parent"
+            type="com.docker.cirlev2.vo.card.ProRecycleCardVo" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_shape"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/circle_pub_news_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/open_liner_bg_shape"
+            android:gravity="center_vertical"
+            android:text="动态"
+            android:textColor="#333" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_next"
+            android:onClick="@{(view) -> parent.onItemClickListener.onItemClick(parent,view)}"
+            android:paddingLeft="10dp"
+            android:paddingTop="3dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="3dp"
+            android:text="开通"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</layout>
