@@ -71,6 +71,19 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     private String district;
     public String autotrophy;   //1 自营
 
+    @Bindable
+    private int num;
+
+    @Bindable
+    public int getNum() {
+        return num;
+    }
+
+    @Bindable
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     public boolean isSelect() {
         return isSelect;
     }

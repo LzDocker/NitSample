@@ -1,9 +1,12 @@
 package com.bfhd.account.di;
 
 
+import com.bfhd.account.ui.tygs.AccounActManagerActivity;
+import com.bfhd.account.ui.tygs.AccounActRegistListActivity;
 import com.bfhd.account.ui.AccounAddAddressActivity;
 import com.bfhd.account.ui.AccounAddressListActivity;
 import com.bfhd.account.ui.AccounAttentionListActivity;
+import com.bfhd.account.ui.tygs.AccounOrderListActivity;
 import com.bfhd.account.ui.tygs.AccounPointActivity;
 import com.bfhd.account.ui.tygs.AccounRewardActivity;
 import com.bfhd.account.ui.tygs.AccounTygsAttentionListActivity;
@@ -20,6 +23,8 @@ import com.bfhd.account.ui.AccounParseListActivity;
 import com.bfhd.account.ui.AccounPrivacySettingActivity;
 import com.bfhd.account.ui.AccounSelectCountryNumActivity;
 import com.bfhd.account.ui.AccounSettingActivity;
+import com.bfhd.account.ui.tygs.AccounTygsBranchListActivity;
+import com.bfhd.account.ui.tygs.fragment.AccountInvitationCoutainerFragment;
 import com.bfhd.account.ui.tygs.setting.AccounSettingFragment;
 import com.bfhd.account.ui.AccounSuggestionActivity;
 import com.bfhd.account.ui.AccounSystemMessageActivity;
@@ -257,7 +262,26 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounPointActivity contributAccounPointActivityInjector();
 
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccountInvitationCoutainerFragment contributAccountInvitationCoutainerFragmentInjector();
 
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounTygsBranchListActivity contributAccounTygsBranchListActivityInjector();
+
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounActRegistListActivity contributAccounActRegistListActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounActManagerActivity contributAccounActManagerActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract AccounOrderListActivity contributAccounOrderListActivityInjector();
 
 }
 

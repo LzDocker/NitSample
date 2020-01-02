@@ -5,6 +5,15 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.bfhd.account.vo.tygs.InvatationVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.bfhd.account.vm.AccountRewardViewModel" />
+        
+        <import type="com.docker.core.util.LayoutManager" />
     </data>
 
 
@@ -13,36 +22,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/open_liner_bg_shape">
-
-            <net.lucode.hackware.magicindicator.MagicIndicator
-                android:id="@+id/magic_indicator"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:paddingRight="10dp" />
-
-            <TextView
-                android:id="@+id/common_tv_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="14dp"
-                android:text="编辑分类"
-                android:textColor="@color/blue" />
-
-        </LinearLayout>
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v4.view.ViewPager>
+            app:itemBinding="@{viewmodel.itemBinding}"
+            app:items="@{viewmodel.mItems}"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 

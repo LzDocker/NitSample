@@ -7,6 +7,7 @@ import com.docker.cirlev2.inter.frame.example.NitDefaultCircleFragment;
 import com.docker.cirlev2.inter.frame.example.CircleDetailFragmentTemple_HeaderImg;
 import com.docker.cirlev2.inter.frame.example.CircleDetailFragmentTemple_HeaderNone;
 import com.docker.cirlev2.ui.CircleInfoActivity;
+import com.docker.cirlev2.ui.PersonInfoActivity;
 import com.docker.cirlev2.ui.common.CircleCoverActivity;
 import com.docker.cirlev2.ui.common.CircleCovertFragment;
 import com.docker.cirlev2.ui.common.CircleSourceUpFragment;
@@ -265,7 +266,8 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleShoppingCarListActivity contributeCircleShoppingCarListActivityInjector();
 
-   ;
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract PersonInfoActivity contributePersonInfoActivityInjector();
 
 
 

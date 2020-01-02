@@ -21,6 +21,7 @@ import com.docker.cirlev2.vo.entity.CommentRstVo;
 import com.docker.cirlev2.vo.entity.CommentVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.StaPersionDetail;
+import com.docker.cirlev2.vo.vo.ShoppingCarItemVo;
 import com.docker.cirlev2.vo.vo.ShoppingCarVo;
 import com.docker.common.BR;
 import com.docker.common.common.router.AppRouter;
@@ -46,24 +47,18 @@ import javax.inject.Inject;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class CircleShoppingCarViewModel extends NitCommonContainerViewModel {
+public class CircleShoppingViewModel extends NitCommonContainerViewModel {
 
 
     @Inject
     CircleApiService circleApiService;
 
-    private AudioPlayerUtils playerUtils;
 
     @Inject
-    public CircleShoppingCarViewModel() {
+    public CircleShoppingViewModel() {
 
     }
 
-    public CommentVo TopCommentVo;
-
-    public void setTopCommon(CommentVo TopCommentVo) {
-        this.TopCommentVo = TopCommentVo;
-    }
 
     @Override
     public void loadData() {
@@ -104,8 +99,6 @@ public class CircleShoppingCarViewModel extends NitCommonContainerViewModel {
         observableServiceDataBeanList.set(serviceDataBeanList);
         shoppingCarVo.setServiceDataBean(observableServiceDataBeanList);
         shoppingCarVo.setServiceDataBean(observableServiceDataBeanList);
-
-
         shoppingCarVoList.add(shoppingCarVo);
 
 
@@ -166,6 +159,36 @@ public class CircleShoppingCarViewModel extends NitCommonContainerViewModel {
             }
 
         }
+
+    }
+
+    public void reduceNumClick(ServiceDataBean item, View view) {
+        String id = "111";
+        for (int i = 0; i < mItems.size(); i++) {
+            ShoppingCarVo shoppingCarVo = (ShoppingCarVo) mItems.get(i);
+            String innerId = shoppingCarVo.getId();
+            if (id.equals(innerId)) {
+
+
+                ObservableField<List<ServiceDataBean>> serviceDataBeanList = shoppingCarVo.getServiceDataBean();
+                List<ServiceDataBean> serviceDataBeans = serviceDataBeanList.get();
+                for (int j = 0; j < serviceDataBeans.size(); j++) {
+                    ServiceDataBean serviceDataBean = serviceDataBeans.get(j);
+                    String dynamicid = serviceDataBean.getDynamicid();
+
+
+
+
+
+
+                }
+            }
+        }
+
+    }
+
+    public void addNumClick(ServiceDataBean item, View view) {
+
 
     }
 

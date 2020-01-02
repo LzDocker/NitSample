@@ -16,7 +16,7 @@
 
         <variable
             name="viewmodel"
-            type="com.docker.cirlev2.vm.CircleShoppingCarViewModel" />
+            type="com.docker.cirlev2.vm.CircleShoppingViewModel" />
 
     </data>
 

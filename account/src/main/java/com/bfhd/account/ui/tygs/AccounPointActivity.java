@@ -1,11 +1,9 @@
 package com.bfhd.account.ui.tygs;
 
-import android.accounts.Account;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -14,10 +12,6 @@ import com.bfhd.account.databinding.AccountActivityRewardBinding;
 import com.bfhd.account.vm.card.AccountPointRecycleViewModel;
 import com.bfhd.account.vo.tygs.AccountEarnHeadVo;
 import com.bfhd.account.vo.tygs.AccountPointHeadVo;
-import com.bfhd.account.vo.tygs.AccountRewardHeadVo;
-import com.docker.cirlev2.vm.CircleShoppingCarViewModel;
-import com.docker.cirlev2.vo.entity.CircleTitlesVo;
-import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
@@ -26,13 +20,7 @@ import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.NitEmptyViewModel;
-import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.common.widget.indector.CommonIndector;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 

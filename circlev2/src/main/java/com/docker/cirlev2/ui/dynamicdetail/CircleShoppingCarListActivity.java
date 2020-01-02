@@ -5,22 +5,15 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.dcbfhd.utilcode.utils.KeyboardUtils;
-import com.dcbfhd.utilcode.utils.LogUtils;
 import com.docker.cirlev2.R;
-import com.docker.cirlev2.databinding.Circlev2ActivityCircleReplyListBinding;
 import com.docker.cirlev2.databinding.Circlev2ActivityCircleShoppingCarListBinding;
-import com.docker.cirlev2.vm.CircleCommentListViewModel;
-import com.docker.cirlev2.vm.CircleShoppingCarViewModel;
+import com.docker.cirlev2.vm.CircleShoppingViewModel;
 import com.docker.cirlev2.vo.entity.CommentVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.command.NitDelegetCommand;
@@ -29,16 +22,8 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.utils.SoftKeyBroadManager;
-import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.common.widget.refresh.api.RefreshLayout;
-import com.docker.common.common.widget.refresh.listener.OnLoadMoreListener;
-import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
-
-import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -46,7 +31,7 @@ import javax.inject.Inject;
  *  购物车列表
  * */
 @Route(path = AppRouter.CIRCLE_shopping_car)
-public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShoppingCarViewModel, Circlev2ActivityCircleShoppingCarListBinding> {
+public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShoppingViewModel, Circlev2ActivityCircleShoppingCarListBinding> {
 
     @Inject
     ViewModelProvider.Factory factory;
@@ -73,8 +58,8 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
     }
 
     @Override
-    public CircleShoppingCarViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(CircleShoppingCarViewModel.class);
+    public CircleShoppingViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(CircleShoppingViewModel.class);
     }
 
     @Override
@@ -125,13 +110,13 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
         NitDelegetCommand nitDelegetCommand = new NitDelegetCommand() {
             @Override
             public Class providerOuterVm() {
-                return CircleShoppingCarViewModel.class;
+                return CircleShoppingViewModel.class;
             }
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 outerVm = commonListVm;
-                mBinding.setViewmodel((CircleShoppingCarViewModel) commonListVm);
+                mBinding.setViewmodel((CircleShoppingViewModel) commonListVm);
             }
         };
         return nitDelegetCommand;

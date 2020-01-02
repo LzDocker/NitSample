@@ -39,6 +39,7 @@
                     android:drawableTop="@mipmap/account_sent"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="我的主页"
                     android:textColor="#000000"
                     android:textSize="12sp" />
@@ -102,6 +103,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:id="@+id/tv_order"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -114,37 +116,40 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tv_mine_circle"
+                    android:id="@+id/tv_mine_branch"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/account_home"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="我的分部"
                     android:textColor="#000"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tv_activie_name"
+                    android:id="@+id/tv_activie_reg"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/account_wd_jfsc"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="活动报名"
                     android:textColor="#000"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tv_active"
+                    android:id="@+id/tv_active_manager"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableTop="@mipmap/account_custom"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="活动管理"
                     android:textColor="#000"
                     android:textSize="12sp" />

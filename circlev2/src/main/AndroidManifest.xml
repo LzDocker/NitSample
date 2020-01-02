@@ -39,6 +39,7 @@
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProListActivity"></activity>
         <activity android:name=".ui.CircleInfoActivity"></activity>
         <activity android:name=".ui.dynamicdetail.CircleShoppingCarListActivity"></activity>
+        <activity android:name=".ui.PersonInfoActivity"></activity>
 
         <activity
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity"

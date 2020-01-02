@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.bfhd.account.vo.tygs.FansVo" />
+            type="com.bfhd.account.vo.tygs.InvatationVo" />
 
         <import type="com.bfhd.circle.base.Constant" />
 
@@ -55,74 +55,31 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_cc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_name"
-                android:layout_marginTop="5dp"
-                android:text="@{item.fansNum}"
-                android:textColor="#666"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_name"
-                android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/tv_cc"
-                android:text="粉丝"
-                android:textColor="#666"
-                android:textSize="13sp" />
-
-
-            <TextView
                 android:id="@+id/tv_alerFocus"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/account_attention_no_shape"
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="已关注"
+                android:text="已邀请"
                 android:textColor="#666"
                 android:textSize="14.5sp"
                 app:visibleGone="@{item.isFocus == 1}" />
 
-
             <TextView
-                android:id="@+id/tv_Focu"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/account_attention_shape"
                 android:gravity="center"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="关注"
-                android:textColor="@color/white"
-                android:textSize="14.5sp"
-                app:visibleGone="@{item.isFocus == 0}" />
-
-            <TextView
-                android:id="@+id/tv_each_Focus"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:background="@drawable/account_attention_no_shape"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:text="互相关注"
+                android:text="已完成"
                 android:textColor="#666"
                 android:textSize="14.5sp"
-                app:visibleGone="@{item.isFocus == 2}" />
-
-
+                app:visibleGone="@{item.isFocus == 1}" />
         </RelativeLayout>
     </LinearLayout>
 

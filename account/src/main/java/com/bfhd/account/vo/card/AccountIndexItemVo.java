@@ -41,15 +41,30 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
         if (view.getId() == R.id.tv_isent) {
         }
         if (view.getId() == R.id.tv_iattend) {//我关注的
-            ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_LISt).withString("type","attention").navigation();
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_LISt).withString("type", "attention").navigation();
 
         }
 
         if (view.getId() == R.id.tv_fans) {//我的粉丝
-            ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_LISt).withString("type","fans").navigation();
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ATTEN_LISt).withString("type", "fans").navigation();
 
         }
+        if (view.getId() == R.id.tv_mine_page) {
+            ARouter.getInstance().build(AppRouter.CIRCLE_person_info).navigation();
+        }
+        if (view.getId() == R.id.tv_mine_branch) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_BRANCH_LIST).navigation();
+        }
 
+        if (view.getId() == R.id.tv_activie_reg) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ACT_REGIST_LIST).navigation();
+        }
+        if (view.getId() == R.id.tv_active_manager) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ACT_MANAGER_LIST).navigation();
+        }
+        if (view.getId() == R.id.tv_order) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_ORDER_LIST).navigation();
+        }
 
         if (view.getId() == R.id.tv_ipay) {
         }

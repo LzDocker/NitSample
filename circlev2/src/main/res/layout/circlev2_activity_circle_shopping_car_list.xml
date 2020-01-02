@@ -11,12 +11,13 @@
             name="item"
             type="com.docker.cirlev2.vo.vo.ShoppingCarVo" />
 
+        <import type="com.docker.cirlev2.R" />
 
         <import type="com.docker.cirlev2.util.BdUtils" />
 
         <variable
             name="viewmodel"
-            type="com.docker.cirlev2.vm.CircleShoppingCarViewModel" />
+            type="com.docker.cirlev2.vm.CircleShoppingViewModel" />
 
     </data>
 
@@ -62,7 +63,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@mipmap/circle_icon_jb" />
+                        android:src="@{item.select== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
 
                     <TextView
                         android:layout_width="wrap_content"

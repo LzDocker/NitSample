@@ -22,11 +22,14 @@ public class AppRouter {
     public static final String ACCOUNT_COUNTRY = AccountGroup + "country";
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
+    public static final String ACCOUNT_BRANCH_LIST = AccountGroup + "attention_branch_list";
+    public static final String ACCOUNT_ACT_REGIST_LIST = AccountGroup + "ACCOUNT_ACT_REGIST_LIST";
+    public static final String ACCOUNT_ACT_MANAGER_LIST = AccountGroup + "ACCOUNT_ACT_MANAGER_LIST";
+    public static final String ACCOUNT_ORDER_LIST = AccountGroup + "ACCOUNT_ORDER_LIST";
 
     public static final String ACCOUNT_reward = AccountGroup + "account_reward";
     public static final String ACCOUNT_point = AccountGroup + "account_point";
     public static final String ACCOUNT_invitation = AccountGroup + "account_invitation";
-
 
 
     /*
@@ -97,6 +100,7 @@ public class AppRouter {
     public static final String CIRCLE_comment_v2_reply = CircleV2Group + "CIRCLE_comment_v2_reply";
     public static final String CIRCLE_more_comment_v2_reply = CircleV2Group + "CIRCLE_more_comment_v2_reply";
     public static final String CIRCLE_shopping_car = CircleV2Group + "CIRCLE_shopping_car";
+    public static final String CIRCLE_person_info = CircleV2Group + "CIRCLE_person_info";
 
     public static final String CIRCLE_comment_v2_ANSWER = CircleV2Group + "CIRCLE_comment_v2_ANSWER";
 
