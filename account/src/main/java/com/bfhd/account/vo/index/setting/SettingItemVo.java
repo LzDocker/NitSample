@@ -1,23 +1,16 @@
 package com.bfhd.account.vo.index.setting;
 
-import android.databinding.BaseObservable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
-import com.bfhd.account.ui.AccounSettingActivity;
-import com.bfhd.account.ui.AccountPersonInfoActivity;
-import com.bfhd.account.vm.AccountPersonInfoViewModel;
-import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.bfhd.account.vo.MyInfoVo;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.AppUtils;
 import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.CommonContainerOptions;
 import com.docker.common.common.model.CommonListOptions;
-import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.GlideCacheUtil;
 import com.docker.common.common.utils.cache.CacheUtils;
@@ -32,7 +25,6 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
 
     public SettingItemVo(int style, int position) {
         super(style, position);
-        maxSupport = 3;
         mVmPath = "com.bfhd.account.vm.AccountSettingViewModel";
     }
 
@@ -56,8 +48,7 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
         }
 
         if (view.getId() == R.id.ll_address) { //地址管理
-            ARouter.getInstance().build(AppRouter.COMMON_address_list)
-                    .navigation();
+            ARouter.getInstance().build(AppRouter.COMMON_address_list).navigation();
         }
 
         if (view.getId() == R.id.ll_chache_clear) { //清除缓存
@@ -86,8 +77,10 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
 
     private void clearChahe() {
         GlideCacheUtil.getInstance().clearImageDiskCache(ActivityUtils.getTopActivity(), () -> {
-//            mBinding.tvChacheClear.setText(GlideCacheUtil.getInstance().getCacheSize(this) + "");
+            cacheSize = "0kb";
+            notifyChange();
         });
-
     }
+
+    public String cacheSize = GlideCacheUtil.getInstance().getCacheSize(ActivityUtils.getTopActivity());
 }

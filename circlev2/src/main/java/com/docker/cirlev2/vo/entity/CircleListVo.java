@@ -6,10 +6,8 @@ import android.text.TextUtils;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
-import com.docker.cirlev2.inter.CircleConfig;
-import com.docker.common.common.config.Constant;
+import com.docker.cirlev2.ui.detail.home.CircleConfig;
 import com.docker.common.common.model.BaseSampleItem;
-import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 

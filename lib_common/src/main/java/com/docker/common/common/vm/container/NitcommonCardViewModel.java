@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import javax.inject.Inject;
-
 public class NitcommonCardViewModel extends NitCommonListVm {
 
 

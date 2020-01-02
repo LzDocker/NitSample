@@ -389,7 +389,7 @@ public class CircleSourceUpFragment extends NitCommonFragment<SampleListViewMode
                         options.withMaxResultSize(mSourceUpParam.width, mSourceUpParam.height);
                         uCrop.withOptions(options).start(CircleSourceUpFragment.this.getHoldingActivity());
                     }
-
+                    
                 } else {
                     for (LocalMedia media : selectList) {
                         switch (PictureMimeType.pictureToVideo(media.getPictureType())) {

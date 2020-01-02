@@ -35,7 +35,7 @@
             android:name="com.docker.cirlev2.ui.detail.CircleEditTabActivity"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="com.docker.cirlev2.inter.DefaultCircleDetailIndexActivity"></activity>
-        <activity android:name="com.docker.cirlev2.inter.frame.NitAbsCircleDetailIndexActivity"></activity>
+        <activity android:name="com.docker.cirlev2.ui.detail.home.base.NitAbsCircleDetailIndexActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProListActivity"></activity>
         <activity android:name=".ui.CircleInfoActivity"></activity>
         <activity android:name=".ui.dynamicdetail.CircleShoppingCarListActivity"></activity>
@@ -46,7 +46,9 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name="com.docker.cirlev2.ui.pro.index.MutipartIndexActivity" />
+        <activity android:name="com.docker.cirlev2.ui.pro.index.active.ActiveIndexActivity" />
 
     </application>
 </manifest>

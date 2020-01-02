@@ -101,27 +101,12 @@ public class AppRouter {
     public static final String CIRCLE_more_comment_v2_reply = CircleV2Group + "CIRCLE_more_comment_v2_reply";
     public static final String CIRCLE_shopping_car = CircleV2Group + "CIRCLE_shopping_car";
     public static final String CIRCLE_person_info = CircleV2Group + "CIRCLE_person_info";
-
     public static final String CIRCLE_comment_v2_ANSWER = CircleV2Group + "CIRCLE_comment_v2_ANSWER";
-
     public static final String CIRCLE_DETAIL_v2_INDEX_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_default";
-
     public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";
     public static final String CIRCLE_DETAIL_v2_PRO_MANAGER = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER";
-
-    public static final String ProGroup = "/Pro/";
-
-    public static final String STUDY = ProGroup + "study";
-
-    public static final String Video_Pro_Training = ProGroup + "pro_video_player";
-
-    public static final String Pro_Country_select = ProGroup + "country_select";
-
-    public static final String Pro_Training_collect = ProGroup + "pro_training_collect";
-
-
-    public static final String HomeGroup = "/Home/";
-
+    public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
+    public static final String CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX";
 
     public static final String VIDEOGROUP = "/video/";
 
@@ -165,5 +150,20 @@ public class AppRouter {
     public static final String EVALUATE_DEMO = EVALUATE + "demo";
     public static final String EVALUATE_DETAIL = EVALUATE + "detail";
     public static final String EVALUATE_LESSON_LIST = EVALUATE + "lessonList";
+
+
+    public static final String ProGroup = "/Pro/";
+
+    public static final String STUDY = ProGroup + "study";
+
+    public static final String Video_Pro_Training = ProGroup + "pro_video_player";
+
+    public static final String Pro_Country_select = ProGroup + "country_select";
+
+    public static final String Pro_Training_collect = ProGroup + "pro_training_collect";
+
+
+    public static final String POINT_GROUP = ProGroup + "/point/";
+    public static final String POINT_SORT_INDEX = POINT_GROUP + "POINT_SORT_INDEX";
 
 }

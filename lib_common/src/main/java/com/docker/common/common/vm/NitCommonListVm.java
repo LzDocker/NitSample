@@ -79,7 +79,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public ObservableList<BaseItemModel> mItems = new ObservableArrayList<>();
     // 多类型条目适配
     public OnItemBind<BaseItemModel> mutipartItemsBinding = (ItemBinding itemBinding, int position, BaseItemModel item) -> {
-        if (item instanceof BaseSampleItem ) {
+        if (item instanceof BaseSampleItem) {
             ((BaseSampleItem) item).index = position;
         }
         itemBinding.set(BR.item, item.getItemLayout());
@@ -189,6 +189,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                             }
                         }
                         //
+
+
                         if (resource.data != null) {
                             mPage++;
                         }
@@ -286,7 +288,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public abstract BaseItemModel formatData(BaseItemModel data);
 
 
-
     public HashMap<Integer, BaseSampleItem> mCardTreeMap = new HashMap<>();
 
     public void addCardVo(BaseSampleItem sampleItem, int position, boolean isadd) {
@@ -298,9 +299,9 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
         if (mItems.size() == 0 && !loadingOV.get()) {
             loadData();
             if (servicefun == null) {
-                if(mItems.size()>=position){
-                    mItems.add(position,sampleItem);
-                }else {
+                if (mItems.size() >= position) {
+                    mItems.add(position, sampleItem);
+                } else {
                     mItems.add(sampleItem);
                 }
                 i = 1;
@@ -308,17 +309,21 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                 if (mCardTreeMap.containsKey(position)) {
                     position++;
                     ((BaseCardVo) sampleItem).position = position;
+                    i = 2;
                 }
                 mCardTreeMap.put(position, sampleItem);
-                i = 2;
+
             }
         } else if (mItems.size() > 0 && servicefun != null) {
-            if (mItems.size() > position) {
+            if (mPage == 1 && !isadd) {
+                mCardTreeMap.put(position, sampleItem);
+            } else if (mItems.size() > position) {
                 mItems.add(position, sampleItem);
+                i = 32;
             } else {
                 mCardTreeMap.put(position, sampleItem);
+                i = 31;
             }
-            i = 3;
         } else {
             if (mItems.size() >= position && servicefun == null) {
                 mItems.add(position, sampleItem);

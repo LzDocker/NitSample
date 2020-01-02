@@ -1,4 +1,4 @@
-include ':app',
+include ':app', ':pro',
         ':social',
         ':lib_core',
         ':lib_utilcode',

@@ -61,6 +61,7 @@ public class NitBaseProviderCard {
         }
         if (baseCardVo.mCardVoLiveData == null) {
             baseCardVo.mCardVoLiveData = new MserialMedatorLv();
+            nitCommonListFragment.getLifecycle().addObserver(baseCardVo.mNitcommonCardViewModel);
         }
         outer.addCardVo(baseCardVo, baseCardVo.position, true);
         baseCardVo.mCardVoLiveData.observe(nitCommonListFragment, o -> {

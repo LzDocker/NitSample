@@ -1,12 +1,8 @@
 package com.bfhd.account.vo.index.setting;
 
-import android.databinding.BaseObservable;
 import android.view.View;
-
 import com.bfhd.account.R;
 import com.bfhd.account.vo.MyInfoVo;
-import com.docker.common.common.model.BaseItemModel;
-import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.vo.card.BaseCardVo;
 
 public class SettingPersonInfoVo extends BaseCardVo<MyInfoVo> {

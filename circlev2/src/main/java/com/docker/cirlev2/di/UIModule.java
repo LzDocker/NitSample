@@ -1,11 +1,11 @@
 package com.docker.cirlev2.di;
 
 
-import com.docker.cirlev2.inter.DefaultCircleDetailIndexActivity;
-import com.docker.cirlev2.inter.frame.NitAbsCircleDetailIndexActivity;
-import com.docker.cirlev2.inter.frame.example.NitDefaultCircleFragment;
-import com.docker.cirlev2.inter.frame.example.CircleDetailFragmentTemple_HeaderImg;
-import com.docker.cirlev2.inter.frame.example.CircleDetailFragmentTemple_HeaderNone;
+
+import com.docker.cirlev2.ui.detail.home.base.NitAbsCircleDetailIndexActivity;
+import com.docker.cirlev2.ui.detail.home.temp.defaults.NitDefaultCircleFragment;
+import com.docker.cirlev2.ui.detail.home.temp.defaults.CircleDetailFragmentTemple_HeaderImg;
+import com.docker.cirlev2.ui.detail.home.temp.defaults.CircleDetailFragmentTemple_HeaderNone;
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.PersonInfoActivity;
 import com.docker.cirlev2.ui.common.CircleCoverActivity;
@@ -44,6 +44,9 @@ import com.docker.cirlev2.ui.persion.CirclePersonDetailActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.ui.persion.CirclePersonPerssionActivity;
 import com.docker.cirlev2.ui.pro.CircleProListActivity;
+import com.docker.cirlev2.ui.pro.index.MutipartIndexActivity;
+import com.docker.cirlev2.ui.pro.index.active.ActiveContainerFragment;
+import com.docker.cirlev2.ui.pro.index.active.ActiveIndexActivity;
 import com.docker.cirlev2.ui.publish.CirclePubActiveFragment;
 import com.docker.cirlev2.ui.publish.CirclePubNewsFragment;
 import com.docker.cirlev2.ui.publish.CirclePubRequestionFragment;
@@ -237,9 +240,6 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleInfoActivity contributeCircleInfoActivityInjector();
 
-    @ActivityScope
-    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract DefaultCircleDetailIndexActivity contributeDefaultCircleDetailIndexActivityInjector();
 
 
     @ActivityScope
@@ -260,14 +260,26 @@ public abstract class UIModule {
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract CircleProListActivity contributeCircleProListActivityInjector();@ActivityScope
+    abstract CircleProListActivity contributeCircleProListActivityInjector();
 
-
+    @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleShoppingCarListActivity contributeCircleShoppingCarListActivityInjector();
 
+
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract PersonInfoActivity contributePersonInfoActivityInjector();
+
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract MutipartIndexActivity contributeMutipartIndexActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveContainerFragment contributeActiveContainerFragmentInjector();
+
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveIndexActivity contributeActiveIndexActivityInjector();
 
 
 

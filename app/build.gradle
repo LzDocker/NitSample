@@ -101,4 +101,5 @@ dependencies {
     api project(":message")
     api project(":circlev2")
     api project(":evaluate")
+    api project(':pro')
 }

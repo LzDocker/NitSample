@@ -17,6 +17,7 @@ import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
@@ -40,7 +41,7 @@ import io.reactivex.disposables.Disposable;
 
 import static com.docker.common.common.router.AppRouter.HOME;
 
-@Route(path = HOME)
+//@Route(path = HOME)
 public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject
@@ -69,6 +70,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
 

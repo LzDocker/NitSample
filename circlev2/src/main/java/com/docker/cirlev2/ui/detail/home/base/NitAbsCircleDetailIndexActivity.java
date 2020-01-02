@@ -1,23 +1,24 @@
-package com.docker.cirlev2.inter.frame;
+package com.docker.cirlev2.ui.detail.home.base;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2NitAbsDetailIndexActivityBinding;
-import com.docker.cirlev2.inter.CircleConfig;
-import com.docker.cirlev2.inter.frame.example.NitDefaultCircleFragment;
+import com.docker.cirlev2.ui.detail.home.CircleConfig;
+import com.docker.cirlev2.ui.detail.home.temp.defaults.NitDefaultCircleFragment;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.vm.NitEmptyViewModel;
 
 /*
- * 圈子详情抽象
+ * 圈子详情
  * */
 @Route(path = AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
 public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyViewModel, Circlev2NitAbsDetailIndexActivityBinding> {
@@ -79,7 +80,12 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
                 fragment = NitDefaultCircleFragment.getInstance(circleConfig);
                 break;
             default:
-                fragment = NitDefaultCircleFragment.getInstance(circleConfig);
+                if (circleConfig != null && circleConfig.extens.size() > 0 && !TextUtils.isEmpty(circleConfig.extens.get("fmrouter"))) {
+                    fragment = (Fragment) ARouter.getInstance().build(circleConfig.extens.get("fmrouter")).navigation();
+                } else {
+                    fragment = NitDefaultCircleFragment.getInstance(circleConfig);
+                }
+
                 break;
         }
         FragmentUtils.add(getSupportFragmentManager(), fragment, R.id.frame_circle_detail);

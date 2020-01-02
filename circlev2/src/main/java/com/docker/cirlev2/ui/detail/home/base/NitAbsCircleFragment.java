@@ -1,4 +1,4 @@
-package com.docker.cirlev2.inter.frame;
+package com.docker.cirlev2.ui.detail.home.base;
 
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
@@ -12,6 +12,7 @@ import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.detail.CircleEditTabActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
+import com.docker.cirlev2.ui.detail.home.base.AbsCircleDetailIndexViewModel;
 import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
