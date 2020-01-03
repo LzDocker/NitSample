@@ -87,30 +87,7 @@ public class AccounCollectActivity extends NitCommonActivity<NitCommonContainerV
 
     }
 
-    @Override
-    public NitDelegetCommand providerNitDelegetCommand(int flag) {
-        NitDelegetCommand nitDelegetCommand = null;
-        switch (flag) {
-            case 0:
-            case 1:
-            case 2:
-                nitDelegetCommand = new NitDelegetCommand() {
-                    @Override
-                    public Class providerOuterVm() {
-                        return AccountOrderViewModel.class;
-                    }
 
-                    @Override
-                    public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                    }
-                };
-                break;
-
-        }
-
-
-        return nitDelegetCommand;
-    }
 
 
     @Override
