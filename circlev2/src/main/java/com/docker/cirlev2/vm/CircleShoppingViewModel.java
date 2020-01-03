@@ -168,19 +168,17 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
             ShoppingCarVo shoppingCarVo = (ShoppingCarVo) mItems.get(i);
             String innerId = shoppingCarVo.getId();
             if (id.equals(innerId)) {
-
-
                 ObservableField<List<ServiceDataBean>> serviceDataBeanList = shoppingCarVo.getServiceDataBean();
                 List<ServiceDataBean> serviceDataBeans = serviceDataBeanList.get();
                 for (int j = 0; j < serviceDataBeans.size(); j++) {
                     ServiceDataBean serviceDataBean = serviceDataBeans.get(j);
                     String dynamicid = serviceDataBean.getDynamicid();
-
-
-
-
-
-
+                    if (dynamicid.equals(item.getDynamicid())) {
+                        if (item.getNum() > 0) {
+                            item.setNum(item.getNum() - 1);
+                            item.notifyPropertyChanged(BR.num);
+                        }
+                    }
                 }
             }
         }
@@ -188,6 +186,23 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
     }
 
     public void addNumClick(ServiceDataBean item, View view) {
+        String id = "111";
+        for (int i = 0; i < mItems.size(); i++) {
+            ShoppingCarVo shoppingCarVo = (ShoppingCarVo) mItems.get(i);
+            String innerId = shoppingCarVo.getId();
+            if (id.equals(innerId)) {
+                ObservableField<List<ServiceDataBean>> serviceDataBeanList = shoppingCarVo.getServiceDataBean();
+                List<ServiceDataBean> serviceDataBeans = serviceDataBeanList.get();
+                for (int j = 0; j < serviceDataBeans.size(); j++) {
+                    ServiceDataBean serviceDataBean = serviceDataBeans.get(j);
+                    String dynamicid = serviceDataBean.getDynamicid();
+                    if (dynamicid.equals(item.getDynamicid())) {
+                        item.setNum(item.getNum() + 1);
+                        item.notifyPropertyChanged(BR.num);
+                    }
+                }
+            }
+        }
 
 
     }

@@ -184,6 +184,11 @@
             android:name=".ui.tygs.AccounOrderListActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.tygs.AccounCollectActivity"
+            android:screenOrientation="portrait" />
+
+
 
     </application>
 

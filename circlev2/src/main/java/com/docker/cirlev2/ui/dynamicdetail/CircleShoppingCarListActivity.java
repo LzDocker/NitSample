@@ -85,8 +85,6 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
                 mBinding.tvAccount.setVisibility(View.VISIBLE);
                 mBinding.tvDelete.setVisibility(View.GONE);
             }
-
-
         });
 
 //        mBinding.recycle.setAdapter(adapter);

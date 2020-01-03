@@ -27,6 +27,7 @@ public class AppRouter {
     public static final String ACCOUNT_ACT_REGIST_LIST = AccountGroup + "ACCOUNT_ACT_REGIST_LIST";
     public static final String ACCOUNT_ACT_MANAGER_LIST = AccountGroup + "ACCOUNT_ACT_MANAGER_LIST";
     public static final String ACCOUNT_ORDER_LIST = AccountGroup + "ACCOUNT_ORDER_LIST";
+    public static final String ACCOUNT_COLLECT_LIST = AccountGroup + "ACCOUNT_COLLECT_LIST";
 
     public static final String ACCOUNT_reward = AccountGroup + "account_reward";
     public static final String ACCOUNT_point = AccountGroup + "account_point";
