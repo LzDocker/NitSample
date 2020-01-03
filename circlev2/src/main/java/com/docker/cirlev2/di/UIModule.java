@@ -1,10 +1,5 @@
 package com.docker.cirlev2.di;
 
-import com.docker.cirlev2.ui.detail.CircleAddTabActivity;
-import com.docker.cirlev2.ui.detail.index.base.NitAbsCircleDetailIndexActivity;
-import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
-import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderImg;
-import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderNone;
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.PersonInfoActivity;
 import com.docker.cirlev2.ui.common.CircleCoverActivity;
@@ -15,11 +10,16 @@ import com.docker.cirlev2.ui.create.CircleCompanyFragment;
 import com.docker.cirlev2.ui.create.CircleConutryFragment;
 import com.docker.cirlev2.ui.create.CircleCreateActivity;
 import com.docker.cirlev2.ui.create.CircleCreateIndexActivity;
+import com.docker.cirlev2.ui.detail.CircleAddTabActivity;
 import com.docker.cirlev2.ui.detail.CircleDetailIndexActivity;
 import com.docker.cirlev2.ui.detail.CircleEditMemberGroupActivity;
 import com.docker.cirlev2.ui.detail.CircleEditTabActivity;
 import com.docker.cirlev2.ui.detail.CircleGroupListActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
+import com.docker.cirlev2.ui.detail.index.base.NitAbsCircleDetailIndexActivity;
+import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderImg;
+import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderNone;
+import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
 import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity;
@@ -46,8 +46,6 @@ import com.docker.cirlev2.ui.pro.CircleProInfoActivity;
 import com.docker.cirlev2.ui.pro.CircleProListActivity;
 import com.docker.cirlev2.ui.pro.CircleProManagerActivity;
 import com.docker.cirlev2.ui.pro.index.MutipartIndexActivity;
-import com.docker.cirlev2.ui.pro.index.active.ActiveContainerFragment;
-import com.docker.cirlev2.ui.pro.index.active.ActiveIndexActivity;
 import com.docker.cirlev2.ui.publish.CirclePubActiveFragment;
 import com.docker.cirlev2.ui.publish.CirclePubNewsFragment;
 import com.docker.cirlev2.ui.publish.CirclePubRequestionFragment;
@@ -269,20 +267,11 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleShoppingCarListActivity contributeCircleShoppingCarListActivityInjector();
 
-
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract PersonInfoActivity contributePersonInfoActivityInjector();
 
-
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract MutipartIndexActivity contributeMutipartIndexActivityInjector();
-
-    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract ActiveContainerFragment contributeActiveContainerFragmentInjector();
-
-
-    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract ActiveIndexActivity contributeActiveIndexActivityInjector();
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleAddTabActivity contributeCircleAddTabActivityInjector();

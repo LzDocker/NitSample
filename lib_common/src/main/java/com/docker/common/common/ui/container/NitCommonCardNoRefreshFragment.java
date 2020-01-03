@@ -62,5 +62,6 @@ public class NitCommonCardNoRefreshFragment extends NitCommonListNoRefreshFragme
     @Override
     public void onVisible() {
         super.onVisible();
+        mViewModel.onCardFrameVisible();
     }
 }

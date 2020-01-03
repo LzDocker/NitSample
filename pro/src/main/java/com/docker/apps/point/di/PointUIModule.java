@@ -2,6 +2,7 @@ package com.docker.apps.point.di;
 
 
 import com.docker.apps.point.ui.index.PointSortActivity;
+import com.docker.apps.point.ui.index.PointSortCoutainerFragment;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
@@ -14,6 +15,10 @@ public abstract class PointUIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract PointSortActivity contributePointSortActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract PointSortCoutainerFragment contributePointSortCoutainerFragmentInjector();
 
 
 }

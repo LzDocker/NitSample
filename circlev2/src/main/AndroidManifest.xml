@@ -48,7 +48,6 @@
             android:name="com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="com.docker.cirlev2.ui.pro.index.MutipartIndexActivity" />
-        <activity android:name="com.docker.cirlev2.ui.pro.index.active.ActiveIndexActivity" />
         <activity android:name="com.docker.cirlev2.ui.detail.CircleAddTabActivity" />
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProManagerActivity" />
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProInfoActivity" />

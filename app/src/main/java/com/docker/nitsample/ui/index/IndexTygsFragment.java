@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
@@ -15,6 +16,7 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
@@ -113,9 +115,11 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
             ARouter.getInstance().build(AppRouter.App_SEARCH_index_TYGS).withString("t", "-1").navigation();
         });
 
-//        mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
-////            outerVm.onJustRefresh();
-//        });
+        mBinding.get().refresh.setEnableLoadMore(false);
+        mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
+            outerVm.onJustRefresh();
+            ((CircleDynamicCoutainerFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).onReFresh(mBinding.get().refresh);
+        });
     }
 
     @Override

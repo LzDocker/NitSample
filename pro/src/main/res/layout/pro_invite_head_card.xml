@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+        <variable
+            name="item"
+            type="com.docker.apps.intvite.vo.card.InviteHeadCardVo" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp">
+
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_inv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/invite_top_bg" />
+
+            <FrameLayout
+                android:id="@+id/fr_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}">
+
+                <View
+                    android:layout_width="140dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="-25dp"
+                    android:alpha=".3"
+                    android:background="@drawable/invite_ovl_black_shape" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:drawableRight="@mipmap/arrow_right"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="10dp"
+                    android:text="规则说明"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+            </FrameLayout>
+
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frame"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginRight="14dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha=".3"
+                android:background="@drawable/invite_ovl_black_shape" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="14dp"
+                    android:src="@mipmap/invite_people" />
+
+                <ViewFlipper
+                    android:id="@+id/viewfliper"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    app:flipper="@{item.sampleName}" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

@@ -35,47 +35,12 @@ public class PointSortActivity extends NitCommonActivity<NitEmptyViewModel, ProP
 
     @Override
     public void initView() {
+        mToolbar.setTitle("积分榜");
         String titles[] = new String[]{"总积分排行榜", "购买排行榜", "拓客排行榜"};
 
-
-        CommonListOptions commonListOptions = new CommonListOptions();
-        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-        commonListOptions.isActParent = true;
-        commonListOptions.falg = 0;
-        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions.ReqParam.put("t", "goods");
-        commonListOptions.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions.ReqParam.put("memberid", "64");
-        commonListOptions.ReqParam.put("companyid", "1");
-
-        NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
-        fragments.add(nitCommonContainerFragmentV2);
-
-
-        CommonListOptions commonListOptions1 = new CommonListOptions();
-        commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
-        commonListOptions1.isActParent = true;
-        commonListOptions1.falg = 1;
-        commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions1.ReqParam.put("t", "goods");
-        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions1.ReqParam.put("memberid", "64");
-        commonListOptions1.ReqParam.put("companyid", "1");
-        NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
-        fragments.add(nitCommonContainerFragmentV21);
-
-
-        CommonListOptions commonListOptions2 = new CommonListOptions();
-        commonListOptions2.RvUi = Constant.KEY_RVUI_LINER;
-        commonListOptions2.isActParent = true;
-        commonListOptions2.falg = 2;
-        commonListOptions2.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions2.ReqParam.put("t", "goods");
-        commonListOptions2.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions2.ReqParam.put("memberid", "64");
-        commonListOptions2.ReqParam.put("companyid", "1");
-        NitCommonContainerFragmentV2 nitCommonContainerFragmentV22 = NitCommonContainerFragmentV2.newinstance(commonListOptions2);
-        fragments.add(nitCommonContainerFragmentV22);
+        fragments.add(PointSortCoutainerFragment.getInstance());
+        fragments.add(PointSortCoutainerFragment.getInstance());
+        fragments.add(PointSortCoutainerFragment.getInstance());
 
         mBinding.viewpager.setOffscreenPageLimit(3);
 

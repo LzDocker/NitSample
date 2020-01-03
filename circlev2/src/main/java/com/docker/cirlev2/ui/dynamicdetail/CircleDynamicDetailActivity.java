@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_A
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
 import static com.docker.common.common.router.AppRouter.CIRCLE_dynamic_v2_detail;
+
 //todo/*
 // 扩展为个应用内自己处理详情content head默认共享，footer如需扩展在应用内实现 统一入口，降低耦合
 // */
@@ -316,6 +318,8 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         if (mDynamicDetailVo != null) {
             switch (mDynamicDetailVo.getType()) {
                 case "goods":
+//                    Fragment frag = (Fragment) ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL).withSerializable("config", mDynamicDetailVo).navigation();
+//                    FragmentUtils.add(getSupportFragmentManager(), frag, R.id.frame_content);
                     FragmentUtils.add(getSupportFragmentManager(), DynamicH5Fragment.getInstance(mDynamicDetailVo), R.id.frame_content);
                     break;
                 case "news":
@@ -324,6 +328,10 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                 case "dynamic":
                 case "answer":
                     FragmentUtils.add(getSupportFragmentManager(), DynamicDetailFragment.getInstance(mDynamicDetailVo), R.id.frame_content);
+                    break;
+                case "active":
+                    Fragment fragment = (Fragment) ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL).withSerializable("config", mDynamicDetailVo).navigation();
+                    FragmentUtils.add(getSupportFragmentManager(), fragment, R.id.frame_content);
                     break;
             }
         }

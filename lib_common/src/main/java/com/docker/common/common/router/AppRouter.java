@@ -109,7 +109,6 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_PRO_INFO = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER_info";
 
     public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
-    public static final String CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX";
 
     public static final String VIDEOGROUP = "/video/";
 
@@ -168,5 +167,16 @@ public class AppRouter {
 
     public static final String POINT_GROUP = ProGroup + "/point/";
     public static final String POINT_SORT_INDEX = POINT_GROUP + "POINT_SORT_INDEX";
+
+    public static final String ACTIVE_GROUP = ProGroup + "/active/";
+    public static final String ACTIVE_INDEX = ACTIVE_GROUP + "ACTIVE_INDEX";
+    public static final String ACTIVE_DEATIL = ACTIVE_GROUP + "ACTIVE_DEATIL";
+    public static final String ACTIVE_SUCC = ACTIVE_GROUP + "ACTIVE_SUCC";
+    public static final String ACTIVE_RESULT = ACTIVE_GROUP + "ACTIVE_RESULT";
+
+    public static final String INVITE_GROUP = ProGroup + "/invite/";
+    public static final String INVITE_INDEX = INVITE_GROUP + "INVITE_INDEX";
+    public static final String INVITE_INDEX_CODE_SCAN = INVITE_GROUP + "INVITE_INDEX_CODE_SCAN";
+
 
 }

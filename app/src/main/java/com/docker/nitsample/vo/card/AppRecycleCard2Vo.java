@@ -50,10 +50,13 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
 
                 break;
             case "沙龙·活动":
-                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX).navigation();
+                ARouter.getInstance().build(AppRouter.ACTIVE_INDEX).navigation();
                 break;
             case "积分榜":
                 ARouter.getInstance().build(AppRouter.POINT_SORT_INDEX).navigation();
+                break;
+            case "邀人·推广":
+                ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
                 break;
         }
     }
@@ -91,7 +94,7 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
         ItemVo itemVo3 = new ItemVo((R.mipmap.dzgl_true), "股东汇");
         ItemVo itemVo4 = new ItemVo((R.mipmap.dzgl_true), "购酒·优选");
         ItemVo itemVo5 = new ItemVo((R.mipmap.dzgl_true), "沙龙·活动");
-        ItemVo itemVo6 = new ItemVo((R.mipmap.dzgl_true), "积分·收益");
+        ItemVo itemVo6 = new ItemVo((R.mipmap.dzgl_true), "认知·课堂");
         ItemVo itemVo7 = new ItemVo((R.mipmap.dzgl_true), "邀人·推广");
         ArrayList<ItemVo> arrayList = new ArrayList();
         arrayList.add(itemVo);

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:drawableLeft="@mipmap/active_result"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:text="恭喜您成功提交申请！"
+            android:textColor="#333"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tv_look_card"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="请等待舵主审核，可以在活动报名中查看审核结果"
+            android:textColor="#333"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_other"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/active_ovl_red_shape"
+                android:gravity="center"
+                android:text="浏览其他活动"
+                android:textColor="@color/common_white"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/tv_mine_active"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/open_gry_bg_shape"
+                android:gravity="center"
+                android:text="查看我的活动"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

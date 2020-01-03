@@ -9,6 +9,7 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.container.NitCommonCardFragment;
+import com.docker.common.common.ui.container.NitCommonCardNoRefreshFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
@@ -75,7 +76,7 @@ public class MainTygsModule {
         commonListOptions3.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions3.refreshState = Constant.KEY_REFRESH_PURSE;
         commonListOptions3.externs.put("NeedVisibleRefresh", "yes");
-        NitCommonCardFragment nitCommonCardFragment = NitCommonCardFragment.newinstance(commonListOptions3);
+        NitCommonCardNoRefreshFragment nitCommonCardFragment = NitCommonCardNoRefreshFragment.newinstance(commonListOptions3);
         fragments.add(nitCommonCardFragment);
 
 //        // 框架index     SampleListViewModel

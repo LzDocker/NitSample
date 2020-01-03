@@ -5,6 +5,11 @@
 
 
         <activity android:name=".point.ui.index.PointSortActivity" />
+        <activity android:name="com.docker.apps.active.ui.index.ActiveIndexActivity" />
+        <activity android:name="com.docker.apps.intvite.ui.index.InviteIndexActivity" />
+        <activity android:name="com.docker.apps.intvite.ui.index.InviteCodeScanActivity" />
+        <activity android:name="com.docker.apps.active.ui.detail.ActiveSuccActivity" />
+        <activity android:name="com.docker.apps.active.ui.detail.ActiveResultActivity" />
 
     </application>
 
