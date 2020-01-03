@@ -1,5 +1,7 @@
 package com.docker.cirlev2.vo.pro;
 
+import android.databinding.Bindable;
+
 import com.docker.cirlev2.R;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
@@ -14,6 +16,17 @@ public class AppVo extends BaseSampleItem {
     public String id;
 
     public String icon;
+
+    @Bindable
+    public boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public boolean checked = false;
 
 
     @Override

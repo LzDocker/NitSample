@@ -1,4 +1,4 @@
-package com.docker.cirlev2.ui.detail.home.temp.defaults;
+package com.docker.cirlev2.ui.detail.index.temp.defaults;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
@@ -17,8 +17,9 @@ import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2DefaultDetailIndexFragmentBinding;
-import com.docker.cirlev2.ui.detail.home.CircleConfig;
-import com.docker.cirlev2.ui.detail.home.base.NitAbsCircleFragment;
+import com.docker.cirlev2.ui.CircleInfoActivity;
+import com.docker.cirlev2.ui.detail.index.CircleConfig;
+import com.docker.cirlev2.ui.detail.index.base.NitAbsCircleFragment;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
@@ -113,9 +114,25 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         super.onActivityCreated(savedInstanceState);
         mBinding.get().setViewmodel(mViewModel);
 
-        if (TextUtils.isEmpty(circleConfig.extens.get("title"))) {
-            mBinding.get().toolbar.setVisibility(View.GONE);
+
+        if (circleConfig.isNeedIntroduce) {
+            mBinding.get().circleLlInfo.setVisibility(View.VISIBLE);
+            mBinding.get().circleLlInfo.setOnClickListener(v -> {
+                if (mViewModel.mCircleDetailLv.getValue() != null) {
+                    StaCirParam mStartParam = new StaCirParam();
+                    mStartParam.setCircleid(circleid);
+                    mStartParam.setUtid(utid);
+                    mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
+                    CircleInfoActivity.startMe(this.getHoldingActivity(), mStartParam);
+                }
+            });
         }
+
+        if (circleConfig.isNeedToobar) {
+            mBinding.get().toolbar.setVisibility(View.VISIBLE);
+            initAppBar();
+        }
+
     }
 
     @Override
@@ -130,8 +147,8 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 
     @Override
     protected void initView(View var1) {
-        initAppBar();
         initRefresh();
+
 
         mBinding.get().circlev2Edit.setOnClickListener(v -> {
             onLevel1EditClick();
@@ -160,16 +177,23 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 
     @Override
     public void initImmersionBar() {
-        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
+//        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
+//            ImmersionBar.with(this)
+//                    .navigationBarColor("#ffffff")
+//                    .statusBarDarkFont(true)
+//                    .titleBarMarginTop(mBinding.get().toolbar)
+//                    .init();
+//        } else {
+//
+//        }
+
+        if (circleConfig.isNeedToobar) {
             ImmersionBar.with(this)
                     .navigationBarColor("#ffffff")
                     .statusBarDarkFont(true)
                     .titleBarMarginTop(mBinding.get().toolbar)
                     .init();
-        } else {
-
         }
-
     }
 
     @Override

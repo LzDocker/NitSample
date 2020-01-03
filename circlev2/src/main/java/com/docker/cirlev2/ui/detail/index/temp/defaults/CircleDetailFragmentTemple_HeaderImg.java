@@ -1,37 +1,45 @@
-package com.docker.cirlev2.ui.detail.home.temp.defaults;
+package com.docker.cirlev2.ui.detail.index.temp.defaults;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
-import com.docker.cirlev2.vo.entity.CircleTitlesVo;
+import com.docker.cirlev2.vo.card.AppImgHeaderCardVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.pro.AppVo;
+import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.core.widget.BottomSheetDialog;
 import com.gyf.immersionbar.ImmersionBar;
 
-import java.util.List;
+public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragment {
 
-public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragment {
+    private NitCommonListVm outerVm;
 
     @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
-        return null;
-    }
+        NitDelegetCommand nitDelegetCommand = new NitDelegetCommand() {
+            @Override
+            public Class providerOuterVm() {
+                return null;
+            }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
-            mBinding.get().title.setText(circleConfig.extens.get("title"));
-            mBinding.get().toolbar.setBackgroundColor(Color.WHITE);
-        } else {
-            mBinding.get().toolbar.setVisibility(View.GONE);
-        }
+            @Override
+            public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+                outerVm = commonListVm;
+                AppImgHeaderCardVo appImgHeaderCardVo = new AppImgHeaderCardVo(0, 1);
+
+//                AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
+
+                NitBaseProviderCard.providerCard(commonListVm, appImgHeaderCardVo, nitCommonFragment);
+//                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
+            }
+        };
+        return nitDelegetCommand;
     }
 
     @Override
@@ -39,37 +47,12 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
         super.initView(var1);
         mBinding.get().ivShare.setVisibility(View.GONE);
         mBinding.get().circlev2Edit.setVisibility(View.GONE);
-        mBinding.get().toolbarLayout.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void initAppBar() {
-
-        mBinding.get().ivBack.setImageResource(com.docker.core.R.mipmap.ic_back);
-        mBinding.get().ivBack.setBackgroundDrawable(null);
-
-        mBinding.get().frameHeader.setVisibility(View.GONE);
-
-
-//        mBinding.get().ivMenuMore.setVisibility(View.GONE);
-//        mBinding.get().toolbar.setVisibility(View.GONE);
     }
 
     @Override
     public void onRefreshIng() {
         super.onRefreshIng();
-    }
-
-    @Override
-    public void initRefresh() {
-        mBinding.get().refresh.setEnableLoadMore(false);
-        mBinding.get().refresh.setEnableRefresh(false);
-
-    }
-
-    @Override
-    public void onCircleTabFetched(List<CircleTitlesVo> list) {
-        super.onCircleTabFetched(list);
+        outerVm.onJustRefresh();
     }
 
     @Override
@@ -104,21 +87,36 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
     }
 
     @Override
+    public void processPro(NitAbsSampleAdapter mAdapter) {
+        super.processPro(mAdapter);
+
+        AppVo appVo = new AppVo();
+        appVo.name = "文章";
+        appVo.id = "1";
+        mAdapter.add(appVo);
+    }
+
+    @Override
+    public void onAppClick(AppVo appVo) {
+        super.onAppClick(appVo);
+    }
+
+    @Override
     public void initImmersionBar() {
-        View view = null;
-        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
-            view = mBinding.get().toolbar;
-            mBinding.get().toolbarLayout.setVisibility(View.VISIBLE);
-            ImmersionBar.with(this)
-                    .navigationBarColor("#ffffff")
-                    .statusBarColor("#ffffff")
-                    .statusBarDarkFont(true)
-                    .titleBarMarginTop(view)
-                    .init();
-        } else {
-//            view = mBinding.get().llStickCoutainer;
+//        super.initImmersionBar();
+//        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
+//            ImmersionBar.with(this)
+//                    .navigationBarColor("#ffffff")
+//                    .statusBarDarkFont(true)
+//                    .titleBarMarginTop(mBinding.get().toolbar)
+//                    .init();
+//        } else {
+//            mBinding.get().toolbar.setVisibility(View.GONE);
+//        }
+        if(circleConfig.isNeedToobar){
+            super.initImmersionBar();
+        }else {
+            mBinding.get().toolbar.setVisibility(View.GONE);
         }
-
-
     }
 }

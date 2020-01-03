@@ -40,7 +40,9 @@ import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_A
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
 import static com.docker.common.common.router.AppRouter.CIRCLE_dynamic_v2_detail;
-
+//todo/*
+// 扩展为个应用内自己处理详情content head默认共享，footer如需扩展在应用内实现 统一入口，降低耦合
+// */
 @Route(path = CIRCLE_dynamic_v2_detail)
 public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamicDetailViewModel, Circlev2DynamicDetailActivityBinding> {
 

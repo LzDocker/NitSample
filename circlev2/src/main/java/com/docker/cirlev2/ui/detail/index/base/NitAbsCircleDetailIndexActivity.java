@@ -1,4 +1,4 @@
-package com.docker.cirlev2.ui.detail.home.base;
+package com.docker.cirlev2.ui.detail.index.base;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2NitAbsDetailIndexActivityBinding;
-import com.docker.cirlev2.ui.detail.home.CircleConfig;
-import com.docker.cirlev2.ui.detail.home.temp.defaults.NitDefaultCircleFragment;
+import com.docker.cirlev2.ui.detail.index.CircleConfig;
+import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.vm.NitEmptyViewModel;

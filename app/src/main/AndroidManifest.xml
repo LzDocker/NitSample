@@ -123,13 +123,17 @@
 
         <activity
             android:name="com.docker.nitsample.ui.MainTygsActivity"
-
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.docker.nitsample.ui.MainActivity"
+            android:screenOrientation="portrait">
+
         </activity>
 
 
@@ -142,6 +146,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.docker.nitsample.ui.IndexSearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.nitsample.ui.search.SearchActivity"
             android:screenOrientation="portrait" />
 
         <!--<activity android:name="com.docker.nitsample.ui.edit.EditIndexActivity" />-->

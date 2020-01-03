@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -21,6 +22,8 @@ import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.widget.recycledrag.ItemTouchHelperCallback;
+import com.docker.core.util.adapter.SimpleCommonRecyclerAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,13 +49,11 @@ public class CircleEditTabActivity extends NitCommonActivity<CircleEditTabViewMo
 //    private int type;
 
     public static void startMe(Context context, StaCirParam startCircleBean, int code) {
-
         Intent intent = new Intent(context, CircleEditTabActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("mStartParam", startCircleBean);
         intent.putExtras(bundle);
         ((Activity) context).startActivityForResult(intent, code);
-
     }
 
     @Override
@@ -74,6 +75,8 @@ public class CircleEditTabActivity extends NitCommonActivity<CircleEditTabViewMo
     @Override
     public void initView() {
         mToolbar.setTitle("编辑分类");
+
+
         mToolbar.setTvRight("保存", v -> {
             if (checkData() && !TextUtils.isEmpty(mParentid)) {
                 HashMap<String, String> params = new HashMap<>();
@@ -105,7 +108,10 @@ public class CircleEditTabActivity extends NitCommonActivity<CircleEditTabViewMo
         touchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         mBinding.recyclerView.setAdapter(editClassAdapter);
 
-
+        editClassAdapter.setOnItemClickListener((view, position) -> {
+            CircleTitlesVo circleTitlesVo = editClassAdapter.getItem(position);
+            CircleAddTabActivity.startMe(CircleEditTabActivity.this, circleTitlesVo, 1012);
+        });
         mStartParam = (StaCirParam) getIntent().getExtras().getSerializable("mStartParam");
         mViewModel.getCircleClass(mStartParam.getCircleid(), mStartParam.getUtid());
 

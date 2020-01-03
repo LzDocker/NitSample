@@ -20,6 +20,7 @@ import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.message.R;
 import com.docker.message.databinding.MessageImFragmentBinding;
 import com.docker.message.vm.MessageViewModel;
+import com.gyf.immersionbar.ImmersionBar;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.api.model.session.SessionEventListener;
 import com.netease.nim.uikit.business.recent.RecentContactsFragment;
@@ -85,4 +86,5 @@ public class MessageImFragment extends NitCommonFragment<MessageViewModel, Messa
     public void initImmersionBar() {
 
     }
+
 }

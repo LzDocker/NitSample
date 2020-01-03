@@ -13,6 +13,7 @@ import com.docker.nitsample.vm.SampleEditCoutainerViewModel;
 import com.docker.nitsample.vm.SampleEditSpaViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
+import com.docker.nitsample.vm.SearchViewModel;
 import com.docker.nitsample.vm.card.AppCardViewModel;
 
 import dagger.Binds;
@@ -75,6 +76,10 @@ public abstract class ViewModelModule {
     @ViewModelKey(OptimizationModel.class)
     abstract ViewModel OptimizationModel(OptimizationModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel.class)
+    abstract ViewModel SearchViewModel(SearchViewModel model);
 
 
 //

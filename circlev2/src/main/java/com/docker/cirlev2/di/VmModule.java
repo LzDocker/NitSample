@@ -3,7 +3,7 @@ package com.docker.cirlev2.di;
 
 import android.arch.lifecycle.ViewModel;
 
-import com.docker.cirlev2.ui.detail.home.temp.defaults.DefaultDetailIndexViewModel;
+import com.docker.cirlev2.ui.detail.index.temp.defaults.DefaultDetailIndexViewModel;
 import com.docker.cirlev2.vm.CircleCommentListViewModel;
 import com.docker.cirlev2.vm.CircleCreateViewModel;
 import com.docker.cirlev2.vm.CircleDetailIndexViewModel;

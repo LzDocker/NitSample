@@ -7,6 +7,7 @@ public class AppRouter {
 
     public static final String App_SEARCH = AppGroup + "search";
     public static final String App_SEARCH_index = AppGroup + "search_index";
+    public static final String App_SEARCH_index_TYGS = AppGroup + "App_SEARCH_index_TYGS";
 
     public static final String HOME = AppGroup + "home";
     public static final String HOME_preview = AppGroup + "home_preview";
@@ -106,6 +107,8 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_INDEX_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_default";
     public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";
     public static final String CIRCLE_DETAIL_v2_PRO_MANAGER = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER";
+    public static final String CIRCLE_DETAIL_v2_PRO_INFO = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER_info";
+
     public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
     public static final String CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_ACTIVEINDEX";
 

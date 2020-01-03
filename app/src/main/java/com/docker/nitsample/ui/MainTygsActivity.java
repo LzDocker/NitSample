@@ -41,7 +41,7 @@ import io.reactivex.disposables.Disposable;
 
 import static com.docker.common.common.router.AppRouter.HOME;
 
-//@Route(path = HOME)
+@Route(path = HOME)
 public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject
@@ -179,14 +179,14 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     position = position - 1;
                 }
                 mBinding.viewpager.setCurrentItem(position, false);
-                if (position == 3) {
+                if (position <= 1) {
                     ImmersionBar.with(MainTygsActivity.this)
-                            .fitsSystemWindows(true)
+                            .statusBarColor("#ffffff")
                             .init();
                 } else {
                     ImmersionBar.with(MainTygsActivity.this)
                             .fitsSystemWindows(true)
-                            .statusBarColor(com.docker.core.R.color.colorPrimary)
+                            .statusBarColor(R.color.colorPrimaryDark)
                             .init();
                 }
             }

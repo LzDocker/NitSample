@@ -1,4 +1,4 @@
-package com.docker.cirlev2.ui.detail.home.base;
+package com.docker.cirlev2.ui.detail.index.base;
 
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
@@ -9,8 +9,6 @@ import com.docker.cirlev2.BR;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
-import com.docker.cirlev2.vo.entity.MemberGroupingVo;
-import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
