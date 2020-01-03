@@ -195,7 +195,6 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
         mBinding.viewPager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
-
     }
 
     @Override

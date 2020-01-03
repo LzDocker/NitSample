@@ -148,8 +148,6 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
 
     public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
 
-
-
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         commonListOptions.isActParent = true;

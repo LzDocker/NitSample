@@ -9,10 +9,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityActManagerBinding;
-import com.bfhd.account.databinding.AccountActivityOrderBinding;
+import com.bfhd.account.databinding.AccountActivityCollectBinding;
 import com.bfhd.account.vm.AccountOrderViewModel;
-import com.bfhd.account.vm.AccountRewardViewModel;
-import com.bfhd.account.vo.tygs.AccountRewardHeadVo;
 import com.bfhd.circle.base.adapter.HivsSampleAdapter;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
@@ -25,7 +23,6 @@ import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
-import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
 
 import java.io.Serializable;
@@ -35,11 +32,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 /*
- * 我的订单列表
+ * 我的收藏表
  **/
 
-@Route(path = AppRouter.ACCOUNT_ORDER_LIST)
-public class AccounOrderListActivity extends NitCommonActivity<NitCommonContainerViewModel, AccountActivityOrderBinding> {
+@Route(path = AppRouter.ACCOUNT_COLLECT_LIST)
+public class AccounCollectActivity extends NitCommonActivity<NitCommonContainerViewModel, AccountActivityCollectBinding> {
 
 
     @Inject
@@ -56,7 +53,7 @@ public class AccounOrderListActivity extends NitCommonActivity<NitCommonContaine
 
     @Override
     protected int getLayoutId() {
-        return R.layout.account_activity_order;
+        return R.layout.account_activity_collect;
     }
 
     @Override
@@ -68,7 +65,7 @@ public class AccounOrderListActivity extends NitCommonActivity<NitCommonContaine
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToolbar.setTitle("我的订单");
+        mToolbar.setTitle("我收藏的");
 
     }
 
@@ -77,21 +74,15 @@ public class AccounOrderListActivity extends NitCommonActivity<NitCommonContaine
 
         List<CircleTitlesVo> circleTitlesVos = new ArrayList<>();
         CircleTitlesVo circleTitlesVo = new CircleTitlesVo();
-        circleTitlesVo.setName("全部");
+        circleTitlesVo.setName("商品");
         CircleTitlesVo circleTitlesVo1 = new CircleTitlesVo();
-        circleTitlesVo1.setName("待付款");
+        circleTitlesVo1.setName("文章");
         CircleTitlesVo circleTitlesVo2 = new CircleTitlesVo();
-        circleTitlesVo2.setName("待收货");
-        CircleTitlesVo circleTitlesVo3 = new CircleTitlesVo();
-        circleTitlesVo3.setName("已完成");
-        CircleTitlesVo circleTitlesVo4 = new CircleTitlesVo();
-        circleTitlesVo4.setName("已取消");
+        circleTitlesVo2.setName("动态");
 
         circleTitlesVos.add(circleTitlesVo);
         circleTitlesVos.add(circleTitlesVo1);
         circleTitlesVos.add(circleTitlesVo2);
-        circleTitlesVos.add(circleTitlesVo3);
-        circleTitlesVos.add(circleTitlesVo4);
         peocessTab(circleTitlesVos);
 
     }
@@ -103,8 +94,6 @@ public class AccounOrderListActivity extends NitCommonActivity<NitCommonContaine
             case 0:
             case 1:
             case 2:
-            case 3:
-            case 4:
                 nitDelegetCommand = new NitDelegetCommand() {
                     @Override
                     public Class providerOuterVm() {
@@ -133,20 +122,18 @@ public class AccounOrderListActivity extends NitCommonActivity<NitCommonContaine
         String[] titles = new String[circleTitlesVos.size()];
         for (int i = 0; i < circleTitlesVos.size(); i++) {
             titles[i] = circleTitlesVos.get(i).getName();
-            CommonListOptions commonListOptions = new CommonListOptions();
-            commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-            commonListOptions.isActParent = true;
-            commonListOptions.falg = i;
-            NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
-            fragments.add(nitCommonContainerFragmentV2);
+            fragments.add((Fragment) ARouter.getInstance()
+                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
+                    .withSerializable("tabVo", (Serializable) circleTitlesVos)
+                    .withInt("pos", i)
+                    .navigation());
         }
-
         // magic
         mBinding.viewPager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
-
     }
+
 
     @Override
     public void initRouter() {

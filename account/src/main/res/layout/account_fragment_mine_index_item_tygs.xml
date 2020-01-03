@@ -58,6 +58,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:id="@+id/tv_icollec"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

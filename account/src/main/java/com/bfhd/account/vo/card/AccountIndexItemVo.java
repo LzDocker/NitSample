@@ -66,10 +66,13 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
             ARouter.getInstance().build(AppRouter.ACCOUNT_ORDER_LIST).navigation();
         }
 
+        if (view.getId() == R.id.tv_icollec) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_COLLECT_LIST).navigation();
+        }
+
         if (view.getId() == R.id.tv_ipay) {
         }
-        if (view.getId() == R.id.tv_icollec) {
-        }
+
         if (view.getId() == R.id.tv_iattend) {
         }
         if (view.getId() == R.id.tv_imoney_box) {

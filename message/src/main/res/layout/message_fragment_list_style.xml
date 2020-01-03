@@ -12,7 +12,7 @@
         <variable
             name="viewmodel"
             type="com.docker.message.vm.MessageViewModel" />
-        
+
         <import type="com.docker.common.common.binding.CommonBdUtils" />
 
     </data>
@@ -32,7 +32,6 @@
             android:layout_height="52dp"
             android:layout_gravity="center_vertical"
             android:src="@{item.icon}" />
-
 
         <LinearLayout
             android:layout_width="0dp"
