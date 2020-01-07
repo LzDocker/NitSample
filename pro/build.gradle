@@ -68,4 +68,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation project(':circlev2')
+    implementation project(":account")
 }

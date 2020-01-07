@@ -8,11 +8,8 @@ import android.support.v4.app.Fragment;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
-import com.bfhd.account.databinding.AccountActivityActManagerBinding;
 import com.bfhd.account.databinding.AccountActivityOrderBinding;
 import com.bfhd.account.vm.AccountOrderViewModel;
-import com.bfhd.account.vm.AccountRewardViewModel;
-import com.bfhd.account.vo.tygs.AccountRewardHeadVo;
 import com.bfhd.circle.base.adapter.HivsSampleAdapter;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
@@ -25,10 +22,8 @@ import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
-import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

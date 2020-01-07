@@ -1,17 +1,9 @@
 package com.bfhd.account.di;
 
 
-import com.bfhd.account.ui.tygs.AccounActManagerActivity;
-import com.bfhd.account.ui.tygs.AccounActRegistListActivity;
 import com.bfhd.account.ui.AccounAddAddressActivity;
 import com.bfhd.account.ui.AccounAddressListActivity;
 import com.bfhd.account.ui.AccounAttentionListActivity;
-import com.bfhd.account.ui.tygs.AccounCollectActivity;
-import com.bfhd.account.ui.tygs.AccounOrderListActivity;
-import com.bfhd.account.ui.tygs.AccounPointActivity;
-import com.bfhd.account.ui.tygs.AccounRewardActivity;
-import com.bfhd.account.ui.tygs.AccounTygsAttentionListActivity;
-
 import com.bfhd.account.ui.AccounCommentListActivity;
 import com.bfhd.account.ui.AccounFansListActivity;
 import com.bfhd.account.ui.AccounMessageDetailActivity;
@@ -21,12 +13,10 @@ import com.bfhd.account.ui.AccounMoneyDetailListActivity;
 import com.bfhd.account.ui.AccounNoSeeActivity;
 import com.bfhd.account.ui.AccounOrderListtActivity;
 import com.bfhd.account.ui.AccounParseListActivity;
+import com.bfhd.account.ui.AccounPointRecordListActivity;
 import com.bfhd.account.ui.AccounPrivacySettingActivity;
 import com.bfhd.account.ui.AccounSelectCountryNumActivity;
 import com.bfhd.account.ui.AccounSettingActivity;
-import com.bfhd.account.ui.tygs.AccounTygsBranchListActivity;
-import com.bfhd.account.ui.tygs.fragment.AccountInvitationCoutainerFragment;
-import com.bfhd.account.ui.tygs.setting.AccounSettingFragment;
 import com.bfhd.account.ui.AccounSuggestionActivity;
 import com.bfhd.account.ui.AccounSystemMessageActivity;
 import com.bfhd.account.ui.AccountAddConstActivity;
@@ -50,11 +40,18 @@ import com.bfhd.account.ui.AccoutMoneyTXActivity;
 import com.bfhd.account.ui.FindPwdActivity;
 import com.bfhd.account.ui.LoginActivity;
 import com.bfhd.account.ui.MineFragment;
-import com.bfhd.account.ui.AccounPointRecordListActivity;
 import com.bfhd.account.ui.MineFragmentWj;
 import com.bfhd.account.ui.RegistActivity;
 import com.bfhd.account.ui.RegisteFragment;
 import com.bfhd.account.ui.index.FragmentMineIndex;
+import com.bfhd.account.ui.tygs.AccounCollectActivity;
+import com.bfhd.account.ui.tygs.AccounOrderListActivity;
+import com.bfhd.account.ui.tygs.AccounPointActivity;
+import com.bfhd.account.ui.tygs.AccounRewardActivity;
+import com.bfhd.account.ui.tygs.AccounTygsAttentionListActivity;
+import com.bfhd.account.ui.tygs.AccounTygsBranchListActivity;
+import com.bfhd.account.ui.tygs.fragment.AccountInvitationCoutainerFragment;
+import com.bfhd.account.ui.tygs.setting.AccounSettingFragment;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
@@ -271,14 +268,6 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccounTygsBranchListActivity contributAccounTygsBranchListActivityInjector();
 
-
-    @ActivityScope
-    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
-    abstract AccounActRegistListActivity contributAccounActRegistListActivityInjector();
-
-    @ActivityScope
-    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
-    abstract AccounActManagerActivity contributAccounActManagerActivityInjector();
 
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/

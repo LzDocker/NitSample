@@ -10,6 +10,13 @@
         <activity android:name="com.docker.apps.intvite.ui.index.InviteCodeScanActivity" />
         <activity android:name="com.docker.apps.active.ui.detail.ActiveSuccActivity" />
         <activity android:name="com.docker.apps.active.ui.detail.ActiveResultActivity" />
+        <activity android:name="com.docker.apps.active.ui.manager.ActiveRegistListActivity" />
+        <activity android:name="com.docker.apps.active.ui.manager.ActiveManagerListActivity" />
+        <activity android:name="com.docker.apps.active.ui.manager.ActiveManagerDetailActivity" />
+        <activity android:name="com.docker.apps.active.ui.manager.ActiveVerificationActivity" />
+        <activity android:name="com.docker.apps.active.ui.manager.ActivePersionManagerListActivity" />
+        <activity android:name="com.docker.apps.active.ui.manager.ActivePersionDetailActivity" />
+        <activity android:name="com.docker.apps.active.ui.publish.ActiveBannerPreviewActivity" />
 
     </application>
 

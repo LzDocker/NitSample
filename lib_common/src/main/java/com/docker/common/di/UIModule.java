@@ -12,6 +12,7 @@ import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.ui.container.NitCommonContainerNoRefreshFragmentV2;
 import com.docker.common.common.ui.container.NitTabContainerFragment;
+import com.docker.common.common.ui.location.MapLocationActivity;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
 
@@ -64,6 +65,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CommonAddressListv2Activity CommonAddressListv2Activity();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract MapLocationActivity MapLocationActivity();
 
 
 

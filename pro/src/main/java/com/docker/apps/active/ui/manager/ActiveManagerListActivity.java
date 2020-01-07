@@ -1,15 +1,13 @@
-package com.bfhd.account.ui.tygs;
+package com.docker.apps.active.ui.manager;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.R;
-import com.bfhd.account.databinding.AccountActivityActRegistBinding;
-import com.bfhd.circle.base.adapter.HivsSampleAdapter;
+import com.docker.apps.R;
+import com.docker.apps.databinding.ProActiveManagerBinding;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.router.AppRouter;
@@ -21,19 +19,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 /*
  * 活动管理列表
  **/
 
-@Route(path = AppRouter.ACCOUNT_ACT_MANAGER_LIST)
-public class AccounActManagerActivity extends NitCommonActivity<NitCommonContainerViewModel, AccountActivityActRegistBinding> {
-
-
-    @Inject
-    ViewModelProvider.Factory factory;
-    private HivsSampleAdapter mAdapter;
+@Route(path = AppRouter.ACTIVE_MANAGER_LIST)
+public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContainerViewModel, ProActiveManagerBinding> {
 
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
@@ -45,7 +36,7 @@ public class AccounActManagerActivity extends NitCommonActivity<NitCommonContain
 
     @Override
     protected int getLayoutId() {
-        return R.layout.account_activity_act_regist;
+        return R.layout.pro_active_manager;
     }
 
     @Override
@@ -59,6 +50,10 @@ public class AccounActManagerActivity extends NitCommonActivity<NitCommonContain
         super.onCreate(savedInstanceState);
         mToolbar.setTitle("活动管理");
 
+        mToolbar.getTvTitle().setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).navigation();
+
+        });
     }
 
     @Override

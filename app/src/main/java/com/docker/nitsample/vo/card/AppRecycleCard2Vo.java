@@ -7,6 +7,8 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.ui.detail.index.CircleConfig;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.ItemVo;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
@@ -57,6 +59,9 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
                 break;
             case "邀人·推广":
                 ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
+                break;
+            case "购酒·优选":
+                RxBus.getDefault().post(new RxEvent<>("change", 1));
                 break;
         }
     }

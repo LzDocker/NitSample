@@ -65,7 +65,7 @@
 
         <!--微信分享-->
         <activity
-            android:name="com.bfhd.tjxq.wxapi.WXEntryActivity"
+            android:name="com.docker.nitsample.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:launchMode="singleTop"
@@ -73,7 +73,7 @@
 
         <!--微信支付-->
         <activity
-            android:name="com.bfhd.tjxq.wxapi.WXPayEntryActivity"
+            android:name="com.docker.nitsample.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
 

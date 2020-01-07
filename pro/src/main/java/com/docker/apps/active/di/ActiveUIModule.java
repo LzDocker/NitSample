@@ -6,6 +6,14 @@ import com.docker.apps.active.ui.detail.ActiveResultActivity;
 import com.docker.apps.active.ui.detail.ActiveSuccActivity;
 import com.docker.apps.active.ui.index.ActiveContainerFragment;
 import com.docker.apps.active.ui.index.ActiveIndexActivity;
+import com.docker.apps.active.ui.manager.ActiveManagerDetailActivity;
+import com.docker.apps.active.ui.manager.ActiveManagerListActivity;
+import com.docker.apps.active.ui.manager.ActivePersionDetailActivity;
+import com.docker.apps.active.ui.manager.ActivePersionManagerListActivity;
+import com.docker.apps.active.ui.manager.ActiveRegistListActivity;
+import com.docker.apps.active.ui.manager.ActiveVerificationActivity;
+import com.docker.apps.active.ui.publish.ActiveBannerPreviewActivity;
+import com.docker.apps.active.ui.publish.ActivePublishFragment;
 import com.docker.core.di.component.BaseActComponent;
 
 import dagger.Module;
@@ -34,5 +42,29 @@ public abstract class ActiveUIModule {
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract ActiveResultActivity contributeActiveResultActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveManagerListActivity contributeActiveManagerActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveRegistListActivity contributeActiveRegistListActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveManagerDetailActivity contributeActiveManagerDetailActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveVerificationActivity contributeActiveVerificationActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActivePersionManagerListActivity contributeActivePersionManagerListActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActivePersionDetailActivity contributeActivePersionDetailActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActivePublishFragment contributeActivePublishFragmentInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveBannerPreviewActivity contributeActiveBannerPreviewActivityInjector();
 }
 

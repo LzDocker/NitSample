@@ -57,10 +57,10 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
         }
 
         if (view.getId() == R.id.tv_activie_reg) {
-            ARouter.getInstance().build(AppRouter.ACCOUNT_ACT_REGIST_LIST).navigation();
+            ARouter.getInstance().build(AppRouter.ACTIVE_REGIST_LIST).navigation();
         }
         if (view.getId() == R.id.tv_active_manager) {
-            ARouter.getInstance().build(AppRouter.ACCOUNT_ACT_MANAGER_LIST).navigation();
+            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_LIST).navigation();
         }
         if (view.getId() == R.id.tv_order) {
             ARouter.getInstance().build(AppRouter.ACCOUNT_ORDER_LIST).navigation();

@@ -4,6 +4,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.WindowManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -21,6 +23,7 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
+import com.gyf.immersionbar.ImmersionBar;
 
 @Route(path = AppRouter.CIRCLE_PUBLISH_v2_INDEX)
 public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel, Circlev2SampleActivityBinding> {
@@ -41,7 +44,17 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
     @Autowired
     int type;
 
+    @Autowired
+    String pubRoterPath;
+
+
+    @Autowired
+    String title;
+
+
     private StaCirParam staCirParam;
+
+    private Fragment pubfragment;
 
     @Override
     protected int getLayoutId() {
@@ -58,37 +71,50 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
         super.onCreate(savedInstanceState);
         staCirParam = (StaCirParam) getIntent().getSerializableExtra("mStartParam");
         String rightstr = "发布";
-        switch (type) {
-            case PUBLISH_TYPE_NEWS:
-                if (editType == 1) {
-                    mToolbar.setTitle("发布新闻");
-                } else {
-                    mToolbar.setTitle("编辑新闻");
-                }
-                rightstr = "发布";
-                FragmentUtils.add(getSupportFragmentManager(), CirclePubNewsFragment.newInstance(), R.id.circlev2_frame);
-                break;
-            case PUBLISH_TYPE_ACTIVE:
 
-                if (editType == 1) {
-                    mToolbar.setTitle("发布动态");
-                } else {
-                    mToolbar.setTitle("编辑动态");
-                }
-                rightstr = "确定";
-                FragmentUtils.add(getSupportFragmentManager(), CirclePubActiveFragment.newInstance(), R.id.circlev2_frame);
-                break;
+        if (!TextUtils.isEmpty(pubRoterPath)) {
+            pubfragment = (Fragment) ARouter.getInstance().build(pubRoterPath).navigation();
+            if (editType == 1) {
+                mToolbar.setTitle("发布" + title);
+            } else {
+                mToolbar.setTitle("编辑" + title);
+            }
+            FragmentUtils.add(getSupportFragmentManager(), pubfragment, R.id.circlev2_frame);
 
-            case PUBLISH_TYPE_QREQUESTION:
-                rightstr = "确定";
-                if (editType == 1) {
-                    mToolbar.setTitle("发布问答");
-                } else {
-                    mToolbar.setTitle("编辑问答");
-                }
-                FragmentUtils.add(getSupportFragmentManager(), CirclePubRequestionFragment.newInstance(), R.id.circlev2_frame);
-                break;
+        } else {
+            switch (type) {
+                case PUBLISH_TYPE_NEWS:
+                    if (editType == 1) {
+                        mToolbar.setTitle("发布新闻");
+                    } else {
+                        mToolbar.setTitle("编辑新闻");
+                    }
+                    rightstr = "发布";
+                    FragmentUtils.add(getSupportFragmentManager(), CirclePubNewsFragment.newInstance(), R.id.circlev2_frame);
+                    break;
+                case PUBLISH_TYPE_ACTIVE:
+
+                    if (editType == 1) {
+                        mToolbar.setTitle("发布动态");
+                    } else {
+                        mToolbar.setTitle("编辑动态");
+                    }
+                    rightstr = "确定";
+                    FragmentUtils.add(getSupportFragmentManager(), CirclePubActiveFragment.newInstance(), R.id.circlev2_frame);
+                    break;
+
+                case PUBLISH_TYPE_QREQUESTION:
+                    rightstr = "确定";
+                    if (editType == 1) {
+                        mToolbar.setTitle("发布问答");
+                    } else {
+                        mToolbar.setTitle("编辑问答");
+                    }
+                    FragmentUtils.add(getSupportFragmentManager(), CirclePubRequestionFragment.newInstance(), R.id.circlev2_frame);
+                    break;
+            }
         }
+
         mToolbar.setTvRight(rightstr, v -> {
             publish();
         });
@@ -161,16 +187,31 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (type) {
-            case PUBLISH_TYPE_NEWS:
-                FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubNewsFragment.class).onActivityResult(requestCode, resultCode, data);
-                break;
-            case PUBLISH_TYPE_ACTIVE:
-                FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubActiveFragment.class).onActivityResult(requestCode, resultCode, data);
-                break;
-            case PUBLISH_TYPE_QREQUESTION:
-                FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubRequestionFragment.class).onActivityResult(requestCode, resultCode, data);
-                break;
+
+        if (pubfragment != null) {
+            pubfragment.onActivityResult(requestCode, resultCode, data);
+        } else {
+            switch (type) {
+                case PUBLISH_TYPE_NEWS:
+                    FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubNewsFragment.class).onActivityResult(requestCode, resultCode, data);
+                    break;
+                case PUBLISH_TYPE_ACTIVE:
+                    FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubActiveFragment.class).onActivityResult(requestCode, resultCode, data);
+                    break;
+                case PUBLISH_TYPE_QREQUESTION:
+                    FragmentUtils.findFragment(getSupportFragmentManager(), CirclePubRequestionFragment.class).onActivityResult(requestCode, resultCode, data);
+                    break;
+            }
         }
+
+    }
+
+    @Override
+    public void initImmersionBar() {
+        ImmersionBar.with(this)
+                .fitsSystemWindows(true)
+                .navigationBarColor("#ffffff")
+                .statusBarDarkFont(true)
+                .statusBarColor(com.docker.core.R.color.colorPrimary).init();
     }
 }

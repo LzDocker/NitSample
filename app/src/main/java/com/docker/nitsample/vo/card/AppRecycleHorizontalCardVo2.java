@@ -1,6 +1,9 @@
 package com.docker.nitsample.vo.card;
 
-import android.databinding.ObservableField;
+import android.databinding.Bindable;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
+import android.util.Log;
 import android.view.View;
 
 import com.docker.cirlev2.BR;
@@ -10,15 +13,14 @@ import com.docker.nitsample.vo.CarRvHorizontalVo;
 import com.docker.nitsample.vo.LayoutManagerVo;
 import com.docker.nitsample.vo.RecycleTopLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
 
     public int managerStyle;
     public LayoutManagerVo managerStyleVo;
+
+    @Bindable
     public RecycleTopLayout recycleTopLayout;
 
     public AppRecycleHorizontalCardVo2(int style, int position, LayoutManagerVo managerStyleVo, RecycleTopLayout recycleTopLayout) {
@@ -26,6 +28,17 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
         this.managerStyleVo = managerStyleVo;
         maxSupport = 1;
         this.recycleTopLayout = recycleTopLayout;
+        setInnerResource();
+    }
+
+    @Bindable
+    public RecycleTopLayout getRecycleTopLayout() {
+        return recycleTopLayout;
+    }
+
+    public void setRecycleTopLayout(RecycleTopLayout recycleTopLayout) {
+        this.recycleTopLayout = recycleTopLayout;
+        notifyPropertyChanged(BR.recycleTopLayout);
     }
 
     @Override
@@ -39,38 +52,51 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
 
     }
 
+    public void onChildItemCilck(CarRvHorizontalVo horizontalVo, View view) {
+        if (view.getId() == R.id.tv_join) { // 加入
+            //
+            Log.d("sss", "onChildItemCilck: ======加入分舵========");
+        }
+
+        if (view.getId() == R.id.iv_close) { // 关闭
+            if (InnerResource != null && InnerResource.contains(horizontalVo)) {
+                InnerResource.remove(horizontalVo);
+                if (InnerResource.size() == 0) {
+                    this.setRecycleTopLayout(null);
+                }
+            }
+        }
+    }
+
     public transient ItemBinding<CarRvHorizontalVo> itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
-            R.layout.app_card_horizontal_img_inner2);// 单一view 有点击事件;
+            R.layout.app_card_horizontal_img_inner2).bindExtra(BR.parent, this);// 单一view 有点击事件;
 
 
     public ItemBinding<CarRvHorizontalVo> getItemImgBinding() {
         if (itemImgBinding == null) {
             itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
-                    R.layout.app_card_horizontal_img_inner2);
+                    R.layout.app_card_horizontal_img_inner2).bindExtra(BR.parent, this);
 
         }
         return itemImgBinding;
     }
 
-    private ObservableField<List<CarRvHorizontalVo>> InnerResource = new ObservableField<>();
+    public ObservableList<CarRvHorizontalVo> InnerResource = new ObservableArrayList<>();
 
 
-    public void setInnerResource(ObservableField<List<CarRvHorizontalVo>> innerResource) {
-        InnerResource = innerResource;
+    public void setInnerResource() {
+        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "七律分部", "CEO：石慧杰", "", 1);
+        InnerResource.add(carRvHorizontalVo);
+        InnerResource.add(carRvHorizontalVo);
+        InnerResource.add(carRvHorizontalVo);
+        InnerResource.add(carRvHorizontalVo);
+        InnerResource.add(carRvHorizontalVo);
+        InnerResource.add(carRvHorizontalVo);
     }
 
 
-    public ObservableField<List<CarRvHorizontalVo>> getInnerResource() {
-        ArrayList<CarRvHorizontalVo> arrayList = new ArrayList();
-        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "七律分部", "CEO：石慧杰", "", 1);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
+    public ObservableList<CarRvHorizontalVo> getInnerResource() {
 
-        InnerResource.set(arrayList);
         return InnerResource;
     }
 

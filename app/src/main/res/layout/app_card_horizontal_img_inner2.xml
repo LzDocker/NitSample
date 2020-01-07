@@ -7,6 +7,10 @@
         <variable
             name="item"
             type="com.docker.nitsample.vo.CarRvHorizontalVo" />
+
+        <variable
+            name="parent"
+            type="com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -41,9 +45,11 @@
 
                 <ImageView
                     android:id="@+id/iv_close"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="right"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|top"
+                    android:onClick="@{(view)->parent.onChildItemCilck(item,view)}"
+                    android:scaleType="centerInside"
                     android:src="@mipmap/close_icon" />
 
             </FrameLayout>
@@ -79,11 +85,13 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_join"
                         android:layout_width="117dp"
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/app_btn_shape"
                         android:gravity="center"
+                        android:onClick="@{(view)->parent.onChildItemCilck(item,view)}"
                         android:text="加入"
                         android:textColor="@color/white"
                         android:textSize="14sp" />

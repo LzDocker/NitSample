@@ -24,8 +24,9 @@ public class AppRouter {
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
     public static final String ACCOUNT_BRANCH_LIST = AccountGroup + "attention_branch_list";
-    public static final String ACCOUNT_ACT_REGIST_LIST = AccountGroup + "ACCOUNT_ACT_REGIST_LIST";
-    public static final String ACCOUNT_ACT_MANAGER_LIST = AccountGroup + "ACCOUNT_ACT_MANAGER_LIST";
+
+
+
     public static final String ACCOUNT_ORDER_LIST = AccountGroup + "ACCOUNT_ORDER_LIST";
     public static final String ACCOUNT_COLLECT_LIST = AccountGroup + "ACCOUNT_COLLECT_LIST";
 
@@ -134,6 +135,7 @@ public class AppRouter {
     public static final String COMMON_CARD_FRAGMENT_NO_REFRESH = COMMONGROUP + "card_fragment_no_refresh";
     public static final String COMMON_TAB_CONTAINER_FRAGMENT = COMMONGROUP + "tab_container_fragment";
     public static final String COMMON_LIST_CONTAINER_FRAGMENT = COMMONGROUP + "LIST_container_fragment";
+    public static final String COMMON_LOCATION_ACTIVITY = COMMONGROUP + "COMMON_LOCATION_ACTIVITY";
 
     public static final String COMMON_XPOPUP = COMMONGROUP + "common_xpopup";
     public static final String COMMON_RXJAVA = COMMONGROUP + "rxjava";
@@ -174,6 +176,15 @@ public class AppRouter {
     public static final String ACTIVE_DEATIL = ACTIVE_GROUP + "ACTIVE_DEATIL";
     public static final String ACTIVE_SUCC = ACTIVE_GROUP + "ACTIVE_SUCC";
     public static final String ACTIVE_RESULT = ACTIVE_GROUP + "ACTIVE_RESULT";
+    public static final String ACTIVE_REGIST_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_REGIST_LIST";
+    public static final String ACTIVE_MANAGER_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_MANAGER_LIST";
+    public static final String ACTIVE_MANAGER_PERSION_LIST = ACTIVE_GROUP + "ACTIVE_MANAGER_PERSION_LIST";
+    public static final String ACTIVE_MANAGER_PERSION_DETAIL = ACTIVE_GROUP + "ACTIVE_MANAGER_PERSION_DETAIL";
+    public static final String ACTIVE_MANAGER_DETAIL = ACTIVE_GROUP + "ACTIVE_MANAGER_DETAIL";
+    public static final String ACTIVE_MANAGE_VERFIC = ACTIVE_GROUP + "ACTIVE_MANAGE_VERFIC";
+    public static final String ACTIVE_PUBLISH = ACTIVE_GROUP + "ACTIVE_PUBLISH";
+    public static final String ACTIVE_PUBLISH_BANNER_PREVIEW = ACTIVE_GROUP + "ACTIVE_PUBLISH_BANNER_PREVIEW";
+
 
     public static final String INVITE_GROUP = ProGroup + "/invite/";
     public static final String INVITE_INDEX = INVITE_GROUP + "INVITE_INDEX";

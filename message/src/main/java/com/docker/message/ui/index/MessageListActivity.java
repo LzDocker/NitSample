@@ -1,5 +1,10 @@
 package com.docker.message.ui.index;
+
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.router.AppRouter;
@@ -17,6 +22,16 @@ public class MessageListActivity extends NitCommonListActivity<MessageViewModel>
     @Override
     public void initObserver() {
 
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("title"))) {
+            mToolbar.setTitle(getIntent().getStringExtra("title"));
+        } else {
+            mToolbar.hide();
+        }
     }
 
     @Override

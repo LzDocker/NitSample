@@ -30,9 +30,11 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/ll_title"
             visibleGone="@{item.recycleTopLayout!=null}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:padding="10dp">
 
             <TextView
@@ -72,8 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#F8F8F8"
-            android:paddingLeft="10dp"
             android:overScrollMode="always"
+            android:paddingLeft="10dp"
             android:paddingRight="10dp"
             app:itemBinding="@{item.getItemImgBinding()}"
             app:items="@{item.getInnerResource()}"
@@ -83,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="12dp"
             android:layout_marginTop="10dp"
-            android:background="#f7f7f7"/>
+            android:background="#f7f7f7" />
     </LinearLayout>
 
 

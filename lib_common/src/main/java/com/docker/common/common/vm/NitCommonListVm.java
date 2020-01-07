@@ -231,9 +231,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     }
 
     public void formartData(Resource<T> resource) {
+
     }
-
-
     public void addData(BaseItemModel baseItemModel) {
         mItems.add(baseItemModel);
     }

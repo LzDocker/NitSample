@@ -29,6 +29,9 @@
         <activity
             android:name=".common.ui.CommonAddressListv2Activity"
             android:configChanges="orientation" />
+        <activity
+            android:name=".common.ui.location.MapLocationActivity"
+            android:configChanges="orientation" />
 
 
 

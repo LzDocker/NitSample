@@ -1,9 +1,12 @@
 package com.docker.nitsample.vo.card;
 
 import android.databinding.ObservableField;
+import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.BR;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
 import com.docker.nitsample.vo.CarRvHorizontalVo;
@@ -35,12 +38,19 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
 
     @Override
     public void onItemClick(BaseCardVo item, View view) {
+        if (view.getId() == R.id.ll_title) {
+            ARouter.getInstance().build(AppRouter.ACTIVE_INDEX).navigation();
+            return;
+        }
+    }
 
-
+    public void onChildItemClick(CarRvHorizontalVo carRvHorizontalVo, View view) {
+        // 进入活动详情
+        Log.d("sss", "onChildItemClick: =======进入活动详情===");
     }
 
     public transient ItemBinding<CarRvHorizontalVo> itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
-            R.layout.app_card_horizontal_img_inner);// 单一view 有点击事件;
+            R.layout.app_card_horizontal_img_inner).bindExtra(BR.parent, this);// 单一view 有点击事件;
 
 
     public ItemBinding<CarRvHorizontalVo> getItemImgBinding() {

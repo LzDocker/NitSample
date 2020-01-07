@@ -50,7 +50,11 @@ public class CircleShareSelectActivity extends NitCommonListActivity<CirlcleSele
         commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListReq.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
         commonListReq.ReqParam.put("memberid", "3");
-        commonListReq.externs.put("default", mStaCirParam.getCircleid());
+        if (mStaCirParam != null) {
+            commonListReq.externs.put("default", mStaCirParam.getCircleid());
+        } else {
+            mStaCirParam = new StaCirParam();
+        }
         super.onCreate(savedInstanceState);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("GroupSelect")) {

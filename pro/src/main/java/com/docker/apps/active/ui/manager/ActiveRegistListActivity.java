@@ -1,56 +1,30 @@
-package com.bfhd.account.ui.tygs;
+package com.docker.apps.active.ui.manager;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.BR;
-import com.bfhd.account.R;
-import com.bfhd.account.databinding.AccountActivityActManagerBinding;
-import com.bfhd.account.databinding.AccountActivityActRegistBinding;
-import com.bfhd.account.databinding.AccountActivityAttentionListBinding;
-import com.bfhd.account.vm.AccountViewModel;
-import com.bfhd.account.vo.FansVo;
-import com.bfhd.circle.base.HivsBaseActivity;
-import com.bfhd.circle.base.ViewEventResouce;
-import com.bfhd.circle.base.adapter.HivsSampleAdapter;
-import com.bfhd.circle.vo.bean.StaPersionDetail;
+import com.docker.apps.R;
+import com.docker.apps.databinding.ProActiveManagerBinding;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
-import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
-import com.docker.common.common.ui.base.NitCommonListActivity;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
-import com.docker.common.common.vm.container.NitcommonCardViewModel;
-import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import javax.inject.Inject;
 
 /*
  * 活动报名列表
  **/
 
-@Route(path = AppRouter.ACCOUNT_ACT_REGIST_LIST)
-public class AccounActRegistListActivity extends NitCommonActivity<NitCommonContainerViewModel, AccountActivityActManagerBinding> {
-
-
-    @Inject
-    ViewModelProvider.Factory factory;
-    private HivsSampleAdapter mAdapter;
-
+@Route(path = AppRouter.ACTIVE_REGIST_LIST)
+public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContainerViewModel, ProActiveManagerBinding> {
     public ArrayList<Fragment> fragments = new ArrayList<>();
-
 
     @Override
     public NitCommonContainerViewModel getmViewModel() {
@@ -59,7 +33,7 @@ public class AccounActRegistListActivity extends NitCommonActivity<NitCommonCont
 
     @Override
     protected int getLayoutId() {
-        return R.layout.account_activity_act_manager;
+        return R.layout.pro_active_manager;
     }
 
     @Override

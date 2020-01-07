@@ -12,8 +12,12 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
+import com.docker.cirlev2.vo.pro.AppVo;
+import com.docker.cirlev2.widget.popmen.SuperPopmenu;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
@@ -33,12 +37,15 @@ import com.docker.videobasic.ui.VideoListFragment;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
 import static com.docker.common.common.router.AppRouter.HOME;
 
 @Route(path = HOME)
@@ -81,8 +88,10 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
         mToolbar.hide();
         initMainTab();
         mBinding.ivCenter.setOnClickListener(v -> {
+            showSuperPop();
+
 //            showPopMenu();
-            ARouter.getInstance().build(AppRouter.HOME_edit_index).navigation();
+//            ARouter.getInstance().build(AppRouter.HOME_edit_index).navigation();
 
 //            Intent intent = new Intent(MainActivity.this, VideoListActivity.class);
 //            startActivity(intent);
@@ -111,7 +120,10 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
             if (rxEvent.getT().equals("change")) {
                 int num = (int) rxEvent.getR();
                 mBinding.tlHomeTab.setCurrentTab(num);
-                mBinding.viewpager.setCurrentItem(num - 1, false);
+                if (num > 2) {
+                    num = num - 1;
+                }
+                mBinding.viewpager.setCurrentItem(num, false);
             }
         });
 
@@ -252,6 +264,109 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
         });
     }
 
+
+    SuperPopmenu mPublishMenu;
+
+    private void showSuperPop() {
+
+        if (mPublishMenu == null) {
+            mPublishMenu = new SuperPopmenu(this);
+        }
+        mPublishMenu.init(mBinding.getRoot());
+        processPro(mPublishMenu.getAdapter());
+        mPublishMenu.setReplyCommandParam((ReplyCommandParam) o -> {
+            switch (((AppVo) o).id) {
+                case "0":
+                    //.withSerializable("mStartParam", staCirParam)
+                    ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                            .withInt("editType", 1)
+                            .withInt("type", PUBLISH_TYPE_ACTIVE)
+                            .navigation();
+                    break;
+                case "1":
+                    ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                            .withInt("editType", 1)
+                            .withString("title", "活动")
+                            .withString("pubRoterPath", AppRouter.ACTIVE_PUBLISH)
+                            .navigation();
+                    break;
+                case "2":
+                    ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                            .withInt("editType", 1)
+                            .withInt("type", PUBLISH_TYPE_NEWS)
+                            .navigation();
+                    break;
+                case "3":
+
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_point).withString("type", "point").navigation();
+
+                    break;
+                case "4": // 客服h5
+
+                    break;
+                case "5":// 推广公社
+                    ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
+                    break;
+                case "6":// 加入公社
+                    ARouter.getInstance().build(AppRouter.CIRCLE_INDEX).navigation();
+                    break;
+                case "7": // 成为股东
+
+                    break;
+            }
+        });
+        mPublishMenu.showMoreWindow(mBinding.getRoot());
+    }
+
+    private void processPro(NitAbsSampleAdapter nitAbsSampleAdapter) {
+        nitAbsSampleAdapter.getmObjects().clear();
+
+        AppVo appVo = new AppVo();
+        appVo.name = "发动态";
+        appVo.id = "0";
+
+        AppVo appVo1 = new AppVo();
+        appVo1.name = "发活动";
+        appVo1.id = "1";
+
+        AppVo appVo2 = new AppVo();
+        appVo2.name = "发文章";
+        appVo2.id = "2";
+
+        AppVo appVo3 = new AppVo();
+        appVo3.name = "赚积分";
+        appVo3.id = "3";
+
+
+        AppVo appVo4 = new AppVo();
+        appVo4.name = "找客服";
+        appVo4.id = "4";
+
+
+        AppVo appVo5 = new AppVo();
+        appVo5.name = "推广公社";
+        appVo5.id = "5";
+
+
+        AppVo appVo6 = new AppVo();
+        appVo6.name = "加入公社";
+        appVo6.id = "6";
+
+        AppVo appVo7 = new AppVo();
+        appVo7.name = "成为股东";
+        appVo7.id = "7";
+
+        ArrayList<AppVo> appVos = new ArrayList();
+        appVos.add(appVo);
+        appVos.add(appVo1);
+        appVos.add(appVo2);
+        appVos.add(appVo3);
+        appVos.add(appVo4);
+        appVos.add(appVo5);
+        appVos.add(appVo6);
+        appVos.add(appVo7);
+        nitAbsSampleAdapter.add(appVos);
+    }
 
     @Override
     protected void onDestroy() {
