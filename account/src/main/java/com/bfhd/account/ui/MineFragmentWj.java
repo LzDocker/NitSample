@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountFragmentMineWjBinding;
+import com.bfhd.account.utils.AccountConstant;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.account.vo.MyInfoVo;
 import com.bfhd.circle.base.CommonFragment;
@@ -142,7 +143,7 @@ public class MineFragmentWj extends CommonFragment<AccountViewModel, AccountFrag
 
         // 客服
         mBinding.get().tvHelp.setOnClickListener(v -> {
-            CommonH5Activity.startMe(getActivity(), Constant.CustomerService, "客服中心");
+            CommonH5Activity.startMe(getActivity(), AccountConstant.CustomerService, "客服中心");
         });
 
         ///----------------------------------------------------------------------

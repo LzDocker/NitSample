@@ -10,6 +10,7 @@ import com.docker.apps.databinding.ProPointSortActivityBinding;
 import com.docker.apps.point.vm.PonitSortVm;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
@@ -38,14 +39,14 @@ public class PointSortActivity extends NitCommonActivity<NitEmptyViewModel, ProP
         mToolbar.setTitle("积分榜");
         String titles[] = new String[]{"总积分排行榜", "购买排行榜", "拓客排行榜"};
 
-        fragments.add(PointSortCoutainerFragment.getInstance());
-        fragments.add(PointSortCoutainerFragment.getInstance());
-        fragments.add(PointSortCoutainerFragment.getInstance());
+        fragments.add(PointSortCoutainerFragment.getInstance("1"));
+        fragments.add(PointSortCoutainerFragment.getInstance("2"));
+        fragments.add(PointSortCoutainerFragment.getInstance("3"));
 
         mBinding.viewpager.setOffscreenPageLimit(3);
 
         // magic
-        mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));
+        mBinding.viewpager.setAdapter(new CommonpagerStateAdapter(getSupportFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.viewpager, mBinding.magic, this);
 

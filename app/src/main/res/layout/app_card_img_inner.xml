@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
 
         <variable
             name="item"
-            type="com.docker.common.common.vo.ItemVo" />
+            type="com.docker.nitsample.vo.MenuEntityVo" />
         <!--<variable-->
         <!--name="item"-->
         <!--type="String" />-->
@@ -15,6 +16,7 @@
             name="parent"
             type="com.docker.nitsample.vo.card.AppRecycleCard2Vo" />
 
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
     </data>
 
     <LinearLayout
@@ -27,12 +29,11 @@
 
 
         <ImageView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginRight="2dp"
+            android:layout_width="66dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@{item.id}" />
+            android:scaleType="centerInside"
+            app:imageNomUrl="@{CommonBdUtils.getCompleteImageUrl(item.img)}" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,6 +44,5 @@
             android:textColor="@color/black" />
 
     </LinearLayout>
-
 
 </layout>

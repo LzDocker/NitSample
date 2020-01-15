@@ -4,6 +4,7 @@ import android.databinding.Bindable;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.AppUtils;
+import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.utils.lv.MserialMedatorLv;
@@ -65,9 +66,12 @@ public abstract class BaseCardVo<T> extends BaseSampleItem {
 
     @Override
     public OnItemClickListener getOnItemClickListener() {
-        return (item, view) -> {
-            BaseCardVo.this.onItemClick((BaseCardVo) item, view);
+        return new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseItemModel item, View view) {
+                BaseCardVo.this.onItemClick((BaseCardVo) item, view);
 //            onChangeStyleClick((BaseCardVo) item, view, null);
+            }
         };
     }
 

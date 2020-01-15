@@ -30,7 +30,7 @@ import javax.inject.Inject;
  * 关注列表
  **/
 
-@Route(path = AppRouter.ACCOUNT_ATTEN_LISt)
+//@Route(path = AppRouter.ACCOUNT_ATTEN_LISt)
 public class AccounTygsAttentionListActivity extends NitCommonListActivity<AccountAttentionViewModel> {
 
 

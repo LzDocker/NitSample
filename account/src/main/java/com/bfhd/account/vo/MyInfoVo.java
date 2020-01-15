@@ -35,7 +35,7 @@ public class MyInfoVo extends BaseObservable implements Serializable {
     private String focusNum;
     private String circleNum;
     private String dynamicNum;
-    private String point;
+
     private String invite_code;
     private String allowInvitation;
     private String nicakname;
@@ -46,6 +46,11 @@ public class MyInfoVo extends BaseObservable implements Serializable {
     private String likeNum;
     private String systemId;
     private String reg_type;
+
+    public String invite;
+    private String point;
+    public String amount;
+
 
 
     public String getReg_type() {

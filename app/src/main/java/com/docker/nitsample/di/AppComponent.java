@@ -5,6 +5,7 @@ import com.bfhd.circle.di.CircleModule;
 import com.bfhd.evaluate.di.EvaluateModule;
 import com.docker.apps.active.di.ActiveModule;
 import com.docker.apps.intvite.di.InviteModule;
+import com.docker.apps.order.di.OrderModule;
 import com.docker.apps.point.di.PointModule;
 import com.docker.cirlev2.di.CircleV2Module;
 import com.docker.common.di.CommonModule;
@@ -60,7 +61,9 @@ import okhttp3.OkHttpClient;
 
         ActiveModule.class,
 
-        InviteModule.class
+        InviteModule.class,
+
+        OrderModule.class,
 
 })
 public interface AppComponent {

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
@@ -17,6 +18,11 @@ import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
 import com.bfhd.circle.base.adapter.HivsAbsSampleAdapter;
 import com.bfhd.circle.utils.BdUtils;
+import com.bigkoo.pickerview.builder.TimePickerBuilder;
+import com.bigkoo.pickerview.listener.OnTimeSelectListener;
+import com.bigkoo.pickerview.view.TimePickerView;
+import com.docker.common.common.binding.CommonBdUtils;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.MoneyDetailVo;
@@ -36,6 +42,7 @@ import io.reactivex.disposables.Disposable;
 /*
  * 金额明细
  **/
+@Route(path = AppRouter.ACCOUNT_MONEY_DETAIL)
 public class AccounMoneyDetailListActivity extends HivsBaseActivity<AccountViewModel, AccountActivityMoneyDetailListBinding> {
 
 
@@ -44,7 +51,7 @@ public class AccounMoneyDetailListActivity extends HivsBaseActivity<AccountViewM
 
     private List<MoneyDetailVo> moneyDetailVoList;
     private Disposable disposable;
-//    private TimePickerView pvTime;
+    private TimePickerView pvTime;
     private String timeStamp;
     private HivsAbsSampleAdapter hivsAbsSampleAdapter;
 
@@ -140,35 +147,35 @@ public class AccounMoneyDetailListActivity extends HivsBaseActivity<AccountViewM
         startDate.set(2013, 0, 1);
         endDate.set(2080, 11, 31);
 
-//        pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
-//            @Override
-//            public void onTimeSelect(Date date, View v) {//选中事件回调
-//                mBinding.tvTime.setText(getTime(date));
-//                timeStamp = CommonBdUtils.DateTimeStamp(getTime(date), "yyyy.MM");
-//                mViewModel.mPage = 1;
-//                mViewModel.getMoneyDetailList(timeStamp);
-//            }
-//        })
-//                .setType(new boolean[]{true, true, false, false, false, false})// 默认全部显示
-//                .setCancelText("取消")//取消按钮文字
-//                .setSubmitText("确定")//确认按钮文字
-//                .setContentTextSize(18)//滚轮文字大小
-//                .setTitleSize(20)//标题文字大小
-//                .setTitleText("")//标题文字
-//                .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
-//                .isCyclic(true)//是否循环滚动
-//                .setTitleColor(Color.BLACK)//标题文字颜色
-//                .setSubmitColor(Color.BLACK)//确定按钮文字颜色
-//                .setCancelColor(Color.BLACK)//取消按钮文字颜色
-//                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
-//                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
-//                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
-//                .setRangDate(startDate, endDate)//起始终止年月日设定
-//                .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
-//                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-//                .isDialog(false)//是否显示为对话框样式
-//                .build();
-//        pvTime.show();
+        pvTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date, View v) {//选中事件回调
+                mBinding.tvTime.setText(getTime(date));
+                timeStamp = CommonBdUtils.DateTimeStamp(getTime(date), "yyyy.MM");
+                mViewModel.mPage = 1;
+                mViewModel.getMoneyDetailList(timeStamp);
+            }
+        })
+                .setType(new boolean[]{true, true, false, false, false, false})// 默认全部显示
+                .setCancelText("取消")//取消按钮文字
+                .setSubmitText("确定")//确认按钮文字
+                .setContentTextSize(18)//滚轮文字大小
+                .setTitleSize(20)//标题文字大小
+                .setTitleText("")//标题文字
+                .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
+                .isCyclic(true)//是否循环滚动
+                .setTitleColor(Color.BLACK)//标题文字颜色
+                .setSubmitColor(Color.BLACK)//确定按钮文字颜色
+                .setCancelColor(Color.BLACK)//取消按钮文字颜色
+                .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
+                .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
+                .setDate(selectedDate)// 如果不设置的话，默认是系统时间*/
+                .setRangDate(startDate, endDate)//起始终止年月日设定
+                .setLabel("年", "月", "日", "时", "分", "秒")//默认设置为年月日时分秒
+                .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
+                .isDialog(false)//是否显示为对话框样式
+                .build();
+        pvTime.show();
     }
 
     private String getTime(Date date) {

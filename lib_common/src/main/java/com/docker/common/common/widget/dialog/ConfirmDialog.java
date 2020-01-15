@@ -83,14 +83,15 @@ public class ConfirmDialog extends CommonBaseDialog {
         holder.setOnClickListener(R.id.confirm, v -> {
             dialog.dismiss();
             if (confimLietener != null) {
-                EditText editText = holder.getView(R.id.ed_uniu_key);
-                String content = editText.getText().toString().trim();
-                if (TextUtils.isEmpty(content)) {
-                    ToastUtils.showShort(editText.getHint());
-                    return;
-                } else {
-                    confimLietener.onConfim(content);
-                }
+                confimLietener.onConfim();
+//                EditText editText = holder.getView(R.id.ed_uniu_key);
+//                String content = editText.getText().toString().trim();
+//                if (TextUtils.isEmpty(content)) {
+//                    ToastUtils.showShort(editText.getHint());
+//                    return;
+//                } else {
+//                    confimLietener.onConfim(content);
+//                }
             }
         });
 

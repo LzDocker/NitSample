@@ -20,8 +20,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="290dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="5dp"
         android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp">

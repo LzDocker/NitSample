@@ -71,4 +71,5 @@ dependencies {
     api project(':lib_common')
     api project(":circle")
     api project(":circlev2")
+    implementation project(":lib_im")
 }

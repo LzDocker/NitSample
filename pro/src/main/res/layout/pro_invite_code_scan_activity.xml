@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="barcode"
+            type="String" />
 
     </data>
 
@@ -72,9 +75,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/tv_desc"
                         android:drawableLeft="@mipmap/invite_people_head"
                         android:drawablePadding="10dp"
-                        android:text="151****1098邀请你注册桃源公社"
                         android:textColor="#333"
                         android:textSize="16sp" />
 
@@ -87,10 +90,11 @@
                         android:textSize="23sp" />
 
                     <ImageView
+                        android:id="@+id/iv_bar_code"
                         android:layout_width="140dp"
                         android:layout_height="140dp"
                         android:layout_marginTop="30dp"
-                        android:background="#000000" />
+                        app:imageUrl="@{barcode}" />
 
                     <TextView
                         android:layout_width="wrap_content"

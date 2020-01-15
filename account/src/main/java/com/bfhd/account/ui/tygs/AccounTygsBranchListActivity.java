@@ -13,6 +13,8 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonListActivity;
+import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.vo.UserInfoVo;
 
 import javax.inject.Inject;
 
@@ -26,7 +28,6 @@ public class AccounTygsBranchListActivity extends NitCommonListActivity<AccountB
 
     @Inject
     ViewModelProvider.Factory factory;
-
 
     @Override
     public AccountBranchViewModel getmViewModel() {
@@ -44,9 +45,9 @@ public class AccounTygsBranchListActivity extends NitCommonListActivity<AccountB
     public void onCreate(Bundle savedInstanceState) {
         commonListReq = new CommonListOptions();
         commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListReq.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
-        commonListReq.ReqParam.put("memberid", "3");
-//        commonListReq.externs.put("default",mStaCirParam.getCircleid());
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        commonListReq.ReqParam.put("uuid", userInfoVo.uuid);
+        commonListReq.ReqParam.put("memberid", userInfoVo.uid);
         super.onCreate(savedInstanceState);
 
     }

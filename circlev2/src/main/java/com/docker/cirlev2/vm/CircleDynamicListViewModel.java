@@ -96,7 +96,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
             staPersionDetail.name = item.getExtData().linkman;
             staPersionDetail.uuid = item.getUuid();
             staPersionDetail.uid = item.getMemberid();
-            ARouter.getInstance().build(AppRouter.CIRCLE_persion_v2_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+
+            ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", item.getMemberid()).withString("uuid2", item.getUuid()).navigation();
+
+//            ARouter.getInstance().build(AppRouter.CIRCLE_persion_v2_detail).withSerializable("mStartParam", staPersionDetail).navigation();
         }
 
     }
@@ -334,6 +337,12 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                             commentVo.setAvatar(userInfoVo.avatar);
                             commentVo.setContent(params.get("content"));
                             commentVo.setPraiseNum("0");
+                            if (params.containsKey("audio")) {
+                                commentVo.setAudio(params.get("audio"));
+                            }
+                            if (params.containsKey("audio_duration")) {
+                                commentVo.setAudio_duration(params.get("audio_duration"));
+                            }
                             commentVo.setInputtime(String.valueOf(System.currentTimeMillis()).substring(0, String.valueOf(System.currentTimeMillis()).length() - 3));
                             RxBus.getDefault().post(new RxEvent("comment", commentVo));
                         }

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityRegistBinding;
+import com.bfhd.account.utils.AccountConstant;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.account.vo.RegistParmVo;
 import com.bfhd.circle.base.Constant;
@@ -28,6 +29,7 @@ import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.UserInfoVo;
 import com.gyf.immersionbar.ImmersionBar;
+
 import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -150,11 +152,11 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
             startActivityForResult(intent, 101);
         });
         mBinding.accountToUse.setOnClickListener(v -> {
-            CommonH5Activity.startMe(RegistActivity.this, Constant.UseContantWeb, "使用协议");
+            CommonH5Activity.startMe(RegistActivity.this, AccountConstant.UseContantWeb, "使用协议");
         });
-//        mBinding.accountUserConst.setOnClickListener(v -> {
-//            CommonH5Activity.startMe(RegistActivity.this, Constant.UseUseWeb, "隐私协议"); // todo
-//        });
+        mBinding.accountToPrivate.setOnClickListener(v -> {
+            CommonH5Activity.startMe(RegistActivity.this, AccountConstant.UseUseWeb, "隐私协议"); // todo
+        });
     }
 
     public boolean dispatchTouchEvent(MotionEvent event) {

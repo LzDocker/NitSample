@@ -56,8 +56,9 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
         mBinding.get().setViewmodel(mViewModel);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("comment")) {
-                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN), 500);
+                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN), 800);
             }
+
         });
     }
 

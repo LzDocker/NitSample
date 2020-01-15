@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import com.bfhd.circle.base.EmptyVm;
 import com.docker.core.di.scope.ViewModelKey;
 import com.docker.nitsample.vm.EditListViewModel;
+import com.docker.nitsample.vm.IndexTygsViewModel;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.OptimizationModel;
 import com.docker.nitsample.vm.PreviewViewModel;
@@ -14,7 +15,11 @@ import com.docker.nitsample.vm.SampleEditSpaViewModel;
 import com.docker.nitsample.vm.SampleListViewModel;
 import com.docker.nitsample.vm.SampleNetListViewModel;
 import com.docker.nitsample.vm.SearchViewModel;
+import com.docker.nitsample.vm.card.AppBannerCardViewModel;
 import com.docker.nitsample.vm.card.AppCardViewModel;
+import com.docker.nitsample.vm.card.AppIndexMenuViewModel;
+import com.docker.nitsample.vm.card.CircleRecomendListCardVm;
+import com.docker.nitsample.vm.card.OptimizationCardViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -81,6 +86,16 @@ public abstract class ViewModelModule {
     @ViewModelKey(SearchViewModel.class)
     abstract ViewModel SearchViewModel(SearchViewModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AppBannerCardViewModel.class)
+    abstract ViewModel AppBannerCardViewModel(AppBannerCardViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AppIndexMenuViewModel.class)
+    abstract ViewModel AppIndexMenuViewModel(AppIndexMenuViewModel model);
+
 
 //
 //    @Binds
@@ -88,5 +103,20 @@ public abstract class ViewModelModule {
 //    @ViewModelKey(MainTabViewModel.class)
 //    abstract ViewModel MainTabViewModel(MainTabViewModel model);
 
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CircleRecomendListCardVm.class)
+    abstract ViewModel CircleRecomendListCardVm(CircleRecomendListCardVm model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(IndexTygsViewModel.class)
+    abstract ViewModel IndexTygsViewModel(IndexTygsViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OptimizationCardViewModel.class)
+    abstract ViewModel OptimizationCardViewModel(OptimizationCardViewModel model);
 
 }

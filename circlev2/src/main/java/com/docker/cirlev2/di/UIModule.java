@@ -20,6 +20,8 @@ import com.docker.cirlev2.ui.detail.index.base.NitAbsCircleDetailIndexActivity;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderImg;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.CircleDetailFragmentTemple_HeaderNone;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
+import com.docker.cirlev2.ui.detail.index.type.CircleDetailFragment_gdh;
+import com.docker.cirlev2.ui.detail.index.type.CircleDetailFragment_tyz;
 import com.docker.cirlev2.ui.dynamicdetail.CircleDynamicDetailActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleMoreReplyListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleReplyListActivity;
@@ -281,6 +283,12 @@ public abstract class UIModule {
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleProInfoActivity contributeCircleProInfoActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleDetailFragment_tyz contributeCircleDetailFragment_tyzInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleDetailFragment_gdh contributeCircleDetailFragment_gdhInjector();
 
 
 }

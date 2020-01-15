@@ -82,12 +82,13 @@
                                 android:id="@+id/recycle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:focusable="false"
                                 android:nestedScrollingEnabled="false"
-                                app:itemBinding="@{item.itemDetailBinding}"
+                                app:itemBinding="@{item.getItemDetailBinding()}"
                                 app:items="@{item.getInnerResource()}"
-                                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                                 app:visibleGone="@{BdUtils.isShowRvImg(item)}"
                                 bind:layoutManager="@{LayoutManager.grid(3)}" />
+
                             <!--bind:items="@{item.extData.resource}"-->
                             <!--bind:items="@{item.getResouceData(item.extData)}"-->
 

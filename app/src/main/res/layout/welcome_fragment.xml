@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/welcome_style1" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_enter"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/circle_lable_shape"
+            android:gravity="center"
+            android:text="点击进入"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+
+</layout>

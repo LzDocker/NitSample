@@ -69,7 +69,6 @@ public class MainTygsModule {
 
 
         //个人中心
-
         CommonListOptions commonListOptions3 = new CommonListOptions();
         commonListOptions3.falg = 3;
         commonListOptions3.isActParent = true;

@@ -37,18 +37,21 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
     @Override
     public void onItemClick(BaseCardVo item, View view) {
         if (view.getId() == R.id.ll_person_info) { // 个人信息
-            CommonContainerOptions options = new CommonContainerOptions();
-            options.title = "个人信息";
-            options.commonListOptions = new CommonListOptions();
-            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
-                    .withSerializable(Constant.ContainerParam, options)
-                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountPersonInfoViewModel")
-                    .navigation();
+//            CommonContainerOptions options = new CommonContainerOptions();
+//            options.title = "个人信息";
+//            options.commonListOptions = new CommonListOptions();
+//            ARouter.getInstance().build(AppRouter.COMMON_CONTAINER)
+//                    .withSerializable(Constant.ContainerParam, options)
+//                    .withSerializable(Constant.ContainerCommand, "com.bfhd.account.vm.AccountPersonInfoViewModel")
+//                    .navigation();
 //            ((AccountPersonInfoViewModel) mNitcommonCardViewModel).process();
+
+            ARouter.getInstance().build(AppRouter.ACCOUNT_PERSION_INFO).navigation();
         }
 
         if (view.getId() == R.id.ll_address) { //地址管理
-            ARouter.getInstance().build(AppRouter.COMMON_address_list).navigation();
+//            ARouter.getInstance().build(AppRouter.COMMON_address_list).navigation();
+            ARouter.getInstance().build(AppRouter.ORDER_ADDRESS_MANAGER).navigation();
         }
 
         if (view.getId() == R.id.ll_chache_clear) { //清除缓存
@@ -65,7 +68,7 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
         }
 
         if (view.getId() == R.id.tv_go_out) { //退出登录
-//            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
             CacheUtils.clearUser();
 //            LogoutHelper.logout();
             JPushInterface.deleteAlias(ActivityUtils.getTopActivity(), AppUtils.getAppVersionCode());

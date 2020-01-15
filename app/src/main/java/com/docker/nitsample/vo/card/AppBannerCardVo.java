@@ -1,38 +1,40 @@
 package com.docker.nitsample.vo.card;
 
-import android.databinding.ObservableField;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.circle.vo.bean.StaDetailParam;
 import com.docker.common.common.command.ReplyCommandParam;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
-
-import java.io.Serializable;
+import com.docker.nitsample.vo.BannerEntityVo;
 import java.util.ArrayList;
-import java.util.List;
+public class AppBannerCardVo extends BaseCardVo {
 
-public class AppBannerCardVo extends BaseCardVo<String> {
-
+    public ObservableList<BannerEntityVo> observableList = new ObservableArrayList<>();
     /*
      * banner 点击事件
      * */
-    public ReplyCommandParam replyCommandParam = new ReplyCommandParam() {
-        @Override
-        public void exectue(Object o) {
-            Log.d("sss", "exectue: ===========popopo==========" + o);
+    public ReplyCommandParam replyCommandParam = (ReplyCommandParam) o -> {
+        if ("".equals(((BannerEntityVo) o).dynamicid)) {
+            ARouter.getInstance().build(AppRouter.COMMONH5)
+                    .withString("title", ((BannerEntityVo) o).title)
+                    .withString("weburl", ((BannerEntityVo) o).http).navigation();
+        } else {
+            StaDetailParam staDetailParam = new StaDetailParam();
+            staDetailParam.dynamicId = (((BannerEntityVo) o)).dynamicid;
+            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL).withSerializable("mStaparam", staDetailParam).navigation();
         }
     };
-    public ObservableField<List<BannerVo>> bannerVos = new ObservableField<>();
 
     public AppBannerCardVo(int style, int position) {
         super(style, position);
         maxSupport = 1;
-        ArrayList<BannerVo> arrayList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            arrayList.add(new BannerVo());
-        }
-        bannerVos.set(arrayList);
+        mVmPath = "com.docker.nitsample.vm.card.AppBannerCardViewModel";
     }
 
     @Override
@@ -45,10 +47,8 @@ public class AppBannerCardVo extends BaseCardVo<String> {
         return R.layout.app_banner_card;
     }
 
-    public class BannerVo implements Serializable {
-        public String img = "http://taijistar.oss-cn-beijing.aliyuncs.com/static/var/upload/img20191029/upload/image/1572354265340_536x451.png";
-        public String url;
-        public String type;
+    public void setBannerList(ArrayList<BannerEntityVo> bannerEntityVos) {
+        observableList.clear();
+        observableList.addAll(bannerEntityVos);
     }
-
 }

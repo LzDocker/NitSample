@@ -9,7 +9,7 @@
 
         <variable
             name="item"
-            type="com.docker.cirlev2.vo.card.PersonInfoHeadVo" />
+            type="com.docker.cirlev2.vo.card.PersonInfoHeadCardVo" />
 
         <import type="com.docker.cirlev2.Constant" />
 
@@ -31,15 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@mipmap/circle_persion_head" />
+            app:BlurImgUrl="@{item.datasource.avatar}" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            android:background="#00000000"
             android:orientation="vertical"
-            android:paddingBottom="20dp">
+            android:paddingBottom="10dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -73,11 +72,10 @@
                     android:id="@+id/v_avater"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="@color/white"
                     android:scaleType="centerCrop"
                     app:errorImg="@{R.mipmap.circle_default_avatar}"
                     app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                    app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+                    app:roundImgUrl="@{Constant.getCompleteImageUrl(item.datasource.avatar)}" />
 
 
                 <LinearLayout
@@ -93,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="郭佳伟"
+                        android:text="@{item.datasource.nickname}"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -119,10 +117,10 @@
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text="关注"
+                    android:text="+关注"
                     android:textColor="@color/white"
                     android:textSize="14.5sp"
-                    app:visibleGone="@{item.isFocus == 0}" />
+                    app:visibleGone="@{item.datasource.isFocus == 0 &amp;&amp; !item.datasource.isSelf}" />
 
                 <TextView
                     android:id="@+id/tv_each_Focus"
@@ -138,14 +136,14 @@
                     android:textColor="#666"
                     android:textSize="14.5sp"
                     android:visibility="gone"
-                    app:visibleGone="@{item.isFocus == 2}" />
+                    app:visibleGone="@{item.datasource.isFocus == 2 &amp;&amp; !item.datasource.isSelf}" />
             </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:lineSpacingExtra="5dp"
                 android:text="抗裂砂浆付款了圣诞节饭开始了健康飞洛杉矶的的罚款第三方接口圣诞节疯狂了时代峻峰克里斯多夫的放假克鲁赛德荆防颗粒时代峰峻释放时间的反馈了圣诞节方式"
@@ -156,13 +154,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:text="552超赞"
+                    android:text="@{item.datasource.favourNum}"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -170,15 +167,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="4689关注"
+                    android:text="超赞"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{item.datasource.focusNum}"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
 
-                    android:text="2177粉丝"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="关注"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.datasource.fansNum}"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="粉丝"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </LinearLayout>

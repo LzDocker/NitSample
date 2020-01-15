@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityRewardBinding;
+import com.bfhd.account.vm.AccountPointViewModel;
 import com.bfhd.account.vm.card.AccountPointRecycleViewModel;
 import com.bfhd.account.vo.tygs.AccountEarnHeadVo;
 import com.bfhd.account.vo.tygs.AccountPointHeadVo;
@@ -18,8 +19,9 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vm.NitEmptyViewModel;
+import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 
 import javax.inject.Inject;
@@ -29,11 +31,11 @@ import javax.inject.Inject;
  **/
 
 @Route(path = AppRouter.ACCOUNT_point)
-public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, AccountActivityRewardBinding> {
+public class AccounPointActivity extends NitCommonActivity<AccountPointViewModel, AccountActivityRewardBinding> {
 
     @Inject
     ViewModelProvider.Factory factory;
-    private NitCommonListVm outerVm;
+    private AccountPointRecycleViewModel outerVm;
     private String type;
 
 
@@ -43,8 +45,8 @@ public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, Ac
     }
 
     @Override
-    public NitEmptyViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(NitEmptyViewModel.class);
+    public AccountPointViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(AccountPointViewModel.class);
     }
 
 
@@ -57,7 +59,7 @@ public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, Ac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mViewModel.fetchPointTotal();
     }
 
     @Override
@@ -73,8 +75,11 @@ public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, Ac
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.falg = 0;
-        commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions.isActParent = true;
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        commonListOptions.ReqParam.put("memberid", userInfoVo.uid);
+        commonListOptions.ReqParam.put("uuid", userInfoVo.uuid);
         NitBaseProviderCard.providerCoutainerForFrame(this.getSupportFragmentManager(), R.id.frame_header, commonListOptions);
     }
 
@@ -88,15 +93,31 @@ public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, Ac
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-
+                outerVm = (AccountPointRecycleViewModel) commonListVm;
                 if ("point".equals(type)) {
+                    outerVm.scope = 0;
                     AccountPointHeadVo accountPointHeadVo = new AccountPointHeadVo(0, 0);
+                    accountPointHeadVo.isNoNetNeed = true;
                     NitBaseProviderCard.providerCard(commonListVm, accountPointHeadVo, nitCommonFragment);
-                    accountPointHeadVo.setPoint("111");
+                    mViewModel.myInfoDispatcherVoMediatorLiveData.observe(AccounPointActivity.this, myInfoDispatcherVo -> {
+                        if (myInfoDispatcherVo != null) {
+                            if (myInfoDispatcherVo.member != null) {
+                                accountPointHeadVo.setPoint(myInfoDispatcherVo.member.getPoint());
+                            }
+                        }
+                    });
                 } else if ("earn".equals(type)) {
+                    outerVm.scope = 1;
                     AccountEarnHeadVo accountEarnHeadVo = new AccountEarnHeadVo(0, 0);
+                    accountEarnHeadVo.isNoNetNeed = true;
                     NitBaseProviderCard.providerCard(commonListVm, accountEarnHeadVo, nitCommonFragment);
-                    accountEarnHeadVo.setPoint("111");
+                    mViewModel.myInfoDispatcherVoMediatorLiveData.observe(AccounPointActivity.this, myInfoDispatcherVo -> {
+                        if (myInfoDispatcherVo != null) {
+                            if (myInfoDispatcherVo.member != null) {
+                                accountEarnHeadVo.setPoint(myInfoDispatcherVo.member.amount);
+                            }
+                        }
+                    });
                 }
             }
         };
@@ -106,6 +127,7 @@ public class AccounPointActivity extends NitCommonActivity<NitEmptyViewModel, Ac
 
     @Override
     public void initObserver() {
+
 
     }
 

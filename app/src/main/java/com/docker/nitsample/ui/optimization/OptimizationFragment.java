@@ -1,5 +1,6 @@
 package com.docker.nitsample.ui.optimization;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,24 +19,33 @@ import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
+import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
 import com.docker.nitsample.databinding.OptimizationFragmentBinding;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.OptimizationModel;
+import com.docker.nitsample.vo.BannerEntityVo;
+import com.docker.nitsample.vo.GoodsBannerVo;
 import com.docker.nitsample.vo.LayoutManagerVo;
 import com.docker.nitsample.vo.RecycleTopLayout;
+import com.docker.nitsample.vo.card.AppGoodsOptimizationCardVo;
 import com.docker.nitsample.vo.card.AppRecycleCard2Vo;
 import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo;
 import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 公社优选
  */
 public class OptimizationFragment extends NitCommonFragment<OptimizationModel, OptimizationFragmentBinding> {
     private NitDelegetCommand delegetCommand;
-    private NitCommonListVm outerVm;
+    private OptimizationModel outerVm;
     private CommonListOptions commonListReq;
 
     public static OptimizationFragment newinstance(CommonListOptions commonListReq) {
@@ -63,7 +73,9 @@ public class OptimizationFragment extends NitCommonFragment<OptimizationModel, O
         ARouter.getInstance().inject(this);
         Bundle bundle = getArguments();
         commonListReq = (CommonListOptions) bundle.getSerializable(Constant.ContainerParam);
-        NitBaseProviderCard.providerCoutainerForFrame(getChildFragmentManager(), R.id.frame, commonListReq);
+        NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), R.id.frame, commonListReq);
+
+
     }
 
     @Override
@@ -82,7 +94,27 @@ public class OptimizationFragment extends NitCommonFragment<OptimizationModel, O
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                outerVm = commonListVm;
+                mViewModel.loadBannerGoodsData();
+                mViewModel.mapMediatorLiveData.observe(OptimizationFragment.this, stringListHashMap -> {
+                    if (stringListHashMap != null && stringListHashMap.size() > 0) {
+                        mBinding.get().empty.hide();
+                        for (Map.Entry<String, List<BannerEntityVo>> entry : stringListHashMap.entrySet()) {
+                            String mapKey = entry.getKey();
+                            List<BannerEntityVo> mapValue = entry.getValue();
+                            AppGoodsOptimizationCardVo appGoodsOptimizationCardVo = new AppGoodsOptimizationCardVo(0, 0);
+                            appGoodsOptimizationCardVo.setBannerList((ArrayList<BannerEntityVo>) mapValue);
+                            appGoodsOptimizationCardVo.tabClass = mapKey;
+                            appGoodsOptimizationCardVo.mRepParamMap.put("shopType", mapKey);
+                            NitBaseProviderCard.providerCard(commonListVm, appGoodsOptimizationCardVo, nitCommonFragment);
+                        }
+                    } else {
+                        mBinding.get().empty.showError();
+                        mBinding.get().empty.setOnretryListener(() -> {
+                            mBinding.get().empty.showLoading();
+                            mViewModel.loadBannerGoodsData();
+                        });
+                    }
+                });
             }
         };
         return nitDelegetCommand;

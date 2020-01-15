@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.ServerGoodsDataBean" />
+
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+    </data>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="7dp">
+
+            <FrameLayout
+                android:id="@+id/circle_iv_header"
+                android:layout_width="match_parent"
+                android:layout_height="172dp">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:imageUrl="@{BdUtils.getDynamicSingleImg(item)}" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:background="#E60012"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="2dp"
+                    android:text="@{item.companyName}"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:background="#D6B98B"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="2dp"
+                    android:text="@{BdUtils.getPoint(item)}"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    app:visibleGone="@{BdUtils.isShowPoint(item)}" />
+
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_title_coutainer"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/circle_iv_header"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/circle_tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/circle_iv_header"
+                    android:layout_toRightOf="@+id/tv_label"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:minHeight="30dp"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:text="@{item}"
+                    android:textColor="#333"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_title_coutainer"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="7dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="¥"
+                    android:textColor="#E84651"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/circle_tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{BdUtils.getPayMoney(item)}"
+                    android:textColor="#E84651"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{BdUtils.getSeeNum(item.seeNum)}"
+                    android:textColor="#999"
+                    android:textSize="10sp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>

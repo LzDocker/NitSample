@@ -286,6 +286,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -303,13 +304,16 @@
                     android:text="活动内容"
                     android:textSize="15sp" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/tv_content"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_weight="1"
                     android:background="@color/white"
+                    android:drawableRight="@mipmap/arrow_right"
+                    android:drawablePadding="10dp"
                     android:gravity="right|center_vertical"
                     android:hint="请输入"
                     android:textSize="14sp" />

@@ -123,12 +123,22 @@
 
         <activity
             android:name="com.docker.nitsample.ui.MainTygsActivity"
+            android:screenOrientation="portrait"></activity>
+
+
+        <!--  android:theme="@style/AppSplash"-->
+        <activity
+            android:name=".ui.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.WelocomeActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name="com.docker.nitsample.ui.MainActivity"

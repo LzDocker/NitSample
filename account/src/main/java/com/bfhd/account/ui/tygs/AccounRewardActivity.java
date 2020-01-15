@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -27,6 +28,8 @@ import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
+import com.docker.common.common.widget.refresh.api.RefreshLayout;
+import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +39,8 @@ import javax.inject.Inject;
 
 /*
  * 推广的人====我的奖励
+ *
+ * todo
  **/
 
 @Route(path = AppRouter.ACCOUNT_reward)
@@ -45,6 +50,8 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
     @Inject
     ViewModelProvider.Factory factory;
     private String[] titles;
+
+    private NitCommonListVm OutercardVm;
 
 
     @Override
@@ -92,6 +99,12 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
         }
         peocessTab(circleTitlesVos);
 
+
+        mBinding.refresh.setEnableLoadMore(false);
+        mBinding.refresh.setOnRefreshListener(refreshLayout -> {
+            ((NitCommonContainerFragmentV2) fragments.get(mBinding.viewPager.getCurrentItem())).onReFresh(mBinding.refresh);
+            OutercardVm.onJustRefresh();
+        });
     }
 
 
@@ -109,8 +122,9 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                         AccountRewardHeadVo accountRewardHeadVo = new AccountRewardHeadVo(0, 0);
+                        accountRewardHeadVo.isNoNetNeed = true;
                         NitBaseProviderCard.providerCard(commonListVm, accountRewardHeadVo, nitCommonFragment);
-
+                        OutercardVm = commonListVm;
                     }
                 };
                 break;
@@ -129,7 +143,6 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
                 break;
 
         }
-
 
 
         return nitDelegetCommand;

@@ -4,7 +4,9 @@ import android.arch.lifecycle.LiveData;
 import android.util.Log;
 
 import com.docker.cirlev2.api.CircleApiService;
-import com.docker.cirlev2.vo.card.CircleDynamicDetailCardVo;
+import com.docker.cirlev2.vo.card.PersonInfoHeadCardVo;
+import com.docker.cirlev2.vo.card.PersonInfoHeadVo;
+import com.docker.cirlev2.vo.entity.CircleCountpageVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
@@ -19,7 +21,7 @@ import javax.inject.Inject;
 
 public class CirclePersonInfoHeadCardVm extends NitcommonCardViewModel {
 
-    public CirclePersonInfoHeadCardVm circlePersonInfoHeadCardVm;
+    public PersonInfoHeadCardVo personInfoHeadVo;
 
     @Inject
     CircleApiService circleApiService;
@@ -28,7 +30,6 @@ public class CirclePersonInfoHeadCardVm extends NitcommonCardViewModel {
     public CirclePersonInfoHeadCardVm() {
 
     }
-
 
 
     public void process() {
@@ -48,11 +49,31 @@ public class CirclePersonInfoHeadCardVm extends NitcommonCardViewModel {
 
     @Override
     public void loadData() {
-
+        if (personInfoHeadVo != null) {
+            loadCardData(personInfoHeadVo);
+        }
     }
 
     @Override
     public void loadCardData(BaseCardVo accountHeadCardVo) {
+        this.personInfoHeadVo = (PersonInfoHeadCardVo) accountHeadCardVo;
+        LiveData<Resource<PersonInfoHeadVo>> responseLiveData = RequestServer(circleApiService.circlePersionCount(personInfoHeadVo.mRepParamMap));
+        personInfoHeadVo.mCardVoLiveData.addSource(responseLiveData,
+                new NitNetBoundObserver<>(new NitBoundCallback<PersonInfoHeadVo>() {
+                    @Override
+                    public void onComplete(Resource<PersonInfoHeadVo> resource) {
+                        super.onComplete(resource);
+                        personInfoHeadVo.mCardVoLiveData.setValue(resource.data);
+                        personInfoHeadVo.mCardVoLiveData.removeSource(responseLiveData);
+                        personInfoHeadVo.setDatasource(resource.data);
+                    }
+
+                    @Override
+                    public void onNetworkError(Resource<PersonInfoHeadVo> resource) {
+                        super.onNetworkError(resource);
+                        personInfoHeadVo.mCardVoLiveData.setValue(null);
+                    }
+                }));
 
     }
 

@@ -1,6 +1,5 @@
 package com.docker.nitsample;
 
-import com.bfhd.circle.base.Constant;
 import com.docker.common.common.config.CommonWidgetModel;
 import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.core.base.BaseApp;
@@ -31,7 +30,7 @@ public class NitApp extends BaseApp {
     @Override
     protected GlobalConfigModule getGlobalConfigModule() {
         return GlobalConfigModule.buidler()
-                .baseurl(Constant.BaseServeTest)
+                .baseurl(ThiredPartConfig.ServeUrl)
                 .globeHttpHandler(new HttpRequestHandler() {
                     @Override
                     public Response onHttpResultResponse(String httpResult, Interceptor.Chain chain, Response response) {

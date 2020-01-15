@@ -2,6 +2,7 @@ package com.docker.cirlev2.ui.dynamicdetail;
 
 import android.Manifest;
 import android.animation.ObjectAnimator;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -115,9 +116,8 @@ public class Circlev2ReplayQuestionActivity extends NitCommonActivity<CircleDyna
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        serviceDataBean = (ServiceDataBean) getIntent().getSerializableExtra("ServiceDataBean");
         super.onCreate(savedInstanceState);
-        mBinding.setViewmodel(mViewModel);
+        serviceDataBean = (ServiceDataBean) getIntent().getSerializableExtra("datasource");
         mBinding.setItem(serviceDataBean);
         // 初始化讯飞
         SpeechUtility.createUtility(this, SpeechConstant.APPID + "=5afbf83a");
@@ -266,7 +266,6 @@ public class Circlev2ReplayQuestionActivity extends NitCommonActivity<CircleDyna
 
     @Override
     public void initObserver() {
-
         mViewModel.mCommentVoMLiveData.observe(this, commentRstVo -> {
             finish();
         });

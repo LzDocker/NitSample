@@ -105,6 +105,8 @@ public class PublishViewModel extends NitCommonContainerViewModel {
                         super.onComplete(resource);
                         if (resource != null && resource.data != null) {
                             mDynamicPublishLV.setValue(((PublishRstVo) resource.data).dynamicId + "-" + "1");
+                        } else {
+                            mDynamicPublishLV.setValue(resource.message);
                         }
                         hideDialogWait();
                     }

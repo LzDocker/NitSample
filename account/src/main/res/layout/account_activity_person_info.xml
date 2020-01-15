@@ -13,6 +13,8 @@
         <import type="com.bfhd.circle.utils.BdUtils" />
 
         <import type="com.bfhd.circle.base.Constant" />
+        
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
 
         <import type="com.bfhd.account.R" />
 
@@ -63,7 +65,7 @@
                                 android:layout_gravity="center_vertical"
                                 app:errorImg="@{R.mipmap.circle_default_avatar}"
                                 app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                                app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+                                app:roundImgUrl="@{CommonBdUtils.getCompleteImageUrl(item.avatar)}" />
 
 
                             <FrameLayout

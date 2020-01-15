@@ -199,34 +199,47 @@
                         android:nestedScrollingEnabled="false"
                         app:itemBinding="@{item.itemDetailBinding}"
                         app:items="@{item.getInnerResource()}"
-                        app:layoutManager="@{LayoutManager.staggeredGrid(1,1)}"
-                        app:visibleGone="@{BdUtils.isShowRvImg(item)}" />
+                        app:layoutManager="@{LayoutManager.staggeredGrid(1,1)}" />
+                    <!--     app:visibleGone="@{BdUtils.isShowRvImg(item)}" -->
                     <!--bind:items="@{item.extData.resource}"-->
                     <!--bind:items="@{item.getResouceData(item.extData)}"-->
 
-                    <FrameLayout
+                    <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"
-                        app:visibleGone="@{BdUtils.isshowBottomImg(item)}">
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="#fff"
+                        android:visibility="gone"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="2dp">
 
-
-                        <ImageView
+                        <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerInside"
-                            app:imageUrl="@{BdUtils.getDynamicSingleImg(item)}" />
+                            android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"
+                            app:visibleGone="@{BdUtils.isshowBottomImg(item)}">
 
 
-                        <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/circle_player_icon"
-                            app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" />
-                    </FrameLayout>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:scaleType="centerInside"
+                                app:rvImgUrl="@{BdUtils.getDynamicSingleImg(item)}" />
+
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/circle_player_icon"
+                                app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" />
+                        </FrameLayout>
+                    </android.support.v7.widget.CardView>
 
                 </LinearLayout>
 
@@ -244,6 +257,7 @@
                         android:id="@+id/activity_answer_ll_play"
                         android:layout_width="156dp"
                         android:layout_height="38.4dp"
+                        android:layout_marginLeft="10dp"
                         android:background="@drawable/circlev2_shape_voice"
                         android:gravity="center_vertical"
                         android:onClick="@{(view)->viewmodel.AudioDetailClick(item.extData.audio,view)}"

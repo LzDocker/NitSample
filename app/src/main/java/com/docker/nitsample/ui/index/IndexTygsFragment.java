@@ -1,32 +1,41 @@
 package com.docker.nitsample.ui.index;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
+import com.docker.cirlev2.ui.list.CircleDynamicListFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.common.widget.refresh.api.RefreshLayout;
 import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
+import com.docker.nitsample.vm.IndexTygsViewModel;
 import com.docker.nitsample.vo.LayoutManagerVo;
 import com.docker.nitsample.vo.RecycleTopLayout;
+import com.docker.nitsample.vo.Tabvo;
+import com.docker.nitsample.vo.card.AppBannerCardVo;
 import com.docker.nitsample.vo.card.AppRecycleCard2Vo;
 import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo;
 import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2;
@@ -35,10 +44,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.docker.common.common.config.Constant.CommonListParam;
+
 /**
  * 公社首页
  */
-public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewModel, IndexTygsFragmentBinding> {
+public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, IndexTygsFragmentBinding> {
     private NitCommonListVm outerVm;
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
@@ -66,15 +77,30 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 outerVm = commonListVm;
-                AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
+                AppBannerCardVo appBannerHeaderCardVo = new AppBannerCardVo(0, 0);
+                appBannerHeaderCardVo.mRepParamMap.put("cid", "1");
+                appBannerHeaderCardVo.mRepParamMap.put("companyid", "1001");
+//                appBannerHeaderCardVo.isNoNetNeed = true;
+
 //                AppRecycleCardVo appRecycleCardVo = new AppRecycleCardVo(0, 0);
                 AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 1);
+                appRecycleCardVo.mRepParamMap.put("keyid", "3471");
+
+
                 AppRecycleHorizontalCardVo appRecycleHorizontalCardVo = new AppRecycleHorizontalCardVo(0, 2,
                         new LayoutManagerVo(0, 0, false),
                         new RecycleTopLayout("热门活动", "更多", true));
+
+
                 AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
                         new LayoutManagerVo(0, 0, false),
                         new RecycleTopLayout("分部推荐", "", false));
+
+                UserInfoVo userInfoVo = CacheUtils.getUser();
+                appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
+                appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
+                appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
+
 
                 NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
                 NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
@@ -86,29 +112,22 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
     }
 
     @Override
-    protected NitCommonContainerViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(NitCommonContainerViewModel.class);
+    protected IndexTygsViewModel getViewModel() {
+        return ViewModelProviders.of(this, factory).get(IndexTygsViewModel.class);
     }
 
     @Override
     protected void initView(View var1) {
+
+        mViewModel.fetchIndexTab();
+        mViewModel.mTabvoLiveData.observe(this, tabvos -> {
+            peocessTab(tabvos);
+        });
+
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), com.docker.cirlev2.R.id.frame_header, commonListOptions);
-        List<CircleTitlesVo> circleTitlesVos = new ArrayList<>();
-        CircleTitlesVo circleTitlesVo = new CircleTitlesVo();
-        circleTitlesVo.setName("我的关注");
-        CircleTitlesVo circleTitlesVo1 = new CircleTitlesVo();
-        circleTitlesVo1.setName("公社头条");
-        CircleTitlesVo circleTitlesVo2 = new CircleTitlesVo();
-        circleTitlesVo2.setName("公社活动");
-        CircleTitlesVo circleTitlesVo3 = new CircleTitlesVo();
-        circleTitlesVo3.setName("全部分部");
-        circleTitlesVos.add(circleTitlesVo);
-        circleTitlesVos.add(circleTitlesVo1);
-        circleTitlesVos.add(circleTitlesVo2);
-        circleTitlesVos.add(circleTitlesVo3);
-        peocessTab(circleTitlesVos);
+
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();
@@ -118,7 +137,11 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
         mBinding.get().refresh.setEnableLoadMore(false);
         mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
             outerVm.onJustRefresh();
-            ((CircleDynamicCoutainerFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).onReFresh(mBinding.get().refresh);
+            if (fragments.size() > 0) {
+                ((CircleDynamicListFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).onReFresh(mBinding.get().refresh);
+            } else {
+                mBinding.get().refresh.finishRefresh(200);
+            }
         });
     }
 
@@ -132,18 +155,26 @@ public class IndexTygsFragment extends NitCommonFragment<NitCommonContainerViewM
 
     }
 
-    public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
-        String[] titles = new String[circleTitlesVos.size()];
-        for (int i = 0; i < circleTitlesVos.size(); i++) {
-            titles[i] = circleTitlesVos.get(i).getName();
+
+    public void peocessTab(List<Tabvo> tabvos) {
+        String[] titles = new String[tabvos.size()];
+        for (int i = 0; i < tabvos.size(); i++) {
+            titles[i] = tabvos.get(i).name;
+            CommonListOptions commonListOptions = new CommonListOptions();
+            commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+            if ("goods".equals(tabvos.get(i).type)) {
+                commonListOptions.RvUi = Constant.KEY_RVUI_GRID2;
+            } else {
+                commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+            }
+            commonListOptions.ReqParam.put("t", tabvos.get(i).type);
             fragments.add((Fragment) ARouter.getInstance()
-                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
-                    .withSerializable("tabVo", (Serializable) circleTitlesVos)
-                    .withInt("pos", i)
+                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                    .withSerializable(CommonListParam, commonListOptions)
                     .navigation());
         }
-        // magic
-        mBinding.get().viewPager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments, titles));
+        //
+        mBinding.get().viewPager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
     }

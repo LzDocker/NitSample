@@ -55,6 +55,7 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     private SourceUpParam mSourceUpParam;
     private CircleSourceUpFragment sourceUpFragment;
 
+    private String content;
     private Disposable disposable;
     private ArrayList<String> selectSurfImgs = new ArrayList<>();
 
@@ -314,6 +315,11 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
         mBinding.get().llLoaction.setOnClickListener(v -> {
             ARouter.getInstance().build(AppRouter.COMMON_LOCATION_ACTIVITY).navigation();
         });
+
+        // 活动内容
+        mBinding.get().llContent.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.ACTIVE_CONTENT_EDIT).withString("data", content).navigation(this.getHoldingActivity(), 10080);
+        });
     }
 
     @Override
@@ -323,6 +329,13 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
             if (requestCode == 10090) {
                 selectSurfImgs = (ArrayList<String>) data.getSerializableExtra("imgList");
                 updateBanner(selectSurfImgs);
+            } else if (requestCode == 10080) {
+                content = data.getStringExtra("data");
+                if (!TextUtils.isEmpty(content)) {
+                    mBinding.get().tvContent.setText("已编辑");
+                } else {
+                    mBinding.get().tvContent.setText("");
+                }
             } else {
                 sourceUpFragment.onActivityResult(requestCode, resultCode, data);
             }

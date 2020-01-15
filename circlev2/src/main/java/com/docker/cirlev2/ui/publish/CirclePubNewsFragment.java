@@ -105,7 +105,6 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
         mViewModel.mImageUploadLV.observe(this, s -> {
             mBinding.get().richEditor.insertImage(CommonBdUtils.getServerImageUrl(s), "");
         });
-
         mViewModel.mDynamicPublishLV.observe(this, s -> {
             ToastUtils.showShort("发布成功");
             RxBus.getDefault().post(new RxEvent<>("dynamic_refresh", ""));
@@ -118,7 +117,6 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
         super.onActivityCreated(savedInstanceState);
         mHandParam = ((CirclePublishActivity) getHoldingActivity()).getmStartParam();
         mEditType = ((CirclePublishActivity) getHoldingActivity()).getmEditType();
-
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("GroupSelect")) {
                 mHandParam = (StaCirParam) rxEvent.getR();
@@ -131,14 +129,11 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
                 }
             }
         });
-
-
         if (mEditType == 2) {
             mHandParam = processStaParam(mHandParam.serviceDataBean);
         }
         processStaparam();
     }
-
 
 
     public void processStaparam() {
@@ -148,7 +143,6 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
             if (!TextUtils.isEmpty(mHandParam.getCircleid())) {
                 mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
             }
-
             if (TextUtils.isEmpty(mHandParam.extentron2)) {
                 mBinding.get().tvPerssionSelect.setText("全部");
             } else {
@@ -336,10 +330,7 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
     }
 
 
-
-
     private void applyPerssion() {
-
         RxPermissions rxPermissions = new RxPermissions(this.getHoldingActivity());
         rxPermissions
                 .request(Manifest.permission.READ_EXTERNAL_STORAGE,

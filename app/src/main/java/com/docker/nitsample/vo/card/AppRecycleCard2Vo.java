@@ -1,6 +1,7 @@
 package com.docker.nitsample.vo.card;
 
-import android.databinding.ObservableField;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableList;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -9,20 +10,20 @@ import com.docker.cirlev2.ui.detail.index.CircleConfig;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
-import com.docker.common.common.vo.ItemVo;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
+import com.docker.nitsample.vo.MenuEntityVo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class AppRecycleCard2Vo extends BaseCardVo<String> {
+public class AppRecycleCard2Vo extends BaseCardVo {
 
     public AppRecycleCard2Vo(int style, int position) {
         super(style, position);
         maxSupport = 1;
+        mVmPath = "com.docker.nitsample.vm.card.AppIndexMenuViewModel";
     }
 
     @Override
@@ -30,24 +31,72 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
 
     }
 
-    public void onChildClick(ItemVo itemVo) {
+    public void onChildClick(MenuEntityVo itemVo) {
+
+//        switch (itemVo.linkageid) {
+//            case "3544":
+//                CircleConfig circleConfig = new CircleConfig();
+//                circleConfig.circleid = "64";
+//                circleConfig.utid = "be49f2cb2627965610be332a4476286c";
+////                circleConfig.circleType = "1";
+//                circleConfig.circleType = "tyz";
+////                circleConfig.Temple = 2;
+//                circleConfig.isNeedToobar = true;
+//                circleConfig.isNeedIntroduce = false;
+//                circleConfig.extens.put("title", "桃源志");
+//                ARouter.getInstance()
+//                        .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
+//                        .withSerializable("circleConfig", circleConfig)
+//                        .navigation();
+//                break;
+//            case "3476":
+//                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX).navigation();
+//                break;
+//            case "3477":
+//                ARouter.getInstance().build(AppRouter.ACTIVE_INDEX).navigation();
+//                break;
+//            case "3472":
+//                ARouter.getInstance().build(AppRouter.POINT_SORT_INDEX).navigation();
+//                break;
+//            case "3475":
+//                ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
+//                break;
+//            case "3474":
+//                RxBus.getDefault().post(new RxEvent<>("change", 1));
+//                break;
+//        }
 
 
         switch (itemVo.getName()) {
             case "桃源志":
                 CircleConfig circleConfig = new CircleConfig();
-                circleConfig.circleid = "255";
-                circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
-                circleConfig.circleType = "1";
+                circleConfig.circleid = "64";
+                circleConfig.utid = "be49f2cb2627965610be332a4476286c";
+//                circleConfig.circleType = "1";
+                circleConfig.circleType = "0";
                 circleConfig.Temple = 2;
-                circleConfig.isNeedToobar = false;
+                circleConfig.isNeedToobar = true;
+                circleConfig.isNeedIntroduce = false;
                 circleConfig.extens.put("title", "桃源志");
                 ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
                         .withSerializable("circleConfig", circleConfig)
                         .navigation();
                 break;
-            case "分部说":
+            case "股东会":
+                CircleConfig circleConfig1 = new CircleConfig();
+                circleConfig1.circleid = "61";
+                circleConfig1.utid = "fcecfffb5fb3c5927997c716b8947fe3";
+                circleConfig1.circleType = "3";
+                circleConfig1.Temple = 1;
+                circleConfig1.isNeedToobar = true;
+                circleConfig1.isNeedIntroduce = false;
+                ARouter.getInstance()
+                        .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
+                        .withSerializable("circleConfig", circleConfig1)
+                        .navigation();
+                break;
+            case "分舵说":
                 ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX).navigation();
 
                 break;
@@ -63,6 +112,9 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
             case "购酒·优选":
                 RxBus.getDefault().post(new RxEvent<>("change", 1));
                 break;
+            case "积分·收益":
+                ARouter.getInstance().build(AppRouter.ACCOUNT_point).withString("type", "point").navigation();
+                break;
         }
     }
 
@@ -72,45 +124,50 @@ public class AppRecycleCard2Vo extends BaseCardVo<String> {
     }
 
 
-    public transient ItemBinding<ItemVo> itemImgBinding = ItemBinding.<ItemVo>of(BR.item,
+    public transient ItemBinding<MenuEntityVo> itemImgBinding = ItemBinding.<MenuEntityVo>of(BR.item,
             R.layout.app_card_img_inner).bindExtra(BR.parent, this); // 单一view 有点击事件;
 //
 
 
-    public ItemBinding<ItemVo> getItemImgBinding() {
+    public ItemBinding<MenuEntityVo> getItemImgBinding() {
         if (itemImgBinding == null) {
-            itemImgBinding = ItemBinding.<ItemVo>of(BR.item,
+            itemImgBinding = ItemBinding.<MenuEntityVo>of(BR.item,
                     R.layout.app_card_img_inner);
         }
         return itemImgBinding;
     }
 
-    private ObservableField<List<ItemVo>> InnerResource = new ObservableField<>();
+    private ObservableList<MenuEntityVo> InnerResource = new ObservableArrayList<>();
 
-    public void setInnerResource(ObservableField<List<ItemVo>> innerResource) {
-        InnerResource = innerResource;
+    public void setInnerResource(ArrayList<MenuEntityVo> innerResource) {
+        InnerResource.clear();
+        InnerResource.addAll(innerResource);
     }
 
 
-    public ObservableField<List<ItemVo>> getInnerResource() {
-        ItemVo itemVo = new ItemVo(R.mipmap.dzgl_true, "桃源志");
-        ItemVo itemVo1 = new ItemVo(R.mipmap.dzgl_true, "分部说");
-        ItemVo itemVo2 = new ItemVo(R.mipmap.dzgl_true, "积分榜");
-        ItemVo itemVo3 = new ItemVo((R.mipmap.dzgl_true), "股东汇");
-        ItemVo itemVo4 = new ItemVo((R.mipmap.dzgl_true), "购酒·优选");
-        ItemVo itemVo5 = new ItemVo((R.mipmap.dzgl_true), "沙龙·活动");
-        ItemVo itemVo6 = new ItemVo((R.mipmap.dzgl_true), "认知·课堂");
-        ItemVo itemVo7 = new ItemVo((R.mipmap.dzgl_true), "邀人·推广");
-        ArrayList<ItemVo> arrayList = new ArrayList();
-        arrayList.add(itemVo);
-        arrayList.add(itemVo1);
-        arrayList.add(itemVo2);
-        arrayList.add(itemVo3);
-        arrayList.add(itemVo4);
-        arrayList.add(itemVo5);
-        arrayList.add(itemVo6);
-        arrayList.add(itemVo7);
-        InnerResource.set(arrayList);
+//    public ObservableField<List<ItemVo>> getInnerResource() {
+//        ItemVo itemVo = new ItemVo(R.mipmap.dzgl_true, "桃源志");
+//        ItemVo itemVo1 = new ItemVo(R.mipmap.dzgl_true, "分部说");
+//        ItemVo itemVo2 = new ItemVo(R.mipmap.dzgl_true, "积分榜");
+//        ItemVo itemVo3 = new ItemVo((R.mipmap.dzgl_true), "股东汇");
+//        ItemVo itemVo4 = new ItemVo((R.mipmap.dzgl_true), "购酒·优选");
+//        ItemVo itemVo5 = new ItemVo((R.mipmap.dzgl_true), "沙龙·活动");
+//        ItemVo itemVo6 = new ItemVo((R.mipmap.dzgl_true), "认知·课堂");
+//        ItemVo itemVo7 = new ItemVo((R.mipmap.dzgl_true), "邀人·推广");
+//        ArrayList<ItemVo> arrayList = new ArrayList();
+//        arrayList.add(itemVo);
+//        arrayList.add(itemVo1);
+//        arrayList.add(itemVo2);
+//        arrayList.add(itemVo3);
+//        arrayList.add(itemVo4);
+//        arrayList.add(itemVo5);
+//        arrayList.add(itemVo6);
+//        arrayList.add(itemVo7);
+//        InnerResource.set(arrayList);
+//        return InnerResource;
+//    }
+
+    public ObservableList<MenuEntityVo> getInnerResource() {
         return InnerResource;
     }
 }

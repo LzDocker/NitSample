@@ -1,6 +1,7 @@
 package com.docker.common.common.widget.XPopup;
 
 import android.content.Context;
+import android.databinding.ObservableField;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -9,10 +10,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.ImageUtils;
 import com.docker.common.R;
+import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.vo.ShareBean;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.animator.PopupAnimator;
@@ -30,12 +33,25 @@ public class FullScreenSharePopView extends CenterPopupView {
 
     private int style = 0;
 
+    public ObservableField<String> shareImgUrl = new ObservableField<>();
+    public ObservableField<String> shareLinkUrl = new ObservableField<>();
+
     public FullScreenSharePopView(@NonNull Context context) {
         super(context);
     }
 
     public FullScreenSharePopView setStyle(int style) {
         this.style = style;
+        return this;
+    }
+
+    public FullScreenSharePopView setShareImgUrl(String shareImgUrl) {
+        this.shareImgUrl.set(shareImgUrl);
+        return this;
+    }
+
+    public FullScreenSharePopView setShareLinkUrl(String shareLinkUrl) {
+        this.shareLinkUrl.set(shareLinkUrl);
         return this;
     }
 
@@ -111,8 +127,15 @@ public class FullScreenSharePopView extends CenterPopupView {
     @Override
     protected void onCreate() {
         super.onCreate();
+
+
         if (style == 0) { // img
             findViewById(R.id.ll_share_img).setVisibility(VISIBLE);
+            ImageView imageView = findViewById(R.id.iv_full_img);
+            GlideApp.with(imageView).load(shareImgUrl.get()).centerCrop().into(imageView);
+            ImageView barcode = findViewById(R.id.iv_bar_code);
+            String codeurl = "http://qr.topscan.com/api.php?text=" + shareLinkUrl.get();
+            GlideApp.with(imageView).load(codeurl).centerCrop().into(barcode);
 
         } else {      // link
             findViewById(R.id.tv_link).setVisibility(VISIBLE);
@@ -177,13 +200,9 @@ public class FullScreenSharePopView extends CenterPopupView {
     }
 
     private void shareLink(ShareBean shareBean, SHARE_MEDIA share_media) {
-
-//        UMWeb web = new UMWeb(shareBean.getShareUrl());
-        UMWeb web = new UMWeb("http://www.baidu.com");
-//        web.setTitle(shareBean.getShareTit());//标题
-        web.setTitle("test");//标题
-//        web.setDescription(shareBean.getShareDesc());//描述
-        web.setDescription("desc");//描述
+        UMWeb web = new UMWeb(shareLinkUrl.get());
+        web.setTitle("桃源公社");//标题
+        web.setDescription("桃源公社");//描述
         new ShareAction(ActivityUtils.getTopActivity())
                 .setPlatform(share_media)//传入平台
                 .withMedia(web)

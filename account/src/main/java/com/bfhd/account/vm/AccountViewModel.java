@@ -1,6 +1,7 @@
 package com.bfhd.account.vm;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -249,6 +250,56 @@ public class AccountViewModel extends HivsBaseViewModel {
                 }));
     }
 
+    public MediatorLiveData<UserInfoVo> mUserAutoLoginLv = new MediatorLiveData<>();
+
+    public void AutoLoginV2() {
+//        showDialogWait("登录中...", false);
+        UserInfoVo userInfoVo = CacheUtils.getUser();
+        HashMap<String, String> param = new HashMap<>();
+        param.put("t", "auto");
+        param.put("uuid", userInfoVo.uuid);
+        param.put("clientType", "2");
+        param.put("version", AppUtils.getAppVersionCode() + "");
+        param.put("nonce_str", UUID.randomUUID().toString());
+        param.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        param.put("sign", MD5Util.genAppSign(param));
+        param.put("udid", CacheUtils.getudid());
+        param.put("source", "1");
+
+        mUserAutoLoginLv.addSource(
+                commonRepository.noneChache(
+                        accountService.login(param)), new HivsNetBoundObserver<>(new NetBoundCallback<UserInfoVo>(this) {
+                    @Override
+                    public void onComplete(Resource<UserInfoVo> resource) {
+                        super.onComplete(resource);
+                        if (resource.data != null) {
+                            mUserAutoLoginLv.setValue(resource.data);
+                            CacheMemoryStaticUtils.put("user", resource.data); //缓存
+                            CacheUtils.saveUser(resource.data);
+                        }
+                        hideDialogWait();
+                    }
+
+                    @Override
+                    public void onBusinessError(Resource<UserInfoVo> resource) {
+                        super.onBusinessError(resource);
+                        mUserAutoLoginLv.setValue(null);
+                    }
+
+                    @Override
+                    public void onNetworkError(Resource<UserInfoVo> resource) {
+                        super.onNetworkError(resource);
+                        mUserAutoLoginLv.setValue(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        hideDialogWait();
+                    }
+                }));
+    }
+
 
     public void Login(String name, String pwd, String area_code) {
         showDialogWait("登录中...", false);
@@ -282,7 +333,7 @@ public class AccountViewModel extends HivsBaseViewModel {
 
     public void ThiredLogin(HashMap<String, String> param) {
         showDialogWait("登录中...", false);
-        param.put("t", "wx");
+        param.put("t", "wx_icon");
         param.put("clientType", "2");
         param.put("source", "1");
         param.put("version", AppUtils.getAppVersionCode() + "");

@@ -1,6 +1,8 @@
 package com.docker.apps.intvite.vo.card;
 
+import android.databinding.ObservableField;
 import android.view.View;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.apps.R;
@@ -23,7 +25,7 @@ public class InviteCardVo extends BaseCardVo {
             new XPopup.Builder(ActivityUtils.getTopActivity())
                     .hasStatusBarShadow(true)
                     .autoOpenSoftInput(true)
-                    .asCustom(new FullScreenSharePopView(ActivityUtils.getTopActivity()).setStyle(0))
+                    .asCustom(new FullScreenSharePopView(ActivityUtils.getTopActivity()).setStyle(0).setShareImgUrl(shareImgUrl.get()).setShareLinkUrl(shareLinkUrl.get()))
                     .show();
             return;
         }
@@ -32,12 +34,13 @@ public class InviteCardVo extends BaseCardVo {
             new XPopup.Builder(ActivityUtils.getTopActivity())
                     .hasStatusBarShadow(true)
                     .autoOpenSoftInput(true)
-                    .asCustom(new FullScreenSharePopView(ActivityUtils.getTopActivity()).setStyle(1))
+                    .asCustom(new FullScreenSharePopView(ActivityUtils.getTopActivity()).setStyle(1).setShareLinkUrl(shareLinkUrl.get()))
                     .show();
             return;
         }
         if (view.getId() == R.id.ll_invite_scan) {
-            ARouter.getInstance().build(AppRouter.INVITE_INDEX_CODE_SCAN).navigation();
+            String codeurl = "http://qr.topscan.com/api.php?text=" + shareLinkUrl.get();
+            ARouter.getInstance().build(AppRouter.INVITE_INDEX_CODE_SCAN).withString("code", codeurl).navigation();
             return;
         }
     }
@@ -46,4 +49,9 @@ public class InviteCardVo extends BaseCardVo {
     public int getItemLayout() {
         return R.layout.pro_invite_card;
     }
+
+
+    public ObservableField<String> shareImgUrl = new ObservableField<>();
+    public ObservableField<String> shareLinkUrl = new ObservableField<>();
+
 }

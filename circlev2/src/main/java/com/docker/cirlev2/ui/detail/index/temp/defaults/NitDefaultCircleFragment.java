@@ -20,6 +20,8 @@ import com.docker.cirlev2.databinding.Circlev2DefaultDetailIndexFragmentBinding;
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.detail.index.CircleConfig;
 import com.docker.cirlev2.ui.detail.index.base.NitAbsCircleFragment;
+import com.docker.cirlev2.ui.detail.index.type.CircleDetailFragment_gdh;
+import com.docker.cirlev2.ui.detail.index.type.CircleDetailFragment_tyz;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
@@ -27,8 +29,11 @@ import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
+import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
+import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
@@ -88,6 +93,14 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
                 break;
             case 2:
                 nitDefaultCircleFragment = new CircleDetailFragmentTemple_HeaderNone();
+                break;
+        }
+        switch (circleConfig.circleType) {
+            case "0":
+                nitDefaultCircleFragment = new CircleDetailFragment_tyz();
+                break;
+            case "3":
+                nitDefaultCircleFragment = new CircleDetailFragment_gdh();
                 break;
         }
         Bundle bundle = new Bundle();
@@ -190,8 +203,15 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         if (circleConfig.isNeedToobar) {
             ImmersionBar.with(this)
                     .navigationBarColor("#ffffff")
+                    .titleBar(mBinding.get().toolbar)
                     .statusBarDarkFont(true)
-                    .titleBarMarginTop(mBinding.get().toolbar)
+                    .transparentBar()
+                    .init();
+        } else {
+            ImmersionBar.with(this)
+                    .navigationBarColor("#ffffff")
+                    .statusBarDarkFont(true)
+                    .statusBarColor("#ffffff")
                     .init();
         }
     }
@@ -201,9 +221,11 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         mBinding.get().setCircleDetail(circleDetailVo);
 //        mBinding.get().circleTvPersonnum.setText(mViewModel.mCircleDetailLv.getValue().getEmployeeNum() + "人");
         if ("1".equals(mViewModel.mCircleDetailLv.getValue().getIsJoin())) {
+            mBinding.get().circlev2Edit.setVisibility(View.VISIBLE);
             mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
         } else {
             mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+            mBinding.get().circlev2Edit.setVisibility(View.GONE);
         }
         processHeader(circleDetailVo);
     }
@@ -213,11 +235,15 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         peocessTab(list);
     }
 
+    public int processRefreshState() {
+        return Constant.KEY_REFRESH_ONLY_LOADMORE;
+    }
+
+    CommonpagerStateAdapter commonpagerStateAdapter;
+
     public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
-        int refresh = Constant.KEY_REFRESH_ONLY_LOADMORE;
-        if (temple == 2) {
-            refresh = Constant.KEY_REFRESH_OWNER;
-        }
+        fragments.clear();
+        int refresh = processRefreshState();
         String[] titles = new String[circleTitlesVos.size()];
         for (int i = 0; i < circleTitlesVos.size(); i++) {
             titles[i] = circleTitlesVos.get(i).getName();
@@ -230,7 +256,8 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
                     .navigation());
         }
         // magic
-        mBinding.get().viewPager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments, titles));
+        commonpagerStateAdapter = new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles);
+        mBinding.get().viewPager.setAdapter(commonpagerStateAdapter);
         CommonIndector commonIndector = new CommonIndector();
         if (fragments.size() > 4) {
             commonIndector.initMagicIndicatorScroll(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
@@ -238,9 +265,26 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
             commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
         }
         // magic
+
+
     }
 
     public void processHeader(CircleDetailVo circleDetailVo) {
+
+        if (circleConfig.Temple == 0) {
+            mBinding.get().ivSurface.setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(circleDetailVo.getSurfaceImg())) {
+                GlideApp.with(this).load(CommonBdUtils.getImgUrl(circleDetailVo.getSurfaceImg())).into(mBinding.get().ivSurface);
+            }
+        }
+
+        String infodesc = "【简介】";
+        if (!TextUtils.isEmpty(circleDetailVo.getIntro())) {
+            infodesc = infodesc + circleDetailVo.getIntro();
+        }
+        mBinding.get().tvCircleDesc.setText(infodesc);
+
+
 //        ArrayList<String> imglist = new ArrayList<>();
 //        if (circleDetailVo.getSurfaceImg().contains(",")) {
 //            String[] img = circleDetailVo.getSurfaceImg().split(",");
@@ -352,13 +396,13 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
-                ArrayList<AppBannerHeaderCardVo.BannerVo> arrayList = new ArrayList<>();
-                for (int i = 0; i < 4; i++) {
-                    arrayList.add(new AppBannerHeaderCardVo.BannerVo());
-                }
-                appBannerHeaderCardVo.bannerVos.set(arrayList);
-                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
+//                AppBannerHeaderCardVo appBannerHeaderCardVo = new AppBannerHeaderCardVo(0, 0);
+//                ArrayList<AppBannerHeaderCardVo.BannerVo> arrayList = new ArrayList<>();
+//                for (int i = 0; i < 4; i++) {
+//                    arrayList.add(new AppBannerHeaderCardVo.BannerVo());
+//                }
+//                appBannerHeaderCardVo.bannerVos.set(arrayList);
+//                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
             }
         };
         return nitDelegetCommand;

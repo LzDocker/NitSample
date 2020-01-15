@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityPersonInfoBinding;
@@ -19,6 +20,7 @@ import com.bfhd.circle.ui.common.CircleSourceUpFragment;
 import com.bfhd.circle.vo.bean.SourceUpParam;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.VisitingCardVo;
@@ -31,7 +33,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
 /*
  * 个人信息
  **/
-
+@Route(path = AppRouter.ACCOUNT_PERSION_INFO)
 public class AccountPersonInfoActivity extends HivsBaseActivity<AccountViewModel, AccountActivityPersonInfoBinding> {
     @Inject
     ViewModelProvider.Factory factory;

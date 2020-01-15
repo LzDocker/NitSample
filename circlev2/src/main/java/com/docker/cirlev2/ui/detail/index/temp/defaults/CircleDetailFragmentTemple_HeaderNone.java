@@ -32,6 +32,10 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
         } else {
             mBinding.get().toolbar.setVisibility(View.GONE);
         }
+
+        if (!circleConfig.isNeedToobar) {
+            mBinding.get().toolbarLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -39,7 +43,7 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
         super.initView(var1);
         mBinding.get().ivShare.setVisibility(View.GONE);
         mBinding.get().circlev2Edit.setVisibility(View.GONE);
-        mBinding.get().toolbarLayout.setVisibility(View.GONE);
+
     }
 
     @Override

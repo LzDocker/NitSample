@@ -48,7 +48,7 @@ public class CommonBdUtils {
         } else if (url.contains("http")) {
             return url;
         } else {
-            return ThiredPartConfig.BaseServeUrl + url;
+            return ThiredPartConfig.ServeUrl + url;
         }
     }
 

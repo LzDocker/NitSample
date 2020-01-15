@@ -107,6 +107,17 @@ public class SuperPopmenu extends PopupWindow implements OnClickListener {
         appVo.id = "0";
         absSampleAdapter.add(appVo);
 
+        AppVo appVo1 = new AppVo();
+        appVo1.name = "问答";
+        appVo1.id = "1";
+        absSampleAdapter.add(appVo1);
+
+        AppVo appVo2 = new AppVo();
+        appVo2.name = "新闻";
+        appVo2.id = "2";
+        absSampleAdapter.add(appVo2);
+
+
         absSampleAdapter.notifyDataSetChanged();
         absSampleAdapter.setOnItemClickListener((view1, position) -> {
             if (replyCommandParam != null) {

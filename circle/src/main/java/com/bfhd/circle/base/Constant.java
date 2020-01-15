@@ -112,14 +112,5 @@ public class Constant {
         return url;
     }
 
-    public static String HelpCenterWeb = BaseServeTest + "api.php?m=h5&mid=12&f=contents&id=1";
-    public static String AboutUsWeb = BaseServeTest + "api.php?m=h5&mid=1&f=content&id=2";
-    // 用户协议
-    public static String UseContantWeb = BaseServeTest + "api.php?m=h5&mid=1&f=content&id=1";
-    // 隐私协议
-    public static String UseUseWeb = BaseServeTest + "api.php?m=h5&mid=12&f=contents&id=5";
-    public static String TroubleWeb = BaseServeTest + "api.php?m=h5&mid=12&f=contents&id=4";
-    //客服中心
-    public static String CustomerService = BaseServeTest + "index.php?m=default.problem";
 
 }

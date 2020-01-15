@@ -2,6 +2,7 @@ package com.docker.apps.point.api;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.apps.point.vo.PointSortVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
@@ -21,6 +22,13 @@ public interface PointService {
     @POST("api.php?m=dynamic.getList")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<ServiceDataBean>>>> fechCircleInfoList(@FieldMap Map<String, String> params);
+
+    /*
+     * 圈子详情tab列表数据
+     * */
+    @POST("api.php?m=publics.getRankList")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<PointSortVo>>> fechPointSortList(@FieldMap Map<String, String> params);
 
 
 }

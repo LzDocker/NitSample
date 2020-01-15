@@ -53,4 +53,8 @@ public interface OpenService {
     @FormUrlEncoded
     Observable<BaseResponse<List>> ttttt3(@FieldMap HashMap<String, Object> map);
 
+
+
+
+
 }

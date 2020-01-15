@@ -1,6 +1,10 @@
 package com.docker.apps.point.ui.index;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -11,9 +15,11 @@ import com.docker.apps.R;
 import com.docker.apps.databinding.ProPointSortActivityBinding;
 import com.docker.apps.databinding.ProPointSortAouFragmentBinding;
 import com.docker.apps.point.vm.PonitSortVm;
+import com.docker.apps.point.vo.PointSortItemVo;
 import com.docker.apps.point.vo.card.PonitHeadCardVo;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
@@ -25,8 +31,12 @@ import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.NitEmptyViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
+import com.docker.common.common.widget.refresh.api.RefreshLayout;
+import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*
  * 积分榜
@@ -34,8 +44,17 @@ import java.util.ArrayList;
 public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewModel, ProPointSortAouFragmentBinding> {
 
 
-    public static PointSortCoutainerFragment getInstance() {
-        return new PointSortCoutainerFragment();
+    public String rankType;
+
+    private PonitSortVm ponitSortVm;
+
+
+    public static PointSortCoutainerFragment getInstance(String rankType) {
+        PointSortCoutainerFragment pointSortCoutainerFragment = new PointSortCoutainerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("rankType", rankType);
+        pointSortCoutainerFragment.setArguments(bundle);
+        return pointSortCoutainerFragment;
     }
 
     private ArrayList<Fragment> fragments = new ArrayList<>();
@@ -51,9 +70,18 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-//                AppBannerHeaderCardVo BannerHeader = new AppBannerHeaderCardVo(0, 0);
                 PonitHeadCardVo ponitHeadCardVo = new PonitHeadCardVo(0, 0);
                 NitBaseProviderCard.providerCard(commonListVm, ponitHeadCardVo, nitCommonFragment);
+                rankType = getArguments().getString("rankType");
+                ponitSortVm = (PonitSortVm) commonListVm;
+                ponitSortVm.scope = flag;
+                ponitSortVm.rankType = rankType;
+                ponitSortVm.mTotalHeadLv.observe(PointSortCoutainerFragment.this.getHoldingActivity(), pointSortItemVos -> {
+                    ponitHeadCardVo.setTotals((ArrayList<PointSortItemVo>) pointSortItemVos, rankType);
+                });
+                ponitSortVm.mMouthHeadLv.observe(PointSortCoutainerFragment.this, pointSortItemVos -> {
+                    ponitHeadCardVo.setTotals((ArrayList<PointSortItemVo>) pointSortItemVos, rankType);
+                });
             }
         };
         return nitDelegetCommand;
@@ -70,7 +98,9 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
     }
 
     @Override
-    protected void initView(View var1) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         String titles[] = new String[]{"月榜", "总榜"};
 
 
@@ -78,12 +108,8 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.falg = 0;
         commonListOptions.isActParent = false;
-        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions.ReqParam.put("t", "goods");
-        commonListOptions.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions.ReqParam.put("memberid", "64");
-        commonListOptions.ReqParam.put("companyid", "1");
-
+        commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions.ReqParam.put("rankType", getArguments().getString("rankType"));
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
         fragments.add(nitCommonContainerFragmentV2);
 
@@ -92,17 +118,12 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
         commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions1.falg = 1;
         commonListOptions1.isActParent = false;
-        commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions1.ReqParam.put("t", "goods");
-        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions1.ReqParam.put("memberid", "64");
-        commonListOptions1.ReqParam.put("companyid", "1");
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions1.ReqParam.put("rankType", getArguments().getString("rankType"));
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(nitCommonContainerFragmentV21);
         mBinding.get().segment.setTabData(titles);
-
-        mBinding.get().viewpager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments));
-
+        mBinding.get().viewpager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments));
         mBinding.get().viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -112,6 +133,7 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
             @Override
             public void onPageSelected(int i) {
                 mBinding.get().segment.setCurrentTab(i);
+                mBinding.get().refresh.finishRefresh();
             }
 
             @Override
@@ -120,6 +142,26 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
             }
         });
         mBinding.get().segment.setCurrentTab(0);
+
+        mBinding.get().segment.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                mBinding.get().viewpager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void initView(View var1) {
+
+        mBinding.get().refresh.setEnableLoadMore(false);
+        mBinding.get().refresh.setEnableRefresh(false);
     }
 
     @Override

@@ -109,8 +109,8 @@ public class CircleEditTabActivity extends NitCommonActivity<CircleEditTabViewMo
         mBinding.recyclerView.setAdapter(editClassAdapter);
 
         editClassAdapter.setOnItemClickListener((view, position) -> {
-            CircleTitlesVo circleTitlesVo = editClassAdapter.getItem(position);
-            CircleAddTabActivity.startMe(CircleEditTabActivity.this, circleTitlesVo, 1012);
+//            CircleTitlesVo circleTitlesVo = editClassAdapter.getItem(position);
+//            CircleAddTabActivity.startMe(CircleEditTabActivity.this, circleTitlesVo, 1012);
         });
         mStartParam = (StaCirParam) getIntent().getExtras().getSerializable("mStartParam");
         mViewModel.getCircleClass(mStartParam.getCircleid(), mStartParam.getUtid());

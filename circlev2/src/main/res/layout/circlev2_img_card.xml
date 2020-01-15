@@ -24,17 +24,17 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:background="#fff000"
+                android:layout_height="159dp"
+                android:background="#000"
                 android:scaleType="fitXY" />
             <!--app:imageUrl="@{item.imgurl}" -->
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="140dp"
-                android:background="#ff00" />
+                android:layout_marginTop="125dp"
+                android:src="@mipmap/icon_img_tygs" />
 
         </FrameLayout>
 
@@ -42,10 +42,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:gravity="center_horizontal"
             android:text="桃源公社股东汇"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

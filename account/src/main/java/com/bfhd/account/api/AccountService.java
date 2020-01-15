@@ -10,6 +10,7 @@ import com.bfhd.account.vo.FansVo;
 import com.bfhd.account.vo.FavVo;
 import com.bfhd.account.vo.HelpUserVo;
 import com.bfhd.account.vo.MessageListVo;
+import com.bfhd.account.vo.MoneyBoxVov2;
 import com.bfhd.account.vo.MyInfoDispatcherVo;
 import com.bfhd.account.vo.NoSeeVo;
 import com.bfhd.account.vo.MsgVo;
@@ -18,7 +19,12 @@ import com.bfhd.account.vo.OrderVo;
 import com.bfhd.account.vo.PointVo;
 import com.bfhd.account.vo.RegistVo;
 import com.bfhd.account.vo.SystemMessageVo;
+import com.bfhd.account.vo.tygs.BranchVoV2;
+import com.bfhd.account.vo.tygs.MoneyItemVo;
+import com.bfhd.account.vo.tygs.PointItemVo;
 import com.bfhd.circle.vo.RstVo;
+import com.docker.cirlev2.vo.entity.CircleListVo;
+import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.AddressVo;
 import com.docker.common.common.vo.MoneyDetailVo;
 import com.docker.common.common.vo.UpdateInfo;
@@ -277,7 +283,11 @@ public interface AccountService {
     //我的钱包
     @POST("api.php?m=my.my_money")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<String>>> moneyBox(@FieldMap HashMap<String, String> paramMap);
+    LiveData<ApiResponse<BaseResponse<String>>> moneyBox(@FieldMap HashMap<String, String> paramMap);//我的钱包
+
+    @POST("api.php?m=my.my_money")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<MoneyBoxVov2>>> moneyBoxv2(@FieldMap HashMap<String, String> paramMap);
 
     //提现
     @POST("api.php?m=my.member_withdraw")
@@ -315,4 +325,24 @@ public interface AccountService {
     @POST("api.php?m=user.pullBlack")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> pullBlack(@FieldMap HashMap<String, String> paramMap);
+
+    // 积分
+    @POST("api.php?m=my.getPointDetail")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<PointItemVo>>>> fetchPointList(@FieldMap HashMap<String, String> paramMap);
+
+    // 收益
+    @POST("api.php?m=my.getPointDetail")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<MoneyItemVo>>>> fetchMoneyList(@FieldMap HashMap<String, String> paramMap);
+
+
+    /*
+     * 已加入的圈子
+     * */
+    @POST("api.php?m=circle.getMyJoin")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<BranchVoV2>>>> fechJoinCircle(@FieldMap Map<String, String> params);
+
+
 }

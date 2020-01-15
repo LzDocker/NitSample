@@ -25,7 +25,7 @@
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="188dp"
             app:banne_click_command="@{item.replyCommandParam}"
             app:banner_items="@{item.bannerVo}"
             app:is_auto_play="true" />
@@ -37,7 +37,7 @@
             android:layout_marginBottom="10dp"
             app:itemBinding="@{item.itemBinding}"
             app:items="@{item.serviceDataBean}"
-            app:layoutManager="@{LayoutManager.grid(2)}"></android.support.v7.widget.RecyclerView>
+            app:layoutManager="@{LayoutManager.grid(2)}" />
 
     </LinearLayout>
 

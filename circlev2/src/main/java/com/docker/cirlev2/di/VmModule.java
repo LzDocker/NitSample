@@ -20,6 +20,7 @@ import com.docker.cirlev2.vm.CreateListViewModel;
 import com.docker.cirlev2.vm.PublishViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vm.card.CircleDynamicDetailCardVm;
+import com.docker.cirlev2.vm.card.CirclePersonInfoHeadCardVm;
 import com.docker.core.di.scope.ViewModelKey;
 
 import dagger.Binds;
@@ -116,6 +117,10 @@ public abstract class VmModule {
     @ViewModelKey(CirclePersonInfoViewModel.class)
     abstract ViewModel CirclePersonInfoViewModel(CirclePersonInfoViewModel model);
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(CirclePersonInfoHeadCardVm.class)
+    abstract ViewModel CirclePersonInfoHeadCardVm(CirclePersonInfoHeadCardVm model);
 
 
 

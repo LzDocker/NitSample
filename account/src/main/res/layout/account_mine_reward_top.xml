@@ -47,7 +47,9 @@
                     android:id="@+id/iv"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="#be3131" />
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/icon_coin_mo" />
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                     android:background="@color/white"
                     android:drawableRight="@mipmap/arrow_right"
                     android:drawablePadding="10dp"
-                    android:text="提现明细"
+                    android:onClick="@{(view)->item.getOnItemClickListener.onItemClick(item,view)}"
+                    android:text="领取奖励明细"
                     android:textColor="#A1A1A1"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -88,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:text="@{1000 + @string/empty}"
+                    android:text="@{item.moneyBoxVov2.balance}"
                     android:textColor="#333333"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -110,11 +113,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/account_attention_no_shape"
+                    android:onClick="@{(view)->item.getOnItemClickListener.onItemClick(item,view)}"
                     android:paddingLeft="12dp"
                     android:paddingTop="5dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="5dp"
-                    android:text="全部提现"
+                    android:text="领取奖励"
                     android:textColor="#A1A1A1"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -127,7 +131,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="15dp"
-                android:text="提现金额预计在2-3小时内到账，具体请以平台通知为准"
+                android:text="奖励将在线下发放，可线上提交领取奖励申请"
                 android:textColor="#9B9B9B"
                 android:textSize="14sp" />
 
@@ -143,7 +147,7 @@
                     android:id="@+id/iv2"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="#be3131" />
+                    android:src="@mipmap/icon_point_lq" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -172,9 +176,8 @@
                     android:id="@+id/tv_jf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:background="@color/white"
-                    android:text="@{1000+@string/empty}"
+                    android:text="@{item.moneyBoxVov2.point}"
                     android:textColor="#333333"
                     android:textSize="20sp"
                     android:textStyle="bold" />

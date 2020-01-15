@@ -42,7 +42,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
 
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -60,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
-                    android:layout_toRightOf="@+id/iv_user_icon"
+                    android:layout_toRightOf="@+id/circle_iv_avater"
                     android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
                     android:text="@{item.nickname}"
                     android:textColor="#121212"
@@ -73,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_username"
                     android:layout_marginLeft="14dp"
-                    android:layout_toRightOf="@+id/iv_user_icon"
+                    android:layout_toRightOf="@+id/circle_iv_avater"
                     android:text="@{CommonBdUtils.getStandardDate(item.inputtime)}"
                     android:textColor="#979797"
                     android:textSize="11sp" />
@@ -138,31 +139,45 @@
                     bind:layoutManager="@{LayoutManager.grid(3)}" />
 
 
-                <FrameLayout
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"
-                    app:visibleGone="@{BdUtils.isshowBottomImg(item)}">
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="#fff"
+                    app:cardCornerRadius="2dp"
+                    app:cardElevation="2dp">
 
-
-                    <ImageView
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:focusable="false"
-                        android:scaleType="centerCrop"
-                        app:imageUrl="@{BdUtils.getDynamicSingleImg(item)}" />
+                        android:layout_height="wrap_content"
+                        android:onClick="@{(view)->viewmodel.singleVideoOrImgClick(item,view)}"
+                        app:visibleGone="@{BdUtils.isshowBottomImg(item)}">
 
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:focusable="false"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/circle_player_icon"
-                        app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" />
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:focusable="false"
+                            android:maxHeight="250dp"
+                            android:scaleType="centerCrop"
+                            app:imageUrl="@{BdUtils.getDynamicSingleImg(item)}" />
 
-                </FrameLayout>
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:focusable="false"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/circle_player_icon"
+                            app:visibleGone="@{BdUtils.isShowVideoSingleImg(item)}" />
+
+                    </FrameLayout>
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 

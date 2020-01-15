@@ -11,6 +11,7 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityInfoCompleteBinding;
+import com.bfhd.account.utils.AccountConstant;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.circle.base.Constant;
 import com.bfhd.circle.base.HivsBaseActivity;
@@ -88,10 +89,10 @@ public class AccountInfoCompleteActivity extends HivsBaseActivity<AccountViewMod
         });
         // 用户协议
         mBinding.accountToUserConst.setOnClickListener(v -> {
-            CommonH5Activity.startMe(AccountInfoCompleteActivity.this, Constant.UseContantWeb, "使用协议");
+            CommonH5Activity.startMe(AccountInfoCompleteActivity.this, AccountConstant.UseContantWeb, "使用协议");
         });
         mBinding.accountUserConst.setOnClickListener(v -> {
-            CommonH5Activity.startMe(AccountInfoCompleteActivity.this, Constant.UseUseWeb, "隐私协议"); // todo
+            CommonH5Activity.startMe(AccountInfoCompleteActivity.this, AccountConstant.UseUseWeb, "隐私协议"); // todo
         });
 
 //        mBinding.tvSelectCompanyNum.setOnClickListener(v -> {
@@ -108,7 +109,7 @@ public class AccountInfoCompleteActivity extends HivsBaseActivity<AccountViewMod
             ARouter.getInstance().build(AppRouter.HOME).navigation();
         });
         mBinding.accountToUserConst.setOnClickListener(v -> {
-            CommonH5Activity.startMe(AccountInfoCompleteActivity.this, Constant.UseContantWeb, "使用协议");
+            CommonH5Activity.startMe(AccountInfoCompleteActivity.this, AccountConstant.UseContantWeb, "使用协议");
         });
     }
 

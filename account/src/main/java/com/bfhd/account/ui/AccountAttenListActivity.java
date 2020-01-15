@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
@@ -23,6 +24,7 @@ import javax.inject.Inject;
 /*
  * 关注列表  wj
  **/
+@Route(path = AppRouter.ACCOUNT_ATTEN_LISt)
 public class AccountAttenListActivity extends OpenBaseListActivity<AccountViewModel> {
 
 

@@ -1,5 +1,6 @@
 package com.docker.cirlev2.ui.detail.index.base;
 
+import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
+import static android.app.Activity.RESULT_OK;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
@@ -82,12 +84,16 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
             if (circleDetailVo != null) {
                 onCircleDetailFetched(circleDetailVo);
                 mViewModel.FetchCircleClass();
+            } else {
+                onCircleDetailFetchFailed();
             }
         });
 
         mViewModel.mCircleClassLv.observe(this, circleTitlesVos -> {
             if (!CollectionUtils.isEmpty(circleTitlesVos)) {
                 onCircleTabFetched(circleTitlesVos);
+            } else {
+                onCircleTabFetchedFailed();
             }
         });
 
@@ -115,6 +121,12 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
 
 
     public abstract void onCircleDetailFetched(CircleDetailVo circleDetailVo);
+
+    public void onCircleDetailFetchFailed() {
+    }
+
+    public void onCircleTabFetchedFailed() {
+    }
 
     public abstract void onCircleTabFetched(List<CircleTitlesVo> circleTitlesVos);
 
@@ -176,7 +188,8 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
     // 显示menu
     public void onCircleMenuClick() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-        bottomSheetDialog.setDataCallback(new String[]{"邀请新成员", "编辑圈子", "成员列表", "圈子简介"}, position -> {
+        /*"编辑圈子",*/
+        bottomSheetDialog.setDataCallback(new String[]{"邀请新成员", "成员列表", "圈子简介"}, position -> {
             bottomSheetDialog.dismiss();
             switch (position) {
                 case 0: //邀请新成员
@@ -189,16 +202,16 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
                                 mViewModel.mCircleDetailLv.getValue().getLogoUrl());
                     }
                     break;
-                case 1: //编辑圈子
-                    if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.mCircleDetailLv.getValue().getRole()> 0*/) {
-                        ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2)
-                                .withInt("flag", Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType()))
-                                .withString("circleid", "245")
-                                .withString("utid", "98699115f2260ef14486f745fc72dbd1")
-                                .navigation();
-                    }
-                    break;
-                case 2: //成员列表
+//                case 1: //编辑圈子
+//                    if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.mCircleDetailLv.getValue().getRole()> 0*/) {
+//                        ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2)
+//                                .withInt("flag", Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType()))
+//                                .withString("circleid", "245")
+//                                .withString("utid", "98699115f2260ef14486f745fc72dbd1")
+//                                .navigation();
+//                    }
+//                    break;
+                case 1: //成员列表
                     if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.detailVo.get().getRole()> 0*/) {
                         StaCirParam mStartParam = new StaCirParam();
                         mStartParam.setCircleid(circleid);
@@ -207,7 +220,7 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
                         CirclePersonListActivity.startMe(this.getHoldingActivity(), mStartParam, mViewModel.mCircleDetailLv.getValue());
                     }
                     break;
-                case 3: //圈子简介
+                case 2: //圈子简介
                     if (mViewModel.mCircleDetailLv.getValue() != null) {
                         StaCirParam mStartParam = new StaCirParam();
                         mStartParam.setCircleid(circleid);
@@ -296,5 +309,15 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CircleEditTabActivity.LEVEL_1_EDITCODE) {
+                mViewModel.FetchCircleDetail(utid, circleid);
+            }
+        }
+    }
 }
 

@@ -23,8 +23,9 @@ public class AppRouter {
     public static final String ACCOUNT_COUNTRY = AccountGroup + "country";
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
+    public static final String ACCOUNT_FANS_LISt = AccountGroup + "ACCOUNT_FANS_LISt";
     public static final String ACCOUNT_BRANCH_LIST = AccountGroup + "attention_branch_list";
-
+    public static final String ACCOUNT_PERSION_INFO = AccountGroup + "ACCOUNT_PERSION_INFO";
 
 
     public static final String ACCOUNT_ORDER_LIST = AccountGroup + "ACCOUNT_ORDER_LIST";
@@ -33,6 +34,8 @@ public class AppRouter {
     public static final String ACCOUNT_reward = AccountGroup + "account_reward";
     public static final String ACCOUNT_point = AccountGroup + "account_point";
     public static final String ACCOUNT_invitation = AccountGroup + "account_invitation";
+    public static final String ACCOUNT_MONEY_HAND = AccountGroup + "ACCOUNT_MONEY_HAND";
+    public static final String ACCOUNT_MONEY_DETAIL = AccountGroup + "ACCOUNT_MONEY_DETAIL";
 
 
     /*
@@ -184,11 +187,18 @@ public class AppRouter {
     public static final String ACTIVE_MANAGE_VERFIC = ACTIVE_GROUP + "ACTIVE_MANAGE_VERFIC";
     public static final String ACTIVE_PUBLISH = ACTIVE_GROUP + "ACTIVE_PUBLISH";
     public static final String ACTIVE_PUBLISH_BANNER_PREVIEW = ACTIVE_GROUP + "ACTIVE_PUBLISH_BANNER_PREVIEW";
+    public static final String ACTIVE_CONTENT_EDIT = ACTIVE_GROUP + "ACTIVE_CONTENT_EDIT";
 
 
     public static final String INVITE_GROUP = ProGroup + "/invite/";
     public static final String INVITE_INDEX = INVITE_GROUP + "INVITE_INDEX";
     public static final String INVITE_INDEX_CODE_SCAN = INVITE_GROUP + "INVITE_INDEX_CODE_SCAN";
+
+
+    public static final String ORDER_GROUP = ProGroup + "/order/";
+    //    public static final String ORDER_INDEX = ORDER_GROUP + "INVITE_INDEX";
+    public static final String ORDER_ADDRESS_MANAGER = ORDER_GROUP + "ORDER_ADDRESS_MANAGER";
+    public static final String ORDER_ADDRESS_EDIT = ORDER_GROUP + "ORDER_ADDRESS_EDIT";
 
 
 }

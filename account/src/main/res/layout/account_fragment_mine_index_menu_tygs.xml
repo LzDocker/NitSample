@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical">
 
         <LinearLayout
@@ -23,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/open_liner_bg_shape"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:orientation="horizontal">
 
             <TextView
@@ -57,6 +57,7 @@
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:text="公社介绍"
@@ -71,6 +72,7 @@
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:text="积分制度"
@@ -90,6 +92,7 @@
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:text="成为桃源公社合伙人"
@@ -104,6 +107,7 @@
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:text="邀请朋友"
@@ -118,6 +122,7 @@
             android:drawableRight="@mipmap/arrow_right"
             android:drawablePadding="8dp"
             android:gravity="center_vertical"
+            android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
             android:paddingLeft="14dp"
             android:paddingRight="14dp"
             android:text="服务支持"

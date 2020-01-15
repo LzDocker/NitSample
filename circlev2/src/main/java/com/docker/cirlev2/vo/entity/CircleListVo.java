@@ -111,6 +111,8 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
     public String classStr1;
     public String authStatus;
 
+    public String linkman;
+
     public String intro;
 
     public String getIntro() {

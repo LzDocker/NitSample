@@ -63,9 +63,9 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        commonListReq = getArgument();
+        commonListReq = (CommonListOptions) getArguments().getSerializable(CommonListParam);
         if (commonListReq == null) {
-            commonListReq = (CommonListOptions) getArguments().getSerializable(CommonListParam);
+            commonListReq = getArgument();
         }
         if (commonListReq != null) {
             ARouter.getInstance().inject(this);

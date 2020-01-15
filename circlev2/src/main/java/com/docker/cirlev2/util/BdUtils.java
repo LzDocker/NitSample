@@ -296,6 +296,17 @@ public class BdUtils {
         return false;
     }
 
+    public static boolean isShowSingleNewsImg(ServiceDataBean serviceDataBean) {
+        if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getNewsImgs() != null) {
+            if (serviceDataBean.getExtData().getNewsImgs().size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     /**
      * PHP时间戳转成java时间
      *
@@ -432,6 +443,15 @@ public class BdUtils {
         return "";
     }
 
+    public static String getDynamicNewsSingleImg(ServiceDataBean serviceDataBean) {
+        if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getNewsImgs() != null) {
+            if (serviceDataBean.getExtData().getNewsImgs().size() > 0) {
+                return serviceDataBean.getExtData().getNewsImgs().get(0);
+            }
+        }
+        return "";
+    }
+
 
     public static String replaySize(CommentVo commentVo) {
         if (commentVo != null) {
@@ -483,7 +503,11 @@ public class BdUtils {
         if (serviceDataBean == null) {
             return false;
         }
-        return !TextUtils.isEmpty(serviceDataBean.getExtData().getAudio());
+        if (TextUtils.isEmpty(serviceDataBean.getExtData().getAudio()) || "0".equals(serviceDataBean.getExtData().getAudio())) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public static String audioDuration(ServiceDataBean serviceDataBean) {
@@ -849,9 +873,9 @@ public class BdUtils {
             return "";
         } else {
             if (Integer.parseInt(num) > 99) {
-                return "99+ 人想要";
+                return "99+ 付款";
             }
-            return num + "人想要";
+            return num + "人付款";
         }
     }
 
@@ -1154,11 +1178,11 @@ public class BdUtils {
         if (CheckServerData(serviceDataBean)) {
             if ("goods".equals(serviceDataBean.getType())) {
                 return 1;
-            }else if ("news".equals(serviceDataBean.getType())) {
+            } else {
                 return 2;
             }
-
+        } else {
+            return 2;
         }
-        return 1;
     }
 }

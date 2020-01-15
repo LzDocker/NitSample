@@ -4,13 +4,13 @@ ext {
             targetSdkVersion : 28,
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",
-//            applicationId    : "com.docker.nitsample",
-            applicationId    : "com.bfhd.safe",
+            applicationId    : "com.bfhd.tygs",
+//            applicationId    : "com.bfhd.safe",
             versionCode      : 100,
             versionName      : "1.0.0"
     ]
     push = [
-            JPUSH_PKGNAME: "com.docker.nitsample",
+            JPUSH_PKGNAME: "om.bfhd.tygs",
             JPUSH_APPKEY : "2e2ecab09929af8af20533ea",
             JPUSH_CHANNEL: "developer-default",
     ]
@@ -99,6 +99,6 @@ ext {
             "media"                      : 'ywl.ywl5320:wlmedia:1.0.0-beta17', // 音频
             "zxing-qrcode"               : 'cn.bingoogolapple:bga-qrcode-zxing:1.3.7', // 二维码识别 // https://github.com/bingoogolapple/BGAQRCode-Android#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E8%AF%B4%E6%98%8E
 
-
+            "pickerview"                 : "com.contrarywind:Android-PickerView:4.1.8" //时间选择框"
     ]
 }

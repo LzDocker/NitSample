@@ -182,6 +182,11 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                                 if (mItems.size() > 0 && mItems.size() >= position) {
                                     mItems.add(position, sampleItem);
                                     keysAddList.add(position);
+                                } else {
+                                    if (mItems.size() == 0) {
+                                        mItems.add(0, sampleItem);
+                                        keysAddList.add(0);
+                                    }
                                 }
                             }
                             for (int i = 0; i < keysAddList.size(); i++) {
@@ -189,8 +194,6 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                             }
                         }
                         //
-
-
                         if (resource.data != null) {
                             mPage++;
                         }
@@ -233,6 +236,7 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
     public void formartData(Resource<T> resource) {
 
     }
+
     public void addData(BaseItemModel baseItemModel) {
         mItems.add(baseItemModel);
     }
@@ -354,6 +358,9 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
                     mItems.add(sampleItem);
                 }
             }
+        }
+        if (i == 0) {
+            mCardTreeMap.put(position, sampleItem);
         }
 
         Log.d("zxd", "addCardVo: ====================" + i);

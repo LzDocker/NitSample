@@ -36,7 +36,8 @@
         android:singleLine="true"
         android:textColor="@color/open_read"
         android:textColorHint="@color/blue"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"

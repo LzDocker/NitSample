@@ -14,18 +14,18 @@ public class CommonWidgetModel {
             "个人中心",
     };
     public static final int[] mIconUnselectIds = {
-            R.mipmap.open_up_pic_icon,
-            R.mipmap.open_up_pic_icon,
+            R.mipmap.index_un,
+            R.mipmap.gsyx,
             R.mipmap.dot,
-            R.mipmap.open_up_pic_icon,
-            R.mipmap.open_up_pic_icon,
+            R.mipmap.jhxx,
+            R.mipmap.grzx,
     };
     public static final int[] mIconSelectIds = {
-            R.mipmap.close_icon,
-            R.mipmap.close_icon,
+            R.mipmap.index,
+            R.mipmap.gsyx_sel,
             R.mipmap.dot,
-            R.mipmap.close_icon,
-            R.mipmap.close_icon,
+            R.mipmap.jhxx_sel,
+            R.mipmap.grzx_sel,
     };
 
     public static void initrefresh() {

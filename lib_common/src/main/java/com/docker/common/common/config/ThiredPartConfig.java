@@ -35,14 +35,24 @@ public class ThiredPartConfig {
     public static final String Umeng = "5d0300984ca3579a45000b17";
 
     // oss
-    public static final String BaseImageUrl = "http://taijistar.oss-cn-beijing.aliyuncs.com";
+//    public static final String BaseImageUrl = "http://taijistar.oss-cn-beijing.aliyuncs.com";
+    public static final String BaseImageUrl = "http://tygsapp.oss-cn-beijing.aliyuncs.com";
+
     public static final String endpoint = "https://oss-cn-beijing.aliyuncs.com";
-    public static final String accessKeyId = "LTAIWijAvXa7BmAt";
-    public static final String accessKeySecret = "RYDaCj2um1nlhYgfyVH6JRceq4ypwO";
-    public static final String P_BUCKETNAME = "taijistar";
+    //    public static final String accessKeyId = "LTAIWijAvXa7BmAt";
+    public static final String accessKeyId = "LTAI4FxpjPKZocMo4X8RdYYS";
+    //    public static final String accessKeySecret = "RYDaCj2um1nlhYgfyVH6JRceq4ypwO";
+    public static final String accessKeySecret = "WmFNwtSR6du990Umh9Gg0klvZGZXc6";
+    //    public static final String P_BUCKETNAME = "taijistar";
+    public static final String P_BUCKETNAME = "tygsapp";
+
     public static final String FLODER = "static/var/upload/img";
     public static final String FLODERVIDEO = "static/var/upload/video";
-    public static final String BaseServeUrl = "http://htj.wgc360.com/";
+    //    public static final String BaseServeUrl = "http://htj.wgc360.com/";
+    public static final String BaseServeUrl = "http://tygs.wgc360.com/";
+
+    public static final String ServeUrl = "http://tygs.wgc360.com/";
+
 
     public static void init(BaseApp app) {
         Utils.init(app);
@@ -53,11 +63,9 @@ public class ThiredPartConfig {
         // 微信
         PlatformConfig.setWeixin(WxAppid, Wxsecret);
         PlatformConfig.setQQZone(QQID, QQKey);
-
         // 百度地图
         SDKInitializer.initialize(app);
         SDKInitializer.setCoordType(CoordType.BD09LL);
-
         //非wifi情况下，主动下载x5内核
         QbSdk.setDownloadWithoutWifi(true);
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。

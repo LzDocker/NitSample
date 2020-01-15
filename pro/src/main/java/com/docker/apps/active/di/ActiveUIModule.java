@@ -13,6 +13,7 @@ import com.docker.apps.active.ui.manager.ActivePersionManagerListActivity;
 import com.docker.apps.active.ui.manager.ActiveRegistListActivity;
 import com.docker.apps.active.ui.manager.ActiveVerificationActivity;
 import com.docker.apps.active.ui.publish.ActiveBannerPreviewActivity;
+import com.docker.apps.active.ui.publish.ActiveContentEditActivity;
 import com.docker.apps.active.ui.publish.ActivePublishFragment;
 import com.docker.core.di.component.BaseActComponent;
 
@@ -66,5 +67,8 @@ public abstract class ActiveUIModule {
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract ActiveBannerPreviewActivity contributeActiveBannerPreviewActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveContentEditActivity contributeActiveContentEditActivityInjector();
 }
 

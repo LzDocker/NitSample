@@ -6,16 +6,21 @@ import android.databinding.ObservableList;
 import android.util.Log;
 import android.view.View;
 
+import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.docker.cirlev2.BR;
+import com.docker.cirlev2.vo.entity.CircleListNomalVo;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
+import com.docker.nitsample.vm.card.CircleRecomendListCardVm;
 import com.docker.nitsample.vo.CarRvHorizontalVo;
 import com.docker.nitsample.vo.LayoutManagerVo;
 import com.docker.nitsample.vo.RecycleTopLayout;
 
+import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
+public class AppRecycleHorizontalCardVo2 extends BaseCardVo {
 
     public int managerStyle;
     public LayoutManagerVo managerStyleVo;
@@ -28,7 +33,7 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
         this.managerStyleVo = managerStyleVo;
         maxSupport = 1;
         this.recycleTopLayout = recycleTopLayout;
-        setInnerResource();
+        mVmPath = "com.docker.nitsample.vm.card.CircleRecomendListCardVm";
     }
 
     @Bindable
@@ -52,9 +57,10 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
 
     }
 
-    public void onChildItemCilck(CarRvHorizontalVo horizontalVo, View view) {
+    public void onChildItemCilck(CircleListNomalVo horizontalVo, View view) {
         if (view.getId() == R.id.tv_join) { // 加入
             //
+            ((CircleRecomendListCardVm) mNitcommonCardViewModel).joinCircle(horizontalVo);
             Log.d("sss", "onChildItemCilck: ======加入分舵========");
         }
 
@@ -68,35 +74,33 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo<String> {
         }
     }
 
-    public transient ItemBinding<CarRvHorizontalVo> itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
+    public transient ItemBinding<CircleListNomalVo> itemImgBinding = ItemBinding.<CircleListNomalVo>of(BR.item,
             R.layout.app_card_horizontal_img_inner2).bindExtra(BR.parent, this);// 单一view 有点击事件;
 
 
-    public ItemBinding<CarRvHorizontalVo> getItemImgBinding() {
+    public ItemBinding<CircleListNomalVo> getItemImgBinding() {
         if (itemImgBinding == null) {
-            itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
+            itemImgBinding = ItemBinding.<CircleListNomalVo>of(BR.item,
                     R.layout.app_card_horizontal_img_inner2).bindExtra(BR.parent, this);
 
         }
         return itemImgBinding;
     }
 
-    public ObservableList<CarRvHorizontalVo> InnerResource = new ObservableArrayList<>();
+    //    public ObservableList<CarRvHorizontalVo> InnerResource = new ObservableArrayList<>();
+    public ObservableList<CircleListNomalVo> InnerResource = new ObservableArrayList<>();
 
 
-    public void setInnerResource() {
-        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "七律分部", "CEO：石慧杰", "", 1);
-        InnerResource.add(carRvHorizontalVo);
-        InnerResource.add(carRvHorizontalVo);
-        InnerResource.add(carRvHorizontalVo);
-        InnerResource.add(carRvHorizontalVo);
-        InnerResource.add(carRvHorizontalVo);
-        InnerResource.add(carRvHorizontalVo);
+    public void setDatasource(List<CircleListNomalVo> datasource) {
+        InnerResource.clear();
+        InnerResource.addAll(datasource);
+        if (InnerResource.size() == 0) {
+            this.setRecycleTopLayout(null);
+        }
     }
 
 
-    public ObservableList<CarRvHorizontalVo> getInnerResource() {
-
+    public ObservableList<CircleListNomalVo> getInnerResource() {
         return InnerResource;
     }
 

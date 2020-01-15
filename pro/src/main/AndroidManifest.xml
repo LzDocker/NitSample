@@ -17,6 +17,9 @@
         <activity android:name="com.docker.apps.active.ui.manager.ActivePersionManagerListActivity" />
         <activity android:name="com.docker.apps.active.ui.manager.ActivePersionDetailActivity" />
         <activity android:name="com.docker.apps.active.ui.publish.ActiveBannerPreviewActivity" />
+        <activity android:name="com.docker.apps.active.ui.publish.ActiveContentEditActivity" />
+        <activity android:name="com.docker.apps.order.ui.address.OrderAddressManagerActivity" />
+        <activity android:name="com.docker.apps.order.ui.address.OrderAddAddressActivity" />
 
     </application>
 

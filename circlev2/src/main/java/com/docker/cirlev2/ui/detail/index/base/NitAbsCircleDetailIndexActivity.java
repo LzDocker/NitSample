@@ -1,6 +1,7 @@
 package com.docker.cirlev2.ui.detail.index.base;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2NitAbsDetailIndexActivityBinding;
 import com.docker.cirlev2.ui.detail.index.CircleConfig;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
+import com.docker.cirlev2.ui.detail.index.type.CircleDetailFragment_tyz;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.vm.NitEmptyViewModel;
@@ -55,8 +57,8 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        isOverrideContentView = true;
         super.onCreate(savedInstanceState);
-
         circleConfig = (CircleConfig) getIntent().getSerializableExtra("circleConfig");
         if (circleConfig == null) {
             utid = getIntent().getStringExtra("utid");
@@ -96,7 +98,7 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
 
     @Override
     public void initView() {
-        mToolbar.hide();
+//        mToolbar.hide();
 
     }
 
@@ -120,5 +122,12 @@ public class NitAbsCircleDetailIndexActivity extends NitCommonActivity<NitEmptyV
         super.onDestroy();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (fragment != null) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
 

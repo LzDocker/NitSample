@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -16,12 +15,9 @@ import com.docker.cirlev2.ui.detail.CircleEditTabActivity;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
-import com.docker.common.common.adapter.CommonpagerAdapter;
-import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.common.widget.refresh.SmartRefreshLayout;
 import com.docker.common.databinding.CommonTabFrameLayoutBinding;
@@ -42,6 +38,9 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
 
     @Autowired
     int role;  // 角色
+
+    @Autowired
+    int refresh;
 
     private String[] titles = null;
 
@@ -105,12 +104,15 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 titles = new String[]{"全部", "全部", "全部"};
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                        .withInt("refresh", refresh)
                         .navigation());
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                        .withInt("refresh", refresh)
                         .navigation());
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                        .withInt("refresh", refresh)
                         .navigation());
             } else {
                 titles = new String[circleTitlesVos.size() + 1];
@@ -119,6 +121,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                     titles[i + 1] = circleTitlesVos.get(i).getName();
                     fragments.add((Fragment) ARouter.getInstance()
                             .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                            .withInt("refresh", refresh)
                             .navigation());
                 }
             }
@@ -127,10 +130,13 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 mBinding.get().magicIndicator.setVisibility(View.GONE);
                 mBinding.get().commonTvEdit.setVisibility(View.GONE);
                 titles = new String[]{""};
+
+
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
                         .withSerializable("param", mCircleTitlesVo.get(pos))
                         .withInt("childPosition", -1)
+                        .withInt("refresh", refresh)
                         .navigation());
             } else {
                 mBinding.get().magicIndicator.setVisibility(View.VISIBLE);
@@ -139,6 +145,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                     titles[i] = circleTitlesVos.get(i).getName();
                     fragments.add((Fragment) ARouter.getInstance()
                             .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                            .withInt("refresh", refresh)
                             .withSerializable("param", mCircleTitlesVo.get(pos))
                             .withInt("childPosition", i)
                             .navigation());
@@ -146,7 +153,7 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
             }
         }
         // magic
-        mBinding.get().viewpager.setAdapter(new CommonpagerAdapter(getChildFragmentManager(), fragments, titles));
+        mBinding.get().viewpager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicatorScroll(titles, mBinding.get().viewpager, mBinding.get().magicIndicator, this.getHoldingActivity());
         // magic

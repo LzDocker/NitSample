@@ -22,10 +22,16 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
             R.layout.circlev2_item_dynamic_img_inner) // 单一view 有点击事件
             .bindExtra(BR.serverdata, this);
 
-    public final transient ItemBinding<ResourceBean> itemDetailBinding = ItemBinding.<ServiceDataBean.ResourceBean>of(BR.item,
-            R.layout.circlev2_item_dynamic_detail_img) // 单一view 有点击事件  //circlev2_item_dynamic_detail_img
-            .bindExtra(BR.serverdata, this);
+    public transient ItemBinding<ResourceBean> itemDetailBinding;
 
+    public ItemBinding<ResourceBean> getItemDetailBinding() {
+        if (itemDetailBinding == null) {
+            itemDetailBinding = ItemBinding.<ServiceDataBean.ResourceBean>of(BR.item,
+                    R.layout.circlev2_item_dynamic_detail_img) // 单一view 有点击事件  //circlev2_item_dynamic_detail_img
+                    .bindExtra(BR.serverdata, this);
+        }
+        return itemDetailBinding;
+    }
 
     @Override
     public int getItemLayout() {
@@ -1409,7 +1415,6 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
         private String memberid;
         private String uuid;
         private String nickname;
-
         private String avatar;
 
         public String getAvatar() {

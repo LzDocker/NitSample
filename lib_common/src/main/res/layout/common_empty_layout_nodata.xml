@@ -16,7 +16,7 @@
             android:layout_width="120dp"
             android:layout_height="125dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_empty" />
+            android:src="@drawable/icon_emptyv2" />
 
         <TextView
             android:id="@+id/common_tv_nodata"
@@ -25,8 +25,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="还没有内容哦～"
-            android:textColor="#999" />
+            android:text="咦～还没有内容呢～"
+            android:textColor="#333" />
     </LinearLayout>
 
 

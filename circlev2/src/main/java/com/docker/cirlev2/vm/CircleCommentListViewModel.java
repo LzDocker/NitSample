@@ -154,7 +154,11 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
                     }
                     params.put("avatar", userInfoVo.avatar);
                     if (TextUtils.isEmpty(userInfoVo.nickname)) {
-                        params.put("nickname", "匿名");
+                        if (TextUtils.isEmpty(userInfoVo.fullName)) {
+                            params.put("nickname", "匿名");
+                        } else {
+                            params.put("nickname", userInfoVo.fullName);
+                        }
                     } else {
                         params.put("nickname", userInfoVo.nickname);
                     }
@@ -190,13 +194,13 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
                     commentVo1.setMemberid(userInfoVo.uid);
                     commentVo1.setInputtime(String.valueOf(System.currentTimeMillis() / 1000));
                     commentVo1.setUuid(userInfoVo.uuid);
-                    commentVo1.setNickname(userInfoVo.nickname);
+                    commentVo1.setNickname(params.get("nickname"));
                     mItems.add(commentVo1);
                 } else {
                     CommentVo.Reply reply = new CommentVo.Reply();
                     reply.setCommentid(((CommentRstVo) resource.data).commentid);
                     reply.setContent(params.get("content"));
-                    reply.setReply_nickname(userInfoVo.nickname);
+                    reply.setReply_nickname(params.get("reply_nickname"));
                     reply.setMemberid(userInfoVo.uid);
                     reply.setUuid(userInfoVo.uuid);
                     reply.setNickname(userInfoVo.nickname);
@@ -222,7 +226,8 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
             staPersionDetail.name = commentVo.nickname;
             staPersionDetail.uuid = commentVo.getUuid();
             staPersionDetail.uid = commentVo.getMemberid();
-            ARouter.getInstance().build(AppRouter.CIRCLE_persion_v2_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+//            ARouter.getInstance().build(AppRouter.CIRCLE_persion_v2_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+            ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", commentVo.getMemberid()).withString("uuid2", commentVo.getUuid()).navigation();
         }
     }
 

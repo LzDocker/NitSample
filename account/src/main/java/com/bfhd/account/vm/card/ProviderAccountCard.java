@@ -27,6 +27,7 @@ public class ProviderAccountCard extends NitBaseProviderCard {
                                                   NitCommonListFragment nitCommonListFragment) {
         if (baseCardVo == null) {  // 提供默认样式 默认接口参数
             baseCardVo = new AccountHeadCardVo(0, 0);
+
             HashMap<String, String> postArrMap = new HashMap<>();
             postArrMap.put("uuid", CacheUtils.getUser().uuid);
             baseCardVo.mRepParamMap.put("postArray", GsonUtils.toJson(postArrMap));

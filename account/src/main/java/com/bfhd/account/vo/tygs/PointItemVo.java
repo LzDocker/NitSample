@@ -1,11 +1,11 @@
 package com.bfhd.account.vo.tygs;
 
-import android.databinding.Bindable;
 import android.view.View;
 
 import com.bfhd.account.R;
 import com.bfhd.account.vo.MyInfoVo;
 import com.docker.common.common.vo.card.BaseCardVo;
+import com.google.gson.annotations.SerializedName;
 
 public class PointItemVo extends BaseCardVo<MyInfoVo> {
 
@@ -22,10 +22,17 @@ public class PointItemVo extends BaseCardVo<MyInfoVo> {
     public int getItemLayout() {
         return R.layout.account_tygs_item_point;
     }
-    private  String id;
 
+    @SerializedName("dotype")
+    private String id;
+
+    @SerializedName("title")
     private String name;
+
+    @SerializedName("inputtime")
     private String time;
+
+    @SerializedName("integral")
     private String point;
 
     public String getId() {

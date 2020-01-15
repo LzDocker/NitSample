@@ -36,7 +36,7 @@
                     android:id="@+id/iv_bg"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:src="#be3131" />
+                    android:src="@drawable/point_head_gradient" />
 
                 <TextView
                     android:id="@+id/tv_rule"
@@ -44,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="10dp"
+                    android:onClick="@{(view)->item.getOnItemClickListener.onItemClick(item,view)}"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/account_tv_transparent_shape"
                     android:paddingLeft="15dp"
@@ -84,7 +85,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
                             android:layout_toRightOf="@id/tv_dq"
-                            android:text="113"
+                            android:text="@{item.point}"
                             android:textColor="@color/white"
                             android:textSize="20sp" />
 
@@ -99,14 +100,6 @@
                             android:textColor="@color/white"
                             android:textSize="14sp" />
 
-
-                        <ImageView
-                            android:id="@+id/iv_point"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignBottom="@id/tv_point_num"
-                            android:layout_toRightOf="@id/tv_point"
-                            android:src="#FFEB3B" />
                     </RelativeLayout>
 
                     <LinearLayout
@@ -118,17 +111,19 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/account_lin_shape"
                         android:gravity="center"
+                        android:onClick="@{(view)->item.getOnItemClickListener.onItemClick(item,view)}"
                         android:paddingLeft="30dp"
                         android:paddingTop="8dp"
                         android:paddingRight="30dp"
                         android:paddingBottom="8dp">
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignBottom="@id/tv_point_num"
-                            android:layout_toRightOf="@id/tv_point"
-                            android:src="#FFEB3B" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="¥"
+                            android:textColor="#763DA1"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -152,27 +147,77 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp">
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="2.5dp"
-                    android:layout_weight="1"
-                    android:background="#BECFCF1E" />
 
-                <ImageView
+                <FrameLayout
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="108dp"
                     android:layout_marginLeft="2.5dp"
-                    android:layout_marginRight="2.5dp"
-                    android:layout_weight="1"
-                    android:background="#FF5722" />
+                    android:layout_weight="1">
 
-                <ImageView
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/point_head_gmsp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="购买商品\n得积分"
+                        android:textColor="@color/circle_white"
+                        android:textSize="15sp" />
+
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="0dp"
-                    android:layout_height="50dp"
+                    android:layout_height="108dp"
                     android:layout_marginLeft="2.5dp"
-                    android:layout_weight="1"
-                    android:background="#4CAF50" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/point_head_cjhd" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="参加活动\n得积分"
+                        android:textColor="@color/circle_white"
+                        android:textSize="15sp" />
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="108dp"
+                    android:layout_marginLeft="2.5dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/point_head_fapy" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="发展朋友\n得积分"
+                        android:textColor="@color/circle_white"
+                        android:textSize="15sp" />
+
+                </FrameLayout>
+
 
             </LinearLayout>
 

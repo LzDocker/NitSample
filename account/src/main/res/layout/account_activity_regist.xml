@@ -287,6 +287,14 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="12sp" />
 
+            <TextView
+                android:id="@+id/account_to_private"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="《隐私协议》"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp" />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+        <variable
+            name="item"
+            type="com.docker.apps.point.vo.PointSortItemVo" />
+
+        <import type="com.docker.apps.point.db.PointBdUtils" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/circle_white"
+        android:paddingTop="14dp">
+
+        <TextView
+            android:id="@+id/tv_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:text="@{PointBdUtils.getPointSortIndex(item.index)}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_index"
+            android:background="@drawable/open_liner_bg_shape"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="14dp">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:imageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:text="@{item.fullName}"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="拓客"-->
+            <!--android:textColor="#FFA60D"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textStyle="bold" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="14dp"
+                android:text="@{PointBdUtils.getPointSortInfoDesc(item)}"
+                android:textColor="#FFA60D"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:text="人"-->
+            <!--android:textColor="#FFA60D"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textStyle="bold" />-->
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

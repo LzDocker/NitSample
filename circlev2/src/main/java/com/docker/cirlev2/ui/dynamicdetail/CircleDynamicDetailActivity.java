@@ -1,10 +1,11 @@
 package com.docker.cirlev2.ui.dynamicdetail;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,15 +28,15 @@ import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.XPopup.BottomPopup;
 import com.docker.common.common.widget.dialog.ConfirmDialog;
-import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.core.widget.BottomSheetDialog;
-import com.gyf.immersionbar.ImmersionBar;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.XPopupCallback;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
 
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
@@ -53,6 +54,8 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     public ServiceDataBean mDynamicDetailVo;
     private BasePopupView basePopupView;
 
+    private Disposable disposable;
+
     @Override
     protected int getLayoutId() {
         return R.layout.circlev2_dynamic_detail_activity;
@@ -64,12 +67,35 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("dynamic_refresh")) {
+                UserInfoVo userInfoVo = CacheUtils.getUser();
+                HashMap<String, String> param = new HashMap();
+                param.put("dynamicid", dynamicId);
+                param.put("memberid", userInfoVo.uid);
+                param.put("uuid", userInfoVo.uuid);
+                mViewModel.fechDynamicDetail(param);
+            }
+        });
+    }
+
+    @Override
     public void initView() {
         mToolbar.hide();
         dynamicId = getIntent().getStringExtra("dynamicId");
         mBinding.setViewmodel(mViewModel);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
 
     @Override
     public void initObserver() {
@@ -112,13 +138,21 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
 
         // ui
         mBinding.setItem(mDynamicDetailVo);
+
+        if (mDynamicDetailVo.getType().equals("goods")) {
+            mBinding.dynamicDetailFootGoods.setVisibility(View.VISIBLE);
+            mBinding.dynamicDetailFoot.setVisibility(View.GONE);
+        } else {
+            mBinding.dynamicDetailFoot.setVisibility(View.VISIBLE);
+            mBinding.dynamicDetailFootGoods.setVisibility(View.GONE);
+        }
+
         if (!mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
             mBinding.circleJubao.setVisibility(View.VISIBLE); // 举报
         }
-//            if (mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
-//                mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
-//            }
-        mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
+        if (mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
+            mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
+        }
 
         mBinding.ivShare.setOnClickListener(v -> {
             mViewModel.ItemZFClick(mDynamicDetailVo, null); // 转发
@@ -262,7 +296,7 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                     }
 
                     if (type != 0) {
-                        StaCirParam staCirParam = new StaCirParam();
+                        StaCirParam staCirParam = new StaCirParam(mDynamicDetailVo.getCircleid(), mDynamicDetailVo.getUtid(), mDynamicDetailVo.getCircleName());
                         staCirParam.serviceDataBean = mDynamicDetailVo;
                         ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX).withSerializable("mStartParam", staCirParam).withInt("editType", 2).withInt("type", type).navigation();
                     }

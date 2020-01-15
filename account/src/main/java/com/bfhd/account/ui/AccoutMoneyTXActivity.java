@@ -9,6 +9,7 @@ import android.text.SpannedString;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityMoneyTxBinding;
@@ -16,6 +17,7 @@ import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.router.AppRouter;
 
 import javax.inject.Inject;
 
@@ -24,8 +26,11 @@ import io.reactivex.disposables.Disposable;
 /*
  * 钱包 wj  提现
  **/
+@Route(path = AppRouter.ACCOUNT_MONEY_HAND)
 public class AccoutMoneyTXActivity extends HivsBaseActivity<AccountViewModel, AccountActivityMoneyTxBinding> {
 
+
+    public String Txmoney;
 
     @Inject
     ViewModelProvider.Factory factory;
@@ -62,6 +67,11 @@ public class AccoutMoneyTXActivity extends HivsBaseActivity<AccountViewModel, Ac
         AbsoluteSizeSpan ass = new AbsoluteSizeSpan(15, true);//设置字体大小 true表示单位是sp
         ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mBinding.editTx.setHint(new SpannedString(ss));
+
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("Txmoney"))) {
+            mBinding.editTx.setText(getIntent().getStringExtra("Txmoney"));
+        }
+
         mBinding.accountTvTx.setOnClickListener(v -> {
             if (TextUtils.isEmpty(mBinding.editTx.getText())) {
                 ToastUtils.showShort("请输入提现金额");

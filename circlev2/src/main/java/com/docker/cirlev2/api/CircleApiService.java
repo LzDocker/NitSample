@@ -2,6 +2,7 @@ package com.docker.cirlev2.api;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.cirlev2.vo.card.PersonInfoHeadVo;
 import com.docker.cirlev2.vo.entity.CircleCountpageVo;
 import com.docker.cirlev2.vo.entity.CircleCreateRst;
 import com.docker.cirlev2.vo.entity.CirclePubSelectVo;
@@ -357,13 +358,17 @@ public interface CircleApiService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<CircleCountpageVo>>> circlePersionDetail(@FieldMap Map<String, String> params);
 
+    @POST("api.php?m=user.countpage")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<PersonInfoHeadVo>>> circlePersionCount(@FieldMap Map<String, String> params);
+
     @POST("api.php?m=user.focus")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> focus(@FieldMap Map<String, String> params);
 
     @POST("api.php?m=circle.invitation")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<ServiceDataBean.ShareBean>>> invite(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<ShareBean>>> invite(@FieldMap Map<String, String> params);
 
     @POST("api.php?m=dynamic.replyList")
     @FormUrlEncoded

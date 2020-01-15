@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.CircleTitlesVo"></variable>
+
+        <variable
+            name="editFlag"
+            type="Boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/open_liner_bg_shape"
+            android:orientation="horizontal"
+            android:paddingLeft="14dp"
+            android:paddingTop="15dp"
+            android:paddingRight="14dp"
+            android:paddingBottom="15dp">
+
+            <TextView
+                android:id="@+id/tv_tab_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="请输入栏目名称"
+                android:singleLine="true"
+                android:text="@={item.name}" />
+
+            <ImageView
+                android:id="@+id/circle_iv_drag"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@mipmap/circle_move_icon"
+                app:visibleGone="@{editFlag}" />
+
+            <TextView
+                android:id="@+id/circle_tv_del"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:background="@color/common_grey"
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:visibleGone="@{editFlag}" />
+
+            <LinearLayout
+                android:id="@+id/ll_edit_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:visibleGone="@{!editFlag}">
+
+                <ImageView
+                    android:id="@+id/circle_tv_ext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/arrow_right" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/recycle_inner"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="#f5f5f5"-->
+        <!--android:nestedScrollingEnabled="false"-->
+        <!--app:visibleGone="@{item.isEditPro}" />-->
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="#f5f5f5"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingBottom="10dp"-->
+        <!--android:visibility="gone">-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:padding="10dp"-->
+        <!--android:text="还没有关联应用哦,赶快去关联吧" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_pro_add"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/circle_shape_red_14"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:paddingLeft="14dp"-->
+        <!--android:paddingTop="5dp"-->
+        <!--android:paddingRight="14dp"-->
+        <!--android:paddingBottom="5dp"-->
+        <!--android:text="去关联应用"-->
+        <!--android:textColor="@color/white" />-->
+
+        <!--</LinearLayout>-->
+
+
+    </LinearLayout>
+
+
+</layout>

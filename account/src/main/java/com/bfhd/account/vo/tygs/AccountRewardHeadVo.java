@@ -6,17 +6,13 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
-import com.bfhd.account.vm.card.AccountHeadCardViewModel;
-import com.bfhd.account.vo.MyInfoVo;
-import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.CommonContainerOptions;
-import com.docker.common.common.model.CommonListOptions;
+import com.bfhd.account.vo.MoneyBoxVov2;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.utils.rxbus.RxBus;
-import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.card.BaseCardVo;
 
-public class AccountRewardHeadVo extends BaseCardVo<MyInfoVo> {
+import static com.docker.common.common.router.AppRouter.ACCOUNT_MONEY_HAND;
+
+public class AccountRewardHeadVo extends BaseCardVo {
 
 
     public AccountRewardHeadVo(int style, int position) {
@@ -33,12 +29,26 @@ public class AccountRewardHeadVo extends BaseCardVo<MyInfoVo> {
     @Override
     public void onItemClick(BaseCardVo item, View view) {
         if (view.getId() == R.id.tv_txmx) {
-
+            ARouter.getInstance().build(AppRouter.ACCOUNT_MONEY_DETAIL).navigation();
         }
-
         if (view.getId() == R.id.tv_qbtx) {
-
+            String txmon = "";
+            if (((AccountRewardHeadVo) item).moneyBoxVov2 != null) {
+                txmon = ((AccountRewardHeadVo) item).moneyBoxVov2.balance;
+            }
+            ARouter.getInstance().build(ACCOUNT_MONEY_HAND).withString("Txmoney", txmon).navigation();
         }
     }
 
+    public MoneyBoxVov2 moneyBoxVov2;
+
+    @Bindable
+    public MoneyBoxVov2 getMoneyBoxVov2() {
+        return moneyBoxVov2;
+    }
+
+    public void setMoneyBoxVov2(MoneyBoxVov2 moneyBoxVov2) {
+        this.moneyBoxVov2 = moneyBoxVov2;
+        notifyPropertyChanged(BR.moneyBoxVov2);
+    }
 }

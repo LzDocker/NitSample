@@ -37,6 +37,9 @@ public class AccountPointRecycleViewModel extends NitCommonContainerViewModel {
 
     public AccountPointHeadVo accountPointHeadVo;
 
+
+    public int scope = 0;
+
     @Inject
     AccountService accountService;
 
@@ -72,31 +75,26 @@ public class AccountPointRecycleViewModel extends NitCommonContainerViewModel {
     }
 
 
-    /*@Override
+    @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
 
+        LiveData<ApiResponse<BaseResponse>> severFun = null;
+        switch (scope) {
+            case 0: // 积分
+                severFun = accountService.fetchPointList(param);
+                break;
+            case 1:// 收益
+                severFun = accountService.fetchMoneyList(param);
+                break;
+        }
 
-        return ;
-    }*/
-
-    @Override
-    public void loadData() {
-        mEmptycommand.set(EmptyStatus.BdHiden);
-        PointItemVo pointItemVo = new PointItemVo(0, 0);
-        pointItemVo.setTime("111");
-        pointItemVo.setPoint("12");
-        pointItemVo.setName("ceshidosjfi");
-        List<PointItemVo> pointItemVoList = new ArrayList<>();
-        pointItemVoList.add(pointItemVo);
-        pointItemVoList.add(pointItemVo);
-        pointItemVoList.add(pointItemVo);
-        mItems.addAll(pointItemVoList);
+        return severFun;
     }
+
 
     @Override
     public void formartData(Resource resource) {
         super.formartData(resource);
-//        resource.data = resource.data.list;
     }
 
     @Override

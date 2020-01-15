@@ -26,6 +26,7 @@ import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.utils.BitmapCut;
+import com.docker.common.common.utils.GaussinaBlurUtil;
 
 import java.io.File;
 import java.security.MessageDigest;
@@ -186,7 +187,7 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"imageNomUrl"}, requireAll = false)
     public static void loadceimage(ImageView imageView, String url) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL);
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).transition(withCrossFade()).into(imageView);
 
     }
 
@@ -228,6 +229,33 @@ public class ImgBindingAdapter {
         GlideApp.with(imageView)
                 .applyDefaultRequestOptions(options)
                 .load(url).transition(withCrossFade()).into(imageView);
+
+    }
+
+
+    @BindingAdapter(value = {"BlurImgUrl"}, requireAll = false)
+    public static void BlurImgUrl(ImageView imageView, String url) {
+        url = CommonBdUtils.getImgUrl("/static/var/upload/image/2019/12/2019122409334512287_750x297.png");
+//        url = CommonBdUtils.getImgUrl(url);
+        options.diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
+                .transform(new BitmapTransformation() {
+                    @Override
+                    protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
+                        Bitmap endbitmap = null;
+                        //调用裁剪图片工具类进行裁剪
+                        endbitmap = GaussinaBlurUtil.GaussianBlur(imageView.getContext(), toTransform, 10);
+
+                        return endbitmap;
+                    }
+
+                    @Override
+                    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+
+                    }
+                });
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+
 
     }
 

@@ -4,6 +4,7 @@
     xmlns:bind="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.docker.cirlev2.vm.CircleDynamicDetailViewModel" />
@@ -46,7 +47,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_toolbar_back" />
+                    android:src="@mipmap/ic_back" />
 
                 <TextView
                     android:id="@+id/title"
@@ -270,6 +271,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_gwc"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
@@ -288,6 +290,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="购物车"
+                        android:textColor="#FF979797"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_gc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/ll_gwc"
+                    android:gravity="center"
+                    android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@{item.isCollect == 1?R.mipmap.circle_store_colleced:R.mipmap.circle_store_collec}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{item.isCollect == 1? @string/collect : @string/isCollect}'
                         android:textColor="#FF979797"
                         android:textSize="12sp" />
                 </LinearLayout>

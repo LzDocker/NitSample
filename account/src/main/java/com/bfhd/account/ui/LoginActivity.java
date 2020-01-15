@@ -29,9 +29,18 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.cache.DbCacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
+import com.docker.common.common.utils.tool.MD5Util;
 import com.docker.common.common.vo.UserInfoVo;
+import com.docker.module_im.DemoCache;
+import com.docker.module_im.config.preference.UserPreferences;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.permissions.RxPermissions;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.common.ToastHelper;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.StatusBarNotificationConfig;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -97,37 +106,51 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
 
 
     public void loginWithIm(String account, String token) {
-//        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-//            @Override
-//            public void onSuccess(LoginInfo param) {
-//                DemoCache.setAccount(account);
-//                // 初始化消息提醒配置
-//                initNotificationConfig();
-////                // 进入主界面
-////                MainActivity.start(LoginActivity.this, null);
-//                if (!isFoceLogin) {
-//                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
-//                } else {
-//                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
-//                    setAlias();
-//                }
-//                finish();
-//            }
-//
-//            @Override
-//            public void onFailed(int code) {
-//                if (code == 302 || code == 404) {
-//                    ToastHelper.showToast(LoginActivity.this, R.string.login_failed);
-//                } else {
-//                    ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
-//                }
-//            }
-//
-//            @Override
-//            public void onException(Throwable exception) {
-//                ToastHelper.showToast(LoginActivity.this, R.string.login_exception);
-//            }
-//        });
+        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
+            @Override
+            public void onSuccess(LoginInfo param) {
+                DemoCache.setAccount(account);
+                // 初始化消息提醒配置
+                initNotificationConfig();
+//                // 进入主界面
+//                MainActivity.start(LoginActivity.this, null);
+                if (!isFoceLogin) {
+                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
+                } else {
+                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
+                    setAlias();
+                }
+                finish();
+            }
+
+            @Override
+            public void onFailed(int code) {
+                if (code == 302 || code == 404) {
+                    ToastHelper.showToast(LoginActivity.this, R.string.login_failed);
+                } else {
+                    ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
+                }
+                if (!isFoceLogin) {
+                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
+                } else {
+                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
+                    setAlias();
+                }
+                finish();
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+                ToastHelper.showToast(LoginActivity.this, R.string.login_exception);
+                if (!isFoceLogin) {
+                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
+                } else {
+                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
+                    setAlias();
+                }
+                finish();
+            }
+        });
     }
 
 
@@ -189,19 +212,19 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
         }
     };
 
-//
-//    private void initNotificationConfig() {
-//        // 初始化消息提醒
-//        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-//        // 加载状态栏配置
-//        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
-//        if (statusBarNotificationConfig == null) {
-//            statusBarNotificationConfig = DemoCache.getNotificationConfig();
-//            UserPreferences.setStatusConfig(statusBarNotificationConfig);
-//        }
-//        // 更新配置
-//        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
-//    }
+
+    private void initNotificationConfig() {
+        // 初始化消息提醒
+        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
+        // 加载状态栏配置
+        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
+        if (statusBarNotificationConfig == null) {
+            statusBarNotificationConfig = DemoCache.getNotificationConfig();
+            UserPreferences.setStatusConfig(statusBarNotificationConfig);
+        }
+        // 更新配置
+        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
+    }
 
     private void initperssion() {
         RxPermissions rxPermissions = new RxPermissions(this);
@@ -340,14 +363,7 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             case 104:
                 if (viewEventResouce.data != null) {
                     UserInfoVo userInfoVo = (UserInfoVo) viewEventResouce.data;
-//                    loginWithIm(userInfoVo.uuid, EncodeUtils.m(userInfoVo.uuid));
-//                    if ("1".equals(userInfoVo.perfectData) && !TextUtils.isEmpty(userInfoVo.reg_type)) { // 完善信息
-//                        Intent intent = new Intent(LoginActivity.this, AccountInfoCompleteActivity.class);
-//                        intent.putExtra("mType", userInfoVo.reg_type + "");
-//                        startActivity(intent);
-//                    } else {
-//
-//                    }
+                    loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
 
                 }
                 break;
@@ -375,6 +391,7 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             public void onStart(SHARE_MEDIA share_media) {
                 showWaitDialog("加载中...");
             }
+
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
                 hidWaitDialog();

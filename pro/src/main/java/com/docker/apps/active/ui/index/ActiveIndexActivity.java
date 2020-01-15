@@ -12,6 +12,7 @@ import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.docker.apps.R;
 import com.docker.apps.databinding.ProActiveIndexActivityBinding;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
@@ -51,10 +52,9 @@ public class ActiveIndexActivity extends NitCommonActivity<NitEmptyViewModel, Pr
         fragments.add(ActiveContainerFragment.getInstance());
         fragments.add(ActiveContainerFragment.getInstance());
         fragments.add(ActiveContainerFragment.getInstance());
-        mBinding.viewpager.setOffscreenPageLimit(6);
 
         // magic
-        mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
+        mBinding.viewpager.setAdapter(new CommonpagerStateAdapter(getSupportFragmentManager(), fragments));
         commonIndector = new CommonIndector();
         commonIndector.mTitleList = titles;
         commonNavigator = commonIndector.initMagicIndicatorScrollSpac(mBinding.viewpager, mBinding.magic, this);

@@ -7,6 +7,9 @@ import com.docker.message.ui.index.MessageImFragment;
 import com.docker.nitsample.ui.IndexSearchActivity;
 import com.docker.nitsample.ui.MainActivity;
 import com.docker.nitsample.ui.MainTygsActivity;
+import com.docker.nitsample.ui.SplashActivity;
+import com.docker.nitsample.ui.WelcomeFragment;
+import com.docker.nitsample.ui.WelocomeActivity;
 import com.docker.nitsample.ui.edit.EditCoutainerFragment;
 import com.docker.nitsample.ui.edit.EditIndexActivity;
 import com.docker.nitsample.ui.edit.EditListFragment;
@@ -94,5 +97,17 @@ public abstract class UIMoudle {
     @ActivityScope
     @ContributesAndroidInjector
     abstract SearchActivity contributeSearchActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract WelcomeFragment contributeWelcomeFragmentInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract SplashActivity contributeSplashActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract WelocomeActivity contributeWelocomeActivityInjector();
 
 }

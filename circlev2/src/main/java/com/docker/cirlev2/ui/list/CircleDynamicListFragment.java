@@ -19,7 +19,11 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
+
+import io.reactivex.disposables.Disposable;
 
 import static com.docker.common.common.config.Constant.KEY_RVUI_GRID2;
 
@@ -32,6 +36,8 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
     public int mChildPos = 0;
 
     private int refresh = -1;
+
+    Disposable disposable;
 
     @Override
     public CircleDynamicListViewModel getViewModel() {
@@ -53,7 +59,16 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         refresh = getArguments().getInt("refresh");
         super.onActivityCreated(savedInstanceState);
-
+        //
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("dynamic_refresh")) {
+                mViewModel.mPage = 1;
+                if(mViewModel.mItems!=null){
+                    mViewModel.mItems.clear();
+                }
+                mViewModel.loadData();
+            }
+        });
     }
 
     @Override
@@ -72,41 +87,53 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
 //        commonListReq.ReqParam.put("memberid", "64");
 //        commonListReq.ReqParam.put("companyid", "1");
 
-//        commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-//        mCircleTitlesVo = (CircleTitlesVo) getArguments().getSerializable("param");
-//        mChildPos = getArguments().getInt("childPosition");
-//        UserInfoVo userInfoVo = CacheUtils.getUser();
-//        commonListReq.ReqParam.put("memberid", userInfoVo.uid);
-//        commonListReq.ReqParam.put("uuid", userInfoVo.uuid);
-//        commonListReq.ReqParam.put("utid", mCircleTitlesVo.getUtid());
-//        commonListReq.ReqParam.put("circleid", mCircleTitlesVo.getCircleid());
-//        commonListReq.ReqParam.put("classid", mCircleTitlesVo.getClassid());
-//        if (mChildPos != -1) {
-//            commonListReq.ReqParam.put("circleid2", mCircleTitlesVo.getChildClass().get(mChildPos).getCircleid());
-//            commonListReq.ReqParam.put("t", mCircleTitlesVo.getChildClass().get(mChildPos).getDataType());
-//        } else {
-//            commonListReq.ReqParam.put("t", mCircleTitlesVo.getDataType());
-//        }
-//
-//        if ("goods".equals(commonListReq.ReqParam.get("t"))) {
-//            commonListReq.RvUi = KEY_RVUI_GRID2;
-//        }
-//
-//        if (TextUtils.isEmpty(commonListReq.ReqParam.get("t"))) {
-//            commonListReq.ReqParam.remove("t");
-//        }
+        mCircleTitlesVo = (CircleTitlesVo) getArguments().getSerializable("param");
+        if (mCircleTitlesVo != null) { // 圈子内
+            commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+            mChildPos = getArguments().getInt("childPosition");
+
+//            UserInfoVo userInfoVo = CacheUtils.getUser();
+//            commonListReq.ReqParam.put("memberid", userInfoVo.uid);
+//            commonListReq.ReqParam.put("uuid", userInfoVo.uuid);
+
+            commonListReq.ReqParam.put("utid", mCircleTitlesVo.getUtid());
+            commonListReq.ReqParam.put("circleid", mCircleTitlesVo.getCircleid());
+            commonListReq.ReqParam.put("classid", mCircleTitlesVo.getClassid());
+//            if (mChildPos != -1) {
+//                commonListReq.ReqParam.put("circleid2", mCircleTitlesVo.getChildClass().get(mChildPos).getCircleid());
+//                commonListReq.ReqParam.put("t", mCircleTitlesVo.getChildClass().get(mChildPos).getDataType());
+//            } else {
+//                commonListReq.ReqParam.put("t", mCircleTitlesVo.getDataType());
+//            }
+
+            commonListReq.ReqParam.put("t", "dynamic");
+//            commonListReq.ReqParam.put("t", "news");
+//            commonListReq.ReqParam.put("t", "answer");
+            if ("goods".equals(commonListReq.ReqParam.get("t"))) {
+                commonListReq.RvUi = KEY_RVUI_GRID2;
+            }
+
+            if (TextUtils.isEmpty(commonListReq.ReqParam.get("t"))) {
+                commonListReq.ReqParam.remove("t");
+            }
+        }
+
+        /*
+        *
+        *  else {     // 圈子外使用列表
+//        commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
+//        commonListReq.ReqParam.put("t", "dynamic");
+            commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
+            commonListReq.ReqParam.put("memberid", "67");
+            commonListReq.ReqParam.put("companyid", "1");
+        }
+        * */
 
         if (refresh == -1) {
             commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         } else {
             commonListReq.refreshState = refresh;
         }
-//        commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
-//        commonListReq.ReqParam.put("t", "dynamic");
-        commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
-        commonListReq.ReqParam.put("memberid", "67");
-        commonListReq.ReqParam.put("companyid", "1");
-
 
         return commonListReq;
     }

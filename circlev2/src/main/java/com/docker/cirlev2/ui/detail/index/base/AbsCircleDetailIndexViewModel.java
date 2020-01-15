@@ -45,13 +45,13 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
     public final MediatorLiveData<List<CircleTitlesVo>> mCircleClassLv = new MediatorLiveData();
 
     /*
-    * 分享数据
-    * */
+     * 分享数据
+     * */
     public final MediatorLiveData<ShareBean> mShareLv = new MediatorLiveData();
 
     /*
-    * 加入圈子
-    * */
+     * 加入圈子
+     * */
     public final MediatorLiveData<String> mJoninLv = new MediatorLiveData();
 
 
@@ -61,8 +61,10 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
         mCommand.OnRetryLoad(() -> {
             mEmptycommand.set(EmptyStatus.BdLoading);
             if (!TextUtils.isEmpty(utid) && !TextUtils.isEmpty(circleid)) {
-                FetchCircleDetail(utid, circleid);
                 if (mCircleDetailLv.getValue() == null) {
+                    FetchCircleDetail(utid, circleid);
+                }
+                if (mCircleDetailLv.getValue() != null&&mCircleDetailLv.getValue() == null) {
                     FetchCircleClass();
                 }
             }

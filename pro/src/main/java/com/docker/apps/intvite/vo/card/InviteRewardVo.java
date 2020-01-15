@@ -1,5 +1,6 @@
 package com.docker.apps.intvite.vo.card;
 
+import android.databinding.ObservableField;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -26,4 +27,9 @@ public class InviteRewardVo extends BaseCardVo {
     public int getItemLayout() {
         return R.layout.pro_invite_reward_card;
     }
+
+
+    public ObservableField<String> pointsReward = new ObservableField<>();
+    public ObservableField<String> incomeReward = new ObservableField<>();
+    public ObservableField<String> inviteNum = new ObservableField<>();
 }

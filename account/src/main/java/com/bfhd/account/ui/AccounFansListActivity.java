@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.BR;
 import com.bfhd.account.R;
@@ -31,6 +32,7 @@ import io.reactivex.disposables.Disposable;
 /*
  * 粉丝列表
  **/
+@Route(path = AppRouter.ACCOUNT_FANS_LISt)
 public class AccounFansListActivity extends OpenBaseListActivity<AccountViewModel> {
 
 
