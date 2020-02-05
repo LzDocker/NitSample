@@ -6,6 +6,7 @@ import android.arch.lifecycle.MediatorLiveData;
 import com.docker.apps.point.api.PointService;
 import com.docker.apps.point.vo.PointSortItemVo;
 import com.docker.apps.point.vo.PointSortVo;
+import com.docker.apps.point.vo.PointTabVo;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vm.PointSortViewModel;
 import com.docker.common.common.model.BaseItemModel;
@@ -13,6 +14,8 @@ import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
+import com.docker.core.repository.NitBoundCallback;
+import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
 import java.util.ArrayList;
@@ -38,9 +41,34 @@ public class PonitSortVm extends CircleDynamicListViewModel {
     PointService pointService;
 
 
-    public MediatorLiveData<List<PointSortItemVo>> mMouthHeadLv = new MediatorLiveData<>();
-    public MediatorLiveData<List<PointSortItemVo>> mTotalHeadLv = new MediatorLiveData<>();
+    public MediatorLiveData<List<PointSortItemVo>> mHeadDataLv = new MediatorLiveData<>();
 
+
+    public MediatorLiveData<List<PointTabVo>> mPointTabLv = new MediatorLiveData<>();
+
+
+    public void fechPointTabdata() {
+        mPointTabLv.addSource(RequestServer(pointService.fechPointTabdata()),
+                new NitNetBoundObserver<List<PointTabVo>>(new NitBoundCallback<List<PointTabVo>>() {
+                    @Override
+                    public void onComplete(Resource<List<PointTabVo>> resource) {
+                        super.onComplete(resource);
+                        mPointTabLv.setValue(resource.data);
+                    }
+
+                    @Override
+                    public void onBusinessError(Resource<List<PointTabVo>> resource) {
+                        super.onBusinessError(resource);
+                        mPointTabLv.setValue(null);
+                    }
+
+                    @Override
+                    public void onNetworkError(Resource<List<PointTabVo>> resource) {
+                        super.onNetworkError(resource);
+                        mPointTabLv.setValue(null);
+                    }
+                }));
+    }
 
     @Override
     public Collection<? extends BaseItemModel> formatListData(Collection data) {
@@ -62,46 +90,19 @@ public class PonitSortVm extends CircleDynamicListViewModel {
     public void formartData(Resource resource) {
 //        super.formartData(resource);
 
-        switch (scope) {
-            case 0:
-
-                for (int i = 0; i < ((PointSortVo) resource.data).mouthRank.size(); i++) {
-                    ((PointSortVo) resource.data).mouthRank.get(i).rankType = rankType;
-                }
-                if (mPage == 1) {
-                    ArrayList<PointSortItemVo> mMouthIts = new ArrayList<>();
-                    if (((PointSortVo) resource.data).mouthRank.size() >= 3) {
-                        mMouthIts.addAll(((PointSortVo) resource.data).mouthRank.subList(0, 3));
-                        ((PointSortVo) resource.data).mouthRank.removeAll(mMouthIts);
-                        resource.data = ((PointSortVo) resource.data).mouthRank;
-                    } else {
-                        mMouthIts.addAll(((PointSortVo) resource.data).mouthRank);
-                        resource.data = new ArrayList<>();
-                    }
-                    mMouthHeadLv.setValue(mMouthIts);
-                } else {
-                    resource.data = ((PointSortVo) resource.data).mouthRank;
-                }
-                break;
-            case 1:
-                for (int i = 0; i < ((PointSortVo) resource.data).totalRank.size(); i++) {
-                    ((PointSortVo) resource.data).totalRank.get(i).rankType = rankType;
-                }
-                if (mPage == 1) {
-                    ArrayList<PointSortItemVo> mTotalIts = new ArrayList<>();
-                    if (((PointSortVo) resource.data).totalRank.size() >= 3) {
-                        mTotalIts.addAll(((PointSortVo) resource.data).totalRank.subList(0, 3));
-                        ((PointSortVo) resource.data).totalRank.removeAll(mTotalIts);
-                        resource.data = ((PointSortVo) resource.data).totalRank;
-                    } else {
-                        mTotalIts.addAll(((PointSortVo) resource.data).totalRank);
-                        resource.data = new ArrayList<>();
-                    }
-                    mTotalHeadLv.setValue(mTotalIts);
-                } else {
-                    resource.data = ((PointSortVo) resource.data).totalRank;
-                }
-                break;
+        for (int i = 0; i < ((List<PointSortItemVo>) resource.data).size(); i++) {
+            ((List<PointSortItemVo>) resource.data).get(i).rankType = rankType;
+        }
+        if (mPage == 1) {
+            ArrayList<PointSortItemVo> mMouthIts = new ArrayList<>();
+            if (((List<PointSortItemVo>) resource.data).size() >= 3) {
+                mMouthIts.addAll(((List<PointSortItemVo>) resource.data).subList(0, 3));
+                ((List<PointSortItemVo>) resource.data).removeAll(mMouthIts);
+            } else {
+                mMouthIts.addAll(((List<PointSortItemVo>) resource.data));
+                resource.data = new ArrayList<>();
+            }
+            mHeadDataLv.setValue(mMouthIts);
         }
     }
 }

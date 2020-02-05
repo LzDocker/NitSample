@@ -16,11 +16,12 @@ public class AppImgHeaderCardVo extends BaseCardVo<String> {
 
 
     public ObservableField<String> imgurl = new ObservableField<>();
+    public ObservableField<String> logourl = new ObservableField<>();
 
     public AppImgHeaderCardVo(int style, int position) {
         super(style, position);
         maxSupport = 1;
-        imgurl.set("http://taijistar.oss-cn-beijing.aliyuncs.com/static/var/upload/img20191029/upload/image/1572354265340_536x451.png");
+//        imgurl.set("http://taijistar.oss-cn-beijing.aliyuncs.com/static/var/upload/img20191029/upload/image/1572354265340_536x451.png");
     }
 
     @Override

@@ -15,12 +15,14 @@ import com.docker.cirlev2.vm.CircleMinesViewModel;
 import com.docker.cirlev2.vm.CirclePersionViewModel;
 import com.docker.cirlev2.vm.CirclePersonInfoViewModel;
 import com.docker.cirlev2.vm.CircleShoppingViewModel;
+import com.docker.cirlev2.vm.CircleShoppingViewModelv2;
 import com.docker.cirlev2.vm.CirlcleSelectViewModel;
 import com.docker.cirlev2.vm.CreateListViewModel;
 import com.docker.cirlev2.vm.PublishViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vm.card.CircleDynamicDetailCardVm;
 import com.docker.cirlev2.vm.card.CirclePersonInfoHeadCardVm;
+import com.docker.cirlev2.vm.card.ShoppingCartViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
 import dagger.Binds;
@@ -121,6 +123,16 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(CirclePersonInfoHeadCardVm.class)
     abstract ViewModel CirclePersonInfoHeadCardVm(CirclePersonInfoHeadCardVm model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ShoppingCartViewModel.class)
+    abstract ViewModel ShoppingCartViewModel(ShoppingCartViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CircleShoppingViewModelv2.class)
+    abstract ViewModel CircleShoppingViewModelv2(CircleShoppingViewModelv2 model);
 
 
 

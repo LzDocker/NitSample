@@ -27,6 +27,9 @@ import com.docker.cirlev2.vo.entity.ScreenVo;
 import com.docker.cirlev2.vo.entity.ShareVo;
 import com.docker.cirlev2.vo.entity.TradingCommonVo;
 import com.docker.cirlev2.vo.entity.TypeVo;
+import com.docker.cirlev2.vo.vo.ShoppingCarItemVo;
+import com.docker.cirlev2.vo.vo.ShoppingCarVoV2;
+import com.docker.cirlev2.vo.vo.ShoppingCarVoV3;
 import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.RstServerVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
@@ -54,6 +57,10 @@ import retrofit2.http.Url;
  */
 
 public interface CircleApiService {
+
+
+
+
 
 
     /*
@@ -403,5 +410,36 @@ public interface CircleApiService {
     @POST("http://api.map.baidu.com/reverse_geocoding/v3/")
     @FormUrlEncoded
     LiveData<ApiResponse<CityCodeVo>> fechCityCode(@FieldMap Map<String, String> params);
+
+
+     @GET("api.php?m=shoppingCar.shoppingCarAdd")
+    LiveData<ApiResponse<BaseResponse<String>>> shoppingCarAdd(@QueryMap Map<String, String> params);
+
+    @POST("api.php?m=shoppingCar.shoppingCarAdd")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<ShoppingCarVoV2>>>> shoppingCarList(@FieldMap Map<String, String> params);
+
+    /*
+     * cartlist
+     * */
+    @POST("api.php?m=get.getGoodsTrueData")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<ShoppingCarItemVo>>>> getGoodsTrueData(@FieldMap Map<String, String> params);
+
+    /*
+     * cartlist
+     * */
+    @POST("api.php?m=shoppingCar.shoppingCarList")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<ShoppingCarVoV3>>>> getGoodsCartListData(@FieldMap Map<String, String> params);
+
+    /*
+     * cart del
+     * */
+    @POST("api.php?m=shoppingCar.shoppingCarDel")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> shoppingCarDel(@FieldMap Map<String, String> params);
+
+
 
 }

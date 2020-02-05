@@ -26,6 +26,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
@@ -74,6 +75,7 @@ import com.luck.picture.lib.permissions.RxPermissions;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.ValueCallback;
+
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +89,7 @@ import static android.app.Activity.RESULT_OK;
 
 /*
  * */
+@Route(path = AppRouter.COMMONH5FRAGMENT)
 public class CommonWebFragment extends CommonFragment<CircleTypeViewModel, CircleFragmentCommonWebBinding> {
 
     @Inject

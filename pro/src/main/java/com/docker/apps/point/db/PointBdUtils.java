@@ -28,13 +28,13 @@ public class PointBdUtils {
         if (Obtotals == null || Obtotals.size() == 0 || Obtotals.size() <= position) {
             return "";
         }
-        if (TextUtils.isEmpty(Obtotals.get(position).fullName)) {
+        if (!TextUtils.isEmpty(Obtotals.get(position).fullName)) {
             return Obtotals.get(position).fullName;
         }
-        if (TextUtils.isEmpty(Obtotals.get(position).nickname)) {
+        if (!TextUtils.isEmpty(Obtotals.get(position).nickname)) {
             return Obtotals.get(position).nickname;
         }
-        if (TextUtils.isEmpty(Obtotals.get(position).username)) {
+        if (!TextUtils.isEmpty(Obtotals.get(position).username)) {
             return Obtotals.get(position).username;
         }
         return "";
@@ -47,13 +47,13 @@ public class PointBdUtils {
         }
         String footstr = "";
         switch (rankType) {
-            case "1":
+            case "integral":
                 footstr = Obtotals.get(position).totalNum + "积分";
                 break;
-            case "2":
+            case "buy":
                 footstr = "消费¥" + Obtotals.get(position).totalNum;
                 break;
-            case "3":
+            case "invite":
                 footstr = "拓客" + Obtotals.get(position).totalNum + "人";
                 break;
         }
@@ -70,13 +70,13 @@ public class PointBdUtils {
     public static String getPointSortInfoDesc(PointSortItemVo pointSortItemVo) {
         String str = "";
         switch (pointSortItemVo.rankType) {
-            case "1":
+            case "integral":
                 str = pointSortItemVo.totalNum + "积分";
                 break;
-            case "2":
+            case "buy":
                 str = "消费¥" + pointSortItemVo.totalNum;
                 break;
-            case "3":
+            case "invite":
                 str = "拓客" + pointSortItemVo.totalNum + "人";
                 break;
         }

@@ -121,7 +121,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.8"
-                        android:background="@color/circle_red"
+                        android:background="@color/colorPrimaryDark"
                         android:gravity="center"
                         android:text="发送验证码"
                         android:textColor="@color/white"

@@ -54,6 +54,10 @@ public class BdUtils {
     };
 
 
+    public static String StringValveof(int obj) {
+        return obj + "";
+    }
+
     /*
      * 获取图片url
      * */

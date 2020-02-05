@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -16,6 +17,8 @@ import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.adapter.CommonpagerStateAdapter;
+import com.docker.common.common.binding.CommonBdUtils;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.widget.indector.CommonIndector;
@@ -130,25 +133,41 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 mBinding.get().magicIndicator.setVisibility(View.GONE);
                 mBinding.get().commonTvEdit.setVisibility(View.GONE);
                 titles = new String[]{""};
+                if (mCircleTitlesVo.get(pos).getShowType() == 1) {
+                    fragments.add((Fragment) ARouter.getInstance()
+                            .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                            .withSerializable("param", mCircleTitlesVo.get(pos))
+                            .withInt("childPosition", -1)
+                            .withInt("refresh", refresh)
+                            .navigation());
+                    Log.d("sss", "processTab: ====111===============");
+                } else {
+                    fragments.add((Fragment) ARouter.getInstance()
+                            .build(AppRouter.CIRCLEV2_COMMONH5)
+                            .withString("weburl", ThiredPartConfig.BaseServeUrl + mCircleTitlesVo.get(pos).getH5_url())
+                            .navigation());
+                    Log.d("sss", "processTab: ====222===============");
+                }
 
-
-                fragments.add((Fragment) ARouter.getInstance()
-                        .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                        .withSerializable("param", mCircleTitlesVo.get(pos))
-                        .withInt("childPosition", -1)
-                        .withInt("refresh", refresh)
-                        .navigation());
             } else {
                 mBinding.get().magicIndicator.setVisibility(View.VISIBLE);
                 titles = new String[circleTitlesVos.size()];
                 for (int i = 0; i < circleTitlesVos.size(); i++) {
                     titles[i] = circleTitlesVos.get(i).getName();
-                    fragments.add((Fragment) ARouter.getInstance()
-                            .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                            .withInt("refresh", refresh)
-                            .withSerializable("param", mCircleTitlesVo.get(pos))
-                            .withInt("childPosition", i)
-                            .navigation());
+                    if (circleTitlesVos.get(i).getShowType() == 1) {
+                        fragments.add((Fragment) ARouter.getInstance()
+                                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                                .withInt("refresh", refresh)
+                                .withSerializable("param", mCircleTitlesVo.get(pos))
+                                .withInt("childPosition", i)
+                                .navigation());
+                    } else {
+                        fragments.add((Fragment) ARouter.getInstance()
+                                .build(AppRouter.CIRCLEV2_COMMONH5)
+                                .withString("weburl", ThiredPartConfig.BaseServeUrl + circleTitlesVos.get(i).getH5_url())
+                                .navigation());
+                        Log.d("sss", "processTab: ====333===============");
+                    }
                 }
             }
         }

@@ -36,6 +36,5 @@ public class PonitHeadCardVo extends BaseCardVo {
     public void setTotals(ArrayList<PointSortItemVo> totals, String rankType) {
         this.rankType = rankType;
         this.Obtotals.addAll(totals);
-
     }
 }

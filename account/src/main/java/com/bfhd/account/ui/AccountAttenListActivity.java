@@ -87,7 +87,9 @@ public class AccountAttenListActivity extends OpenBaseListActivity<AccountViewMo
                 staPersionDetail.name = fansVo.getNickname();
                 staPersionDetail.uuid = fansVo.getUuid();
                 staPersionDetail.uid = fansVo.getMemberid();
-                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", fansVo.getMemberid()).withString("uuid2", fansVo.getUuid()).navigation();
+
+//                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
             }
         });
         mBinding.recyclerView.setAdapter(hivsSampleAdapter);

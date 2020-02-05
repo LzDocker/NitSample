@@ -15,7 +15,7 @@ public class AppVo extends BaseSampleItem {
 
     public String id;
 
-    public String icon;
+    public int icon = R.mipmap.open_up_pic_icon;
 
     @Bindable
     public boolean getChecked() {

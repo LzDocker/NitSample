@@ -4,10 +4,12 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableField;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
+import com.docker.common.common.router.AppRouter;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -41,7 +43,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
             case "datetime":
             case "product":
             case "goods":
-                lay = R.layout.circlev2_item_dynamic_goods;
+                lay = R.layout.circlev2_item_dynamic_goodsv2;
                 break;
             case "dynamic": //dynamic
                 lay = R.layout.circlev2_item_dynamic_active;
@@ -67,7 +69,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
     @Override
     public OnItemClickListener getOnItemClickListener() {
-        return null;
+        return (item, view) -> ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", ((ServiceDataBean) item).getDynamicid()).navigation();
     }
 
     private boolean isSelect;

@@ -7,32 +7,60 @@ import android.view.View;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.common.common.model.BaseSampleItem;
+import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.vo.card.BaseCardVo;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class ShoppingCarItemVo extends BaseCardVo {
+public class ShoppingCarItemVo extends BaseSampleItem {
 
-
-    @Override
-    public void onItemClick(BaseCardVo item, View view) {
-
-    }
 
     @Override
     public int getItemLayout() {
-        return R.layout.circlev2_item_shopping_car;
+        return R.layout.circlev2_shopping_car_item_inner;
     }
 
-    public transient ItemBinding<ServiceDataBean> itemBinding = ItemBinding.<ServiceDataBean>of(BR.item,
-            R.layout.circlev2_shopping_car_item_inner);// 单一view 有点击事件;
+    @Override
+    public OnItemClickListener getOnItemClickListener() {
+        return null;
+    }
 
 
+    @SerializedName("name")
     private String title;
+
+    public String price;
+
+    public String img;
+
     private String id;
+
     private boolean isSelect;
+
+    @Bindable
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String totalMoney;
+
+    @Bindable
+    public String getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(String totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
     @Bindable
     private int num;
 
@@ -69,10 +97,6 @@ public class ShoppingCarItemVo extends BaseCardVo {
     @Bindable
     public void setNum(int num) {
         this.num = num;
-    }
-
-    public ShoppingCarItemVo(int style, int position) {
-        super(style, position);
     }
 
 

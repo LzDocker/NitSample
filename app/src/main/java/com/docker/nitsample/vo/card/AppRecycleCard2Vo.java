@@ -96,7 +96,7 @@ public class AppRecycleCard2Vo extends BaseCardVo {
                         .withSerializable("circleConfig", circleConfig1)
                         .navigation();
                 break;
-            case "分舵说":
+            case "分部说":
                 ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX).navigation();
 
                 break;

@@ -97,24 +97,27 @@ public class SuperPopmenu extends PopupWindow implements OnClickListener {
         recyclerView.setLayoutManager(new GridLayoutManager(recyclerView.getContext(), 4));
         recyclerView.setAdapter(absSampleAdapter);
 
-        AppVo appManagerVo = new AppVo();
-        appManagerVo.name = "应用管理";
-        appManagerVo.id = "-1";
-        absSampleAdapter.add(appManagerVo);
+//        AppVo appManagerVo = new AppVo();
+//        appManagerVo.name = "应用管理";
+//        appManagerVo.id = "-1";
+//        absSampleAdapter.add(appManagerVo);
 
         AppVo appVo = new AppVo();
         appVo.name = "动态";
         appVo.id = "0";
+        appVo.icon = R.mipmap.publish_dy;
         absSampleAdapter.add(appVo);
 
         AppVo appVo1 = new AppVo();
         appVo1.name = "问答";
-        appVo1.id = "1";
+        appVo1.id = "2";
+        appVo1.icon = R.mipmap.publish_ask;
         absSampleAdapter.add(appVo1);
 
         AppVo appVo2 = new AppVo();
-        appVo2.name = "新闻";
-        appVo2.id = "2";
+        appVo2.name = "文章";
+        appVo2.id = "1";
+        appVo2.icon = R.mipmap.publish_art;
         absSampleAdapter.add(appVo2);
 
 

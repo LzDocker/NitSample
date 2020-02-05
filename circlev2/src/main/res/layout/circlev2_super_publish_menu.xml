@@ -12,14 +12,24 @@
         android:layout_marginTop="40dp"
         android:text="圈子"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ivlogo"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/logo_tygs" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ivlogo"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="80dp"
-        android:text="发动态，发问答，发新闻，查资料；\n还能建圈子，快来和圈友一起交流学习吧！" />
+        android:layout_marginTop="10dp"
+        android:text="发动态、发问答、发求助、办活动、发投票；" />
 
     <LinearLayout
         android:id="@+id/lin"

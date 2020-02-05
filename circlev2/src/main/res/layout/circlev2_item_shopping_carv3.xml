@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.vo.ShoppingCarVoV3" />
+
+        <!--<variable-->
+            <!--name="viewmodel"-->
+            <!--type="com.docker.cirlev2.vm.CircleShoppingViewModel" />-->
+
+        <import type="com.docker.cirlev2.R" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+    </data>
+
+
+    <!--     android:onClick="@{(view)->viewmodel.imgclick(item,view,BdUtils.getResourceImgUrl(item))}"-->
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!-- android:onClick="@{(view)->viewmodel.ItemClick(item,view)}"-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@{item.circleName}"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                app:itemBinding="@{item.itemBinding}"
+                app:items="@{item.info}"
+                app:layoutManager="@{LayoutManager.linear}">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</layout>

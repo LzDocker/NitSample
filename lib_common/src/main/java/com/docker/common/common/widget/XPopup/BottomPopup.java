@@ -55,6 +55,9 @@ public class BottomPopup extends BottomPopupView {
     // 设置最大高度，看需要而定
     @Override
     protected int getMaxHeight() {
+        if ("detail_foot_style".equals(style)) {
+            return super.getMaxHeight();
+        }
         return super.getMaxWidth();
     }
 

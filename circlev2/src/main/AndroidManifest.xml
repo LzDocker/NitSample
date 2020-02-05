@@ -51,6 +51,7 @@
         <activity android:name="com.docker.cirlev2.ui.detail.CircleAddTabActivity" />
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProManagerActivity" />
         <activity android:name="com.docker.cirlev2.ui.pro.CircleProInfoActivity" />
+        <activity android:name="com.docker.cirlev2.ui.dynamicdetail.CircleShoppingCarListActivityV2" />
 
     </application>
 </manifest>

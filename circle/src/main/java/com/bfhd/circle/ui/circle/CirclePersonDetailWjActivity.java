@@ -106,7 +106,10 @@ public class CirclePersonDetailWjActivity extends HivsBaseActivity<CircleViewMod
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("login_state_change")) {
                 finish();
-                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", mStartParam).navigation();
+//                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", mStartParam).navigation();
+
+                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", mStartParam.uid).withString("uuid2", mStartParam.uuid).navigation();
+
             }
         });
     }

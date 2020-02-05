@@ -24,10 +24,10 @@ public class Constant {
     public static final String IFLAYID = "=5afbf83a";
     public static final String Umeng = "5d0300984ca3579a45000b17";
 
-    public static final String BaseServeTest = "http://htj.wgc360.com/";
+    public static final String BaseServeTest = "http://tygs.wgc360.com/";
 //    public static final String BaseServeTest = " http://app.cosri.org.cn/";
 
-    public static final String endpoint = "http://taijistar.oss-cn-beijing.aliyuncs.com";
+    public static final String endpoint = "http://tygsapp.oss-cn-beijing.aliyuncs.com";
     public static final String mBaseImageUrl = endpoint;//测试地址
     public static final String mOSSBaseImageUrl = endpoint;
 

@@ -36,7 +36,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_sent"
+                    android:drawableTop="@mipmap/account_icon_index"
                     android:drawablePadding="8dp"
                     android:gravity="center"
                     android:onClick="@{(view) -> item.onItemClick(item,view)}"
@@ -49,7 +49,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_payfor"
+                    android:drawableTop="@mipmap/account_icon_mine_at"
                     android:drawablePadding="8dp"
                     android:gravity="center"
                     android:onClick="@{(view) -> item.onItemClick(item,view)}"
@@ -58,14 +58,14 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:id="@+id/tv_icollec"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_collec"
+                    android:drawableTop="@mipmap/account_icon_collec"
                     android:drawablePadding="8dp"
                     android:gravity="center"
+                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
                     android:text="我的收藏"
                     android:textColor="#000"
                     android:textSize="12sp" />
@@ -75,7 +75,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_atten"
+                    android:drawableTop="@mipmap/account_icon_fans"
                     android:drawablePadding="8dp"
                     android:gravity="center"
                     android:onClick="@{(view) -> item.onItemClick(item,view)}"
@@ -90,7 +90,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
             android:background="#fff"
@@ -99,64 +99,133 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="19dp"
+                android:paddingBottom="19dp">
 
-                <TextView
-                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
-                    android:id="@+id/tv_order"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_money_box"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:text="我的订单"
-                    android:textColor="#000"
-                    android:textSize="12sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_mine_branch"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_home"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
-                    android:text="我的分部"
-                    android:textColor="#000"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_order"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_order"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="我的订单"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tv_activie_reg"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_wd_jfsc"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
-                    android:text="活动报名"
-                    android:textColor="#000"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_mine_branch"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_home"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="我的分部"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tv_active_manager"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawableTop="@mipmap/account_custom"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:onClick="@{(view) -> item.onItemClick(item,view)}"
-                    android:text="活动管理"
-                    android:textColor="#000"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/tv_activie_reg"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_active"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="活动报名"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_active_manager"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_acmanag"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="活动管理"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
 
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="33dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_course"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_course"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="我的课程"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_quan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_quan"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="我的卡券"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_bin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_bin"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="我的学币"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_course_his"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/account_icon_course_his"
+                        android:drawablePadding="16dp"
+                        android:gravity="center"
+                        android:onClick="@{(view) -> item.onItemClick(item,view)}"
+                        android:text="学习历史"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
+
 
         </android.support.v7.widget.CardView>
 

@@ -40,6 +40,8 @@ public abstract class NitBoundCallback<T> {
     public void onNetworkError(Resource<T> resource) {
         if (resource.message != null) {
             ToastUtils.showShort(resource.message);
+        }else {
+            ToastUtils.showShort("网络失败请重试");
         }
     }
 

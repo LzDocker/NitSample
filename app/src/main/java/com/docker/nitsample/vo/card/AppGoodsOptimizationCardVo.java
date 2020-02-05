@@ -3,6 +3,7 @@ package com.docker.nitsample.vo.card;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -41,7 +42,7 @@ public class AppGoodsOptimizationCardVo extends BaseCardVo {
      * banner 点击事件
      * */
     public ReplyCommandParam replyCommandParam = (ReplyCommandParam) o -> {
-        if ("".equals(((BannerEntityVo) o).dynamicid)) {
+        if ("".equals(((BannerEntityVo) o).dynamicid) || "0".equals(((BannerEntityVo) o).dynamicid) && !TextUtils.isEmpty(((BannerEntityVo) o).http)) {
             ARouter.getInstance().build(AppRouter.COMMONH5)
                     .withString("title", ((BannerEntityVo) o).title)
                     .withString("weburl", ((BannerEntityVo) o).http).navigation();

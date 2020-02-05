@@ -71,12 +71,12 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
             finish();
             return;
         }
-        if (!CacheUtils.getWelcomeFlag()) {//欢迎页
-            Intent intent = new Intent(this, WelocomeActivity.class);
-            startActivity(intent);
-            finish();
-            return;
-        }
+//        if (!CacheUtils.getWelcomeFlag()) {//欢迎页
+//            Intent intent = new Intent(this, WelocomeActivity.class);
+//            startActivity(intent);
+//            finish();
+//            return;
+//        }
         UserInfoVo userInfoVo = CacheUtils.getUser();
         timer(userInfoVo);
         mBinding.tvJump.setOnClickListener(v -> {
@@ -102,7 +102,7 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
     }
 
     private void timer(UserInfoVo userInfoVo) {
-        final int count = 6;
+        final int count = 3;
         Observable.interval(0, 1, TimeUnit.SECONDS)
                 .take(count)
                 .map(aLong -> count - aLong)

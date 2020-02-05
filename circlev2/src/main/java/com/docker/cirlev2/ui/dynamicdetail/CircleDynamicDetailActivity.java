@@ -1,5 +1,6 @@
 package com.docker.cirlev2.ui.dynamicdetail;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,15 +15,22 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2DynamicDetailActivityBinding;
+import com.docker.cirlev2.util.BdUtils;
 import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.vo.ShoppingCartDbVo;
+import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.command.ReplyCommand;
+import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.cache.DbCacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
@@ -34,7 +42,11 @@ import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.XPopupCallback;
 import com.umeng.socialize.UMShareAPI;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
@@ -55,6 +67,10 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
     private BasePopupView basePopupView;
 
     private Disposable disposable;
+
+    @Inject
+    DbCacheUtils dbCacheUtils;
+
 
     @Override
     protected int getLayoutId() {
@@ -132,6 +148,27 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         });
 
 
+        mViewModel.mCartAddLv.observe(this, integer -> {
+
+            switch (integer) {
+                case 1:
+                    if (basePopupView == null) {
+                        initBottomPopup();
+                    } else {
+                        if (mReplyCommand != null) {
+                            mReplyCommand.exectue();
+                            mReplyCommand = null;
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    ToastUtils.showShort("网络错误请重试");
+                    break;
+            }
+            mReplyCommand = null;
+        });
     }
 
     private void processView() {
@@ -168,14 +205,26 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         //购物车的点击事件
         mBinding.tvShoppingCart.setOnClickListener(view -> {
             if (basePopupView == null) {
-                initBottomPopup();
+                // 请求加入购物车接口
+                requestServerCart("1", null);
             } else {
                 basePopupView.show();
             }
 
         });
+    }
 
+    private ReplyCommand mReplyCommand;
 
+    private void requestServerCart(String option, ReplyCommand replyCommand) {
+        if (replyCommand != null) {
+            mReplyCommand = replyCommand;
+        }
+        HashMap<String, String> param = new HashMap<>();
+        param.put("memberid", CacheUtils.getUser().uid);
+        param.put("goodsid", mDynamicDetailVo.getDataid());
+        param.put("operation", option);
+        mViewModel.PushCartDataToServer(param);
     }
 
     private void initBottomPopup() {
@@ -188,22 +237,74 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                 TextView tv_num = bottomPopup.findViewById(com.docker.common.R.id.tv_num);
                 TextView tv_shopping_cart = bottomPopup.findViewById(com.docker.common.R.id.tv_shopping_cart);
                 TextView tv_buy = bottomPopup.findViewById(com.docker.common.R.id.tv_buy);
+                TextView tv_barcode = bottomPopup.findViewById(com.docker.common.R.id.tv_barcode);
+                TextView tv_money = bottomPopup.findViewById(com.docker.common.R.id.tv_money);
 
                 ImageView iv_close = bottomPopup.findViewById(com.docker.common.R.id.iv_close);
+                ImageView iv_goods_icon = bottomPopup.findViewById(com.docker.common.R.id.iv_goods_icon);
 
+                GlideApp.with(iv_goods_icon).load(BdUtils.getDynamicSingleImg(mDynamicDetailVo)).into(iv_goods_icon);
+
+                tv_barcode.setText("编号：---¥----");
+                tv_money.setText(mDynamicDetailVo.getExtData().price);
                 tv_add.setOnClickListener(view -> {
                     String num = tv_num.getText().toString();
-                    tv_num.setText(String.valueOf(Integer.valueOf(num) + 1));
+                    requestServerCart("1", () -> {
+                        tv_num.setText(String.valueOf(Integer.valueOf(num) + 1));
+                    });
+//                    BigDecimal bigPrice = new BigDecimal(mDynamicDetailVo.getExtData().price);
+//                    BigDecimal bigNum = new BigDecimal(tv_num.getText().toString());
+//                    tv_money.setText(String.valueOf(bigPrice.multiply(bigNum)));
                 });
+
                 tv_reduce.setOnClickListener(view -> {
                     String num = tv_num.getText().toString();
                     if (!"1".equals(num)) {
-                        tv_num.setText(String.valueOf(Integer.valueOf(num) - 1));
+                        requestServerCart("2", () -> tv_num.setText(String.valueOf(Integer.valueOf(num) - 1)));
+
+                        BigDecimal bigPrice = new BigDecimal(mDynamicDetailVo.getExtData().price);
+                        BigDecimal bigNum = new BigDecimal(tv_num.getText().toString());
+
+//                        tv_money.setText(String.valueOf(bigPrice.multiply(bigNum)));
                     }
                 });
                 tv_shopping_cart.setOnClickListener(view -> {
                     basePopupView.dismiss();
                     ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+
+//                    dbCacheUtils.loadFromDb("shopcart").observe(CircleDynamicDetailActivity.this, o -> {
+//                        if (o != null && ((ArrayList<ShoppingCartDbVo>) o).size() > 0) {
+//                            boolean isAdded = false;
+//                            for (int i = 0; i < ((ArrayList<ShoppingCartDbVo>) o).size(); i++) {
+//                                if (((ArrayList<ShoppingCartDbVo>) o).get(i).id.equals(mDynamicDetailVo.getDataid())) {
+//                                    isAdded = true;
+//                                    ((ArrayList<ShoppingCartDbVo>) o).get(i).num = Integer.parseInt(tv_num.getText().toString().trim());
+//                                }
+//                            }
+//                            if (!isAdded) {
+//                                ShoppingCartDbVo shoppingCartDbVo = new ShoppingCartDbVo();
+//                                shoppingCartDbVo.id = mDynamicDetailVo.getDataid();
+//                                shoppingCartDbVo.num = Integer.parseInt(tv_num.getText().toString().trim());
+//                                ((ArrayList<ShoppingCartDbVo>) o).add(shoppingCartDbVo);
+//                            }
+//                            dbCacheUtils.save("shopcart", ((ArrayList<ShoppingCartDbVo>) o), () -> {
+//                                ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+//                            });
+//
+//                        } else {
+//                            ShoppingCartDbVo shoppingCartDbVo = new ShoppingCartDbVo();
+//                            shoppingCartDbVo.id = mDynamicDetailVo.getDataid();
+//                            shoppingCartDbVo.num = Integer.parseInt(tv_num.getText().toString().trim());
+//
+//                            ArrayList<ShoppingCartDbVo> shoppingCartDbVos = new ArrayList<>();
+//                            shoppingCartDbVos.add(shoppingCartDbVo);
+//                            dbCacheUtils.save("shopcart", shoppingCartDbVos, () -> {
+//                                ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+//                            });
+//                        }
+//                    });
+
+
                 });
                 tv_buy.setOnClickListener(view -> {
                     basePopupView.dismiss();

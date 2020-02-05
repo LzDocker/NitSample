@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.docker.cirlev2.vo.vo.ShoppingCarVo" />
+            type="com.docker.cirlev2.vo.vo.ShoppingCarVoV3" />
 
         <variable
             name="viewmodel"
@@ -37,20 +37,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:onClick="@{(view)->viewmodel.ItemClick(item,view)}"
+                android:onClick="@{(view)->viewmodel.selectCheck(item,view)}"
                 android:orientation="horizontal"
                 android:padding="20dp">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@{item.select== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
+                    android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="@{item.title}"
+                    android:text="@{item.circleName}"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -61,8 +61,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
-                app:itemBinding="@{item.itemBinding}"
-                app:items="@{item.serviceDataBean}"
+                app:itemBinding="@{item.getItemBinding(viewmodel)}"
+                app:items="@{item.info}"
                 app:layoutManager="@{LayoutManager.linear}">
 
             </android.support.v7.widget.RecyclerView>

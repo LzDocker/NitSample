@@ -277,7 +277,7 @@
                 android:layout_height="wrap_content"
                 android:text="注册,即表示您阅读并同意 "
                 android:textColor="#858585"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/account_to_use"

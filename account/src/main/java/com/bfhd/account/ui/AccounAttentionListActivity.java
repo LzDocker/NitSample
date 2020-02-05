@@ -74,7 +74,9 @@ public class AccounAttentionListActivity extends HivsBaseActivity<AccountViewMod
                 msta.uid = fvo.getMemberid();
                 msta.name = fvo.getNickname();
 //                CirclePersonDetailActivity.startMe(AccounTygsAttentionListActivity.this, msta);
-                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
+//                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
+                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", fvo.getMemberid()).withString("uuid2", fvo.getUuid()).navigation();
+
             }
         });
         mBinding.recyclerView.setAdapter(mAdapter);

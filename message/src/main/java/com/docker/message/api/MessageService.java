@@ -20,15 +20,17 @@ public interface MessageService {
 
     /*
      * 消息列表
+     * MessageApiConfig.apiBaseUrl +
      * */
-    @POST(MessageApiConfig.apiBaseUrl + "api.php?m=get.msgList")
+    @POST("api.php?m=get.msgList")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<MessageListVo>>>> FsetchmessageList(@FieldMap HashMap<String, String> paramMap);
 
     /*
      * 消息二级列表
+     * MessageApiConfig.apiBaseUrl +
      * */
-    @POST(MessageApiConfig.apiBaseUrl + "api.php?m=get.msgTypeList")
+    @POST("api.php?m=get.msgTypeList")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<MessageDetailListVo>>>> FetchMessageList(@FieldMap HashMap<String, String> paramMap);
 

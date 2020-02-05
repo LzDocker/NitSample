@@ -112,7 +112,10 @@ public class AccounFansListActivity extends OpenBaseListActivity<AccountViewMode
                 msta.uid = fvo.getMemberid();
                 msta.name = fvo.getNickname();
 //                CirclePersonDetailActivity.startMe(AccounFansListActivity.this, msta);
-                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
+//                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
+                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", msta.uid).withString("uuid2", msta.uuid).navigation();
+
+
             }
         });
 

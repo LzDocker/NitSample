@@ -111,7 +111,9 @@ public class AccounParseListActivity extends OpenBaseListActivity<AccountViewMod
                     staPersionDetail.name = favVo.getNickname();
                     staPersionDetail.uuid = favVo.getParams().getUuid();
                     staPersionDetail.uid = favVo.getUid();
-                    ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+//                    ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+                    ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", staPersionDetail.uid).withString("uuid2", staPersionDetail.uuid).navigation();
+
                 }
 
             }

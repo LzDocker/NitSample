@@ -446,7 +446,9 @@ public class CircleDynamicViewModel extends HivsBaseViewModel {
             staPersionDetail.name = persion.nickname;
             staPersionDetail.uuid = persion.uuid;
             staPersionDetail.uid = persion.memberid;
-            ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+//            ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+            ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", staPersionDetail.uid).withString("uuid2", staPersionDetail.uuid).navigation();
+
         }
     }
 

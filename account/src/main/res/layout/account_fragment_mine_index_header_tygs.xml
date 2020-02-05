@@ -46,7 +46,8 @@
                 android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:paddingRight="10dp">
+                android:paddingRight="10dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -111,9 +112,9 @@
                 android:layout_gravity="center_vertical"
                 android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
                 android:scaleType="centerCrop"
+                app:avaterImageUrl="@{Constant.getCompleteImageUrl(item.myinfo.avatar)}"
                 app:errorImg="@{R.mipmap.circle_default_avatar}"
-                app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                app:roundImgUrl="@{Constant.getCompleteImageUrl(item.myinfo.avatar)}" />
+                app:placeHolder="@{R.mipmap.circle_default_avatar}" />
 
             <TextView
                 android:id="@+id/account_user_name"

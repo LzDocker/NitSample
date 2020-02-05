@@ -51,6 +51,26 @@ public class CircleTitlesVo extends BaseObservable implements Serializable {
     private String isDelClcked;//是否显示侧滑删除动画
     private List<CircleTitlesVo> childClass;
 
+    private int showType; // 1.动态 2 h5
+
+    private String h5_url;
+
+    public int getShowType() {
+        return showType;
+    }
+
+    public void setShowType(int showType) {
+        this.showType = showType;
+    }
+
+    public String getH5_url() {
+        return h5_url;
+    }
+
+    public void setH5_url(String h5_url) {
+        this.h5_url = h5_url;
+    }
+
     public String getDataType() {
         return dataType;
     }

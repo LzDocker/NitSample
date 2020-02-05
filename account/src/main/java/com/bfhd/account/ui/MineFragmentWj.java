@@ -155,7 +155,8 @@ public class MineFragmentWj extends CommonFragment<AccountViewModel, AccountFrag
             staPersionDetail.name = userInfoVo.nickname;
             staPersionDetail.uuid = userInfoVo.uuid;
             staPersionDetail.uid = userInfoVo.uid;
-            ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+//            ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", staPersionDetail).navigation();
+            ARouter.getInstance().build(AppRouter.CIRCLE_person_info).navigation();
 
         });
         // 圈子

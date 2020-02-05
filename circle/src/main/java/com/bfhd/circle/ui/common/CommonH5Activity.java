@@ -69,7 +69,9 @@ public class CommonH5Activity extends HivsBaseActivity<CircleViewModel, CircleAc
                 commonWebFragment = CommonWebFragment.newInstance(getIntent().getStringExtra("type"), webUrl);
             }
         }
-        FragmentUtils.add(getSupportFragmentManager(), commonWebFragment, R.id.frame);
+        if (commonWebFragment != null) {
+            FragmentUtils.add(getSupportFragmentManager(), commonWebFragment, R.id.frame);
+        }
     }
 
     @Override

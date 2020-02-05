@@ -23,6 +23,7 @@ import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
+import com.docker.module_im.session.SessionHelper;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -128,8 +129,6 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
     }
 
 
-
-
     public void circleBlackList(String memberid) {
         showDialogWait("拉黑中...", false);
         UserInfoVo userInfoVo = CacheUtils.getUser();
@@ -184,5 +183,46 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
                 }));
     }
 
+
+    // 聊一聊
+    public void ItemTalkClick(ServiceDataBean item, View view) {
+//        if (checkLoginState()) {
+//            return;
+//        }
+        if (item == null) {
+            return;
+        }
+        SessionHelper.startP2PSession(ActivityUtils.getTopActivity(), item.getUuid());
+    }
+
+    // 购物车
+    public void ItemShopCartClick(ServiceDataBean item, View view) {
+        ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+    }
+
+
+    public final MediatorLiveData<Integer> mCartAddLv = new MediatorLiveData<>();
+
+    public void PushCartDataToServer(HashMap<String, String> param) {
+
+        mDynamicDetailLv.addSource(RequestServer(circleApiService.shoppingCarAdd(param)), new NitNetBoundObserver<String>(new NitBoundCallback<String>() {
+            @Override
+            public void onComplete(Resource<String> resource) {
+                super.onComplete(resource);
+                mCartAddLv.setValue(1);
+            }
+
+            @Override
+            public void onBusinessError(Resource<String> resource) {
+                super.onBusinessError(resource);
+                mCartAddLv.setValue(2);
+            }
+            @Override
+            public void onNetworkError(Resource<String> resource) {
+                super.onNetworkError(resource);
+                mCartAddLv.setValue(3);
+            }
+        }));
+    }
 
 }

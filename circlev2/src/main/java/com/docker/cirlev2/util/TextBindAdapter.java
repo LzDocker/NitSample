@@ -43,7 +43,7 @@ public class TextBindAdapter {
                 if (TextUtils.isEmpty(serviceDataBean.getExtData().getName())) {
                     title.append(serviceDataBean.getExtData().getContent());
                 } else {
-                    title.append(serviceDataBean.getExtData().getName()).append(serviceDataBean.getExtData().getContent());
+                    title.append(serviceDataBean.getExtData().getName());//.append(serviceDataBean.getExtData().getContent())
                 }
             }
         }

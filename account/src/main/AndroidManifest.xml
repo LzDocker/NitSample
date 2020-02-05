@@ -11,7 +11,7 @@
         <activity
             android:name=".ui.LoginActivity"
             android:label="登录"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.RegistActivity"

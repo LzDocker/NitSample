@@ -38,7 +38,11 @@ public class CommonBdUtils {
         } else if (url.contains("http")) {
             return url;
         } else {
-            return ThiredPartConfig.BaseImageUrl + url;
+            if (url.startsWith("/")) {
+                return ThiredPartConfig.BaseImageUrl + url;
+            } else {
+                return ThiredPartConfig.BaseImageUrl + "/" + url;
+            }
         }
     }
 
@@ -1082,7 +1086,6 @@ public class CommonBdUtils {
             return false;
         }
     }
-
 
 
 }

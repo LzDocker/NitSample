@@ -324,37 +324,46 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
         AppVo appVo = new AppVo();
         appVo.name = "发动态";
         appVo.id = "0";
+        appVo.icon = R.mipmap.publish_dy;
 
         AppVo appVo1 = new AppVo();
         appVo1.name = "发活动";
         appVo1.id = "1";
+        appVo1.icon = R.mipmap.publish_act;
+
 
         AppVo appVo2 = new AppVo();
         appVo2.name = "发文章";
         appVo2.id = "2";
+        appVo2.icon = R.mipmap.publish_art;
 
         AppVo appVo3 = new AppVo();
         appVo3.name = "赚积分";
         appVo3.id = "3";
+        appVo3.icon = R.mipmap.publish_point;
 
 
         AppVo appVo4 = new AppVo();
         appVo4.name = "找客服";
         appVo4.id = "4";
+        appVo4.icon = R.mipmap.publish_cust;
 
 
         AppVo appVo5 = new AppVo();
         appVo5.name = "推广公社";
         appVo5.id = "5";
+        appVo5.icon = R.mipmap.publish_push;
 
 
         AppVo appVo6 = new AppVo();
         appVo6.name = "加入公社";
         appVo6.id = "6";
+        appVo6.icon = R.mipmap.publish_join;
 
         AppVo appVo7 = new AppVo();
         appVo7.name = "成为股东";
         appVo7.id = "7";
+        appVo7.icon = R.mipmap.publish_ch;
 
         ArrayList<AppVo> appVos = new ArrayList();
         appVos.add(appVo);

@@ -21,6 +21,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import java.util.List;
 
 public class CircleDetailFragment_gdh extends NitDefaultCircleFragment {
+    AppImgHeaderCardVo appImgHeaderCardVo;
 
     @Override
     public NitDelegetCommand providerNitDelegetCommand(int flag) {
@@ -32,17 +33,18 @@ public class CircleDetailFragment_gdh extends NitDefaultCircleFragment {
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                AppImgHeaderCardVo appImgHeaderCardVo = new AppImgHeaderCardVo(0, 1);
                 NitBaseProviderCard.providerCard(commonListVm, appImgHeaderCardVo, nitCommonFragment);
             }
         };
         return nitDelegetCommand;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mBinding.get().title.setText(circleConfig.extens.get("title"));
+        appImgHeaderCardVo = new AppImgHeaderCardVo(0, 1);
     }
 
     @Override
@@ -57,6 +59,8 @@ public class CircleDetailFragment_gdh extends NitDefaultCircleFragment {
     public void onCircleDetailFetched(CircleDetailVo circleDetailVo) {
         super.onCircleDetailFetched(circleDetailVo);
         mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        appImgHeaderCardVo.imgurl.set(circleDetailVo.getSurfaceImg());
+        appImgHeaderCardVo.logourl.set(circleDetailVo.getLogoUrl());
     }
 
     @Override

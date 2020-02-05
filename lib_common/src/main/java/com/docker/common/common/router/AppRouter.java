@@ -77,6 +77,9 @@ public class AppRouter {
 
     public static final String COMMONH5 = CircleGroup + "commonh5";
 
+    public static final String COMMONH5FRAGMENT = CircleGroup + "COMMONH5FRAGMENT";
+
+
     public static final String COMMENTLIST = CircleGroup + "Commentlist";
 
     public static final String CIRCLE_persion_detail = CircleGroup + "CIRCLE_persion_detail";
@@ -112,6 +115,7 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_INDEX_NEW_default = CircleV2Group + "CIRCLE_DETAIL_v2_INDEX_NEW_default";
     public static final String CIRCLE_DETAIL_v2_PRO_MANAGER = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER";
     public static final String CIRCLE_DETAIL_v2_PRO_INFO = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER_info";
+    public static final String CIRCLEV2_COMMONH5 = CircleV2Group + "CIRCLEV2_COMMONH5";
 
     public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
 
@@ -199,6 +203,7 @@ public class AppRouter {
     //    public static final String ORDER_INDEX = ORDER_GROUP + "INVITE_INDEX";
     public static final String ORDER_ADDRESS_MANAGER = ORDER_GROUP + "ORDER_ADDRESS_MANAGER";
     public static final String ORDER_ADDRESS_EDIT = ORDER_GROUP + "ORDER_ADDRESS_EDIT";
+    public static final String ORDER_MAKER = ORDER_GROUP + "ORDER_MAKER";
 
 
 }

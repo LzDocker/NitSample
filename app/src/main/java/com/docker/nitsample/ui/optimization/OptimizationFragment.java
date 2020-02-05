@@ -105,7 +105,9 @@ public class OptimizationFragment extends NitCommonFragment<OptimizationModel, O
                             appGoodsOptimizationCardVo.setBannerList((ArrayList<BannerEntityVo>) mapValue);
                             appGoodsOptimizationCardVo.tabClass = mapKey;
                             appGoodsOptimizationCardVo.mRepParamMap.put("shopType", mapKey);
-                            NitBaseProviderCard.providerCard(commonListVm, appGoodsOptimizationCardVo, nitCommonFragment);
+                            if (OptimizationFragment.this != null && OptimizationFragment.this.getHoldingActivity() != null) {
+                                NitBaseProviderCard.providerCard(commonListVm, appGoodsOptimizationCardVo, nitCommonFragment);
+                            }
                         }
                     } else {
                         mBinding.get().empty.showError();

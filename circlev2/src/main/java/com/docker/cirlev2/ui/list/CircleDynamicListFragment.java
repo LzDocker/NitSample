@@ -99,14 +99,14 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
             commonListReq.ReqParam.put("utid", mCircleTitlesVo.getUtid());
             commonListReq.ReqParam.put("circleid", mCircleTitlesVo.getCircleid());
             commonListReq.ReqParam.put("classid", mCircleTitlesVo.getClassid());
-//            if (mChildPos != -1) {
-//                commonListReq.ReqParam.put("circleid2", mCircleTitlesVo.getChildClass().get(mChildPos).getCircleid());
-//                commonListReq.ReqParam.put("t", mCircleTitlesVo.getChildClass().get(mChildPos).getDataType());
-//            } else {
-//                commonListReq.ReqParam.put("t", mCircleTitlesVo.getDataType());
-//            }
+            if (mChildPos != -1) {
+                commonListReq.ReqParam.put("circleid2", mCircleTitlesVo.getChildClass().get(mChildPos).getCircleid());
+                commonListReq.ReqParam.put("t", mCircleTitlesVo.getChildClass().get(mChildPos).getDataType());
+            } else {
+                commonListReq.ReqParam.put("t", mCircleTitlesVo.getDataType());
+            }
 
-            commonListReq.ReqParam.put("t", "dynamic");
+//            commonListReq.ReqParam.put("t", "dynamic");
 //            commonListReq.ReqParam.put("t", "news");
 //            commonListReq.ReqParam.put("t", "answer");
             if ("goods".equals(commonListReq.ReqParam.get("t"))) {

@@ -24,6 +24,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.dcbfhd.utilcode.utils.ArrayUtils;
 import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
+import com.docker.common.R;
 import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.utils.BitmapCut;
 import com.docker.common.common.utils.GaussinaBlurUtil;
@@ -54,12 +55,10 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"ImgUrl", "placeHolder", "errorImg"}, requireAll = false)
     public static void loadimage(ImageView imageView, String url, int resHolderId, int resErrId) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(resHolderId)
-                .error(resErrId)
                 .centerCrop();
         GlideApp.with(imageView)
                 .applyDefaultRequestOptions(options)
-                .load(url).transition(withCrossFade()).into(imageView);
+                .load(url).placeholder(null).transition(withCrossFade()).into(imageView);
 
     }
 
@@ -69,10 +68,8 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"roundImgUrl", "placeHolder", "errorImg"}, requireAll = false)
     public static void loadRoundimage(ImageView imageView, String url, int resHolderId, int resErrId) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(resHolderId)
-                .error(resErrId)
                 .centerCrop();
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).transition(withCrossFade()).into(imageView);
     }
 
     /*
@@ -145,11 +142,9 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"openImgUrl", "placeHolder", "errorImg"}, requireAll = false)
     public static void loadcirlceRoundimage(ImageView imageView, String url, int resHolderId, int resErrId) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(resHolderId)
-                .error(resErrId)
                 .bitmapTransform(new CircleCrop())
                 .centerCrop();
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).transition(withCrossFade()).into(imageView);
 
     }
 
@@ -176,7 +171,7 @@ public class ImgBindingAdapter {
 
                     }
                 });
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).transition(withCrossFade()).into(imageView);
 
     }
 
@@ -199,7 +194,7 @@ public class ImgBindingAdapter {
     public static void loadavaterimage(ImageView imageView, String url) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop();
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(R.mipmap.common_default_avatar).transition(withCrossFade()).into(imageView);
 
     }
 
@@ -218,7 +213,7 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"dontTransImg"}, requireAll = false)
     public static void donttransImg(ImageView imageView, String url) {
         options.diskCacheStrategy(DiskCacheStrategy.ALL);
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).dontTransform().transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).dontTransform().transition(withCrossFade()).into(imageView);
 
     }
 
@@ -228,13 +223,14 @@ public class ImgBindingAdapter {
         options.diskCacheStrategy(DiskCacheStrategy.ALL);
         GlideApp.with(imageView)
                 .applyDefaultRequestOptions(options)
-                .load(url).transition(withCrossFade()).into(imageView);
+                .load(url).transition(withCrossFade()).placeholder(null).into(imageView);
 
     }
 
 
     @BindingAdapter(value = {"BlurImgUrl"}, requireAll = false)
-    public static void BlurImgUrl(ImageView imageView, String url) {
+    public static void
+    BlurImgUrl(ImageView imageView, String url) {
         url = CommonBdUtils.getImgUrl("/static/var/upload/image/2019/12/2019122409334512287_750x297.png");
 //        url = CommonBdUtils.getImgUrl(url);
         options.diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -254,7 +250,7 @@ public class ImgBindingAdapter {
 
                     }
                 });
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(com.docker.common.R.mipmap.common_persion_head).transition(withCrossFade()).into(imageView);
 
 
     }

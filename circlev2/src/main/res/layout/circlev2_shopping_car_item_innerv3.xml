@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.vo.ShoppingCarVoV3.CardInfo" />
+
+        <variable
+            name="parent"
+            type="com.docker.cirlev2.vo.vo.ShoppingCarVoV3" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleShoppingViewModel" />
+
+        <import type="com.docker.cirlev2.R" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+
+    </data>
+
+
+    <!--     android:onClick="@{(view)->viewmodel.imgclick(item,view,BdUtils.getResourceImgUrl(item))}"-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_select"
+                android:layout_width="20dp"
+                android:onClick="@{(view)->viewmodel.childCheck(item,parent,view)}"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
+
+            <ImageView
+                android:id="@+id/iv_shop_logo"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/iv_select"
+                android:scaleType="centerInside"
+                app:imageUrl="@{BdUtils.getImgUrl(item.picture)}" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/iv_shop_logo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/iv_shop_logo"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.goodsName}"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <RelativeLayout
+                android:id="@+id/lin_price_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/iv_shop_logo"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/iv_shop_logo">
+
+
+                <RelativeLayout
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_reduce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/tv_num"
+                        android:onClick='@{(view)->viewmodel.requestServerCart("2",item,view)}'
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="-"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/tv_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/tv_add"
+                        android:background="@drawable/circle_tv_shape"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="@{BdUtils.StringValveof(item.num)}"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="+"
+                        android:onClick='@{(view)->viewmodel.requestServerCart("1",item,view)}'
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                    <!--  android:onClick="@{(view)->viewmodel.addNumClick(item,view)}"-->
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="¥"
+                        android:textColor="@color/open_read"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="@{item.price}"
+                        android:textColor="@color/open_read"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/iv_select2"
+                android:layout_width="15dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@+id/iv_shop_logo1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/iv_select2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/iv_shop_logo1"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="10dp"
+                    android:text="赠品"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginLeft="10dp"
+                    android:text="200积分" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</layout>
