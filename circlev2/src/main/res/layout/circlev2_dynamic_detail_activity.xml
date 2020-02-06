@@ -355,7 +355,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/circle_btn_shape"
-                    android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
+                    android:onClick="@{(view)->viewmodel.ShopingToBuy(item,view)}"
                     android:paddingLeft="18dp"
                     android:paddingTop="8dp"
                     android:paddingRight="18dp"

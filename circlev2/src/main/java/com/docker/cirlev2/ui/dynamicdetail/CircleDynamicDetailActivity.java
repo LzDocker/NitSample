@@ -146,7 +146,9 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         mViewModel.mCollectLv.observe(this, s -> {
 
         });
+        mViewModel.mOrderAddLv.observe(this, s -> {
 
+        });
 
         mViewModel.mCartAddLv.observe(this, integer -> {
 
@@ -259,6 +261,10 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
 
                 tv_reduce.setOnClickListener(view -> {
                     String num = tv_num.getText().toString();
+                    if ("0".equals(num)) {
+                        ToastUtils.showShort("已减至最低购买数量");
+                        return;
+                    }
                     if (!"1".equals(num)) {
                         requestServerCart("2", () -> tv_num.setText(String.valueOf(Integer.valueOf(num) - 1)));
 
@@ -307,6 +313,7 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
 
                 });
                 tv_buy.setOnClickListener(view -> {
+                    ARouter.getInstance().build(AppRouter.ORDER_MAKER).withSerializable("ServiceDataBean", mDynamicDetailVo).navigation();
                     basePopupView.dismiss();
                 });
 

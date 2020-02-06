@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
+import android.util.Log;
 import android.view.View;
 
 import com.docker.cirlev2.BR;
@@ -22,6 +23,8 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
     public String circleName;
 
     public String circleid;
+
+    public String mark;
 
 
     @Bindable
@@ -55,6 +58,21 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
         public String price;
         public String memberid;
         public String circleid;
+        public String transMoney;
+
+        @Bindable
+        public boolean kucunNoHave = false;
+
+        @Bindable
+        public boolean getKucunNoHave() {
+            return kucunNoHave;
+        }
+
+        @Bindable
+        public void setKucunNoHave(boolean kucunNoHave) {
+            this.kucunNoHave = kucunNoHave;
+            notifyPropertyChanged(BR.kucunNoHave);
+        }
 
         @Bindable
         public int num;
@@ -115,10 +133,21 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
 
 
     public ItemBinding<CardInfo> getItemBinding(CircleShoppingViewModel circleShoppingViewModel) {
-        ItemBinding<CardInfo> itemBinding = ItemBinding.<CardInfo>of(BR.item,
-                R.layout.circlev2_shopping_car_item_innerv3)
-                .bindExtra(BR.parent, this)
-                .bindExtra(BR.viewmodel, circleShoppingViewModel);// 单一view 有点击事件;
+        ItemBinding<CardInfo> itemBinding;
+        Log.d("sss", "getItemBinding: =============" + circleShoppingViewModel.flag);
+        if (circleShoppingViewModel.flag == 1) {
+            itemBinding = ItemBinding.<CardInfo>of(BR.item,
+                    R.layout.circlev2_shopping_car_item_innerv3_style_2)
+                    .bindExtra(BR.parent, this)
+                    .bindExtra(BR.viewmodel, circleShoppingViewModel);// 单一view 有点击事件;
+        } else {
+            itemBinding = ItemBinding.<CardInfo>of(BR.item,
+                    R.layout.circlev2_shopping_car_item_innerv3)
+                    .bindExtra(BR.parent, this)
+                    .bindExtra(BR.viewmodel, circleShoppingViewModel);// 单一view 有点击事件;
+        }
+
+
         return itemBinding;
     }
 }

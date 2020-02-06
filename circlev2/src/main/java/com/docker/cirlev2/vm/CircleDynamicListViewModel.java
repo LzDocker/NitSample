@@ -356,6 +356,28 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                 }));
     }
 
+
+    public final MediatorLiveData<String> mOrderAddLv = new MediatorLiveData<>();
+
+    // 立刻购买
+    public void ShopingToBuy(ServiceDataBean item, View view) {
+
+        ARouter.getInstance().build(AppRouter.ORDER_MAKER).withSerializable("ServiceDataBean", item).navigation();
+//        HashMap<String, String> param = new HashMap<>();
+//        param.put("memberid", CacheUtils.getUser().uid);
+//        param.put("goodsid", item.getDataid());
+//        param.put("operation", "1");
+//        mOrderAddLv.addSource(RequestServer(circleApiService.shoppingCarAdd(param)), new NitNetBoundObserver<String>(new NitBoundCallback<String>() {
+//            @Override
+//            public void onComplete(Resource<String> resource) {
+//                super.onComplete(resource);
+//                ARouter.getInstance().build(AppRouter.ORDER_MAKER).navigation();
+//            }
+//        }));
+
+    }
+
+
     // 收藏
     public void ItemStoreClick(ServiceDataBean item, View view) {
         if (item == null) {

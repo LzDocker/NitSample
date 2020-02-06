@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">apps</string>
+    <string name="comment">评论</string>
+    <string name="collect">收藏</string>
+    <string name="fav">点赞</string>
+    <string name="price">¥</string>
+    <string name="gong">共</string>
+    <string name="jian">件</string>
+    <string name="adress">地址：</string>
+    <string name="num">数量：</string>
+    <string name="com">物流公司：</string>
+    <string name="state">物流状态：</string>
+    <string name="bianhao">快递编号：</string>
 </resources>

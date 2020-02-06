@@ -1,5 +1,6 @@
 package com.docker.apps.order.vo;
 
+import com.docker.apps.R;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 
@@ -7,7 +8,7 @@ public class OrderVo extends BaseSampleItem {
 
     @Override
     public int getItemLayout() {
-        return 0;
+        return R.layout.pro_order_item_order;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class OrderVo extends BaseSampleItem {
     private String memberid;
     private String circleid;
     private String real_price;
-    private String status;
+    private int status;
     private String pay_time;
     private String payStatus;
     private String effect_time;
@@ -90,11 +91,11 @@ public class OrderVo extends BaseSampleItem {
         this.real_price = real_price;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

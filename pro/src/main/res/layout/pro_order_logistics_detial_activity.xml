@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.apps.order.vm.OrderMakerViewModel" />
+
+        <variable
+            name="item"
+            type="com.docker.apps.order.vo.LogisticeVo" />
+
+        <import type="com.bfhd.circle.utils.BdUtils" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+        <import type="com.bfhd.circle.R" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <com.docker.common.common.widget.refresh.SmartRefreshLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srlEnablePureScrollMode="true">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <android.support.v4.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/color_f2"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical">
+
+                                        <android.support.v7.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            app:cardCornerRadius="10dp"
+                                            app:cardElevation="0dp">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+
+                                                android:background="#00000000"
+                                                android:orientation="vertical">
+
+                                                <www.linwg.org.lib.LCardView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    app:bottomShadowHeight="0dp"
+                                                    app:cardBackgroundColor="@color/white"
+                                                    app:cornerRadius="10dp"
+                                                    app:leftShadowWidth="0dp"
+                                                    app:rightShadowWidth="0dp"
+                                                    app:topShadowHeight="0dp">
+
+                                                    <RelativeLayout
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:padding="20dp">
+
+
+                                                        <ImageView
+                                                            android:id="@+id/iv"
+                                                            android:layout_width="83dp"
+                                                            android:layout_height="83dp"
+                                                            android:layout_centerVertical="true"
+                                                            app:errorImg="@{R.mipmap.circle_default_avatar}"
+                                                            app:placeHolder="@{R.mipmap.circle_default_avatar}"
+                                                            app:roundImgUrl="@{BdUtils.getImgUrl(item.imgurl)}" />
+
+                                                        <TextView
+                                                            android:id="@+id/tv_title"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_toRightOf="@id/iv"
+                                                            android:text="@{@string/state+ BdUtils.getWlStatus(item.state)}"
+                                                            android:textColor="@color/black"
+                                                            android:textSize="14sp" />
+
+                                                        <TextView
+                                                            android:id="@+id/tv_commpany"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_below="@id/tv_title"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginTop="10dp"
+                                                            android:layout_toRightOf="@id/iv"
+                                                            android:text="@{@string/com + item.com}"
+                                                            android:textColor="@color/black"
+                                                            android:textSize="13sp" />
+
+                                                        <TextView
+                                                            android:id="@+id/num"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_below="@+id/tv_commpany"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:layout_marginTop="10dp"
+                                                            android:layout_toRightOf="@id/iv"
+                                                            android:text="@{@string/bianhao+ item.nu}"
+                                                            android:textColor="#FF757575"
+                                                            android:textSize="12sp" />
+                                                    </RelativeLayout>
+
+
+                                                </www.linwg.org.lib.LCardView>
+
+                                                <www.linwg.org.lib.LCardView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    app:bottomShadowHeight="0dp"
+                                                    app:cardBackgroundColor="@color/white"
+                                                    app:cornerRadius="10dp"
+                                                    app:leftShadowWidth="0dp"
+                                                    app:rightShadowWidth="0dp"
+                                                    app:shadowColor="#000000"
+                                                    app:topShadowHeight="0dp"></www.linwg.org.lib.LCardView>
+                                            </LinearLayout>
+                                        </android.support.v7.widget.CardView>
+
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <com.docker.common.common.widget.empty.EmptyLayout
+                                    android:id="@+id/empty"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/white">
+
+                                    <android.support.v7.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="10dp"
+                                        android:padding="10dp"
+                                        app:cardCornerRadius="10dp"
+                                        app:cardElevation="0dp">
+
+                                        <android.support.v7.widget.RecyclerView
+                                            android:id="@+id/recyclerView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                                            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                                        </android.support.v7.widget.RecyclerView>
+
+                                    </android.support.v7.widget.CardView>
+                                </com.docker.common.common.widget.empty.EmptyLayout>
+
+
+                            </LinearLayout>
+
+
+                        </android.support.v4.widget.NestedScrollView>
+
+                        <com.docker.common.common.widget.empty.EmptyLayout
+                            android:id="@+id/empty_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white">
+
+
+                        </com.docker.common.common.widget.empty.EmptyLayout>
+                    </FrameLayout>
+
+
+                </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</layout>
+
+

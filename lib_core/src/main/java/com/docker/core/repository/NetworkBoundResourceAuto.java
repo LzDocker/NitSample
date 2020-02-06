@@ -100,7 +100,7 @@ public abstract class NetworkBoundResourceAuto<ResultType> {
                         result.addSource(apiResponse,
                                 newData -> {
                                     result.removeSource(apiResponse);
-                                    setZoneValue(Resource.bussinessError(response.body.getErrmsg(), null));
+                                    setZoneValue(Resource.bussinessError(response.body.getErrmsg(), (ResultType) response.body.getRst()));
                                 });
                     } else {
                         setZoneValue(Resource.success((ResultType) response.body.getRst(), response.body.getErrmsg()));

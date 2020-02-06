@@ -34,11 +34,10 @@
                         android:id="@+id/message_card"
                         android:layout_width="match_parent"
                         android:layout_height="99dp"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="2dp"
                         android:background="@color/white"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="2dp">
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="1dp">
 
 
                         <RelativeLayout
@@ -50,7 +49,6 @@
                                 android:id="@+id/tv_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="邹善"
                                 android:textColor="#333"
                                 android:textSize="16sp" />
 
@@ -60,7 +58,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="14dp"
                                 android:layout_toRightOf="@+id/tv_name"
-                                android:text="15210999099"
                                 android:textColor="#333"
                                 android:textSize="16sp" />
 
@@ -73,7 +70,6 @@
                                 android:layout_marginTop="14dp"
                                 android:layout_toLeftOf="@+id/iv_arrow"
                                 android:layout_toRightOf="@+id/tv_name"
-                                android:text="15210999099"
                                 android:textColor="#666"
                                 android:textSize="14sp" />
 
@@ -87,23 +83,22 @@
 
                         </RelativeLayout>
 
+
                     </android.support.v7.widget.CardView>
 
                     <FrameLayout
                         android:id="@+id/goods_frame"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp"
-                        android:layout_marginBottom="14dp" />
+                        android:layout_marginTop="7dp" />
 
                     <android.support.v7.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="125dp"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="2dp"
                         android:background="@color/white"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="2dp">
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="1dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -133,7 +128,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="运费:"
                                 android:textColor="#333"
                                 android:textSize="14sp" />
 
@@ -144,7 +138,6 @@
                                 android:layout_below="@+id/goodstotalmoflg"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginTop="14dp"
-                                android:text="运费:"
                                 android:textColor="#333"
                                 android:textSize="14sp" />
 
@@ -152,8 +145,8 @@
                                 android:id="@+id/goodsrealflag"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/goodstransmoney"
-                                android:layout_marginTop="14dp"
+                                android:layout_below="@+id/goodsmoney"
+                                android:layout_marginTop="47dp"
                                 android:layout_toLeftOf="@+id/goodsrealmoney"
                                 android:text="实付款："
                                 android:textColor="#333"
@@ -166,7 +159,6 @@
                                 android:layout_below="@+id/goodstransmoney"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginTop="14dp"
-                                android:text="111"
                                 android:textColor="@color/circle_red"
                                 android:textSize="14sp" />
                         </RelativeLayout>
@@ -200,7 +192,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="4dp"
                 android:layout_toRightOf="@+id/moneyflag"
-                android:text="190909"
                 android:textColor="@color/circle_red"
                 android:textSize="14sp" />
 

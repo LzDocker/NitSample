@@ -2,7 +2,10 @@ package com.docker.cirlev2.vm;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.api.CircleApiService;
@@ -12,6 +15,7 @@ import com.docker.cirlev2.vo.vo.ShoppingCarVo;
 import com.docker.cirlev2.vo.vo.ShoppingCarVoV3;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
@@ -27,6 +31,13 @@ import javax.inject.Inject;
 
 public class CircleShoppingViewModel extends NitCommonContainerViewModel {
 
+
+    /*
+     * 0 默认
+     * 1 从购物车到达 填写订单界面
+     * 2 单个商品购买
+     * */
+    public int flag = 0;
 
     @Inject
     CircleApiService circleApiService;
@@ -188,22 +199,34 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
 
     @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
-        return circleApiService.getGoodsCartListData(param);
+        if (param.containsKey("falg")) {
+            flag = 1;
+            if ("1".equals(param.get("falg"))) {
+                return circleApiService.getGoodsCartListData(param);
+            } else {
+                mEmptycommand.set(EmptyStatus.BdHiden);
+                return null;
+            }
+        } else {
+            return circleApiService.getGoodsCartListData(param);
+        }
     }
 
     public final MediatorLiveData<String> mTotalMoney = new MediatorLiveData<>();
+    public final MediatorLiveData<String> mTotalTransMoney = new MediatorLiveData<>();
 
     @Override
     public void formartData(Resource resource) {
         super.formartData(resource);
         if (resource.data != null && ((List<ShoppingCarVoV3>) resource.data).size() > 0) {
             processTotalMoney((List<ShoppingCarVoV3>) resource.data);
+            processTotalTransMoney((List<ShoppingCarVoV3>) resource.data);
         } else {
             mTotalMoney.setValue(String.valueOf(0));
         }
     }
 
-    private void processTotalMoney(List<ShoppingCarVoV3> shoppingCarVoV3s) {
+    public void processTotalMoney(List<ShoppingCarVoV3> shoppingCarVoV3s) {
         BigDecimal total = new BigDecimal(0);
         for (int i = 0; i < shoppingCarVoV3s.size(); i++) {
             for (int j = 0; j < ((shoppingCarVoV3s).get(i).info).size(); j++) {
@@ -215,6 +238,25 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
         }
         mTotalMoney.setValue(String.valueOf(total));
     }
+
+    public void processTotalTransMoney(List<ShoppingCarVoV3> shoppingCarVoV3s) {
+        BigDecimal total = new BigDecimal(0);
+        for (int i = 0; i < shoppingCarVoV3s.size(); i++) {
+            for (int j = 0; j < ((shoppingCarVoV3s).get(i).info).size(); j++) {
+                ShoppingCarVoV3.CardInfo cardInfo = ((shoppingCarVoV3s).get(i)).info.get(j);
+                BigDecimal bigtrans;
+                if ("0.00".equals(cardInfo.transMoney) || TextUtils.isEmpty(cardInfo.transMoney)) {
+                    bigtrans = new BigDecimal(0);
+                } else {
+                    bigtrans = new BigDecimal(cardInfo.transMoney);
+                }
+                BigDecimal bignum = new BigDecimal(cardInfo.num);
+                total = total.add(bigtrans.multiply(bignum).setScale(2, BigDecimal.ROUND_HALF_UP));
+            }
+        }
+        mTotalTransMoney.setValue(String.valueOf(total));
+    }
+
 
     public MediatorLiveData<List<ShoppingCarItemVo>> listMediatorLiveData = new MediatorLiveData<>();
 
@@ -247,6 +289,27 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
 
     public void requestServerCart(String option, ShoppingCarVoV3.CardInfo cardInfo, View view) {
 
+        cardInfo.setKucunNoHave(false);
+        if ("2".equals(option)) {
+            if (cardInfo.num <= 0) {
+                ToastUtils.showShort("已减至最低购买数量");
+                return;
+            }
+        }
+        if (flag != 0) {  // 填写订单界面不计入购物车数量
+            switch (option) {
+                case "1":
+                    cardInfo.setNum(cardInfo.num + 1);
+                    break;
+                case "2":
+                    cardInfo.setNum(cardInfo.num - 1);
+                    break;
+            }
+            processTotalMoney(mItems);
+            processTotalTransMoney(mItems);
+            return;
+        }
+
         HashMap<String, String> param = new HashMap<>();
         param.put("memberid", CacheUtils.getUser().uid);
         param.put("goodsid", cardInfo.goodsid);
@@ -264,6 +327,7 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
                         break;
                 }
                 processTotalMoney(mItems);
+                processTotalTransMoney(mItems);
             }
 
             @Override

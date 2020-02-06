@@ -105,8 +105,7 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
 
 //        mBinding.recycle.setAdapter(adapter);
         mBinding.tvToOrder.setOnClickListener(v -> {
-
-
+            ARouter.getInstance().build(AppRouter.ORDER_MAKER).navigation();
         });
         mBinding.tvDelete.setOnClickListener(view -> {
 

@@ -44,7 +44,8 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
+                    android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}"
+                    app:visibleGone="@{viewmodel.flag==0}" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,6 +67,33 @@
                 app:layoutManager="@{LayoutManager.linear}">
 
             </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_zeng_pin"
+                android:orientation="horizontal"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                app:visibleGone="@{viewmodel.flag==1}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:text="留言"
+                    android:textColor="#333"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="14dp"
+                    android:background="@color/white"
+                    android:hint="建议留言前先与商家沟通确认"
+                    android:text="@={item.mark}"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

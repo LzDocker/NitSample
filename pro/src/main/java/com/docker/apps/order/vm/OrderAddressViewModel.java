@@ -3,6 +3,7 @@ package com.docker.apps.order.vm;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.order.api.OrderService;
@@ -157,5 +158,14 @@ public class OrderAddressViewModel extends NitCommonContainerViewModel {
 
     }
 
+
+    public final MediatorLiveData<AddressVo> mAddressCheckLv = new MediatorLiveData<>();
+
+    public void onAddressCheck(AddressVo addressVo, View view) {
+        (addressVo).setIsCheck(!addressVo.getIsCheck());
+        if (addressVo.getIsCheck()) {
+            mAddressCheckLv.setValue(addressVo);
+        }
+    }
 }
 

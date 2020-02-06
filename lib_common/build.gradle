@@ -115,6 +115,7 @@ dependencies {
 
     api 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.8'
     api 'com.yanzhenjie.recyclerview:support:1.3.2'
+    api 'org.linwg1988:lcardview:1.4.2'//可以设置阴影的cardview
 
     // 视频基础类库
     api project(':lib_video')

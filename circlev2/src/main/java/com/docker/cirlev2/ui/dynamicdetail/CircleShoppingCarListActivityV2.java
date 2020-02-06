@@ -88,21 +88,21 @@ public class CircleShoppingCarListActivityV2 extends NitCommonActivity<CircleSho
             String rightContent = tvRight.getText().toString();
             if (rightContent.contains("编辑")) {//点击编辑
                 tvRight.setText("完成");
-                mBinding.tvAccount.setVisibility(View.GONE);
+//                mBinding.tvAccount.setVisibility(View.GONE);
                 mBinding.tvDelete.setVisibility(View.VISIBLE);
                 mBinding.linCount.setVisibility(View.GONE);
             } else if (rightContent.contains("完成")) {//点击完成
                 tvRight.setText("编辑");
                 mBinding.linCount.setVisibility(View.VISIBLE);
-                mBinding.tvAccount.setVisibility(View.VISIBLE);
+//                mBinding.tvAccount.setVisibility(View.VISIBLE);
                 mBinding.tvDelete.setVisibility(View.GONE);
             }
         });
 
 //        mBinding.recycle.setAdapter(adapter);
-        mBinding.tvAccount.setOnClickListener(v -> {
-
-        });
+//        mBinding.tvAccount.setOnClickListener(v -> {
+//
+//        });
         mBinding.tvDelete.setOnClickListener(view -> {
 
         });

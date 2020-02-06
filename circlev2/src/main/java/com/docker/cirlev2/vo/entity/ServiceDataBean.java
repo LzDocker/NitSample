@@ -515,6 +515,14 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
     public static class ExtDataBean extends BaseObservable implements Serializable {
 
+
+//        "transType":"1",
+//                "transMoney":"0.00",
+
+        public String transType;
+        public String transMoney;
+
+
         private String type;
 
         public String getType() {

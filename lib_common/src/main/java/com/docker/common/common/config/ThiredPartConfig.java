@@ -24,8 +24,8 @@ import timber.log.Timber;
 
 public class ThiredPartConfig {
     // 微信
-    public static final String WxAppid = "wxaa486294063f057d";
-    public static final String Wxsecret = "d7c817b7a302ce6aad7217922cef2be2";
+    public static final String WxAppid = "wx03f37a631a4c7d77";
+    public static final String Wxsecret = "a57c93ef31505408eaf7105ac085c776";
     // qq
     public static final String QQID = "101780103";
     public static final String QQKey = "42113368dbc1de3b734f0a96956369fe";

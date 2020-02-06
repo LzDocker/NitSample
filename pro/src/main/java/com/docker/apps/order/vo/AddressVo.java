@@ -23,10 +23,9 @@ public class AddressVo extends BaseSampleItem {
     @Override
     public OnItemClickListener getOnItemClickListener() {
         return (item, view) -> {
-            if (view.getId() == R.id.iv_choose_address) {
-                ((AddressVo) item).setIsCheck(!((AddressVo) item).isCheck);
-
-            }
+//            if (view.getId() == R.id.iv_choose_address) {
+//                ((AddressVo) item).setIsCheck(!((AddressVo) item).isCheck);
+//            }
             if (view.getId() == R.id.tv_edit_address) {
                 ARouter.getInstance().build(AppRouter.ORDER_ADDRESS_EDIT).withString("type", "1").withSerializable("AddressVo", (AddressVo) item).navigation();
             }

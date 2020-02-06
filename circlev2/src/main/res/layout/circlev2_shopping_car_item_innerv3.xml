@@ -41,10 +41,10 @@
             <ImageView
                 android:id="@+id/iv_select"
                 android:layout_width="20dp"
-                android:onClick="@{(view)->viewmodel.childCheck(item,parent,view)}"
                 android:layout_height="20dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:onClick="@{(view)->viewmodel.childCheck(item,parent,view)}"
                 android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
 
             <ImageView
@@ -121,10 +121,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
+                        android:onClick='@{(view)->viewmodel.requestServerCart("1",item,view)}'
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:text="+"
-                        android:onClick='@{(view)->viewmodel.requestServerCart("1",item,view)}'
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />

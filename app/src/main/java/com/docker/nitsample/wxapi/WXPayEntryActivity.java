@@ -3,8 +3,12 @@ package com.docker.nitsample.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.docker.common.common.config.ThiredPartConfig;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -38,15 +42,15 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onResp(BaseResp resp) {
 //        Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
-//        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-//            if (resp.errCode == 0) { //支付成功
-//                com.docker.core.rxbus.RxBus.getDefault().post(new RxEvent<>("refresh_buy", ""));
-//                Toast.makeText(this, "支付成功", Toast.LENGTH_LONG).show();
-//
-//            } else {
-//                Toast.makeText(this, "支付失败，请重试", Toast.LENGTH_SHORT).show();
-//            }
-//            finish();
-//        }
+        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            if (resp.errCode == 0) { //支付成功
+                RxBus.getDefault().post(new RxEvent<>("refresh_buy", ""));
+                Toast.makeText(this, "支付成功", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(this, "支付失败，请重试", Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        }
     }
 }

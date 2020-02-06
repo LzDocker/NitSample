@@ -20,10 +20,6 @@ import javax.inject.Inject;
  * */
 public class NitCommonContainerViewModel extends NitCommonListVm {
 
-
-
-
-
     /*
      * vm 数据源
      * */

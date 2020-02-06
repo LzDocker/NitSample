@@ -204,6 +204,10 @@ public class AppRouter {
     public static final String ORDER_ADDRESS_MANAGER = ORDER_GROUP + "ORDER_ADDRESS_MANAGER";
     public static final String ORDER_ADDRESS_EDIT = ORDER_GROUP + "ORDER_ADDRESS_EDIT";
     public static final String ORDER_MAKER = ORDER_GROUP + "ORDER_MAKER";
+    public static final String ORDER_PAY = ORDER_GROUP + "ORDER_PAY";
+    public static final String ORDER_LIST = ORDER_GROUP + "ORDER_LIST";
+    public static final String ORDER_Logistics_LIST = ORDER_GROUP + "ORDER_Logistics_LIST";
+    public static final String ORDER_DETAIL = ORDER_GROUP + "ORDER_DETAIL";
 
 
 }

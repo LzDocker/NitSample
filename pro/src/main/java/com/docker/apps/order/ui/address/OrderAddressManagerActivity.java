@@ -1,8 +1,12 @@
 package com.docker.apps.order.ui.address;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -86,6 +90,7 @@ public class OrderAddressManagerActivity extends NitCommonActivity<OrderAddressV
     @Override
     public void initObserver() {
 
+
     }
 
     @Override
@@ -105,6 +110,16 @@ public class OrderAddressManagerActivity extends NitCommonActivity<OrderAddressV
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 mNitCommonFragment = nitCommonFragment;
+                ((OrderAddressViewModel) commonListVm).mAddressCheckLv.observe(nitCommonFragment, aBoolean -> {
+                    Log.d("sss", "initObserver: =====mAddressCheckLv========");
+
+                    if (aBoolean != null && !TextUtils.isEmpty(type)) {
+                        Intent intent = new Intent();
+                        intent.putExtra("AddressVo", aBoolean);
+                        OrderAddressManagerActivity.this.setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                });
             }
         };
         return nitDelegetCommand;

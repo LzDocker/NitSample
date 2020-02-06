@@ -14,6 +14,10 @@
 
         <import type="com.docker.common.common.binding.CommonBdUtils" />
 
+        <variable
+            name="viewmodel"
+            type="com.docker.apps.order.vm.OrderAddressViewModel" />
+
 
     </data>
 
@@ -42,6 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:onClick="@{(view)->viewmodel.onAddressCheck(item,view)}"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -49,11 +54,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
                         android:src="@{item.isCheck ? R.mipmap.dzgl_true :R.mipmap.dzgl_false}" />
 
+                    <!-- android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+                     -->
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -114,9 +120,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
+                    android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
                     android:padding="5dp"
                     android:text="编辑"
-                    android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
                     android:textColor="#FF404040"
                     android:textSize="14sp" />
             </LinearLayout>

@@ -3,6 +3,7 @@ package com.docker.apps.order.di;
 import android.arch.lifecycle.ViewModel;
 
 import com.docker.apps.order.vm.OrderAddressViewModel;
+import com.docker.apps.order.vm.OrderCommonViewModel;
 import com.docker.apps.order.vm.OrderMakerViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
@@ -27,6 +28,11 @@ public abstract class OrderVmModule {
     @IntoMap
     @ViewModelKey(OrderMakerViewModel.class)
     abstract ViewModel OrderMakerViewModel(OrderMakerViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(OrderCommonViewModel.class)
+    abstract ViewModel OrderCommonViewModel(OrderCommonViewModel model);
 
 
 }
