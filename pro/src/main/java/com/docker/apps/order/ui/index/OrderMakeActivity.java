@@ -146,7 +146,6 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
                     innerVm.processTotalMoney(innerVm.mItems);
                     innerVm.processTotalTransMoney(innerVm.mItems);
                     innerVm.mEmptycommand.set(EmptyStatus.BdHiden);
-
                 }
 
                 ((CircleShoppingViewModel) commonListVm).mCartAddLv.observe(nitCommonFragment, s -> {
