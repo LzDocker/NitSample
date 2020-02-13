@@ -19,7 +19,6 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
-
     public final transient ItemBinding<ResourceBean> itemImgBinding = ItemBinding.<ServiceDataBean.ResourceBean>of(BR.item,
             R.layout.circlev2_item_dynamic_img_inner) // 单一view 有点击事件
             .bindExtra(BR.serverdata, this);
@@ -38,25 +37,41 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     @Override
     public int getItemLayout() {
         int lay = R.layout.circlev2_item_dynamic_answer;
-        switch (this.getType()) {
-            case "car":
-            case "datetime":
-            case "product":
-            case "goods":
-                lay = R.layout.circlev2_item_dynamic_goodsv2;
-                break;
-            case "dynamic": //dynamic
-                lay = R.layout.circlev2_item_dynamic_active;
-                break;
-            case "news":
-                lay = R.layout.circlev2_item_dynamic_news;
-                break;
-            case "answer":
-                lay = R.layout.circlev2_item_dynamic_answer;
-                break;
+        if (flag == 0) {
+            switch (this.getType()) {
+                case "car":
+                case "datetime":
+                case "product":
+                case "goods":
+                    lay = R.layout.circlev2_item_dynamic_goodsv2;
+                    break;
+                case "dynamic": //dynamic
+                    lay = R.layout.circlev2_item_dynamic_active;
+                    break;
+                case "news":
+                    lay = R.layout.circlev2_item_dynamic_news;
+                    break;
+                case "answer":
+                    lay = R.layout.circlev2_item_dynamic_answer;
+                    break;
+                case "activity":
+
+                    break;
+            }
+        } else if (flag == 1) {
+            switch (this.getType()) {
+                case "car":
+                case "datetime":
+                case "product":
+                case "goods":
+                    lay = R.layout.circlev2_item_dynamic_goodsv3;
+                    break;
+            }
         }
         return lay;
     }
+
+    public int flag = 0;
 
 
     public ObservableField<List<ResourceBean>> getInnerResource() {

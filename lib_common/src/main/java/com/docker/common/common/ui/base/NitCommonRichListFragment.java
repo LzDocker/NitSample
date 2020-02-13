@@ -1,7 +1,6 @@
 package com.docker.common.common.ui.base;
 
 import android.databinding.Observable;
-import android.databinding.ObservableList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +19,7 @@ import com.docker.common.common.widget.recycledrag.ItemTouchHelperAdapter;
 import com.docker.common.common.widget.recycledrag.ItemTouchHelperCallback;
 import com.docker.common.common.widget.refresh.SmartRefreshLayout;
 import com.docker.common.databinding.CommonFragmentListBinding;
+import com.docker.common.databinding.CommonFragmentRichListBinding;
 import com.docker.core.util.LayoutManager;
 
 import java.util.ArrayList;
@@ -29,12 +29,11 @@ import javax.inject.Inject;
 
 import static com.docker.common.common.config.Constant.CommonListParam;
 import static com.docker.common.common.config.Constant.KEY_RVUI_GRID2;
-import static com.docker.common.common.config.Constant.KEY_RVUI_GRID3;
 import static com.docker.common.common.config.Constant.KEY_RVUI_GRID5;
 import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
 import static com.docker.common.common.config.Constant.KEY_RVUI_LINER;
 
-public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentListBinding> implements ItemTouchHelperAdapter {
+public abstract class NitCommonRichListFragment<VM extends NitCommonListVm> extends NitCommonFragment<VM, CommonFragmentRichListBinding> implements ItemTouchHelperAdapter {
 
 
     @Inject
@@ -48,7 +47,7 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.common_fragment_list;
+        return R.layout.common_fragment_rich_list;
     }
 
     @Override
@@ -118,11 +117,6 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
             case KEY_RVUI_GRID5:
                 (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
                         .grid(5)
-                        .create((mBinding.get()).recyclerView));
-                break;
-            case KEY_RVUI_GRID3:
-                (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
-                        .grid(3)
                         .create((mBinding.get()).recyclerView));
                 break;
         }

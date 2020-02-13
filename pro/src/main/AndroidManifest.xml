@@ -23,6 +23,10 @@
         <activity android:name="com.docker.apps.order.ui.index.OrderPayActivity" />
         <activity android:name="com.docker.apps.order.ui.index.OrderListActivity" />
         <activity android:name="com.docker.apps.order.ui.logistics.LogisticsDetialActivity" />
+        <activity android:name="com.docker.apps.order.ui.index.OrderGoodsListActivity" />
+        <activity android:name="com.docker.apps.order.ui.comment.OrderGoodsCommentActivity" />
+        <activity android:name="com.docker.apps.order.ui.comment.OrderCommentSuccessActivity" />
+        <activity android:name="com.docker.apps.order.ui.index.OrderDetailActivity" />
         <activity
             android:name="com.docker.apps.order.ui.index.OrderMakeActivity"
             android:windowSoftInputMode="adjustResize" />

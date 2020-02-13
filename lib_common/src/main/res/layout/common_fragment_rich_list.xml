@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.docker.common.common.vm.NitCommonListVm" />
+    </data>
+
+
+    <com.docker.common.common.widget.empty.EmptyLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        bind:onRetryCommand="@{viewmodel.mCommand.retrycommand}"
+        bind:status="@{viewmodel.mEmptycommand}">
+
+        <com.docker.common.common.widget.refresh.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:bdcomplete="@={viewmodel.mCompleteCommand}"
+            bind:bdenable="@={viewmodel.bdenable}"
+            bind:bdenablemore="@={viewmodel.bdenablemore}"
+            bind:bdenablenodata="@={viewmodel.bdenablenodata}"
+            bind:onRefreshCommand="@{viewmodel.mCommand.onrefreshCommand}"
+            bind:onloadmoreCommand="@{viewmodel.mCommand.onloadmoreCommand}"
+            bind:srlEnableRefresh="@={viewmodel.bdenablerefresh}">
+
+            <com.yanzhenjie.recyclerview.SwipeRecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:overScrollMode="never"
+                app:fastScrollEnabled="false"
+                app:itemBinding="@{viewmodel.itemBinding}"
+                app:items="@{viewmodel.mItems}" />
+        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+    </com.docker.common.common.widget.empty.EmptyLayout>
+</layout>

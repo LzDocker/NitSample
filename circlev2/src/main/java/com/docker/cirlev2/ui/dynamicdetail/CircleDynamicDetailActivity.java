@@ -207,8 +207,10 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         //购物车的点击事件
         mBinding.tvShoppingCart.setOnClickListener(view -> {
             if (basePopupView == null) {
+
+                initBottomPopup();
                 // 请求加入购物车接口
-                requestServerCart("1", null);
+//                requestServerCart("1", null);
             } else {
                 basePopupView.show();
             }
@@ -226,6 +228,18 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         param.put("memberid", CacheUtils.getUser().uid);
         param.put("goodsid", mDynamicDetailVo.getDataid());
         param.put("operation", option);
+        mViewModel.PushCartDataToServer(param);
+    }
+
+
+    private void requestServerCartNum(String num, ReplyCommand replyCommand) {
+        if (replyCommand != null) {
+            mReplyCommand = replyCommand;
+        }
+        HashMap<String, String> param = new HashMap<>();
+        param.put("memberid", CacheUtils.getUser().uid);
+        param.put("goodsid", mDynamicDetailVo.getDataid());
+        param.put("num", num);
         mViewModel.PushCartDataToServer(param);
     }
 
@@ -251,9 +265,14 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                 tv_money.setText(mDynamicDetailVo.getExtData().price);
                 tv_add.setOnClickListener(view -> {
                     String num = tv_num.getText().toString();
-                    requestServerCart("1", () -> {
-                        tv_num.setText(String.valueOf(Integer.valueOf(num) + 1));
-                    });
+
+                    tv_num.setText(String.valueOf(Integer.valueOf(num) + 1));
+
+//                    requestServerCart("1", () -> {
+//                        tv_num.setText(String.valueOf(Integer.valueOf(num) + 1));
+//                    });
+
+
 //                    BigDecimal bigPrice = new BigDecimal(mDynamicDetailVo.getExtData().price);
 //                    BigDecimal bigNum = new BigDecimal(tv_num.getText().toString());
 //                    tv_money.setText(String.valueOf(bigPrice.multiply(bigNum)));
@@ -266,17 +285,20 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                         return;
                     }
                     if (!"1".equals(num)) {
-                        requestServerCart("2", () -> tv_num.setText(String.valueOf(Integer.valueOf(num) - 1)));
-
-                        BigDecimal bigPrice = new BigDecimal(mDynamicDetailVo.getExtData().price);
-                        BigDecimal bigNum = new BigDecimal(tv_num.getText().toString());
-
+                        tv_num.setText(String.valueOf(Integer.valueOf(num) - 1));
+//                        requestServerCart("2", () -> tv_num.setText(String.valueOf(Integer.valueOf(num) - 1)));
+//                        BigDecimal bigPrice = new BigDecimal(mDynamicDetailVo.getExtData().price);
+//                        BigDecimal bigNum = new BigDecimal(tv_num.getText().toString());
 //                        tv_money.setText(String.valueOf(bigPrice.multiply(bigNum)));
                     }
                 });
                 tv_shopping_cart.setOnClickListener(view -> {
-                    basePopupView.dismiss();
-                    ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+
+                    requestServerCartNum(tv_num.getText().toString().trim(), () -> {
+                        basePopupView.dismiss();
+                        ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+                    });
+
 
 //                    dbCacheUtils.loadFromDb("shopcart").observe(CircleDynamicDetailActivity.this, o -> {
 //                        if (o != null && ((ArrayList<ShoppingCartDbVo>) o).size() > 0) {

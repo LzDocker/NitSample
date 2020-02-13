@@ -21,4 +21,7 @@ public class RstVo implements Serializable {
 
 
     public String img;
+
+
+    public String commentid;
 }

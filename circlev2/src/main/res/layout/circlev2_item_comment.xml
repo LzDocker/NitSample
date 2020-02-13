@@ -110,9 +110,64 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_star"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_pub_time"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/iv_user_icon"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:visibleGone="@{BdUtils.isShowStar(item)}">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@{BdUtils.getCommentPic(item.starNum,0)}" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@{BdUtils.getCommentPic(item.starNum,1)}" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@{BdUtils.getCommentPic(item.starNum,2)}" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@{BdUtils.getCommentPic(item.starNum,3)}" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@{BdUtils.getCommentPic(item.starNum,4)}" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_star"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/iv_user_icon"
+                app:itemBinding="@{item.itemImgBinding}"
+                app:items="@{item.getResouceData(item)}"
+                bind:layoutManager="@{LayoutManager.grid(4)}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recycle"
                 android:layout_marginLeft="14dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@+id/iv_user_icon"

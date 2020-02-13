@@ -55,6 +55,8 @@ import static com.docker.common.common.router.AppRouter.CIRCLE_comment_v2_ANSWER
 public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
 
+    public int flag = 0;
+
     public final MediatorLiveData<CommentRstVo> mCommentVoMLiveData = new MediatorLiveData<>();
     public final MediatorLiveData<String> mCollectLv = new MediatorLiveData<>();
     public final MediatorLiveData<String> mAttenLv = new MediatorLiveData<>();
@@ -82,6 +84,15 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         };
     }
 
+    @Override
+    public void formartData(Resource resource) {
+        super.formartData(resource);
+        if (flag == 1) {
+            for (int i = 0; i < ((List<ServiceDataBean>) resource.data).size(); i++) {
+                ((List<ServiceDataBean>) resource.data).get(i).flag = flag;
+            }
+        }
+    }
 
     // 动态点击
     public void ItemDynamicClick(ServiceDataBean item, View view) {
@@ -571,7 +582,7 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
     // 内部九宫格点击
     public static void imgclick(ServiceDataBean.ResourceBean item, View view, ServiceDataBean
             serviceDataBean) {
-        if (serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getResource() != null) {
+        if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getResource() != null) {
             int index = serviceDataBean.getInnerResource().get().indexOf(item);
             if (serviceDataBean.getExtData().getResource().get(index).getT() == 2) {
                 String videoUrl = BdUtils.getImgUrl(serviceDataBean.getExtData().getResource().get(index).getUrl());
@@ -598,6 +609,19 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                         .themeStyle(R.style.picture_default_style)
                         .openExternalPreview(index, localMediaList);
             }
+        } else {
+            List<LocalMedia> localMediaList = new ArrayList<>();
+            LocalMedia localMedia = new LocalMedia();
+            if (!TextUtils.isEmpty(item.getImg())) {
+                localMedia.setPath(BdUtils.getImgUrl(item.getImg()));
+            } else {
+                localMedia.setPath(BdUtils.getImgUrl(item.getUrl()));
+            }
+            localMediaList.add(localMedia);
+            PictureSelector
+                    .create(ActivityUtils.getTopActivity())
+                    .themeStyle(R.style.picture_default_style)
+                    .openExternalPreview(0, localMediaList);
         }
     }
 

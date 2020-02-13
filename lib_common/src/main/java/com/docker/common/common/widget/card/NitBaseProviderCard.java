@@ -15,6 +15,7 @@ import com.docker.common.common.ui.container.NitCommonCardFragment;
 import com.docker.common.common.ui.container.NitCommonCardNoRefreshFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.ui.container.NitCommonContainerNoRefreshFragmentV2;
+import com.docker.common.common.ui.container.NitCommonRichContainerFragment;
 import com.docker.common.common.utils.lv.MserialMedatorLv;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
@@ -33,6 +34,11 @@ public class NitBaseProviderCard {
         FragmentUtils.add(fragmentManager, nitCommonContainerFragmentV2, layid);
     }
 
+//    public static void providerRichCoutainerForFrame(FragmentManager fragmentManager, int layid, CommonListOptions commonListOptions) {
+//        NitCommonRichContainerFragment nitCommonRichContainerFragment = NitCommonRichContainerFragment.newinstance(commonListOptions);
+//        FragmentUtils.add(fragmentManager, nitCommonRichContainerFragment, layid);
+//    }
+    
     public static void providerCardNoRefreshForFrame(FragmentManager fragmentManager, int layid, CommonListOptions commonListOptions) {
         NitCommonCardNoRefreshFragment nitCommonCardNoRefreshFragment = NitCommonCardNoRefreshFragment.newinstance(commonListOptions);
         FragmentUtils.add(fragmentManager, nitCommonCardNoRefreshFragment, layid);

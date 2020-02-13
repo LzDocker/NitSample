@@ -2,7 +2,11 @@ package com.docker.cirlev2.vo.entity;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 
+import com.docker.cirlev2.BR;
 import com.docker.cirlev2.R;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
@@ -12,8 +16,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.tatarka.bindingcollectionadapter2.ItemBinding;
+
 public class CommentVo extends BaseSampleItem implements Serializable {
 
+
+    public final transient ItemBinding<ServiceDataBean.ResourceBean> itemImgBinding = ItemBinding.<ServiceDataBean.ResourceBean>of(BR.item,
+            R.layout.circlev2_item_dynamic_img_inner); // 单一view 有点击事件
+
+    public final transient ObservableList<ServiceDataBean.ResourceBean> mResource = new ObservableArrayList<>();
+
+    public ObservableList<ServiceDataBean.ResourceBean> getResouceData(CommentVo commentVo) {
+        if (mResource.size() > 0) {
+            return mResource;
+        } else {
+            mResource.addAll(commentVo.getResource());
+        }
+        return mResource;
+    }
 
     @Override
     public int getItemLayout() {
@@ -45,6 +65,8 @@ public class CommentVo extends BaseSampleItem implements Serializable {
     public String nickname;
     public String avatar;
     public String content;
+
+    public int starNum;
 
     @Bindable
     public String praiseNum;

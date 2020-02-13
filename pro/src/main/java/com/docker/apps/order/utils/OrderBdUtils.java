@@ -1,5 +1,10 @@
 package com.docker.apps.order.utils;
 
+import android.databinding.ObservableField;
+import android.util.Log;
+
+import com.docker.apps.R;
+import com.docker.apps.order.vo.LogisticeVo;
 import com.docker.apps.order.vo.OrderVoV2;
 
 import java.math.BigDecimal;
@@ -162,4 +167,93 @@ public class OrderBdUtils {
     }
 
 
+    public static int getCommentPic(ObservableField<Integer> position, int curposition) {
+        if (position.get() >= curposition) {
+            return R.mipmap.pro_comment_star1;
+        } else {
+            return R.mipmap.pro_comment_star2;
+        }
+    }
+
+
+    /*
+    *
+    * 订单：
+全部订单：status=-1
+待付款：status=0
+待收货：status=1,2
+已完成：status=4,5 （status=5的状态不显示“评价”评价按钮）
+已取消：status=3*/
+    public static int getOrderStatePic(OrderVoV2 orderVoV2) {
+        if (orderVoV2 == null) {
+            return R.mipmap.wlcar;
+        }
+        if (orderVoV2.status == 3) {
+            return R.mipmap.order_cancel;
+        } else {
+            return R.mipmap.wlcar;
+        }
+    }
+
+    public static String getOrderTopDesc(OrderVoV2 orderVoV2, LogisticeVo logisticeVo) {
+        if (orderVoV2 == null) {
+            return "";
+        }
+        String desc = "";
+        switch (orderVoV2.status) {
+            case 1:
+            case 2:
+            case 4:
+            case 5:
+//                desc = logisticeVo.getData().get(logisticeVo.getData().size()).getContext();
+                if (logisticeVo != null && logisticeVo.getData() != null && logisticeVo.getData().size() > 0) {
+                    desc = logisticeVo.getData().get(0).getContext();
+                }
+                break;
+            case 3:
+                desc = "您的订单已取消";
+                break;
+        }
+
+        return desc;
+    }
+
+
+    public static String getOrderTopStatus(OrderVoV2 orderVoV2) {
+        if (orderVoV2 == null) {
+            return "";
+        }
+        String desc = "";
+        switch (orderVoV2.status) {
+            case 0:
+                desc = "待付款";
+                break;
+            case 1:
+            case 2:
+                desc = "待收货";
+                break;
+            case 4:
+            case 5:
+                desc = "已完成";
+                break;
+            case 3:
+                desc = "已取消";
+                break;
+        }
+
+        return desc;
+    }
+
+    public static boolean isShowOrderTopDesc(OrderVoV2 orderVoV2) {
+        if (orderVoV2 == null) {
+            return false;
+        }
+        boolean isShow = true;
+        switch (orderVoV2.status) {
+            case 0:
+                isShow = false;
+                break;
+        }
+        return isShow;
+    }
 }

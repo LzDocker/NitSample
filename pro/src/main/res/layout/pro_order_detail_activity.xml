@@ -7,17 +7,23 @@
 
         <variable
             name="viewmodel"
-            type="com.docker.apps.order.vm.OrderMakerViewModel" />
+            type="com.docker.apps.order.vm.OrderCommonViewModel" />
 
         <variable
             name="item"
-            type="com.docker.apps.order.vo.OrderDetialVo" />
+            type="com.docker.apps.order.vo.OrderVoV2" />
 
         <import type="com.docker.core.util.LayoutManager" />
 
         <import type="com.bfhd.circle.utils.BdUtils" />
 
         <import type="com.bfhd.circle.R" />
+
+        <variable
+            name="logic"
+            type="com.docker.apps.order.vo.LogisticeVo" />
+
+        <import type="com.docker.apps.order.utils.OrderBdUtils" />
     </data>
 
     <LinearLayout
@@ -33,626 +39,618 @@
             android:layout_weight="1"
             android:background="@color/color_f2">
 
-            <com.docker.common.common.widget.refresh.SmartRefreshLayout
-                android:id="@+id/refresh"
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@mipmap/dzf_bg"
-                app:srlEnablePureScrollMode="true">
+                android:background="@color/color_f2">
 
-                <FrameLayout
+                <android.support.v4.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_f2">
+                    android:layout_height="match_parent">
 
-                    <android.support.v4.widget.NestedScrollView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@color/color_f2"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/color_f2"
                             android:orientation="vertical">
 
-                            <LinearLayout
+                            <RelativeLayout
+                                android:id="@+id/rl_dzf"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:layout_height="130dp"
+                                android:background="@mipmap/dzf_bg">
 
-                                <RelativeLayout
-                                    android:id="@+id/rl_dzf"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="130dp"
-                                    android:background="@mipmap/dzf_bg">
+                                <ImageView
+                                    android:id="@+id/iv_back"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginLeft="14dp"
+                                    android:layout_marginTop="14dp"
+                                    android:src="@mipmap/ic_toolbar_back" />
 
-                                    <ImageView
-                                        android:id="@+id/iv_back"
-                                        android:layout_width="25dp"
-                                        android:layout_height="25dp"
-                                        android:layout_marginLeft="20dp"
-                                        android:layout_marginTop="20dp"
-                                        android:src="@mipmap/ic_toolbar_back" />
+                                <ImageView
+                                    android:id="@+id/iv_staus"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toLeftOf="@id/tv_status"
+                                    android:src="@mipmap/dzf" />
 
-                                    <ImageView
-                                        android:id="@+id/iv_staus"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:layout_centerVertical="true"
-                                        android:layout_toLeftOf="@id/tv_status"
-                                        android:src="@mipmap/dzf" />
-
-                                    <TextView
-                                        android:id="@+id/tv_status"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerInParent="true"
-                                        android:layout_gravity="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:textColor="@color/white"
-                                        android:textSize="20sp"
-                                        android:textStyle="bold" />
-
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
+                                <TextView
+                                    android:id="@+id/tv_status"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/pro_cardview_shape">
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="10dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
 
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="20dp"
-                                        android:background="@mipmap/dzf_bg" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/pro_cardview_shape">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="20dp"
+                                    android:background="@mipmap/dzf_bg" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/pro_cardview_shape_gray"
+                                    android:orientation="vertical">
 
                                     <LinearLayout
+                                        android:id="@+id/cardview_wl_address"
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/pro_cardview_shape_gray"
-                                        android:orientation="vertical">
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:background="@drawable/pro_cardview_shape"
+                                        android:orientation="vertical"
+                                        android:padding="20dp">
 
-                                        <LinearLayout
-                                            android:id="@+id/cardview_wl_address"
+                                        <RelativeLayout
+                                            android:id="@+id/rl_wl"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:layout_marginBottom="10dp"
-                                            android:background="@drawable/pro_cardview_shape"
-                                            android:orientation="vertical"
-                                            android:padding="20dp">
+                                            android:layout_marginBottom="20dp"
+                                            app:visibleGone="@{OrderBdUtils.isShowOrderTopDesc(item)}">
 
-                                            <RelativeLayout
-                                                android:id="@+id/rl_wl"
-                                                android:layout_width="match_parent"
+                                            <ImageView
+                                                android:id="@+id/iv_wyc"
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:src="@{OrderBdUtils.getOrderStatePic(item)}" />
+
+                                            <TextView
+                                                android:id="@+id/tv_wl_status"
+                                                android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginBottom="20dp"
-                                                android:visibility="gone">
-
-                                                <ImageView
-                                                    android:id="@+id/iv_wyc"
-                                                    android:layout_width="20dp"
-                                                    android:layout_height="20dp"
-                                                    android:src="@mipmap/wlcar" />
-
-                                                <TextView
-                                                    android:id="@+id/tv_wl_status"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="10dp"
-                                                    android:layout_toRightOf="@id/iv_wyc"
-                                                    android:ellipsize="end"
-                                                    android:singleLine="true"
-                                                    android:text=""
-                                                    android:textColor="@color/black"
-                                                    android:textSize="14sp" />
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_toRightOf="@id/iv_wyc"
+                                                android:ellipsize="end"
+                                                android:singleLine="true"
+                                                android:text="@{OrderBdUtils.getOrderTopDesc(item,logic)}"
+                                                android:textColor="@color/black"
+                                                android:textSize="14sp" />
 
 
-                                                <TextView
-                                                    android:id="@+id/tv_wl_time"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_below="@id/tv_wl_status"
-                                                    android:layout_alignLeft="@id/tv_wl_status"
-                                                    android:layout_marginTop="8dp"
-                                                    android:ellipsize="end"
-                                                    android:singleLine="true"
-                                                    android:text=""
-                                                    android:textColor="#FF757575"
-                                                    android:textSize="12sp" />
-
-                                                <ImageView
-                                                    android:id="@+id/iv_arror"
-                                                    android:layout_width="15dp"
-                                                    android:layout_height="15dp"
-                                                    android:layout_alignParentRight="true"
-                                                    android:layout_centerVertical="true"
-                                                    android:src="@mipmap/arrow_right" />
-
-                                            </RelativeLayout>
-
-                                            <RelativeLayout
-                                                android:id="@+id/rl_address"
-                                                android:layout_width="match_parent"
+                                            <TextView
+                                                android:id="@+id/tv_wl_time"
+                                                android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:visibility="gone">
+                                                android:layout_below="@id/tv_wl_status"
+                                                android:layout_alignLeft="@id/tv_wl_status"
+                                                android:layout_marginTop="8dp"
+                                                android:ellipsize="end"
+                                                android:singleLine="true"
+                                                android:text="@{BdUtils.getStandardDate(item.inputtime)}"
+                                                android:textColor="#FF757575"
+                                                android:textSize="12sp" />
 
-                                                <ImageView
-                                                    android:id="@+id/iv_dz"
-                                                    android:layout_width="15dp"
-                                                    android:layout_height="15dp"
-                                                    android:layout_marginTop="2dp"
-                                                    android:src="@mipmap/dz" />
+                                        </RelativeLayout>
 
-                                                <TextView
-                                                    android:id="@+id/tv_name"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="10dp"
-                                                    android:layout_toRightOf="@id/iv_dz"
-                                                    android:text="@{item.receiveName}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="14sp" />
-
-                                                <TextView
-                                                    android:id="@+id/tv_phone"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_marginLeft="10dp"
-                                                    android:layout_toRightOf="@id/tv_name"
-                                                    android:text="@{item.receiveTel}"
-                                                    android:textColor="@color/black"
-                                                    android:textSize="13sp" />
-
-                                                <TextView
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_below="@id/tv_name"
-                                                    android:layout_alignLeft="@id/tv_name"
-                                                    android:layout_marginTop="8dp"
-                                                    android:text="@{item.receiveAddress}"
-                                                    android:textColor="#FF757575"
-                                                    android:textSize="12sp" />
-                                            </RelativeLayout>
-                                        </LinearLayout>
-
-
-                                        <LinearLayout
+                                        <RelativeLayout
+                                            android:id="@+id/rl_address"
                                             android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:background="@drawable/pro_cardview_shape_gray"
-                                            android:orientation="vertical">
+                                            android:layout_height="wrap_content">
 
-                                            <android.support.v7.widget.CardView
-                                                android:layout_width="match_parent"
+                                            <ImageView
+                                                android:id="@+id/iv_dz"
+                                                android:layout_width="15dp"
+                                                android:layout_height="15dp"
+                                                android:layout_marginTop="2dp"
+                                                android:src="@mipmap/dz" />
+
+                                            <TextView
+                                                android:id="@+id/tv_name"
+                                                android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                app:cardCornerRadius="10dp"
-                                                app:cardElevation="0dp">
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_toRightOf="@id/iv_dz"
+                                                android:text="@{item.receiveName}"
+                                                android:textColor="@color/black"
+                                                android:textSize="14sp" />
 
-                                                <LinearLayout
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:background="#00000000"
-                                                    android:orientation="vertical">
-
-                                                    <www.linwg.org.lib.LCardView
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        app:bottomShadowHeight="5dp"
-                                                        app:cornerRadius="10dp"
-                                                        app:leftShadowWidth="0dp"
-                                                        app:rightShadowWidth="0dp"
-                                                        app:shadowColor="#000000"
-                                                        app:topShadowHeight="0dp">
-
-                                                        <RelativeLayout
-                                                            android:layout_width="match_parent"
-                                                            android:layout_height="wrap_content"
-                                                            android:padding="20dp">
-
-                                                            <ImageView
-                                                                android:id="@+id/iv"
-                                                                android:layout_width="83dp"
-                                                                android:layout_height="83dp"
-                                                                app:errorImg="@{R.mipmap.circle_default_avatar}"
-                                                                app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                                                                app:roundImgUrl="@{BdUtils.getImgUrl(item.goods_info.img)}" />
-
-                                                            <TextView
-                                                                android:id="@+id/tv_title"
-                                                                android:layout_width="wrap_content"
-                                                                android:layout_height="wrap_content"
-                                                                android:layout_marginLeft="10dp"
-                                                                android:layout_toRightOf="@id/iv"
-                                                                android:text="@{item.goods_info.name}"
-                                                                android:textColor="@color/black"
-                                                                android:textSize="14sp" />
-
-                                                            <TextView
-                                                                android:id="@+id/tv_num"
-                                                                android:layout_width="wrap_content"
-                                                                android:layout_height="wrap_content"
-                                                                android:layout_below="@id/tv_title"
-                                                                android:layout_marginLeft="10dp"
-                                                                android:layout_marginTop="10dp"
-                                                                android:layout_toRightOf="@id/iv"
-                                                                android:text="@{@string/num+ item.goods_info.goods_num}"
-                                                                android:textColor="@color/black"
-                                                                android:textSize="13sp" />
-
-                                                            <TextView
-                                                                android:layout_width="wrap_content"
-                                                                android:layout_height="wrap_content"
-                                                                android:layout_below="@id/tv_num"
-                                                                android:layout_marginLeft="10dp"
-                                                                android:layout_marginTop="10dp"
-                                                                android:layout_toRightOf="@id/iv"
-                                                                android:text="@{@string/price + item.goods_info.price}"
-                                                                android:textColor="@color/black"
-                                                                android:textSize="12sp" />
-                                                        </RelativeLayout>
-                                                    </www.linwg.org.lib.LCardView>
-
-                                                    <www.linwg.org.lib.LCardView
-                                                        android:id="@+id/cardview_contact"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        app:bottomShadowHeight="0dp"
-                                                        app:cardBackgroundColor="@color/white"
-                                                        app:cornerRadius="10dp"
-                                                        app:leftShadowWidth="0dp"
-                                                        app:rightShadowWidth="0dp"
-                                                        app:shadowColor="#000000"
-                                                        app:topShadowHeight="0dp">
-
-                                                        <LinearLayout
-                                                            android:id="@+id/lin_contact"
-                                                            android:layout_width="match_parent"
-                                                            android:layout_height="wrap_content"
-                                                            android:gravity="center"
-                                                            android:orientation="horizontal"
-                                                            android:padding="15dp">
-
-                                                            <ImageView
-                                                                android:layout_width="15dp"
-                                                                android:layout_height="15dp"
-                                                                android:src="@mipmap/pro_lxkf" />
-
-                                                            <TextView
-                                                                android:id="@+id/tv_constant"
-                                                                android:layout_width="wrap_content"
-                                                                android:layout_height="wrap_content"
-                                                                android:layout_gravity="center"
-                                                                android:layout_marginLeft="10dp"
-                                                                android:text="联系卖家"
-                                                                android:textColor="@color/black"
-                                                                android:textSize="13sp" />
-                                                        </LinearLayout>
-                                                    </www.linwg.org.lib.LCardView>
-                                                </LinearLayout>
-
-                                            </android.support.v7.widget.CardView>
-
-                                            <android.support.v7.widget.CardView
-                                                android:layout_width="match_parent"
+                                            <TextView
+                                                android:id="@+id/tv_phone"
+                                                android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                app:cardCornerRadius="10dp"
-                                                app:cardElevation="0dp">
+                                                android:layout_marginLeft="10dp"
+                                                android:layout_toRightOf="@id/tv_name"
+                                                android:text="@{item.receiveTel}"
+                                                android:textColor="@color/black"
+                                                android:textSize="13sp" />
 
-                                                <LinearLayout
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="vertical"
-                                                    android:padding="10dp">
-
-                                                    <LinearLayout
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_gravity="center_vertical"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="订单编号："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{item.orderNo}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <LinearLayout
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_gravity="center_vertical"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="下单时间："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:background="@drawable/open_liner_bg_shape"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{BdUtils.getTime(item.inputtime)}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <LinearLayout
-                                                        android:id="@+id/lin_pay_way"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_gravity="center_vertical"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="支付方式："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:background="@drawable/open_liner_bg_shape"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{BdUtils.getPayWay(item.payment,item.is_point)}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <LinearLayout
-                                                        android:id="@+id/lin_push_memberName"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_gravity="center_vertical"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="发货人："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:background="@drawable/open_liner_bg_shape"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{item.push_memberName}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <LinearLayout
-                                                        android:id="@+id/lin_logisticsNo"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_gravity="center_vertical"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="快递单号："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{item.logisticsNo}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <LinearLayout
-                                                        android:id="@+id/ll_mark"
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_marginTop="5dp"
-                                                        android:background="@color/common_white"
-                                                        android:orientation="horizontal">
-
-                                                        <TextView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:ellipsize="end"
-                                                            android:gravity="center_vertical"
-                                                            android:hint="备注: "
-                                                            android:paddingLeft="10dp"
-                                                            android:paddingRight="14dp"
-                                                            android:singleLine="true"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="16sp" />
-
-                                                        <TextView
-                                                            android:id="@+id/tv_mark"
-                                                            android:layout_width="match_parent"
-                                                            android:layout_height="wrap_content"
-                                                            android:ellipsize="end"
-                                                            android:gravity="left|center_vertical"
-                                                            android:paddingLeft="14dp"
-                                                            android:paddingRight="14dp"
-                                                            android:singleLine="true"
-                                                            android:text="@{item.remark}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-                                                </LinearLayout>
-
-
-                                            </android.support.v7.widget.CardView>
-
-                                            <android.support.v7.widget.CardView
-                                                android:layout_width="match_parent"
+                                            <TextView
+                                                android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                app:cardCornerRadius="10dp"
-                                                app:cardElevation="0dp">
+                                                android:layout_below="@id/tv_name"
+                                                android:layout_alignLeft="@id/tv_name"
+                                                android:layout_marginTop="8dp"
+                                                android:text="@{item.receiveAddress}"
+                                                android:textColor="#FF757575"
+                                                android:textSize="12sp" />
 
-                                                <LinearLayout
-                                                    android:id="@+id/order_footer"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:orientation="vertical"
-                                                    android:padding="10dp">
-
-                                                    <LinearLayout
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="商品总额："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:gravity="right"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingRight="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{@string/price + item.total}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <LinearLayout
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:orientation="horizontal"
-                                                        android:paddingLeft="10dp"
-                                                        android:paddingRight="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="1"
-                                                            android:singleLine="true"
-                                                            android:text="运费："
-                                                            android:textColor="#FF999999"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:layout_width="0dp"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_weight="3"
-                                                            android:gravity="right"
-                                                            android:paddingTop="10dp"
-                                                            android:paddingRight="10dp"
-                                                            android:paddingBottom="10dp"
-                                                            android:text="@{@string/price + item.freight}"
-                                                            android:textColor="@color/black"
-                                                            android:textSize="14dp" />
-                                                    </LinearLayout>
-
-                                                    <RelativeLayout
-                                                        android:layout_width="match_parent"
-                                                        android:layout_height="wrap_content"
-                                                        android:layout_gravity="right"
-                                                        android:orientation="horizontal"
-                                                        android:padding="10dp">
-
-                                                        <TextView
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_toLeftOf="@id/tv_fukuan"
-                                                            android:singleLine="true"
-                                                            android:text="实付款："
-                                                            android:textColor="#FF121212"
-                                                            android:textSize="14dp" />
-
-                                                        <TextView
-                                                            android:id="@+id/tv_fukuan"
-                                                            android:layout_width="wrap_content"
-                                                            android:layout_height="wrap_content"
-                                                            android:layout_alignParentRight="true"
-                                                            android:layout_marginRight="10dp"
-                                                            android:text="@{@string/price + item.paytotal}"
-                                                            android:textColor="#FFE60012"
-                                                            android:textSize="14dp" />
-                                                    </RelativeLayout>
-                                                </LinearLayout>
-                                            </android.support.v7.widget.CardView>
-                                        </LinearLayout>
-
+                                        </RelativeLayout>
                                     </LinearLayout>
 
 
-                                </RelativeLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/pro_cardview_shape_gray"
+                                        android:orientation="vertical">
+
+                                        <android.support.v7.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            app:cardCornerRadius="10dp"
+                                            app:cardElevation="0dp">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="#00000000"
+                                                android:orientation="vertical">
+
+                                                <www.linwg.org.lib.LCardView
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    app:bottomShadowHeight="5dp"
+                                                    app:cornerRadius="10dp"
+                                                    app:leftShadowWidth="0dp"
+                                                    app:rightShadowWidth="0dp"
+                                                    app:shadowColor="#000000"
+                                                    app:topShadowHeight="0dp">
+
+                                                    <FrameLayout
+                                                        android:id="@+id/frame"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content" />
+
+                                                    <!--<RelativeLayout-->
+                                                    <!--android:layout_width="match_parent"-->
+                                                    <!--android:layout_height="wrap_content"-->
+                                                    <!--android:padding="20dp">-->
+
+                                                    <!--<ImageView-->
+                                                    <!--android:id="@+id/iv"-->
+                                                    <!--android:layout_width="83dp"-->
+                                                    <!--android:layout_height="83dp"-->
+                                                    <!--app:errorImg="@{R.mipmap.circle_default_avatar}"-->
+                                                    <!--app:placeHolder="@{R.mipmap.circle_default_avatar}"-->
+                                                    <!--app:roundImgUrl="@{BdUtils.getImgUrl(item.goods_info.img)}" />-->
+
+                                                    <!--<TextView-->
+                                                    <!--android:id="@+id/tv_title"-->
+                                                    <!--android:layout_width="wrap_content"-->
+                                                    <!--android:layout_height="wrap_content"-->
+                                                    <!--android:layout_marginLeft="10dp"-->
+                                                    <!--android:layout_toRightOf="@id/iv"-->
+                                                    <!--android:text="@{item.goods_info.name}"-->
+                                                    <!--android:textColor="@color/black"-->
+                                                    <!--android:textSize="14sp" />-->
+
+                                                    <!--<TextView-->
+                                                    <!--android:id="@+id/tv_num"-->
+                                                    <!--android:layout_width="wrap_content"-->
+                                                    <!--android:layout_height="wrap_content"-->
+                                                    <!--android:layout_below="@id/tv_title"-->
+                                                    <!--android:layout_marginLeft="10dp"-->
+                                                    <!--android:layout_marginTop="10dp"-->
+                                                    <!--android:layout_toRightOf="@id/iv"-->
+                                                    <!--android:text="@{@string/num+ item.goods_info.goods_num}"-->
+                                                    <!--android:textColor="@color/black"-->
+                                                    <!--android:textSize="13sp" />-->
+
+                                                    <!--<TextView-->
+                                                    <!--android:layout_width="wrap_content"-->
+                                                    <!--android:layout_height="wrap_content"-->
+                                                    <!--android:layout_below="@id/tv_num"-->
+                                                    <!--android:layout_marginLeft="10dp"-->
+                                                    <!--android:layout_marginTop="10dp"-->
+                                                    <!--android:layout_toRightOf="@id/iv"-->
+                                                    <!--android:text="@{@string/price + item.goods_info.price}"-->
+                                                    <!--android:textColor="@color/black"-->
+                                                    <!--android:textSize="12sp" />-->
+                                                    <!--</RelativeLayout>-->
 
 
-                            </LinearLayout>
+                                                </www.linwg.org.lib.LCardView>
+
+                                                <www.linwg.org.lib.LCardView
+                                                    android:id="@+id/cardview_contact"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    app:bottomShadowHeight="0dp"
+                                                    app:cardBackgroundColor="@color/white"
+                                                    app:cornerRadius="10dp"
+                                                    app:leftShadowWidth="0dp"
+                                                    app:rightShadowWidth="0dp"
+                                                    app:shadowColor="#000000"
+                                                    app:topShadowHeight="0dp">
+
+                                                    <LinearLayout
+                                                        android:id="@+id/lin_contact"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:gravity="center"
+                                                        android:orientation="horizontal"
+                                                        android:padding="15dp">
+
+                                                        <ImageView
+                                                            android:layout_width="15dp"
+                                                            android:layout_height="15dp"
+                                                            android:src="@mipmap/pro_lxkf" />
+
+                                                        <TextView
+                                                            android:id="@+id/tv_constant"
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="wrap_content"
+                                                            android:layout_gravity="center"
+                                                            android:layout_marginLeft="10dp"
+                                                            android:text="联系卖家"
+                                                            android:textColor="@color/black"
+                                                            android:textSize="13sp" />
+                                                    </LinearLayout>
+                                                </www.linwg.org.lib.LCardView>
+                                            </LinearLayout>
+
+                                        </android.support.v7.widget.CardView>
+
+                                        <android.support.v7.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            app:cardCornerRadius="10dp"
+                                            app:cardElevation="0dp">
+
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="vertical"
+                                                android:padding="10dp">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="订单编号："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{item.orderNo}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="下单时间："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:background="@drawable/open_liner_bg_shape"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{BdUtils.getTime(item.inputtime)}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:id="@+id/lin_pay_way"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="支付方式："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:background="@drawable/open_liner_bg_shape"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{BdUtils.getPayWay(item.payment,item.is_point)}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:id="@+id/lin_push_memberName"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="发货人："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:background="@drawable/open_liner_bg_shape"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{item.push_memberName}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:id="@+id/lin_logisticsNo"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_gravity="center_vertical"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="快递单号："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{item.orderNo}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:id="@+id/ll_mark"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginTop="5dp"
+                                                    android:background="@color/common_white"
+                                                    android:orientation="horizontal">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:ellipsize="end"
+                                                        android:gravity="center_vertical"
+                                                        android:hint="备注: "
+                                                        android:paddingLeft="10dp"
+                                                        android:paddingRight="14dp"
+                                                        android:singleLine="true"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="16sp" />
+
+                                                    <TextView
+                                                        android:id="@+id/tv_mark"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="wrap_content"
+                                                        android:ellipsize="end"
+                                                        android:gravity="left|center_vertical"
+                                                        android:paddingLeft="14dp"
+                                                        android:paddingRight="14dp"
+                                                        android:singleLine="true"
+                                                        android:text="@{item.remark}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+
+
+                                                </LinearLayout>
+                                            </LinearLayout>
+
+
+                                        </android.support.v7.widget.CardView>
+
+                                        <android.support.v7.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            app:cardCornerRadius="10dp"
+                                            app:cardElevation="0dp">
+
+                                            <LinearLayout
+                                                android:id="@+id/order_footer"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="vertical"
+                                                android:padding="10dp">
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="商品总额："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:gravity="right"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingRight="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{@string/price + item.goodsTotalPrice}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="horizontal"
+                                                    android:paddingLeft="10dp"
+                                                    android:paddingRight="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="1"
+                                                        android:singleLine="true"
+                                                        android:text="运费："
+                                                        android:textColor="#FF999999"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="3"
+                                                        android:gravity="right"
+                                                        android:paddingTop="10dp"
+                                                        android:paddingRight="10dp"
+                                                        android:paddingBottom="10dp"
+                                                        android:text="@{@string/price + item.freight}"
+                                                        android:textColor="@color/black"
+                                                        android:textSize="14dp" />
+                                                </LinearLayout>
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="right"
+                                                    android:orientation="horizontal"
+                                                    android:padding="10dp">
+
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_toLeftOf="@id/tv_fukuan"
+                                                        android:singleLine="true"
+                                                        android:text="实付款："
+                                                        android:textColor="#FF121212"
+                                                        android:textSize="14dp" />
+
+                                                    <TextView
+                                                        android:id="@+id/tv_fukuan"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_alignParentRight="true"
+                                                        android:layout_marginRight="10dp"
+                                                        android:text="@{@string/price + item.total}"
+                                                        android:textColor="#FFE60012"
+                                                        android:textSize="14dp" />
+                                                </RelativeLayout>
+                                            </LinearLayout>
+                                        </android.support.v7.widget.CardView>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+
+
                         </LinearLayout>
+                    </LinearLayout>
 
-                    </android.support.v4.widget.NestedScrollView>
+                </android.support.v4.widget.NestedScrollView>
 
-                    <com.docker.common.common.widget.empty.EmptyLayout
-                        android:id="@+id/empty"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:visibility="gone">
+                <com.docker.common.common.widget.empty.EmptyLayout
+                    android:id="@+id/empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:visibility="gone">
 
-                    </com.docker.common.common.widget.empty.EmptyLayout>
-                </FrameLayout>
-
-
-            </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+                </com.docker.common.common.widget.empty.EmptyLayout>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -730,9 +728,12 @@
                 android:paddingRight="15dp"
                 android:paddingBottom="8dp"
                 android:text="确认收货"
+                android:onClick="@{(view)->viewmodel.sureHandle(item,view)}"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                android:visibility="gone" />
+                app:visibleGone="@{item.status == 2}" />
+
+            <!--sureHandle-->
 
             <TextView
                 android:id="@+id/tv_look_wl"
@@ -740,16 +741,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/circle_pay_shape"
+                android:background="@drawable/circle_pay_shape_gray"
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:paddingTop="8dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="8dp"
                 android:text="查看物流"
-                android:textColor="@color/white"
+                android:onClick="@{(view)->viewmodel.lookLogic(item,view)}"
+                android:textColor="@color/black"
                 android:textSize="15sp"
-                android:visibility="gone" />
+                visibleGone="@{item.status ==1 || item.status ==2}" />
 
             <TextView
                 android:id="@+id/tv_cancle_order"
@@ -763,10 +765,11 @@
                 android:paddingTop="8dp"
                 android:paddingRight="15dp"
                 android:paddingBottom="8dp"
+                android:onClick="@{(view)->viewmodel.cancelOrder(item,view)}"
                 android:text="取消订单"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                android:visibility="gone" />
+                app:visibleGone="@{item.status == 0}" />
 
             <TextView
                 android:id="@+id/tv_go_pay"
@@ -781,10 +784,46 @@
                 android:paddingRight="15dp"
                 android:paddingBottom="8dp"
                 android:text="去付款"
+                android:onClick="@{(view)->viewmodel.payOrder(item,view)}"
                 android:textColor="@color/white"
                 android:textSize="15sp"
-                android:visibility="gone" />
+                app:visibleGone="@{item.status == 0}" />
 
+            <TextView
+                android:id="@+id/tv_pl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/circle_pay_shape_gray"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingTop="8dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="8dp"
+                android:text="评价"
+                android:onClick="@{(view)->viewmodel.ordercomment(item,view)}"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:visibleGone="@{item.status == 4}" />
+
+            <TextView
+                android:id="@+id/tv_again"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/circle_pay_shape"
+                android:gravity="center"
+                android:onClick="@{(view)->viewmodel.getAgain(item,view)}"
+                android:paddingLeft="15dp"
+                android:paddingTop="8dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="8dp"
+                android:text="再次购买"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                visibleGone="@{item.status==3 || item.status==4 || item.status==5}"/>
 
         </LinearLayout>
     </LinearLayout>

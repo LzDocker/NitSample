@@ -69,6 +69,9 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
         super.onActivityCreated(savedInstanceState);
         serviceDataBean = (ServiceDataBean) getArguments().getSerializable("dataSource");
         mBinding.get().setItem(serviceDataBean);
+        if ("goods".equals(serviceDataBean.getType())) {
+            mBinding.get().rlDynamicTitle.setVisibility(View.GONE);
+        }
         FragmentUtils.add(getChildFragmentManager(), DynamicBotContentFragment.getInstance(serviceDataBean), R.id.frame_bot_content);
         mBinding.get().setViewmodel(mViewModel);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
@@ -171,7 +174,7 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
             public void onProgressChanged(com.tencent.smtt.sdk.WebView view, int newProgress) {
                 if (mBinding.get() != null && newProgress > 75) {
                     mBinding.get().empty.hide();
-                    }
+                }
             }
         });
         processLoad();

@@ -59,10 +59,6 @@ import retrofit2.http.Url;
 public interface CircleApiService {
 
 
-
-
-
-
     /*
      * 创建圈子
      * */
@@ -412,7 +408,7 @@ public interface CircleApiService {
     LiveData<ApiResponse<CityCodeVo>> fechCityCode(@FieldMap Map<String, String> params);
 
 
-     @GET("api.php?m=shoppingCar.shoppingCarAdd")
+    @GET("api.php?m=shoppingCar.shoppingCarAdd")
     LiveData<ApiResponse<BaseResponse<String>>> shoppingCarAdd(@QueryMap Map<String, String> params);
 
     @POST("api.php?m=shoppingCar.shoppingCarAdd")
@@ -439,6 +435,19 @@ public interface CircleApiService {
     @POST("api.php?m=shoppingCar.shoppingCarDel")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> shoppingCarDel(@FieldMap Map<String, String> params);
+
+
+    //订单列表--再次购买
+    @POST("api.php?m=order.buyAgain")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<ShoppingCarVoV3>>>> orderbuyAgain(@FieldMap Map<String, String> params);
+
+    //订单列表--评论
+    @POST("api.php?m=dynamic.comment")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<RstVo>>> goodsComment(@FieldMap Map<String, String> params);
+
+
 
 
 

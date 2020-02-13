@@ -1,8 +1,10 @@
 package com.docker.apps.order.vo;
 
+import android.databinding.BaseObservable;
+
 import java.util.List;
 
-public class LogisticeVo {
+public class LogisticeVo extends BaseObservable {
 
 
     /**
@@ -23,7 +25,7 @@ public class LogisticeVo {
     private String com;
     private String status;
     private String state;
-    private  String imgurl;
+    private String imgurl;
     private List<DataBean> data;
 
     public String getImgurl() {

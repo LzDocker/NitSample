@@ -4,9 +4,12 @@ import android.arch.lifecycle.LiveData;
 
 import com.docker.apps.order.vo.AddressVo;
 import com.docker.apps.order.vo.AllLinkageVo;
+import com.docker.apps.order.vo.GoodsVo;
 import com.docker.apps.order.vo.LogisticeVo;
+import com.docker.apps.order.vo.OrderDetialVo;
 import com.docker.apps.order.vo.OrderVo;
 import com.docker.apps.order.vo.OrderVoV2;
+import com.docker.cirlev2.vo.vo.ShoppingCarVoV3;
 import com.docker.common.common.vo.PayOrederVo;
 import com.docker.common.common.vo.WxOrderVo;
 import com.docker.core.di.netmodule.ApiResponse;
@@ -76,5 +79,35 @@ public interface OrderService {
     @POST("api.php?m=order.takeGoods")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> takeGoods(@FieldMap HashMap<String, String> paramMap);
+
+    //订单列表--支付
+    @POST("api.php?m=order.orderPay")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<PayOrederVo>>> orderPay(@FieldMap HashMap<String, String> paramMap);
+
+    //订单列表--取消
+    @POST("api.php?m=order.order_del")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> orderCancel(@FieldMap HashMap<String, String> paramMap);
+
+    //订单列表--删除
+    @POST("api.php?m=order.prePaymentOrder_del")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> prePaymentOrder_del(@FieldMap HashMap<String, String> paramMap);
+
+    //订单列表--再次购买
+    @POST("api.php?m=order.buyAgain")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<ShoppingCarVoV3>>>> orderbuyAgain(@FieldMap HashMap<String, String> paramMap);
+
+    //单个订单包含的商品列表
+    @POST("api.php?m=order.getOrderGoods")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<GoodsVo>>>> orderGoodsList(@FieldMap HashMap<String, String> paramMap);
+
+    //单个订单包含的商品列表
+    @POST("api.php?m=order.order_info")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<OrderVoV2>>> order_info(@FieldMap HashMap<String, String> paramMap);
 
 }

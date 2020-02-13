@@ -57,8 +57,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical"
-                    android:onClick="@{(view)->viewmodel.allSelectClick(item,view)}">
-
+                   >
+<!-- android:onClick="@{(view)->viewmodel.allSelectClick(item,view)}"-->
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"

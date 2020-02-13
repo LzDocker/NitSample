@@ -1,5 +1,8 @@
 package com.docker.apps.order.vo;
 
+import com.docker.common.common.model.BaseSampleItem;
+import com.docker.common.common.model.OnItemClickListener;
+
 public class OrderDetialVo {
 
 
@@ -242,13 +245,14 @@ public class OrderDetialVo {
         this.goods_info = goods_info;
     }
 
-    public static class GoodsInfoBean {
+    public class GoodsInfoBean extends BaseSampleItem {
         /**
          * name : 太极酒
          * price : 184
          * point : 100
          * img : /var/upload/image/2019/08/2019082611290451635_172x172.png
          */
+
 
         private String name;
         private String price;
@@ -295,6 +299,17 @@ public class OrderDetialVo {
 
         public void setImg(String img) {
             this.img = img;
+        }
+
+
+        @Override
+        public int getItemLayout() {
+            return 0;
+        }
+
+        @Override
+        public OnItemClickListener getOnItemClickListener() {
+            return null;
         }
     }
 }

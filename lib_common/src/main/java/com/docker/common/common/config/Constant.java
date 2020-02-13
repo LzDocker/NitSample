@@ -43,6 +43,7 @@ public class Constant {
     public static final int KEY_RVUI_GRID2 = 1;
     public static final int KEY_RVUI_HOR = 2;
     public static final int KEY_RVUI_GRID5 = 5;
+    public static final int KEY_RVUI_GRID3 = 3;
 
 
     //----------------------------end---------------------

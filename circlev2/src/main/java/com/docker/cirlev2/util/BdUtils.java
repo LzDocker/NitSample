@@ -1,5 +1,6 @@
 package com.docker.cirlev2.util;
 
+import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -37,6 +38,25 @@ public class BdUtils {
         }
         return utl;
 
+    }
+
+    public static int getCommentPic(int position, int curposition) {
+        if (position > curposition) {
+            return R.mipmap.pro_comment_star1;
+        } else {
+            return R.mipmap.pro_comment_star2;
+        }
+    }
+
+    public static boolean isShowStar(CommentVo commentVo) {
+        if (commentVo == null) {
+            return false;
+        }
+        if (TextUtils.isEmpty(String.valueOf(commentVo.starNum))) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private static SimpleDateFormat sdf = null;

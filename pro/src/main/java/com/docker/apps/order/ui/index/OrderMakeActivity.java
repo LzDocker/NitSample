@@ -50,6 +50,8 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
 
     private BigDecimal bigDecimaltotal;
 
+    private String orderId;  // 再次购买
+
     /*
      * 1  购物车列表点进来
      *
@@ -81,8 +83,12 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
         mBinding.empty.hide();
         mToolbar.setTitle("填写订单");
         mDynamicDetailVo = (ServiceDataBean) getIntent().getSerializableExtra("ServiceDataBean");
+        orderId = getIntent().getStringExtra("orderId");
         if (mDynamicDetailVo != null) {
             flag = 2;
+        }
+        if (!TextUtils.isEmpty(orderId)) {
+            flag = 3;
         }
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.falg = flag;
@@ -91,6 +97,9 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.ReqParam.put("memberid", CacheUtils.getUser().uid);
         commonListOptions.ReqParam.put("falg", String.valueOf(flag));
+        if (!TextUtils.isEmpty(orderId)) {
+            commonListOptions.ReqParam.put("orderid", orderId);
+        }
         NitBaseProviderCard.providerCoutainerNoRefreshForFrame(OrderMakeActivity.this.getSupportFragmentManager(), R.id.goods_frame, commonListOptions);
 
         mViewModel.fetchAddress();

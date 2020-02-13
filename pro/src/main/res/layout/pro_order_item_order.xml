@@ -35,6 +35,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
             android:orientation="vertical"
             android:padding="15dp"
             android:paddingBottom="1dp">
@@ -52,26 +53,29 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@id/iv_delete"
                         android:layout_alignParentRight="true"
+                        android:layout_toLeftOf="@id/iv_delete"
                         android:text="@{OrderBdUtils.getOrderStatus(item)}"
                         android:textColor="#be3131"
-                        android:textSize="15sp" />
+                        android:textSize="13sp" />
 
                     <ImageView
                         android:id="@+id/iv_delete"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="10dp"
-                        app:visibleGone="@{OrderBdUtils.isShowDel(item)}"
-                        android:src="@mipmap/del_icon" />
+                        android:onClick="@{(view)->viewmodel.delOrder(item,view)}"
+                        android:src="@mipmap/del_icon"
+                        app:visibleGone="@{item.status==0}" />
 
                 </LinearLayout>
 
@@ -94,10 +98,10 @@
                 <!--app:imageUrl="@{item.goods_info.getImg()}" />-->
 
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle"
                     android:layout_width="wrap_content"
                     android:layout_height="76dp"
                     android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@+id/name"
                     app:itemBinding="@{item.getItemImgBinding()}"
                     app:items="@{item.getInnerResource()}"
                     bind:layoutManager="@{LayoutManager.linear(0, false)}" />
@@ -110,13 +114,13 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@+id/lin_price"
-                    android:layout_weight="1"
+                    android:layout_toRightOf="@+id/recycle"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="@{OrderBdUtils.getGoodsName(item)}"
                     android:textColor="#333333"
-                    android:textSize="15sp" />
+                    android:textSize="14sp"
+                    app:visibleGone="@{OrderBdUtils.isShowName(item.goods_info)}" />
 
                 <LinearLayout
                     android:id="@+id/lin_price"
@@ -139,7 +143,7 @@
                             android:layout_weight="1"
                             android:text="@string/yjf"
                             android:textColor="#333333"
-                            android:textSize="16sp" />
+                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_price"
@@ -147,7 +151,7 @@
                             android:layout_height="wrap_content"
                             android:text="@{OrderBdUtils.getPriceTotal(item)}"
                             android:textColor="#333333"
-                            android:textSize="18sp" />
+                            android:textSize="15sp" />
                     </LinearLayout>
 
                     <TextView
@@ -156,9 +160,10 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/lin_price"
                         android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
                         android:text="@{@string/gong+OrderBdUtils.getNumTotal(item)+@string/jian}"
                         android:textColor="#333333"
-                        android:textSize="15sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -177,36 +182,38 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/common_radius20_white"
+                    android:onClick="@{(view)->viewmodel.cancelOrder(item,view)}"
                     android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
-                    android:onClick="@{(view)->viewmodel.cancelOrder(item,view)}"
                     android:paddingBottom="5dp"
                     android:text="取消订单"
-                    android:textColor="#333333" />
+                    android:textColor="#333333"
+                    app:visibleGone="@{item.status==0}" />
 
                 <TextView
                     android:id="@+id/tv_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/common_radius20_blue"
+                    android:onClick="@{(view)->viewmodel.payOrder(item,view)}"
                     android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"
-                    android:onClick="@{(view)->viewmodel.payOrder(item,view)}"
                     android:text="去支付"
-                    android:textColor="@color/common_blue" />
+                    android:textColor="@color/common_blue"
+                    app:visibleGone="@{item.status==0}" />
 
                 <TextView
                     android:id="@+id/tv_look_wl"
-                    visibleGone="@{item.status ==1}"
+                    visibleGone="@{item.status ==1 || item.status ==2}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/common_radius20_white"
-                    android:paddingLeft="15dp"
                     android:onClick="@{(view)->viewmodel.lookLogic(item,view)}"
+                    android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"
@@ -215,41 +222,41 @@
 
                 <TextView
                     android:id="@+id/tv_comfire_sh"
-                    visibleGone="@{item.status ==1}"
+                    visibleGone="@{item.status ==1 || item.status ==2}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/common_radius20_blue"
+                    android:onClick="@{(view)->viewmodel.sureHandle(item,view)}"
                     android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"
-                    android:onClick="@{(view)->viewmodel.sureHandle(item,view)}"
                     android:text="确认收货"
                     android:textColor="@color/common_blue" />
 
                 <TextView
                     android:id="@+id/tv_look_pj"
-                    visibleGone="@{item.status ==1}"
+                    visibleGone="@{item.status ==4}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/common_radius20_white"
+                    android:onClick="@{(view)->viewmodel.ordercomment(item,view)}"
                     android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"
                     android:text="评价"
-                    android:onClick="@{(view)->viewmodel.ordercomment(item,view)}"
                     android:textColor="#333333" />
 
                 <TextView
                     android:id="@+id/tv_again_pay"
-                    visibleGone="@{item.status==1}"
+                    visibleGone="@{item.status==3 || item.status==4 || item.status==5}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/common_radius20_blue"
-                    android:paddingLeft="15dp"
                     android:onClick="@{(view)->viewmodel.getAgain(item,view)}"
+                    android:paddingLeft="15dp"
                     android:paddingTop="5dp"
                     android:paddingRight="15dp"
                     android:paddingBottom="5dp"

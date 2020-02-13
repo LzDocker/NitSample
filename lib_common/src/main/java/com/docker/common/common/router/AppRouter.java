@@ -137,6 +137,7 @@ public class AppRouter {
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
     public static final String COMMON_CONTAINER_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2";
+    public static final String COMMON_RICH_CONTAINER_FRAGMENTV2 = COMMONGROUP + "COMMON_RICH_CONTAINER_FRAGMENTV2";
     public static final String COMMON_CONTAINER_NO_REFRESH_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2_no_refresh";
     public static final String COMMON_CARD_FRAGMENT = COMMONGROUP + "card_fragment";
     public static final String COMMON_CARD_FRAGMENT_NO_REFRESH = COMMONGROUP + "card_fragment_no_refresh";
@@ -206,6 +207,10 @@ public class AppRouter {
     public static final String ORDER_MAKER = ORDER_GROUP + "ORDER_MAKER";
     public static final String ORDER_PAY = ORDER_GROUP + "ORDER_PAY";
     public static final String ORDER_LIST = ORDER_GROUP + "ORDER_LIST";
+    public static final String ORDER_GOODS_LIST = ORDER_GROUP + "ORDER_GOODS_LIST";
+    public static final String ORDER_COMMENT_SUCCESS_LIST = ORDER_GROUP + "ORDER_COMMENT_SUCCESS_LIST";
+    public static final String ORDER_GOODS_COMMENT = ORDER_GROUP + "ORDER_GOODS_COMMENT";
+
     public static final String ORDER_Logistics_LIST = ORDER_GROUP + "ORDER_Logistics_LIST";
     public static final String ORDER_DETAIL = ORDER_GROUP + "ORDER_DETAIL";
 

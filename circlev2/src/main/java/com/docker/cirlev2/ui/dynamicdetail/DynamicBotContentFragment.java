@@ -52,7 +52,7 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
 
     @Override
     protected void initView(View var1) {
-      mBinding.get().setViewmodel(mViewModel);
+        mBinding.get().setViewmodel(mViewModel);
     }
 
 
@@ -78,6 +78,12 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
                         commonListReq.ReqParam.put("page", "1");
                         commonListReq.externs.put("serverdata", serviceDataBean);
                         commonListVm.initParam(commonListReq);
+
+//                        CommonListOptions commonListOptions1 = new CommonListOptions();
+//                        commonListOptions1.isActParent = false;
+//                        commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
+//                        commonListOptions1.falg = 1003;
+//                        NitBaseProviderCard.providerCoutainerNoRefreshForFrame(getChildFragmentManager(), R.id.frame_comment, commonListOptions1);
                     }
                 };
                 break;
@@ -90,11 +96,12 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
 
                     @Override
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+                        ((CircleDynamicListViewModel) commonListVm).flag = 1;
                         CommonListOptions commonListReq = new CommonListOptions();
-                       // commonListReq.ReqParam.put("t", "dynamic");
-                        commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
-                        commonListReq.ReqParam.put("memberid", "67");
-                        commonListReq.ReqParam.put("companyid", "1");
+                        // commonListReq.ReqParam.put("t", "dynamic");
+                        commonListReq.ReqParam.put("t", "goods");
+//                        commonListReq.ReqParam.put("isrecommend", "1");
+                        commonListReq.ReqParam.put("page", "1");
                         commonListVm.initParam(commonListReq);
                     }
                 };
@@ -125,14 +132,15 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.falg = 1002;
         NitBaseProviderCard.providerCoutainerNoRefreshForFrame(getChildFragmentManager(), R.id.frame_comment, commonListOptions);
-//
 
-//        CommonListOptions commonListOptions1 = new CommonListOptions();
-//        commonListOptions1.isActParent = false;
-//        commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
-//        commonListOptions1.falg = 1003;
-//        NitBaseProviderCard.providerCoutainerNoRefreshForFrame(getChildFragmentManager(), R.id.frame_comment, commonListOptions1);
 
+        if ("goods".equals(serviceDataBean.getType())) {
+            CommonListOptions commonListOptions1 = new CommonListOptions();
+            commonListOptions1.isActParent = false;
+            commonListOptions1.RvUi = Constant.KEY_RVUI_GRID3;
+            commonListOptions1.falg = 1003;
+            NitBaseProviderCard.providerCoutainerForFrame(getChildFragmentManager(), R.id.frame_goods, commonListOptions1);
+        }
 
 //        FragmentUtils.add(getChildFragmentManager(), (Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation(), R.id.frame_recommend);
 //        FragmentUtils.add(getChildFragmentManager(), (Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation(), R.id.frame_recommend);
@@ -146,7 +154,7 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(disposable!=null){
+        if (disposable != null) {
             disposable.dispose();
         }
     }

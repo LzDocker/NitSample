@@ -4,11 +4,11 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.databinding.AccountActivityOrderBinding;
-import com.bfhd.account.vm.AccountOrderViewModel;
 import com.bfhd.circle.base.adapter.HivsSampleAdapter;
 import com.docker.apps.order.vm.OrderCommonViewModel;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
@@ -21,14 +21,17 @@ import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.indector.CommonIndector;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.disposables.Disposable;
 
 /*
  * 订单支付
@@ -44,6 +47,7 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
     private OrderCommonViewModel innervm;
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
+    private Disposable disposable;
 
     @Override
     public OrderCommonViewModel getmViewModel() {
@@ -65,7 +69,11 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mToolbar.setTitle("我的订单");
-
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("refresh_buy")) {
+                ((NitCommonContainerFragmentV2) fragments.get(mBinding.viewPager.getCurrentItem())).onReFresh(null);
+            }
+        });
     }
 
     @Override
@@ -106,6 +114,17 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 innervm = (OrderCommonViewModel) commonListVm;
                 innervm.state = flag;
+                innervm.mPayOrederLv.observe(nitCommonFragment, payOrederVo -> {
+                    if (payOrederVo != null && payOrederVo.alipayStr != null) {
+                        ARouter.getInstance().build(AppRouter.ORDER_PAY).withSerializable("payOrederVo", payOrederVo).navigation();
+                    }
+                });
+                innervm.mDelOrderLv.observe(nitCommonFragment, orderVoV2 -> {
+                    innervm.mItems.remove(orderVoV2);
+                });
+                innervm.mRealDelOrderLv.observe(nitCommonFragment, orderVoV2 -> {
+                    Log.d("sss", "next: ============22222========");
+                });
 
 //                switch (flag) {
 //                    case 0:
@@ -135,7 +154,7 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
         for (int i = 0; i < circleTitlesVos.size(); i++) {
             titles[i] = circleTitlesVos.get(i).getName();
             CommonListOptions commonListOptions = new CommonListOptions();
-            commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+            commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
             commonListOptions.isActParent = true;
             commonListOptions.falg = i;
             commonListOptions.ReqParam.put("uuid", CacheUtils.getUser().uuid);

@@ -29,6 +29,7 @@ import javax.inject.Inject;
 
 import static com.docker.common.common.config.Constant.CommonListParam;
 import static com.docker.common.common.config.Constant.KEY_RVUI_GRID2;
+import static com.docker.common.common.config.Constant.KEY_RVUI_GRID3;
 import static com.docker.common.common.config.Constant.KEY_RVUI_HOR;
 import static com.docker.common.common.config.Constant.KEY_RVUI_LINER;
 
@@ -116,6 +117,11 @@ public abstract class NitCommonListNoRefreshFragment<VM extends NitCommonListVm>
             case KEY_RVUI_HOR:
                 (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
                         .linear(LinearLayoutManager.HORIZONTAL, false)
+                        .create((mBinding.get()).recyclerView));
+                break;
+            case KEY_RVUI_GRID3:
+                (mBinding.get()).recyclerView.setLayoutManager(LayoutManager
+                        .grid(3)
                         .create((mBinding.get()).recyclerView));
                 break;
         }
