@@ -1,9 +1,11 @@
 package com.docker.apps.point.db;
 
+import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 import android.text.TextUtils;
 
 import com.docker.apps.point.vo.PointSortItemVo;
+import com.docker.cirlev2.util.BdUtils;
 import com.docker.common.common.binding.CommonBdUtils;
 
 public class PointBdUtils {
@@ -81,5 +83,50 @@ public class PointBdUtils {
                 break;
         }
         return str;
+    }
+
+
+    public static String getMyRankName(PointSortItemVo pointSortItemVo) {
+        if (pointSortItemVo == null) {
+            return "";
+        }
+        if (!TextUtils.isEmpty(pointSortItemVo.fullName)) {
+            return pointSortItemVo.fullName;
+        }
+        if (!TextUtils.isEmpty(pointSortItemVo.nickname)) {
+            return pointSortItemVo.nickname;
+        }
+        if (!TextUtils.isEmpty(pointSortItemVo.username)) {
+            return pointSortItemVo.username;
+        }
+        return "";
+    }
+
+
+    public static String getPointSortMyFootStr(ObservableField<PointSortItemVo> Obtotals, String rankType) {
+
+        if (Obtotals == null || Obtotals.get() == null) {
+            return "";
+        }
+        String footstr = "";
+        switch (rankType) {
+            case "integral":
+                footstr = Obtotals.get().totalNum + "积分";
+                break;
+            case "buy":
+                footstr = "消费¥" + Obtotals.get().totalNum;
+                break;
+            case "invite":
+                footstr = "拓客" + Obtotals.get().totalNum + "人";
+                break;
+        }
+        return footstr;
+    }
+
+    public static String getPointSortMyIcon(ObservableField<PointSortItemVo> Obtotals) {
+        if (Obtotals == null || Obtotals.get() == null) {
+            return "";
+        }
+        return BdUtils.getImgUrl(Obtotals.get().avatar);
     }
 }

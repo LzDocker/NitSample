@@ -55,7 +55,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
                     lay = R.layout.circlev2_item_dynamic_answer;
                     break;
                 case "activity":
-
+                    lay = R.layout.circlev2_item_dynamic_activity;
                     break;
             }
         } else if (flag == 1) {
@@ -529,6 +529,37 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     }
 
     public static class ExtDataBean extends BaseObservable implements Serializable {
+
+        /*
+        *
+        *  "startDate":"2017-04-18 09:59:00",
+                "endDate":"2017-04-18 09:59:00",
+                "situs":"2",
+                "address":"北京市海淀区",
+                "sponsorName":"北方互动",
+                "contact":"13930183794",
+                "signAudit":"1",
+                "content":"测试内容",
+                "updatetime":1581327794,
+                "inputtime":1581327794,
+                "status":2,
+                "dataid":17,*/
+
+        public String isDate;
+        public String startDate;
+        public String endDate;
+        public String situs;
+        public String address;
+        public String sponsorName;
+        public String signAudit;
+        public String status;
+        public String dataid;
+
+
+        public String goodsSn;
+        public String goodsNumber;
+        public String market_price;
+        public String is_on_sale;
 
 
 //        "transType":"1",

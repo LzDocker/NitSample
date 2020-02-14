@@ -27,6 +27,7 @@
         <activity android:name="com.docker.apps.order.ui.comment.OrderGoodsCommentActivity" />
         <activity android:name="com.docker.apps.order.ui.comment.OrderCommentSuccessActivity" />
         <activity android:name="com.docker.apps.order.ui.index.OrderDetailActivity" />
+        <activity android:name="com.docker.apps.active.ui.publish.ActiveTypeSelectActivity" />
         <activity
             android:name="com.docker.apps.order.ui.index.OrderMakeActivity"
             android:windowSoftInputMode="adjustResize" />

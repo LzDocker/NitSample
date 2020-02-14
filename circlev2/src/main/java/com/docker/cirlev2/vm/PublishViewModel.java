@@ -120,6 +120,30 @@ public class PublishViewModel extends NitCommonContainerViewModel {
 
     }
 
+    public void publishActive(HashMap<String, String> paramMap) {
+        showDialogWait("发布中...", false);
+        mDynamicPublishLV.addSource(RequestServer(circleApiService.publishactive(paramMap)),
+                new NitNetBoundObserver(new NitBoundCallback() {
+                    @Override
+                    public void onComplete(Resource resource) {
+                        super.onComplete(resource);
+                        if (resource != null && resource.data != null) {
+                            mDynamicPublishLV.setValue(((PublishRstVo) resource.data).activityid + "-" + "1");
+                        } else {
+                            mDynamicPublishLV.setValue(resource.message);
+                        }
+                        hideDialogWait();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        hideDialogWait();
+                    }
+                }));
+
+    }
+
     public int mBaiduImgPage = 0;
 
     public void getBaiduImgList(String keyword) {

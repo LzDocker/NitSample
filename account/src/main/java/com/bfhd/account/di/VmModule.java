@@ -11,6 +11,7 @@ import com.bfhd.account.vm.AccountPointViewModel;
 import com.bfhd.account.vm.AccountRewardViewModel;
 import com.bfhd.account.vm.AccountSettingViewModel;
 import com.bfhd.account.vm.AccountViewModel;
+import com.bfhd.account.vm.MoneyBoxCommonViewModel;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.bfhd.account.vm.card.AccountPointHeadCardViewModel;
 import com.bfhd.account.vm.card.AccountPointRecycleViewModel;
@@ -92,6 +93,11 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(AccountOrderViewModel.class)
     abstract ViewModel AccountOrderViewModel(AccountOrderViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoneyBoxCommonViewModel.class)
+    abstract ViewModel MoneyBoxCommonViewModel(MoneyBoxCommonViewModel model);
 
 
 }

@@ -180,17 +180,18 @@
                 android:layout_toRightOf="@id/iv_select2" />
 
             <LinearLayout
+                android:id="@+id/ll_zeng_pin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/iv_shop_logo1"
                 android:background="@color/white"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                app:visibleGone="@{!BdUtils.isPointEmpty(item.point)}">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:layout_marginLeft="10dp"
                     android:text="赠品"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
@@ -200,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginLeft="10dp"
-                    android:text="200积分" />
+                    android:text="@{item.point+@string/jifen}" />
             </LinearLayout>
 
         </RelativeLayout>

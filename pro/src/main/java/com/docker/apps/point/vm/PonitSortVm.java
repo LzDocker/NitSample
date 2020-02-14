@@ -10,6 +10,7 @@ import com.docker.apps.point.vo.PointTabVo;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.cirlev2.vm.PointSortViewModel;
 import com.docker.common.common.model.BaseItemModel;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.core.di.netmodule.ApiResponse;
@@ -42,6 +43,22 @@ public class PonitSortVm extends CircleDynamicListViewModel {
 
 
     public MediatorLiveData<List<PointSortItemVo>> mHeadDataLv = new MediatorLiveData<>();
+    public MediatorLiveData<PointSortItemVo> mRankDataLv = new MediatorLiveData<>();
+
+
+    public void getMyRankdata(String rankType, String rankClass) {
+        HashMap<String, String> param = new HashMap<>();
+        param.put("rankType", rankType);
+        param.put("rankClass", rankClass);
+        param.put("uuid", CacheUtils.getUser().uuid);
+        mRankDataLv.addSource(RequestServer(pointService.getMyRank(param)), new NitNetBoundObserver<PointSortItemVo>(new NitBoundCallback<PointSortItemVo>() {
+            @Override
+            public void onComplete(Resource<PointSortItemVo> resource) {
+                super.onComplete(resource);
+                mRankDataLv.setValue(resource.data);
+            }
+        }));
+    }
 
 
     public MediatorLiveData<List<PointTabVo>> mPointTabLv = new MediatorLiveData<>();

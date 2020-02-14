@@ -21,5 +21,7 @@
     <string name="circle_publish1">发动态，发问答，发新闻，查资料；\n还能建圈子，快来和圈友一起交流学习吧！</string>
     <string name="circle_publish2">店铺名称:</string>
     <string name="circle_publish3">联系人:</string>
+    <string name="jifen">积分:</string>
+    <string name="divi"> - </string>
 
 </resources>

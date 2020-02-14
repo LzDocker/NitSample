@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 
@@ -152,6 +153,8 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
                 (mBinding.get()).refresh.setEnablePureScrollMode(true);
                 break;
         }
+
+        Log.d("sss", "initRefreshUi: =============="+commonListReq.refreshState);
     }
 
     // 外部更改请求接口的参数

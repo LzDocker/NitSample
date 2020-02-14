@@ -250,6 +250,16 @@ public interface CircleApiService {
     @POST("api.php?m=publish")
     LiveData<ApiResponse<BaseResponse<PublishRstVo>>> publishNews(@FieldMap Map<String, String> params);
 
+
+    /*
+     * 发布动态 news
+     * */
+    @FormUrlEncoded
+    @POST("api.php?m=activity.publish")
+    LiveData<ApiResponse<BaseResponse<PublishRstVo>>> publishactive(@FieldMap Map<String, String> params);
+
+
+
     /*
      * 圈子详情tab列表数据
      * */

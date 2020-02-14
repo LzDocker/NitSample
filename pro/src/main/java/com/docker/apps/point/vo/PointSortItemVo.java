@@ -23,6 +23,10 @@ public class PointSortItemVo extends BaseSampleItem {
     public String uuid;
     public String totalNum;
     public String avatar;
+    public String circlename;
+
+
+    public String rowNo;
 
     public String rankType;
 }

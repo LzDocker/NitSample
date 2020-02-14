@@ -35,6 +35,7 @@ public class AppRouter {
     public static final String ACCOUNT_point = AccountGroup + "account_point";
     public static final String ACCOUNT_invitation = AccountGroup + "account_invitation";
     public static final String ACCOUNT_MONEY_HAND = AccountGroup + "ACCOUNT_MONEY_HAND";
+    public static final String ACCOUNT_MONEY_HAND_V2 = AccountGroup + "ACCOUNT_MONEY_HAND_V2";
     public static final String ACCOUNT_MONEY_DETAIL = AccountGroup + "ACCOUNT_MONEY_DETAIL";
 
 
@@ -192,6 +193,7 @@ public class AppRouter {
     public static final String ACTIVE_MANAGE_VERFIC = ACTIVE_GROUP + "ACTIVE_MANAGE_VERFIC";
     public static final String ACTIVE_PUBLISH = ACTIVE_GROUP + "ACTIVE_PUBLISH";
     public static final String ACTIVE_PUBLISH_BANNER_PREVIEW = ACTIVE_GROUP + "ACTIVE_PUBLISH_BANNER_PREVIEW";
+    public static final String ACTIVE_TYPE_SELECT = ACTIVE_GROUP + "ACTIVE_TYPE_SELECT";
     public static final String ACTIVE_CONTENT_EDIT = ACTIVE_GROUP + "ACTIVE_CONTENT_EDIT";
 
 

@@ -59,6 +59,7 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
         public String memberid;
         public String circleid;
         public String transMoney;
+        public String point;
 
         @Bindable
         public boolean kucunNoHave = false;

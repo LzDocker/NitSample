@@ -21,4 +21,13 @@ public class RstVo implements Serializable {
 
 
     public String img;
+
+
+//    "balance": "0.00",
+//            "point": "0",
+//            "inviteNum": "0"
+
+    public String balance;
+    public String point;
+    public String inviteNum;
 }

@@ -18,6 +18,8 @@ public class PonitHeadCardVo extends BaseCardVo {
 
     public String rankType;
 
+    public String myRankType;
+
     public PonitHeadCardVo(int style, int position) {
         super(style, position);
     }
@@ -37,4 +39,13 @@ public class PonitHeadCardVo extends BaseCardVo {
         this.rankType = rankType;
         this.Obtotals.addAll(totals);
     }
+
+    public ObservableField<PointSortItemVo> myRankob = new ObservableField<>();
+
+    public void setMyRankob(PointSortItemVo totals, String rankType) {
+        this.myRankType = rankType;
+        this.myRankob.set(totals);
+    }
+
+
 }

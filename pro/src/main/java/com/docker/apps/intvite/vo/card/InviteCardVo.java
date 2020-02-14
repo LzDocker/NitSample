@@ -6,6 +6,7 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.apps.R;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.XPopup.FullScreenSharePopView;
@@ -41,6 +42,11 @@ public class InviteCardVo extends BaseCardVo {
         if (view.getId() == R.id.ll_invite_scan) {
             String codeurl = "http://qr.topscan.com/api.php?text=" + shareLinkUrl.get();
             ARouter.getInstance().build(AppRouter.INVITE_INDEX_CODE_SCAN).withString("code", codeurl).navigation();
+            return;
+        }
+        if (view.getId() == R.id.ll_gl) { // 攻略
+            String weburl = ThiredPartConfig.ServeUrl + "api.php?m=h5&mid=1&f=content&id=50";
+            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", weburl).withString("title", "赚钱攻略").navigation();
             return;
         }
     }

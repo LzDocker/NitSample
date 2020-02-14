@@ -140,6 +140,7 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
             commonListOptions1.RvUi = Constant.KEY_RVUI_GRID3;
             commonListOptions1.falg = 1003;
             NitBaseProviderCard.providerCoutainerForFrame(getChildFragmentManager(), R.id.frame_goods, commonListOptions1);
+            mBinding.get().llGoodsTitle.setVisibility(View.VISIBLE);
         }
 
 //        FragmentUtils.add(getChildFragmentManager(), (Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation(), R.id.frame_recommend);

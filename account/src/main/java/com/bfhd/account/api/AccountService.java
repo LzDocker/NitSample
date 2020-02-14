@@ -19,7 +19,9 @@ import com.bfhd.account.vo.OrderVo;
 import com.bfhd.account.vo.PointVo;
 import com.bfhd.account.vo.RegistVo;
 import com.bfhd.account.vo.SystemMessageVo;
+import com.bfhd.account.vo.TxmemberVo;
 import com.bfhd.account.vo.tygs.BranchVoV2;
+import com.bfhd.account.vo.tygs.InvatationVo;
 import com.bfhd.account.vo.tygs.MoneyItemVo;
 import com.bfhd.account.vo.tygs.PointItemVo;
 import com.bfhd.circle.vo.RstVo;
@@ -283,7 +285,10 @@ public interface AccountService {
     //我的钱包
     @POST("api.php?m=my.my_money")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<String>>> moneyBox(@FieldMap HashMap<String, String> paramMap);//我的钱包
+    LiveData<ApiResponse<BaseResponse<String>>> moneyBox(@FieldMap HashMap<String, String> paramMap);//我的钱包   //我的钱包
+
+
+
 
     @POST("api.php?m=my.my_money")
     @FormUrlEncoded
@@ -302,7 +307,7 @@ public interface AccountService {
 
 
     //明细
-    @POST("api.php?m=user.getBalanceDetail")
+    @POST("api.php?m=my.getBalanceDetail")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<MoneyDetailVo>>>> moneyDetail(@FieldMap HashMap<String, String> paramMap);
 
@@ -343,6 +348,21 @@ public interface AccountService {
     @POST("api.php?m=circle.getMyJoin")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<BranchVoV2>>>> fechJoinCircle(@FieldMap Map<String, String> params);
+
+    /*
+     * 已加入的圈子
+     * */
+    @POST("api.php?m=my.getMemberWithdraw")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<TxmemberVo>>> getMemberWithdraw(@FieldMap Map<String, String> params);
+
+
+    /*
+
+     * */
+    @POST("api.php/?m=my.my_invite")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<InvatationVo>>>> getmyinviteList(@FieldMap Map<String, String> params);
 
 
 }

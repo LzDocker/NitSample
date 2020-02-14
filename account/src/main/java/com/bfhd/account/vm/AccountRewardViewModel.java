@@ -15,12 +15,15 @@ import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.common.common.widget.empty.EmptyStatus;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,6 +32,8 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 public class AccountRewardViewModel extends NitCommonContainerViewModel {
 
+
+    public int flag = 1;
 
     public InvatationVo invatationVo;
 
@@ -75,18 +80,38 @@ public class AccountRewardViewModel extends NitCommonContainerViewModel {
         return data;
     }
 
-    @Override
-    public void loadData() {
+//    @Override
+//    public void loadData() {
+//
+////        mEmptycommand.set(EmptyStatus.BdHiden);
+////        InvatationVo invatationVo = new InvatationVo(0, 0);
+////        invatationVo.setNickname("测试");
+////        List<InvatationVo> invatationVoList = new ArrayList<>();
+////        invatationVoList.add(invatationVo);
+////        mItems.addAll(invatationVoList);
+////        if (invatationVo != null) {
+////            fetchAccountHeaderCard(invatationVo);
+////        }
+//    }
 
-        mEmptycommand.set(EmptyStatus.BdHiden);
-        InvatationVo invatationVo = new InvatationVo(0, 0);
-        invatationVo.setNickname("测试");
-        List<InvatationVo> invatationVoList = new ArrayList<>();
-        invatationVoList.add(invatationVo);
-        mItems.addAll(invatationVoList);
-//        if (invatationVo != null) {
-//            fetchAccountHeaderCard(invatationVo);
-//        }
+
+    @Override
+    public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
+        LiveData<ApiResponse<BaseResponse>> apiResponseLiveData = null;
+
+        switch (flag) {
+            case 1:
+                param.put("invite_status", "1");
+                apiResponseLiveData = accountService.getmyinviteList(param);
+                break;
+            case 2:
+                param.put("invite_status", "2");
+                apiResponseLiveData = accountService.getmyinviteList(param);
+                break;
+        }
+        return apiResponseLiveData;
+
+
     }
 
     @Override

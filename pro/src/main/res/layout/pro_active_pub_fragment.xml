@@ -6,6 +6,9 @@
 
     <data>
 
+        <variable
+            name="pub"
+            type="com.docker.apps.active.vo.ActivePubVo" />
 
     </data>
 
@@ -84,6 +87,7 @@
                     android:background="@color/white"
                     android:gravity="right|center_vertical"
                     android:hint="请输入"
+                    android:text="@={pub.title}"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -125,7 +129,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="不限时"
-                            android:textColor="#666" />
+                            android:textColor="#666"
+                            android:textSize="12sp" />
 
                         <RadioButton
                             android:id="@+id/rb_limit_time"
@@ -135,9 +140,7 @@
                             android:checked="true"
                             android:text="限时"
                             android:textColor="#666" />
-
                     </RadioGroup>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -252,6 +255,7 @@
                         android:drawableRight="@mipmap/arrow_right"
                         android:drawablePadding="10dp"
                         android:gravity="right|center_vertical"
+                        android:text="@{pub.location}"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -278,10 +282,46 @@
                         android:background="@color/white"
                         android:gravity="right|center_vertical"
                         android:hint="请输入"
+                        android:text="@={pub.address}"
                         android:textSize="14sp" />
 
                 </LinearLayout>
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_persion_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="14dp"
+                    android:text="活动人数"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/ed_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawablePadding="10dp"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入"
+                    android:text="@={pub.num}"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -316,6 +356,43 @@
                     android:drawablePadding="10dp"
                     android:gravity="right|center_vertical"
                     android:hint="请输入"
+                    android:text="@{pub.contentshow}"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="14dp"
+                    android:text="活动类型"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:drawableRight="@mipmap/arrow_right"
+                    android:drawablePadding="10dp"
+                    android:gravity="right|center_vertical"
+                    android:hint="请选择"
+                    android:text="@{pub.actTypeshow}"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -352,6 +429,7 @@
                         android:background="@color/white"
                         android:gravity="right|center_vertical"
                         android:hint="请输入"
+                        android:text="@={pub.sponsorName}"
                         android:textSize="14sp" />
 
 
@@ -381,6 +459,7 @@
                         android:background="@color/white"
                         android:gravity="right|center_vertical"
                         android:hint="请输入"
+                        android:text="@={pub.contact}"
                         android:textSize="14sp" />
 
 
@@ -418,6 +497,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="right|center_vertical"
                     android:hint="请选择"
+                    android:text="@{pub.circleidshow}"
                     android:textSize="14sp" />
 
 
@@ -445,7 +525,7 @@
                     android:layout_weight="1" />
 
                 <CheckBox
-                    android:id="@+id/account_message_check"
+                    android:id="@+id/active_he_check"
                     style="@style/account_CustomCheckBoxTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

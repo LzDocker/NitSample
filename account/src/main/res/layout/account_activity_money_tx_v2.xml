@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="TxVo"
+            type="com.bfhd.account.vo.TxmemberVo" />
+
+    </data>
+
+    <com.docker.common.common.widget.refresh.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingTop="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
+                    android:text="领取奖励金额"
+                    android:textColor="#999999"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="¥"
+                        android:textColor="#333"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edit_tx"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:text=""
+                        android:textColor="#333"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/open_top_liner_shape"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:text="目前可领取奖励余额为50000元，"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tv_all_in"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:text="全部提现"
+                        android:textColor="@color/chat_item_bg_me"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#ffefeff4"
+                    android:drawableLeft="@mipmap/tips"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="14dp"
+                    android:text="该银行卡将作为您的提现银行卡" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingBottom="3dp">
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="持卡人"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="请输入持卡人姓名"
+                        android:text="@={TxVo.bankman}"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingBottom="3dp">
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:text="开户行"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="请输入开户行名称"
+                        android:text="@={TxVo.bank}"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingBottom="3dp">
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:text="银行卡号"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="请输入银行卡号"
+                        android:text="@={TxVo.bankcard}"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/open_liner_bg_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="14dp"
+                    android:paddingBottom="3dp">
+
+                    <TextView
+                        android:layout_width="180dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:text="预留手机号"
+                        android:textSize="15sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:hint="请输入预留手机号"
+                        android:text="@={TxVo.account_phone}"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/account_tv_tx"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/circle_button_bg_press"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="确认提现"
+                android:textColor="@color/white" />
+        </FrameLayout>
+
+    </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+</layout>
+
+

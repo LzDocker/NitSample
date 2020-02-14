@@ -1,6 +1,7 @@
 package com.docker.common.common.ui.location;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -47,6 +48,18 @@ public class MapLocationActivity extends NitCommonActivity<NitEmptyViewModel, Co
     @Override
     public void initView() {
         mToolbar.setTitle("选择位置");
+        mToolbar.setTvRight("完成", v -> {
+            Intent data = new Intent();
+            data.putExtra("address", "北京市");
+//            data.putExtra("lng", String.valueOf(latLng.longitude));
+//            data.putExtra("lat", String.valueOf(latLng.latitude));
+
+            data.putExtra("lng", String.valueOf(88.99));
+            data.putExtra("lat", String.valueOf(99.90));
+            data.putExtra("citycode", "101");
+            setResult(RESULT_OK, data);
+            finish();
+        });
 
         findViewById(R.id.btn_location).setOnClickListener(v -> {
             if (!locationClient.isStarted()) {

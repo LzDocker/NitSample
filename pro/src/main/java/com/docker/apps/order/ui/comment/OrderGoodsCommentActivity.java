@@ -213,6 +213,7 @@ public class OrderGoodsCommentActivity extends NitCommonActivity<OrderCommentVie
             ARouter.getInstance().build(AppRouter.ORDER_COMMENT_SUCCESS_LIST)
                     .withString("orderid", orderVoV2.id)
                     .withSerializable("orderVoV2", orderVoV2)
+                    .withString("dynamicid", goodsVo.dynamicid)
                     .navigation();
 
             finish();

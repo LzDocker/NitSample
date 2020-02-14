@@ -202,10 +202,10 @@
 
         <ImageView
             android:id="@+id/iv_close"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:src="@mipmap/close_icon" />
     </RelativeLayout>
 

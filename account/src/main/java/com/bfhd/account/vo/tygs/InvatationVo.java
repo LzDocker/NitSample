@@ -28,6 +28,15 @@ public class InvatationVo extends BaseCardVo<MyInfoVo> {
     }
 
 
+    /*
+    * "memberid": "952",
+            "avatar": "/static/var/upload/image/2020/02/2020021110052023452_99x98.png",
+            "nickname": "20080952",
+            "fullName": "孙浩天",
+            "invite_status": "1"*/
+
+    public int invite_status;
+    public String fullName;
 
     private String memberid;
     private String uuid;

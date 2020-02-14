@@ -34,9 +34,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            app:errorImg="@{R.mipmap.circle_default_avatar}"
-            app:placeHolder="@{R.mipmap.circle_default_avatar}"
-            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
+            app:avaterImageUrl="@{Constant.getCompleteImageUrl(item.avatar)}" />
 
 
         <RelativeLayout
@@ -66,7 +64,7 @@
                 android:text="已邀请"
                 android:textColor="#666"
                 android:textSize="14.5sp"
-                app:visibleGone="@{item.isFocus == 1}" />
+                app:visibleGone="@{item.invite_status == 1}" />
 
             <TextView
                 android:layout_width="70dp"
@@ -79,7 +77,7 @@
                 android:text="已完成"
                 android:textColor="#666"
                 android:textSize="14.5sp"
-                app:visibleGone="@{item.isFocus == 1}" />
+                app:visibleGone="@{item.invite_status == 2}" />
         </RelativeLayout>
     </LinearLayout>
 

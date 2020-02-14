@@ -180,8 +180,9 @@
         <activity
             android:name=".ui.tygs.AccounCollectActivity"
             android:screenOrientation="portrait" />
-
-
+        <activity
+            android:name="com.bfhd.account.ui.AccoutMoneyTXActivityV2"
+            android:screenOrientation="portrait" />
 
     </application>
 

@@ -11,6 +11,7 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 
 import static com.docker.common.common.router.AppRouter.ACCOUNT_MONEY_HAND;
+import static com.docker.common.common.router.AppRouter.ACCOUNT_MONEY_HAND_V2;
 
 public class AccountRewardHeadVo extends BaseCardVo {
 
@@ -36,7 +37,7 @@ public class AccountRewardHeadVo extends BaseCardVo {
             if (((AccountRewardHeadVo) item).moneyBoxVov2 != null) {
                 txmon = ((AccountRewardHeadVo) item).moneyBoxVov2.balance;
             }
-            ARouter.getInstance().build(ACCOUNT_MONEY_HAND).withString("Txmoney", txmon).navigation();
+            ARouter.getInstance().build(ACCOUNT_MONEY_HAND_V2).withString("Txmoney", txmon).navigation();
         }
     }
 

@@ -2,6 +2,7 @@ package com.docker.apps.order.ui.comment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -35,6 +36,8 @@ public class OrderCommentSuccessActivity extends NitCommonActivity<OrderCommonVi
     private String orderid;
 
     private OrderVoV2 orderVoV2;
+
+    private String dynamicid;
 
     @Override
     public OrderCommonViewModel getmViewModel() {
@@ -74,6 +77,10 @@ public class OrderCommentSuccessActivity extends NitCommonActivity<OrderCommonVi
         commonListOptions.falg = 1;
         commonListOptions.ReqParam.put("orderid", orderid);
         NitBaseProviderCard.providerCoutainerForFrame(getSupportFragmentManager(), R.id.frame, commonListOptions);
+
+        mBinding.tvPub.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", getIntent().getStringExtra("dynamicid")).navigation();
+        });
     }
 
     @Override

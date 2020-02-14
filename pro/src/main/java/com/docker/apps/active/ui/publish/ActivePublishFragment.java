@@ -11,12 +11,15 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
+import com.docker.apps.active.vo.ActivePubVo;
+import com.docker.apps.active.vo.LinkageVo;
 import com.docker.apps.databinding.ProActivePubFragmentBinding;
 import com.docker.cirlev2.ui.common.CircleSourceUpFragment;
 import com.docker.cirlev2.ui.publish.CirclePublishActivity;
@@ -35,7 +38,10 @@ import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.picker.CommonWheelPicker;
 import com.luck.picture.lib.entity.LocalMedia;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,7 +64,10 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     private String content;
     private Disposable disposable;
     private ArrayList<String> selectSurfImgs = new ArrayList<>();
+    public LinkageVo linkageVo;
 
+
+    private ActivePubVo activePubVo;
     /*
      *
      * 选择圈子 选择 分类 子栏目
@@ -140,6 +149,9 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
                 }
                 sourceUpFragment.processDataRep(localMediaList);
             }
+        } else {
+            activePubVo = new ActivePubVo();
+            mBinding.get().setPub(activePubVo);
         }
 //        mBinding.get().perssionSelect.setOnClickListener(v -> {
 //            if (mHandParam == null) {
@@ -163,7 +175,6 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
 //                        realPublish();
                         selectSurfImgs.add(mSourceUpParam.imgList.get(0));
                         updateBanner(selectSurfImgs);
-
                         for (int i = 0; i < selectSurfImgs.size(); i++) {
                             Log.d("sss", "onPropertyChanged: ==================" + selectSurfImgs.get(i));
 
@@ -272,6 +283,89 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     @Override
     protected void initView(View var1) {
 
+
+        mBinding.get().rbLimitTime.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mBinding.get().getPub().isDate = "1";
+        });
+        mBinding.get().rbNlimTime.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mBinding.get().getPub().isDate = "0";
+        });
+
+        mBinding.get().llStartTime.setOnClickListener(v -> {
+            CommonWheelPicker.showTimePicker(ActivePublishFragment.this.getHoldingActivity(), (year, month, day, hous, second) -> {
+                yearStart = year;
+                mouthStart = month;
+                dayStart = day;
+                housStart = hous;
+                secondStart = second;
+
+                String str = year + "-" + month + "-" + day + " " + hous + ":" + second + ":00";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = null;
+                try {
+                    date = simpleDateFormat.parse(str);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long ts = date.getTime();
+
+                mBinding.get().getPub().startDate = String.valueOf(ts);
+                mBinding.get().tvStartTime.setText(str);
+
+                mBinding.get().tvEndTime.setText("");
+
+            });
+        });
+
+        mBinding.get().llEndTime.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(yearStart)) {
+                ToastUtils.showShort("请先选择开始时间");
+                return;
+            }
+            CommonWheelPicker.showTimePicker(ActivePublishFragment.this.getHoldingActivity(),
+                    new int[]{Integer.parseInt(yearStart), Integer.parseInt(mouthStart), Integer.parseInt(dayStart),
+                            Integer.parseInt(housStart), Integer.parseInt(secondStart)},
+                    (year, month, day, hous, second) -> {
+                        String str = year + "-" + month + "-" + day + " " + hous + ":" + second + ":00";
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        Date date = null;
+                        try {
+                            date = simpleDateFormat.parse(str);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        long ts = date.getTime();
+                        mBinding.get().getPub().endDate = String.valueOf(ts);
+                        mBinding.get().tvEndTime.setText(str);
+                    });
+        });
+
+        mBinding.get().llLoaction.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.COMMON_LOCATION_ACTIVITY).navigation(getHoldingActivity(), 10099);
+        });
+
+        // 活动内容
+        mBinding.get().llContent.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.ACTIVE_CONTENT_EDIT).withString("data", content).navigation(this.getHoldingActivity(), 10080);
+        });
+
+        // 活动类型
+        mBinding.get().llType.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.ACTIVE_TYPE_SELECT).navigation(getHoldingActivity(), 10097);
+        });
+
+        mBinding.get().activeHeCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                mBinding.get().getPub().signAudit = "1";
+            } else {
+                mBinding.get().getPub().signAudit = "0";
+            }
+        });
+
+        mBinding.get().publish.setOnClickListener(v -> {
+            publish();
+        });
+
 //        mBinding.get().checkIsRelay.setOnCheckedChangeListener((buttonView, isChecked) -> {
 //            if (!isChecked) {
 //                if (mHandParam != null) {
@@ -288,38 +382,7 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
 //            }
 //        });
 
-        mBinding.get().llStartTime.setOnClickListener(v -> {
-            CommonWheelPicker.showTimePicker(ActivePublishFragment.this.getHoldingActivity(), (year, month, day, hous, second) -> {
-                yearStart = year;
-                mouthStart = month;
-                dayStart = day;
-                housStart = hous;
-                secondStart = second;
-                mBinding.get().tvStartTime.setText(year + month + day + hous + second);
-                mBinding.get().tvEndTime.setText("");
-            });
-        });
 
-        mBinding.get().llEndTime.setOnClickListener(v -> {
-            if (TextUtils.isEmpty(yearStart)) {
-                ToastUtils.showShort("请先选择开始时间");
-                return;
-            }
-            CommonWheelPicker.showTimePicker(ActivePublishFragment.this.getHoldingActivity(),
-                    new int[]{Integer.parseInt(yearStart), Integer.parseInt(mouthStart), Integer.parseInt(dayStart),
-                            Integer.parseInt(housStart), Integer.parseInt(secondStart)},
-                    (year, month, day, hous, second) -> {
-                        mBinding.get().tvEndTime.setText(year + month + day + hous + second);
-                    });
-        });
-        mBinding.get().llLoaction.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.COMMON_LOCATION_ACTIVITY).navigation();
-        });
-
-        // 活动内容
-        mBinding.get().llContent.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.ACTIVE_CONTENT_EDIT).withString("data", content).navigation(this.getHoldingActivity(), 10080);
-        });
     }
 
     @Override
@@ -333,9 +396,20 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
                 content = data.getStringExtra("data");
                 if (!TextUtils.isEmpty(content)) {
                     mBinding.get().tvContent.setText("已编辑");
+                    mBinding.get().getPub().content = content;
                 } else {
                     mBinding.get().tvContent.setText("");
                 }
+            } else if (requestCode == 10097) {
+                linkageVo = (LinkageVo) data.getSerializableExtra("linkageVo");
+                mBinding.get().tvType.setText(linkageVo.name);
+                mBinding.get().getPub().actType = linkageVo.linkageid;
+
+            } else if (requestCode == 10099) {
+                mBinding.get().getPub().lat = data.getStringExtra("lat");
+                mBinding.get().getPub().lng = data.getStringExtra("lng");
+                mBinding.get().getPub().cityCode = data.getStringExtra("citycode");
+                mBinding.get().getPub().location = data.getStringExtra("address");
             } else {
                 sourceUpFragment.onActivityResult(requestCode, resultCode, data);
             }
@@ -346,15 +420,65 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     // 发布
     public void publish() {
 
-//        if (TextUtils.isEmpty(mBinding.get().proEventDesc.getText().toString())) {
-//            ToastUtils.showShort("请输入要发表的内容");
+        if (TextUtils.isEmpty(mBinding.get().tvContent.getText().toString())) {
+            ToastUtils.showShort("请输入要发表的内容");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mBinding.get().getPub().title)) {
+            ToastUtils.showShort("活动名称不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mBinding.get().getPub().startDate)) {
+            ToastUtils.showShort("活动开时间不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mBinding.get().getPub().endDate)) {
+            ToastUtils.showShort("活动结束时间不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mBinding.get().getPub().location)) {
+            ToastUtils.showShort("活动定位不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(mBinding.get().getPub().address)) {
+            ToastUtils.showShort("活动具体地址不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(mBinding.get().getPub().num)) {
+            ToastUtils.showShort("活动人数不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(mBinding.get().getPub().content)) {
+            ToastUtils.showShort("活动内容不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(mBinding.get().getPub().actType)) {
+            ToastUtils.showShort("活动类型不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(mBinding.get().getPub().sponsorName)) {
+            ToastUtils.showShort("活动主办方名称不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(mBinding.get().getPub().contact)) {
+            ToastUtils.showShort("活动主办方电话不能为空");
+            return;
+        }
+//        if (TextUtils.isEmpty(mBinding.get().getPub().circleidshow)) {
+//            ToastUtils.showShort("分舵不能为空");
 //            return;
 //        }
 
-        if (TextUtils.isEmpty(mHandParam.getCircleid()) || TextUtils.isEmpty(mHandParam.getUtid())) {
-            ToastUtils.showShort("请选择要发布的圈子");
-            return;
-        }
+
+//        if (TextUtils.isEmpty(mHandParam.getCircleid()) || TextUtils.isEmpty(mHandParam.getUtid())) {
+//            ToastUtils.showShort("请选择要发布的圈子");
+//            return;
+//        }
 
         if (sourceUpFragment.selectList != null && sourceUpFragment.selectList.size() > 0) {
             sourceUpFragment.processUpload();
@@ -370,52 +494,57 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
         HashMap<String, String> paramMap = new HashMap();
         paramMap.put("memberid", userInfoVo.uid);
         paramMap.put("uuid", userInfoVo.uuid);
-        paramMap.put("type", "dynamic");
-//        paramMap.put("content", mBinding.get().proEventDesc.getText().toString().trim());
-        paramMap.put("circleid", mHandParam.getCircleid());
-        paramMap.put("utid", mHandParam.getUtid());
-        if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid1"))) {
-            paramMap.put("classid", mHandParam.getExtenMap().get("classid1"));
-        }
-        if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid2"))) {
-            paramMap.put("classid2", mHandParam.getExtenMap().get("classid2"));
-        }
-        if (mEditType == 2) {
-            paramMap.put("dataid", mHandParam.serviceDataBean.getDataid());
-        }
-        if (TextUtils.isEmpty(mHandParam.extentron2) && mHandParam.extentronList.size() == 0) {
-            paramMap.put("visibleType", "0");   // extentronList
-        } else {
-            paramMap.put("visibleType", "1");
 
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < mHandParam.extentronList.size(); i++) {
-                String id = (String) mHandParam.extentronList.get(i);
-                stringBuilder.append(id).append(",");
-            }
-            if (stringBuilder.length() > 1) {
-                String ids = stringBuilder.substring(0, stringBuilder.length() - 1);
-                paramMap.put("groupids", ids);
-            }
-        }
+//        paramMap.put("actType", mBinding.get().getPub().actType);
+        paramMap.put("actType", mBinding.get().getPub().actType);
+        paramMap.put("utid", "8d93e6a11a530bafabe31724e2b35972");
+        paramMap.put("circleid", "598");
+
+//        paramMap.put("title", mBinding.get().getPub().title);
+        paramMap.put("title", mBinding.get().getPub().title);
+//        if (mSourceUpParam.imgList.size() > 0) {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            for (int i = 0; i < mSourceUpParam.imgList.size(); i++) {
+//                stringBuilder.append(mSourceUpParam.imgList.get(i)).append(",");
+//            }
+//            paramMap.put("banner", stringBuilder.substring(0, stringBuilder.length() - 1));
+//        }
+
 
         if (mSourceUpParam.imgList.size() > 0) {
             for (int i = 0; i < mSourceUpParam.imgList.size(); i++) {
-                paramMap.put("resource[" + i + "][t]", "1");
-                paramMap.put("resource[" + i + "][url]", mSourceUpParam.imgList.get(i));
-                paramMap.put("resource[" + i + "][img]", mSourceUpParam.imgList.get(i));
-                paramMap.put("resource[" + i + "][sort]", i + 1 + "");
+                paramMap.put("banner[" + i + "][t]", "1");
+                paramMap.put("banner[" + i + "][url]", mSourceUpParam.imgList.get(i));
+                paramMap.put("banner[" + i + "][img]", mSourceUpParam.imgList.get(i));
+                paramMap.put("banner[" + i + "][sort]", i + 1 + "");
             }
         }
         if (mSourceUpParam.upLoadVideoList.size() > 0) {
             for (int i = 0; i < mSourceUpParam.upLoadVideoList.size(); i++) {
-                paramMap.put("resource[" + i + "][t]", "2");
-                paramMap.put("resource[" + i + "][url]", mSourceUpParam.upLoadVideoList.get(i).getVideoUrl());
-                paramMap.put("resource[" + i + "][img]", mSourceUpParam.upLoadVideoList.get(i).getVideoImgUrl());
-                paramMap.put("resource[" + i + "][sort]", i + 1 + "");
+                paramMap.put("banner[" + i + "][t]", "2");
+                paramMap.put("banner[" + i + "][url]", mSourceUpParam.upLoadVideoList.get(i).getVideoUrl());
+                paramMap.put("banner[" + i + "][img]", mSourceUpParam.upLoadVideoList.get(i).getVideoImgUrl());
+                paramMap.put("banner[" + i + "][sort]", i + 1 + "");
             }
         }
-        this.getHoldingActivity().runOnUiThread(() -> mViewModel.publishNews(paramMap));
+
+        paramMap.put("isDate", mBinding.get().getPub().isDate);
+        paramMap.put("startDate", mBinding.get().getPub().startDate);
+        paramMap.put("endDate", mBinding.get().getPub().endDate);
+        paramMap.put("situs", "2");
+        paramMap.put("location", mBinding.get().getPub().location);
+        paramMap.put("address", mBinding.get().getPub().address);
+        paramMap.put("lat", mBinding.get().getPub().lat);
+        paramMap.put("lng", mBinding.get().getPub().lng);
+        paramMap.put("cityCode", mBinding.get().getPub().cityCode);
+        paramMap.put("sponsorName", mBinding.get().getPub().sponsorName);
+        paramMap.put("contact", mBinding.get().getPub().contact);
+        paramMap.put("content", mBinding.get().getPub().content);
+        paramMap.put("signAudit", mBinding.get().getPub().signAudit);
+        paramMap.put("limitNum", mBinding.get().getPub().num);
+        paramMap.put("type", "activity");
+
+        mViewModel.publishActive(paramMap);
     }
 
     @Override

@@ -261,7 +261,7 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
 
                 GlideApp.with(iv_goods_icon).load(BdUtils.getDynamicSingleImg(mDynamicDetailVo)).into(iv_goods_icon);
 
-                tv_barcode.setText("编号：---¥----");
+                tv_barcode.setText("编号：" + mDynamicDetailVo.getExtData().goodsSn);
                 tv_money.setText(mDynamicDetailVo.getExtData().price);
                 tv_add.setOnClickListener(view -> {
                     String num = tv_num.getText().toString();

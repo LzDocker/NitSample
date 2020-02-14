@@ -36,6 +36,16 @@ public interface PointService {
     /*
      * 圈子详情tab列表数据
      * */
+    @POST("api.php?m=publics.getMyRank")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<PointSortItemVo>>> getMyRank(@FieldMap Map<String, String> params);
+
+
+
+
+    /*
+     * 圈子详情tab列表数据
+     * */
     @POST("api.php?m=publics.getRankClass")
     LiveData<ApiResponse<BaseResponse<List<PointTabVo>>>> fechPointTabdata();
 

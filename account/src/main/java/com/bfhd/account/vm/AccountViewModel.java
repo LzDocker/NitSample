@@ -23,6 +23,7 @@ import com.bfhd.account.vo.PointVo;
 import com.bfhd.account.vo.RegistParmVo;
 import com.bfhd.account.vo.RegistVo;
 import com.bfhd.account.vo.SystemMessageVo;
+import com.bfhd.account.vo.TxmemberVo;
 import com.bfhd.circle.base.HivsBaseViewModel;
 import com.bfhd.circle.base.HivsNetBoundObserver;
 import com.bfhd.circle.base.NetBoundCallback;
@@ -1629,8 +1630,8 @@ public class AccountViewModel extends HivsBaseViewModel {
                     }
                 }));
 
-
     }
+
 
 }
 

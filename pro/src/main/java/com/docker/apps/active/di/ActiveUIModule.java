@@ -15,6 +15,7 @@ import com.docker.apps.active.ui.manager.ActiveVerificationActivity;
 import com.docker.apps.active.ui.publish.ActiveBannerPreviewActivity;
 import com.docker.apps.active.ui.publish.ActiveContentEditActivity;
 import com.docker.apps.active.ui.publish.ActivePublishFragment;
+import com.docker.apps.active.ui.publish.ActiveTypeSelectActivity;
 import com.docker.core.di.component.BaseActComponent;
 
 import dagger.Module;
@@ -70,5 +71,8 @@ public abstract class ActiveUIModule {
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract ActiveContentEditActivity contributeActiveContentEditActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveTypeSelectActivity contributeActiveTypeSelectActivityInjector();
 }
 

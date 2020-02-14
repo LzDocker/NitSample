@@ -77,6 +77,7 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
         }
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -90,5 +91,6 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
     @Override
     public void onVisible() {
         super.onVisible();
+        initRefreshUi();
     }
 }

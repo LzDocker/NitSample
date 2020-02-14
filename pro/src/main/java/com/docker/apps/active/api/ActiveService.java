@@ -2,6 +2,7 @@ package com.docker.apps.active.api;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.apps.active.vo.LinkageVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
@@ -22,5 +23,7 @@ public interface ActiveService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<ServiceDataBean>>>> fechCircleInfoList(@FieldMap Map<String, String> params);
 
-
+    @POST("api.php?m=publics.linkage")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<LinkageVo>>>> fetchLinkType(@FieldMap Map<String, String> params);
 }

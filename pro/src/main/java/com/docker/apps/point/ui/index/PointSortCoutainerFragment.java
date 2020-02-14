@@ -28,6 +28,7 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.NitEmptyViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
@@ -93,6 +94,14 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
                 ponitSortVm.mHeadDataLv.observe(PointSortCoutainerFragment.this.getHoldingActivity(), pointSortItemVos -> {
                     ponitHeadCardVo.setTotals((ArrayList<PointSortItemVo>) pointSortItemVos, ponitSortVm.rankType);
                 });
+
+                ponitSortVm.mRankDataLv.observe(PointSortCoutainerFragment.this, new Observer<PointSortItemVo>() {
+                    @Override
+                    public void onChanged(@Nullable PointSortItemVo pointSortItemVo) {
+                        ponitHeadCardVo.setMyRankob(pointSortItemVo, pointTabVo.param);
+                    }
+                });
+                ponitSortVm.getMyRankdata(pointTabVo.param, pointTabVo.rankClass.get(flag).param);
             }
         };
         return nitDelegetCommand;
@@ -121,11 +130,12 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
             titles[i] = pointTabVo.rankClass.get(i).name;
             CommonListOptions commonListOptions = new CommonListOptions();
             commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-            commonListOptions.falg = 0;
+            commonListOptions.falg = i;
             commonListOptions.isActParent = false;
             commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
             commonListOptions.ReqParam.put("rankType", pointTabVo.param);
             commonListOptions.ReqParam.put("rankClass", pointTabVo.rankClass.get(i).param);
+            commonListOptions.ReqParam.put("uuid", CacheUtils.getUser().uuid);
             NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
             fragments.add(nitCommonContainerFragmentV2);
         }
@@ -161,7 +171,6 @@ public class PointSortCoutainerFragment extends NitCommonFragment<NitEmptyViewMo
 
             }
         });
-
 
     }
 

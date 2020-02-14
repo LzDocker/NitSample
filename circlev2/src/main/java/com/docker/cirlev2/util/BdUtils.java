@@ -29,6 +29,14 @@ import static com.docker.common.common.binding.CommonBdUtils.getCompleteImageUrl
  * */
 public class BdUtils {
 
+    public static boolean isPointEmpty(String ss) {
+        if ("0.00".equals(ss) || TextUtils.isEmpty(ss)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static String getAudioUrl(String url) {
 
         String utl = getCompleteImageUrl(url);
