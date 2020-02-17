@@ -65,9 +65,9 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     private Disposable disposable;
     private ArrayList<String> selectSurfImgs = new ArrayList<>();
     public LinkageVo linkageVo;
-
-
     private ActivePubVo activePubVo;
+
+
     /*
      *
      * 选择圈子 选择 分类 子栏目
@@ -150,7 +150,21 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
                 sourceUpFragment.processDataRep(localMediaList);
             }
         } else {
+
             activePubVo = new ActivePubVo();
+            if (mHandParam != null) {  // 带有圈子信息进来的
+                mBinding.get().llSelCircle.setVisibility(View.GONE);
+                activePubVo.circleid = mHandParam.getCircleid();
+                activePubVo.utid = mHandParam.getUtid();
+            } else {
+                UserInfoVo userInfoVo = CacheUtils.getUser();
+                if ("2".equals(userInfoVo.reg_type)) { // 股东
+                    mBinding.get().llSelCircle.setVisibility(View.VISIBLE);
+                } else { // 默认圈子
+                    activePubVo.circleid = userInfoVo.circleid;
+                    activePubVo.utid = userInfoVo.utid;
+                }
+            }
             mBinding.get().setPub(activePubVo);
         }
 //        mBinding.get().perssionSelect.setOnClickListener(v -> {
@@ -283,6 +297,10 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     @Override
     protected void initView(View var1) {
 
+        mBinding.get().llSelCircle.setOnClickListener(v -> { // 选择分部
+            //ACCOUNT_BRANCH_LIST
+            ARouter.getInstance().build(AppRouter.ACCOUNT_BRANCH_LIST).withInt("flag", 1).navigation(ActivePublishFragment.this.getHoldingActivity(), 10067);
+        });
 
         mBinding.get().rbLimitTime.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mBinding.get().getPub().isDate = "1";
@@ -410,6 +428,10 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
                 mBinding.get().getPub().lng = data.getStringExtra("lng");
                 mBinding.get().getPub().cityCode = data.getStringExtra("citycode");
                 mBinding.get().getPub().location = data.getStringExtra("address");
+            } else if (requestCode == 10067) {
+                mBinding.get().getPub().circleid = data.getStringExtra("circleid");
+                mBinding.get().getPub().utid = data.getStringExtra("utid");
+                mBinding.get().tvCircleName.setText(data.getStringExtra("circlename"));
             } else {
                 sourceUpFragment.onActivityResult(requestCode, resultCode, data);
             }

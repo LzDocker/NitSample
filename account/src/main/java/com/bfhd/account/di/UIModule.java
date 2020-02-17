@@ -38,6 +38,7 @@ import com.bfhd.account.ui.AccountWjSenttActivity;
 import com.bfhd.account.ui.AccoutMoneyBoxActivity;
 import com.bfhd.account.ui.AccoutMoneyTXActivity;
 import com.bfhd.account.ui.AccoutMoneyTXActivityV2;
+import com.bfhd.account.ui.CompleteInfoActivity;
 import com.bfhd.account.ui.FindPwdActivity;
 import com.bfhd.account.ui.LoginActivity;
 import com.bfhd.account.ui.MineFragment;
@@ -281,6 +282,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
     abstract AccoutMoneyTXActivityV2 contributAccoutMoneyTXActivityV2Injector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityMoe.class)*/
+    abstract CompleteInfoActivity contributCompleteInfoActivityInjector();
 
 }
 

@@ -249,6 +249,17 @@ public interface AccountService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<MsgVo>>> editCardInfo(@FieldMap HashMap<String, String> paramMap);
 
+
+    /*
+     * 我的--点击头像编辑个人信息
+     * */
+    @POST("api.php?m=user.member_data_update")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> editCardInfov2(@FieldMap HashMap<String, String> paramMap);
+
+
+
+
     /*
      * 我的--关注列表--关注/取消关注
      * */
@@ -286,8 +297,6 @@ public interface AccountService {
     @POST("api.php?m=my.my_money")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> moneyBox(@FieldMap HashMap<String, String> paramMap);//我的钱包   //我的钱包
-
-
 
 
     @POST("api.php?m=my.my_money")
@@ -347,7 +356,9 @@ public interface AccountService {
      * */
     @POST("api.php?m=circle.getMyJoin")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<List<BranchVoV2>>>> fechJoinCircle(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<List<BranchVoV2>>>> fechJoinCircle(@FieldMap Map<String, String> params);    /*
+     * 已加入的圈子
+     * */
 
     /*
      * 已加入的圈子

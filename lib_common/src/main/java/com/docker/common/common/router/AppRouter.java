@@ -19,12 +19,14 @@ public class AppRouter {
     public static final String AccountGroup = "/Account/";
 
     public static final String ACCOUNT_LOGIN = AccountGroup + "login";
+    public static final String ACCOUNT_COMPLETE_INFO = AccountGroup + "ACCOUNT_COMPLETE_INFO";
 
     public static final String ACCOUNT_COUNTRY = AccountGroup + "country";
 
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
     public static final String ACCOUNT_FANS_LISt = AccountGroup + "ACCOUNT_FANS_LISt";
     public static final String ACCOUNT_BRANCH_LIST = AccountGroup + "attention_branch_list";
+    public static final String ACCOUNT_BRANCH_SELECT_LIST = AccountGroup + "ACCOUNT_BRANCH_SELECT_LIST";
     public static final String ACCOUNT_PERSION_INFO = AccountGroup + "ACCOUNT_PERSION_INFO";
 
 

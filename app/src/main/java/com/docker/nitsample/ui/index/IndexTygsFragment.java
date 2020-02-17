@@ -96,6 +96,7 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
                         new LayoutManagerVo(0, 0, false),
                         new RecycleTopLayout("分部推荐", "", false));
 
+
                 UserInfoVo userInfoVo = CacheUtils.getUser();
                 appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
                 appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
@@ -154,8 +155,7 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
     public void initImmersionBar() {
 
     }
-
-
+    
     public void peocessTab(List<Tabvo> tabvos) {
         String[] titles = new String[tabvos.size()];
         for (int i = 0; i < tabvos.size(); i++) {

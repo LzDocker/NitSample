@@ -24,6 +24,8 @@ public class MyInfoVo extends BaseObservable implements Serializable {
      * circleNum : 2
      */
 
+    public String labels;
+
     private String nickname;
     private String avatar;
     private String utid;

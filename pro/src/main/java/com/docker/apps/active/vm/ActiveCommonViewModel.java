@@ -37,6 +37,9 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
             case 0:
                 serverFun = activeService.fetchLinkType(param);
                 break;
+            case 1:
+                serverFun = activeService.fetchActiveList(param);
+                break;
         }
         return serverFun;
     }

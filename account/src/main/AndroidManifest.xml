@@ -183,6 +183,9 @@
         <activity
             android:name="com.bfhd.account.ui.AccoutMoneyTXActivityV2"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.bfhd.account.ui.CompleteInfoActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

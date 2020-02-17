@@ -112,6 +112,13 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
                 DemoCache.setAccount(account);
                 // 初始化消息提醒配置
                 initNotificationConfig();
+
+                if ("1".equals(CacheUtils.getUser().perfectData)) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
+                    finish();
+                    return;
+                }
+
 //                // 进入主界面
 //                MainActivity.start(LoginActivity.this, null);
                 if (!isFoceLogin) {
@@ -125,6 +132,12 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
 
             @Override
             public void onFailed(int code) {
+                if ("1".equals(CacheUtils.getUser().perfectData)) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
+                    finish();
+                    return;
+                }
+
                 if (code == 302 || code == 404) {
                     ToastHelper.showToast(LoginActivity.this, R.string.login_failed);
                 } else {
@@ -141,6 +154,11 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
 
             @Override
             public void onException(Throwable exception) {
+                if ("1".equals(CacheUtils.getUser().perfectData)) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
+                    finish();
+                    return;
+                }
                 ToastHelper.showToast(LoginActivity.this, R.string.login_exception);
                 if (!isFoceLogin) {
                     ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);

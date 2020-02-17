@@ -483,6 +483,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="14dp"
                     android:text="同步到分舵"
+                    android:id="@+id/tv_tb_fd"
                     android:textColor="#333"
                     android:textSize="15sp" />
 
@@ -492,6 +493,7 @@
                     android:layout_marginLeft="14dp"
                     android:layout_marginRight="14dp"
                     android:layout_weight="1"
+                    android:id="@+id/tv_circle_name"
                     android:background="@color/white"
                     android:drawableRight="@mipmap/arrow_right"
                     android:drawablePadding="10dp"

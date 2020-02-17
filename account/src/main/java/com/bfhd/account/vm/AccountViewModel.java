@@ -1112,6 +1112,38 @@ public class AccountViewModel extends HivsBaseViewModel {
 
     }
 
+    /**
+     * 编辑名片
+     */
+    public void saveUserInfo(HashMap<String, String> paramMap) {
+        showDialogWait("加载中", false);
+        mResourceLiveData.addSource(commonRepository.noneChache(
+                accountService.editCardInfov2(paramMap)), new HivsNetBoundObserver<>(new NetBoundCallback<String>() {
+            @Override
+            public void onComplete(Resource<String> resource) {
+                super.onComplete(resource);
+                hideDialogWait();
+                mVmEventSouce.setValue(new ViewEventResouce(538, "", resource.data));
+                ToastUtils.showShort("保存成功");
+            }
+
+            @Override
+            public void onNetworkError(Resource<String> resource) {
+                super.onNetworkError(resource);
+                hideDialogWait();
+                mVmEventSouce.setValue(new ViewEventResouce(539, "", null));
+                ToastUtils.showShort("网络问题，保存失败");
+            }
+
+            @Override
+            public void onBusinessError(Resource<String> resource) {
+                super.onComplete();
+                hideDialogWait();
+            }
+        }));
+
+    }
+
 
 //    /**
 //     * 点击关注

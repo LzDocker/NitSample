@@ -13,6 +13,8 @@ import android.util.Pair;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.GsonUtils;
+import com.dcbfhd.utilcode.utils.MapUtils;
 import com.docker.common.R;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.vm.NitCommonListVm;
@@ -25,6 +27,8 @@ import com.docker.core.util.LayoutManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -154,7 +158,7 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
                 break;
         }
 
-        Log.d("sss", "initRefreshUi: =============="+commonListReq.refreshState);
+        Log.d("sss", "initRefreshUi: ==============" + commonListReq.refreshState);
     }
 
     // 外部更改请求接口的参数
@@ -202,6 +206,90 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         (mViewModel).mPage = 1;
         (mViewModel).mItems.clear();
     }
+
+
+    /*
+     * 新接口规范刷新
+     *
+     *
+     *
+     * */
+    public void updateReqParamV2(boolean isAll, ArrayList<Pair<String, String>> pairArrayList) {
+        (mViewModel).loadingState = false;
+        if (isAll) {
+            (mViewModel).mCommonListReq.ReqParam.clear();
+            for (int i = 0; i < pairArrayList.size(); i++) {
+                if (!TextUtils.isEmpty(pairArrayList.get(i).first) && !TextUtils.isEmpty(pairArrayList.get(i).second)) {
+                    (mViewModel).mCommonListReq.ReqParam.put(pairArrayList.get(i).first, pairArrayList.get(i).second);
+                }
+            }
+        } else {
+            if (pairArrayList != null && pairArrayList.size() > 0) {
+                for (int i = 0; i < pairArrayList.size(); i++)
+                    if (!TextUtils.isEmpty(pairArrayList.get(i).first) && !TextUtils.isEmpty(pairArrayList.get(i).second)) {
+                        if ((mViewModel).mCommonListReq.ReqParam.containsKey(pairArrayList.get(i).first)) {
+                            Map<String, String> willupparam = GsonUtils.fromJson((mViewModel).mCommonListReq.ReqParam.get(pairArrayList.get(i).first), Map.class);
+                            willupparam.put(pairArrayList.get(i).first, pairArrayList.get(i).second);
+                        } else {
+                            (mViewModel).mCommonListReq.ReqParam.put(pairArrayList.get(i).first, pairArrayList.get(i).second);
+                        }
+                    }
+            }
+        }
+        (mViewModel).mPage = 1;
+        (mViewModel).mItems.clear();
+    }
+
+    /*
+     * 新接口规范刷新
+     *
+     * 只提供增量更新（追加更新）
+     *
+     * */
+    public void updateReqParamV2(String onelevelKey, ArrayList<Pair<String, String>> pairArrayList) {
+        (mViewModel).loadingState = false;
+        if (TextUtils.isEmpty(onelevelKey)) {
+            for (int i = 0; i < pairArrayList.size(); i++) {
+                try {
+                    Map<String, String> oldparam = GsonUtils.fromJson((mViewModel).mCommonListReq.ReqParam.get(pairArrayList.get(i).first), Map.class);
+                    Map<String, String> newparam = GsonUtils.fromJson(pairArrayList.get(i).second, Map.class);
+                    for (Map.Entry<String, String> entry : newparam.entrySet()) {
+                        oldparam.put(entry.getKey(), entry.getValue());
+                    }
+                    mViewModel.mCommonListReq.ReqParam.put(pairArrayList.get(i).first, GsonUtils.toJson(oldparam));
+                } catch (Exception e) {
+                    if (!TextUtils.isEmpty(pairArrayList.get(i).first) && !TextUtils.isEmpty(pairArrayList.get(i).second)) {
+                        (mViewModel).mCommonListReq.ReqParam.put(pairArrayList.get(i).first, pairArrayList.get(i).second);
+                    }
+                }
+            }
+        } else {
+            Map<String, String> oldTotalparam = new HashMap<>();
+            for (int i = 0; i < pairArrayList.size(); i++) {
+                try {
+
+                    oldTotalparam = GsonUtils.fromJson((mViewModel).mCommonListReq.ReqParam.get(onelevelKey), Map.class);
+                    Map<String, String> oldparam = GsonUtils.fromJson(oldTotalparam.get(pairArrayList.get(i).first), Map.class);
+                    Map<String, String> newparam = GsonUtils.fromJson(pairArrayList.get(i).second, Map.class);
+
+                    for (Map.Entry<String, String> entry : newparam.entrySet()) {
+                        oldparam.put(entry.getKey(), entry.getValue());
+                    }
+                    oldTotalparam.put(pairArrayList.get(i).first, GsonUtils.toJson(oldparam));
+
+                } catch (Exception e) {
+                    if (oldTotalparam == null) {
+                        oldTotalparam = new HashMap<>();
+                    }
+                    oldTotalparam.put(pairArrayList.get(i).first, pairArrayList.get(i).second);
+                }
+            }
+            mViewModel.mCommonListReq.ReqParam.put(onelevelKey, GsonUtils.toJson(oldTotalparam));
+        }
+        (mViewModel).mPage = 1;
+        (mViewModel).mItems.clear();
+    }
+
 
     @Override
     public void onVisible() {

@@ -3,6 +3,7 @@ package com.bfhd.circle.base;
 
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.dcbfhd.utilcode.utils.AppUtils;
 import com.dcbfhd.utilcode.utils.EncryptUtils;
@@ -32,11 +33,16 @@ public class Constant {
     public static final String mOSSBaseImageUrl = endpoint;
 
     public static String getCompleteImageUrl(String url) {//云端的图片
+
+        Log.d("sss", "getCompleteImageUrl: =================="+url);
+
         if (TextUtils.isEmpty(url)) {
             return "";
         } else if (url.contains("http")) {
+            Log.d("sss", "getCompleteImageUrl: =================="+url);
             return url;
         } else {
+            Log.d("sss", "getCompleteImageUrl: =================="+endpoint+url);
             return endpoint + url;
         }
     }

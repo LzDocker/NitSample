@@ -26,6 +26,7 @@ import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
 import com.bfhd.circle.ui.common.CommonH5Activity;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.UserInfoVo;
 import com.gyf.immersionbar.ImmersionBar;
@@ -275,6 +276,8 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
                 ToastUtils.showShort("注册成功");
                 UserInfoVo userInfoVo = CacheUtils.getUser();
                 setAlias();
+                ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
+
 //                loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
                 break;
             case 516:

@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.utils.TextUtils;
@@ -192,10 +193,21 @@ public class ImgBindingAdapter {
      * */
     @BindingAdapter(value = {"avaterImageUrl"}, requireAll = false)
     public static void loadavaterimage(ImageView imageView, String url) {
-        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerCrop();
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(R.mipmap.common_default_avatar).transition(withCrossFade()).into(imageView);
+//        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .centerCrop();
+//
+//        GlideApp.with(imageView)
+//                .applyDefaultRequestOptions(options)
+//                .load(url).placeholder(R.mipmap.common_default_avatar)
+//                .transition(withCrossFade())
+//                .into(imageView);
 
+        Glide.with(imageView)
+                .load(url)
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(imageView);
+
+        Log.d("sss", "loadavaterimage: =========111=========");
     }
 
     /*

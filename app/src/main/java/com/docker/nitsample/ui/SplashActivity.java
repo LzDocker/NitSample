@@ -78,6 +78,8 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
 //            return;
 //        }
         UserInfoVo userInfoVo = CacheUtils.getUser();
+
+
         timer(userInfoVo);
         mBinding.tvJump.setOnClickListener(v -> {
             if (mdisposable != null) {
@@ -171,6 +173,11 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
 
 
     public void enterSystem() {
+        if ("1".equals(CacheUtils.getUser().perfectData)) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
+            finish();
+            return;
+        }
         ARouter.getInstance().build(AppRouter.HOME).navigation(SplashActivity.this);
     }
 
