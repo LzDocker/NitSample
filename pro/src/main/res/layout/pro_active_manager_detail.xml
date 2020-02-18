@@ -11,6 +11,9 @@
 
         <import type="com.docker.cirlev2.R" />
 
+        <variable
+            name="item"
+            type="com.docker.apps.active.vo.card.ActiveManagerDetailVo" />
 
     </data>
 
@@ -39,7 +42,7 @@
             android:paddingLeft="14dp"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
-            android:text="2016-12-01 12:00  至  2017-04-20 12:00"
+            android:text="@{BdUtils.getActiveTimeStr(item.startDate,item.endDate)}"
             android:textColor="#333"
             android:textSize="16sp" />
 
@@ -47,6 +50,13 @@
             android:id="@+id/frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible" />
 
         <View
             android:layout_width="1dp"

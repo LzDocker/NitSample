@@ -11,4 +11,6 @@
     <string name="com">物流公司：</string>
     <string name="state">物流状态：</string>
     <string name="bianhao">快递编号：</string>
+    <string name="divie"> / </string>
+    <string name="d_d"> - </string>
 </resources>

@@ -25,6 +25,7 @@
             android:background="@color/white"
             android:overScrollMode="never"
             android:tag="fixed"
+            android:visibility="gone"
             tl:tl_divider_color="#00000000"
             tl:tl_divider_width="0.1dp"
             tl:tl_indicator_color="@color/colorPrimaryDark"

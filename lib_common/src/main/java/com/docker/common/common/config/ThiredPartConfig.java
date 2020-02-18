@@ -53,6 +53,8 @@ public class ThiredPartConfig {
 
     public static final String ServeUrl = "http://tygs.wgc360.com/";
 
+    public static final String BarcoderUrl = "http://qr.topscan.com/api.php?text=";
+
 
     public static void init(BaseApp app) {
         Utils.init(app);

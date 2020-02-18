@@ -167,7 +167,9 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     private String avatar;
     private String nickname;
     private String circleName;
-    private ExtDataBean extData;
+
+
+    public ExtDataBean extData;
 
     public String area1;
     public String area2;
@@ -424,6 +426,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     public ExtDataBean getExtData() {
         return extData;
     }
+
 
     public void setExtData(ExtDataBean extData) {
         extData.setParentid(this.dynamicid);
@@ -1429,7 +1432,6 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
         }
     }
 
-
     public static class FavsUsersBean extends BaseObservable implements Serializable {
         /**
          * nickname : 小海
@@ -1524,6 +1526,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
 
     public static class ResourceBean extends BaseObservable implements Serializable {
+
 
         @Override
         public String toString() {

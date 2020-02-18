@@ -73,7 +73,7 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
         String rightstr = "发布";
 
         if (!TextUtils.isEmpty(pubRoterPath)) {
-            pubfragment = (Fragment) ARouter.getInstance().build(pubRoterPath).navigation();
+            pubfragment = (Fragment) ARouter.getInstance().build(pubRoterPath).withBundle("bundle", getIntent().getBundleExtra("bundle")).navigation();
             if (editType == 1) {
                 mToolbar.setTitle("发布" + title);
             } else {

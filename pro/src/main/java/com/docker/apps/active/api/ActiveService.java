@@ -2,8 +2,12 @@ package com.docker.apps.active.api;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.apps.active.vo.ActiveServerDataBean;
+import com.docker.apps.active.vo.ActiveSucVo;
 import com.docker.apps.active.vo.ActiveVo;
+import com.docker.apps.active.vo.ActiveWraperVo;
 import com.docker.apps.active.vo.LinkageVo;
+import com.docker.apps.active.vo.card.ActiveManagerDetailVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
@@ -22,7 +26,8 @@ public interface ActiveService {
      * */
     @POST("api.php?m=dynamic.getList")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<List<ServiceDataBean>>>> fechCircleInfoList(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<List<ActiveServerDataBean>>>> fechCircleInfoList(@FieldMap Map<String, String> params);
+
 
     @POST("api.php?m=publics.linkage")
     @FormUrlEncoded
@@ -30,9 +35,32 @@ public interface ActiveService {
 
     @POST("api.php?m=activity.getList")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<List<ActiveVo>>>> fetchActiveList(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<ActiveWraperVo>>> fetchActiveList(@FieldMap Map<String, String> params);
 
 
+    @POST("api.php?m=activity.detail")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<ActiveVo>>> fetchActivedetail(@FieldMap Map<String, String> params);
+
+
+    @POST("api.php?m=activity.joinActivity")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<ActiveSucVo>>> activeJoin(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.manage")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<ActiveManagerDetailVo>>> activitymanage(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.updateStatus")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> updateStatus(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.delete")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> delete(@FieldMap Map<String, String> params);
+
+
+    //ActiveManagerDetailVo
 
 
 }

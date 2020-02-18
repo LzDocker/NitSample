@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 
@@ -51,8 +53,14 @@ public class ActiveContainerFragment extends NitCommonFragment<ActiveCommonViewM
 
     public ActiveCommonViewModel innerVm;
 
-    public static ActiveContainerFragment getInstance() {
+
+    public HashMap<String, String> reqparam = new HashMap<>();
+
+    public static ActiveContainerFragment getInstance(HashMap<String, String> stringHashMap) {
         ActiveContainerFragment fragment = new ActiveContainerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("reqparam", stringHashMap);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
@@ -67,52 +75,34 @@ public class ActiveContainerFragment extends NitCommonFragment<ActiveCommonViewM
     }
 
 
+    public void onSearching(String keywords) {
+        ArrayList<Pair<String, String>> pairs = new ArrayList<>();
+        HashMap<String, String> orderbymap = new HashMap<>();
+        orderbymap.put("title", keywords);
+        pairs.add(new Pair<>("filter", GsonUtils.toJson(orderbymap)));
+        ((NitCommonListFragment) fragment).updateReqParamV2(null, pairs);
+        ((NitCommonListFragment) fragment).onReFresh(null);
+    }
+
+    public void upDate(String cityCode, String cityname) {
+        if (fragment != null) {
+            ArrayList<Pair<String, String>> pairs = new ArrayList<>();
+            HashMap<String, String> filtermap = new HashMap<>();
+            filtermap.put("cityCode", cityCode);
+            pairs.add(new Pair<>("filter", GsonUtils.toJson(filtermap)));
+            ((NitCommonListFragment) fragment).updateReqParamV2(null, pairs);
+            ((NitCommonListFragment) fragment).onReFresh(null);
+        }
+        mBinding.get().tvSortArea.setText(cityname);
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-//        fragment = (Fragment) ARouter.getInstance()
-//                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-//                .navigation();
-//
-//
-//        FragmentUtils.add(getChildFragmentManager(), fragment, R.id.frame_active);
-
-
-//        HashMap<String, String> param = new HashMap<>();
-//        HashMap<String, String[]> whereData = new HashMap<>();
-//        HashMap<String, String> orderData = new HashMap<>();
-//
-////        whereData.put("memberid", new String[]{"=", CacheUtils.getUser().uid});
-////        whereData.put("uuid", new String[]{"=", CacheUtils.getUser().uuid});
-//        whereData.put("actType", new String[]{"=", "3569"});
-////        whereData.put("utid", );
-////        whereData.put("circleid", );
-////        whereData.put("endDate", new String[]{"", ""});
-//
-//
-////        orderData.put("inputtime", "DESC");
-//
-//
-////        param.put("whereData", "");
-//
-//        param.put("whereData", GsonUtils.toJson(whereData));
-//        commonListOptions.ReqParam.put("jsonData", GsonUtils.toJson(param));
-
-
+        reqparam = (HashMap<String, String>) getArguments().getSerializable("reqparam");
         CommonListOptions commonListOptions = new CommonListOptions();
-        commonListOptions.ReqParam.put("showFields", "*");
-        Map<String, String> filterMap = new HashMap<>();
-        filterMap.put("actType", "3569");
-        commonListOptions.ReqParam.put("filter", GsonUtils.toJson(filterMap));
-
-
-//        String[] orderByArr = new String[]{"inputtime"};
-//        Map<String, String> orderByMap = new HashMap<>();
-//        orderByMap.put("inputtime", "desc");
-//        commonListOptions.ReqParam.put("orderBy", GsonUtils.toJson(orderByMap));
-
-
+        commonListOptions.ReqParam = reqparam;
         commonListOptions.isActParent = false;
         commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
@@ -195,26 +185,31 @@ public class ActiveContainerFragment extends NitCommonFragment<ActiveCommonViewM
 
             switch (((FilterVo) mFilterAdapter.getItem(position)).state) {
                 case 0:
+                    ((NitCommonListVm) (((NitCommonListFragment) fragment).mViewModel)).mCommonListReq.ReqParam.put("orderBy", "");
                     ArrayList<Pair<String, String>> pairs = new ArrayList<>();
                     HashMap<String, String> orderbymap = new HashMap<>();
+                    orderbymap.put("is_recommend", "desc");
                     orderbymap.put("inputtime", "desc");
                     pairs.add(new Pair<>("orderBy", GsonUtils.toJson(orderbymap)));
-                    ((NitCommonListFragment) fragment).updateReqParamV2("circle.getlist", pairs);
+                    ((NitCommonListFragment) fragment).updateReqParamV2(null, pairs);
                     break;
                 case 1:
+                    ((NitCommonListVm) (((NitCommonListFragment) fragment).mViewModel)).mCommonListReq.ReqParam.put("orderBy", "");
                     ArrayList<Pair<String, String>> pairs1 = new ArrayList<>();
                     HashMap<String, String> orderbymap1 = new HashMap<>();
-                    orderbymap1.put("uid2", "1111");
-                    orderbymap1.put("class1", "333");
-                    pairs1.add(new Pair<>("filter", GsonUtils.toJson(orderbymap1)));
-                    ((NitCommonListFragment) fragment).updateReqParamV2("circle.getlist", pairs1);
+                    orderbymap1.put("inputtime", "desc");
+                    pairs1.add(new Pair<>("orderBy", GsonUtils.toJson(orderbymap1)));
+                    ((NitCommonListFragment) fragment).updateReqParamV2(null, pairs1);
                     break;
                 case 2:
+
+                    ((NitCommonListVm) (((NitCommonListFragment) fragment).mViewModel)).mCommonListReq.ReqParam.put("orderBy", "");
                     ArrayList<Pair<String, String>> pairs2 = new ArrayList<>();
                     HashMap<String, String> orderbymap2 = new HashMap<>();
-                    orderbymap2.put("inputtime", "asc");
+                    orderbymap2.put("enrollNum", "desc");
                     pairs2.add(new Pair<>("orderBy", GsonUtils.toJson(orderbymap2)));
-                    ((NitCommonListFragment) fragment).updateReqParamV2("user.getinfo", pairs2);
+                    ((NitCommonListFragment) fragment).updateReqParamV2(null, pairs2);
+
                     break;
             }
 

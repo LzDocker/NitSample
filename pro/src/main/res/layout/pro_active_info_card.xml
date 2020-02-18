@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
                     android:layout_marginRight="14dp"
-                    android:text="5"
+                    android:text="@{item.aMDlVo.get().enrollNum}"
                     android:textColor="#611C93"
                     android:textSize="20sp" />
 
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
                     android:layout_marginRight="14dp"
-                    android:text="5"
+                    android:text="@{item.aMDlVo.get().readNum}"
                     android:textColor="#611C93"
                     android:textSize="20sp" />
 
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|bottom"
                     android:layout_marginRight="14dp"
-                    android:text="5"
+                    android:text="@{item.aMDlVo.get().shareNum}"
                     android:textColor="#611C93"
                     android:textSize="20sp" />
 

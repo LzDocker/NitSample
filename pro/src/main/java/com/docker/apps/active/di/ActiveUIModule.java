@@ -1,6 +1,7 @@
 package com.docker.apps.active.di;
 
 
+import com.docker.apps.active.ui.detail.ActiveDetailActivity;
 import com.docker.apps.active.ui.detail.ActiveDetailFragment;
 import com.docker.apps.active.ui.detail.ActiveResultActivity;
 import com.docker.apps.active.ui.detail.ActiveSuccActivity;
@@ -74,5 +75,8 @@ public abstract class ActiveUIModule {
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract ActiveTypeSelectActivity contributeActiveTypeSelectActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveDetailActivity contributeActiveDetailActivityInjector();
 }
 

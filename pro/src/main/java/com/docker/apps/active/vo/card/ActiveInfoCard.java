@@ -1,5 +1,6 @@
 package com.docker.apps.active.vo.card;
 
+import android.databinding.ObservableField;
 import android.view.View;
 
 import com.docker.apps.R;
@@ -20,5 +21,16 @@ public class ActiveInfoCard extends BaseCardVo {
     @Override
     public int getItemLayout() {
         return R.layout.pro_active_info_card;
+    }
+
+
+    public ObservableField<ActiveManagerDetailVo> aMDlVo = new ObservableField<>();
+
+    public ObservableField<ActiveManagerDetailVo> getActiveManagerDetailVo() {
+        return aMDlVo;
+    }
+
+    public void setActiveManagerDetailVo(ActiveManagerDetailVo activeManagerDetailVo) {
+        this.aMDlVo.set(activeManagerDetailVo);
     }
 }

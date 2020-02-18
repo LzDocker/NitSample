@@ -9,6 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.GsonUtils;
+import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.ui.list.CircleDynamicListFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
@@ -21,6 +23,7 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListFragment;
+import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
@@ -42,7 +45,9 @@ import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.docker.common.common.config.Constant.CommonListParam;
 
@@ -71,42 +76,55 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
         NitDelegetCommand nitDelegetCommand = new NitDelegetCommand() {
             @Override
             public Class providerOuterVm() {
-                return null;
+                return ActiveCommonViewModel.class;
             }
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                outerVm = commonListVm;
-                AppBannerCardVo appBannerHeaderCardVo = new AppBannerCardVo(0, 0);
-                appBannerHeaderCardVo.mRepParamMap.put("cid", "1");
-                appBannerHeaderCardVo.mRepParamMap.put("companyid", "1001");
+                if (flag == 101) {
+                    ActiveCommonViewModel innerVm = (ActiveCommonViewModel) commonListVm;
+                    innerVm.apiType = 2;
+                } else {
+                    outerVm = commonListVm;
+                    AppBannerCardVo appBannerHeaderCardVo = new AppBannerCardVo(0, 0);
+                    appBannerHeaderCardVo.mRepParamMap.put("cid", "1");
+                    appBannerHeaderCardVo.mRepParamMap.put("companyid", "1001");
 //                appBannerHeaderCardVo.isNoNetNeed = true;
 
 //                AppRecycleCardVo appRecycleCardVo = new AppRecycleCardVo(0, 0);
-                AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 1);
-                appRecycleCardVo.mRepParamMap.put("keyid", "3471");
+                    AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 1);
+                    appRecycleCardVo.mRepParamMap.put("keyid", "3471");
 
 
-                AppRecycleHorizontalCardVo appRecycleHorizontalCardVo = new AppRecycleHorizontalCardVo(0, 2,
-                        new LayoutManagerVo(0, 0, false),
-                        new RecycleTopLayout("热门活动", "更多", true));
+                    AppRecycleHorizontalCardVo appRecycleHorizontalCardVo = new AppRecycleHorizontalCardVo(0, 2,
+                            new LayoutManagerVo(0, 0, false),
+                            new RecycleTopLayout("热门活动", "更多", true));
+
+                    HashMap<String, String> JXhashMap = new HashMap<>();
+                    JXhashMap.put("showFields", "*");
+                    Map<String, String> filterMap = new HashMap<>();
+//                filterMap.put("is_recommend", "1");
+                    JXhashMap.put("filter", GsonUtils.toJson(filterMap));
+                    appRecycleHorizontalCardVo.mRepParamMap = JXhashMap;
 
 
-                AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
-                        new LayoutManagerVo(0, 0, false),
-                        new RecycleTopLayout("分部推荐", "", false));
+                    AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
+                            new LayoutManagerVo(0, 0, false),
+                            new RecycleTopLayout("分部推荐", "", false));
 
 
-                UserInfoVo userInfoVo = CacheUtils.getUser();
-                appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
-                appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
-                appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
+                    UserInfoVo userInfoVo = CacheUtils.getUser();
+                    appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
+                    appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
+                    appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
 
 
-                NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
-                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
-                NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
-                NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
+                    NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
+                    NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
+                    NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
+                    NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
+                }
+
             }
         };
         return nitDelegetCommand;
@@ -139,7 +157,7 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
         mBinding.get().refresh.setOnRefreshListener(refreshLayout -> {
             outerVm.onJustRefresh();
             if (fragments.size() > 0) {
-                ((CircleDynamicListFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).onReFresh(mBinding.get().refresh);
+                ((NitCommonListFragment) fragments.get(mBinding.get().viewPager.getCurrentItem())).onReFresh(mBinding.get().refresh);
             } else {
                 mBinding.get().refresh.finishRefresh(200);
             }
@@ -155,7 +173,7 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
     public void initImmersionBar() {
 
     }
-    
+
     public void peocessTab(List<Tabvo> tabvos) {
         String[] titles = new String[tabvos.size()];
         for (int i = 0; i < tabvos.size(); i++) {
@@ -168,10 +186,22 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
                 commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
             }
             commonListOptions.ReqParam.put("t", tabvos.get(i).type);
-            fragments.add((Fragment) ARouter.getInstance()
-                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                    .withSerializable(CommonListParam, commonListOptions)
-                    .navigation());
+            commonListOptions.ReqParam.put("index_bottom_catid", tabvos.get(i).id);
+            if ("activity".equals(tabvos.get(i).type)) {
+
+                commonListOptions.isActParent = false;
+                commonListOptions.falg = 101;
+                NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+                fragments.add(nitCommonContainerFragmentV2);
+
+            } else {
+
+                fragments.add((Fragment) ARouter.getInstance()
+                        .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                        .withSerializable(CommonListParam, commonListOptions)
+                        .navigation());
+            }
+
         }
         //
         mBinding.get().viewPager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));

@@ -3,6 +3,7 @@ package com.docker.apps.active.di;
 import android.arch.lifecycle.ViewModel;
 
 import com.docker.apps.active.vm.ActiveCommonViewModel;
+import com.docker.apps.active.vm.ActiveHeadCardViewModel;
 import com.docker.apps.active.vm.ActivePersionListViewModel;
 import com.docker.core.di.scope.ViewModelKey;
 
@@ -26,6 +27,11 @@ public abstract class ActiveVmModule {
     @IntoMap
     @ViewModelKey(ActiveCommonViewModel.class)
     abstract ViewModel ActiveCommonViewModel(ActiveCommonViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ActiveHeadCardViewModel.class)
+    abstract ViewModel ActiveHeadCardViewModel(ActiveHeadCardViewModel model);
 //
 
 

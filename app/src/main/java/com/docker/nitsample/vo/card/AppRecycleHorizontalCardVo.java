@@ -1,12 +1,17 @@
 package com.docker.nitsample.vo.card;
 
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.docker.apps.active.vo.ActiveVo;
+import com.docker.apps.active.vo.ActiveWraperVo;
 import com.docker.cirlev2.BR;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
 import com.docker.nitsample.vo.CarRvHorizontalVo;
@@ -18,7 +23,7 @@ import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
-public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
+public class AppRecycleHorizontalCardVo extends BaseCardVo<ActiveWraperVo> {
 
     public int managerStyle;
     public LayoutManagerVo managerStyleVo;
@@ -29,6 +34,7 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
         this.managerStyleVo = managerStyleVo;
         maxSupport = 1;
         this.recycleTopLayout = recycleTopLayout;
+        mVmPath = "com.docker.nitsample.vm.card.AppRecycleHorizontalVm";
     }
 
     @Override
@@ -44,45 +50,50 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<String> {
         }
     }
 
-    public void onChildItemClick(CarRvHorizontalVo carRvHorizontalVo, View view) {
+    public void onChildItemClick(ActiveVo item, View view) {
         // 进入活动详情
         Log.d("sss", "onChildItemClick: =======进入活动详情===");
+        if (((ActiveVo) item).uuid.equals(CacheUtils.getUser().uuid)) {
+            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).withSerializable("activeVo", ((ActiveVo) item)).navigation();
+        } else {
+            ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY)
+                    .withString("activityid", ((ActiveVo) item).dataid)
+                    .withString("activitytitle", ((ActiveVo) item).title)
+                    .navigation();
+        }
     }
 
-    public transient ItemBinding<CarRvHorizontalVo> itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
+    public transient ItemBinding<ActiveVo> itemImgBinding = ItemBinding.<ActiveVo>of(BR.item,
             R.layout.app_card_horizontal_img_inner).bindExtra(BR.parent, this);// 单一view 有点击事件;
 
 
-    public ItemBinding<CarRvHorizontalVo> getItemImgBinding() {
+    public ItemBinding<ActiveVo> getItemImgBinding() {
         if (itemImgBinding == null) {
-            itemImgBinding = ItemBinding.<CarRvHorizontalVo>of(BR.item,
+            itemImgBinding = ItemBinding.<ActiveVo>of(BR.item,
                     R.layout.app_card_horizontal_img_inner);
 
         }
         return itemImgBinding;
     }
 
-    private ObservableField<List<CarRvHorizontalVo>> InnerResource = new ObservableField<>();
+    //ArrayList<ActiveVo> indexList;
+
+    private ObservableField<List<ActiveVo>> activeVos = new ObservableField<>();
 
 
-    public void setInnerResource(ObservableField<List<CarRvHorizontalVo>> innerResource) {
-        InnerResource = innerResource;
+    public ObservableField<List<ActiveVo>> getActiveVos() {
+        return activeVos;
+    }
+
+    public void setActiveVos(List<ActiveVo> activeVos) {
+        this.activeVos.set(activeVos);
+        if (activeVos == null || activeVos.size() == 0) {
+            isnonedata.set(false);
+        } else {
+            isnonedata.set(true);
+        }
     }
 
 
-    public ObservableField<List<CarRvHorizontalVo>> getInnerResource() {
-        ArrayList<CarRvHorizontalVo> arrayList = new ArrayList();
-        CarRvHorizontalVo carRvHorizontalVo = new CarRvHorizontalVo("", "2019桃源公社黔酒封坛大典圆满礼成！封一坛老2019桃源公社黔酒封坛大典圆满礼成！封一坛老", "北京海淀", "活动日期：11/5", 1);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-        arrayList.add(carRvHorizontalVo);
-
-        InnerResource.set(arrayList);
-        return InnerResource;
-    }
-
-
+    public ObservableField<Boolean> isnonedata = new ObservableField<Boolean>();
 }

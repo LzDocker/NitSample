@@ -27,6 +27,7 @@ import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ScreenUtils;
 import com.docker.common.R;
 import com.docker.common.common.config.GlideApp;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.common.common.utils.BitmapCut;
 import com.docker.common.common.utils.GaussinaBlurUtil;
 
@@ -268,4 +269,14 @@ public class ImgBindingAdapter {
     }
 
 
+    /*
+     *
+     * */
+    @BindingAdapter(value = {"imageCodeUrl"}, requireAll = false)
+    public static void loadbareimage(ImageView imageView, String url) {
+        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontTransform();
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(ThiredPartConfig.BarcoderUrl + url).transition(withCrossFade()).into(imageView);
+
+    }
 }

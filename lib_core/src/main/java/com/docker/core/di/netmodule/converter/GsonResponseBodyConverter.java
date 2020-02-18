@@ -16,6 +16,7 @@
 package com.docker.core.di.netmodule.converter;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 
@@ -43,6 +44,7 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
 
         Reader reader = new StringReader(s);
         JsonReader jsonReader = gson.newJsonReader(reader);
+
 
         try {
             return adapter.read(jsonReader);

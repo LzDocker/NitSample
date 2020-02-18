@@ -1,40 +1,59 @@
 package com.docker.apps.active.ui.detail;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.FileUtils;
+import com.dcbfhd.utilcode.utils.ImageUtils;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
-import com.docker.apps.active.ui.index.ActiveContainerFragment;
+import com.docker.apps.active.ui.manager.ActiveManagerDetailActivity;
+import com.docker.apps.active.vo.ActiveSucVo;
+import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.widget.CardActivePopup;
-import com.docker.apps.databinding.ProActiveIndexActivityBinding;
 import com.docker.apps.databinding.ProActiveSuccActivityBinding;
-import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.config.GlideApp;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.common.common.router.AppRouter;
-import com.docker.common.common.ui.XPopup.XPopupActivity;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.utils.tool.PhotoGalleryUtils;
 import com.docker.common.common.vm.NitEmptyViewModel;
-import com.docker.common.common.vo.WorldNumList;
-import com.docker.common.common.widget.XPopup.CenterPopup;
-import com.docker.common.common.widget.indector.CommonIndector;
 import com.lxj.xpopup.XPopup;
 import com.lxj.xpopup.core.BasePopupView;
 import com.lxj.xpopup.interfaces.XPopupCallback;
 
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
-
-import java.util.ArrayList;
-
 @Route(path = AppRouter.ACTIVE_SUCC)
 public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, ProActiveSuccActivityBinding> {
 
+    public ActiveSucVo activeSucVo;
+
+    public String activityid;
+    public String activitytitle;
 
     private BasePopupView basePopupView;
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        activeSucVo = (ActiveSucVo) getIntent().getSerializableExtra("ActiveSucVo");
+        activityid = (String) getIntent().getStringExtra("activityid");
+        activitytitle = (String) getIntent().getStringExtra("activitytitle");
+
+        mBinding.tvBack.setOnClickListener(v -> {
+            ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", activityid).navigation();
+        });
+
+    }
 
     @Override
     public void initView() {
@@ -46,7 +65,17 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
             basePopupView = new XPopup.Builder(this).setPopupCallback(new XPopupCallback() {
                 @Override
                 public void onCreated() {
-
+                    TextView textView = basePopupView.findViewById(R.id.tv_pzh);
+                    TextView title = basePopupView.findViewById(R.id.tv_title);
+                    title.setText(activitytitle);
+                    textView.setText("凭证号：" + activeSucVo.evoucherNo);
+                    ImageView imageView = basePopupView.findViewById(R.id.iv_bar_code);
+                    GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + activeSucVo.AuditUrl).into(imageView);
+                    imageView.setOnLongClickListener(v1 -> {
+                        PhotoGalleryUtils.saveImageToGallery(ActiveSuccActivity.this, ImageUtils.view2Bitmap(imageView), Constant.BaseFileFloder, "ccc");
+                        ToastUtils.showShort("保存成功");
+                        return true;
+                    });
                 }
 
                 @Override

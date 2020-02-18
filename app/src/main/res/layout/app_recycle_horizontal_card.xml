@@ -25,17 +25,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:visibleGone="@{item.isnonedata}">
 
+        <!-- visibleGone="@{item.recycleTopLayout!=null}"-->
         <RelativeLayout
             android:id="@+id/ll_title"
-            visibleGone="@{item.recycleTopLayout!=null}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
-            android:padding="10dp">
+            android:padding="10dp"
+            app:visibleGone="@{item.isnonedata}">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,10 +76,9 @@
             android:layout_height="wrap_content"
             android:background="#F8F8F8"
             android:overScrollMode="always"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingTop="10dp"
             app:itemBinding="@{item.getItemImgBinding()}"
-            app:items="@{item.getInnerResource()}"
+            app:items="@{item.getActiveVos()}"
             bind:layoutManager="@{LayoutManager.linear(item.managerStyleVo.orientation,item.managerStyleVo.reverseLayout)}" />
 
         <View

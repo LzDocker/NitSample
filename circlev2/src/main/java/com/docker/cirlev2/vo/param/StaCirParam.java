@@ -83,4 +83,5 @@ public class StaCirParam implements Serializable {
     public String DataType;  // wj
 
 
+
 }

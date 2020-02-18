@@ -36,4 +36,7 @@ public class ActivePubVo extends BaseObservable {
     public String circleidshow;
     public String circleid;
     public String utid;
+
+    public String point;
+
 }

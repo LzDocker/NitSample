@@ -119,6 +119,7 @@ public class AppRouter {
     public static final String CIRCLE_DETAIL_v2_PRO_MANAGER = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER";
     public static final String CIRCLE_DETAIL_v2_PRO_INFO = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MANAGER_info";
     public static final String CIRCLEV2_COMMONH5 = CircleV2Group + "CIRCLEV2_COMMONH5";
+    public static final String CIRCLEV3_COMMONH5 = CircleV2Group + "CIRCLEV3_COMMONH5";
 
     public static final String CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX = CircleV2Group + "CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX";
 
@@ -185,6 +186,8 @@ public class AppRouter {
     public static final String ACTIVE_GROUP = ProGroup + "/active/";
     public static final String ACTIVE_INDEX = ACTIVE_GROUP + "ACTIVE_INDEX";
     public static final String ACTIVE_DEATIL = ACTIVE_GROUP + "ACTIVE_DEATIL";
+    public static final String ACTIVE_DEATIL_ACTIVITY = ACTIVE_GROUP + "ACTIVE_DEATIL_ACTIVITY";
+
     public static final String ACTIVE_SUCC = ACTIVE_GROUP + "ACTIVE_SUCC";
     public static final String ACTIVE_RESULT = ACTIVE_GROUP + "ACTIVE_RESULT";
     public static final String ACTIVE_REGIST_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_REGIST_LIST";

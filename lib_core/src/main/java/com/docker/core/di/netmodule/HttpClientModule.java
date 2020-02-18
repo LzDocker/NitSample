@@ -6,6 +6,7 @@ import com.docker.core.di.netmodule.converter.GsonConverterFactory;
 import com.docker.core.di.module.cookie.CookieJarImpl;
 import com.docker.core.di.module.cookie.PersistentCookieStore;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
@@ -154,7 +155,9 @@ public class HttpClientModule {
     @Singleton
     @Provides
     public Gson provideGson() {
-        return new Gson();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+        return gson;
     }
 
     @Singleton

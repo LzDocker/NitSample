@@ -18,6 +18,7 @@ import com.docker.nitsample.vm.SearchViewModel;
 import com.docker.nitsample.vm.card.AppBannerCardViewModel;
 import com.docker.nitsample.vm.card.AppCardViewModel;
 import com.docker.nitsample.vm.card.AppIndexMenuViewModel;
+import com.docker.nitsample.vm.card.AppRecycleHorizontalVm;
 import com.docker.nitsample.vm.card.CircleRecomendListCardVm;
 import com.docker.nitsample.vm.card.OptimizationCardViewModel;
 
@@ -118,5 +119,10 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OptimizationCardViewModel.class)
     abstract ViewModel OptimizationCardViewModel(OptimizationCardViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AppRecycleHorizontalVm .class)
+    abstract ViewModel AppRecycleHorizontalVm (AppRecycleHorizontalVm  model);
 
 }

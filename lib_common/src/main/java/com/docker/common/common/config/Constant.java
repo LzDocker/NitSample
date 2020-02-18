@@ -50,5 +50,7 @@ public class Constant {
 
     public static String BaseFileFloder = Environment.getExternalStorageDirectory() + "/" + AppUtils.getAppName() + "/chache/";
 
+    public static String BarCommonCodeUrl = "http://www.baidu.com";
+
 
 }

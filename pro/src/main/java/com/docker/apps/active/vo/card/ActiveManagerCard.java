@@ -4,9 +4,13 @@ import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.apps.R;
 import com.docker.apps.active.vo.ActiveManagerVo;
+import com.docker.apps.active.vo.ActiveVo;
 import com.docker.cirlev2.BR;
+import com.docker.common.common.command.ReplyCommandParam;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
@@ -24,20 +28,16 @@ public class ActiveManagerCard extends BaseCardVo {
     }
 
     public void onChilcItemClick(ActiveManagerVo activeManagerVo, View view) {
-        switch (activeManagerVo.id) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
+        if (mCommand != null) {
+            mCommand.exectue(activeManagerVo.id);
         }
+
+    }
+
+    public transient ReplyCommandParam mCommand;
+
+    public void setCommand(ReplyCommandParam replyCommandParam) {
+        mCommand = replyCommandParam;
     }
 
     @Override
@@ -64,4 +64,13 @@ public class ActiveManagerCard extends BaseCardVo {
         return observableList;
     }
 
+    public ActiveManagerDetailVo aMDlVo;
+
+    public ActiveManagerDetailVo getActiveManagerDetailVo() {
+        return aMDlVo;
+    }
+
+    public void setActiveManagerDetailVo(ActiveManagerDetailVo activeManagerDetailVo) {
+        this.aMDlVo = activeManagerDetailVo;
+    }
 }

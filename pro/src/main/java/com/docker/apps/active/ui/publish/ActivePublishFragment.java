@@ -1,5 +1,6 @@
 package com.docker.apps.active.ui.publish;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -18,7 +19,9 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
+import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.active.vo.ActivePubVo;
+import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.LinkageVo;
 import com.docker.apps.databinding.ProActivePubFragmentBinding;
 import com.docker.cirlev2.ui.common.CircleSourceUpFragment;
@@ -31,6 +34,7 @@ import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.ParamUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
@@ -56,7 +60,7 @@ import static com.docker.common.common.router.AppRouter.ACTIVE_PUBLISH;
  * 活动类型的动态
  * */
 @Route(path = ACTIVE_PUBLISH)
-public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, ProActivePubFragmentBinding> {
+public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewModel, ProActivePubFragmentBinding> {
 
     private SourceUpParam mSourceUpParam;
     private CircleSourceUpFragment sourceUpFragment;
@@ -67,6 +71,8 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
     public LinkageVo linkageVo;
     private ActivePubVo activePubVo;
 
+    public String activitytitle;
+    public String activityid;
 
     /*
      *
@@ -96,13 +102,14 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
 
 
     @Override
-    protected PublishViewModel getViewModel() {
-        return ViewModelProviders.of(this, factory).get(PublishViewModel.class);
+    protected ActiveCommonViewModel getViewModel() {
+        return ViewModelProviders.of(this, factory).get(ActiveCommonViewModel.class);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 
     @Override
@@ -111,7 +118,12 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
         mEditType = ((CirclePublishActivity) getHoldingActivity()).getmEditType();
         mHandParam = ((CirclePublishActivity) getHoldingActivity()).getmStartParam();
 
-        initBanner(null);
+        Bundle bundle = getArguments().getBundle("bundle");
+
+        activityid = bundle.getString("activityid");
+        activitytitle = bundle.getString("activitytitle");
+
+
         mViewModel.mDynamicPublishLV.observe(this, s -> {
             ToastUtils.showShort("发布成功");
             RxBus.getDefault().post(new RxEvent<>("dynamic_refresh", ""));
@@ -132,25 +144,53 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
         });
 
         if (mEditType == 2) {
-            if (mHandParam.serviceDataBean.getExtData().getResource() != null && mHandParam.serviceDataBean.getExtData().getResource().size() > 0) {
-                ArrayList<LocalMedia> localMediaList = new ArrayList();
-                List<ServiceDataBean.ResourceBean> resourceBeans = mHandParam.serviceDataBean.getExtData().getResource();
-                if (resourceBeans != null && resourceBeans.size() > 0) {
-                    for (int i = 0; i < resourceBeans.size(); i++) {
-                        LocalMedia localMedia = new LocalMedia();
-                        localMedia.setPictureType("1");
-                        if (!TextUtils.isEmpty(resourceBeans.get(i).getImg())) {
-                            localMedia.setPath(CommonBdUtils.getCompleteImageUrl(resourceBeans.get(i).getImg()));
-                        } else {
-                            localMedia.setPath(CommonBdUtils.getCompleteImageUrl(resourceBeans.get(i).getUrl()));
-                        }
-                        localMediaList.add(localMedia);
-                    }
-                }
-                sourceUpFragment.processDataRep(localMediaList);
-            }
-        } else {
+            mViewModel.mActiveDetailLv.observe(this, activeVo -> {
+                activePubVo = new ActivePubVo();
+                /*public String actType;
+    public String actTypeshow;
 
+    public String memberid;
+    public String uuid;
+    public String title;
+    public String banner;
+    public String isDate = "1";
+
+    public String startDate;
+    public String endDate;
+
+    public String startDateShow;
+    public String endDateShow;
+
+    public String num;
+
+    public String situs;
+    public String location;
+    public String address;
+    public String cityCode;
+    public String lng;
+    public String lat;
+    public String sponsorName;
+    public String contact;
+    public String content;
+    public String contentshow;
+    public String signAudit = "0";
+
+    public String circleidshow;
+    public String circleid;
+    public String utid;
+
+    public String point;*/
+
+                activePubVo.utid = activeVo.utid;
+                activePubVo.actType = activeVo.actType;
+
+            });
+            HashMap<String, String> parm = new HashMap<>();
+            parm.put("activityid", activityid);
+            mViewModel.fetchActiveVo(parm);
+
+        } else {
+            initBanner(null);
             activePubVo = new ActivePubVo();
             if (mHandParam != null) {  // 带有圈子信息进来的
                 mBinding.get().llSelCircle.setVisibility(View.GONE);
@@ -202,10 +242,10 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
             }
         });
 
-        if (mEditType == 2) {
-            mHandParam = processStaParam(mHandParam.serviceDataBean);
-        }
-        processStaparam();
+//        if (mEditType == 2) {
+//            mHandParam = processStaParam(mHandParam.serviceDataBean);
+//        }
+//        processStaparam();
     }
 
 
@@ -327,7 +367,7 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
                 }
                 long ts = date.getTime();
 
-                mBinding.get().getPub().startDate = String.valueOf(ts);
+                mBinding.get().getPub().startDate = String.valueOf(str);
                 mBinding.get().tvStartTime.setText(str);
 
                 mBinding.get().tvEndTime.setText("");
@@ -353,7 +393,7 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
                             e.printStackTrace();
                         }
                         long ts = date.getTime();
-                        mBinding.get().getPub().endDate = String.valueOf(ts);
+                        mBinding.get().getPub().endDate = String.valueOf(str);
                         mBinding.get().tvEndTime.setText(str);
                     });
         });
@@ -522,6 +562,7 @@ public class ActivePublishFragment extends NitCommonFragment<PublishViewModel, P
         paramMap.put("utid", "8d93e6a11a530bafabe31724e2b35972");
         paramMap.put("circleid", "598");
 
+        paramMap.put("point", mBinding.get().getPub().point);
 //        paramMap.put("title", mBinding.get().getPub().title);
         paramMap.put("title", mBinding.get().getPub().title);
 //        if (mSourceUpParam.imgList.size() > 0) {

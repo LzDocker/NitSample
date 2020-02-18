@@ -19,6 +19,7 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.MoneyDetailVo;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -1217,4 +1218,22 @@ public class BdUtils {
             return 2;
         }
     }
+
+    public static ArrayList<String> getBannerImg(List<ServiceDataBean.ResourceBean> resourceBeans) {
+
+        if (resourceBeans == null) {
+            return null;
+        }
+        ArrayList<String> imglist = new ArrayList<>();
+        for (int i = 0; i < resourceBeans.size(); i++) {
+            imglist.add(resourceBeans.get(i).getImg());
+        }
+        return imglist;
+    }
+
+    public static String getActiveTimeStr(String sta, String end) {
+        return sta + " 至 " + end;
+    }
+
+
 }

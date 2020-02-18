@@ -7,4 +7,6 @@ public class Tabvo implements Serializable {
 
     public String name;
     public String type;
+
+    public String id;
 }

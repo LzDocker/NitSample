@@ -5,7 +5,7 @@
 
     <data>
 
-
+        <import type="com.docker.common.common.config.Constant" />
     </data>
 
 
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="24dp"
             android:background="@drawable/open_gry_bg_shape"
             android:gravity="center"
@@ -66,7 +66,7 @@
         <ImageView
             android:layout_width="67dp"
             android:layout_height="67dp"
-            android:src="#000" />
+            app:imageCodeUrl="@{Constant.BarCommonCodeUrl}" />
 
         <TextView
             android:layout_width="wrap_content"
