@@ -2,30 +2,14 @@ package com.docker.apps.active.bd;
 
 import android.text.TextUtils;
 
+import com.docker.apps.R;
 import com.docker.apps.active.vo.ActiveVo;
+import com.docker.common.common.utils.cache.CacheUtils;
 
 public class ActiveBdutils {
 
 
-    public static String getActiveStr(ActiveVo activeVo) {
-        String str = "";
-        if (activeVo == null) {
-            return str;
-        }
-        if (activeVo.status == -1) {
-            str = "已结束";
-        }
-        if (activeVo.status == 1) {
-            str = "立即报名";
-        }
-        if (activeVo.signStatus == 1) {
-            str = "已报名";
-        }
-        if (activeVo.enrollNum.equals(activeVo.limitNum)) {
-            str = "报名人数已满";
-        }
-        return str;
-    }
+
 
     public static boolean getPointShow(ActiveVo activeVo) {
         if (activeVo == null) {
@@ -38,5 +22,19 @@ public class ActiveBdutils {
         }
     }
 
+
+
+
+    public static boolean isShowBot(ActiveVo activeVo) {
+        if (activeVo == null || CacheUtils.getUser() == null) {
+            return false;
+        }
+
+        if (activeVo.uuid.equals(CacheUtils.getUser().uuid)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }

@@ -8,30 +8,40 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.ImageUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
 import com.docker.apps.active.ui.index.ActiveContainerFragment;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.card.ActiveDetailHeadCard;
+import com.docker.apps.active.widget.CardActivePopup;
 import com.docker.apps.databinding.ProActiveDetailFragmentLayoutBinding;
 import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
+import com.docker.common.common.config.GlideApp;
+import com.docker.common.common.config.ThiredPartConfig;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.tool.PhotoGalleryUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.databinding.CommonDetailCoutainerLayoutBinding;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.interfaces.XPopupCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +57,7 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
     ActiveDetailHeadCard activeDetailHeadCard;
     ActiveVo activeVo;
     public String activityid;
-
+    private BasePopupView basePopupView;
     public int edit = 0;
 
     @Override
@@ -71,30 +81,88 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
             if (CacheUtils.getUser() == null) {
                 // 去登录
             }
+
+
             if (activeVo.status == -1) {
                 ToastUtils.showShort("已结束");
-                return;
-            }
-
-            if (activeVo.signStatus == 1) {
-                ToastUtils.showShort("已报名");
                 return;
             }
             if (activeVo.enrollNum.equals(activeVo.limitNum)) {
                 ToastUtils.showShort("报名人数已满");
                 return;
             }
-            if (activeVo.status != 1) {
+            if (activeVo.status == 1) {
+
+                if (activeVo.signStatus == 0) {
+                    ToastUtils.showShort("待审核");
+                    return;
+                }
+                if (activeVo.signStatus == 1) {
+//                    return "查看我的凭证"; //绿色
+
+                    //todo
+                }
+                if (activeVo.signStatus == 2) {
+                    ToastUtils.showShort("已核销");
+                    return;
+                }
+                if (activeVo.signStatus == -1) {
+                    ToastUtils.showShort("报名被驳回");
+                    return;
+                }
+                if (activeVo.signStatus == -2) {
+                    HashMap<String, String> parm = new HashMap<>();
+                    parm.put("sign_memberid", CacheUtils.getUser().uid);
+                    parm.put("activityid", activeVo.dataid);
+                    parm.put("circleid", activeVo.circleid);
+                    mViewModel.activeJoin(parm);
+                }
+            }
+        });
+    }
+
+    private void showPop(String evoucherNo, String AuditUrl) {
+        CardActivePopup centerPopup = new CardActivePopup(this.getHoldingActivity());
+        basePopupView = new XPopup.Builder(this.getHoldingActivity()).setPopupCallback(new XPopupCallback() {
+            @Override
+            public void onCreated() {
+                TextView textView = basePopupView.findViewById(R.id.tv_pzh);
+                TextView title = basePopupView.findViewById(R.id.tv_title);
+                title.setText(activeVo.title);
+                textView.setText("凭证号：" + evoucherNo);
+                ImageView imageView = basePopupView.findViewById(R.id.iv_bar_code);
+                GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + AuditUrl).into(imageView);
+                imageView.setOnLongClickListener(v1 -> {
+                    PhotoGalleryUtils.saveImageToGallery(ActiveDetailFragment.this.getHoldingActivity(), ImageUtils.view2Bitmap(imageView), Constant.BaseFileFloder, "ccc");
+                    ToastUtils.showShort("保存成功");
+                    return true;
+                });
+            }
+
+            @Override
+            public void beforeShow() {
 
             }
 
-            HashMap<String, String> parm = new HashMap<>();
-            parm.put("sign_memberid", CacheUtils.getUser().uid);
-            parm.put("activityid", activeVo.dataid);
-            parm.put("circleid", activeVo.circleid);
-            mViewModel.activeJoin(parm);
-        });
+            @Override
+            public void onShow() {
+
+            }
+
+            @Override
+            public void onDismiss() {
+
+            }
+
+            @Override
+            public boolean onBackPressed() {
+                return false;
+            }
+        }).asCustom(centerPopup).show();
+
+
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -153,12 +221,100 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
                     public void onPropertyChanged(Observable sender, int propertyId) {
                         activeVo = activeDetailHeadCard.voObservableField.get();
                         mBinding.get().setItem(activeVo);
+                        processBot(activeVo);
                         processTab();
                     }
                 });
             }
         };
         return nitDelegetCommand;
+    }
+
+    public void processBot(ActiveVo activeVo) {
+        mBinding.get().submitArea.setBackgroundResource(getBackGround(activeVo));
+        mBinding.get().submitArea.setText(getActiveStr(activeVo));
+    }
+
+    public static String getActiveStr(ActiveVo activeVo) {
+        String str = "";
+
+        /*
+        * 活动状态：
+进行中 status=1      显示按钮：立即报名（紫色）
+已结束 status=-1    显示按钮：已结束（灰色） 不可点击
+
+报名状态：
+待审核：signStatus=0  显示按钮：待审核（红色）不可点击
+待参加：signStatus=1  显示按钮：查看我的凭证（绿色）点击弹框展示
+已核销 signStatus=2
+忽略：signStatus=-1
+        * */
+
+
+        if (activeVo == null) {
+            return str;
+        }
+        if (activeVo.status == -1) {
+            return "已结束"; //灰色
+        }
+        if (activeVo.enrollNum.equals(activeVo.limitNum)) {
+            return "报名人数已满";//灰色
+        }
+        if (activeVo.status == 1) {
+
+            if (activeVo.signStatus == 0) {
+                return "待审核"; //红色
+            }
+            if (activeVo.signStatus == 1) {
+                return "查看我的凭证"; //绿色
+            }
+            if (activeVo.signStatus == 2) {
+                return "已核销"; // 灰色
+            }
+            if (activeVo.signStatus == -1) {
+                return "报名被驳回";//灰色
+            }
+            if (activeVo.signStatus == -2) {
+                return "立即报名"; //紫色
+            }
+        }
+        return str;
+    }
+
+    public int getBackGround(ActiveVo activeVo) {
+
+        int str = R.drawable.common_radius30_hui;
+        if (activeVo == null) {
+            return str;
+        }
+        if (activeVo.status == -1) {
+            return R.drawable.common_radius30_hui; //灰色
+        }
+        if (activeVo.enrollNum.equals(activeVo.limitNum)) {
+            return R.drawable.common_radius30_hui;
+        }
+        if (activeVo.status == 1) {
+
+            if (activeVo.signStatus == 0) {
+                //红色
+                return R.drawable.common_radius30_hong;
+            }
+
+            if (activeVo.signStatus == 1) {
+                //绿色
+                return R.drawable.common_radius30_lv;
+            }
+            if (activeVo.signStatus == 2) {
+                // 灰色
+                return R.drawable.common_radius30_hui;
+            }
+            if (activeVo.signStatus == -1) {
+                return R.drawable.common_radius30_hui;
+            }
+            //紫色
+            return R.drawable.common_radius30_zi;
+        }
+        return str;
     }
 
 

@@ -46,7 +46,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    app:visibleGone="@{item.scope==0}">
 
                     <TextView
                         android:layout_width="0dp"
@@ -80,6 +81,68 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#EA523E"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="已结束"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:visibleGone="@{item.status == -1}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:visibleGone="@{item.scope==1}">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{item.title}"
+                        android:textColor="#333333"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#EA523E"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="待审核"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:visibleGone="@{item.signStatus == 0}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#32B16C"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="待参加"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:visibleGone="@{item.signStatus == 1}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#BDBDBD"
                         android:paddingLeft="5dp"
                         android:paddingTop="3dp"
                         android:paddingRight="5dp"

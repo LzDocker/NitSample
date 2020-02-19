@@ -35,6 +35,8 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
 
     public int apiType = 0;
 
+    public int scope = 0;
+
     @Inject
     public ActiveCommonViewModel() {
 
@@ -67,7 +69,13 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
         super.formartData(resource);
         switch (apiType) {
             case 1:
+                if (scope == 1) {
+                    for (int i = 0; i < ((ActiveWraperVo) resource.data).indexList.size(); i++) {
+                        ((ActiveWraperVo) resource.data).indexList.get(i).scope = 1;
+                    }
+                }
                 resource.data = ((ActiveWraperVo) resource.data).indexList;
+
                 break;
             case 2:
                 ArrayList<ActiveVo> activeVos = new ArrayList<>();

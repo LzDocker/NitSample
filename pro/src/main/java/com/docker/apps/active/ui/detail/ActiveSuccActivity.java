@@ -40,10 +40,21 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
 
     private BasePopupView basePopupView;
 
+    public String flag; // 0 不可以  1 可以
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        flag = getIntent().getStringExtra("flag");
+        if ("0".equals(flag)) {
+            mBinding.llNoValutify.setVisibility(View.VISIBLE);
+            mBinding.llValutify.setVisibility(View.GONE);
+        } else {
+            mBinding.llValutify.setVisibility(View.VISIBLE);
+            mBinding.llNoValutify.setVisibility(View.GONE);
+        }
 
         activeSucVo = (ActiveSucVo) getIntent().getSerializableExtra("ActiveSucVo");
         activityid = (String) getIntent().getStringExtra("activityid");
@@ -102,6 +113,16 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
         });
 
         mBinding.tvBack.setOnClickListener(v -> finish());
+
+        mBinding.tvActiveMine.setOnClickListener(v -> {
+            // 查看自己的活动
+            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_LIST).navigation();
+        });
+
+        mBinding.tvActiveOther.setOnClickListener(v -> {
+            // 查看别人的活动
+            ARouter.getInstance().build(AppRouter.ACTIVE_INDEX).navigation();
+        });
     }
 
     @Override

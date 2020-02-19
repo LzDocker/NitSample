@@ -189,6 +189,8 @@ public class AppRouter {
     public static final String ACTIVE_DEATIL_ACTIVITY = ACTIVE_GROUP + "ACTIVE_DEATIL_ACTIVITY";
 
     public static final String ACTIVE_SUCC = ACTIVE_GROUP + "ACTIVE_SUCC";
+
+
     public static final String ACTIVE_RESULT = ACTIVE_GROUP + "ACTIVE_RESULT";
     public static final String ACTIVE_REGIST_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_REGIST_LIST";
     public static final String ACTIVE_MANAGER_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_MANAGER_LIST";

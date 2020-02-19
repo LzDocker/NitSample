@@ -9,76 +9,151 @@
     </data>
 
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <ImageView
-            android:layout_width="75dp"
-            android:layout_height="65dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:src="@mipmap/active_succ" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="活动报名成功"
-            android:textColor="#333"
-            android:textSize="16sp" />
-
-
-        <TextView
-            android:id="@+id/tv_look_card"
+        <LinearLayout
+            android:id="@+id/ll_valutify"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/active_ovl_red_shape"
-            android:gravity="center"
-            android:text="查看凭证"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_back"
+
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="65dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:src="@mipmap/active_succ" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="活动报名成功"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/tv_look_card"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/active_ovl_red_shape"
+                android:gravity="center"
+                android:text="查看凭证"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/open_gry_bg_shape"
+                android:gravity="center"
+                android:text="返回活动"
+                android:textColor="#333"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                app:imageCodeUrl="@{Constant.BarCommonCodeUrl}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:text="关注桃源公社\n发现更多有趣活动"
+                android:textColor="#611C93"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_no_valutify"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="24dp"
-            android:background="@drawable/open_gry_bg_shape"
-            android:gravity="center"
-            android:text="返回活动"
-            android:textColor="#333"
-            android:textSize="16sp" />
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="75dp"
+                android:drawableLeft="@mipmap/chenggong_icon"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="恭喜您成功提交申请！"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-        <ImageView
-            android:layout_width="67dp"
-            android:layout_height="67dp"
-            app:imageCodeUrl="@{Constant.BarCommonCodeUrl}" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="请等待舵主审核，可以在活动报名中查看审核结果"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:gravity="center"
-            android:lineSpacingExtra="5dp"
-            android:text="关注桃源公社\n发现更多有趣活动"
-            android:textColor="#611C93"
-            android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_active_other"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/common_radius5_zi_ovl"
+                    android:gravity="center"
+                    android:text="浏览其他活动"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_active_mine"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/common_radius5_pr"
+                    android:gravity="center"
+                    android:text="查看我的活动"
+                    android:textColor="#611C93"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
 
 </layout>

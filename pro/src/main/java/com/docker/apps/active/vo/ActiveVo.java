@@ -16,6 +16,8 @@ import java.util.List;
 public class ActiveVo extends BaseSampleItem {
 
 
+    public int scope = 0;
+
     @Override
     public int getItemLayout() {
         return R.layout.pro_item_active;

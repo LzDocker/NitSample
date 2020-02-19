@@ -13,11 +13,13 @@ import com.docker.apps.databinding.ProActiveManagerBinding;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
@@ -89,12 +91,11 @@ public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContain
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.isActParent = true;
         commonListOptions.falg = 101;
-
-        HashMap<String, String> parmBegining = new HashMap<>();
-        HashMap<String, String> orderbymap1 = new HashMap<>();
-        orderbymap1.put("inputtime", "desc");
-        parmBegining.put("orderBy", GsonUtils.toJson(orderbymap1));
-        commonListOptions.ReqParam = parmBegining;
+        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions.ReqParam.put("my_join", "1");
+        commonListOptions.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions.ReqParam.put("signStatus", "0");
+        commonListOptions.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
         fragments.add(nitCommonContainerFragmentV2);
 
@@ -102,13 +103,25 @@ public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContain
         CommonListOptions commonListOptions1 = new CommonListOptions();
         commonListOptions1.isActParent = true;
         commonListOptions1.falg = 101;
-        HashMap<String, String> endinging = new HashMap<>();
-        HashMap<String, String> orderbymap2 = new HashMap<>();
-        orderbymap2.put("inputtime", "desc");
-        endinging.put("orderBy", GsonUtils.toJson(orderbymap2));
-        commonListOptions1.ReqParam = endinging;
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions1.ReqParam.put("my_join", "1");
+        commonListOptions1.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions1.ReqParam.put("signStatus", "1");
+        commonListOptions1.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(nitCommonContainerFragmentV21);
+
+
+        CommonListOptions commonListOptions2 = new CommonListOptions();
+        commonListOptions2.isActParent = true;
+        commonListOptions2.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions2.falg = 101;
+        commonListOptions2.ReqParam.put("my_join", "1");
+        commonListOptions2.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions2.ReqParam.put("activityStatus", "-1");
+        commonListOptions2.ReqParam.put("showFields", "*");
+        NitCommonContainerFragmentV2 nitCommonContainerFragmentV22 = NitCommonContainerFragmentV2.newinstance(commonListOptions2);
+        fragments.add(nitCommonContainerFragmentV22);
 
 
         // magic
@@ -130,6 +143,7 @@ public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContain
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 ActiveCommonViewModel innerVm = (ActiveCommonViewModel) commonListVm;
                 innerVm.apiType = 1;
+                innerVm.scope = 1;
             }
         };
     }
