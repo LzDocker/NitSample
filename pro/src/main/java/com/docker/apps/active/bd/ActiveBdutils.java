@@ -1,5 +1,7 @@
 package com.docker.apps.active.bd;
 
+import android.text.TextUtils;
+
 import com.docker.apps.active.vo.ActiveVo;
 
 public class ActiveBdutils {
@@ -24,4 +26,17 @@ public class ActiveBdutils {
         }
         return str;
     }
+
+    public static boolean getPointShow(ActiveVo activeVo) {
+        if (activeVo == null) {
+            return false;
+        }
+        if (TextUtils.isEmpty(activeVo.point)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }

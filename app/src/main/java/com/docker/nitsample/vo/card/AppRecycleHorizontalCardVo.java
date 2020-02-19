@@ -3,10 +3,12 @@ package com.docker.nitsample.vo.card;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.ActiveWraperVo;
 import com.docker.cirlev2.BR;
@@ -53,6 +55,11 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<ActiveWraperVo> {
     public void onChildItemClick(ActiveVo item, View view) {
         // 进入活动详情
         Log.d("sss", "onChildItemClick: =======进入活动详情===");
+
+        if (item == null || TextUtils.isEmpty(((ActiveVo) item).uuid)) {
+            ToastUtils.showShort("数据不存在");
+            return;
+        }
         if (((ActiveVo) item).uuid.equals(CacheUtils.getUser().uuid)) {
             ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).withSerializable("activeVo", ((ActiveVo) item)).navigation();
         } else {

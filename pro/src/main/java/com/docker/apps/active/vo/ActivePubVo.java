@@ -5,6 +5,7 @@ import android.databinding.BaseObservable;
 public class ActivePubVo extends BaseObservable {
 
     public String actType;
+
     public String actTypeshow;
 
     public String memberid;
@@ -38,5 +39,7 @@ public class ActivePubVo extends BaseObservable {
     public String utid;
 
     public String point;
+
+    public String dataid;
 
 }

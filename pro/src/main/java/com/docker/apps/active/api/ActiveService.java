@@ -2,13 +2,13 @@ package com.docker.apps.active.api;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.apps.active.vo.ActivePersionVo;
 import com.docker.apps.active.vo.ActiveServerDataBean;
 import com.docker.apps.active.vo.ActiveSucVo;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.ActiveWraperVo;
 import com.docker.apps.active.vo.LinkageVo;
 import com.docker.apps.active.vo.card.ActiveManagerDetailVo;
-import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 
@@ -58,6 +58,18 @@ public interface ActiveService {
     @POST("api.php?m=activity.delete")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> delete(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.getJoinList")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<ActivePersionVo>>>> persionList(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.updateReviewStatus")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> updateReviewStatus(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.evoucherValidate")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> evoucherValidate(@FieldMap Map<String, String> params);
 
 
     //ActiveManagerDetailVo

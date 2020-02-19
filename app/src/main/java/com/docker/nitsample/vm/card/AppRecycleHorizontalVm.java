@@ -57,7 +57,6 @@ public class AppRecycleHorizontalVm extends NitcommonCardViewModel {
         Log.d("sss", "process: ===============================");
     }
 
-
     @Override
     public BaseItemModel formatData(BaseItemModel data) {
         return null;
@@ -77,8 +76,9 @@ public class AppRecycleHorizontalVm extends NitcommonCardViewModel {
 
     @Override
     public void loadCardData(BaseCardVo accountHeadCardVo) {
+        if (((AppRecycleHorizontalCardVo) accountHeadCardVo).getActiveVos() != null && ((AppRecycleHorizontalCardVo) accountHeadCardVo).getActiveVos().get() != null) {
+            ((AppRecycleHorizontalCardVo) accountHeadCardVo).getActiveVos().get().clear();
+        }
         fetchAppIndexMenuData((AppRecycleHorizontalCardVo) accountHeadCardVo);
     }
-
-
 }

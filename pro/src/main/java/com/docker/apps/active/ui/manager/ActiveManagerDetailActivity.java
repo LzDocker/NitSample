@@ -277,12 +277,14 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
 
         // 扫码核销
         mBinding.tvScanerTicker.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGE_VERFIC).navigation();
+
+
+            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGE_VERFIC).withString("activityid", activeVo.dataid).navigation();
         });
 
         // 名单管理
         mBinding.tvPersionManager.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_PERSION_LIST).navigation();
+            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_PERSION_LIST).withString("activityid", activeVo.dataid).navigation();
         });
     }
 

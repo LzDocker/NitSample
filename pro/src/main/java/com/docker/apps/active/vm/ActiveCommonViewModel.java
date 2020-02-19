@@ -2,7 +2,6 @@ package com.docker.apps.active.vm;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.databinding.ObservableList;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -12,14 +11,13 @@ import com.docker.apps.active.vo.ActiveSucVo;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.ActiveWraperVo;
 import com.docker.apps.active.vo.LinkageVo;
-import com.docker.apps.active.vo.PersionVo;
 import com.docker.apps.active.vo.card.ActiveManagerDetailVo;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.entity.PublishRstVo;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
-import com.docker.common.common.vo.card.BaseCardVo;
-import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
@@ -165,6 +163,7 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
             public void onComplete(Resource<String> resource) {
                 super.onComplete(resource);
                 mDoactiveLv.setValue("1");
+                RxBus.getDefault().post(new RxEvent<>("activeStusUpdate", activeManagerDetailVo.dataid));
             }
         }));
     }
@@ -178,6 +177,7 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
             public void onComplete(Resource<String> resource) {
                 super.onComplete(resource);
                 mDoactiveLv.setValue("2");
+                RxBus.getDefault().post(new RxEvent<>("activedel", activeManagerDetailVo.dataid));
             }
         }));
     }
@@ -223,4 +223,19 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                 }));
 
     }
+
+    public final MediatorLiveData<String> mValidateLv = new MediatorLiveData<>();
+
+    public void evoucherValidate(HashMap<String, String> param) {
+        mValidateLv.addSource(RequestServer(activeService.evoucherValidate(param)), new NitNetBoundObserver<String>(new NitBoundCallback<String>() {
+            @Override
+            public void onComplete(Resource<String> resource) {
+                super.onComplete(resource);
+                mValidateLv.setValue("succ");
+                RxBus.getDefault().post(new RxEvent<>("ValidateSuccess", ""));
+            }
+        }));
+    }
+
+
 }

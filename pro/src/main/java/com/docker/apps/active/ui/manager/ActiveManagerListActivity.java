@@ -3,21 +3,34 @@ package com.docker.apps.active.ui.manager;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.docker.apps.R;
+import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.databinding.ProActiveManagerBinding;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
+import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.indector.CommonIndector;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /*
  * 活动管理列表
@@ -28,6 +41,7 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
 
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
+    private Disposable disposable;
 
     @Override
     public NitCommonContainerViewModel getmViewModel() {
@@ -50,45 +64,75 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
         super.onCreate(savedInstanceState);
         mToolbar.setTitle("活动管理");
 
-        mToolbar.getTvTitle().setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).navigation();
-
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("activedel")
+                    || rxEvent.getT().equals("activeStusUpdate")
+                    || rxEvent.getT().equals("active_refresh")
+                    || rxEvent.getT().equals("activemodify")) {
+                ((NitCommonFragment) fragments.get(mBinding.viewPager.getCurrentItem())).onReFresh(null);
+            }
         });
+
     }
 
     @Override
     public void initView() {
-
+        peocessTab();
     }
 
     @Override
     public void initObserver() {
 
-        List<CircleTitlesVo> circleTitlesVos = new ArrayList<>();
-        CircleTitlesVo circleTitlesVo = new CircleTitlesVo();
-        circleTitlesVo.setName("进行中");
-        CircleTitlesVo circleTitlesVo1 = new CircleTitlesVo();
-        circleTitlesVo1.setName("已结束");
-        circleTitlesVos.add(circleTitlesVo);
-        circleTitlesVos.add(circleTitlesVo1);
-        peocessTab(circleTitlesVos);
     }
 
-    public void peocessTab(List<CircleTitlesVo> circleTitlesVos) {
-        String[] titles = new String[circleTitlesVos.size()];
-        for (int i = 0; i < circleTitlesVos.size(); i++) {
-            titles[i] = circleTitlesVos.get(i).getName();
-            fragments.add((Fragment) ARouter.getInstance()
-                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME_COUTAINER)
-                    .withSerializable("tabVo", (Serializable) circleTitlesVos)
-                    .withInt("pos", i)
-                    .navigation());
-        }
+    public void peocessTab() {
+        String[] titles = new String[]{"进行中", "已结束"};
+
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.isActParent = true;
+        commonListOptions.falg = 101;
+
+        HashMap<String, String> parmBegining = new HashMap<>();
+        HashMap<String, String> orderbymap1 = new HashMap<>();
+        orderbymap1.put("inputtime", "desc");
+        parmBegining.put("orderBy", GsonUtils.toJson(orderbymap1));
+        commonListOptions.ReqParam = parmBegining;
+        NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+        fragments.add(nitCommonContainerFragmentV2);
+
+
+        CommonListOptions commonListOptions1 = new CommonListOptions();
+        commonListOptions1.isActParent = true;
+        commonListOptions1.falg = 101;
+        HashMap<String, String> endinging = new HashMap<>();
+        HashMap<String, String> orderbymap2 = new HashMap<>();
+        orderbymap2.put("inputtime", "desc");
+        endinging.put("orderBy", GsonUtils.toJson(orderbymap2));
+        commonListOptions1.ReqParam = endinging;
+        NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
+        fragments.add(nitCommonContainerFragmentV21);
+
+
         // magic
         mBinding.viewPager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
+    }
 
+    @Override
+    public NitDelegetCommand providerNitDelegetCommand(int flag) {
+        return new NitDelegetCommand() {
+            @Override
+            public Class providerOuterVm() {
+                return ActiveCommonViewModel.class;
+            }
+
+            @Override
+            public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+                ActiveCommonViewModel innerVm = (ActiveCommonViewModel) commonListVm;
+                innerVm.apiType = 1;
+            }
+        };
     }
 
     @Override
@@ -97,4 +141,11 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
 }

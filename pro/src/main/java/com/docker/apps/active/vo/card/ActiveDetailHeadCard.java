@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.docker.apps.R;

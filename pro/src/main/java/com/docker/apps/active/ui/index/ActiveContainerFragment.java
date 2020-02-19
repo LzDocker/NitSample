@@ -29,8 +29,11 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.NitEmptyViewModel;
+import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.WorldNumList;
 import com.docker.common.common.widget.XPopup.FilterPopupView;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
@@ -40,6 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.disposables.Disposable;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -96,6 +101,8 @@ public class ActiveContainerFragment extends NitCommonFragment<ActiveCommonViewM
         mBinding.get().tvSortArea.setText(cityname);
     }
 
+    private Disposable disposable;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -108,6 +115,14 @@ public class ActiveContainerFragment extends NitCommonFragment<ActiveCommonViewM
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         NitBaseProviderCard.providerCoutainerForFrame(getChildFragmentManager(), R.id.frame_active, commonListOptions);
 
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("activedel")
+                    || rxEvent.getT().equals("activeStusUpdate")
+                    || rxEvent.getT().equals("active_refresh")
+                    || rxEvent.getT().equals("activemodify")) {
+                ((NitCommonFragment) fragment).onReFresh(null);
+            }
+        });
     }
 
     @Override
@@ -233,6 +248,14 @@ public class ActiveContainerFragment extends NitCommonFragment<ActiveCommonViewM
         if (requestCode == 3001 && resultCode == RESULT_OK) {
             WorldNumList.WorldEnty worldEnty = (WorldNumList.WorldEnty) data.getSerializableExtra("datasource");
             ((NitCommonListFragment) fragment).onReFresh(null);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
         }
     }
 }

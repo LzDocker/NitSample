@@ -29,29 +29,20 @@
             android:paddingRight="14dp">
 
 
-            <LinearLayout
-                android:id="@+id/ll_search"
+            <EditText
+                android:id="@+id/ed_serch"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/open_gry_bg_shape"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/ed_serch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:drawableLeft="@mipmap/serch_icon_nor"
-                    android:drawablePadding="10dp"
-                    android:gravity="center"
-                    android:hint="找人"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
+                android:drawableLeft="@mipmap/serch_icon_nor"
+                android:drawablePadding="10dp"
+                android:hint="找人"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:textSize="13sp" />
 
         </LinearLayout>
 

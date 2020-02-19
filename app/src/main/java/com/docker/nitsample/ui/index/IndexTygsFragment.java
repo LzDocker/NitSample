@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -25,6 +26,8 @@ import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vo.UserInfoVo;
@@ -49,6 +52,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.disposables.Disposable;
+
 import static com.docker.common.common.config.Constant.CommonListParam;
 
 /**
@@ -65,6 +70,8 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
         IndexTygsFragment.setArguments(bundle);
         return IndexTygsFragment;
     }
+
+    public Disposable disposable;
 
     @Override
     protected int getLayoutId() {
@@ -106,6 +113,19 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
 //                filterMap.put("is_recommend", "1");
                     JXhashMap.put("filter", GsonUtils.toJson(filterMap));
                     appRecycleHorizontalCardVo.mRepParamMap = JXhashMap;
+
+
+                    disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+                        if (rxEvent.getT().equals("activedel")
+                                || rxEvent.getT().equals("activeStusUpdate")
+                                || rxEvent.getT().equals("active_refresh")
+                                || rxEvent.getT().equals("activemodify")) {
+
+                            Log.d("sss", "next: =================11111====");
+                            appRecycleHorizontalCardVo.mNitcommonCardViewModel.loadCardData(appRecycleHorizontalCardVo);
+                            Log.d("sss", "next: =================2222====");
+                        }
+                    });
 
 
                     AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
@@ -188,20 +208,16 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
             commonListOptions.ReqParam.put("t", tabvos.get(i).type);
             commonListOptions.ReqParam.put("index_bottom_catid", tabvos.get(i).id);
             if ("activity".equals(tabvos.get(i).type)) {
-
                 commonListOptions.isActParent = false;
                 commonListOptions.falg = 101;
                 NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
                 fragments.add(nitCommonContainerFragmentV2);
-
             } else {
-
                 fragments.add((Fragment) ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
                         .withSerializable(CommonListParam, commonListOptions)
                         .navigation());
             }
-
         }
         //
         mBinding.get().viewPager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));
@@ -209,4 +225,11 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
         commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
 }

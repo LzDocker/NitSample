@@ -3,15 +3,17 @@ package com.docker.apps.active.ui.manager;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Pair;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.apps.R;
+import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.active.vm.ActivePersionListViewModel;
-import com.docker.apps.databinding.ProActiveManagerBinding;
 import com.docker.apps.databinding.ProActivePersionManagerBinding;
-import com.docker.cirlev2.vm.SampleListViewModel;
-import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
@@ -20,26 +22,31 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.indector.CommonIndector;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /*
  * 活动名单管理列表
  **/
-
+//api.php?m=activity.getJoinList
 @Route(path = AppRouter.ACTIVE_MANAGER_PERSION_LIST)
-public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommonContainerViewModel, ProActivePersionManagerBinding> {
+public class ActivePersionManagerListActivity extends NitCommonActivity<ActiveCommonViewModel, ProActivePersionManagerBinding> {
 
     public ArrayList<Fragment> fragments = new ArrayList<>();
 
+    public String activityid;
+
+    private Disposable disposable;
+
     @Override
-    public NitCommonContainerViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(NitCommonContainerViewModel.class);
+    public ActiveCommonViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(ActiveCommonViewModel.class);
     }
 
     @Override
@@ -57,15 +64,40 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mToolbar.setTitle("名单管理");
+        activityid = getIntent().getStringExtra("activityid");
+        peocessTab();
 
-        mToolbar.getTvTitle().setOnClickListener(v -> {
+        //ValidateSuccess
 
-        });
+
     }
 
     @Override
     public void initView() {
-        peocessTab();
+
+        mBinding.edSerch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (TextUtils.isEmpty(mBinding.edSerch.getText().toString().trim())) {
+                    return;
+                }
+                ((NitCommonContainerFragmentV2) fragments
+                        .get(mBinding.viewPager.getCurrentItem()))
+                        .UpdateReqParam(false, new Pair<>("keyword", mBinding.edSerch.getText().toString().trim()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     @Override
@@ -80,7 +112,8 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommo
         commonListOptions.isActParent = true;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions.ReqParam.put("", "");
+        commonListOptions.ReqParam.put("activityid", activityid);
+        commonListOptions.ReqParam.put("status", "0");
         NitCommonContainerFragmentV2 activeRegistFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions);
         fragments.add(activeRegistFragment);
 
@@ -89,7 +122,8 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommo
         commonListOptions1.isActParent = true;
         commonListOptions1.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions1.ReqParam.put("", "");
+        commonListOptions1.ReqParam.put("activityid", activityid);
+        commonListOptions1.ReqParam.put("status", "1");
         NitCommonContainerFragmentV2 activeWaitVifirFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(activeWaitVifirFragment);
 
@@ -97,7 +131,8 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommo
         commonListOptions3.isActParent = true;
         commonListOptions3.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions3.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListOptions3.ReqParam.put("", "");
+        commonListOptions3.ReqParam.put("activityid", activityid);
+        commonListOptions3.ReqParam.put("status", "2");
         NitCommonContainerFragmentV2 activeAleaVifirFragment = NitCommonContainerFragmentV2.newinstance(commonListOptions3);
         fragments.add(activeAleaVifirFragment);
 
@@ -118,7 +153,16 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommo
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+                ((ActivePersionListViewModel) commonListVm).mPersionStatusLv.observe(nitCommonFragment, s -> {
+                    nitCommonFragment.onReFresh(null);
+                });
+                ((ActivePersionListViewModel) commonListVm).acctivityid = getIntent().getStringExtra("activityid");
 
+                disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+                    if (rxEvent.getT().equals("ValidateSuccess")) {
+                        nitCommonFragment.onReFresh(null);
+                    }
+                });
             }
         };
         return nitDelegetCommand;
@@ -127,5 +171,13 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<NitCommo
     @Override
     public void initRouter() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
     }
 }

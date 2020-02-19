@@ -1,6 +1,9 @@
 package com.docker.apps.active.vo;
 
+import android.text.TextUtils;
+
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.model.BaseSampleItem;
@@ -21,6 +24,10 @@ public class ActiveVo extends BaseSampleItem {
     @Override
     public OnItemClickListener getOnItemClickListener() {
         return (item, view) -> {
+            if (item == null || TextUtils.isEmpty(((ActiveVo) item).uuid)) {
+                ToastUtils.showShort("数据不存在");
+                return;
+            }
             if (((ActiveVo) item).uuid.equals(CacheUtils.getUser().uuid)) {
                 ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).withSerializable("activeVo", ((ActiveVo) item)).navigation();
             } else {
@@ -68,5 +75,9 @@ public class ActiveVo extends BaseSampleItem {
 
     public int signStatus; // 0，未报名，1 已报名
 
+    public String point;
+
+    public String actTypeName;
+    public String circlename;
 }
 

@@ -10,13 +10,18 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.alibaba.sdk.android.oss.common.utils.DateUtil;
+import com.baidu.location.BDLocation;
+import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
+import com.dcbfhd.utilcode.utils.TimeUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
@@ -36,11 +41,13 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.ParamUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.location.LocationManager;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.picker.CommonWheelPicker;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.umeng.commonsdk.debug.D;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,6 +80,10 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
     public String activitytitle;
     public String activityid;
+
+
+    @Inject
+    LocationManager locationManager;
 
     /*
      *
@@ -119,14 +130,15 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
         mHandParam = ((CirclePublishActivity) getHoldingActivity()).getmStartParam();
 
         Bundle bundle = getArguments().getBundle("bundle");
-
-        activityid = bundle.getString("activityid");
-        activitytitle = bundle.getString("activitytitle");
+        if (bundle != null) {
+            activityid = bundle.getString("activityid");
+            activitytitle = bundle.getString("activitytitle");
+        }
 
 
         mViewModel.mDynamicPublishLV.observe(this, s -> {
             ToastUtils.showShort("发布成功");
-            RxBus.getDefault().post(new RxEvent<>("dynamic_refresh", ""));
+            RxBus.getDefault().post(new RxEvent<>("active_refresh", ""));
             getHoldingActivity().finish();
         });
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
@@ -183,6 +195,65 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
                 activePubVo.utid = activeVo.utid;
                 activePubVo.actType = activeVo.actType;
+                activePubVo.memberid = activeVo.memberid;
+                activePubVo.uuid = activeVo.uuid;
+                activePubVo.title = activeVo.title;
+
+                if (activeVo.banner != null && activeVo.banner.size() > 0) {
+                    for (int i = 0; i < activeVo.banner.size(); i++) {
+                        if (!TextUtils.isEmpty(activeVo.banner.get(i).getImg())) {
+                            selectSurfImgs.add(CommonBdUtils.getCompleteImageUrl(activeVo.banner.get(i).getImg()));
+                        } else {
+                            selectSurfImgs.add(CommonBdUtils.getCompleteImageUrl(activeVo.banner.get(i).getUrl()));
+                        }
+                    }
+                    initBanner(selectSurfImgs);
+                }
+
+                activePubVo.isDate = activeVo.isDate;
+                if ("1".equals(activePubVo.isDate)) {
+                    mBinding.get().rbLimitTime.setChecked(true);
+                } else {
+                    mBinding.get().rbNlimTime.setChecked(true);
+                }
+
+                activePubVo.dataid = activeVo.dataid;
+
+                activePubVo.startDate = stampToDate(activeVo.startDate);
+                mBinding.get().tvStartTime.setText(activePubVo.startDate);
+
+                activePubVo.endDate = stampToDate(activeVo.endDate);
+                mBinding.get().tvEndTime.setText(activePubVo.endDate);
+
+
+                activePubVo.num = activeVo.limitNum;
+                activePubVo.situs = activeVo.situs;
+
+                activePubVo.location = activeVo.location;
+                activePubVo.address = activeVo.address;
+                activePubVo.cityCode = activeVo.cityCode;
+                activePubVo.lng = activeVo.lng;
+                activePubVo.lat = activeVo.lat;
+                activePubVo.sponsorName = activeVo.sponsorName;
+                activePubVo.contact = activeVo.contact;
+                activePubVo.content = activeVo.content;
+                activePubVo.contentshow = "已编辑";
+
+                activePubVo.signAudit = activeVo.signAudit;
+                if ("0".equals(activePubVo.signAudit)) {
+                    mBinding.get().activeHeCheck.setChecked(false);
+                } else {
+                    mBinding.get().activeHeCheck.setChecked(true);
+                }
+
+                activePubVo.circleid = activeVo.circleid;
+                activePubVo.circleidshow = activeVo.circlename;
+                activePubVo.actTypeshow = activeVo.actTypeName;
+
+
+                activePubVo.point = activeVo.point;
+                mBinding.get().setPub(activePubVo);
+
 
             });
             HashMap<String, String> parm = new HashMap<>();
@@ -399,12 +470,34 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
         });
 
         mBinding.get().llLoaction.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.COMMON_LOCATION_ACTIVITY).navigation(getHoldingActivity(), 10099);
+//            ARouter.getInstance().build(AppRouter.COMMON_LOCATION_ACTIVITY).navigation(getHoldingActivity(), 10099);
+
+            locationManager.processLocation(this.getHoldingActivity(),
+                    (o) -> {
+                        if (o != null) {
+                            mBinding.get().getPub().lat = String.valueOf(((BDLocation) o).getLatitude());
+                            mBinding.get().getPub().lng = String.valueOf(((BDLocation) o).getLongitude());
+                            mBinding.get().getPub().cityCode = ((BDLocation) o).getCityCode();
+                            mBinding.get().getPub().location = ((BDLocation) o).getAddrStr();
+                        } else {
+                            Log.d("sss", "onCreate: =======定位失败========");
+                        }
+                    },
+                    (geo) -> {
+                        if (geo != null) {
+                            Log.d("sss", "==city==" + ((ReverseGeoCodeResult) geo).getAddress());
+                        } else {
+                            Log.d("sss", "==citycode=failed=");
+                        }
+                    }
+            );
+
+
         });
 
         // 活动内容
         mBinding.get().llContent.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.ACTIVE_CONTENT_EDIT).withString("data", content).navigation(this.getHoldingActivity(), 10080);
+            ARouter.getInstance().build(AppRouter.ACTIVE_CONTENT_EDIT).withString("data", mBinding.get().getPub().content).navigation(this.getHoldingActivity(), 10080);
         });
 
         // 活动类型
@@ -413,6 +506,9 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
         });
 
         mBinding.get().activeHeCheck.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (mBinding.get().getPub() == null) {
+                return;
+            }
             if (isChecked) {
                 mBinding.get().getPub().signAudit = "1";
             } else {
@@ -441,6 +537,15 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 //        });
 
 
+    }
+
+    public static String stampToDate(String s) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(s + "000");
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
     }
 
     @Override
@@ -574,22 +679,22 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 //        }
 
 
-        if (mSourceUpParam.imgList.size() > 0) {
-            for (int i = 0; i < mSourceUpParam.imgList.size(); i++) {
+        if (selectSurfImgs.size() > 0) {
+            for (int i = 0; i < selectSurfImgs.size(); i++) {
                 paramMap.put("banner[" + i + "][t]", "1");
-                paramMap.put("banner[" + i + "][url]", mSourceUpParam.imgList.get(i));
-                paramMap.put("banner[" + i + "][img]", mSourceUpParam.imgList.get(i));
+                paramMap.put("banner[" + i + "][url]", selectSurfImgs.get(i));
+                paramMap.put("banner[" + i + "][img]", selectSurfImgs.get(i));
                 paramMap.put("banner[" + i + "][sort]", i + 1 + "");
             }
         }
-        if (mSourceUpParam.upLoadVideoList.size() > 0) {
-            for (int i = 0; i < mSourceUpParam.upLoadVideoList.size(); i++) {
-                paramMap.put("banner[" + i + "][t]", "2");
-                paramMap.put("banner[" + i + "][url]", mSourceUpParam.upLoadVideoList.get(i).getVideoUrl());
-                paramMap.put("banner[" + i + "][img]", mSourceUpParam.upLoadVideoList.get(i).getVideoImgUrl());
-                paramMap.put("banner[" + i + "][sort]", i + 1 + "");
-            }
-        }
+//        if (mSourceUpParam.upLoadVideoList.size() > 0) {
+//            for (int i = 0; i < mSourceUpParam.upLoadVideoList.size(); i++) {
+//                paramMap.put("banner[" + i + "][t]", "2");
+//                paramMap.put("banner[" + i + "][url]", mSourceUpParam.upLoadVideoList.get(i).getVideoUrl());
+//                paramMap.put("banner[" + i + "][img]", mSourceUpParam.upLoadVideoList.get(i).getVideoImgUrl());
+//                paramMap.put("banner[" + i + "][sort]", i + 1 + "");
+//            }
+//        }
 
         paramMap.put("isDate", mBinding.get().getPub().isDate);
         paramMap.put("startDate", mBinding.get().getPub().startDate);
@@ -607,6 +712,9 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
         paramMap.put("limitNum", mBinding.get().getPub().num);
         paramMap.put("type", "activity");
 
+        if (!TextUtils.isEmpty(mBinding.get().getPub().dataid)) {
+            paramMap.put("dataid", mBinding.get().getPub().dataid);
+        }
         mViewModel.publishActive(paramMap);
     }
 
