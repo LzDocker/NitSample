@@ -49,7 +49,13 @@ public class ActiveHeadCardViewModel extends NitcommonCardViewModel {
                     @Override
                     public void onNetworkError(Resource<ActiveVo> resource) {
                         super.onNetworkError(resource);
-                        activeDetailHeadCard.setVoObservableField(null);
+                        activeDetailHeadCard.setVoObservableField(new ActiveVo());
+                    }
+
+                    @Override
+                    public void onBusinessError(Resource<ActiveVo> resource) {
+                        super.onBusinessError(resource);
+                        activeDetailHeadCard.setVoObservableField(new ActiveVo());
                     }
                 }));
     }

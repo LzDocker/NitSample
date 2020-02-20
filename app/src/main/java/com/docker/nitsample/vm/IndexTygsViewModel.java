@@ -34,6 +34,18 @@ public class IndexTygsViewModel extends NitCommonVm {
                 super.onComplete(resource);
                 mTabvoLiveData.setValue(resource.data);
             }
+
+            @Override
+            public void onBusinessError(Resource<List<Tabvo>> resource) {
+                super.onBusinessError(resource);
+                mTabvoLiveData.setValue(null);
+            }
+
+            @Override
+            public void onNetworkError(Resource<List<Tabvo>> resource) {
+                super.onNetworkError(resource);
+                mTabvoLiveData.setValue(null);
+            }
         }));
 
     }

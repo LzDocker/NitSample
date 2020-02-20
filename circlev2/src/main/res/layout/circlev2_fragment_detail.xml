@@ -44,14 +44,14 @@
                 android:paddingBottom="10dp">
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/iv_user_icon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center_vertical"
                     android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
+                    app:avaterImageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
 
                 <TextView
                     android:id="@+id/tv_username"

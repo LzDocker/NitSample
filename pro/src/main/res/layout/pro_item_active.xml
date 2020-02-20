@@ -23,7 +23,7 @@
         android:layout_marginBottom="5dp"
         android:background="@color/white"
         android:onClick="@{(view)->item.getOnItemClickListener.onItemClick(item,view)}"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="4dp"
         app:cardElevation="2dp">
 
         <LinearLayout
@@ -34,7 +34,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="162dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 app:imageNomUrl="@{BdUtils.getCommentSingleImg(item.banner)}" />
 
             <LinearLayout
@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:visibleGone="@{item.scope==0}">
+                    app:visibleGone="@{item.scope==0||item.scope==2}">
 
                     <TextView
                         android:layout_width="0dp"
@@ -90,6 +90,20 @@
                         android:textSize="11sp"
                         app:visibleGone="@{item.status == -1}" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#BDBDBD"
+                        android:paddingLeft="5dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="3dp"
+                        android:text="已下架"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        app:visibleGone="@{item.status == 0 &amp;&amp; item.scope==2}" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -124,7 +138,7 @@
                         android:text="待审核"
                         android:textColor="@color/white"
                         android:textSize="11sp"
-                        app:visibleGone="@{item.signStatus == 0}" />
+                        app:visibleGone="@{item.signStatus == 0 &amp;&amp; item.status != -1}" />
 
                     <TextView
                         android:layout_width="wrap_content"

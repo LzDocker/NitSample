@@ -71,7 +71,6 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
 
     @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
-
         if (TopCommentVo == null) {
             return circleApiService.fechCommentList(param);
         } else {

@@ -19,7 +19,7 @@ public class GlideImageLoaderv2 extends ImageLoader {
         imageView.setCropToPadding(true);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         RequestOptions options = new RequestOptions();
-//        options.transforms(new CenterCrop(), new RoundedCorners(8));
+        options.transforms(new CenterCrop(), new RoundedCorners(2));
         Glide.with(context)
                 .load(CommonBdUtils.getCompleteImageUrl((String) path))
                 .apply(options)

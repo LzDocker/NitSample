@@ -47,7 +47,10 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        flag = getIntent().getStringExtra("flag");
+        activeSucVo = (ActiveSucVo) getIntent().getSerializableExtra("ActiveSucVo");
+        activityid = (String) getIntent().getStringExtra("activityid");
+        activitytitle = (String) getIntent().getStringExtra("activitytitle");
+        flag = String.valueOf(activeSucVo.signStatus);
         if ("0".equals(flag)) {
             mBinding.llNoValutify.setVisibility(View.VISIBLE);
             mBinding.llValutify.setVisibility(View.GONE);
@@ -55,10 +58,6 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
             mBinding.llValutify.setVisibility(View.VISIBLE);
             mBinding.llNoValutify.setVisibility(View.GONE);
         }
-
-        activeSucVo = (ActiveSucVo) getIntent().getSerializableExtra("ActiveSucVo");
-        activityid = (String) getIntent().getStringExtra("activityid");
-        activitytitle = (String) getIntent().getStringExtra("activitytitle");
 
         mBinding.tvBack.setOnClickListener(v -> {
             ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", activityid).navigation();
@@ -117,11 +116,13 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
         mBinding.tvActiveMine.setOnClickListener(v -> {
             // 查看自己的活动
             ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_LIST).navigation();
+            finish();
         });
 
         mBinding.tvActiveOther.setOnClickListener(v -> {
             // 查看别人的活动
             ARouter.getInstance().build(AppRouter.ACTIVE_INDEX).navigation();
+            finish();
         });
     }
 

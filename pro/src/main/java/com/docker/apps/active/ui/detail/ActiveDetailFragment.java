@@ -37,6 +37,7 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.tool.PhotoGalleryUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
+import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.databinding.CommonDetailCoutainerLayoutBinding;
 import com.lxj.xpopup.XPopup;
@@ -99,7 +100,7 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
                 }
                 if (activeVo.signStatus == 1) {
 //                    return "查看我的凭证"; //绿色
-
+                    showPop(activeVo.evoucherNo, activeVo.AuditUrl);
                     //todo
                 }
                 if (activeVo.signStatus == 2) {
@@ -122,6 +123,9 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
     }
 
     private void showPop(String evoucherNo, String AuditUrl) {
+        if (TextUtils.isEmpty(evoucherNo) || TextUtils.isEmpty(AuditUrl)) {
+            return;
+        }
         CardActivePopup centerPopup = new CardActivePopup(this.getHoldingActivity());
         basePopupView = new XPopup.Builder(this.getHoldingActivity()).setPopupCallback(new XPopupCallback() {
             @Override
@@ -220,9 +224,17 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
                     @Override
                     public void onPropertyChanged(Observable sender, int propertyId) {
                         activeVo = activeDetailHeadCard.voObservableField.get();
-                        mBinding.get().setItem(activeVo);
-                        processBot(activeVo);
-                        processTab();
+                        if (!TextUtils.isEmpty(activeVo.dataid)) {
+                            mBinding.get().setItem(activeVo);
+                            processBot(activeVo);
+                            processTab();
+                            mBinding.get().empty.hide();
+                        } else {
+                            mBinding.get().empty.showError();
+                            mBinding.get().empty.setOnretryListener(() -> {
+                                activeDetailHeadCard.mNitcommonCardViewModel.loadCardData(activeDetailHeadCard);
+                            });
+                        }
                     }
                 });
             }

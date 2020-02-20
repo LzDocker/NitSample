@@ -32,6 +32,7 @@ import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
+import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.common.widget.refresh.api.RefreshLayout;
 import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
@@ -110,23 +111,18 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
                     HashMap<String, String> JXhashMap = new HashMap<>();
                     JXhashMap.put("showFields", "*");
                     Map<String, String> filterMap = new HashMap<>();
-//                filterMap.put("is_recommend", "1");
+                    filterMap.put("is_recommend", "1");
                     JXhashMap.put("filter", GsonUtils.toJson(filterMap));
                     appRecycleHorizontalCardVo.mRepParamMap = JXhashMap;
-
 
                     disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
                         if (rxEvent.getT().equals("activedel")
                                 || rxEvent.getT().equals("activeStusUpdate")
                                 || rxEvent.getT().equals("active_refresh")
                                 || rxEvent.getT().equals("activemodify")) {
-
-                            Log.d("sss", "next: =================11111====");
                             appRecycleHorizontalCardVo.mNitcommonCardViewModel.loadCardData(appRecycleHorizontalCardVo);
-                            Log.d("sss", "next: =================2222====");
                         }
                     });
-
 
                     AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
                             new LayoutManagerVo(0, 0, false),
@@ -160,13 +156,23 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
 
         mViewModel.fetchIndexTab();
         mViewModel.mTabvoLiveData.observe(this, tabvos -> {
-            peocessTab(tabvos);
+            if (tabvos != null) {
+                if (fragments.size() == 0) {
+                    peocessTab(tabvos);
+                }
+                mBinding.get().emptyTab.hide();
+            } else {
+                mBinding.get().emptyTab.showError();
+                mBinding.get().emptyTab.setOnretryListener(() -> {
+                    mBinding.get().emptyTab.showLoading();
+                    mBinding.get().refresh.autoRefresh();
+                    mViewModel.fetchIndexTab();
+                });
+            }
         });
-
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), com.docker.cirlev2.R.id.frame_header, commonListOptions);
-
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();

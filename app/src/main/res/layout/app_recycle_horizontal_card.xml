@@ -74,16 +74,14 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F8F8F8"
             android:overScrollMode="always"
-            android:paddingTop="10dp"
             app:itemBinding="@{item.getItemImgBinding()}"
             app:items="@{item.getActiveVos()}"
             bind:layoutManager="@{LayoutManager.linear(item.managerStyleVo.orientation,item.managerStyleVo.reverseLayout)}" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="12dp"
+            android:layout_height="8dp"
             android:layout_marginTop="10dp"
             android:background="#f7f7f7" />
     </LinearLayout>

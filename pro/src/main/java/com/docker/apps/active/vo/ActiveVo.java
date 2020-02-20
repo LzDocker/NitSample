@@ -81,5 +81,12 @@ public class ActiveVo extends BaseSampleItem {
 
     public String actTypeName;
     public String circlename;
+
+
+    public String joinid;
+    public String evoucherNo;
+    public String AuditUrl;
+
+
 }
 

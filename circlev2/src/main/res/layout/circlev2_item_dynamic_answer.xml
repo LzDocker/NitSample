@@ -87,7 +87,7 @@
                 app:visibleGone="@{item.commentUsers.size != 0}">
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/round_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"

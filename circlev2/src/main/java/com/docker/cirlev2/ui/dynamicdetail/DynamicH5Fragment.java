@@ -80,6 +80,10 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
             }
         });
         initWebView();
+
+        if (CacheUtils.getUser() != null && serviceDataBean.getUuid().equals(CacheUtils.getUser().uuid)) {
+            mBinding.get().tvAttention.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -88,13 +88,23 @@ public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContain
     public void peocessTab() {
         String[] titles = new String[]{"待审核", "待参加", "已结束"};
 
+
+        /*
+        * 待审核： my_join=1&activityStatus=1&filter={“sign_memberid”:”938”,”status”:”0”}
+待参加： my_join=1&activityStatus=1&filter={“sign_memberid”:”938”,”status”:”1”}
+已结束： my_join=1&activityStatus=-1&filter={“sign_memberid”:”938”}
+        * */
+
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.isActParent = true;
         commonListOptions.falg = 101;
         commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions.ReqParam.put("my_join", "1");
-        commonListOptions.ReqParam.put("memberid", CacheUtils.getUser().uid);
-        commonListOptions.ReqParam.put("signStatus", "0");
+        commonListOptions.ReqParam.put("activityStatus", "1");
+        HashMap<String, String> filterMap = new HashMap<>();
+        filterMap.put("sign_memberid", CacheUtils.getUser().uid);
+        filterMap.put("status", "0");
+        commonListOptions.ReqParam.put("filter", GsonUtils.toJson(filterMap));
         commonListOptions.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
         fragments.add(nitCommonContainerFragmentV2);
@@ -105,8 +115,11 @@ public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContain
         commonListOptions1.falg = 101;
         commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions1.ReqParam.put("my_join", "1");
-        commonListOptions1.ReqParam.put("memberid", CacheUtils.getUser().uid);
-        commonListOptions1.ReqParam.put("signStatus", "1");
+        commonListOptions.ReqParam.put("activityStatus", "1");
+        HashMap<String, String> filterMap1 = new HashMap<>();
+        filterMap1.put("sign_memberid", CacheUtils.getUser().uid);
+        filterMap1.put("status", "1");
+        commonListOptions1.ReqParam.put("filter", GsonUtils.toJson(filterMap1));
         commonListOptions1.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(nitCommonContainerFragmentV21);
@@ -117,8 +130,10 @@ public class ActiveRegistListActivity extends NitCommonActivity<NitCommonContain
         commonListOptions2.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions2.falg = 101;
         commonListOptions2.ReqParam.put("my_join", "1");
-        commonListOptions2.ReqParam.put("memberid", CacheUtils.getUser().uid);
         commonListOptions2.ReqParam.put("activityStatus", "-1");
+        HashMap<String, String> filterMap2 = new HashMap<>();
+        filterMap2.put("sign_memberid", CacheUtils.getUser().uid);
+        commonListOptions2.ReqParam.put("filter", GsonUtils.toJson(filterMap2));
         commonListOptions2.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV22 = NitCommonContainerFragmentV2.newinstance(commonListOptions2);
         fragments.add(nitCommonContainerFragmentV22);

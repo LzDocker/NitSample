@@ -90,13 +90,20 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
     public void peocessTab() {
         String[] titles = new String[]{"进行中", "已结束"};
 
+        /*
+        * 进行中：activityStatus=1&filter={“memberid”:”938”}
+已结束：activityStatus=-1&filter={“memberid”:”938”}
+
+        * */
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.isActParent = true;
         commonListOptions.falg = 101;
         commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions.ReqParam.put("activityStatus", "1");
         commonListOptions.ReqParam.put("showFields", "*");
-        commonListOptions.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        HashMap<String, String> filterMap = new HashMap<>();
+        filterMap.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions.ReqParam.put("filter", GsonUtils.toJson(filterMap));
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
         fragments.add(nitCommonContainerFragmentV2);
 
@@ -106,7 +113,9 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
         commonListOptions1.falg = 101;
         commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
         commonListOptions1.ReqParam.put("activityStatus", "-1");
-        commonListOptions1.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        HashMap<String, String> filterMap1 = new HashMap<>();
+        filterMap1.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions1.ReqParam.put("filter", GsonUtils.toJson(filterMap1));
         commonListOptions1.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(nitCommonContainerFragmentV21);
@@ -130,6 +139,7 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 ActiveCommonViewModel innerVm = (ActiveCommonViewModel) commonListVm;
                 innerVm.apiType = 1;
+                innerVm.scope = 2;
             }
         };
     }

@@ -168,11 +168,23 @@ public class CirclePubRequestionFragment extends NitCommonFragment<PublishViewMo
 
 
     public void processStaparam() {
+        if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+            mBinding.get().circleSelect.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.get().circleSelect.setVisibility(View.GONE);
+        }
+
         if (mHandParam != null) {
             mBinding.get().circleSelect.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(mHandParam.getCircleid())) {
-                mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
+//                mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
             }
+            if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                mBinding.get().circleSelect.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circleSelect.setVisibility(View.GONE);
+            }
+
             if (TextUtils.isEmpty(mHandParam.extentron2)) {
                 mBinding.get().tvPerssionSelect.setText("全部");
             } else {
@@ -189,6 +201,10 @@ public class CirclePubRequestionFragment extends NitCommonFragment<PublishViewMo
                     mBinding.get().tvCircleSelect.setText(mHandParam.getExtentron() + " / " + mHandParam.getExtenMap().get("classname1") + " / " + mHandParam.getExtenMap().get("classname2"));
                     break;
             }
+        }
+
+        if (mEditType == 2) {
+            mBinding.get().circleSelect.setVisibility(View.GONE);
         }
     }
 
@@ -209,20 +225,26 @@ public class CirclePubRequestionFragment extends NitCommonFragment<PublishViewMo
     }
 
     private void showVideoProgressInfo() {
-        if (isProgress && audioTime <= 60) {
-            mBinding.get().activityQuizTvTime.setVisibility(View.VISIBLE);
-            mBinding.get().activityQuizTvTime.setText(audioTime + "''");
-            audioTime++;
-            startUpdateTimer();
-        } else {
-            isProgress = false;
-            mIat.stopListening();
-            mBinding.get().activityQuizTvReRecord.setVisibility(View.VISIBLE);
-            mBinding.get().activityQuizIvPause.setVisibility(View.GONE);
-            mBinding.get().activityQuizIvPlay.setVisibility(View.VISIBLE);
-            mBinding.get().activityQuizPb.setVisibility(View.GONE);
-            mBinding.get().activityQuizPb.setProgress(0);
+
+        try {
+            if (isProgress && audioTime <= 60) {
+                mBinding.get().activityQuizTvTime.setVisibility(View.VISIBLE);
+                mBinding.get().activityQuizTvTime.setText(audioTime + "''");
+                audioTime++;
+                startUpdateTimer();
+            } else {
+                isProgress = false;
+                mIat.stopListening();
+                mBinding.get().activityQuizTvReRecord.setVisibility(View.VISIBLE);
+                mBinding.get().activityQuizIvPause.setVisibility(View.GONE);
+                mBinding.get().activityQuizIvPlay.setVisibility(View.VISIBLE);
+                mBinding.get().activityQuizPb.setVisibility(View.GONE);
+                mBinding.get().activityQuizPb.setProgress(0);
+            }
+        } catch (Exception e) {
+
         }
+
     }
 
     private void startUpdateTimer() {

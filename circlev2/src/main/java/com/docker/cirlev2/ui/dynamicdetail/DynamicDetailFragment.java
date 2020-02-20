@@ -12,6 +12,7 @@ import com.docker.cirlev2.databinding.Circlev2FragmentDetailBinding;
 import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 
@@ -60,6 +61,11 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
             }
 
         });
+
+        if (CacheUtils.getUser() != null && serviceDataBean.getUuid().equals(CacheUtils.getUser().uuid)) {
+            mBinding.get().tvAttention.setVisibility(View.GONE);
+        }
+
     }
 
     @Override

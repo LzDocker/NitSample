@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.Postcard;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.ui.CircleInfoActivity;
 import com.docker.cirlev2.ui.detail.CircleInviteActivity;
@@ -12,10 +13,14 @@ import com.docker.cirlev2.ui.persion.CirclePersonListActivity;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.pro.AppVo;
+import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.core.widget.BottomSheetDialog;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class CircleDetailFragment_tyz extends NitDefaultCircleFragment {
@@ -79,30 +84,46 @@ public class CircleDetailFragment_tyz extends NitDefaultCircleFragment {
     @Override
     public void onCircleMenuClick() {
 //        super.onCircleMenuClick();
-        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-        bottomSheetDialog.setDataCallback(new String[]{"成员管理", "编辑分类"}, position -> {
-            bottomSheetDialog.dismiss();
-            switch (position) {
-                case 0: //成员管理
-                    if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.detailVo.get().getRole()> 0*/) {
-                        StaCirParam mStartParam = new StaCirParam();
-                        mStartParam.setCircleid(circleid);
-                        mStartParam.setUtid(utid);
-                        mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
-                        CirclePersonListActivity.startMe(this.getHoldingActivity(), mStartParam, mViewModel.mCircleDetailLv.getValue());
-                    }
-                    break;
-                case 1: //编辑分类
-                    onLevel1EditClick();
-                    break;
-            }
-        });
-        bottomSheetDialog.show(this.getHoldingActivity());
+        onShareClick();
+
+//        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+//        bottomSheetDialog.setDataCallback(new String[]{"成员管理", "编辑分类"}, position -> {
+//            bottomSheetDialog.dismiss();
+//            switch (position) {
+//                case 0: //成员管理
+//                    if (mViewModel.mCircleDetailLv.getValue() != null /*&& mViewModel.detailVo.get().getRole()> 0*/) {
+//                        StaCirParam mStartParam = new StaCirParam();
+//                        mStartParam.setCircleid(circleid);
+//                        mStartParam.setUtid(utid);
+//                        mStartParam.type = Integer.parseInt(mViewModel.mCircleDetailLv.getValue().getType());
+//                        CirclePersonListActivity.startMe(this.getHoldingActivity(), mStartParam, mViewModel.mCircleDetailLv.getValue());
+//                    }
+//                    break;
+//                case 1: //编辑分类
+//                    onLevel1EditClick();
+//                    break;
+//            }
+//        });
+//        bottomSheetDialog.show(this.getHoldingActivity());
     }
 
     @Override
     public void initImmersionBar() {
         super.initImmersionBar();
 
+    }
+
+    @Override
+    public void processPro(NitAbsSampleAdapter mAdapter) {
+        super.processPro(mAdapter);
+        mAdapter.remove(1);
+    }
+
+    @Override
+    public void processPubRouterNext(Postcard postcard) {
+//        super.processPubRouterNext(postcard);
+        HashMap<String, String> param = new HashMap<>();
+        param.put("isShowBot", "1");
+        postcard.withSerializable("extens", param).navigation();
     }
 }

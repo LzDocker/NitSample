@@ -65,7 +65,7 @@ public class CircleShareSelectActivity extends NitCommonListActivity<CirlcleSele
 
     @Override
     public void initView() {
-        mToolbar.setTitle("选择圈子");
+        mToolbar.setTitle("选择");
         mViewModel.selectVoMediatorLiveData.observe(this, circlePubSelectVo -> {
             mStaCirParam.setCircleid(circlePubSelectVo.getCircleid());
             mStaCirParam.setUtid(circlePubSelectVo.getUtid());

@@ -10,5 +10,5 @@ public class ActiveSucVo implements Serializable {
     public String joinid;
     public String evoucherNo;
     public String AuditUrl;
-
+    public int signStatus; //0待审核 1待核销（可查看核销凭证）
 }

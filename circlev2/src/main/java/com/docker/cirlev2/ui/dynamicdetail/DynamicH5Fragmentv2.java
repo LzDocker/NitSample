@@ -18,6 +18,7 @@ import com.docker.cirlev2.widget.nested.InfoBean;
 import com.docker.cirlev2.widget.nested.RvAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.refresh.api.RefreshLayout;
 import com.docker.common.common.widget.refresh.listener.OnLoadMoreListener;
@@ -57,6 +58,7 @@ public class DynamicH5Fragmentv2 extends NitCommonFragment<SampleListViewModel, 
         super.onActivityCreated(savedInstanceState);
         serviceDataBean = (ServiceDataBean) getArguments().getSerializable("dataSource");
         mBinding.get().setItem(serviceDataBean);
+
 //
 //        CommonListOptions commonListOptions = new CommonListOptions();
 //        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;

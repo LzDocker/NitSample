@@ -108,7 +108,6 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
                 break;
         }
 
-
         return nitDelegetCommand;
     }
 
@@ -126,7 +125,6 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
 
         serviceDataBean = (ServiceDataBean) getArguments().getSerializable("dataSource");
         mBinding.get().setItem(serviceDataBean);
-
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.isActParent = false;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;

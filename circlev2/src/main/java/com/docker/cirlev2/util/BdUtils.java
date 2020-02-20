@@ -61,7 +61,7 @@ public class BdUtils {
         if (commentVo == null) {
             return false;
         }
-        if (TextUtils.isEmpty(String.valueOf(commentVo.starNum))) {
+        if (TextUtils.isEmpty(String.valueOf(commentVo.starNum)) || commentVo.starNum == 0) {
             return false;
         } else {
             return true;

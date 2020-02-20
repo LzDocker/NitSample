@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.CollectionUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -434,42 +435,48 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         }
 
         if (staCirParam != null) {
-            if ("0".equals(appVo.id)) {
-                ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
-                        .withInt("editType", 1)
-                        .withInt("type", PUBLISH_TYPE_ACTIVE)
-                        .withSerializable("mStartParam", staCirParam)
-                        .navigation();
-            }
 
-            if ("1".equals(appVo.id)) {
-                ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
-                        .withInt("editType", 1)
-                        .withInt("type", PUBLISH_TYPE_NEWS)
-                        .withSerializable("mStartParam", staCirParam)
-                        .navigation();
-            }
-
-            if ("2".equals(appVo.id)) {
-                ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
-                        .withInt("editType", 1)
-                        .withInt("type", PUBLISH_TYPE_QREQUESTION)
-                        .withSerializable("mStartParam", staCirParam)
-                        .navigation();
-            }
-
-            if ("-1".equals(appVo.id)) {
-                // 应用管理
-                ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MANAGER)
-                        .withSerializable("mStartParam", staCirParam)
-                        .navigation();
-            }
+            processPublishRouterClick(staCirParam, appVo);
 
         } else {
             ToastUtils.showShort("数据问题,请稍后");
         }
-
-
     }
+
+    public void processPublishRouterClick(StaCirParam staCirParam, AppVo appVo) {
+        Postcard postcard = null;
+        if ("0".equals(appVo.id)) {
+            postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withInt("type", PUBLISH_TYPE_ACTIVE)
+                    .withSerializable("mStartParam", staCirParam);
+        }
+
+        if ("1".equals(appVo.id)) {
+            postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withInt("type", PUBLISH_TYPE_NEWS)
+                    .withSerializable("mStartParam", staCirParam);
+        }
+
+        if ("2".equals(appVo.id)) {
+            postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withInt("type", PUBLISH_TYPE_QREQUESTION)
+                    .withSerializable("mStartParam", staCirParam);
+        }
+
+        if ("-1".equals(appVo.id)) {
+            // 应用管理
+            postcard = ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MANAGER)
+                    .withSerializable("mStartParam", staCirParam);
+        }
+        processPubRouterNext(postcard);
+    }
+
+    public void processPubRouterNext(Postcard postcard) {
+        postcard.navigation();
+    }
+
 }
 

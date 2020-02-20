@@ -74,6 +74,11 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                         ((ActiveWraperVo) resource.data).indexList.get(i).scope = 1;
                     }
                 }
+                if (scope == 2) {
+                    for (int i = 0; i < ((ActiveWraperVo) resource.data).indexList.size(); i++) {
+                        ((ActiveWraperVo) resource.data).indexList.get(i).scope = 2;
+                    }
+                }
                 resource.data = ((ActiveWraperVo) resource.data).indexList;
 
                 break;
@@ -147,25 +152,41 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                 super.onComplete(resource);
                 voMediatorLiveData.setValue(resource.data);
             }
+
+            @Override
+            public void onNetworkError(Resource<ActiveManagerDetailVo> resource) {
+                super.onNetworkError(resource);
+                voMediatorLiveData.setValue(null);
+            }
+
+            @Override
+            public void onBusinessError(Resource<ActiveManagerDetailVo> resource) {
+                super.onBusinessError(resource);
+                voMediatorLiveData.setValue(null);
+            }
         }));
-
     }
-
 
     public final MediatorLiveData<String> mDoactiveLv = new MediatorLiveData<>();
 
     public void updateStatus(ActiveManagerDetailVo activeManagerDetailVo) {
         if ("-1".equals(activeManagerDetailVo.status)) {
-            ToastUtils.showShort("该活动已下架");
+            ToastUtils.showShort("该活动已结束");
             return;
         }
         HashMap<String, String> param = new HashMap<>();
         param.put("activityid", activeManagerDetailVo.dataid);
         param.put("uuid", CacheUtils.getUser().uuid);
-        param.put("status", "0"); // 0 下架  1 上架
-//        if(activeManagerDetailVo.status){
-//
-//        }
+        /*进行中 ：status=1
+             下架：status=0
+            已结束：status=-1
+        * */
+        if ("0".equals(activeManagerDetailVo.status)) {
+            param.put("status", "1");
+        } else {
+            param.put("status", "0");
+        }
+        // 0 下架  1 上架
         mDoactiveLv.addSource(RequestServer(activeService.updateStatus(param)), new NitNetBoundObserver<String>(new NitBoundCallback<String>() {
             @Override
             public void onComplete(Resource<String> resource) {
@@ -229,7 +250,6 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                         hideDialogWait();
                     }
                 }));
-
     }
 
     public final MediatorLiveData<String> mValidateLv = new MediatorLiveData<>();

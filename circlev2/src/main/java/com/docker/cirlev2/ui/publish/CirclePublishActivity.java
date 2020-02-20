@@ -25,12 +25,18 @@ import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.gyf.immersionbar.ImmersionBar;
 
+import java.util.HashMap;
+
 @Route(path = AppRouter.CIRCLE_PUBLISH_v2_INDEX)
 public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel, Circlev2SampleActivityBinding> {
 
     public static final int PUBLISH_TYPE_NEWS = 101;    // 新闻类型
     public static final int PUBLISH_TYPE_ACTIVE = 102;    // 动态类型
     public static final int PUBLISH_TYPE_QREQUESTION = 103;    // 问答类型
+
+    public String isShowBot = "2"; // 默认显示
+
+    public static
 
     /*
     *  .withInt("editType", editType)
@@ -44,12 +50,22 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
     @Autowired
     int type;
 
+    public String getIsShowBot() {
+        if (extens != null && !TextUtils.isEmpty(extens.get("isShowBot"))) {
+            isShowBot = extens.get("isShowBot");
+        }
+        return isShowBot;
+    }
+
     @Autowired
     String pubRoterPath;
 
 
     @Autowired
     String title;
+
+    // 扩展字段
+    public HashMap<String, String> extens = new HashMap<>();
 
 
     private StaCirParam staCirParam;
@@ -66,10 +82,16 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
         return ViewModelProviders.of(this, factory).get(SampleListViewModel.class);
     }
 
+
+    public HashMap<String, String> getExtens() {
+        return extens;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         staCirParam = (StaCirParam) getIntent().getSerializableExtra("mStartParam");
+        extens = (HashMap<String, String>) getIntent().getSerializableExtra("extens");
+        super.onCreate(savedInstanceState);
         String rightstr = "发布";
 
         if (!TextUtils.isEmpty(pubRoterPath)) {
@@ -113,11 +135,11 @@ public class CirclePublishActivity extends NitCommonActivity<SampleListViewModel
                     FragmentUtils.add(getSupportFragmentManager(), CirclePubRequestionFragment.newInstance(), R.id.circlev2_frame);
                     break;
             }
-        }
 
-        mToolbar.setTvRight(rightstr, v -> {
-            publish();
-        });
+            mToolbar.setTvRight(rightstr, v -> {
+                publish();
+            });
+        }
     }
 
     @Override

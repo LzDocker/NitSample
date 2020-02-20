@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
+import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.cirlev2.widget.popmen.SuperPopmenu;
 import com.docker.common.common.adapter.CommonpagerAdapter;
@@ -38,6 +40,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -268,7 +271,13 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
     SuperPopmenu mPublishMenu;
 
     private void showSuperPop() {
-
+        // public String reg_type; // 注册类型 1 个人 2企业
+        HashMap<String, String> hashMap = new HashMap<>();
+        if (CacheUtils.getUser() == null) {
+            //
+        } else {
+            hashMap.put("isShowBot", CacheUtils.getUser().reg_type);  // no
+        }
         if (mPublishMenu == null) {
             mPublishMenu = new SuperPopmenu(this);
         }
@@ -281,26 +290,28 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                             .withInt("editType", 1)
                             .withInt("type", PUBLISH_TYPE_ACTIVE)
+                            .withSerializable("extens", hashMap)
                             .navigation();
                     break;
                 case "1":
                     ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                             .withInt("editType", 1)
                             .withString("title", "活动")
+                            .withSerializable("extens", hashMap)
                             .withString("pubRoterPath", AppRouter.ACTIVE_PUBLISH)
                             .navigation();
                     break;
                 case "2":
                     ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                             .withInt("editType", 1)
+                            .withSerializable("extens", hashMap)
                             .withInt("type", PUBLISH_TYPE_NEWS)
                             .navigation();
                     break;
                 case "3":
-
                     ARouter.getInstance().build(AppRouter.ACCOUNT_point).withString("type", "point").navigation();
-
                     break;
+
                 case "4": // 客服h5
 
                     break;
@@ -367,8 +378,10 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
         ArrayList<AppVo> appVos = new ArrayList();
         appVos.add(appVo);
-        appVos.add(appVo1);
-        appVos.add(appVo2);
+        if (CacheUtils.getUser() != null && "2".equals(CacheUtils.getUser().reg_type)) {
+            appVos.add(appVo1);
+            appVos.add(appVo2);
+        }
         appVos.add(appVo3);
         appVos.add(appVo4);
         appVos.add(appVo5);
@@ -394,6 +407,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
         if (isExit) {
             this.finish();
+            ActivityUtils.finishAllActivities();
         } else {
             Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
             isExit = true;

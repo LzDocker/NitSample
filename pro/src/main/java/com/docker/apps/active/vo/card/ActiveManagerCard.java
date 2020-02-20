@@ -58,7 +58,7 @@ public class ActiveManagerCard extends BaseCardVo {
         observableList.add(new ActiveManagerVo(R.mipmap.active_icon_share, "分享活动", 1));
         observableList.add(new ActiveManagerVo(R.mipmap.active_icon_scaner, "下载二维码", 2));
         observableList.add(new ActiveManagerVo(R.mipmap.active_icon_modify, "修改活动", 3));
-        observableList.add(new ActiveManagerVo(R.mipmap.active_icon_down, "下架", 4));
+        observableList.add(new ActiveManagerVo(R.mipmap.active_icon_down, "上/下架", 4));
         observableList.add(new ActiveManagerVo(R.mipmap.active_icon_del, "删除活动", 5));
 
         return observableList;

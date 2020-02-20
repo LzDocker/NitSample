@@ -40,6 +40,7 @@ import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.ParamUtils;
+import com.docker.common.common.utils.TimerUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.location.LocationManager;
 import com.docker.common.common.utils.rxbus.RxBus;
@@ -222,10 +223,23 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
                 activePubVo.startDate = stampToDate(activeVo.startDate);
                 mBinding.get().tvStartTime.setText(activePubVo.startDate);
 
+
+//                yearStart = String.valueOf(TimerUtils.getYear(activePubVo.startDate));
+//                mouthStart = String.valueOf(TimerUtils.getMonth(activePubVo.startDate));
+//                dayStart = String.valueOf(TimerUtils.getDay(activePubVo.startDate));
+//                housStart = String.valueOf(TimerUtils.getHour(activePubVo.startDate));
+//                secondStart = String.valueOf(TimerUtils.getMinute(activePubVo.startDate));
+
+//
+//                Log.d("sss", "onActivityCreated: " + yearStart);
+//                Log.d("sss", "mouthStart:=========== " + mouthStart);
+//                Log.d("sss", "dayStart:=========== " + dayStart);
+//                Log.d("sss", "housStart:=========== " + housStart);
+//                Log.d("sss", "secondStart:=========== " + secondStart);
+
+
                 activePubVo.endDate = stampToDate(activeVo.endDate);
                 mBinding.get().tvEndTime.setText(activePubVo.endDate);
-
-
                 activePubVo.num = activeVo.limitNum;
                 activePubVo.situs = activeVo.situs;
 
@@ -447,6 +461,7 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
         });
 
         mBinding.get().llEndTime.setOnClickListener(v -> {
+
             if (TextUtils.isEmpty(yearStart)) {
                 ToastUtils.showShort("请先选择开始时间");
                 return;
@@ -471,7 +486,7 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
         mBinding.get().llLoaction.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.COMMON_LOCATION_ACTIVITY).navigation(getHoldingActivity(), 10099);
-
+            ToastUtils.showShort("定位中...");
             locationManager.processLocation(this.getHoldingActivity(),
                     (o) -> {
                         if (o != null) {
@@ -479,8 +494,10 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
                             mBinding.get().getPub().lng = String.valueOf(((BDLocation) o).getLongitude());
                             mBinding.get().getPub().cityCode = ((BDLocation) o).getCityCode();
                             mBinding.get().getPub().location = ((BDLocation) o).getAddrStr();
+                            mBinding.get().tvLocation.setText(((BDLocation) o).getAddrStr());
                         } else {
                             Log.d("sss", "onCreate: =======定位失败========");
+
                         }
                     },
                     (geo) -> {
@@ -547,6 +564,14 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
         res = simpleDateFormat.format(date);
         return res;
     }
+
+    public static Date getDate(String s) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(s + "000");
+        Date date = new Date(lt);
+        return date;
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

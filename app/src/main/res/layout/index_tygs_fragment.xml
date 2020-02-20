@@ -23,6 +23,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -54,75 +55,83 @@
 
         </LinearLayout>
 
-        <com.docker.common.common.widget.refresh.SmartRefreshLayout
-            android:id="@+id/refresh"
+        <com.docker.common.common.widget.empty.EmptyLayout
+            android:id="@+id/empty_tab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srlFooterTranslationViewId="@+id/viewPager">
+            android:layout_height="match_parent">
 
-            <com.docker.common.common.widget.refresh.header.ClassicsHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srlAccentColor="@android:color/black"
-                app:srlDrawableArrowSize="13dp"
-                app:srlDrawableProgressSize="16dp"
-                app:srlDrawableSize="16dp"
-                app:srlFinishDuration="200"
-                app:srlTextSizeTitle="13sp" />
-
-            <android.support.design.widget.CoordinatorLayout
+            <com.docker.common.common.widget.refresh.SmartRefreshLayout
+                android:id="@+id/refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                bind:ignore="MergeRootFrame">
+                app:srlFooterTranslationViewId="@+id/viewPager">
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:overScrollMode="ifContentScrolls"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:layout_scrollFlags="scroll" />
-
-                <android.support.design.widget.AppBarLayout
-                    android:id="@+id/app_bar"
+                <com.docker.common.common.widget.refresh.header.ClassicsHeader
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:elevation="0dp"
-                    android:orientation="vertical"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:elevation="0dp">
+                    app:srlAccentColor="@android:color/black"
+                    app:srlDrawableArrowSize="13dp"
+                    app:srlDrawableProgressSize="16dp"
+                    app:srlDrawableSize="16dp"
+                    app:srlFinishDuration="200"
+                    app:srlTextSizeTitle="13sp" />
+
+                <android.support.design.widget.CoordinatorLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:ignore="MergeRootFrame">
 
 
-                    <FrameLayout
-                        android:id="@+id/frame_header"
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@color/white"
+                        android:overScrollMode="ifContentScrolls"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         app:layout_scrollFlags="scroll" />
 
-
-                    <LinearLayout
-                        android:id="@+id/ll_stick_coutainer"
+                    <android.support.design.widget.AppBarLayout
+                        android:id="@+id/app_bar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:paddingBottom="5dp">
+                        android:background="@color/transparent"
+                        android:elevation="0dp"
+                        android:orientation="vertical"
+                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                        app:elevation="0dp">
 
-                        <net.lucode.hackware.magicindicator.MagicIndicator
-                            android:id="@+id/magic_indicator"
-                            android:layout_width="0dp"
-                            android:layout_height="45dp"
-                            android:layout_weight="1"
-                            android:paddingRight="10dp" />
 
-                    </LinearLayout>
+                        <FrameLayout
+                            android:id="@+id/frame_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            app:layout_scrollFlags="scroll" />
 
-                </android.support.design.widget.AppBarLayout>
-            </android.support.design.widget.CoordinatorLayout>
 
-        </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+                        <LinearLayout
+                            android:id="@+id/ll_stick_coutainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:paddingBottom="5dp">
+
+                            <net.lucode.hackware.magicindicator.MagicIndicator
+                                android:id="@+id/magic_indicator"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_weight="1"
+                                android:paddingRight="10dp" />
+
+                        </LinearLayout>
+
+                    </android.support.design.widget.AppBarLayout>
+                </android.support.design.widget.CoordinatorLayout>
+
+            </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
+        </com.docker.common.common.widget.empty.EmptyLayout>
 
     </LinearLayout>
 

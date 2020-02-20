@@ -30,6 +30,7 @@ import com.dcbfhd.utilcode.utils.ImageUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
 import com.docker.apps.active.bd.ActiveBdutils;
+import com.docker.apps.active.ui.detail.ActiveSuccActivity;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.card.ActiveInfoCard;
@@ -48,10 +49,13 @@ import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.BitmapCut;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.tool.PhotoGalleryUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vo.ShareBean;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
+import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.core.util.AppExecutors;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -67,6 +71,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 import cn.jpush.android.helper.Logger;
+import io.reactivex.disposables.Disposable;
 
 /*
  * 活动管理详情
@@ -79,6 +84,8 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
     public ActiveVo activeVo;
 
     public ActiveManagerDetailVo mActiveManagerDetailVo;
+
+    private Disposable disposable;
 
     @Override
     public ActiveCommonViewModel getmViewModel() {
@@ -107,6 +114,18 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
         commonListOptions.falg = 0;
         NitBaseProviderCard.providerCardNoRefreshForFrame(getSupportFragmentManager(), R.id.frame, commonListOptions);
 
+
+        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+            if (rxEvent.getT().equals("activedel")
+                    || rxEvent.getT().equals("activeStusUpdate")
+                    || rxEvent.getT().equals("active_refresh")
+                    || rxEvent.getT().equals("activemodify")) {
+
+                mBinding.empty.showLoading();
+                processRequest();
+            }
+        });
+
     }
 
 
@@ -122,7 +141,6 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                 ActiveInfoCard activeInfoCard = new ActiveInfoCard(0, 0);
                 NitBaseProviderCard.providerCard(commonListVm, activeInfoCard, nitCommonFragment);
-
                 ActiveManagerCard activeManagerCard = new ActiveManagerCard(0, 1);
                 NitBaseProviderCard.providerCard(commonListVm, activeManagerCard, nitCommonFragment);
                 activeManagerCard.setCommand((ReplyCommandParam) o -> {
@@ -130,22 +148,48 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
                 });
 
                 mViewModel.voMediatorLiveData.observe(ActiveManagerDetailActivity.this, activeManagerDetailVo -> {
-                    activeManagerDetailVo.dataid = activeVo.dataid;
-                    mActiveManagerDetailVo = activeManagerDetailVo;
-                    activeInfoCard.setActiveManagerDetailVo(activeManagerDetailVo);
-                    activeManagerCard.setActiveManagerDetailVo(activeManagerDetailVo);
-                    mBinding.setItem(activeManagerDetailVo);
+                    if (activeManagerDetailVo != null) {
+                        mBinding.empty.hide();
+                        activeManagerDetailVo.dataid = activeVo.dataid;
+                        mActiveManagerDetailVo = activeManagerDetailVo;
+                        activeInfoCard.setActiveManagerDetailVo(activeManagerDetailVo);
+                        activeManagerCard.setActiveManagerDetailVo(activeManagerDetailVo);
+                        mBinding.setItem(activeManagerDetailVo);
+                        processImg();
+                    } else {
+                        mBinding.empty.showError();
+                        mBinding.empty.setOnretryListener(() -> {
+                            processRequest();
+                        });
+                    }
                 });
-                HashMap<String, String> parm = new HashMap<>();
-                activeVo = (ActiveVo) getIntent().getSerializableExtra("activeVo");
-                parm.put("activityid", activeVo.dataid);
-                parm.put("utid", activeVo.utid);
-                parm.put("uuid", CacheUtils.getUser().uuid);
-                mViewModel.getActiveManagerDv(parm);
+                processRequest();
             }
         };
         return nitDelegetCommand;
     }
+
+
+    private void processImg() {
+        RequestOptions options = new RequestOptions();
+        options.diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
+                .centerCrop();
+        GlideApp.with(ActiveManagerDetailActivity.this)
+                .applyDefaultRequestOptions(options)
+                .load(ThiredPartConfig.BarcoderUrl + mActiveManagerDetailVo.detailUrl).into(mBinding.ivCode);
+    }
+
+
+    private void processRequest() {
+        HashMap<String, String> parm = new HashMap<>();
+        activeVo = (ActiveVo) getIntent().getSerializableExtra("activeVo");
+        parm.put("activityid", activeVo.dataid);
+        parm.put("utid", activeVo.utid);
+        parm.put("uuid", CacheUtils.getUser().uuid);
+        mViewModel.getActiveManagerDv(parm);
+    }
+
 
     private void processDo(int id) {
         /*
@@ -225,29 +269,10 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
                 }).open(config);
     }
 
+
     private void downbarcode() {
-
-        RequestOptions options = new RequestOptions();
-        options.diskCacheStrategy(DiskCacheStrategy.ALL)
-                .priority(Priority.HIGH)
-                .centerCrop()
-                .transform(new BitmapTransformation() {
-                    @Override
-                    protected Bitmap transform(@NonNull BitmapPool pool, @NonNull Bitmap toTransform, int outWidth, int outHeight) {
-                        PhotoGalleryUtils.saveImageToGallery(ActiveManagerDetailActivity.this, toTransform, Constant.BaseFileFloder, "ccc");
-                        ToastUtils.showShort("保存成功");
-                        return toTransform;
-                    }
-
-                    @Override
-                    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
-
-                    }
-                });
-        GlideApp.with(ActiveManagerDetailActivity.this)
-                .applyDefaultRequestOptions(options)
-                .load(ThiredPartConfig.BarcoderUrl + mActiveManagerDetailVo.detailUrl).into(500, 500);
-
+        PhotoGalleryUtils.saveImageToGallery(this, ImageUtils.view2Bitmap(mBinding.ivCode), Constant.BaseFileFloder, "ccc");
+        ToastUtils.showShort("保存成功");
     }
 
     private void editContent() {
@@ -277,8 +302,6 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
 
         // 扫码核销
         mBinding.tvScanerTicker.setOnClickListener(v -> {
-
-
             ARouter.getInstance().build(AppRouter.ACTIVE_MANAGE_VERFIC).withString("activityid", activeVo.dataid).navigation();
         });
 
@@ -294,7 +317,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
         mViewModel.mDoactiveLv.observe(this, s -> {
             switch (s) {
                 case "1":
-                    ToastUtils.showShort("下架成功");
+                    ToastUtils.showShort("操作成功");
                     finish();
                     break;
                 case "2":

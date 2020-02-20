@@ -138,11 +138,24 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
 
     public void processStaparam() {
 
+
+        if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+            mBinding.get().circleSelect.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.get().circleSelect.setVisibility(View.GONE);
+        }
+
         if (mHandParam != null) {
             mBinding.get().circleSelect.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(mHandParam.getCircleid())) {
-                mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
+//                mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
             }
+            if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                mBinding.get().circleSelect.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circleSelect.setVisibility(View.GONE);
+            }
+
             if (TextUtils.isEmpty(mHandParam.extentron2)) {
                 mBinding.get().tvPerssionSelect.setText("全部");
             } else {
@@ -159,6 +172,10 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
                     mBinding.get().tvCircleSelect.setText(mHandParam.getExtentron() + " / " + mHandParam.getExtenMap().get("classname1") + " / " + mHandParam.getExtenMap().get("classname2"));
                     break;
             }
+        }
+
+        if (mEditType == 2) {
+            mBinding.get().circleSelect.setVisibility(View.GONE);
         }
     }
 

@@ -81,7 +81,8 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:text="发布到指定的圈子"
-                    android:textColor="#666" />
+                    android:textColor="#666"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/circle_select"
@@ -91,8 +92,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
-                    android:paddingRight="12dp"
-                   >
+                    android:paddingRight="12dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
                         android:drawablePadding="10dp"
                         android:ellipsize="end"
                         android:gravity="right"
-                        android:hint="请选择圈子"
+                        android:hint="请选择"
                         android:maxWidth="200dp"
                         android:maxLines="1"
                         android:textColor="#666" />

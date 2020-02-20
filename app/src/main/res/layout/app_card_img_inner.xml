@@ -26,12 +26,12 @@
         android:gravity="center"
         android:onClick="@{()->parent.onChildClick(item)}"
         android:orientation="vertical">
-        
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             app:imageNomUrl="@{CommonBdUtils.getCompleteImageUrl(item.img)}" />
 
         <TextView

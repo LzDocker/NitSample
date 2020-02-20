@@ -78,9 +78,7 @@ public class ActiveBannerPreviewActivity extends NitCommonActivity<NitEmptyViewM
     @Override
     public void initView() {
         mToolbar.hide();
-
         mBinding.ivBack.setOnClickListener(v -> finish());
-
         mBinding.tvComplete.setOnClickListener(v -> {
             Intent intent = new Intent();
             intent.putExtra("imgList", imgList);

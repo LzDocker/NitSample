@@ -30,7 +30,8 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="always"
+            android:focusableInTouchMode="false"
+            android:overScrollMode="never"
             app:itemBinding="@{item.itemBinding}"
             app:items="@{item.goodsListOb}"
             bind:layoutManager="@{LayoutManager.grid(2)}" />

@@ -160,18 +160,27 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
         if (mEditType == 2) {
             mHandParam = processStaParam(mHandParam.serviceDataBean);
         }
-        processStaparam();
+        processStaparam();  // todo--zxd
     }
+
 
     public void processStaparam() {
 
+        if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+            mBinding.get().circleSelect.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.get().circleSelect.setVisibility(View.GONE);
+        }
         if (mHandParam != null) {
-
             mBinding.get().circleSelect.setVisibility(View.VISIBLE);
             if (!TextUtils.isEmpty(mHandParam.getCircleid())) {
-                mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
+//                mBinding.get().perssionSelect.setVisibility(View.VISIBLE);
             }
-
+            if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                mBinding.get().circleSelect.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circleSelect.setVisibility(View.GONE);
+            }
 //            if (mPerssionParam == null) {
             if (TextUtils.isEmpty(mHandParam.extentron2)) {
                 mBinding.get().tvPerssionSelect.setText("全部");
@@ -191,8 +200,10 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
             }
         }
 
+        if (mEditType == 2) {
+            mBinding.get().circleSelect.setVisibility(View.GONE);
+        }
     }
-
 
     private StaCirParam processStaParam(ServiceDataBean serviceDataBean) {
         mHandParam.getExtenMap().put("classid1", serviceDataBean.getClassid());

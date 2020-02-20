@@ -27,12 +27,16 @@ public class CommentVo extends BaseSampleItem implements Serializable {
     public final transient ObservableList<ServiceDataBean.ResourceBean> mResource = new ObservableArrayList<>();
 
     public ObservableList<ServiceDataBean.ResourceBean> getResouceData(CommentVo commentVo) {
-        if (mResource.size() > 0) {
+        try {
+            if (mResource.size() > 0) {
+                return mResource;
+            } else {
+                mResource.addAll(commentVo.getResource());
+            }
             return mResource;
-        } else {
-            mResource.addAll(commentVo.getResource());
+        } catch (Exception e) {
+            return mResource;
         }
-        return mResource;
     }
 
     @Override
