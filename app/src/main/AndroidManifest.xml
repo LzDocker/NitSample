@@ -166,6 +166,9 @@
         <activity
             android:name="com.docker.nitsample.ui.search.SearchActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.nitsample.ui.index.circle.CircleJoinActionActivity"
+            android:screenOrientation="portrait" />
 
         <!--<activity android:name="com.docker.nitsample.ui.edit.EditIndexActivity" />-->
     </application>

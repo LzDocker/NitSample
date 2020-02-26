@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.nitsample.vo.CircleListNomalJoinVo" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.nitsample.vm.circle.CircleJoinListVm" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/open_liner_bg_shape"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:rvImgUrl="@{BdUtils.getImgUrl(item.logoUrl)}" />
+
+        <TextView
+            android:id="@+id/tv_cname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/iv"
+            android:text="@{item.circleName}"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_dz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_cname"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv"
+            android:text="舵主： "
+            android:textColor="#999"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_cname"
+            android:layout_toRightOf="@+id/tv_dz"
+            android:singleLine="true"
+            android:text="@{item.linkman}"
+            android:textColor="#999"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/tv_join"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/app_btn_shape"
+            android:gravity="center"
+            android:onClick="@{(view) -> viewmodel.joinCircle(item,view)}"
+            android:text="加入"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:visibleGone="@{BdUtils.isShowJoin(item)}" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/app_btn_shape_gray"
+            android:gravity="center"
+            android:text="已加入"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:visibleGone="@{!BdUtils.isShowJoin(item)}" />
+    </RelativeLayout>
+
+
+</layout>

@@ -22,6 +22,7 @@ import com.docker.nitsample.vo.BannerEntityVo;
 import com.docker.nitsample.vo.GoodsBannerVo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -35,6 +36,7 @@ public class AppGoodsOptimizationCardVo extends BaseCardVo {
     public ObservableList<BannerEntityVo> goodsBannerOb = new ObservableArrayList<>();
 
     public ObservableList<ServerGoodsDataBean> goodsListOb = new ObservableArrayList<>();
+
 
     public String tabClass;
 
@@ -78,6 +80,7 @@ public class AppGoodsOptimizationCardVo extends BaseCardVo {
         goodsListOb.clear();
         goodsListOb.addAll(serviceDataBeans);
     }
+
 
 
     // 多类型条目适配

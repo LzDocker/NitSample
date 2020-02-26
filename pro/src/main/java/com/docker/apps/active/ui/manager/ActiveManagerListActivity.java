@@ -25,6 +25,7 @@ import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.indector.CommonIndector;
 
 import java.io.Serializable;
@@ -119,7 +120,6 @@ public class ActiveManagerListActivity extends NitCommonActivity<NitCommonContai
         commonListOptions1.ReqParam.put("showFields", "*");
         NitCommonContainerFragmentV2 nitCommonContainerFragmentV21 = NitCommonContainerFragmentV2.newinstance(commonListOptions1);
         fragments.add(nitCommonContainerFragmentV21);
-
 
         // magic
         mBinding.viewPager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));

@@ -4,13 +4,16 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
+import android.text.TextUtils;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2FragmentDetailBinding;
 import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
@@ -44,6 +47,13 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
     protected void initView(View var1) {
         mViewModel.mAttenLv.observe(this, s -> {
         });
+
+        mBinding.get().tvContent.setOnClickListener(v -> {
+            if (!TextUtils.isEmpty(serviceDataBean.activityid)) {
+                ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", serviceDataBean.activityid).navigation();
+            }
+        });
+        
     }
 
     private Disposable disposable;

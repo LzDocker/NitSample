@@ -38,7 +38,7 @@ public class NitBaseProviderCard {
 //        NitCommonRichContainerFragment nitCommonRichContainerFragment = NitCommonRichContainerFragment.newinstance(commonListOptions);
 //        FragmentUtils.add(fragmentManager, nitCommonRichContainerFragment, layid);
 //    }
-    
+
     public static void providerCardNoRefreshForFrame(FragmentManager fragmentManager, int layid, CommonListOptions commonListOptions) {
         NitCommonCardNoRefreshFragment nitCommonCardNoRefreshFragment = NitCommonCardNoRefreshFragment.newinstance(commonListOptions);
         FragmentUtils.add(fragmentManager, nitCommonCardNoRefreshFragment, layid);

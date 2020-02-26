@@ -87,6 +87,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
         return (item, view) -> ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", ((ServiceDataBean) item).getDynamicid()).navigation();
     }
 
+    public String activityid;
     private boolean isSelect;
     private String country;
     private String province;
@@ -223,6 +224,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     private String pricing;
     private String discount;
     private String companyName;
+
 
 
     // 动态详情 -------------------------------------------
@@ -1610,5 +1612,6 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
             this.url = url;
         }
     }
+
 
 }

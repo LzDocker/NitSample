@@ -94,32 +94,43 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
     public void initView() {
         mToolbar.setTitle("圈子成员");
         if (mStartParam.role > 0) {
+            mToolbar.setIvRight(R.mipmap.gray_menu, v -> {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+                String[] bar;
+//                bar = new String[]{"邀请新成员", "设置分组权限", "分组管理"};
+                bar = new String[]{"设置分组权限", "分组管理"};
 
-        }
 
-        mToolbar.setIvRight(R.mipmap.open_meun, v -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-            String[] bar;
-            bar = new String[]{"邀请新成员", "设置分组权限", "分组管理"};
-            bottomSheetDialog.setDataCallback(bar, position -> {
-                bottomSheetDialog.dismiss();
-                switch (position) {
-                    case 0:
-                        CircleInviteActivity.startMe(CirclePersonListActivity.this,
-                                mStartParam, mCircleDetailVo.getCircleName(),
-                                mCircleDetailVo.getLogoUrl());
-                        break;
-                    case 1://设置分组权限
+//                bottomSheetDialog.setDataCallback(bar, position -> {
+//                    bottomSheetDialog.dismiss();
+//                    switch (position) {
+//                        case 0:
+//                            CircleInviteActivity.startMe(CirclePersonListActivity.this,
+//                                    mStartParam, mCircleDetailVo.getCircleName(),
+//                                    mCircleDetailVo.getLogoUrl());
+//                            break;
+//                        case 1://设置分组权限
+//                            CircleGroupPerssionActivity.startMe(CirclePersonListActivity.this, mStartParam);
+//                            break;
+//                        case 2: //分组管理
+//                            CircleEditMemberGroupActivity.startMe(this, mStartParam);
+//                            break;
+//                    }
+//                });
+                bottomSheetDialog.setDataCallback(bar, position -> {
+                    bottomSheetDialog.dismiss();
+                    switch (position) {
+                        case 0://设置分组权限
                             CircleGroupPerssionActivity.startMe(CirclePersonListActivity.this, mStartParam);
-                        break;
-                    case 2: //分组管理
-                        CircleEditMemberGroupActivity.startMe(this, mStartParam);
-                        break;
-                }
+                            break;
+                        case 1: //分组管理
+                            CircleEditMemberGroupActivity.startMe(this, mStartParam);
+                            break;
+                    }
+                });
+                bottomSheetDialog.show(this);
             });
-            bottomSheetDialog.show(this);
-        });
-
+        }
         ArrayList<Integer> darbles = new ArrayList<Integer>();
         darbles.add(R.drawable.circle_ov_shape);
         darbles.add(R.drawable.circle_ov_shape1);

@@ -134,13 +134,25 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 mBinding.get().commonTvEdit.setVisibility(View.GONE);
                 titles = new String[]{""};
                 if (mCircleTitlesVo.get(pos).getShowType() == 1) {
-                    fragments.add((Fragment) ARouter.getInstance()
-                            .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                            .withSerializable("param", mCircleTitlesVo.get(pos))
-                            .withInt("childPosition", -1)
-                            .withInt("refresh", refresh)
-                            .navigation());
+
+                    if ("activity".equals(mCircleTitlesVo.get(pos).getDataType())) {
+                        fragments.add((Fragment) ARouter.getInstance()
+                                .build(AppRouter.ACTIVE_FRAME_LIST)
+                                .withSerializable("param", mCircleTitlesVo.get(pos))
+                                .withInt("childPosition", -1)
+                                .withInt("refresh", refresh)
+                                .navigation());
+
+                    } else {
+                        fragments.add((Fragment) ARouter.getInstance()
+                                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                                .withSerializable("param", mCircleTitlesVo.get(pos))
+                                .withInt("childPosition", -1)
+                                .withInt("refresh", refresh)
+                                .navigation());
+                    }
                     Log.d("sss", "processTab: ====111===============");
+
                 } else {
                     fragments.add((Fragment) ARouter.getInstance()
                             .build(AppRouter.CIRCLEV2_COMMONH5)
@@ -155,12 +167,25 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 for (int i = 0; i < circleTitlesVos.size(); i++) {
                     titles[i] = circleTitlesVos.get(i).getName();
                     if (circleTitlesVos.get(i).getShowType() == 1) {
-                        fragments.add((Fragment) ARouter.getInstance()
-                                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                                .withInt("refresh", refresh)
-                                .withSerializable("param", mCircleTitlesVo.get(pos))
-                                .withInt("childPosition", i)
-                                .navigation());
+
+                        if ("activity".equals(mCircleTitlesVo.get(pos).getDataType())) {
+
+                            fragments.add((Fragment) ARouter.getInstance()
+                                    .build(AppRouter.ACTIVE_FRAME_LIST)
+                                    .withSerializable("param", mCircleTitlesVo.get(pos))
+                                    .withInt("childPosition", -1)
+                                    .withInt("refresh", refresh)
+                                    .navigation());
+                        } else {
+                            fragments.add((Fragment) ARouter.getInstance()
+                                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                                    .withInt("refresh", refresh)
+                                    .withSerializable("param", mCircleTitlesVo.get(pos))
+                                    .withInt("childPosition", i)
+                                    .navigation());
+                        }
+
+
                     } else {
                         fragments.add((Fragment) ARouter.getInstance()
                                 .build(AppRouter.CIRCLEV2_COMMONH5)

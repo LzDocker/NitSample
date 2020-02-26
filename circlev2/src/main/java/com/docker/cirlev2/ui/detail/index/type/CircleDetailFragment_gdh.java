@@ -12,6 +12,7 @@ import com.docker.cirlev2.vo.card.AppImgHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.cirlev2.vo.param.StaCirParam;
+import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.ui.base.NitCommonFragment;
@@ -116,8 +117,23 @@ public class CircleDetailFragment_gdh extends NitDefaultCircleFragment {
     @Override
     public void processPro(NitAbsSampleAdapter mAdapter) {
         super.processPro(mAdapter);
-        mAdapter.remove(2);
+        AppVo appVo = new AppVo();
+        appVo.id = "4";
+        appVo.name = "活动";
+        appVo.icon = R.mipmap.publish_act;
+        mAdapter.add(appVo);
     }
+
+    @Override
+    public void processPushSHow(CircleDetailVo circleDetailVo) {
+        super.processPushSHow(circleDetailVo);
+        if ("1".equals(circleDetailVo.getIsJoin())) {
+            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+        }
+    }
+
 
     @Override
     public void processPubRouterNext(Postcard postcard) {

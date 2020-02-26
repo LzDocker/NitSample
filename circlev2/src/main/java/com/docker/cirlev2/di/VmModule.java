@@ -18,6 +18,7 @@ import com.docker.cirlev2.vm.CircleShoppingViewModel;
 import com.docker.cirlev2.vm.CircleShoppingViewModelv2;
 import com.docker.cirlev2.vm.CirlcleSelectViewModel;
 import com.docker.cirlev2.vm.CreateListViewModel;
+import com.docker.cirlev2.vm.MutipartCircleViewModel;
 import com.docker.cirlev2.vm.PublishViewModel;
 import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vm.card.CircleDynamicDetailCardVm;
@@ -133,6 +134,11 @@ public abstract class VmModule {
     @IntoMap
     @ViewModelKey(CircleShoppingViewModelv2.class)
     abstract ViewModel CircleShoppingViewModelv2(CircleShoppingViewModelv2 model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MutipartCircleViewModel.class)
+    abstract ViewModel MutipartCircleViewModel(MutipartCircleViewModel model);
 
 
 

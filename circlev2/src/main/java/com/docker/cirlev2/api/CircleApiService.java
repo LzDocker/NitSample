@@ -2,6 +2,7 @@ package com.docker.cirlev2.api;
 
 import android.arch.lifecycle.LiveData;
 
+import com.docker.cirlev2.ui.pro.index.MutipartTabVo;
 import com.docker.cirlev2.vo.card.PersonInfoHeadVo;
 import com.docker.cirlev2.vo.entity.CircleCountpageVo;
 import com.docker.cirlev2.vo.entity.CircleCreateRst;
@@ -94,10 +95,10 @@ public interface CircleApiService {
      * */
     @POST(CommonApiConfig.apiBaseUrlZHA + "api.php?m=circle.getlist")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<List<CircleListNomalVo>>>> fechCircleList(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<List<CircleListNomalVo>>>> fechCircleList(@FieldMap Map<String, String> params);    /*
 
 
-    /*
+   /*
      * 已加入的圈子
      * */
     @POST(CommonApiConfig.apiBaseUrlZHA + "api.php?m=circle.getMyJoin")
@@ -456,6 +457,11 @@ public interface CircleApiService {
     @POST("api.php?m=dynamic.comment")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<RstVo>>> goodsComment(@FieldMap Map<String, String> params);
+
+
+    //订单列表--评论
+    @POST("api.php?m=circle.getCircleTab")
+    LiveData<ApiResponse<BaseResponse<List<MutipartTabVo>>>> getCircleTab();
 
 
 

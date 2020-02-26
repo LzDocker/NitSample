@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.active.api.ActiveService;
+import com.docker.apps.active.vo.ActiveSelectVo;
+import com.docker.apps.active.vo.ActiveSelectWraper;
 import com.docker.apps.active.vo.ActiveServerDataBean;
 import com.docker.apps.active.vo.ActiveSucVo;
 import com.docker.apps.active.vo.ActiveVo;
@@ -60,6 +62,9 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
             case 2:
                 serverFun = activeService.fechCircleInfoList(param);
                 break;
+            case 3:
+                serverFun = activeService.ActiveSelectVo(param);
+                break;
         }
         return serverFun;
     }
@@ -92,6 +97,10 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                     }
                     resource.data = activeVos;
                 }
+                break;
+
+            case 3:
+                resource.data = ((ActiveSelectWraper) resource.data).list;
                 break;
         }
     }
@@ -263,6 +272,12 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                 RxBus.getDefault().post(new RxEvent<>("ValidateSuccess", ""));
             }
         }));
+    }
+
+
+    public final MediatorLiveData<ActiveSelectVo> mActiveSelectVov = new MediatorLiveData<>();
+    public void onActiveSelect(ActiveSelectVo activeSelectVo, View view) {
+        mActiveSelectVov.setValue(activeSelectVo);
     }
 
 

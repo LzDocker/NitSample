@@ -12,6 +12,9 @@ public class AppRouter {
     public static final String HOME = AppGroup + "home";
     public static final String HOME_preview = AppGroup + "home_preview";
     public static final String HOME_edit_index = AppGroup + "home_edit_index";
+    public static final String HOME_JOIN_ACTION = AppGroup + "HOME_JOIN_ACTION";
+
+    public static final String CIRCLE_INDEX_FRAMEV2 = AppGroup + "CIRCLE_INDEX_FRAMEV2";
 
     public static final String COMPANY_GROUP = AppGroup + "companygroup";
 
@@ -194,6 +197,7 @@ public class AppRouter {
     public static final String ACTIVE_RESULT = ACTIVE_GROUP + "ACTIVE_RESULT";
     public static final String ACTIVE_REGIST_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_REGIST_LIST";
     public static final String ACTIVE_MANAGER_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_MANAGER_LIST";
+    public static final String ACTIVE_SEARCH_LIST = ACTIVE_GROUP + "ACTIVE_SEARCH_LIST";
     public static final String ACTIVE_MANAGER_PERSION_LIST = ACTIVE_GROUP + "ACTIVE_MANAGER_PERSION_LIST";
     public static final String ACTIVE_MANAGER_PERSION_DETAIL = ACTIVE_GROUP + "ACTIVE_MANAGER_PERSION_DETAIL";
     public static final String ACTIVE_MANAGER_DETAIL = ACTIVE_GROUP + "ACTIVE_MANAGER_DETAIL";
@@ -202,6 +206,7 @@ public class AppRouter {
     public static final String ACTIVE_PUBLISH_BANNER_PREVIEW = ACTIVE_GROUP + "ACTIVE_PUBLISH_BANNER_PREVIEW";
     public static final String ACTIVE_TYPE_SELECT = ACTIVE_GROUP + "ACTIVE_TYPE_SELECT";
     public static final String ACTIVE_CONTENT_EDIT = ACTIVE_GROUP + "ACTIVE_CONTENT_EDIT";
+    public static final String ACTIVE_FRAME_LIST = ACTIVE_GROUP + "ACTIVE_FRAME_LIST";
 
 
     public static final String INVITE_GROUP = ProGroup + "/invite/";

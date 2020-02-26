@@ -1,36 +1,19 @@
 package com.docker.apps.active.ui.manager;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
-import android.widget.TableLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
-import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.ImageUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
-import com.docker.apps.active.bd.ActiveBdutils;
-import com.docker.apps.active.ui.detail.ActiveSuccActivity;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.card.ActiveInfoCard;
@@ -47,16 +30,12 @@ import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.utils.BitmapCut;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.tool.PhotoGalleryUtils;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vo.ShareBean;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.common.widget.empty.EmptyLayout;
-import com.docker.core.util.AppExecutors;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -65,12 +44,8 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.ShareBoardConfig;
 
-import java.security.MessageDigest;
 import java.util.HashMap;
 
-import javax.inject.Inject;
-
-import cn.jpush.android.helper.Logger;
 import io.reactivex.disposables.Disposable;
 
 /*

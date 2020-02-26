@@ -19,6 +19,8 @@ import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.card.BaseCardVo;
+import com.docker.core.di.netmodule.ApiResponse;
+import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
@@ -32,6 +34,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class CircleRecomendListCardVm extends NitcommonCardViewModel {
+
+    public int mApitype = 0;
 
     public AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2;
 

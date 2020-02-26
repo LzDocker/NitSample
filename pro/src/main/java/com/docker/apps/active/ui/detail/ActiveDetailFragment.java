@@ -344,7 +344,8 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-        commonListOptions.ReqParam.put("t", "dynamic");
+        commonListOptions.ReqParam.put("t", "idle");
+        commonListOptions.ReqParam.put("activityid",activeVo.dataid);
         fragments.add((Fragment) ARouter.getInstance()
                 .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
                 .withSerializable(CommonListParam, commonListOptions)

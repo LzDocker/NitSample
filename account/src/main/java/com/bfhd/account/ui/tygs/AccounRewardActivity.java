@@ -69,7 +69,6 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
         return ViewModelProviders.of(this, factory).get(NitCommonContainerViewModel.class);
     }
 
-
     @Override
     protected void inject() {
         super.inject();
@@ -179,7 +178,6 @@ public class AccounRewardActivity extends NitCommonActivity<NitCommonContainerVi
         CommonIndector commonIndector = new CommonIndector();
         commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
     }
-
 
     @Override
     protected void onDestroy() {

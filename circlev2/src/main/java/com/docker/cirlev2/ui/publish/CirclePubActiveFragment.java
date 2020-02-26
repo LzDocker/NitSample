@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
+import com.dcbfhd.utilcode.utils.KeyboardUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2FragmentCirclePubActiveBinding;
@@ -22,7 +25,13 @@ import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.SourceUpParam;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.binding.CommonBdUtils;
+import com.docker.common.common.command.ReplyCommand;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.ait.v1.AitVo;
+import com.docker.common.common.utils.ait.v1.MyAitManager;
+import com.docker.common.common.utils.ait.v1.MyAitPanel;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
@@ -37,6 +46,8 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
+import static android.app.Activity.RESULT_OK;
+
 /*
  * 动态类型的动态
  * */
@@ -46,6 +57,10 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
     private CircleSourceUpFragment sourceUpFragment;
 
     private Disposable disposable;
+
+    private MyAitManager myAitManager;
+
+    private ReplyCommand replyCommand;
 
     /*
      *
@@ -161,6 +176,51 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
             mHandParam = processStaParam(mHandParam.serviceDataBean);
         }
         processStaparam();  // todo--zxd
+
+        replyCommand = () -> ARouter.getInstance().build(AppRouter.ACTIVE_SEARCH_LIST).navigation(getHoldingActivity(), 2001);
+        myAitManager = new MyAitManager(this.getHoldingActivity().getBaseContext(), replyCommand);
+
+        MyAitPanel myAitPanel = new MyAitPanel(mBinding.get().proEventDesc);
+        myAitPanel.addAitTextWatcher(myAitManager);
+        myAitManager.setTextChangeListener(myAitPanel);
+
+
+//        mBinding.get().proEventDesc.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//
+//                if (count == 1) {
+//                    String curText = mBinding.get().proEventDesc.getText().toString();
+//                    if (!TextUtils.isEmpty(curText) && curText.endsWith(Constant.ACTIVE_CONTACT_FALG)) {
+//                        ARouter.getInstance().build(AppRouter.ACTIVE_SEARCH_LIST).navigation(getHoldingActivity(), 2001);
+//                    }
+//                }
+//
+//
+//                Log.d("sss", "onTextChanged: =============s==" + s);
+//                Log.d("sss", "onTextChanged: =============start==" + start);
+//                Log.d("sss", "onTextChanged: =============before==" + before);
+//                Log.d("sss", "onTextChanged: =============count==" + count);
+//
+////                if (start == 1 && before == 0) {
+////                    Log.d("sss", "onTextChanged: =============s==" + s);
+////                    Log.d("sss", "onTextChanged: =============start==" + start);
+////                    Log.d("sss", "onTextChanged: =============before==" + before);
+////                    Log.d("sss", "onTextChanged: =============count==" + count);
+////                }
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
     }
 
 
@@ -225,6 +285,22 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
     @Override
     protected void initView(View var1) {
 
+        KeyboardUtils.registerSoftInputChangedListener(this.getHoldingActivity(),
+                height -> {
+                    Log.d("sss", "onSoftInputChanged: he" + height);
+                    if (height > 0) {
+                        mBinding.get().tvContact.setVisibility(View.VISIBLE);
+                    } else {
+                        mBinding.get().tvContact.setVisibility(View.GONE);
+                    }
+                });
+        mBinding.get().tvContact.setOnClickListener(v -> {
+            if (myAitManager.getAitTeamMember() == null || myAitManager.getAitTeamMember().size() == 0) {
+                String content = mBinding.get().proEventDesc.getText().toString().trim();
+                mBinding.get().proEventDesc.setText(content + "#");
+                mBinding.get().proEventDesc.setSelection(mBinding.get().proEventDesc.getText().toString().length());
+            }
+        });
 
 //        mBinding.get().checkIsRelay.setOnCheckedChangeListener((buttonView, isChecked) -> {
 //            if (!isChecked) {
@@ -244,10 +320,35 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
 
     }
 
+
+    /*
+     * activename
+     * activeid
+     * */
+    public HashMap<String, String> activeInfoMap = new HashMap<>();
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        sourceUpFragment.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 2001) {
+                activeInfoMap = (HashMap<String, String>) data.getSerializableExtra("activeInfo");
+
+
+//                String content = mBinding.get().proEventDesc.getText().toString();
+//                SpannableString ss = new SpannableString(content + activeInfoMap.get("acvitename") + "#  ");
+//                ss.setSpan(new ForegroundColorSpan(Color.RED), content.length() - 1, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                mBinding.get().proEventDesc.setText(ss);
+
+                AitVo aitVo = new AitVo();
+                aitVo.aitId = activeInfoMap.get("activeid");
+                aitVo.aitname = activeInfoMap.get("acvitename") + Constant.ACTIVE_CONTACT_FALG;
+                myAitManager.handResult(aitVo);
+
+            } else {
+                sourceUpFragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
     }
 
 
@@ -259,9 +360,16 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
             return;
         }
 
-        if (TextUtils.isEmpty(mHandParam.getCircleid()) || TextUtils.isEmpty(mHandParam.getUtid())) {
-            ToastUtils.showShort("请选择要发布的圈子");
-            return;
+        if (mHandParam != null) {
+            if (TextUtils.isEmpty(mHandParam.getCircleid()) || TextUtils.isEmpty(mHandParam.getUtid())) {
+                ToastUtils.showShort("请选择要发布的圈子");
+                return;
+            }
+        } else {
+            if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                ToastUtils.showShort("请选择要发布的圈子");
+                return;
+            }
         }
 
         if (sourceUpFragment.selectList != null && sourceUpFragment.selectList.size() > 0) {
@@ -280,32 +388,53 @@ public class CirclePubActiveFragment extends NitCommonFragment<PublishViewModel,
         paramMap.put("uuid", userInfoVo.uuid);
         paramMap.put("type", "dynamic");
         paramMap.put("content", mBinding.get().proEventDesc.getText().toString().trim());
-        paramMap.put("circleid", mHandParam.getCircleid());
-        paramMap.put("utid", mHandParam.getUtid());
-        if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid1"))) {
-            paramMap.put("classid", mHandParam.getExtenMap().get("classid1"));
-        }
-        if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid2"))) {
-            paramMap.put("classid2", mHandParam.getExtenMap().get("classid2"));
-        }
-        if (mEditType == 2) {
-            paramMap.put("dataid", mHandParam.serviceDataBean.getDataid());
-        }
-        if (TextUtils.isEmpty(mHandParam.extentron2) && mHandParam.extentronList.size() == 0) {
-            paramMap.put("visibleType", "0");   // extentronList
-        } else {
-            paramMap.put("visibleType", "1");
 
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < mHandParam.extentronList.size(); i++) {
-                String id = (String) mHandParam.extentronList.get(i);
-                stringBuilder.append(id).append(",");
+
+        if (mHandParam != null) {
+            paramMap.put("circleid", mHandParam.getCircleid());
+            paramMap.put("utid", mHandParam.getUtid());
+
+            if (TextUtils.isEmpty(mHandParam.extentron2) && mHandParam.extentronList.size() == 0) {
+                paramMap.put("visibleType", "0");   // extentronList
+            } else {
+                paramMap.put("visibleType", "1");
+
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < mHandParam.extentronList.size(); i++) {
+                    String id = (String) mHandParam.extentronList.get(i);
+                    stringBuilder.append(id).append(",");
+                }
+                if (stringBuilder.length() > 1) {
+                    String ids = stringBuilder.substring(0, stringBuilder.length() - 1);
+                    paramMap.put("groupids", ids);
+                }
             }
-            if (stringBuilder.length() > 1) {
-                String ids = stringBuilder.substring(0, stringBuilder.length() - 1);
-                paramMap.put("groupids", ids);
+
+            if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid1"))) {
+                paramMap.put("classid", mHandParam.getExtenMap().get("classid1"));
+            }
+            if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid2"))) {
+                paramMap.put("classid2", mHandParam.getExtenMap().get("classid2"));
+            }
+            if (mEditType == 2) {
+                paramMap.put("dataid", mHandParam.serviceDataBean.getDataid());
+            }
+
+        } else {
+            if ("1".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                if (CacheUtils.getUser() != null) {
+                    paramMap.put("circleid", CacheUtils.getUser().circleid);
+                    paramMap.put("utid", CacheUtils.getUser().utid);
+                    paramMap.put("visibleType", "0");
+                }
             }
         }
+
+        if (myAitManager.getAitTeamMember() != null && myAitManager.getAitTeamMember().size() > 0 &&
+                !TextUtils.isEmpty(myAitManager.getAitTeamMember().get(0))) {
+            paramMap.put("activityid", myAitManager.getAitTeamMember().get(0));
+        }
+
 
         if (mSourceUpParam.imgList.size() > 0) {
             for (int i = 0; i < mSourceUpParam.imgList.size(); i++) {

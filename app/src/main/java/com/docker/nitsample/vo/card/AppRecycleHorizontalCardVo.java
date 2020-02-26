@@ -1,8 +1,6 @@
 package com.docker.nitsample.vo.card;
 
-import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
-import android.databinding.ObservableList;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,11 +14,9 @@ import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
-import com.docker.nitsample.vo.CarRvHorizontalVo;
 import com.docker.nitsample.vo.LayoutManagerVo;
 import com.docker.nitsample.vo.RecycleTopLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;

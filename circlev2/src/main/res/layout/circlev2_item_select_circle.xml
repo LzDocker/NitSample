@@ -33,11 +33,11 @@
 
         <ImageView
             android:id="@+id/img_thumb"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:scaleType="centerCrop"
-            app:roundImgUrl="@{item.logoUrl}" />
+            android:scaleType="fitXY"
+            app:imageUrl="@{CommonBdUtils.getCompleteImageUrl(item.logoUrl)}" />
 
         <LinearLayout
             android:layout_width="0dp"

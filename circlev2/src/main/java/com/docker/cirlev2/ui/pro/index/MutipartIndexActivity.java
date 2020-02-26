@@ -1,6 +1,9 @@
 package com.docker.cirlev2.ui.pro.index;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -9,63 +12,83 @@ import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2MutipartIndexActivityBinding;
 import com.docker.cirlev2.ui.detail.index.CircleConfig;
 import com.docker.cirlev2.ui.detail.index.temp.defaults.NitDefaultCircleFragment;
+import com.docker.cirlev2.vm.MutipartCircleViewModel;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.vm.NitEmptyViewModel;
 import com.docker.common.common.widget.indector.CommonIndector;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.docker.common.common.config.Constant.CommonListParam;
 
 @Route(path = AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX)
-public class MutipartIndexActivity extends NitCommonActivity<NitEmptyViewModel, Circlev2MutipartIndexActivityBinding> {
+public class MutipartIndexActivity extends NitCommonActivity<MutipartCircleViewModel, Circlev2MutipartIndexActivityBinding> {
 
 
     @Override
-    public void initView() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel.fetchMutipartTabData();
+    }
 
+    @Override
+    public void initView() {
         mToolbar.setTitle("分部说");
 
-        String[] titles = new String[]{"七律分部", "燕山分部", "逍遥分部"};
-        ArrayList<Fragment> fragments = new ArrayList<>();
-
-        CircleConfig circleConfig = new CircleConfig();
-        circleConfig.circleid = "255";
-        circleConfig.utid = "62fe4a4647e39d823677c40fa8fff5f1";
-        circleConfig.circleType = "1";
-        circleConfig.Temple = 0;
-        circleConfig.isNeedToobar = false;
-        fragments.add(NitDefaultCircleFragment.getInstance(circleConfig));
-
-        CircleConfig circleConfig1 = new CircleConfig();
-        circleConfig1.circleid = "255";
-        circleConfig1.utid = "62fe4a4647e39d823677c40fa8fff5f1";
-        circleConfig1.circleType = "1";
-        circleConfig1.Temple = 0;
-        circleConfig1.isNeedToobar = false;
-        fragments.add(NitDefaultCircleFragment.getInstance(circleConfig1));
-
-        CircleConfig circleConfig2 = new CircleConfig();
-        circleConfig2.circleid = "255";
-        circleConfig2.utid = "62fe4a4647e39d823677c40fa8fff5f1";
-        circleConfig2.circleType = "1";
-        circleConfig2.Temple = 0;
-        circleConfig2.isNeedToobar = false;
-        fragments.add(NitDefaultCircleFragment.getInstance(circleConfig2));
-
-
-        mBinding.viewpager.setOffscreenPageLimit(3);
-
-        // magic
-        mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));
-        CommonIndector commonIndector = new CommonIndector();
-        commonIndector.initMagicIndicatorScroll(titles, mBinding.viewpager, mBinding.magic, this);
-        // magic
     }
 
     @Override
     public void initObserver() {
 
+        mViewModel.mMutipartTbLv.observe(this, new Observer<List<MutipartTabVo>>() {
+            @Override
+            public void onChanged(@Nullable List<MutipartTabVo> mutipartTabVos) {
+                if (mutipartTabVos != null && mutipartTabVos.size() > 0) {
+                    processTab(mutipartTabVos);
+                }
+            }
+        });
+    }
+
+    public void processTab(List<MutipartTabVo> mutipartTabVos) {
+
+        //{
+        //            "我关注的", "七律分部", "燕山分部", "逍遥分部"
+        //        } ;
+        String[] titles = new String[mutipartTabVos.size()];
+        ArrayList<Fragment> fragments = new ArrayList<>();
+//        CommonListOptions commonListOptions = new CommonListOptions();
+//        commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+//        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+//        commonListOptions.ReqParam.put("t", "idle");
+//        fragments.add((Fragment) ARouter.getInstance()
+//                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+//                .withSerializable(CommonListParam, commonListOptions)
+//                .navigation());
+
+//        titles[0] = "我关注的";
+        for (int i = 0; i < mutipartTabVos.size(); i++) {
+            titles[i] = mutipartTabVos.get(i).circleName;
+            CircleConfig circleConfig = new CircleConfig();
+            circleConfig.circleid = mutipartTabVos.get(i).circleid;
+            circleConfig.utid = mutipartTabVos.get(i).utid;
+            circleConfig.circleType = "1";
+            circleConfig.Temple = 0;
+            circleConfig.isNeedToobar = false;
+            fragments.add(NitDefaultCircleFragment.getInstance(circleConfig));
+        }
+
+        // magic
+        mBinding.viewpager.setAdapter(new CommonpagerStateAdapter(getSupportFragmentManager(), fragments, titles));
+        CommonIndector commonIndector = new CommonIndector();
+        commonIndector.initMagicIndicatorScroll(titles, mBinding.viewpager, mBinding.magic, this);
+        // magic
     }
 
     @Override
@@ -79,7 +102,7 @@ public class MutipartIndexActivity extends NitCommonActivity<NitEmptyViewModel, 
     }
 
     @Override
-    public NitEmptyViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(NitEmptyViewModel.class);
+    public MutipartCircleViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(MutipartCircleViewModel.class);
     }
 }

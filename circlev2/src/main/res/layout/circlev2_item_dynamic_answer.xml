@@ -72,7 +72,7 @@
                     android:layout_height="65dp"
                     android:layout_marginLeft="15dp"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{BdUtils.getResourceImgUrl(item.extData.resource.get(0))}"
+                    app:imageUrl="@{BdUtils.getCommentSingleImg(item.extData.resource)}"
                     app:visibleGone="@{item.extData.resource.size() != 0}" />
 
 

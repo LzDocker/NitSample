@@ -1,13 +1,18 @@
 package com.docker.nitsample.api;
 
 import android.arch.lifecycle.LiveData;
+import android.telephony.SignalStrength;
 
+import com.docker.cirlev2.vo.entity.CircleListNomalVo;
 import com.docker.cirlev2.vo.entity.ServerGoodsDataBean;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.RstServerVo;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.nitsample.vo.BannerEntityVo;
+import com.docker.nitsample.vo.CircleListJoinVo;
+import com.docker.nitsample.vo.CircleListNomalJoinVo;
 import com.docker.nitsample.vo.GoodsBannerVo;
 import com.docker.nitsample.vo.MenuEntityVo;
 import com.docker.nitsample.vo.SampleServiceDataVo;
@@ -60,5 +65,28 @@ public interface SampleService {
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<List<ServerGoodsDataBean>>>> fechCircleGoodsList(@FieldMap Map<String, String> params);
 
+    /*
+     * 圈子列表
+     * */
+    @POST(CommonApiConfig.apiBaseUrlZHA + "api.php?m=circle.getlist")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<CircleListJoinVo>>>> fechCircleList(@FieldMap Map<String, String> params);
 
+    /*
+     * 圈子列表
+     * */
+    @POST(CommonApiConfig.apiBaseUrlZHA + "api.php?m=circle.getlist")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<CircleListNomalJoinVo>>>> fechCircleListNomal(@FieldMap Map<String, String> params);
+
+    /*
+     * 圈子列表
+     * */
+    @POST(CommonApiConfig.apiBaseUrlZHA + "api.php?m=circle.setCheckMsg")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> sendCheckMsg(@FieldMap Map<String, String> params);
+
+
+
+    //api.php?m=circle.setCheckMsg
 }

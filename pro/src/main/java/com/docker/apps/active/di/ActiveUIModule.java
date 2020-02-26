@@ -7,11 +7,13 @@ import com.docker.apps.active.ui.detail.ActiveResultActivity;
 import com.docker.apps.active.ui.detail.ActiveSuccActivity;
 import com.docker.apps.active.ui.index.ActiveContainerFragment;
 import com.docker.apps.active.ui.index.ActiveIndexActivity;
+import com.docker.apps.active.ui.index.ActiveListFragment;
 import com.docker.apps.active.ui.manager.ActiveManagerDetailActivity;
 import com.docker.apps.active.ui.manager.ActiveManagerListActivity;
 import com.docker.apps.active.ui.manager.ActivePersionDetailActivity;
 import com.docker.apps.active.ui.manager.ActivePersionManagerListActivity;
 import com.docker.apps.active.ui.manager.ActiveRegistListActivity;
+import com.docker.apps.active.ui.manager.ActiveSearchActivity;
 import com.docker.apps.active.ui.manager.ActiveVerificationActivity;
 import com.docker.apps.active.ui.publish.ActiveBannerPreviewActivity;
 import com.docker.apps.active.ui.publish.ActiveContentEditActivity;
@@ -78,5 +80,11 @@ public abstract class ActiveUIModule {
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract ActiveDetailActivity contributeActiveDetailActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveSearchActivity contributeActiveSearchActivityInjector();
+
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract ActiveListFragment contributeActiveListFragmentInjector();
 }
 

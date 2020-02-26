@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="false"
-            android:overScrollMode="never"
+            android:focusable="false"
             app:itemBinding="@{item.itemBinding}"
             app:items="@{item.goodsListOb}"
             bind:layoutManager="@{LayoutManager.grid(2)}" />

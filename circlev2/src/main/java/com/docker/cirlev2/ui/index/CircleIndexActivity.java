@@ -32,8 +32,9 @@ public class CircleIndexActivity extends NitCommonActivity<SampleListViewModel, 
 
     @Override
     public void initView() {
-        mToolbar.hide();
-        FragmentUtils.add(getSupportFragmentManager(), (Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_INDEX_FRAME).navigation(), R.id.circlev2_frame);
+        mToolbar.setTitle("加入公社");
+//        FragmentUtils.add(getSupportFragmentManager(), (Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_INDEX_FRAME).navigation(), R.id.circlev2_frame);
+        FragmentUtils.add(getSupportFragmentManager(), (Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_INDEX_FRAMEV2).navigation(), R.id.circlev2_frame);
     }
 
     @Override

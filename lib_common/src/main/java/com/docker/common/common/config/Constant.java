@@ -53,4 +53,7 @@ public class Constant {
     public static String BarCommonCodeUrl = "http://www.baidu.com";
 
 
+    public static String ACTIVE_CONTACT_FALG = "#";
+
+
 }

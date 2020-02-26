@@ -18,6 +18,7 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.KeyboardUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
@@ -31,9 +32,12 @@ import com.docker.cirlev2.vo.param.SourceCoverParam;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.widget.ColorPickerDialog;
 import com.docker.common.common.binding.CommonBdUtils;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.DisplayUtil;
 import com.docker.common.common.utils.SoftKeyBroadManager;
+import com.docker.common.common.utils.ait.v1.AitVo;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
@@ -47,6 +51,7 @@ import java.util.HashMap;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
+import jp.wasabeef.richeditor.RichEditor;
 import me.shaohui.advancedluban.Luban;
 import me.shaohui.advancedluban.OnCompressListener;
 
@@ -64,6 +69,8 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
     public SourceCoverParam mSourceCoverParam;
 
     private Disposable disposable;
+
+    private String acvtivetyid;
 
 
     /*
@@ -109,6 +116,12 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
             ToastUtils.showShort("发布成功");
             RxBus.getDefault().post(new RxEvent<>("dynamic_refresh", ""));
             getHoldingActivity().finish();
+        });
+
+        mBinding.get().tvContact.setOnClickListener(v -> {
+            if (!isContctActive()) {
+                ARouter.getInstance().build(AppRouter.ACTIVE_SEARCH_LIST).navigation(getHoldingActivity(), 2001);
+            }
         });
     }
 
@@ -233,15 +246,12 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
 
 
         KeyboardUtils.registerSoftInputChangedListener(CirclePubNewsFragment.this.getHoldingActivity(),
-                new KeyboardUtils.OnSoftInputChangedListener() {
-                    @Override
-                    public void onSoftInputChanged(int height) {
-                        Log.d("sss", "onSoftInputChanged: he" + height);
-                        if (height > 0) {
-                            mBinding.get().llSelsectCoutainer.setVisibility(View.GONE);
-                        } else {
-                            mBinding.get().llSelsectCoutainer.setVisibility(View.VISIBLE);
-                        }
+                height -> {
+                    Log.d("sss", "onSoftInputChanged: he" + height);
+                    if (height > 0) {
+                        mBinding.get().llSelsectCoutainer.setVisibility(View.GONE);
+                    } else {
+                        mBinding.get().llSelsectCoutainer.setVisibility(View.VISIBLE);
                     }
                 });
 
@@ -388,9 +398,33 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
                             }
                         });
             }
+
+            if (requestCode == 2001) {
+                HashMap<String, String> activeInfoMap = (HashMap<String, String>) data.getSerializableExtra("activeInfo");
+
+//                String content = mBinding.get().proEventDesc.getText().toString();
+//                SpannableString ss = new SpannableString(content + activeInfoMap.get("acvitename") + "#  ");
+//                ss.setSpan(new ForegroundColorSpan(Color.RED), content.length() - 1, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                mBinding.get().proEventDesc.setText(ss);
+                AitVo aitVo = new AitVo();
+                aitVo.aitId = activeInfoMap.get("activeid");
+                acvtivetyid = aitVo.aitId;
+                aitVo.aitname = activeInfoMap.get("acvitename") + Constant.ACTIVE_CONTACT_FALG;
+//                mBinding.get().richEditor.insertLink("arouter://m.aliyun.com/&" + aitVo.aitId, "#" + aitVo.aitname);
+                mBinding.get().richEditor.insertLink("mydemo://push/ActiveInfoViewController?" + aitVo.aitId, "#" + aitVo.aitname);
+
+            }
         }
+
+//        mBinding.get().richEditor.getHtml().contains("<a")
     }
 
+    public boolean isContctActive() {
+        if (TextUtils.isEmpty(mBinding.get().richEditor.getHtml())) {
+            return false;
+        }
+        return mBinding.get().richEditor.getHtml().contains("arouter://m.aliyun.com/");
+    }
 
     //
     public String getTitle() {
@@ -417,10 +451,19 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
             ToastUtils.showShort("请输入动态内容");
             return;
         }
-        if (TextUtils.isEmpty(mHandParam.getCircleid()) || TextUtils.isEmpty(mHandParam.getUtid())) {
-            ToastUtils.showShort("请选择要发布的圈子");
-            return;
+
+        if (mHandParam != null) {
+            if (TextUtils.isEmpty(mHandParam.getCircleid()) || TextUtils.isEmpty(mHandParam.getUtid())) {
+                ToastUtils.showShort("请选择要发布的圈子");
+                return;
+            }
+        } else {
+            if ("2".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                ToastUtils.showShort("请选择要发布的圈子");
+                return;
+            }
         }
+
         UserInfoVo userInfoVo = CacheUtils.getUser();
         HashMap<String, String> paramMap = new HashMap();
         paramMap.put("memberid", userInfoVo.uid);
@@ -428,34 +471,49 @@ public class CirclePubNewsFragment extends NitCommonFragment<PublishViewModel, C
         paramMap.put("type", "news");
         paramMap.put("title", mBinding.get().circleEditName.getText().toString().trim());
         paramMap.put("content", mBinding.get().richEditor.getHtml());
-        paramMap.put("circleid", mHandParam.getCircleid());
-        paramMap.put("utid", mHandParam.getUtid());
-        if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid1"))) {
-            paramMap.put("classid", mHandParam.getExtenMap().get("classid1"));
-        }
-        if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid2"))) {
-            paramMap.put("classid2", mHandParam.getExtenMap().get("classid2"));
+
+        if (!TextUtils.isEmpty(acvtivetyid) && isContctActive()) {
+            paramMap.put("activityid", acvtivetyid);
         }
 
-        if (TextUtils.isEmpty(mHandParam.extentron2) && mHandParam.extentronList.size() == 0) {
-            paramMap.put("visibleType", "0");   // extentronList
+        if (mHandParam != null) {
+            paramMap.put("circleid", mHandParam.getCircleid());
+            paramMap.put("utid", mHandParam.getUtid());
+            if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid1"))) {
+                paramMap.put("classid", mHandParam.getExtenMap().get("classid1"));
+            }
+            if (!TextUtils.isEmpty(mHandParam.getExtenMap().get("classid2"))) {
+                paramMap.put("classid2", mHandParam.getExtenMap().get("classid2"));
+            }
+
+            if (TextUtils.isEmpty(mHandParam.extentron2) && mHandParam.extentronList.size() == 0) {
+                paramMap.put("visibleType", "0");   // extentronList
+            } else {
+                paramMap.put("visibleType", "1");
+
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < mHandParam.extentronList.size(); i++) {
+                    String id = (String) mHandParam.extentronList.get(i);
+                    stringBuilder.append(id).append(",");
+                }
+
+                if (stringBuilder.length() > 1) {
+                    String ids = stringBuilder.substring(0, stringBuilder.length() - 1);
+                    paramMap.put("groupids", ids);
+                }
+
+            }
+            if (mEditType == 2) {
+                paramMap.put("dataid", mHandParam.serviceDataBean.getDataid());
+            }
         } else {
-            paramMap.put("visibleType", "1");
-
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < mHandParam.extentronList.size(); i++) {
-                String id = (String) mHandParam.extentronList.get(i);
-                stringBuilder.append(id).append(",");
+            if ("1".equals(((CirclePublishActivity) getHoldingActivity()).getIsShowBot())) {
+                if (CacheUtils.getUser() != null) {
+                    paramMap.put("circleid", CacheUtils.getUser().circleid);
+                    paramMap.put("utid", CacheUtils.getUser().utid);
+                    paramMap.put("visibleType", "0");
+                }
             }
-
-            if (stringBuilder.length() > 1) {
-                String ids = stringBuilder.substring(0, stringBuilder.length() - 1);
-                paramMap.put("groupids", ids);
-            }
-
-        }
-        if (mEditType == 2) {
-            paramMap.put("dataid", mHandParam.serviceDataBean.getDataid());
         }
 
         mViewModel.publishNews(paramMap);

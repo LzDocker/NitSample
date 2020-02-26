@@ -3,6 +3,8 @@ package com.docker.apps.active.api;
 import android.arch.lifecycle.LiveData;
 
 import com.docker.apps.active.vo.ActivePersionVo;
+import com.docker.apps.active.vo.ActiveSelectVo;
+import com.docker.apps.active.vo.ActiveSelectWraper;
 import com.docker.apps.active.vo.ActiveServerDataBean;
 import com.docker.apps.active.vo.ActiveSucVo;
 import com.docker.apps.active.vo.ActiveVo;
@@ -70,6 +72,10 @@ public interface ActiveService {
     @POST("api.php?m=activity.evoucherValidate")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> evoucherValidate(@FieldMap Map<String, String> params);
+
+    @POST("api.php?m=activity.activitySearch")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<ActiveSelectWraper>>> ActiveSelectVo(@FieldMap Map<String, String> params);
 
 
     //ActiveManagerDetailVo

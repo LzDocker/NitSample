@@ -49,6 +49,7 @@ import io.reactivex.disposables.Disposable;
 
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_NEWS;
+import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
 import static com.docker.common.common.router.AppRouter.HOME;
 
 @Route(path = HOME)
@@ -292,6 +293,8 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                             .withInt("type", PUBLISH_TYPE_ACTIVE)
                             .withSerializable("extens", hashMap)
                             .navigation();
+
+
                     break;
                 case "1":
                     ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
@@ -324,6 +327,13 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                 case "7": // 成为股东
 
                     break;
+                case "8":
+                    ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                            .withInt("editType", 1)
+                            .withSerializable("extens", hashMap)
+                            .withInt("type", PUBLISH_TYPE_QREQUESTION)
+                            .navigation();
+                    break;
             }
         });
         mPublishMenu.showMoreWindow(mBinding.getRoot());
@@ -347,6 +357,11 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
         appVo2.name = "发文章";
         appVo2.id = "2";
         appVo2.icon = R.mipmap.publish_art;
+
+        AppVo appVo8 = new AppVo();
+        appVo8.name = "发问答";
+        appVo8.id = "8";
+        appVo8.icon = R.mipmap.publish_ask;
 
         AppVo appVo3 = new AppVo();
         appVo3.name = "赚积分";
@@ -381,7 +396,9 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
         if (CacheUtils.getUser() != null && "2".equals(CacheUtils.getUser().reg_type)) {
             appVos.add(appVo1);
             appVos.add(appVo2);
+            appVos.add(appVo8);
         }
+
         appVos.add(appVo3);
         appVos.add(appVo4);
         appVos.add(appVo5);

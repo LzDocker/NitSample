@@ -19,12 +19,15 @@ import com.docker.nitsample.ui.index.IndexFragment;
 import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
+import com.docker.nitsample.ui.index.circle.CircleIndexFragmentv2;
+import com.docker.nitsample.ui.index.circle.CircleJoinActionActivity;
 import com.docker.nitsample.ui.optimization.OptimizationFragment;
 import com.docker.nitsample.ui.search.SearchActivity;
-//import com.docker.nitsample.ui.index.IndexFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+
+//import com.docker.nitsample.ui.index.IndexFragment;
 
 /**
  * Created by zhangxindang on 2018/11/21.
@@ -109,5 +112,13 @@ public abstract class UIMoudle {
     @ActivityScope
     @ContributesAndroidInjector
     abstract WelocomeActivity contributeWelocomeActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract CircleIndexFragmentv2 contributeCircleIndexFragmentv2Injector();
+
+    @ActivityScope
+    @ContributesAndroidInjector
+    abstract CircleJoinActionActivity contributeCircleJoinActionActivityInjector();
 
 }

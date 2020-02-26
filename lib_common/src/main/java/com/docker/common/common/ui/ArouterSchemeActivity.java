@@ -3,6 +3,7 @@ package com.docker.common.common.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavCallback;
@@ -20,6 +21,7 @@ public class ArouterSchemeActivity extends BaseActivity {
         super.onCreate(savedInstanceStates);
         ARouter.getInstance().inject(this);
         Uri uri = getIntent().getData();
+        Log.d("sss", "onCreate: ====================="+uri.toString());
         String[] dataurl = uri.toString().split("/?");
         // 根据uri 获取参数 跳转
         ARouter.getInstance().build(uri).navigation(this, new NavCallback() {

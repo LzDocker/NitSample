@@ -2,6 +2,7 @@ package com.docker.cirlev2.ui.detail.index.base;
 
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -64,7 +65,7 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
                 if (mCircleDetailLv.getValue() == null) {
                     FetchCircleDetail(utid, circleid);
                 }
-                if (mCircleDetailLv.getValue() != null&&mCircleDetailLv.getValue() == null) {
+                if (mCircleDetailLv.getValue() != null && mCircleDetailLv.getValue() == null) {
                     FetchCircleClass();
                 }
             }
@@ -77,8 +78,8 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
         this.utid = utid;
         UserInfoVo userInfoVo = CacheUtils.getUser();
         HashMap<String, String> param = new HashMap();
-        param.put("memberid", "3");
-        param.put("uuid", "3c29a4eed44db285468df3443790e64a");
+        param.put("memberid", userInfoVo.uid);
+        param.put("uuid", userInfoVo.uuid);
         param.put("utid", utid);
         param.put("circleid", circleid);
         mCircleDetailLv.addSource(RequestServer(circleApiService.fechCircleDetail(param)),
@@ -136,7 +137,12 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
     }
 
     public void joinCircle(View view) {
-        if (mCircleDetailLv.getValue().getRole() > 0) {
+        if (CacheUtils.getUser() == null) {
+            return;
+        }
+        Log.d("sss", "joinCircle: =========="+mCircleDetailLv.getValue().getMemberid()+"===="+CacheUtils.getUser().uid);
+
+        if (mCircleDetailLv.getValue().getRole() > 0 && mCircleDetailLv.getValue().getMemberid().endsWith(CacheUtils.getUser().uid)) {
             ToastUtils.showShort("圈主不能退出圈子");
             return;
         }
@@ -149,7 +155,6 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
 
 
     public void quitCirlce() {
-        showDialogWait("退出中..", false);
         UserInfoVo userInfoVo = CacheUtils.getUser();
         Map<String, String> parms = new HashMap<>();
         parms.put("circleid", circleid);
@@ -168,7 +173,7 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
                     @Override
                     public void onComplete(Resource<String> resource) {
                         super.onComplete(resource);
-                        mJoninLv.setValue(resource.data);
+
                         hideDialogWait();
                         ToastUtils.showShort("退出成功！");
                         mCircleDetailLv.getValue().setIsJoin("0");
@@ -176,6 +181,7 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
                         mCircleDetailLv.getValue().setEmployeeNum(String.valueOf(Integer.parseInt(mCircleDetailLv.getValue().getEmployeeNum()) - 1));
                         mCircleDetailLv.getValue().notifyPropertyChanged(BR.employeeNum);
                         RxBus.getDefault().post(new RxEvent<>("refresh_circle_myjoin", "111")); // 刷新我的圈子
+                        mJoninLv.setValue(resource.data);
                     }
                 }));
     }
@@ -192,7 +198,6 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
             params.put("fullName", userInfoVo.nickname);
         }
         params.put("circleid", circleid);
-        showDialogWait("加入中...", false);
         mJoninLv.addSource(RequestServer(circleApiService.joinCircle(params)),
                 new NitNetBoundObserver<>(new NitBoundCallback<String>() {
                     @Override
@@ -205,7 +210,6 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
                     @Override
                     public void onComplete(Resource<String> resource) {
                         super.onComplete(resource);
-                        mJoninLv.setValue(resource.data);
                         hideDialogWait();
                         ToastUtils.showShort("加入成功！");
                         mCircleDetailLv.getValue().setIsJoin("1");
@@ -213,6 +217,7 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
                         mCircleDetailLv.getValue().setEmployeeNum(String.valueOf(Integer.parseInt(mCircleDetailLv.getValue().getEmployeeNum()) + 1));
                         mCircleDetailLv.getValue().notifyPropertyChanged(BR.employeeNum);
                         RxBus.getDefault().post(new RxEvent<>("refresh_circle_myjoin", "111")); // 刷新我的圈子
+                        mJoninLv.setValue(resource.data);
                     }
                 }));
     }

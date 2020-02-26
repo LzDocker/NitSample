@@ -1,6 +1,5 @@
 package com.docker.apps.active.ui.publish;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -10,52 +9,41 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.alibaba.sdk.android.oss.common.utils.DateUtil;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
-import com.dcbfhd.utilcode.utils.TimeUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
 import com.docker.apps.active.vo.ActivePubVo;
-import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.LinkageVo;
 import com.docker.apps.databinding.ProActivePubFragmentBinding;
 import com.docker.cirlev2.ui.common.CircleSourceUpFragment;
 import com.docker.cirlev2.ui.publish.CirclePublishActivity;
 import com.docker.cirlev2.util.GlideImageLoader;
-import com.docker.cirlev2.vm.PublishViewModel;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.SourceUpParam;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.utils.ParamUtils;
-import com.docker.common.common.utils.TimerUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.location.LocationManager;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.picker.CommonWheelPicker;
-import com.luck.picture.lib.entity.LocalMedia;
-import com.umeng.commonsdk.debug.D;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -264,7 +252,7 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
                 activePubVo.circleidshow = activeVo.circlename;
                 activePubVo.actTypeshow = activeVo.actTypeName;
 
-
+                mBinding.get().llSelCircle.setVisibility(View.GONE);
                 activePubVo.point = activeVo.point;
                 mBinding.get().setPub(activePubVo);
 
@@ -557,11 +545,15 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
     }
 
     public static String stampToDate(String s) {
-        String res;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long lt = new Long(s + "000");
-        Date date = new Date(lt);
-        res = simpleDateFormat.format(date);
+        String res = "";
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long lt = new Long(s + "000");
+            Date date = new Date(lt);
+            res = simpleDateFormat.format(date);
+        } catch (Exception e) {
+
+        }
         return res;
     }
 
@@ -689,8 +681,8 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
 //        paramMap.put("actType", mBinding.get().getPub().actType);
         paramMap.put("actType", mBinding.get().getPub().actType);
-        paramMap.put("utid", "8d93e6a11a530bafabe31724e2b35972");
-        paramMap.put("circleid", "598");
+        paramMap.put("utid", mBinding.get().getPub().utid);
+        paramMap.put("circleid", mBinding.get().getPub().circleid);
 
         paramMap.put("point", mBinding.get().getPub().point);
 //        paramMap.put("title", mBinding.get().getPub().title);

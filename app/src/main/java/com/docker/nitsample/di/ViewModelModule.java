@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.bfhd.circle.base.EmptyVm;
 import com.docker.core.di.scope.ViewModelKey;
+import com.docker.nitsample.vm.CircleJoinListViewModel;
 import com.docker.nitsample.vm.EditListViewModel;
 import com.docker.nitsample.vm.IndexTygsViewModel;
 import com.docker.nitsample.vm.MainViewModel;
@@ -21,6 +22,7 @@ import com.docker.nitsample.vm.card.AppIndexMenuViewModel;
 import com.docker.nitsample.vm.card.AppRecycleHorizontalVm;
 import com.docker.nitsample.vm.card.CircleRecomendListCardVm;
 import com.docker.nitsample.vm.card.OptimizationCardViewModel;
+import com.docker.nitsample.vm.circle.CircleJoinListVm;
 
 import dagger.Binds;
 import dagger.Module;
@@ -124,5 +126,15 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AppRecycleHorizontalVm .class)
     abstract ViewModel AppRecycleHorizontalVm (AppRecycleHorizontalVm  model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CircleJoinListViewModel.class)
+    abstract ViewModel CircleJoinListViewModel(CircleJoinListViewModel model);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CircleJoinListVm.class)
+    abstract ViewModel CircleJoinListVm(CircleJoinListVm model);
 
 }

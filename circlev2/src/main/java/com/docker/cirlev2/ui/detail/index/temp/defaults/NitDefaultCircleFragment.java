@@ -1,8 +1,10 @@
 package com.docker.cirlev2.ui.detail.index.temp.defaults;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.res.ColorStateList;
+import android.databinding.ObservableField;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,10 +29,12 @@ import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
 import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
+import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.adapter.CommonpagerStateAdapter;
+import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
@@ -48,6 +52,7 @@ import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_ACTIVE;
@@ -140,13 +145,23 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
                     CircleInfoActivity.startMe(this.getHoldingActivity(), mStartParam);
                 }
             });
+            mBinding.get().circleLlPerLiner.setVisibility(View.VISIBLE);
+            mBinding.get().circleLlPerLiner.setOnClickListener(v -> {
+                onCirclePersionManagerClick();
+            });
         }
 
         if (circleConfig.isNeedToobar) {
             mBinding.get().toolbar.setVisibility(View.VISIBLE);
             initAppBar();
         }
-
+        mViewModel.mJoninLv.observe(this, s -> {
+            if ("0".endsWith(mViewModel.mCircleDetailLv.getValue().getIsJoin())) {
+                mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+            } else {
+                mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -221,15 +236,22 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
     public void onCircleDetailFetched(CircleDetailVo circleDetailVo) {
         mBinding.get().setCircleDetail(circleDetailVo);
 //        mBinding.get().circleTvPersonnum.setText(mViewModel.mCircleDetailLv.getValue().getEmployeeNum() + "人");
-        if ("1".equals(mViewModel.mCircleDetailLv.getValue().getIsJoin())) {
-            mBinding.get().circlev2Edit.setVisibility(View.VISIBLE);
+
+        processHeader(circleDetailVo);
+        processPushSHow(circleDetailVo);
+    }
+
+
+    public void processPushSHow(CircleDetailVo circleDetailVo){
+        if ("1".equals(circleDetailVo.getIsJoin())) {
+            mBinding.get().circlev2Edit.setVisibility(View.GONE);
             mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
         } else {
             mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
             mBinding.get().circlev2Edit.setVisibility(View.GONE);
         }
-        processHeader(circleDetailVo);
     }
+
 
     @Override
     public void onCircleTabFetched(List<CircleTitlesVo> list) {
@@ -267,16 +289,25 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         }
         // magic
 
-
     }
 
     public void processHeader(CircleDetailVo circleDetailVo) {
 
+        if ("0".endsWith(circleDetailVo.getIsJoin())) {
+            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+        } else {
+            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        }
+
+
         if (circleConfig.Temple == 0) {
-            mBinding.get().ivSurface.setVisibility(View.VISIBLE);
+            mBinding.get().ivSurface.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(circleDetailVo.getSurfaceImg())) {
-                GlideApp.with(this).load(CommonBdUtils.getImgUrl(circleDetailVo.getSurfaceImg())).into(mBinding.get().ivSurface);
+                mBinding.get().banner.setVisibility(View.VISIBLE);
+                mBinding.get().setBannerstr(circleDetailVo.getSurfaceImg());
             }
+            mBinding.get().frameCoutainer.setVisibility(View.VISIBLE);
+
         }
 
         String infodesc = "【简介】";
@@ -443,11 +474,21 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         }
     }
 
+    @Override
+    public void processPro(NitAbsSampleAdapter mAdapter) {
+        super.processPro(mAdapter);
+
+
+    }
+
     public void processPublishRouterClick(StaCirParam staCirParam, AppVo appVo) {
         Postcard postcard = null;
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("isShowBot", "1");
         if ("0".equals(appVo.id)) {
             postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                     .withInt("editType", 1)
+                    .withSerializable("extens", hashMap)
                     .withInt("type", PUBLISH_TYPE_ACTIVE)
                     .withSerializable("mStartParam", staCirParam);
         }
@@ -455,6 +496,7 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         if ("1".equals(appVo.id)) {
             postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                     .withInt("editType", 1)
+                    .withSerializable("extens", hashMap)
                     .withInt("type", PUBLISH_TYPE_NEWS)
                     .withSerializable("mStartParam", staCirParam);
         }
@@ -462,8 +504,17 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         if ("2".equals(appVo.id)) {
             postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
                     .withInt("editType", 1)
+                    .withSerializable("extens", hashMap)
                     .withInt("type", PUBLISH_TYPE_QREQUESTION)
                     .withSerializable("mStartParam", staCirParam);
+        }
+        if ("4".equals(appVo.id)) {
+            postcard = ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
+                    .withInt("editType", 1)
+                    .withString("title", "活动")
+                    .withSerializable("extens", hashMap)
+                    .withSerializable("mStartParam", staCirParam)
+                    .withString("pubRoterPath", AppRouter.ACTIVE_PUBLISH);
         }
 
         if ("-1".equals(appVo.id)) {

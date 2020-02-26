@@ -2,6 +2,7 @@ package com.docker.nitsample.vm.card;
 
 import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
+import android.util.Log;
 
 import com.docker.cirlev2.vo.entity.CircleListNomalVo;
 import com.docker.cirlev2.vo.entity.ServerGoodsDataBean;
@@ -50,7 +51,7 @@ public class OptimizationCardViewModel extends NitcommonCardViewModel {
                     @Override
                     public void onComplete(Resource<List<ServerGoodsDataBean>> resource) {
                         super.onComplete(resource);
-                        appGoodsOptimizationCardVo.setRecycleGoodsList((ArrayList<ServerGoodsDataBean>) resource.data);
+                        ((AppGoodsOptimizationCardVo) accountHeadCardVo).setRecycleGoodsList((ArrayList<ServerGoodsDataBean>) resource.data);
                     }
 
                     @Override

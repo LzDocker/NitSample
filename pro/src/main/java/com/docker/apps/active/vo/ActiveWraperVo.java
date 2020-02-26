@@ -6,5 +6,8 @@ public class ActiveWraperVo {
 
     public ArrayList<ActiveVo> indexList;
 
+
+    public String num;
+    public String money;
 }
 

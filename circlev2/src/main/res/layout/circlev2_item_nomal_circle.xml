@@ -14,6 +14,7 @@
             name="viewmodel"
             type="com.docker.cirlev2.vm.CircleMinesViewModel" />
 
+
     </data>
 
 

@@ -50,6 +50,18 @@ public class CircleDetailFragment_tyz extends NitDefaultCircleFragment {
         mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
     }
 
+
+    @Override
+    public void processPushSHow(CircleDetailVo circleDetailVo) {
+        super.processPushSHow(circleDetailVo);
+
+        if ("1".equals(circleDetailVo.getRole())) {
+            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void initAppBar() {
         mBinding.get().ivBack.setImageResource(com.docker.core.R.mipmap.ic_back);

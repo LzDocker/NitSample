@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -80,7 +81,6 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
             }
         });
         initWebView();
-
         if (CacheUtils.getUser() != null && serviceDataBean.getUuid().equals(CacheUtils.getUser().uuid)) {
             mBinding.get().tvAttention.setVisibility(View.GONE);
         }
@@ -153,11 +153,17 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
                 // 如果不是http或者https开头的url，那么使用手机自带的浏览器打开
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     try {
-                        return true;
+                        if (url.startsWith("arouter")) {
+                            String activityid = url.split("#")[1];
+                            ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", activityid).navigation();
+                        } else if (url.startsWith("mydemo")) {
+                            String activityid = url.split("\\?")[1];
+                            ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", activityid).navigation();
+                        }
                     } catch (Exception e) {
-                        e.printStackTrace();
-                        return true;
+
                     }
+                    return true;
                 }
                 view.loadUrl(url);
                 return true;

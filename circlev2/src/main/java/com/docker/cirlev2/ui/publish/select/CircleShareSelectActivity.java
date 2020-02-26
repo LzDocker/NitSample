@@ -12,6 +12,7 @@ import com.docker.common.common.command.NitContainerCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonListActivity;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 
@@ -48,8 +49,8 @@ public class CircleShareSelectActivity extends NitCommonListActivity<CirlcleSele
         mStaCirParam = (StaCirParam) getIntent().getExtras().getSerializable("StaCirParam");
         commonListReq = new CommonListOptions();
         commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
-        commonListReq.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
-        commonListReq.ReqParam.put("memberid", "3");
+        commonListReq.ReqParam.put("uuid", CacheUtils.getUser().uuid);
+        commonListReq.ReqParam.put("memberid", CacheUtils.getUser().uid);
         if (mStaCirParam != null) {
             commonListReq.externs.put("default", mStaCirParam.getCircleid());
         } else {
