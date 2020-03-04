@@ -3,10 +3,12 @@ package com.docker.apps.order.ui.logistics.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.docker.apps.R;
 import com.docker.apps.order.vo.LogisticeVo;
 
@@ -23,6 +25,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.MyViewHolder
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d("sss", "onBindViewHolder: ======================" + viewType);
         MyViewHolder holder = new MyViewHolder(LayoutInflater.from(mContext).inflate(R.layout.pro_order_item_logistics, null));
         return holder;
     }
@@ -30,10 +33,12 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         LogisticeVo.DataBean bean = mDataList.get(position);
+        Log.d("sss", "onBindViewHolder: ======================" + position);
         if (null == bean) {
             return;
         }
         holder.tv_time.setText(bean.getFtime());
+        Log.d("sss", "onBindViewHolder: ====================="+bean.getFtime());
         holder.tv_desc.setText(bean.getContext());
 //        if (bean.isCheck()) {
 //            //设置圆点背景

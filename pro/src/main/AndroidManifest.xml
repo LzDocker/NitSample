@@ -30,6 +30,7 @@
         <activity android:name="com.docker.apps.active.ui.publish.ActiveTypeSelectActivity" />
         <activity android:name="com.docker.apps.active.ui.detail.ActiveDetailActivity" />
         <activity android:name="com.docker.apps.active.ui.manager.ActiveSearchActivity" />
+        <activity android:name="com.docker.apps.order.ui.index.OrderPaySuccActivity" />
         <activity
             android:name="com.docker.apps.order.ui.index.OrderMakeActivity"
             android:windowSoftInputMode="adjustResize" />

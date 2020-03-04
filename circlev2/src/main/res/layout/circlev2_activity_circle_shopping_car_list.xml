@@ -63,16 +63,16 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll_all_check"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:id="@+id/ll_all_check"
                         android:gravity="center_vertical">
 
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@{isAllCheck== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
+                            android:src="@{isAllCheck== true?R.mipmap.xz:R.mipmap.wxz}" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -96,9 +96,9 @@
                             android:textColor="@color/black" />
 
                         <TextView
+                            android:id="@+id/tv_money"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/tv_money"
                             android:text="123456.00"
                             android:textColor="@color/black"
                             android:textSize="14sp" />

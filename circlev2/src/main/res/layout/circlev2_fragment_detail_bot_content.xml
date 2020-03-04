@@ -17,7 +17,6 @@
         <variable
             name="viewmodel"
             type="com.docker.cirlev2.vm.CircleDynamicDetailViewModel" />
-        .
 
         <variable
             name="commentVm"

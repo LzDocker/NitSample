@@ -17,6 +17,8 @@ import com.docker.cirlev2.vo.entity.TradingCommonVo;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.MoneyDetailVo;
+import com.docker.core.util.LayoutManager;
+import com.library.flowlayout.FlowLayoutManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -518,7 +520,11 @@ public class BdUtils {
     }
 
     public static boolean isShowDel(CommentVo commentVo) {
-        return CacheUtils.getUser().uid.equals(commentVo.getMemberid());
+        if (CacheUtils.getUser() != null) {
+            return CacheUtils.getUser().uid.equals(commentVo.getMemberid());
+        } else {
+            return false;
+        }
     }
 
 
@@ -1234,6 +1240,5 @@ public class BdUtils {
     public static String getActiveTimeStr(String sta, String end) {
         return sta + " 至 " + end;
     }
-
 
 }

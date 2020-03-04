@@ -30,6 +30,13 @@ public class ActiveVo extends BaseSampleItem {
                 ToastUtils.showShort("数据不存在");
                 return;
             }
+            if (CacheUtils.getUser() == null) {
+                ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY)
+                        .withString("activityid", ((ActiveVo) item).dataid)
+                        .withString("activitytitle", ((ActiveVo) item).title)
+                        .navigation();
+                return;
+            }
             if (((ActiveVo) item).uuid.equals(CacheUtils.getUser().uuid)) {
                 ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).withSerializable("activeVo", ((ActiveVo) item)).navigation();
             } else {

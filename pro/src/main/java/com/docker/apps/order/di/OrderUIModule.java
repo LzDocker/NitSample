@@ -10,6 +10,7 @@ import com.docker.apps.order.ui.index.OrderGoodsListActivity;
 import com.docker.apps.order.ui.index.OrderListActivity;
 import com.docker.apps.order.ui.index.OrderMakeActivity;
 import com.docker.apps.order.ui.index.OrderPayActivity;
+import com.docker.apps.order.ui.index.OrderPaySuccActivity;
 import com.docker.apps.order.ui.logistics.LogisticsDetialActivity;
 import com.docker.core.di.component.BaseActComponent;
 import com.docker.core.di.scope.ActivityScope;
@@ -64,6 +65,10 @@ public abstract class OrderUIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract OrderDetailActivity contributeOrderDetailActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract OrderPaySuccActivity contributeOrderPaySuccActivityInjector();
 
 
 }

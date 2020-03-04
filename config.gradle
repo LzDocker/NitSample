@@ -4,14 +4,14 @@ ext {
             targetSdkVersion : 28,
             compileSdkVersion: 28,
             buildToolsVersion: "28.0.3",
-            applicationId    : "com.bfhd.tygs",
+            applicationId    : "com.bfhd.tygs",//com.bfhd.tygs
 //            applicationId    : "com.bfhd.safe",
             versionCode      : 100,
             versionName      : "1.0.0"
     ]
     push = [
-            JPUSH_PKGNAME: "om.bfhd.tygs",
-            JPUSH_APPKEY : "2e2ecab09929af8af20533ea",
+            JPUSH_PKGNAME: "com.bfhd.tygs",
+            JPUSH_APPKEY : "b3396c4b78e0d00ef5e7b4f6", //b85970df10d9d27e5980b18b   //47494f2be8f3cd55657748f4
             JPUSH_CHANNEL: "developer-default",
     ]
     dependencies = [

@@ -146,12 +146,12 @@
 
         <LinearLayout
             android:id="@+id/dynamic_detail_foot"
-            visibleGone="@{BdUtils.detailFootStyle(item) == 2}"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/common_top_liner_shape"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:id="@+id/circle_common_bar"
@@ -276,7 +276,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_toRightOf="@+id/lin_kf"
                     android:gravity="center"
                     android:onClick="@{(view)->viewmodel.ItemShopCartClick(item,view)}"
@@ -304,7 +304,7 @@
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_toRightOf="@id/ll_gwc"
                     android:gravity="center"
                     android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"
@@ -327,39 +327,37 @@
                 </LinearLayout>
 
 
-                <TextView
+                <Button
                     android:id="@+id/tv_shopping_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_toLeftOf="@id/tv_buy"
                     android:background="@drawable/circle_red_btn_shape"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="15dp"
-                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="加入购物车"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 
                 <!--                    android:onClick="@{(view)->viewmodel.ItemStoreClick(item,view)}"-->
 
-                <TextView
+                <Button
                     android:id="@+id/tv_buy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/circle_btn_shape"
                     android:onClick="@{(view)->viewmodel.ShopingToBuy(item,view)}"
-                    android:paddingLeft="18dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="18dp"
-                    android:paddingBottom="8dp"
+                    android:paddingLeft="14dp"
+                    android:paddingRight="14dp"
                     android:text="立即购买"
                     android:textColor="@color/white"
                     android:textSize="14sp" />

@@ -6,10 +6,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.account.utils.RouterUtils;
+import com.bfhd.account.vo.CollectVo;
+import com.bfhd.account.vo.CommentVo;
+import com.dcbfhd.utilcode.utils.ActivityUtils;
+import com.dcbfhd.utilcode.utils.AppUtils;
+import com.dcbfhd.utilcode.utils.GsonUtils;
+import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.util.AppExecutors;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.helper.Logger;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -37,23 +49,23 @@ public class MyProcessReceiver extends BroadcastReceiver {
             Logger.d(TAG, "接受到推送下来的自定义消息");
 
             String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-//            CollectVo.ParamsBean paramsBean = GsonUtils.fromJson(extras, CollectVo.ParamsBean.class);
-//            if ("quit".equals(paramsBean.getAct())) {
-//                ToastUtils.showShort("您的账号在其它设备登录，您已被迫下线！！");
-//                JPushInterface.deleteAlias(context, AppUtils.getAppVersionCode());
-//                JPushInterface.clearAllNotifications(context);
-//                ShortcutBadger.removeCount(context);
-//                ActivityUtils.finishAllActivities();
-//                if (AppUtils.isAppForeground()) {
-//                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
-//                }
-//            }
-//            if ("store".equals(paramsBean.getAct())) {
-//                UserInfoVo userInfoVo = CacheUtils.getUser();
-//                userInfoVo.reg_type = "2";
-//                CacheUtils.saveUser(userInfoVo);
-//            }
-//            RouterUtils.Jump(paramsBean, true);
+            CommentVo.ParamsBean paramsBean = GsonUtils.fromJson(extras, CommentVo.ParamsBean.class);
+            if ("quit".equals(paramsBean.getAct())) {
+                ToastUtils.showShort("您的账号在其它设备登录，您已被迫下线！！");
+                JPushInterface.deleteAlias(context, AppUtils.getAppVersionCode());
+                JPushInterface.clearAllNotifications(context);
+                ShortcutBadger.removeCount(context);
+                ActivityUtils.finishAllActivities();
+                if (AppUtils.isAppForeground()) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
+                }
+            }
+            if ("store".equals(paramsBean.getAct())) {
+                UserInfoVo userInfoVo = CacheUtils.getUser();
+                userInfoVo.reg_type = "2";
+                CacheUtils.saveUser(userInfoVo);
+            }
+            RouterUtils.Jump(paramsBean, true);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Logger.d(TAG, "接受到推送下来的通知");

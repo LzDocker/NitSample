@@ -144,11 +144,10 @@ public class MyAitManager implements TextWatcher {
             if (s == null) {
                 return;
             }
-            if (s.toString().equals(Constant.ACTIVE_CONTACT_FALG)) {
+            if (s.toString().endsWith(Constant.ACTIVE_CONTACT_FALG)) {
                 if (aitContactsModel.getAitTeamMember() == null || aitContactsModel.getAitTeamMember().size() == 0) {
                     replyCommand.exectue();
                 }
-
 //                if (!TextUtils.isEmpty(tid) || robot) {
 //                    AitContactSelectorActivity.start(context, tid, robot);
 //

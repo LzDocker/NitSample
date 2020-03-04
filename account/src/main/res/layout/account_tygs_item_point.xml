@@ -13,6 +13,8 @@
 
         <import type="com.bfhd.circle.R" />
 
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
     </data>
 
 
@@ -49,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_title"
                 android:layout_marginTop="10dp"
-                android:text="@{item.time}"
+                android:text="@{BdUtils.getStandardDate(item.time)}"
                 android:textColor="@color/color_69"
                 android:textSize="13sp" />
 
@@ -60,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="@{@string/add + item.point}"
+                android:text="@{item.point}"
                 android:textColor="#DB2310"
                 android:textSize="20sp"
                 android:textStyle="bold" />

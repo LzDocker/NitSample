@@ -22,6 +22,14 @@ public class MessageListActivity extends NitCommonListActivity<MessageViewModel>
     @Override
     public void initObserver() {
 
+        // 忽略
+        mViewModel.mignoreMsgLv.observe(this, s -> {
+
+        });
+        // 同意
+        mViewModel.mJoinSucLv.observe(this, s -> {
+
+        });
     }
 
     @Override

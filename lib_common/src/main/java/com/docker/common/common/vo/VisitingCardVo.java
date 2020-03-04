@@ -61,6 +61,15 @@ public class VisitingCardVo {
     private String landline_telephone;
     private String age;
 
+    public String content;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getFullName() {
         return fullName;

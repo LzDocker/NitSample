@@ -101,7 +101,6 @@
             android:layout_height="0.5dp"
             android:layout_below="@id/lin"
             android:layout_marginLeft="30dp"
-
             android:background="#ffeeeeee"></TextView>
     </RelativeLayout>
 

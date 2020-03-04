@@ -73,7 +73,7 @@
             android:paddingTop="3dp"
             android:paddingRight="5dp"
             android:paddingBottom="3dp"
-            android:text="家长"
+            android:text="舵主"
             android:textColor="#fff"
             android:textSize="11sp"
             app:visibleGone="@{item.role == 2}" />

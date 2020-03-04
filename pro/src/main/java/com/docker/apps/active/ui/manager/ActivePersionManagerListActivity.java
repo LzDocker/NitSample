@@ -87,9 +87,13 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<ActiveCo
                 if (TextUtils.isEmpty(mBinding.edSerch.getText().toString().trim())) {
                     return;
                 }
-                ((NitCommonContainerFragmentV2) fragments
-                        .get(mBinding.viewPager.getCurrentItem()))
-                        .UpdateReqParam(false, new Pair<>("keyword", mBinding.edSerch.getText().toString().trim()));
+                for (int i = 0; i < fragments.size(); i++) {
+                    ((NitCommonContainerFragmentV2) fragments
+                            .get(i))
+                            .UpdateReqParam(false, new Pair<>("keyword", mBinding.edSerch.getText().toString().trim()));
+                    ((NitCommonContainerFragmentV2) fragments
+                            .get(i)).onReFresh(null);
+                }
             }
 
             @Override
@@ -137,6 +141,8 @@ public class ActivePersionManagerListActivity extends NitCommonActivity<ActiveCo
         fragments.add(activeAleaVifirFragment);
 
         String[] titles = new String[]{"报名审核", "待核销", "已核销"};
+
+        mBinding.viewPager.setOffscreenPageLimit(3);
         // magic
         mBinding.viewPager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, titles));
         CommonIndector commonIndector = new CommonIndector();

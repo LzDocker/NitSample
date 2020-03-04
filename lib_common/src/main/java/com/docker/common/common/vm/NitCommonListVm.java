@@ -77,6 +77,8 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
     // 列表数据源
     public ObservableList<BaseItemModel> mItems = new ObservableArrayList<>();
+
+
     // 多类型条目适配
     public OnItemBind<BaseItemModel> mutipartItemsBinding = (ItemBinding itemBinding, int position, BaseItemModel item) -> {
         if (item instanceof BaseSampleItem) {
@@ -217,13 +219,13 @@ public abstract class NitCommonListVm<T> extends NitCommonVm {
 
                     @Override
                     public void onBusinessError(Resource<T> resource) {
-                        super.onBusinessError(resource);
+//                        super.onBusinessError(resource);
                         setLoadControl(false);
                     }
 
                     @Override
                     public void onNetworkError(Resource<T> resource) {
-                        super.onNetworkError(resource);
+//                        super.onNetworkError(resource);
                         setLoadControl(false);
                         if (mPage == 1) {
                             mEmptycommand.set(EmptyStatus.BdError);

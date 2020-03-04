@@ -3,6 +3,7 @@ package com.docker.cirlev2.vm;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
@@ -56,6 +57,10 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
                 param.put("memberid", CacheUtils.getUser().uid);
                 param.put("orderid", orderid);
                 return circleApiService.orderbuyAgain(param);
+            } else if ("4".equals(param.get("flag"))) {
+                param.clear();
+                mEmptycommand.set(EmptyStatus.BdHiden);
+                return null;
             } else {
                 mEmptycommand.set(EmptyStatus.BdHiden);
                 return null;
@@ -80,13 +85,23 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
     }
 
     public void processTotalMoney(List<ShoppingCarVoV3> shoppingCarVoV3s) {
+
+        Log.d("sss", "processTotalMoney: =======flag=======" + flag);
         BigDecimal total = new BigDecimal(0);
         for (int i = 0; i < shoppingCarVoV3s.size(); i++) {
             for (int j = 0; j < ((shoppingCarVoV3s).get(i).info).size(); j++) {
                 ShoppingCarVoV3.CardInfo cardInfo = ((shoppingCarVoV3s).get(i)).info.get(j);
-                BigDecimal bigprice = new BigDecimal(cardInfo.price);
-                BigDecimal bignum = new BigDecimal(cardInfo.num);
-                total = total.add(bigprice.multiply(bignum).setScale(2, BigDecimal.ROUND_HALF_UP));
+                if (flag == 0) {
+                    if (((shoppingCarVoV3s).get(i)).info.get(j).getIsSelect()) {
+                        BigDecimal bigprice = new BigDecimal(cardInfo.price);
+                        BigDecimal bignum = new BigDecimal(cardInfo.num);
+                        total = total.add(bigprice.multiply(bignum).setScale(2, BigDecimal.ROUND_HALF_UP));
+                    }
+                } else {
+                    BigDecimal bigprice = new BigDecimal(cardInfo.price);
+                    BigDecimal bignum = new BigDecimal(cardInfo.num);
+                    total = total.add(bigprice.multiply(bignum).setScale(2, BigDecimal.ROUND_HALF_UP));
+                }
             }
         }
         mTotalMoney.setValue(String.valueOf(total));
@@ -203,6 +218,7 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
             shoppingCarVoV3.info.get(i).setIsSelect(shoppingCarVoV3.getIsSelect());
         }
         processAllCheck();
+        processTotalMoney(mItems);
     }
 
     public void childCheck(ShoppingCarVoV3.CardInfo info, ShoppingCarVoV3 shoppingCarVoV3, View view) {
@@ -228,6 +244,7 @@ public class CircleShoppingViewModel extends NitCommonContainerViewModel {
         } else {
             mIsAllCheckLv.setValue(false);
         }
+        processTotalMoney(mItems);
     }
 
     public final MediatorLiveData<Boolean> mIsAllCheckLv = new MediatorLiveData<>();

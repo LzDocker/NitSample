@@ -299,4 +299,6 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
         this.logoUrl = logoUrl;
     }
 
+    public String emploeeName;
+
 }

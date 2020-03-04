@@ -29,13 +29,13 @@
         <ImageView
             android:id="@+id/parallax"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            app:BlurImgUrl="@{item.datasource.avatar}" />
+            android:layout_height="280dp"
+            android:scaleType="centerCrop"
+            app:BlurImgUrl="@{item.datasource.get().avatar}" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="220dp"
             android:layout_marginTop="60dp"
             android:orientation="vertical"
             android:paddingBottom="10dp">
@@ -68,14 +68,12 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ImageView
                     android:id="@+id/v_avater"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="centerCrop"
-                    app:errorImg="@{R.mipmap.circle_default_avatar}"
-                    app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                    app:roundImgUrl="@{Constant.getCompleteImageUrl(item.datasource.avatar)}" />
+                    app:avaterImageUrl="@{BdUtils.getImgUrl(item.datasource.get().avatar)}" />
 
 
                 <LinearLayout
@@ -91,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
-                        android:text="@{item.datasource.nickname}"
+                        android:text="@{item.datasource.get().nickname}"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -101,52 +99,92 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:singleLine="true"
-                        android:text="互动分舵"
+                        android:text="@{item.datasource.get().labels}"
                         android:textColor="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
 
 
-                <TextView
-                    android:id="@+id/tv_Focu"
-                    android:layout_width="70dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:background="@drawable/account_attention_shape"
-                    android:gravity="center"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="+关注"
-                    android:textColor="@color/white"
-                    android:textSize="14.5sp"
-                    app:visibleGone="@{item.datasource.isFocus == 0 &amp;&amp; !item.datasource.isSelf}" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_each_Focus"
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/account_attention_no_shape"
-                    android:gravity="center"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:text="互相关注"
-                    android:textColor="#666"
-                    android:textSize="14.5sp"
-                    android:visibility="gone"
-                    app:visibleGone="@{item.datasource.isFocus == 2 &amp;&amp; !item.datasource.isSelf}" />
+                    <TextView
+                        android:id="@+id/tv_Focu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/tv_im"
+                        android:background="@drawable/account_attention_shape"
+                        android:gravity="center"
+                        android:onClick="@{(view)->item.onItemClick(item,view)}"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="+关注"
+                        android:textColor="@color/white"
+                        android:textSize="14.5sp"
+                        app:visibleGone="@{item.datasource.get().isFocus == 0 &amp;&amp; !item.datasource.get().isSelf}" />
+                    <!--}" -->
+
+                    <TextView
+                        android:id="@+id/tv_each_Focus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/tv_im"
+                        android:background="@drawable/account_attention_no_shape"
+                        android:gravity="center"
+                        android:onClick="@{(view)->item.onItemClick(item,view)}"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="已关注"
+                        android:textColor="@color/white"
+                        android:textSize="14.5sp"
+                        android:visibility="gone"
+                        app:visibleGone="@{item.datasource.get().isFocus == 1 &amp;&amp; !item.datasource.get().isSelf}" />
+
+
+                    <TextView
+                        android:id="@+id/tv_im"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:background="@drawable/account_attention_shape_white"
+                        android:gravity="center"
+                        android:onClick="@{(view)->item.onItemClick(item,view)}"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="5dp"
+                        android:text="聊一聊"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14.5sp"
+                        app:visibleGone="@{!item.datasource.get().isSelf}" />
+
+
+                </LinearLayout>
             </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
+                android:ellipsize="end"
                 android:lineSpacingExtra="5dp"
-                android:text="抗裂砂浆付款了圣诞节饭开始了健康飞洛杉矶的的罚款第三方接口圣诞节疯狂了时代峻峰克里斯多夫的放假克鲁赛德荆防颗粒时代峰峻释放时间的反馈了圣诞节方式"
+                android:maxLines="3"
+                android:text="@{item.datasource.get().content}"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
@@ -159,7 +197,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.datasource.favourNum}"
+                    android:text="@{item.datasource.get().favourNum}"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -174,7 +212,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.datasource.focusNum}"
+                    android:text="@{item.datasource.get().focusNum}"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
@@ -189,7 +227,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.datasource.fansNum}"
+                    android:text="@{item.datasource.get().fansNum}"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 

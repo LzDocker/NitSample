@@ -131,6 +131,10 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
     public abstract void onCircleTabFetched(List<CircleTitlesVo> circleTitlesVos);
 
     public void onShareClick() {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (mViewModel.mCircleDetailLv.getValue() != null) {
             HashMap<String, String> params = new HashMap<>();
             UserInfoVo userInfoVo = CacheUtils.getUser();
@@ -262,7 +266,6 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
             if (mViewModel.mCircleDetailLv.getValue() != null) {
                 onAppClick((AppVo) o);
             }
-
         });
         mPublishMenu.showMoreWindow(mBinding.get().getRoot());
     }

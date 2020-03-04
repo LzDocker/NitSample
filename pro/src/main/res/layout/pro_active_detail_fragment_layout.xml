@@ -55,8 +55,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:elevation="0dp"
-                        app:contentScrim="@color/white"
                         app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <!--   app:contentScrim="@color/white"-->
 
                         <FrameLayout
                             android:id="@+id/frame_head"

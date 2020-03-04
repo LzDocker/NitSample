@@ -3,11 +3,13 @@ package com.bfhd.account.utils;
 import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.account.vo.CollectVo;
 import com.bfhd.account.vo.CommentVo;
 import com.bfhd.circle.vo.bean.StaDetailParam;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.UserInfoVo;
+import com.docker.common.common.vo.entity.ParamsBean;
 
 public class RouterUtils {
 

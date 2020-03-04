@@ -9,8 +9,6 @@ import com.docker.common.common.utils.cache.CacheUtils;
 public class ActiveBdutils {
 
 
-
-
     public static boolean getPointShow(ActiveVo activeVo) {
         if (activeVo == null) {
             return false;
@@ -23,11 +21,9 @@ public class ActiveBdutils {
     }
 
 
-
-
     public static boolean isShowBot(ActiveVo activeVo) {
         if (activeVo == null || CacheUtils.getUser() == null) {
-            return false;
+            return true;
         }
 
         if (activeVo.uuid.equals(CacheUtils.getUser().uuid)) {

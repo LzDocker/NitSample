@@ -18,6 +18,7 @@ import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 
@@ -73,10 +74,11 @@ public class CircleInfoActivity extends NitCommonActivity<CircleCreateViewModel,
     @Override
     public void initView() {
         mToolbar.setTitle("圈子简介");
-        mToolbar.setTvRight("编辑", v -> {
-            ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2).withInt("flag", 1).withString("circleid", mStartParam.getCircleid()).withString("utid", mStartParam.getUtid()).navigation();
-        });
-
+        if (mStartParam.role == 1) {
+            mToolbar.setTvRight("编辑", v -> {
+                ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2).withInt("flag", 1).withString("circleid", mStartParam.getCircleid()).withString("utid", mStartParam.getUtid()).navigation();
+            });
+        }
         mViewModel.getCircleDetailVo(mStartParam.getUtid(), mStartParam.getCircleid());
         mBinding.circleInfoQuit.setOnClickListener(v -> {
             CircleCreateVo circleCreateVo = mBinding.getVo();

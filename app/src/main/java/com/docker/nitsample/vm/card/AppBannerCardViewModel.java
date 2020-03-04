@@ -46,14 +46,9 @@ public class AppBannerCardViewModel extends NitcommonCardViewModel {
                         appBannerCardVo.mCardVoLiveData.setValue(resource.data);
                         ArrayList<BannerEntityVo> appBannerCardVos = new ArrayList<>();
                         appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
-                        appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
-                        appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
-                        appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
-                        appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
-                        appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
-                        appBannerCardVos.addAll((ArrayList<BannerEntityVo>) resource.data);
                         appBannerCardVo.setBannerList(appBannerCardVos);
                     }
+
                     @Override
                     public void onNetworkError(Resource<List<BannerEntityVo>> resource) {
                         super.onNetworkError(resource);

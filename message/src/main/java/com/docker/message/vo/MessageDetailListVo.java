@@ -1,8 +1,12 @@
 package com.docker.message.vo;
+
+import android.databinding.Bindable;
+
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.vo.entity.ParamsBean;
 import com.docker.common.common.vo.entity.ResourceBean;
+import com.docker.message.BR;
 import com.docker.message.R;
 import com.docker.message.util.MessageRouterUtils;
 
@@ -37,6 +41,9 @@ public class MessageDetailListVo extends BaseSampleItem {
             case "1":  // 系统通知
                 layoutid = R.layout.message_item_system;
                 break;
+            case "7":
+                layoutid = R.layout.message_item_join;
+                break;
             default:
                 layoutid = R.layout.message_item_comment;
                 break;
@@ -47,7 +54,9 @@ public class MessageDetailListVo extends BaseSampleItem {
 
     @Override
     public OnItemClickListener getOnItemClickListener() {
-        return (item, view) -> MessageRouterUtils.Jump(((MessageDetailListVo) item).params, false);
+        return (item, view) -> {
+            MessageRouterUtils.Jump(((MessageDetailListVo) item).params, false);
+        };
     }
 
     private String id;
@@ -63,6 +72,25 @@ public class MessageDetailListVo extends BaseSampleItem {
     private String avatar;
     private String port;
     private String onecompany;
+    public String fullName;
+    public String msgType;
+
+
+    // 0待审核 展示审核/忽略按钮、1：同意展示“已同意”；2：忽略，展示“已忽略”
+
+    @Bindable
+    public int status;
+
+    @Bindable
+    public int getStatus() {
+        return status;
+    }
+
+    @Bindable
+    public void setStatus(int status) {
+        this.status = status;
+        notifyPropertyChanged(BR.status);
+    }
 
     public String getPort() {
         return port;

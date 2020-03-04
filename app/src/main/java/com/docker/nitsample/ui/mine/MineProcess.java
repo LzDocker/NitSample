@@ -1,5 +1,7 @@
 package com.docker.nitsample.ui.mine;
 
+import android.util.Log;
+
 import com.bfhd.account.vo.card.AccountHeadCardVo;
 import com.bfhd.account.vo.card.AccountIndexItemVo;
 import com.dcbfhd.utilcode.utils.GsonUtils;
@@ -18,10 +20,39 @@ public class MineProcess {
 //            return;
 //        }
 
-        AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(2, 0);
-        accountHeadCardVo.isNoNetNeed = true;
 
         if (CacheUtils.getUser() != null) {
+            AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(2, 0);
+            accountHeadCardVo.isNoNetNeed = true;
+            HashMap<String, String> postArrMap = new HashMap<>();
+            postArrMap.put("uuid", CacheUtils.getUser().uuid);
+            accountHeadCardVo.mRepParamMap.put("postArray", GsonUtils.toJson(postArrMap));
+            HashMap<String, Object> disArrMap = new HashMap<>();
+            String[] userarr = new String[]{"all"};
+            disArrMap.put("member", userarr);
+            String[] exarr = new String[]{"dynamicNum", "inviteNum","notReadMsgNum"}; //"dzNum", "plNum",
+            disArrMap.put("extData", exarr);
+            accountHeadCardVo.mRepParamMap.put("dispatcherArray", GsonUtils.toJson(disArrMap));
+
+            accountHeadCardVo.sampleName = "AccountHeadCardVo_style_";
+            NitBaseProviderCard.providerCard(commonListVm, accountHeadCardVo, nitCommonFragment);
+        }
+
+
+        AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo(2, 1);
+        NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo, nitCommonFragment);
+
+        AccountIndexItemVo accountIndexItemVo2 = new AccountIndexItemVo(3, 2);
+        NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo2, nitCommonFragment);
+
+    }
+
+    public static void processMineHeaderFrame(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
+
+        if (CacheUtils.getUser() != null && commonListVm.mItems.size() != 3) {
+            Log.d("sss", "processMineHeaderFrame: =======processMineHeaderFrame=====");
+            AccountHeadCardVo accountHeadCardVo = new AccountHeadCardVo(2, 0);
+            accountHeadCardVo.isNoNetNeed = true;
             HashMap<String, String> postArrMap = new HashMap<>();
             postArrMap.put("uuid", CacheUtils.getUser().uuid);
             accountHeadCardVo.mRepParamMap.put("postArray", GsonUtils.toJson(postArrMap));
@@ -31,18 +62,12 @@ public class MineProcess {
             String[] exarr = new String[]{"dynamicNum", "dzNum", "plNum"};
             disArrMap.put("extData", exarr);
             accountHeadCardVo.mRepParamMap.put("dispatcherArray", GsonUtils.toJson(disArrMap));
+
+            accountHeadCardVo.sampleName = "AccountHeadCardVo_style_";
+            NitBaseProviderCard.providerCard(commonListVm, accountHeadCardVo, nitCommonFragment);
         }
 
-        accountHeadCardVo.sampleName = "AccountHeadCardVo_style_";
-        NitBaseProviderCard.providerCard(commonListVm, accountHeadCardVo, nitCommonFragment);
-
-
-        AccountIndexItemVo accountIndexItemVo = new AccountIndexItemVo(2, 1);
-        NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo, nitCommonFragment);
-
-
-        AccountIndexItemVo accountIndexItemVo2 = new AccountIndexItemVo(3, 2);
-        NitBaseProviderCard.providerCard(commonListVm, accountIndexItemVo2, nitCommonFragment);
-
     }
+
+
 }

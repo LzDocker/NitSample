@@ -77,7 +77,7 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
         mBinding.get().setViewmodel(mViewModel);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("comment")) {
-                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN), 500);
+                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN), 800);
             }
         });
         initWebView();
@@ -207,7 +207,12 @@ public class DynamicH5Fragment extends NitCommonFragment<CircleDynamicDetailView
                     break;
                 case "goods":
                     UserInfoVo userInfoVo = CacheUtils.getUser();
-                    String url = CommonApiConfig.apiBaseUrlHTJ + "index.php?m=default.goods_info" + "&memberid=" + userInfoVo.memberid + "&uuid=" + userInfoVo.uuid + "&dynamicid=" + serviceDataBean.getDynamicid();
+                    String url = "";
+                    if (CacheUtils.getUser() != null) {
+                        url = CommonApiConfig.apiBaseUrlHTJ + "index.php?m=default.goods_info" + "&memberid=" + userInfoVo.memberid + "&uuid=" + userInfoVo.uuid + "&dynamicid=" + serviceDataBean.getDynamicid();
+                    } else {
+                        url = CommonApiConfig.apiBaseUrlHTJ + "index.php?m=default.goods_info" + "&dynamicid=" + serviceDataBean.getDynamicid();
+                    }
                     webView.loadUrl(url);
                     break;
             }

@@ -71,12 +71,12 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
             finish();
             return;
         }
-//        if (!CacheUtils.getWelcomeFlag()) {//欢迎页
-//            Intent intent = new Intent(this, WelocomeActivity.class);
-//            startActivity(intent);
-//            finish();
-//            return;
-//        }
+        if (!CacheUtils.getWelcomeFlag()) {//欢迎页
+            Intent intent = new Intent(this, WelocomeActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         UserInfoVo userInfoVo = CacheUtils.getUser();
 
 
@@ -85,7 +85,7 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
             if (mdisposable != null) {
                 mdisposable.dispose();
             }
-            if ("-1".equals(userInfoVo.uuid)) { // 未登录
+            if (userInfoVo == null) { // 未登录
                 enterSystem();
                 finish();
             } else { // 登录过
@@ -128,7 +128,8 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
                     @Override
                     public void onComplete() {
                         if (userInfoVo == null) { // 未登录
-                            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
+//                            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
+                            ARouter.getInstance().build(AppRouter.HOME).navigation();
                         } else { // 登录过
                             mViewModel.AutoLoginV2();
                         }
@@ -195,9 +196,9 @@ public class SplashActivity extends NitCommonActivity<AccountViewModel, Activity
             @Override
             public void onFailed(int code) {
                 if (code == 302 || code == 404) {
-                    ToastHelper.showToast(SplashActivity.this, "登录失败");
+//                    ToastHelper.showToast(SplashActivity.this, "登录失败");
                 } else {
-                    ToastHelper.showToast(SplashActivity.this, "登录失败: " + code);
+//                    ToastHelper.showToast(SplashActivity.this, "登录失败: " + code);
                 }
                 enterSystem();
                 finish();

@@ -5,9 +5,11 @@ import android.databinding.ObservableList;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.ui.detail.index.CircleConfig;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.card.BaseCardVo;
@@ -65,10 +67,8 @@ public class AppRecycleCard2Vo extends BaseCardVo {
 //                RxBus.getDefault().post(new RxEvent<>("change", 1));
 //                break;
 //        }
-
-
-        switch (itemVo.getName()) {
-            case "桃源志":
+        switch (itemVo.linkageid) {
+            case "3544":
                 CircleConfig circleConfig = new CircleConfig();
                 circleConfig.circleid = "64";
                 circleConfig.utid = "be49f2cb2627965610be332a4476286c";
@@ -83,36 +83,57 @@ public class AppRecycleCard2Vo extends BaseCardVo {
                         .withSerializable("circleConfig", circleConfig)
                         .navigation();
                 break;
-            case "股东会":
-                CircleConfig circleConfig1 = new CircleConfig();
-                circleConfig1.circleid = "61";
-                circleConfig1.utid = "fcecfffb5fb3c5927997c716b8947fe3";
-                circleConfig1.circleType = "3";
-                circleConfig1.Temple = 1;
-                circleConfig1.isNeedToobar = true;
-                circleConfig1.isNeedIntroduce = false;
-                ARouter.getInstance()
-                        .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
-                        .withSerializable("circleConfig", circleConfig1)
-                        .navigation();
+            case "3472":
+                if (CacheUtils.getUser() == null) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                    return;
+                }
+                if (CacheUtils.getUser() != null && "2".equals(CacheUtils.getUser().reg_type)) {
+                    CircleConfig circleConfig1 = new CircleConfig();
+                    circleConfig1.circleid = "61";
+                    circleConfig1.utid = "fcecfffb5fb3c5927997c716b8947fe3";
+                    circleConfig1.circleType = "3";
+                    circleConfig1.Temple = 1;
+                    circleConfig1.isNeedToobar = true;
+                    circleConfig1.isNeedIntroduce = false;
+                    ARouter.getInstance()
+                            .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)
+                            .withSerializable("circleConfig", circleConfig1)
+                            .navigation();
+                } else {
+                    ToastUtils.showShort("您还不是股东");
+                }
+
                 break;
-            case "分部说":
+            case "3476":
                 ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL_v2_PRO_MUTIPARTINDEX).navigation();
 
                 break;
-            case "沙龙·活动":
+            case "3474":
                 ARouter.getInstance().build(AppRouter.ACTIVE_INDEX).navigation();
                 break;
-            case "积分榜":
+            case "3477":
+                if (CacheUtils.getUser() == null) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                    return;
+                }
                 ARouter.getInstance().build(AppRouter.POINT_SORT_INDEX).navigation();
                 break;
-            case "邀人·推广":
+            case "3478":
+                if (CacheUtils.getUser() == null) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                    return;
+                }
                 ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
                 break;
-            case "购酒·优选":
+            case "3475":
                 RxBus.getDefault().post(new RxEvent<>("change", 1));
                 break;
-            case "积分·收益":
+            case "3473":
+                if (CacheUtils.getUser() == null) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                    return;
+                }
                 ARouter.getInstance().build(AppRouter.ACCOUNT_point).withString("type", "point").navigation();
                 break;
         }
@@ -140,8 +161,11 @@ public class AppRecycleCard2Vo extends BaseCardVo {
     private ObservableList<MenuEntityVo> InnerResource = new ObservableArrayList<>();
 
     public void setInnerResource(ArrayList<MenuEntityVo> innerResource) {
-        InnerResource.clear();
-        InnerResource.addAll(innerResource);
+        if (InnerResource.size() == 0) {
+            InnerResource.addAll(innerResource);
+        }
+//        InnerResource.clear();
+
     }
 
 

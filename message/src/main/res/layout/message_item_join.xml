@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.message.vo.MessageDetailListVo" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.message.vm.MessageViewModel" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+
+        <ImageView
+            android:id="@+id/iv_avater"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            app:avaterImageUrl="@{CommonBdUtils.getCompleteImageUrl(item.avatar)}" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:background="@drawable/open_liner_bg_shape">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.fullName}"
+                android:textColor="#333" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_cancel"
+                android:text="@{item.content}"
+                android:textColor="#333"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_sure"
+                android:background="@drawable/common_radius20_white"
+                android:onClick="@{(view)->viewmodel.cancelJoin(item,view)}"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="忽略"
+                android:textColor="#333333"
+                app:visibleGone="@{item.status==0}" />
+
+            <TextView
+                android:id="@+id/tv_sure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/common_radius20_ovl"
+                android:onClick="@{(view)->viewmodel.joinCircle(item,view)}"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="同意"
+                android:textColor="@color/white"
+                app:visibleGone="@{item.status==0}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="已忽略"
+                android:textColor="@color/grey"
+                app:visibleGone="@{item.status==2}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="已同意"
+                android:textColor="@color/grey"
+                app:visibleGone="@{item.status==1}" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="14dp"
+                android:text="@{CommonBdUtils.getStandardDate(item.addtime)}"
+                android:textColor="#999"
+                android:textSize="12sp" />
+
+
+            <FrameLayout
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="14dp"
+                app:visibleGone="@{CommonBdUtils.isShowSingleImg(item.resource)}">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:scaleType="fitXY"
+                    app:roundImgUrl="@{CommonBdUtils.getCommentSingleImg(item.resource)}" />
+
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:focusable="false"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/circle_player_icon"
+                    app:visibleGone="@{CommonBdUtils.isShowCommentVideoImg(item.resource)}" />
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
+
+

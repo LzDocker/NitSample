@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -93,6 +94,8 @@ public class InviteIndexActivity extends NitCommonActivity<ProInviteVm, ProInvit
                     @Override
                     public void onChanged(@Nullable InviteDataVo inviteDataVo) {
                         inviteHeadCardVo.fliperDataList.addAll(inviteDataVo.ad);
+                        Log.d("sss", "onChanged: ================"+inviteDataVo.ad.size());
+
                         inviteCardVo.shareImgUrl.set(inviteDataVo.shareImg);
                         inviteCardVo.shareLinkUrl.set(inviteDataVo.shareUrl);
                         inviteRewardVo.incomeReward.set(inviteDataVo.myReward.incomeReward);

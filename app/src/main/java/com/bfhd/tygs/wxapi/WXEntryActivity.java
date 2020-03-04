@@ -1,4 +1,4 @@
-package com.docker.nitsample.wxapi;
+package com.bfhd.tygs.wxapi;
 
 import android.os.Bundle;
 

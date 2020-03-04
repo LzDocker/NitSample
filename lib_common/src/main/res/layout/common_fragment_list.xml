@@ -22,6 +22,8 @@
             android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             bind:bdcomplete="@={viewmodel.mCompleteCommand}"
             bind:bdenable="@={viewmodel.bdenable}"
             bind:bdenablemore="@={viewmodel.bdenablemore}"

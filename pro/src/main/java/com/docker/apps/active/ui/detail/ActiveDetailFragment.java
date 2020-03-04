@@ -81,6 +81,8 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
 
             if (CacheUtils.getUser() == null) {
                 // 去登录
+                ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                return;
             }
 
 
@@ -111,7 +113,7 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
                     ToastUtils.showShort("报名被驳回");
                     return;
                 }
-                if (activeVo.signStatus == -2) {
+                if (activeVo.signStatus == -2 && activeVo.status != -1) {
                     HashMap<String, String> parm = new HashMap<>();
                     parm.put("sign_memberid", CacheUtils.getUser().uid);
                     parm.put("activityid", activeVo.dataid);
@@ -135,7 +137,7 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
                 title.setText(activeVo.title);
                 textView.setText("凭证号：" + evoucherNo);
                 ImageView imageView = basePopupView.findViewById(R.id.iv_bar_code);
-                GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + AuditUrl).into(imageView);
+                GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + evoucherNo).into(imageView);
                 imageView.setOnLongClickListener(v1 -> {
                     PhotoGalleryUtils.saveImageToGallery(ActiveDetailFragment.this.getHoldingActivity(), ImageUtils.view2Bitmap(imageView), Constant.BaseFileFloder, "ccc");
                     ToastUtils.showShort("保存成功");
@@ -261,7 +263,9 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
 已核销 signStatus=2
 忽略：signStatus=-1
         * */
-
+        if (CacheUtils.getUser() == null) {
+            return "立即报名";
+        }
 
         if (activeVo == null) {
             return str;
@@ -298,6 +302,9 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
         int str = R.drawable.common_radius30_hui;
         if (activeVo == null) {
             return str;
+        }
+        if (CacheUtils.getUser() == null) {
+            return R.drawable.common_radius30_zi;
         }
         if (activeVo.status == -1) {
             return R.drawable.common_radius30_hui; //灰色
@@ -345,7 +352,7 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
         commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.ReqParam.put("t", "idle");
-        commonListOptions.ReqParam.put("activityid",activeVo.dataid);
+        commonListOptions.ReqParam.put("activityid", activeVo.dataid);
         fragments.add((Fragment) ARouter.getInstance()
                 .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
                 .withSerializable(CommonListParam, commonListOptions)

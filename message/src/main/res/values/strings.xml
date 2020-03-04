@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">message</string>
+    <string name="message_join">申请加入</string>
 </resources>

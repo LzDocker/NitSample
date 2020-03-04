@@ -24,6 +24,7 @@ import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.param.StaPersionDetail;
 import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitContainerCommand;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
@@ -242,7 +243,9 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
                 msta.uuid = commonVo.getUuid();
                 msta.uid = commonVo.getMemberid();
                 msta.name = commonVo.getNickname();
-                CirclePersonDetailActivity.startMe(CirclePersonListActivity.this, msta);
+//                CirclePersonDetailActivity.startMe(CirclePersonListActivity.this, msta);
+
+                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2",  msta.uid).withString("uuid2", msta.uuid).navigation();
 //                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
             }
         }

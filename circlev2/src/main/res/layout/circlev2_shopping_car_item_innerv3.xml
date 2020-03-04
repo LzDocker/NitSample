@@ -44,8 +44,9 @@
                 android:layout_height="20dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:src="@{item.isSelect== true?R.mipmap.xz:R.mipmap.wxz}"
                 android:onClick="@{(view)->viewmodel.childCheck(item,parent,view)}"
-                android:src="@{item.isSelect== true?R.mipmap.circle_delete_img:R.mipmap.circle_icon_jb}" />
+                />
 
             <ImageView
                 android:id="@+id/iv_shop_logo"

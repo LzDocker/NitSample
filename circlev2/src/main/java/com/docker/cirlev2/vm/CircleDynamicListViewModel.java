@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
+import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.dcbfhd.utilcode.utils.KeyboardUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
@@ -33,6 +34,7 @@ import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
+import com.google.gson.reflect.TypeToken;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.umeng.socialize.ShareAction;
@@ -102,6 +104,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     // 头像点击
     public void ItemAvaterClick(ServiceDataBean item, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (item != null) {
             StaPersionDetail staPersionDetail = new StaPersionDetail();
             staPersionDetail.name = item.getExtData().linkman;
@@ -118,6 +124,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     // 关注
     public void attention(ServiceDataBean serviceDataBean, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         HashMap<String, String> params = new HashMap<>();
         UserInfoVo userInfoVo = CacheUtils.getUser();
         params.put("memberid", userInfoVo.uid);
@@ -192,6 +202,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     //
     public void ItemZFClick(ServiceDataBean item, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (item != null) {
             HashMap<String, String> params = new HashMap<>();
             UserInfoVo userInfoVo = CacheUtils.getUser();
@@ -207,7 +221,7 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
     }
 
     public void getShareData(HashMap<String, String> params) {
-        showDialogWait("加载中...", false);
+//        showDialogWait("加载中...", false);
         mServerLiveData.addSource(
                 RequestServer(circleApiService.share(params))
                 , new NitNetBoundObserver(new NitBoundCallback<ShareBean>() {
@@ -274,7 +288,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     //
     public void ItemPLClick(ServiceDataBean serviceDataBean, View view) {
-
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (serviceDataBean == null) {
             return;
         }
@@ -324,10 +341,22 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         }
     }
 
+    List<ServiceDataBean.ResourceBean> resourcelist = null;
 
     public void commentDynamic(HashMap<String, String> params) {
-
-        showDialogWait("发送中...", false);
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+        if (params.containsKey("resource")) {
+            if (resourcelist != null) {
+                resourcelist.clear();
+            }
+            resourcelist = GsonUtils.fromJson(params.get("resource"), new TypeToken<List<ServiceDataBean.ResourceBean>>() {
+            }.getType());
+            params.remove("resource");
+        }
+//        showDialogWait("发送中...", false);
         mCommentVoMLiveData.addSource(
                 RequestServer(
                         circleApiService.commentDynamic(params)), new NitNetBoundObserver(new NitBoundCallback<CommentRstVo>() {
@@ -348,6 +377,9 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                             commentVo.setAvatar(userInfoVo.avatar);
                             commentVo.setContent(params.get("content"));
                             commentVo.setPraiseNum("0");
+                            if (resourcelist != null) {
+                                commentVo.setResource(resourcelist);
+                            }
                             if (params.containsKey("audio")) {
                                 commentVo.setAudio(params.get("audio"));
                             }
@@ -372,7 +404,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     // 立刻购买
     public void ShopingToBuy(ServiceDataBean item, View view) {
-
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         ARouter.getInstance().build(AppRouter.ORDER_MAKER).withSerializable("ServiceDataBean", item).navigation();
 //        HashMap<String, String> param = new HashMap<>();
 //        param.put("memberid", CacheUtils.getUser().uid);
@@ -394,7 +429,11 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         if (item == null) {
             return;
         }
-        showDialogWait("加载中...", false);
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+//        showDialogWait("加载中...", false);
         UserInfoVo userInfoVo = CacheUtils.getUser();
         HashMap<String, String> paramap = new HashMap<>();
         paramap.put("memberid", userInfoVo.uid);
@@ -421,7 +460,7 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                         super.onComplete(resource);
                         this.onComplete();
                         mCollectLv.setValue(resource.data);
-                        hideDialogWait();
+//                        hideDialogWait();
                         if (item.getIsCollect() == 1) {
                             item.setIsCollect(0);
                         } else {
@@ -434,13 +473,13 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        hideDialogWait();
+//                        hideDialogWait();
                     }
 
                     @Override
                     public void onNetworkError(Resource<String> resource) {
 //                        super.onNetworkError(resource);
-                        hideDialogWait();
+//                        hideDialogWait();
                         if (item.getIsCollect() == 1) {
                             item.setIsCollect(0);
                         } else {
@@ -462,7 +501,11 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         if (item == null) {
             return;
         }
-        showDialogWait("加载中...", false);
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+//        showDialogWait("加载中...", false);
         UserInfoVo userInfoVo = CacheUtils.getUser();
         Map<String, String> params = new HashMap<>();
         params.put("memberid", userInfoVo.uid);
@@ -507,7 +550,11 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         if (item == null) {
             return;
         }
-        showDialogWait("加载中...", false);
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+//        showDialogWait("加载中...", false);
         UserInfoVo userInfoVo = CacheUtils.getUser();
         Map<String, String> params = new HashMap<>();
         params.put("memberid", userInfoVo.uid);

@@ -22,6 +22,10 @@ public class ParamsBean {
     public String orderid;
     public String status;
 
+    public String utid;
+    public String circleid;
+    public String fullName;
+
 
     public String getPush_memberid() {
         return push_memberid;

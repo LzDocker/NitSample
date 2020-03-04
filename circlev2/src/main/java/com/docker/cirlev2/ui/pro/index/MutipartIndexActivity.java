@@ -19,6 +19,7 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitEmptyViewModel;
 import com.docker.common.common.widget.indector.CommonIndector;
 
@@ -61,20 +62,24 @@ public class MutipartIndexActivity extends NitCommonActivity<MutipartCircleViewM
         //{
         //            "我关注的", "七律分部", "燕山分部", "逍遥分部"
         //        } ;
-        String[] titles = new String[mutipartTabVos.size()];
+        String[] titles = new String[mutipartTabVos.size() + 1];
         ArrayList<Fragment> fragments = new ArrayList<>();
-//        CommonListOptions commonListOptions = new CommonListOptions();
-//        commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-//        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-//        commonListOptions.ReqParam.put("t", "idle");
-//        fragments.add((Fragment) ARouter.getInstance()
-//                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-//                .withSerializable(CommonListParam, commonListOptions)
-//                .navigation());
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+        commonListOptions.ReqParam.put("t", "idle");
+        commonListOptions.ReqParam.put("act", "focus"); //act=
+        if (CacheUtils.getUser() != null) {
+            commonListOptions.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        }
+        fragments.add((Fragment) ARouter.getInstance()
+                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                .withSerializable(CommonListParam, commonListOptions)
+                .navigation());
+        titles[0] = "我关注的";
 
-//        titles[0] = "我关注的";
         for (int i = 0; i < mutipartTabVos.size(); i++) {
-            titles[i] = mutipartTabVos.get(i).circleName;
+            titles[i + 1] = mutipartTabVos.get(i).circleName;
             CircleConfig circleConfig = new CircleConfig();
             circleConfig.circleid = mutipartTabVos.get(i).circleid;
             circleConfig.utid = mutipartTabVos.get(i).utid;

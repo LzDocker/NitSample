@@ -37,6 +37,7 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.permissions.RxPermissions;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.common.ToastHelper;
+import com.netease.nim.uikit.common.util.C;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
@@ -139,9 +140,9 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
                 }
 
                 if (code == 302 || code == 404) {
-                    ToastHelper.showToast(LoginActivity.this, R.string.login_failed);
+//                    ToastHelper.showToast(LoginActivity.this, R.string.login_failed);
                 } else {
-                    ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
+//                    ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
                 }
                 if (!isFoceLogin) {
                     ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
@@ -184,6 +185,8 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
                 return;
             }
             mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
+
+            Log.d("sss", "setAlias: ==============2222");
         }
     }
 
@@ -194,11 +197,13 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             String logs;
             switch (code) {
                 case 0:
+                    Log.d("sss", "setAlias: ==============3333");
                     logs = "Set tag and alias success";
                     Log.i(TAG, logs);
                     // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
                     break;
                 case 6002:
+                    Log.d("sss", "setAlias: ==============4444");
                     logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
                     Log.i(TAG, logs);
                     // 延迟 60 秒来调用 Handler 设置别名
@@ -206,6 +211,7 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
                     break;
                 default:
                     logs = "Failed with errorCode = " + code;
+                    Log.d("sss", "setAlias: ==============555" + logs);
                     Log.e(TAG, logs);
             }
         }
@@ -381,8 +387,9 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             case 104:
                 if (viewEventResouce.data != null) {
                     UserInfoVo userInfoVo = (UserInfoVo) viewEventResouce.data;
+                    CacheUtils.saveUser(userInfoVo);
+                    setAlias();
                     loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
-
                 }
                 break;
             case 109:
@@ -413,6 +420,7 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
                 hidWaitDialog();
+                Log.d("sss", "onComplete: ============================");
 //                String uid = map.get("uid");
 //                String openid = map.get("openid");//微博没有
 //                String unionid = map.get("unionid");//微博没有
@@ -433,11 +441,13 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             @Override
             public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
                 hidWaitDialog();
+                Log.d("sss", "onError: ======onError======================");
             }
 
             @Override
             public void onCancel(SHARE_MEDIA share_media, int i) {
                 hidWaitDialog();
+                Log.d("sss", "onCancel: ======onCancel======================");
             }
         });
     }
@@ -478,6 +488,7 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
             public void onCancel(SHARE_MEDIA share_media, int i) {
                 hidWaitDialog();
             }
+
         });
     }
 

@@ -1,22 +1,13 @@
 package com.docker.nitsample.ui.index;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
-import com.docker.cirlev2.ui.list.CircleDynamicCoutainerFragment;
-import com.docker.cirlev2.ui.list.CircleDynamicListFragment;
-import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
-import com.docker.cirlev2.vo.entity.CircleTitlesVo;
-import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
@@ -29,13 +20,9 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.common.common.widget.indector.CommonIndector;
-import com.docker.common.common.widget.refresh.api.RefreshLayout;
-import com.docker.common.common.widget.refresh.listener.OnRefreshListener;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
 import com.docker.nitsample.vm.IndexTygsViewModel;
@@ -47,7 +34,6 @@ import com.docker.nitsample.vo.card.AppRecycleCard2Vo;
 import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo;
 import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -124,21 +110,21 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
                         }
                     });
 
-                    AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
-                            new LayoutManagerVo(0, 0, false),
-                            new RecycleTopLayout("分部推荐", "", false));
-
-
-                    UserInfoVo userInfoVo = CacheUtils.getUser();
-                    appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
-                    appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
-                    appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
-
-
                     NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
                     NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
                     NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
-                    NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
+
+                    UserInfoVo userInfoVo = CacheUtils.getUser();
+                    if (userInfoVo != null) {
+                        AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
+                                new LayoutManagerVo(0, 0, false),
+                                new RecycleTopLayout("分部推荐", "", false));
+
+                        appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
+                        appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
+                        appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
+                        NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
+                    }
                 }
 
             }

@@ -26,6 +26,19 @@ import java.util.List;
  * */
 public class BdUtils {
 
+
+    public static boolean isShowNotMesg(String mesg) {
+        if (TextUtils.isEmpty(mesg)) {
+            return false;
+        } else {
+            if ("0".equals(mesg)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
     private static SimpleDateFormat sdf = null;
     private final static ThreadLocal<SimpleDateFormat> dateFormater = new ThreadLocal<SimpleDateFormat>() {
         @Override

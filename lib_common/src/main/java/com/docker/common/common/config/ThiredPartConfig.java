@@ -27,12 +27,12 @@ public class ThiredPartConfig {
     public static final String WxAppid = "wx03f37a631a4c7d77";
     public static final String Wxsecret = "a57c93ef31505408eaf7105ac085c776";
     // qq
-    public static final String QQID = "101780103";
-    public static final String QQKey = "42113368dbc1de3b734f0a96956369fe";
+    public static final String QQID = "1110210245";//1110210245 //101780103
+    public static final String QQKey = "5bdBepss0NOkNQmk"; // 5bdBepss0NOkNQmk
     // 讯飞ID
     public static final String IFLAYID = "=5afbf83a";
     //友盟
-    public static final String Umeng = "5d0300984ca3579a45000b17";
+    public static final String Umeng = "5d0300984ca3579a45000b17";//5e5f6f5c9f9a0a410a2b1512
 
     // oss
 //    public static final String BaseImageUrl = "http://taijistar.oss-cn-beijing.aliyuncs.com";
@@ -52,7 +52,6 @@ public class ThiredPartConfig {
     public static final String BaseServeUrl = "http://tygs.wgc360.com/";
 
     public static final String ServeUrl = "http://tygs.wgc360.com/";
-
     public static final String BarcoderUrl = "http://qr.topscan.com/api.php?text=";
 
 
@@ -85,7 +84,7 @@ public class ThiredPartConfig {
         //x5内核初始化接口
         QbSdk.initX5Environment(app, cb);
         // 极光推送
-        JPushInterface.setDebugMode(false);
+        JPushInterface.setDebugMode(true);
         JPushInterface.init(app);
         BasicPushNotificationBuilder builder = new BasicPushNotificationBuilder(app);
         builder.statusBarDrawable = R.mipmap.ic_toolbar_back;

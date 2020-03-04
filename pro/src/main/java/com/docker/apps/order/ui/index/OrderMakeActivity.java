@@ -1,12 +1,11 @@
 package com.docker.apps.order.ui.index;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -30,7 +29,6 @@ import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vo.PayOrederVo;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.common.common.widget.empty.EmptyStatus;
 
@@ -52,10 +50,18 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
 
     private String orderId;  // 再次购买
 
+    private String is_ShoppingCar; // 是否是购物车进入  1 是
+
+
+    private ArrayList<ShoppingCarVoV3> carVoV3ArrayList;
     /*
-     * 1  购物车列表点进来
+     * 1  购物车列表点进来(全选)
      *
      * 2  购买单个商品
+     *
+     * 3.再次购买
+     *
+     * 4.  //购物车选购
      * */
     public int flag = 1;
 
@@ -82,14 +88,28 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
         super.onCreate(savedInstanceState);
         mBinding.empty.hide();
         mToolbar.setTitle("填写订单");
+
+        // 直接购买
         mDynamicDetailVo = (ServiceDataBean) getIntent().getSerializableExtra("ServiceDataBean");
+
+        // 再次购买
         orderId = getIntent().getStringExtra("orderId");
+
+        //购物车选购
+        carVoV3ArrayList = (ArrayList<ShoppingCarVoV3>) getIntent().getSerializableExtra("CartList");
+
         if (mDynamicDetailVo != null) {
             flag = 2;
         }
         if (!TextUtils.isEmpty(orderId)) {
             flag = 3;
         }
+        if (carVoV3ArrayList != null) {
+            flag = 4;
+        }
+
+        is_ShoppingCar = getIntent().getStringExtra("is_ShoppingCar");
+
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.falg = flag;
         commonListOptions.isActParent = true;
@@ -152,6 +172,22 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
                     shoppingCarVoV3.info = infos;
 
                     innerVm.mItems.add(shoppingCarVoV3);
+                    innerVm.processTotalMoney(innerVm.mItems);
+                    innerVm.processTotalTransMoney(innerVm.mItems);
+                    innerVm.mEmptycommand.set(EmptyStatus.BdHiden);
+                }
+
+                if (carVoV3ArrayList != null) {
+                    for (int i = 0; i < carVoV3ArrayList.size(); i++) {
+                        ArrayList<ShoppingCarVoV3.CardInfo> cardInfos = new ArrayList<>();
+                        for (int j = 0; j < carVoV3ArrayList.get(i).info.size(); j++) {
+                            if (carVoV3ArrayList.get(i).info.get(j).getIsSelect()) {
+                                cardInfos.add(carVoV3ArrayList.get(i).info.get(j));
+                            }
+                        }
+                        carVoV3ArrayList.get(i).info = cardInfos;
+                    }
+                    innerVm.mItems.addAll(carVoV3ArrayList);
                     innerVm.processTotalMoney(innerVm.mItems);
                     innerVm.processTotalTransMoney(innerVm.mItems);
                     innerVm.mEmptycommand.set(EmptyStatus.BdHiden);
@@ -222,6 +258,7 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
                     }
                 } else {
                     ARouter.getInstance().build(AppRouter.ORDER_PAY).withSerializable("payOrederVo", payOrederVo).navigation();
+                    finish();
                 }
             }
         });
@@ -253,7 +290,9 @@ public class OrderMakeActivity extends NitCommonActivity<OrderMakerViewModel, Pr
             param.put("memberid", CacheUtils.getUser().uid);
             param.put("uuid", CacheUtils.getUser().uuid);
             param.put("addressid", addressVo.getId());
-
+            if (!TextUtils.isEmpty(is_ShoppingCar)) {
+                param.put("is_ShoppingCar", "1");
+            }
             ArrayList<SubmitOrderShopVo> submitOrderShopVos = new ArrayList<>();
             for (int i = 0; i < innerVm.mItems.size(); i++) {
                 SubmitOrderShopVo submitOrderShopVo = new SubmitOrderShopVo();

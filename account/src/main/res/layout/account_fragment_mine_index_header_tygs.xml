@@ -67,7 +67,7 @@
                 android:paddingRight="10dp">
 
                 <ImageView
-                    android:layout_width="20dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginRight="10dp"
                     android:background="@mipmap/account_setting" />
@@ -99,7 +99,8 @@
                     android:paddingRight="2dp"
                     android:text="@{item.myinfo.notReadMsgNum}"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="9sp" />
+                    android:textSize="9sp"
+                    app:visibleGone="@{BdUtils.isShowNotMesg(item.myinfo.notReadMsgNum)}" />
             </FrameLayout>
 
 
@@ -112,7 +113,7 @@
                 android:layout_gravity="center_vertical"
                 android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
                 android:scaleType="centerCrop"
-                app:avaterImageUrl="@{BdUtils.getImgUrl(item.myinfo.avatar)}" />
+                app:avaterImageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
 
             <TextView
                 android:id="@+id/account_user_name"
@@ -127,7 +128,7 @@
                 android:text="@{item.myinfo.nicakname}"
                 android:textColor="@color/white"
                 android:textSize="15sp" />
-            
+
             <LinearLayout
                 android:id="@+id/account_ll_cou"
                 android:layout_width="wrap_content"
@@ -223,7 +224,7 @@
                     android:id="@+id/tv_mine_follow_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.myinfo.invite}"
+                    android:text="@{item.myinfo.inviteNum}"
                     android:textColor="@color/white"
                     android:textSize="17sp" />
 

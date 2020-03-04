@@ -19,6 +19,9 @@ public class MyInfoDispatcherVo extends BaseObservable implements Serializable {
         public String dynamicNum;
         public String dzNum;
         public String plNum;
+        public String inviteNum;
+        public String notReadMsgNum;
+
     }
 
 }

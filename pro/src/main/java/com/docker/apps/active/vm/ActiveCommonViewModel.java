@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.active.api.ActiveService;
+import com.docker.apps.active.vo.ActiveManagerVo;
 import com.docker.apps.active.vo.ActiveSelectVo;
 import com.docker.apps.active.vo.ActiveSelectWraper;
 import com.docker.apps.active.vo.ActiveServerDataBean;
@@ -178,7 +179,7 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
 
     public final MediatorLiveData<String> mDoactiveLv = new MediatorLiveData<>();
 
-    public void updateStatus(ActiveManagerDetailVo activeManagerDetailVo) {
+    public void updateStatus(ActiveManagerDetailVo activeManagerDetailVo, ActiveManagerVo activeManagerVo) {
         if ("-1".equals(activeManagerDetailVo.status)) {
             ToastUtils.showShort("该活动已结束");
             return;
@@ -201,7 +202,16 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
             public void onComplete(Resource<String> resource) {
                 super.onComplete(resource);
                 mDoactiveLv.setValue("1");
-                RxBus.getDefault().post(new RxEvent<>("activeStusUpdate", activeManagerDetailVo.dataid));
+//                RxBus.getDefault().post(new RxEvent<>("activeStusUpdate", activeManagerDetailVo.dataid));
+                if ("0".equals(param.get("status"))) {
+                    activeManagerVo.setRotation(180);
+                    activeManagerVo.setTitle("上架");
+                    activeManagerDetailVo.status = "0";
+                } else {
+                    activeManagerDetailVo.status = "1";
+                    activeManagerVo.setRotation(0);
+                    activeManagerVo.setTitle("下架");
+                }
             }
         }));
     }
@@ -215,7 +225,8 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
             public void onComplete(Resource<String> resource) {
                 super.onComplete(resource);
                 mDoactiveLv.setValue("2");
-                RxBus.getDefault().post(new RxEvent<>("activedel", activeManagerDetailVo.dataid));
+//                RxBus.getDefault().post(new RxEvent<>("activedel", activeManagerDetailVo.dataid));
+
             }
         }));
     }
@@ -271,11 +282,23 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
                 mValidateLv.setValue("succ");
                 RxBus.getDefault().post(new RxEvent<>("ValidateSuccess", ""));
             }
+
+            @Override
+            public void onBusinessError(Resource<String> resource) {
+                super.onBusinessError(resource);
+                mValidateLv.setValue("fail");
+            }
+
+            @Override
+            public void onNetworkError(Resource<String> resource) {
+                super.onNetworkError(resource);
+                mValidateLv.setValue("fail");
+            }
         }));
     }
 
-
     public final MediatorLiveData<ActiveSelectVo> mActiveSelectVov = new MediatorLiveData<>();
+
     public void onActiveSelect(ActiveSelectVo activeSelectVo, View view) {
         mActiveSelectVov.setValue(activeSelectVo);
     }

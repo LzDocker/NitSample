@@ -43,20 +43,27 @@ public class AccountHeadCardViewModel extends NitcommonCardViewModel {
                         accountHeadCardVo.setMyinfo(resource.data.member);
                         if (resource.data.extData != null) {
                             accountHeadCardVo.myinfo.setCircleNum(resource.data.extData.dynamicNum);
-                            accountHeadCardVo.myinfo.setCommentNum(resource.data.extData.plNum);
-                            accountHeadCardVo.myinfo.setLikeNum(resource.data.extData.dzNum);
+                            accountHeadCardVo.myinfo.setInviteNum(resource.data.extData.inviteNum);
+                            accountHeadCardVo.myinfo.setNotReadMsgNum(resource.data.extData.notReadMsgNum);
+//                            accountHeadCardVo.myinfo.setCommentNum(resource.data.extData.plNum);
+//                            accountHeadCardVo.myinfo.setLikeNum(resource.data.extData.dzNum);
                         }
                     }
 
                     @Override
                     public void onNetworkError(Resource<MyInfoDispatcherVo> resource) {
-                        super.onNetworkError(resource);
+//                        super.onNetworkError(resource);
                         accountHeadCardVo.mCardVoLiveData.setValue(null);
+                    }
+
+                    @Override
+                    public void onBusinessError(Resource<MyInfoDispatcherVo> resource) {
+//                        super.onBusinessError(resource);
                     }
                 }));
     }
 
-    public void process(){
+    public void process() {
         Log.d("sss", "process: ===============================");
     }
 

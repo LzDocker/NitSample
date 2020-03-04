@@ -35,9 +35,18 @@ import com.docker.cirlev2.util.BdUtils;
 import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.tool.MD5Util;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.VisitingCardVo;
+import com.docker.module_im.DemoCache;
+import com.docker.module_im.config.preference.UserPreferences;
 import com.gyf.immersionbar.ImmersionBar;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.common.ToastHelper;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.StatusBarNotificationConfig;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -122,6 +131,10 @@ public class CompleteInfoActivity extends HivsBaseActivity<AccountViewModel, Acc
             sourceHeadUpFragment.enterToSelect(2);
         });
 
+        mBinding.ivClick.setOnClickListener(v -> {
+            sourceHeadUpFragment.enterToSelect(2);
+        });
+
         mBinding.tvSubmit.setOnClickListener(v -> {
             if (checkParam()) {
 
@@ -164,10 +177,58 @@ public class CompleteInfoActivity extends HivsBaseActivity<AccountViewModel, Acc
         super.OnVmEnentListner(viewEventResouce);
         switch (viewEventResouce.eventType) {
             case 538:
+                UserInfoVo userInfoVo = CacheUtils.getUser();
+                loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
                 ARouter.getInstance().build(AppRouter.HOME).navigation();
                 finish();
                 break;
         }
+    }
+
+    public void loginWithIm(String account, String token) {
+        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
+            @Override
+            public void onSuccess(LoginInfo param) {
+                DemoCache.setAccount(account);
+                // 初始化消息提醒配置
+                initNotificationConfig();
+//                // 进入主界面
+//                MainActivity.start(LoginActivity.this, null);
+                ARouter.getInstance().build(AppRouter.HOME).navigation();
+                finish();
+            }
+
+            @Override
+            public void onFailed(int code) {
+                if (code == 302 || code == 404) {
+//                    ToastHelper.showToast(CompleteInfoActivity.this, R.string.login_failed);
+                } else {
+//                    ToastHelper.showToast(CompleteInfoActivity.this, "im登录失败: " + code);
+                }
+                ARouter.getInstance().build(AppRouter.HOME).navigation(CompleteInfoActivity.this);
+                finish();
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+//                ToastHelper.showToast(CompleteInfoActivity.this, R.string.login_exception);
+                ARouter.getInstance().build(AppRouter.HOME).navigation(CompleteInfoActivity.this);
+                finish();
+            }
+        });
+    }
+
+    private void initNotificationConfig() {
+        // 初始化消息提醒
+        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
+        // 加载状态栏配置
+        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
+        if (statusBarNotificationConfig == null) {
+            statusBarNotificationConfig = DemoCache.getNotificationConfig();
+            UserPreferences.setStatusConfig(statusBarNotificationConfig);
+        }
+        // 更新配置
+        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
     }
 
 

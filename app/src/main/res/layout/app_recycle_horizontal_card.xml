@@ -74,7 +74,6 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="always"
             app:itemBinding="@{item.getItemImgBinding()}"
             app:items="@{item.getActiveVos()}"
             bind:layoutManager="@{LayoutManager.linear(item.managerStyleVo.orientation,item.managerStyleVo.reverseLayout)}" />

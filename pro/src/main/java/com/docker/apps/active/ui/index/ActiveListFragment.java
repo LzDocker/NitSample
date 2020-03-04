@@ -94,7 +94,6 @@ public class ActiveListFragment extends NitCommonListFragment<ActiveCommonViewMo
                 commonListReq.ReqParam.remove("t");
             }
         }
-
         if (refresh == -1) {
             commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         } else {

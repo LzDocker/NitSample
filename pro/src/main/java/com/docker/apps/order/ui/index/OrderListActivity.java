@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -70,7 +71,7 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
         super.onCreate(savedInstanceState);
         mToolbar.setTitle("我的订单");
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
-            if (rxEvent.getT().equals("refresh_buy")) {
+            if (rxEvent.getT().equals("refresh_buy") || rxEvent.getT().equals("refresh_buy_order")) {
                 ((NitCommonContainerFragmentV2) fragments.get(mBinding.viewPager.getCurrentItem())).onReFresh(null);
             }
         });
@@ -124,6 +125,13 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
                 });
                 innervm.mRealDelOrderLv.observe(nitCommonFragment, orderVoV2 -> {
                     Log.d("sss", "next: ============22222========");
+                });
+
+                // 确认收货
+                innervm.mTakeGoodsLv.observe(nitCommonFragment, s -> {
+                    if (!TextUtils.isEmpty(s)) {
+
+                    }
                 });
 
 //                switch (flag) {

@@ -118,8 +118,10 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
         UserInfoVo userInfoVo = CacheUtils.getUser();
         HashMap<String, String> param = new HashMap();
         param.put("dynamicid", dynamicId);
-        param.put("memberid", userInfoVo.uid);
-        param.put("uuid", userInfoVo.uuid);
+        if (userInfoVo != null) {
+            param.put("memberid", userInfoVo.uid);
+            param.put("uuid", userInfoVo.uuid);
+        }
         mViewModel.fechDynamicDetail(param);
         mViewModel.mDynamicDetailLv.observe(this, serviceDataBean -> {
             mDynamicDetailVo = serviceDataBean;
@@ -175,6 +177,11 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
 
     private void processView() {
 
+        //tv_comment
+        if ("answer".equals(mDynamicDetailVo.getType())) {
+            mBinding.tvComment.setText("回答");
+        }
+
         // ui
         mBinding.setItem(mDynamicDetailVo);
 
@@ -186,12 +193,18 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
             mBinding.dynamicDetailFootGoods.setVisibility(View.GONE);
         }
 
-        if (!mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
-            mBinding.circleJubao.setVisibility(View.VISIBLE); // 举报
+        if (CacheUtils.getUser() != null) {
+            if (!mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid) && !"goods".equals(mDynamicDetailVo.getType())) {
+                mBinding.circleJubao.setVisibility(View.VISIBLE); // 举报
+            }
+            if (mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
+                mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
+            }
+        } else {
+            mBinding.circleJubao.setVisibility(View.GONE); // 举报
+            mBinding.ivMenuMore.setVisibility(View.GONE); // 更多
         }
-        if (mDynamicDetailVo.getUuid().equals(CacheUtils.getUser().uuid)) {
-            mBinding.ivMenuMore.setVisibility(View.VISIBLE); // 更多
-        }
+
 
         mBinding.ivShare.setOnClickListener(v -> {
             mViewModel.ItemZFClick(mDynamicDetailVo, null); // 转发
@@ -206,15 +219,18 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
 
         //购物车的点击事件
         mBinding.tvShoppingCart.setOnClickListener(view -> {
-            if (basePopupView == null) {
 
+            if (CacheUtils.getUser() == null) {
+                ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                return;
+            }
+            if (basePopupView == null) {
                 initBottomPopup();
                 // 请求加入购物车接口
 //                requestServerCart("1", null);
             } else {
                 basePopupView.show();
             }
-
         });
     }
 
@@ -293,7 +309,10 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                     }
                 });
                 tv_shopping_cart.setOnClickListener(view -> {
-
+                    if (CacheUtils.getUser() == null) {
+                        ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                        return;
+                    }
                     requestServerCartNum(tv_num.getText().toString().trim(), () -> {
                         basePopupView.dismiss();
                         ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();

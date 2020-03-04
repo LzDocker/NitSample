@@ -6,9 +6,11 @@ import android.databinding.ObservableList;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.vm.card.AccountHeadCardViewModel;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.vo.entity.CircleListNomalVo;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.nitsample.R;
 import com.docker.nitsample.vm.card.CircleRecomendListCardVm;
@@ -60,8 +62,9 @@ public class AppRecycleHorizontalCardVo2 extends BaseCardVo {
     public void onChildItemCilck(CircleListNomalVo horizontalVo, View view) {
         if (view.getId() == R.id.tv_join) { // 加入
             //
-            ((CircleRecomendListCardVm) mNitcommonCardViewModel).joinCircle(horizontalVo);
-            Log.d("sss", "onChildItemCilck: ======加入分舵========");
+//            ((CircleRecomendListCardVm) mNitcommonCardViewModel).joinCircle(horizontalVo);
+            ARouter.getInstance().build(AppRouter.HOME_JOIN_ACTION).withString("circleid", horizontalVo.circleid)
+                    .withString("utid", horizontalVo.getUtid()).navigation();
         }
 
         if (view.getId() == R.id.iv_close) { // 关闭

@@ -78,6 +78,8 @@ public class ActiveVerificationActivity extends NitCommonActivity<ActiveCommonVi
                 param.put("activityid", activityid);
                 param.put("evoucherNo", result);
                 mViewModel.evoucherValidate(param);
+                mBinding.zxingview.stopSpot();
+
             }
 
             @Override
@@ -170,7 +172,11 @@ public class ActiveVerificationActivity extends NitCommonActivity<ActiveCommonVi
     @Override
     public void initObserver() {
         mViewModel.mValidateLv.observe(this, s -> {
-            finish();
+            if ("fail".equals(s)) {
+                mBinding.zxingview.startSpot();
+            } else {
+                finish();
+            }
         });
     }
 

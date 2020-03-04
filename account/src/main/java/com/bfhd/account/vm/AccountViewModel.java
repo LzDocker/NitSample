@@ -224,9 +224,9 @@ public class AccountViewModel extends HivsBaseViewModel {
                     public void onComplete(Resource<UserInfoVo> resource) {
                         super.onComplete(resource);
                         if (resource.data != null) {
-                            mVmEventSouce.setValue(new ViewEventResouce(104, "", resource.data));
                             CacheMemoryStaticUtils.put("user", resource.data); //缓存
                             CacheUtils.saveUser(resource.data);
+                            mVmEventSouce.setValue(new ViewEventResouce(104, "", resource.data));
                         }
                         hideDialogWait();
                     }
@@ -1092,6 +1092,11 @@ public class AccountViewModel extends HivsBaseViewModel {
                 super.onComplete(resource);
                 hideDialogWait();
                 mVmEventSouce.setValue(new ViewEventResouce(538, "", resource.data));
+                UserInfoVo userInfoVo1 = CacheUtils.getUser();
+                userInfoVo1.nickname = visitingCardVo.getFullName();
+                userInfoVo1.fullName = visitingCardVo.getFullName();
+                userInfoVo1.avatar = visitingCardVo.getAvatar();
+                CacheUtils.saveUser(userInfoVo1);
                 ToastUtils.showShort("保存成功");
             }
 

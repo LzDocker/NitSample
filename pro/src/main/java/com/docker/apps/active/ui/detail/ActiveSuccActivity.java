@@ -80,7 +80,7 @@ public class ActiveSuccActivity extends NitCommonActivity<NitEmptyViewModel, Pro
                     title.setText(activitytitle);
                     textView.setText("凭证号：" + activeSucVo.evoucherNo);
                     ImageView imageView = basePopupView.findViewById(R.id.iv_bar_code);
-                    GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + activeSucVo.AuditUrl).into(imageView);
+                    GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + activeSucVo.evoucherNo).into(imageView);
                     imageView.setOnLongClickListener(v1 -> {
                         PhotoGalleryUtils.saveImageToGallery(ActiveSuccActivity.this, ImageUtils.view2Bitmap(imageView), Constant.BaseFileFloder, "ccc");
                         ToastUtils.showShort("保存成功");

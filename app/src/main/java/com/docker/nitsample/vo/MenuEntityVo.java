@@ -23,4 +23,5 @@ public class MenuEntityVo extends BaseObservable implements Serializable {
     public String getName() {
         return name;
     }
+
 }

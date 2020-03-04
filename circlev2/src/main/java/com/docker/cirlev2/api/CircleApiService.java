@@ -464,6 +464,12 @@ public interface CircleApiService {
     LiveData<ApiResponse<BaseResponse<List<MutipartTabVo>>>> getCircleTab();
 
 
+    //忽略
+    @POST("api.php?m=circle.ignoreMsg")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<String>>> ignoreMsg(@FieldMap Map<String, String> params);
+
+
 
 
 

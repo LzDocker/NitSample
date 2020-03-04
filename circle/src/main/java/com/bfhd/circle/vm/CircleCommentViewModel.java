@@ -126,6 +126,10 @@ public class CircleCommentViewModel extends HivsBaseViewModel {
 
     // 点击头像
     public void ItemAvaterClick(CommentVo commentVo, View v) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (commentVo != null) {
             StaPersionDetail staPersionDetail = new StaPersionDetail();
             staPersionDetail.name = commentVo.nickname;
@@ -139,6 +143,10 @@ public class CircleCommentViewModel extends HivsBaseViewModel {
 
     // 点击头像
     public void ItemAvaterClick(CommentVo.Reply commentVo, View v) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (commentVo != null) {
             StaPersionDetail staPersionDetail = new StaPersionDetail();
             staPersionDetail.name = commentVo.nickname;

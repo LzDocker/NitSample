@@ -545,7 +545,7 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
     }
 
     public static String stampToDate(String s) {
-        String res = "";
+        String res = s;
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             long lt = new Long(s + "000");

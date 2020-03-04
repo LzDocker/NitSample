@@ -4,16 +4,22 @@ import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.vo.bean.StaDetailParam;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.vo.entity.ParamsBean;
+import com.docker.message.vo.MessageListVoV2;
 
 public class MessageRouterUtils {
 
 
     public static void Jump(ParamsBean paramsBean, boolean isPush) {
 
+        if (CacheUtils.getUser() == null) {
+            return;
+        }
 
         if ("quit".equals(paramsBean.getAct())) {
 //            ARouter.getInstance().build(AppRouter.Account.ACCOUNT_LOGIN).navigation();
@@ -27,7 +33,8 @@ public class MessageRouterUtils {
         ) { // 点赞 收藏 评论 回复
             StaDetailParam staDetailParam = new StaDetailParam();
             staDetailParam.dynamicId = paramsBean.getDynamicid();
-            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL).withSerializable("mStaparam", staDetailParam).navigation();
+            ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", paramsBean.getDynamicid()).navigation();
+//            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL).withSerializable("mStaparam", staDetailParam).navigation();
             return;
         }
 
@@ -35,13 +42,31 @@ public class MessageRouterUtils {
         // 关注
         if ("userFocus".equals(paramsBean.getAct()) && isPush) {
             //
-            ARouter.getInstance().build(AppRouter.ACCOUNT_SYSTEM_sMESSAGE).withString("type", "1").navigation();
+            CommonListOptions options = new CommonListOptions();
+            options.refreshState = 0;
+            options.ReqParam.put("type", "1");
+            options.ReqParam.put("memberid", CacheUtils.getUser().uid);
+            ARouter.getInstance().build(AppRouter.MESSAGELISTACT)
+                    .withSerializable(Constant.CommonListParam, options)
+                    .withString("title", "关注")
+                    .navigation();
+//            ARouter.getInstance().build(AppRouter.ACCOUNT_SYSTEM_sMESSAGE).withString("type", "1").navigation();
             return;
         }
 
         if ("message".equals(paramsBean.getType()) && isPush) {
             //
-            ARouter.getInstance().build(AppRouter.ACCOUNT_SYSTEM_sMESSAGE).withString("type", "1").navigation();
+
+            CommonListOptions options = new CommonListOptions();
+            options.refreshState = 0;
+            options.ReqParam.put("type", "1");
+            options.ReqParam.put("memberid", CacheUtils.getUser().uid);
+            ARouter.getInstance().build(AppRouter.MESSAGELISTACT)
+                    .withSerializable(Constant.CommonListParam, options)
+                    .withString("title", "系统通知")
+                    .navigation();
+
+//            ARouter.getInstance().build(AppRouter.ACCOUNT_SYSTEM_sMESSAGE).withString("type", "1").navigation();
             return;
         }
 
@@ -72,6 +97,11 @@ public class MessageRouterUtils {
             userInfoVo.reg_type = "2";
             CacheUtils.saveUser(userInfoVo);
             ARouter.getInstance().build(AppRouter.ACCOUNT_SYSTEM_sMESSAGE).withString("type", "1").navigation();
+            return;
+        }
+        // 活动
+        if ("activity".equals(paramsBean.getAct())) {
+            ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", paramsBean.getDataid()).navigation();
             return;
         }
 

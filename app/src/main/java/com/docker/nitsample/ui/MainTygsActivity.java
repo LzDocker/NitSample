@@ -2,16 +2,19 @@ package com.docker.nitsample.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.account.utils.AccountConstant;
 import com.bfhd.circle.widget.popmenu.PopmenuWj;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.cirlev2.vo.pro.AppVo;
@@ -28,6 +31,7 @@ import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.versionmanager.AppVersionManager;
 import com.docker.common.common.vm.NitCommonListVm;
+import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
 import com.docker.nitsample.databinding.ActivityMainBinding;
@@ -81,7 +85,6 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
 
@@ -92,6 +95,10 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
         mToolbar.hide();
         initMainTab();
         mBinding.ivCenter.setOnClickListener(v -> {
+            if (CacheUtils.getUser() == null) {
+                ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                return;
+            }
             showSuperPop();
 
 //            showPopMenu();
@@ -110,7 +117,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
     public void initObserver() {
         this.getLifecycle().addObserver(versionManager.Bind(this,
                 this, mViewModel.checkUpData(),
-                versionManager.TYPE_DIALOG, "com.bfhd.tjxq"));
+                versionManager.TYPE_DIALOG, "com.bfhd.tygs"));
 
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("Badger")) {
@@ -179,6 +186,12 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
                         mineVm = commonListVm;
                         MineProcess.processMineFrame(mineVm, nitCommonFragment);
+
+                        disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+                            if (rxEvent.getT().equals("login_state_change")) {
+                                MineProcess.processMineHeaderFrame(commonListVm, nitCommonFragment);
+                            }
+                        });
                     }
                 };
                 break;
@@ -194,17 +207,43 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                 if (position > 2) {
                     position = position - 1;
                 }
+                if (position > 1 && CacheUtils.getUser() == null) {
+                    return;
+                }
                 mBinding.viewpager.setCurrentItem(position, false);
                 if (position <= 1) {
                     ImmersionBar.with(MainTygsActivity.this)
                             .statusBarColor("#ffffff")
+                            .fullScreen(false)
+                            .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
+                            .autoDarkModeEnable(true) //自动状态栏字体和导航栏图标变色，必须指定状态栏颜色和导航栏颜色才可以自动变色哦
+                            .autoStatusBarDarkModeEnable(true, 0.2f) //自动状态栏字体变色，必须指定状态栏颜色才可以自动变色哦
+                            .autoNavigationBarDarkModeEnable(true, 0.2f) //自动导航栏图标变色，必须指定导航栏颜色才可以自动变色哦
+                            .flymeOSStatusBarFontColor("#000000")  //修改flyme OS状态栏字体颜色
+                            .init();
+                } else if (position == 2) {
+                    ImmersionBar.with(MainTygsActivity.this)
+                            .fullScreen(false)
+                            .statusBarColor(R.color.colorPrimaryDark)
+                            .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
+                            .autoDarkModeEnable(true) //自动状态栏字体和导航栏图标变色，必须指定状态栏颜色和导航栏颜色才可以自动变色哦
+                            .autoStatusBarDarkModeEnable(true, 0.2f) //自动状态栏字体变色，必须指定状态栏颜色才可以自动变色哦
+                            .autoNavigationBarDarkModeEnable(true, 0.2f) //自动导航栏图标变色，必须指定导航栏颜色才可以自动变色哦
+                            .flymeOSStatusBarFontColor("#000000")  //修改flyme OS状态栏字体颜色
+
                             .init();
                 } else {
                     ImmersionBar.with(MainTygsActivity.this)
-                            .fitsSystemWindows(true)
-                            .statusBarColor(R.color.colorPrimaryDark)
+                            .navigationBarColor("#FFFFFF")
+                            .fullScreen(false).statusBarColor(R.color.colorPrimaryDark)
+                            .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
+                            .autoDarkModeEnable(true) //自动状态栏字体和导航栏图标变色，必须指定状态栏颜色和导航栏颜色才可以自动变色哦
+                            .autoStatusBarDarkModeEnable(true, 0.2f) //自动状态栏字体变色，必须指定状态栏颜色才可以自动变色哦
+                            .autoNavigationBarDarkModeEnable(true, 0.2f) //自动导航栏图标变色，必须指定导航栏颜色才可以自动变色哦
+                            .flymeOSStatusBarFontColor("#000000")  //修改flyme OS状态栏字体颜色
                             .init();
                 }
+
             }
 
             @Override
@@ -213,29 +252,8 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
             }
         });
         mBinding.tlHomeTab.setCurrentTab(0);
-//        CommonListOptions commonListOptions = new CommonListOptions();
-//        commonListOptions.falg = 0;
-////        fragments.add(SampleFragment.newInstance());
-//        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
-//        fragments.add(containerFragment);
-//
-//        CommonListOptions commonListOptions1 = new CommonListOptions();
-//        commonListOptions1.falg = 1;
-//        commonListOptions1.refreshState = 0;
-//        commonListOptions1.RvUi = 0;
-//        commonListOptions1.ReqParam.put("t", "dynamic");
-//        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-//        commonListOptions1.ReqParam.put("memberid", "64");
-//
-//        fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
-////        fragments.add(SampleListFragment.newInstance());
-//
-//        fragments.add(IndexFragment.newInstance());
-//        fragments.add(FragmentMineIndex.newInstance());
-
         mBinding.viewpager.setOffscreenPageLimit(4);
         mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
-
     }
 
 
@@ -316,7 +334,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     break;
 
                 case "4": // 客服h5
-
+                    ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", AccountConstant.CustomerService).withString("title", "客服").navigation();
                     break;
                 case "5":// 推广公社
                     ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
@@ -325,7 +343,7 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
                     ARouter.getInstance().build(AppRouter.CIRCLE_INDEX).navigation();
                     break;
                 case "7": // 成为股东
-
+                    ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", AccountConstant.BecomeToBoss).withString("title", "成为股东").navigation();
                     break;
                 case "8":
                     ARouter.getInstance().build(AppRouter.CIRCLE_PUBLISH_v2_INDEX)
@@ -416,11 +434,11 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
     @Override
     public void onBackPressed() {
-        if (mBinding.viewpager.getCurrentItem() == 2) {
-            if (fragments.get(2) != null) {
-                ((VideoListFragment) (fragments.get(2))).onBackPressed();
-            }
-        }
+//        if (mBinding.viewpager.getCurrentItem() == 2) {
+//            if (fragments.get(2) != null) {
+//                ((VideoListFragment) (fragments.get(2))).onBackPressed();
+//            }
+//        }
 
         if (isExit) {
             this.finish();

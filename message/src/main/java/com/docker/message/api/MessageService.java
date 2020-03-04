@@ -6,6 +6,7 @@ import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.message.vo.MessageDetailListVo;
 import com.docker.message.vo.MessageListVo;
+import com.docker.message.vo.MessageListVoV2;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,15 @@ public interface MessageService {
     LiveData<ApiResponse<BaseResponse<List<MessageListVo>>>> FsetchmessageList(@FieldMap HashMap<String, String> paramMap);
 
     /*
+     * 消息列表
+     * MessageApiConfig.apiBaseUrl +
+     * */
+
+    @POST("api.php?m=get.msgList_v2")
+    @FormUrlEncoded
+    LiveData<ApiResponse<BaseResponse<List<MessageListVoV2>>>> FsetchmessageListv2(@FieldMap HashMap<String, String> paramMap);
+
+    /*
      * 消息二级列表
      * MessageApiConfig.apiBaseUrl +
      * */
@@ -38,4 +48,7 @@ public interface MessageService {
     @POST("api.php?m=user.readAllMsg")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> readAllMsg(@Field("memberid") String memberid);
+
+
+
 }

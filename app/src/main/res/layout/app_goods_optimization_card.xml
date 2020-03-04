@@ -16,6 +16,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:onClick="@{(view) -> item.onItemClickListener.onItemClick(item,view)}"
         android:orientation="vertical">
 
@@ -23,6 +25,8 @@
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="188dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:banner_items="@{item.goodsBannerOb}"
             app:clickCommand="@{item.replyCommandParam}"
             app:is_auto_play="true" />
@@ -30,8 +34,9 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="false"
             android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:nestedScrollingEnabled="false"
             app:itemBinding="@{item.itemBinding}"
             app:items="@{item.goodsListOb}"
             bind:layoutManager="@{LayoutManager.grid(2)}" />

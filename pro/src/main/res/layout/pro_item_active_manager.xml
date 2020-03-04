@@ -24,6 +24,7 @@
         <ImageView
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:rotation="@{item.rotation}"
             android:src="@{item.icon}" />
 
         <TextView

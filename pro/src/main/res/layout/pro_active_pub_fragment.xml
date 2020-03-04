@@ -83,6 +83,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
+                        android:drawableLeft="@mipmap/active_name_icon"
+                        android:drawablePadding="10dp"
                         android:text="活动名称"
                         android:textSize="15sp" />
 
@@ -117,6 +119,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="14dp"
+                            android:drawableLeft="@mipmap/active_time_icon"
+                            android:drawablePadding="10dp"
                             android:text="活动时间"
                             android:textColor="#333"
                             android:textSize="15sp" />
@@ -229,6 +233,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="14dp"
+                            android:drawableLeft="@mipmap/active_loc_icon"
+                            android:drawablePadding="10dp"
                             android:text="活动地点"
                             android:textColor="#333"
                             android:textSize="15sp" />
@@ -324,10 +330,10 @@
                         android:layout_marginRight="14dp"
                         android:layout_weight="1"
                         android:background="@color/white"
-                        android:inputType="number"
                         android:drawablePadding="10dp"
                         android:gravity="right|center_vertical"
                         android:hint="请输入"
+                        android:inputType="number"
                         android:text="@={pub.num}"
                         android:textSize="14sp" />
 
@@ -349,6 +355,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="14dp"
+                        android:drawableLeft="@mipmap/active_content_icon"
+                        android:drawablePadding="10dp"
                         android:text="活动内容"
                         android:textSize="15sp" />
 
@@ -424,6 +432,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="14dp"
+                            android:drawableLeft="@mipmap/active_zbf_icon_2"
+                            android:drawablePadding="10dp"
                             android:text="主办方名称"
                             android:textColor="#333"
                             android:textSize="15sp" />
@@ -454,6 +464,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="14dp"
+                            android:drawableLeft="@mipmap/active_phone_icon"
+                            android:drawablePadding="10dp"
                             android:text="主办方联系电话"
                             android:textColor="#333"
                             android:textSize="15sp" />
@@ -464,10 +476,10 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginRight="14dp"
                             android:layout_weight="1"
-                            android:inputType="phone"
                             android:background="@color/white"
                             android:gravity="right|center_vertical"
                             android:hint="请输入"
+                            android:inputType="phone"
                             android:text="@={pub.contact}"
                             android:textSize="14sp" />
 
@@ -495,10 +507,10 @@
                             android:layout_marginLeft="14dp"
                             android:layout_marginRight="14dp"
                             android:layout_weight="1"
-                            android:inputType="number"
                             android:background="@color/white"
                             android:gravity="right|center_vertical"
                             android:hint="请输入"
+                            android:inputType="number"
                             android:text="@={pub.point}"
                             android:textSize="14sp" />
 

@@ -21,6 +21,7 @@ import android.view.animation.LinearInterpolator;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dcbfhd.utilcode.utils.FileUtils;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
+import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.dcbfhd.utilcode.utils.LogUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
@@ -52,8 +53,10 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -192,9 +195,44 @@ public class Circlev2ReplayQuestionActivity extends NitCommonActivity<CircleDyna
         params.put("reply_memberid", "");
         params.put("reply_uuid", "");
         params.put("reply_nickname", "");
+
+        List<ServiceDataBean.ResourceBean> resource = new ArrayList<>();
+        if (mSourceUpParam.imgList.size() > 0) {
+            for (int i = 0; i < mSourceUpParam.imgList.size(); i++) {
+                params.put("resource[" + i + "][t]", "1");
+                params.put("resource[" + i + "][url]", mSourceUpParam.imgList.get(i));
+                params.put("resource[" + i + "][img]", mSourceUpParam.imgList.get(i));
+                params.put("resource[" + i + "][sort]", i + 1 + "");
+                ServiceDataBean.ResourceBean resourceBean = new ServiceDataBean.ResourceBean();
+                resourceBean.setImg(mSourceUpParam.imgList.get(i));
+                resourceBean.setT(1);
+                resourceBean.setSort(i + "");
+                resourceBean.setUrl(mSourceUpParam.imgList.get(i));
+                resource.add(resourceBean);
+            }
+        }
+        if (mSourceUpParam.upLoadVideoList.size() > 0) {
+            for (int i = 0; i < mSourceUpParam.upLoadVideoList.size(); i++) {
+                params.put("resource[" + i + "][t]", "2");
+                params.put("resource[" + i + "][url]", mSourceUpParam.upLoadVideoList.get(i).getVideoUrl());
+                params.put("resource[" + i + "][img]", mSourceUpParam.upLoadVideoList.get(i).getVideoImgUrl());
+                params.put("resource[" + i + "][sort]", i + 1 + "");
+                ServiceDataBean.ResourceBean resourceBean = new ServiceDataBean.ResourceBean();
+                resourceBean.setImg(mSourceUpParam.upLoadVideoList.get(i).getVideoImgUrl());
+                resourceBean.setT(2);
+                resourceBean.setSort(i + "");
+                resourceBean.setUrl(mSourceUpParam.upLoadVideoList.get(i).getVideoUrl());
+                resource.add(resourceBean);
+            }
+        }
+
         if (mBinding.activityQuizTvReRecord.getVisibility() == View.VISIBLE && !TextUtils.isEmpty(audioUrl)) {
             params.put("audio", audioUrl);
             params.put("audio_duration", mBinding.activityQuizTvTime.getText().toString().substring(0, mBinding.activityQuizTvTime.getText().toString().indexOf("'")));
+        }
+
+        if (resource.size() > 0) {
+            params.put("resource", GsonUtils.toJson(resource));
         }
         mViewModel.commentDynamic(params);
 

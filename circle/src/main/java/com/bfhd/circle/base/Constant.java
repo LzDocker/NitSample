@@ -33,23 +33,23 @@ public class Constant {
     public static final String mOSSBaseImageUrl = endpoint;
 
     public static String getCompleteImageUrl(String url) {//云端的图片
-
-        Log.d("sss", "getCompleteImageUrl: =================="+url);
-
+        Log.d("sss", "getCompleteImageUrl: ==================" + url);
         if (TextUtils.isEmpty(url)) {
             return "";
         } else if (url.contains("http")) {
-            Log.d("sss", "getCompleteImageUrl: =================="+url);
+            Log.d("sss", "getCompleteImageUrl: ==================" + url);
             return url;
         } else {
-            Log.d("sss", "getCompleteImageUrl: =================="+endpoint+url);
-            return endpoint + url;
+            Log.d("sss", "getCompleteImageUrl: ==================" + endpoint + url);
+            if (url.startsWith("/")) {
+                return endpoint + url;
+            } else {
+                return endpoint + "/" + url;
+            }
         }
     }
 
-
     public static String getAudioUrl(String url) {
-
         String utl = getCompleteImageUrl(url);
         if (utl.contains("https")) {
             String newUrl = utl.substring(0, 4) + utl.substring(5, utl.length());

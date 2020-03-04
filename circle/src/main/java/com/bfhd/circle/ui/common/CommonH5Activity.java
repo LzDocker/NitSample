@@ -17,11 +17,12 @@ import com.bfhd.circle.ui.safe.CommonWebFragment;
 import com.bfhd.circle.vm.CircleViewModel;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.ui.base.NitCommonActivity;
 
 import javax.inject.Inject;
 
 @Route(path = AppRouter.COMMONH5)
-public class CommonH5Activity extends HivsBaseActivity<CircleViewModel, CircleActivityCommonH5Binding> {
+public class CommonH5Activity extends NitCommonActivity<CircleViewModel, CircleActivityCommonH5Binding> {
     private String webUrl;
     private String title;
     private CommonWebFragment commonWebFragment;
@@ -76,6 +77,16 @@ public class CommonH5Activity extends HivsBaseActivity<CircleViewModel, CircleAc
 
     @Override
     public void initView() {
+
+    }
+
+    @Override
+    public void initObserver() {
+
+    }
+
+    @Override
+    public void initRouter() {
 
     }
 

@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonListFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.message.vm.MessageViewModel;
 
 @Route(path = AppRouter.MESSAGELIST)
@@ -69,11 +71,10 @@ public class MessageFragment extends NitCommonListFragment<MessageViewModel> {
         } else {
             commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
         }
-        commonListReq.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
-//        commonListReq.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListReq.ReqParam.put("memberid", "3");
-//        commonListReq.ReqParam.put("memberid", "64");
-//        commonListReq.ReqParam.put("companyid", "1");
+        if (CacheUtils.getUser() != null) {
+            commonListReq.ReqParam.put("uuid", CacheUtils.getUser().uuid);
+            commonListReq.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        }
         return commonListReq;
     }
 
@@ -85,6 +86,11 @@ public class MessageFragment extends NitCommonListFragment<MessageViewModel> {
     @Override
     public void onVisible() {
         super.onVisible();
-
+        if (mViewModel != null && CacheUtils.getUser() != null && style == 0 && TextUtils.isEmpty(mViewModel.mCommonListReq.ReqParam.get("uuid"))) {
+            mViewModel.mCommonListReq.ReqParam.put("uuid", CacheUtils.getUser().uuid);
+            mViewModel.mCommonListReq.ReqParam.put("memberid", CacheUtils.getUser().uid);
+            mViewModel.mPage = 1;
+            mViewModel.loadData();
+        }
     }
 }

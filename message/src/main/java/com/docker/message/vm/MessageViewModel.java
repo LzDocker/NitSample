@@ -2,26 +2,36 @@ package com.docker.message.vm;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.bfhd.circle.base.HivsNetBoundObserver;
 import com.bfhd.circle.base.NetBoundCallback;
 import com.dcbfhd.utilcode.utils.CacheMemoryUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.cirlev2.api.CircleApiService;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.rxbus.RxBus;
+import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
+import com.docker.core.repository.NitBoundCallback;
+import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
 import com.docker.message.R;
 import com.docker.message.api.MessageService;
+import com.docker.message.vo.MessageDetailListVo;
 import com.docker.message.vo.MessageListVo;
+import com.docker.message.vo.MessageListVoV2;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -63,7 +73,7 @@ public class MessageViewModel extends NitCommonContainerViewModel {
         LiveData<ApiResponse<BaseResponse>> serverFun = null;
         switch (serverType) {
             case 0:
-                serverFun = messageService.FsetchmessageList(param);
+                serverFun = messageService.FsetchmessageListv2(param);
                 break;
             case 1:
                 serverFun = messageService.FetchMessageList(param);
@@ -74,8 +84,19 @@ public class MessageViewModel extends NitCommonContainerViewModel {
 
     @Override
     public Collection<? extends BaseItemModel> formatListData(Collection data) {
+//        if (serverType == 0) {
+//            return proceeeMessageList((ArrayList<MessageListVo>) data);
+//        }
+
         if (serverType == 0) {
-            return proceeeMessageList((ArrayList<MessageListVo>) data);
+            List<MessageListVoV2> datelist = (List<MessageListVoV2>) data;
+            for (int i = 0; i < datelist.size(); i++) {
+                if (!TextUtils.isEmpty(datelist.get(i).getNotReadMsgNum()) && !"0".equals(datelist.get(i).getNotReadMsgNum())) {
+                    RxBus.getDefault().post(new RxEvent<>("Badger", 1));
+                    break;
+                }
+            }
+
         }
         return data;
     }
@@ -93,6 +114,7 @@ public class MessageViewModel extends NitCommonContainerViewModel {
                         super.onComplete(resource);
                         hideDialogWait();
                         loadData();
+                        RxBus.getDefault().post(new RxEvent<>("Badger", 0));
                     }
 
                     @Override
@@ -191,5 +213,76 @@ public class MessageViewModel extends NitCommonContainerViewModel {
             }
         }
         return messageVoList;
+    }
+
+    @Inject
+    CircleApiService circleApiService;
+
+
+    public final MediatorLiveData<String> mJoinSucLv = new MediatorLiveData<>();
+
+    public void joinCircle(MessageDetailListVo messageDetailListVo, View view) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("msgId", messageDetailListVo.getId());
+        params.put("memberid", messageDetailListVo.getParams().getMemberid());
+        params.put("uuid", messageDetailListVo.getParams().getUuid());
+        params.put("utid", messageDetailListVo.getParams().utid);
+        if (TextUtils.isEmpty(messageDetailListVo.getParams().fullName)) {
+            params.put("fullName", "匿名");
+        } else {
+            params.put("fullName", messageDetailListVo.getParams().fullName);
+        }
+        params.put("circleid", messageDetailListVo.getParams().circleid);
+        mJoinSucLv.addSource(RequestServer(circleApiService.joinCircle(params)), new NitNetBoundObserver<String>(new NitBoundCallback() {
+            @Override
+            public void onComplete(Resource resource) {
+                super.onComplete(resource);
+                mJoinSucLv.setValue("succ");
+                messageDetailListVo.setStatus(1);
+                ToastUtils.showShort("加入成功");
+            }
+
+            @Override
+            public void onBusinessError(Resource resource) {
+                super.onBusinessError(resource);
+                ToastUtils.showShort("加入失败请重试");
+            }
+
+            @Override
+            public void onNetworkError(Resource resource) {
+                super.onNetworkError(resource);
+                ToastUtils.showShort("加入失败请重试");
+            }
+        }));
+    }
+
+
+    public final MediatorLiveData<String> mignoreMsgLv = new MediatorLiveData<>();
+
+    public void cancelJoin(MessageDetailListVo messageDetailListVo, View view) {
+        //ignoreMsg
+        HashMap<String, String> params = new HashMap<>();
+        params.put("msgId", messageDetailListVo.getId());
+        mignoreMsgLv.addSource(RequestServer(circleApiService.ignoreMsg(params)), new NitNetBoundObserver<String>(new NitBoundCallback() {
+            @Override
+            public void onComplete(Resource resource) {
+                super.onComplete(resource);
+                mignoreMsgLv.setValue("succ");
+                messageDetailListVo.setStatus(2);
+                ToastUtils.showShort("忽略成功");
+            }
+
+            @Override
+            public void onBusinessError(Resource resource) {
+                super.onBusinessError(resource);
+                ToastUtils.showShort("忽略失败请重试");
+            }
+
+            @Override
+            public void onNetworkError(Resource resource) {
+                super.onNetworkError(resource);
+                ToastUtils.showShort("忽略失败请重试");
+            }
+        }));
     }
 }

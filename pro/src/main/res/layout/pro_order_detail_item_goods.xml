@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{@string/num+item.goods_num}"
+                android:text="@{@string/num+item.num}"
                 android:textColor="#666666"
                 android:textSize="12sp" />
 

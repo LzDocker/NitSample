@@ -26,6 +26,8 @@ import com.docker.common.BR;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.utils.annotation.CustomModeAnnotation;
+import com.docker.common.common.utils.annotation.CustomModeParser;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
@@ -60,6 +62,7 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
 
     @Inject
     public CircleCommentListViewModel() {
+
 
     }
 
@@ -106,6 +109,10 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
 
     // 条目点击事件  回复
     public void ItemCommentClick(CommentVo commentVo, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (dialogFragment == null) {
             dialogFragment = new CommentDialogFragment();
         }
@@ -177,6 +184,12 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
 
     // 回复评论
     public void replayComment(CommentVo commentVo, HashMap<String, String> params) {
+        //
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+
         showDialogWait("发送中...", false);
         mServerLiveData.addSource(RequestServer(circleApiService.commentDynamic(params)), new NitNetBoundObserver(new NitBoundCallback() {
             @Override
@@ -219,7 +232,13 @@ public class CircleCommentListViewModel extends NitCommonContainerViewModel {
     }
 
     // 点击头像
+    @CustomModeAnnotation(version = 2)
     public void ItemAvaterClick(CommentVo commentVo, View v) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+
         if (commentVo != null) {
             StaPersionDetail staPersionDetail = new StaPersionDetail();
             staPersionDetail.name = commentVo.nickname;

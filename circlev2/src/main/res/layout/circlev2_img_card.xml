@@ -34,6 +34,7 @@
                 android:layout_height="76dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="125dp"
+                android:background="@color/white"
                 app:imageUrl="@{item.logourl}" />
             <!-- android:src="@mipmap/icon_img_tygs"-->
 

@@ -214,7 +214,6 @@ public class OrderBdUtils {
                 desc = "您的订单已取消";
                 break;
         }
-
         return desc;
     }
 
@@ -229,6 +228,8 @@ public class OrderBdUtils {
                 desc = "待付款";
                 break;
             case 1:
+                desc = "待发货";
+                break;
             case 2:
                 desc = "待收货";
                 break;
@@ -240,7 +241,6 @@ public class OrderBdUtils {
                 desc = "已取消";
                 break;
         }
-
         return desc;
     }
 

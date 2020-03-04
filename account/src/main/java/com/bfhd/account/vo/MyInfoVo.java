@@ -1,7 +1,10 @@
 package com.bfhd.account.vo;
 
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.text.TextUtils;
+
+import com.bfhd.account.BR;
 
 import java.io.Serializable;
 
@@ -27,6 +30,7 @@ public class MyInfoVo extends BaseObservable implements Serializable {
     public String labels;
 
     private String nickname;
+
     private String avatar;
     private String utid;
     private String job;
@@ -42,6 +46,8 @@ public class MyInfoVo extends BaseObservable implements Serializable {
     private String allowInvitation;
     private String nicakname;
     private String fullName;
+
+    @Bindable
     private String notReadMsgNum;
     private String contact_us;
     private String commentNum;
@@ -53,7 +59,19 @@ public class MyInfoVo extends BaseObservable implements Serializable {
     private String point;
     public String amount;
 
+    @Bindable
+    public String inviteNum;
 
+    @Bindable
+    public String getInviteNum() {
+        return inviteNum;
+    }
+
+    @Bindable
+    public void setInviteNum(String inviteNum) {
+        this.inviteNum = inviteNum;
+        notifyPropertyChanged(BR.inviteNum);
+    }
 
     public String getReg_type() {
         return reg_type;
@@ -103,12 +121,15 @@ public class MyInfoVo extends BaseObservable implements Serializable {
         this.contact_us = contact_us;
     }
 
+    @Bindable
     public String getNotReadMsgNum() {
         return notReadMsgNum;
     }
 
+    @Bindable
     public void setNotReadMsgNum(String notReadMsgNum) {
         this.notReadMsgNum = notReadMsgNum;
+        notifyPropertyChanged(BR.notReadMsgNum);
     }
 
     public String getNicakname() {

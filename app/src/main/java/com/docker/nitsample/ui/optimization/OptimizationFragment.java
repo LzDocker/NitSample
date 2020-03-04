@@ -1,43 +1,25 @@
 package com.docker.nitsample.ui.optimization;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.docker.cirlev2.vo.card.AppBannerHeaderCardVo;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
-import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonFragment;
-import com.docker.common.common.ui.base.NitCommonListFragment;
-import com.docker.common.common.ui.container.NitCommonContainerFragmentV2;
 import com.docker.common.common.vm.NitCommonListVm;
-import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.nitsample.R;
-import com.docker.nitsample.databinding.IndexTygsFragmentBinding;
 import com.docker.nitsample.databinding.OptimizationFragmentBinding;
-import com.docker.nitsample.ui.index.IndexTygsFragment;
-import com.docker.nitsample.vm.MainViewModel;
 import com.docker.nitsample.vm.OptimizationModel;
 import com.docker.nitsample.vo.BannerEntityVo;
-import com.docker.nitsample.vo.GoodsBannerVo;
-import com.docker.nitsample.vo.LayoutManagerVo;
-import com.docker.nitsample.vo.RecycleTopLayout;
 import com.docker.nitsample.vo.card.AppGoodsOptimizationCardVo;
-import com.docker.nitsample.vo.card.AppRecycleCard2Vo;
-import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo;
-import com.docker.nitsample.vo.card.AppRecycleHorizontalCardVo2;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

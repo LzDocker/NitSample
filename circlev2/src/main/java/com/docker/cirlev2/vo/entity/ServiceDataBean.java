@@ -95,6 +95,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     private String district;
     public String autotrophy;   //1 自营
 
+    public String labels;
     @Bindable
     private int num;
 
@@ -224,7 +225,6 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
     private String pricing;
     private String discount;
     private String companyName;
-
 
 
     // 动态详情 -------------------------------------------

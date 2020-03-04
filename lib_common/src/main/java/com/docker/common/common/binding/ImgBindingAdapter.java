@@ -184,7 +184,7 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"imageNomUrl"}, requireAll = false)
     public static void loadceimage(ImageView imageView, String url) {
         options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL);
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).transition(withCrossFade()).into(imageView);
+        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(CommonBdUtils.getImgUrl(url)).placeholder(null).transition(withCrossFade()).into(imageView);
 
     }
 
@@ -205,7 +205,7 @@ public class ImgBindingAdapter {
 
         Glide.with(imageView)
                 .load(url)
-                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()).placeholder(R.mipmap.common_default_avatar))
                 .into(imageView);
 
         Log.d("sss", "loadavaterimage: =========111=========");
@@ -244,8 +244,8 @@ public class ImgBindingAdapter {
     @BindingAdapter(value = {"BlurImgUrl"}, requireAll = false)
     public static void
     BlurImgUrl(ImageView imageView, String url) {
-        url = CommonBdUtils.getImgUrl("/static/var/upload/image/2019/12/2019122409334512287_750x297.png");
-//        url = CommonBdUtils.getImgUrl(url);
+//        url = CommonBdUtils.getImgUrl("/static/var/upload/image/2019/12/2019122409334512287_750x297.png");
+        url = CommonBdUtils.getImgUrl(url);
         options.diskCacheStrategy(DiskCacheStrategy.ALL)
                 .priority(Priority.HIGH)
                 .transform(new BitmapTransformation() {

@@ -189,6 +189,10 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
 //        if (checkLoginState()) {
 //            return;
 //        }
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         if (item == null) {
             return;
         }
@@ -197,6 +201,10 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
 
     // 购物车
     public void ItemShopCartClick(ServiceDataBean item, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
         ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
     }
 
@@ -217,6 +225,7 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
                 super.onBusinessError(resource);
                 mCartAddLv.setValue(2);
             }
+
             @Override
             public void onNetworkError(Resource<String> resource) {
                 super.onNetworkError(resource);

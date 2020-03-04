@@ -1,18 +1,20 @@
 package com.docker.cirlev2.ui.dynamicdetail;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dcbfhd.utilcode.utils.ArrayUtils;
+import com.dcbfhd.utilcode.utils.CollectionUtils;
+import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2ActivityCircleShoppingCarListBinding;
 import com.docker.cirlev2.vm.CircleShoppingViewModel;
@@ -105,17 +107,39 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
 
 //        mBinding.recycle.setAdapter(adapter);
         mBinding.tvToOrder.setOnClickListener(v -> {
-            ARouter.getInstance().build(AppRouter.ORDER_MAKER).navigation();
+
+            if (innerVm.mItems.size() == 0) {
+                ToastUtils.showShort("请先添加商品");
+                return;
+            }
+
+            if (mBinding.getIsAllCheck()) { // 全选
+                ARouter.getInstance().build(AppRouter.ORDER_MAKER).withString("is_ShoppingCar", "1").navigation();
+                finish();
+                return;
+            } else {
+                ArrayList<ShoppingCarVoV3> CartSaleList = new ArrayList<>();
+                for (int i = 0; i < innerVm.mItems.size(); i++) {
+                    if (((ShoppingCarVoV3) innerVm.mItems.get(i)).getIsSelect()) {
+                        CartSaleList.add((ShoppingCarVoV3) innerVm.mItems.get(i));
+                    }
+                }
+                if (CartSaleList.size() > 0) {
+                    ARouter.getInstance().build(AppRouter.ORDER_MAKER).withString("is_ShoppingCar", "1").withSerializable("CartList", CartSaleList).navigation();
+                    finish();
+                } else {
+                    ToastUtils.showShort("请先选择商品");
+                }
+            }
         });
         mBinding.tvDelete.setOnClickListener(view -> {
-
             ((CircleShoppingViewModel) innerVm).shoppingCarDel();
         });
-
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.falg = 1;
         commonListOptions.isActParent = true;
-        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+//        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions.refreshState = Constant.KEY_REFRESH_PURSE;
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
         commonListOptions.ReqParam.put("memberid", CacheUtils.getUser().uid);
         NitBaseProviderCard.providerCoutainerForFrame(CircleShoppingCarListActivity.this.getSupportFragmentManager(), R.id.frame, commonListOptions);
@@ -128,6 +152,7 @@ public class CircleShoppingCarListActivity extends NitCommonActivity<CircleShopp
                 carVoV3s.get(i).setIsSelect(!isAllCheck);
                 selectCheck(carVoV3s.get(i), null);
             }
+            ((CircleShoppingViewModel) innerVm).processTotalMoney(innerVm.mItems);
         });
     }
 

@@ -28,15 +28,13 @@
         android:paddingRight="14dp"
         android:paddingBottom="14dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/round_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            app:errorImg="@{R.mipmap.circle_default_avatar}"
-            app:placeHolder="@{R.mipmap.circle_default_avatar}"
-            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.logoUrl)}" />
+            app:imageUrl="@{Constant.getCompleteImageUrl(item.logoUrl)}" />
 
         <TextView
             android:id="@+id/tv_name"

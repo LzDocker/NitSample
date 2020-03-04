@@ -28,6 +28,7 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -44,9 +45,11 @@
                     android:layout_height="match_parent"
                     app:srlEnablePureScrollMode="true">
 
-                    <FrameLayout
+                    <com.docker.common.common.widget.empty.EmptyLayout
+                        android:id="@+id/empty_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@color/white">
 
                         <android.support.v4.widget.NestedScrollView
                             android:layout_width="match_parent"
@@ -78,7 +81,6 @@
                                             <LinearLayout
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
-
                                                 android:background="#00000000"
                                                 android:orientation="vertical">
 
@@ -103,9 +105,7 @@
                                                             android:layout_width="83dp"
                                                             android:layout_height="83dp"
                                                             android:layout_centerVertical="true"
-                                                            app:errorImg="@{R.mipmap.circle_default_avatar}"
-                                                            app:placeHolder="@{R.mipmap.circle_default_avatar}"
-                                                            app:roundImgUrl="@{BdUtils.getImgUrl(item.imgurl)}" />
+                                                            app:imageUrl="@{BdUtils.getImgUrl(item.imgurl)}" />
 
                                                         <TextView
                                                             android:id="@+id/tv_title"
@@ -154,55 +154,35 @@
                                                     app:leftShadowWidth="0dp"
                                                     app:rightShadowWidth="0dp"
                                                     app:shadowColor="#000000"
-                                                    app:topShadowHeight="0dp"></www.linwg.org.lib.LCardView>
+                                                    app:topShadowHeight="0dp">
+
+                                                    <com.docker.common.common.widget.empty.EmptyLayout
+                                                        android:id="@+id/empty"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="match_parent">
+
+                                                        <android.support.v7.widget.RecyclerView
+                                                            android:id="@+id/recyclerView"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="match_parent"
+                                                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                                                            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+                                                    </com.docker.common.common.widget.empty.EmptyLayout>
+
+
+                                                </www.linwg.org.lib.LCardView>
                                             </LinearLayout>
                                         </android.support.v7.widget.CardView>
-
 
                                     </LinearLayout>
                                 </LinearLayout>
 
-                                <com.docker.common.common.widget.empty.EmptyLayout
-                                    android:id="@+id/empty"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@color/white">
-
-                                    <android.support.v7.widget.CardView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginTop="10dp"
-                                        android:padding="10dp"
-                                        app:cardCornerRadius="10dp"
-                                        app:cardElevation="0dp">
-
-                                        <android.support.v7.widget.RecyclerView
-                                            android:id="@+id/recyclerView"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-                                            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                                        </android.support.v7.widget.RecyclerView>
-
-                                    </android.support.v7.widget.CardView>
-                                </com.docker.common.common.widget.empty.EmptyLayout>
-
-
                             </LinearLayout>
 
-
                         </android.support.v4.widget.NestedScrollView>
-
-                        <com.docker.common.common.widget.empty.EmptyLayout
-                            android:id="@+id/empty_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/white">
-
-
-                        </com.docker.common.common.widget.empty.EmptyLayout>
-                    </FrameLayout>
+                    </com.docker.common.common.widget.empty.EmptyLayout>
 
 
                 </com.docker.common.common.widget.refresh.SmartRefreshLayout>

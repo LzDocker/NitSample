@@ -15,6 +15,7 @@ import com.dcbfhd.utilcode.utils.ImageUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.apps.R;
 import com.docker.apps.active.vm.ActiveCommonViewModel;
+import com.docker.apps.active.vo.ActiveManagerVo;
 import com.docker.apps.active.vo.ActiveVo;
 import com.docker.apps.active.vo.card.ActiveInfoCard;
 import com.docker.apps.active.vo.card.ActiveManagerCard;
@@ -96,7 +97,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
                     || rxEvent.getT().equals("active_refresh")
                     || rxEvent.getT().equals("activemodify")) {
 
-                mBinding.empty.showLoading();
+//                mBinding.empty.showLoading();
                 processRequest();
             }
         });
@@ -119,7 +120,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
                 ActiveManagerCard activeManagerCard = new ActiveManagerCard(0, 1);
                 NitBaseProviderCard.providerCard(commonListVm, activeManagerCard, nitCommonFragment);
                 activeManagerCard.setCommand((ReplyCommandParam) o -> {
-                    processDo((Integer) o);
+                    processDo((ActiveManagerVo) o);
                 });
 
                 mViewModel.voMediatorLiveData.observe(ActiveManagerDetailActivity.this, activeManagerDetailVo -> {
@@ -166,7 +167,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
     }
 
 
-    private void processDo(int id) {
+    private void processDo(ActiveManagerVo activeManagerVo) {
         /*
         *        observableList.add(new ActiveManagerVo(R.mipmap.active_icon_detail, "查看活动页面", 0));
         observableList.add(new ActiveManagerVo(R.mipmap.active_icon_share, "分享活动", 1));
@@ -176,7 +177,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
         observableList.add(new ActiveManagerVo(R.mipmap.active_icon_del, "删除活动", 5));
         * */
 
-        switch (id) {
+        switch (activeManagerVo.id) {
             case 0:
                 ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY)
                         .withString("activityid", activeVo.dataid)
@@ -193,7 +194,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
                 editContent();
                 break;
             case 4:
-                downactive();
+                downactive(activeManagerVo);
                 break;
             case 5:
                 delactive();
@@ -215,7 +216,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
         UMImage image = new UMImage(ActivityUtils.getTopActivity(), BdUtils.getImgUrl(activeVo.banner.get(0).getImg()));//网络图片
         image.compressStyle = UMImage.CompressStyle.SCALE;//大小压缩，默认为大小压缩，适合普通很大的图
         image.compressStyle = UMImage.CompressStyle.QUALITY;//质量压缩，适合长图的分
-        UMWeb web = new UMWeb(mActiveManagerDetailVo.shortUrl);
+        UMWeb web = new UMWeb(mActiveManagerDetailVo.detailUrl);
         web.setTitle(mActiveManagerDetailVo.title);//标题
         web.setThumb(image);  //缩略图
         web.setDescription(activeVo.content);//描述
@@ -264,8 +265,8 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
                 .navigation();
     }
 
-    private void downactive() {
-        mViewModel.updateStatus(mActiveManagerDetailVo);
+    private void downactive(ActiveManagerVo activeManagerVo) {
+        mViewModel.updateStatus(mActiveManagerDetailVo, activeManagerVo);
     }
 
     private void delactive() {
@@ -293,7 +294,7 @@ public class ActiveManagerDetailActivity extends NitCommonActivity<ActiveCommonV
             switch (s) {
                 case "1":
                     ToastUtils.showShort("操作成功");
-                    finish();
+//                    finish();
                     break;
                 case "2":
                     ToastUtils.showShort("删除成功");

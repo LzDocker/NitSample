@@ -23,11 +23,11 @@
             android:layout_height="match_parent"
             android:focusableInTouchMode="true">
 
-            <com.tencent.smtt.sdk.WebView
+            <WebView
                 android:id="@+id/pro_webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:ignore="WebViewLayout"></com.tencent.smtt.sdk.WebView>
+                tools:ignore="WebViewLayout"></WebView>
 
         </com.docker.common.common.widget.empty.EmptyLayout>
 

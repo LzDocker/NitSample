@@ -14,6 +14,7 @@ import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.vo.card.BaseCardVo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
@@ -43,12 +44,11 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
     public ObservableList<CardInfo> cardInfoObservableList = new ObservableArrayList<>();
 
     public ObservableList<CardInfo> getObList() {
-
         cardInfoObservableList.addAll(getInfo());
         return cardInfoObservableList;
     }
 
-    public class CardInfo extends BaseObservable {
+    public class CardInfo extends BaseObservable implements Serializable {
         public String id;
         public String inputtime;
         public String goodsid;
@@ -89,7 +89,7 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
             notifyPropertyChanged(BR.num);
         }
 
-        private boolean isSelect;
+        private boolean isSelect = false;
 
         @Bindable
         public boolean getIsSelect() {
@@ -116,7 +116,7 @@ public class ShoppingCarVoV3 extends BaseSampleItem {
     }
 
 
-    private boolean isSelect;
+    private boolean isSelect = false;
 
     @Bindable
     public boolean getIsSelect() {

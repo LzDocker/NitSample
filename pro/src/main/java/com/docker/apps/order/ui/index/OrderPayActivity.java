@@ -97,6 +97,7 @@ public class OrderPayActivity extends NitCommonActivity<OrderMakerViewModel, Pro
         mBinding.tvTotalmoney.setText(payOrederVo.payTotal);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("refresh_buy")) {
+                ARouter.getInstance().build(AppRouter.ORDER_PAY_SUCC).navigation();
                 finish();
             }
         });

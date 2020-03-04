@@ -79,8 +79,8 @@ dependencies {
     api files('libs/umeng-share-QQ-simplify-6.9.4.jar')
     api files('libs/umeng-common-2.0.2.jar')
     // 激光
-    api 'cn.jiguang.sdk:jpush:3.3.2'  //
-    api 'cn.jiguang.sdk:jcore:2.0.1'  //
+    api 'cn.jiguang.sdk:jpush:3.5.6'  //
+    api 'cn.jiguang.sdk:jcore:2.2.8'  //
     api 'com.lxj:xpopup:1.8.10'//XPopup
 
 

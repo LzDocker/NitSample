@@ -7,6 +7,7 @@ import com.bfhd.account.R;
 import com.bfhd.account.utils.AccountConstant;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.card.BaseCardVo;
 
 import static com.bfhd.account.utils.AccountConstant.ChenHHR;
@@ -43,6 +44,36 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
 
     @Override
     public void onItemClick(BaseCardVo item, View view) {
+
+        if (view.getId() == R.id.account_lin_tywh) {
+            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", Tywenhua).withString("title", "桃源文化").navigation();
+            return;
+        }
+        if (view.getId() == R.id.account_tv_gsjs) {
+            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", InfoDesc).withString("title", "公社介绍").navigation();
+            return;
+        }
+        if (view.getId() == R.id.account_tv_jfzd) {
+            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", JfenZhidu).withString("title", "积分制度").navigation();
+            return;
+        }
+        if (view.getId() == R.id.account_tv_hhr) { //成为合伙人
+            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", ChenHHR).withString("title", "成为合伙人").navigation();
+            return;
+        }
+
+        if (view.getId() == R.id.account_tv_fwzc) {
+            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", AccountConstant.CustomerService).withString("title", "服务支持").navigation();
+            return;
+        }
+
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+        if (view.getId() == R.id.account_tv_join_friend) { // 邀请好友
+            ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
+        }
 
         if (view.getId() == R.id.tv_isent) {
         }
@@ -89,24 +120,7 @@ public class AccountIndexItemVo extends BaseCardVo<String> {
         if (view.getId() == R.id.tv_help) {
         }
 
-        if (view.getId() == R.id.account_lin_tywh) {
-            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", Tywenhua).withString("title", "桃源文化").navigation();
-        }
-        if (view.getId() == R.id.account_tv_gsjs) {
-            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", InfoDesc).withString("title", "公社介绍").navigation();
-        }
-        if (view.getId() == R.id.account_tv_jfzd) {
-            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", JfenZhidu).withString("title", "积分制度").navigation();
-        }
-        if (view.getId() == R.id.account_tv_hhr) { //成为合伙人
-            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", ChenHHR).withString("title", "成为合伙人").navigation();
-        }
-        if (view.getId() == R.id.account_tv_join_friend) { // 邀请好友
-            ARouter.getInstance().build(AppRouter.INVITE_INDEX).navigation();
-        }
-        if (view.getId() == R.id.account_tv_fwzc) {
-            ARouter.getInstance().build(AppRouter.COMMONH5).withString("weburl", AccountConstant.CustomerService).withString("title", "服务支持").navigation();
-        }
+
     }
 
 }

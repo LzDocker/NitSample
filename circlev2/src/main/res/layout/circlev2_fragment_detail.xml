@@ -110,7 +110,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/circle_red"
+                        android:background="@color/colorPrimaryDark"
                         android:onClick="@{(view)->viewmodel.attention(item,view)}"
                         android:paddingLeft="14dp"
                         android:paddingTop="5dp"
@@ -194,12 +194,13 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycle"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:focusable="false"
                         android:nestedScrollingEnabled="false"
                         app:itemBinding="@{item.itemDetailBinding}"
                         app:items="@{item.getInnerResource()}"
                         app:layoutManager="@{LayoutManager.staggeredGrid(1,1)}" />
+                    <!--app:layoutManager="@{LayoutManager.staggeredGrid(1,1)}"-->
                     <!--     app:visibleGone="@{BdUtils.isShowRvImg(item)}" -->
                     <!--bind:items="@{item.extData.resource}"-->
                     <!--bind:items="@{item.getResouceData(item.extData)}"-->

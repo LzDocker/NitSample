@@ -6,6 +6,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableInt;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.common.common.command.RefreshCommand;
+import com.docker.common.common.utils.annotation.CustomModeParser;
 import com.docker.common.common.widget.dialog.DialogWait;
 import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.base.BaseVm;
@@ -18,6 +19,7 @@ public abstract class NitCommonBaseVm extends BaseVm {
     public void create() {
         initCommand();
         mEmptycommand.set(EmptyStatus.BdLoading);
+        CustomModeParser.inject(this);
     }
 
 

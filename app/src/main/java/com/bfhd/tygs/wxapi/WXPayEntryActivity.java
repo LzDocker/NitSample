@@ -1,4 +1,4 @@
-package com.docker.nitsample.wxapi;
+package com.bfhd.tygs.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;

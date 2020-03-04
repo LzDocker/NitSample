@@ -151,52 +151,54 @@ public class OrderCommonViewModel extends NitCommonContainerViewModel {
 
     // 去支付
     public void payOrder(OrderVoV2 orderVoV2, View view) {
-        ordercomment(orderVoV2, view);
+        showDialogWait("请稍后...", false);
+        HashMap<String, String> param = new HashMap<>();
+        param.put("memberid", CacheUtils.getUser().uid);
+        param.put("uuid", CacheUtils.getUser().uuid);
+        param.put("orderid", orderVoV2.id);
+        param.put("payment", "2");
+        mPayOrederLv.addSource(RequestServer(orderService.orderPay(param)), new NitNetBoundObserver<PayOrederVo>(new NitBoundCallback<PayOrederVo>() {
+            @Override
+            public void onComplete(Resource<PayOrederVo> resource) {
+                super.onComplete(resource);
+                mPayOrederLv.setValue(resource.data);
+                hideDialogWait();
+            }
 
-//        showDialogWait("请稍后...", false);
-//        HashMap<String, String> param = new HashMap<>();
-//        param.put("memberid", CacheUtils.getUser().uid);
-//        param.put("uuid", CacheUtils.getUser().uuid);
-//        param.put("orderid", orderVoV2.id);
-//        param.put("payment", "2");
-//        mPayOrederLv.addSource(RequestServer(orderService.orderPay(param)), new NitNetBoundObserver<PayOrederVo>(new NitBoundCallback<PayOrederVo>() {
-//            @Override
-//            public void onComplete(Resource<PayOrederVo> resource) {
-//                super.onComplete(resource);
-//                mPayOrederLv.setValue(resource.data);
-//                hideDialogWait();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                super.onComplete();
-//                hideDialogWait();
-//            }
-//        }));
+
+            @Override
+            public void onComplete() {
+                super.onComplete();
+                hideDialogWait();
+            }
+        }));
 
     }
 
     // 查看物流
     public void lookLogic(OrderVoV2 orderVoV2, View view) {
+        Log.d("sss", "lookLogic: =============="+orderVoV2.goods_info.get(0).img);
         ARouter.getInstance().build(AppRouter.ORDER_Logistics_LIST)
                 .withString("imgurl", orderVoV2.goods_info.get(0).img)
                 .withString("phone", orderVoV2.receiveTel)
                 .withString("nu", orderVoV2.logisticsNo).navigation();
     }
 
-
     public final MediatorLiveData<String> mTakeGoodsLv = new MediatorLiveData<>();
-
     // 确认收货
     public void sureHandle(OrderVoV2 orderVoV2, View view) {
         showDialogWait("确认收货中...", false);
         HashMap<String, String> param = new HashMap<>();
+        param.put("orderid",orderVoV2.id);
+        param.put("memberid",CacheUtils.getUser().uid);
+        param.put("uuid",CacheUtils.getUser().uuid);
         mTakeGoodsLv.addSource(RequestServer(orderService.takeGoods(param)), new NitNetBoundObserver<String>(new NitBoundCallback<String>() {
             @Override
             public void onComplete(Resource<String> resource) {
                 super.onComplete(resource);
                 hideDialogWait();
-                mTakeGoodsLv.setValue(resource.data);
+                mItems.remove(orderVoV2);
+                mTakeGoodsLv.setValue("succ");
             }
 
             @Override

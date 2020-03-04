@@ -42,6 +42,7 @@ import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.appbar.AppBarStateChangeListener;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
@@ -137,6 +138,10 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         if (circleConfig.isNeedIntroduce) {
             mBinding.get().circleLlInfo.setVisibility(View.VISIBLE);
             mBinding.get().circleLlInfo.setOnClickListener(v -> {
+                if (CacheUtils.getUser() == null) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                    return;
+                }
                 if (mViewModel.mCircleDetailLv.getValue() != null) {
                     StaCirParam mStartParam = new StaCirParam();
                     mStartParam.setCircleid(circleid);
@@ -147,6 +152,10 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
             });
             mBinding.get().circleLlPerLiner.setVisibility(View.VISIBLE);
             mBinding.get().circleLlPerLiner.setOnClickListener(v -> {
+                if (CacheUtils.getUser() == null) {
+                    ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                    return;
+                }
                 onCirclePersionManagerClick();
             });
         }
@@ -224,11 +233,12 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
                     .transparentBar()
                     .init();
         } else {
-            ImmersionBar.with(this)
-                    .navigationBarColor("#ffffff")
-                    .statusBarDarkFont(true)
-                    .statusBarColor("#ffffff")
-                    .init();
+            super.initImmersionBar();
+//            ImmersionBar.with(this)
+//                    .navigationBarColor("#ffffff")
+//                    .statusBarDarkFont(true)
+//                    .statusBarColor("#ffffff")
+//                    .init();
         }
     }
 
@@ -242,12 +252,16 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
     }
 
 
-    public void processPushSHow(CircleDetailVo circleDetailVo){
-        if ("1".equals(circleDetailVo.getIsJoin())) {
-            mBinding.get().circlev2Edit.setVisibility(View.GONE);
-            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+    public void processPushSHow(CircleDetailVo circleDetailVo) {
+        if (CacheUtils.getUser() != null) {
+            if ("1".equals(circleDetailVo.getIsJoin())) {
+                mBinding.get().circlev2Edit.setVisibility(View.GONE);
+                mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+                mBinding.get().circlev2Edit.setVisibility(View.GONE);
+            }
         } else {
-            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
             mBinding.get().circlev2Edit.setVisibility(View.GONE);
         }
     }
@@ -293,10 +307,14 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 
     public void processHeader(CircleDetailVo circleDetailVo) {
 
-        if ("0".endsWith(circleDetailVo.getIsJoin())) {
-            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+        if (CacheUtils.getUser() != null) {
+            if ("0".endsWith(circleDetailVo.getIsJoin())) {
+                mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+            } else {
+                mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            }
         } else {
-            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
         }
 
 
@@ -466,7 +484,6 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
         }
 
         if (staCirParam != null) {
-
             processPublishRouterClick(staCirParam, appVo);
 
         } else {
@@ -478,7 +495,14 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
     public void processPro(NitAbsSampleAdapter mAdapter) {
         super.processPro(mAdapter);
 
-
+        if("1".equals(circleConfig.circleType)){
+            mAdapter.remove(2);
+            AppVo appVo2 = new AppVo();
+            appVo2.name = "活动";
+            appVo2.id = "4";
+            appVo2.icon = R.mipmap.publish_act;
+            mAdapter.add(appVo2);
+        }
     }
 
     public void processPublishRouterClick(StaCirParam staCirParam, AppVo appVo) {
@@ -528,6 +552,8 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
     public void processPubRouterNext(Postcard postcard) {
         postcard.navigation();
     }
+
+
 
 }
 

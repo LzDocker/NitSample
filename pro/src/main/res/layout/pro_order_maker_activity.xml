@@ -159,7 +159,7 @@
                                 android:layout_below="@+id/goodstransmoney"
                                 android:layout_alignParentRight="true"
                                 android:layout_marginTop="14dp"
-                                android:textColor="@color/circle_red"
+                                android:textColor="@color/open_read"
                                 android:textSize="14sp" />
                         </RelativeLayout>
 
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="¥"
-                android:textColor="@color/circle_red"
+                android:textColor="@color/open_read"
                 android:textSize="14sp" />
 
             <TextView
@@ -192,7 +192,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="4dp"
                 android:layout_toRightOf="@+id/moneyflag"
-                android:textColor="@color/circle_red"
+                android:textColor="@color/open_read"
                 android:textSize="14sp" />
 
             <TextView

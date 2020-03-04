@@ -1,9 +1,11 @@
 package com.docker.apps.intvite.vo;
 
+import android.databinding.BaseObservable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class InviteDataVo implements Serializable {
+public class InviteDataVo extends BaseObservable implements Serializable {
 
 
     public ArrayList<String> ad;

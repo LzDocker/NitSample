@@ -38,11 +38,10 @@
             android:orientation="horizontal"
             android:paddingBottom="14dp">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                app:imageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
+                app:avaterImageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
 
             <TextView
                 android:layout_width="wrap_content"

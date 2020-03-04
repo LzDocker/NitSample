@@ -91,6 +91,6 @@ public class NitCommonContainerFragmentV2 extends NitCommonListFragment<NitCommo
     @Override
     public void onVisible() {
         super.onVisible();
-        initRefreshUi();
+//        initRefreshUi();
     }
 }

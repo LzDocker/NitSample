@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.circle.vo.bean.StaDetailParam;
+import com.docker.cirlev2.vo.entity.ServerGoodsDataBean;
 import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.vo.card.BaseCardVo;
@@ -25,9 +26,10 @@ public class AppBannerCardVo extends BaseCardVo {
                     .withString("title", ((BannerEntityVo) o).title)
                     .withString("weburl", ((BannerEntityVo) o).http).navigation();
         } else {
-            StaDetailParam staDetailParam = new StaDetailParam();
-            staDetailParam.dynamicId = (((BannerEntityVo) o)).dynamicid;
-            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL).withSerializable("mStaparam", staDetailParam).navigation();
+//            StaDetailParam staDetailParam = new StaDetailParam();
+//            staDetailParam.dynamicId = (((BannerEntityVo) o)).dynamicid;
+//            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL).withSerializable("mStaparam", staDetailParam).navigation();
+            ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", (((BannerEntityVo) o)).dynamicid).navigation();
         }
     };
 

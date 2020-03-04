@@ -47,13 +47,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     app:dontTransImg="@{BdUtils.getResourceImgUrl(item)}" />
+                <!-- app:dontTransImg="@{BdUtils.getResourceImgUrl(item)}"-->
                 <!--<ImageView-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->

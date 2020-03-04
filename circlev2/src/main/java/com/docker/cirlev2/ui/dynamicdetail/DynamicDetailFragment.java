@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ScrollView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
@@ -53,7 +54,7 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
                 ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY).withString("activityid", serviceDataBean.activityid).navigation();
             }
         });
-        
+
     }
 
     private Disposable disposable;
@@ -67,7 +68,7 @@ public class DynamicDetailFragment extends NitCommonFragment<CircleDynamicDetail
         mBinding.get().setViewmodel(mViewModel);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("comment")) {
-                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(NestedScrollView.FOCUS_DOWN), 800);
+                mBinding.get().netSpeed.postDelayed(() -> mBinding.get().netSpeed.fullScroll(ScrollView.FOCUS_DOWN), 800);
             }
 
         });

@@ -28,8 +28,18 @@ import com.bfhd.circle.ui.common.CommonH5Activity;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.tool.MD5Util;
 import com.docker.common.common.vo.UserInfoVo;
+import com.docker.module_im.DemoCache;
+import com.docker.module_im.config.preference.UserPreferences;
 import com.gyf.immersionbar.ImmersionBar;
+import com.netease.nim.uikit.api.NimUIKit;
+import com.netease.nim.uikit.common.ToastHelper;
+import com.netease.nim.uikit.common.util.log.LogUtil;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.StatusBarNotificationConfig;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -278,7 +288,8 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
                 setAlias();
                 ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
 
-//                loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
+                //loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
+
                 break;
             case 516:
                 if (viewEventResouce.data != null) {
@@ -288,52 +299,51 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
         }
     }
 
-//    public void loginWithIm(String account, String token) {
-//        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-//            @Override
-//            public void onSuccess(LoginInfo param) {
-//                LogUtil.i("login success");
-//                DemoCache.setAccount(account);
-//                // 初始化消息提醒配置
-//                initNotificationConfig();
-////                // 进入主界面
-////                MainActivity.start(LoginActivity.this, null);
-//                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
-//                finish();
-//            }
-//
-//            @Override
-//            public void onFailed(int code) {
-//                if (code == 302 || code == 404) {
-//                    ToastHelper.showToast(RegistActivity.this, R.string.login_failed);
-//                } else {
-//                    ToastHelper.showToast(RegistActivity.this, "im登录失败: " + code);
-//                }
-//                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
-//                finish();
-//            }
-//
-//            @Override
-//            public void onException(Throwable exception) {
-//                ToastHelper.showToast(RegistActivity.this, R.string.login_exception);
-//                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
-//                finish();
-//            }
-//        });
-//    }
+    public void loginWithIm(String account, String token) {
+        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
+            @Override
+            public void onSuccess(LoginInfo param) {
+                DemoCache.setAccount(account);
+                // 初始化消息提醒配置
+                initNotificationConfig();
+//                // 进入主界面
+//                MainActivity.start(LoginActivity.this, null);
+                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
+                finish();
+            }
 
-//    private void initNotificationConfig() {
-//        // 初始化消息提醒
-//        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-//        // 加载状态栏配置
-//        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
-//        if (statusBarNotificationConfig == null) {
-//            statusBarNotificationConfig = DemoCache.getNotificationConfig();
-//            UserPreferences.setStatusConfig(statusBarNotificationConfig);
-//        }
-//        // 更新配置
-//        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
-//    }
+            @Override
+            public void onFailed(int code) {
+                if (code == 302 || code == 404) {
+//                    ToastHelper.showToast(RegistActivity.this, R.string.login_failed);
+                } else {
+//                    ToastHelper.showToast(RegistActivity.this, "im登录失败: " + code);
+                }
+                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
+                finish();
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+                ToastHelper.showToast(RegistActivity.this, R.string.login_exception);
+                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
+                finish();
+            }
+        });
+    }
+
+    private void initNotificationConfig() {
+        // 初始化消息提醒
+        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
+        // 加载状态栏配置
+        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
+        if (statusBarNotificationConfig == null) {
+            statusBarNotificationConfig = DemoCache.getNotificationConfig();
+            UserPreferences.setStatusConfig(statusBarNotificationConfig);
+        }
+        // 更新配置
+        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
+    }
 
 
     private void verfi() {

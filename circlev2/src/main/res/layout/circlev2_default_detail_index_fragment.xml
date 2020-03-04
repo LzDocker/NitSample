@@ -101,12 +101,13 @@
                                 android:id="@+id/frame_coutainer"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
                                 android:visibility="gone">
 
                                 <com.youth.banner.Banner
                                     android:id="@+id/banner"
                                     android:layout_width="match_parent"
-                                    android:layout_height="150dp"
+                                    android:layout_height="180dp"
                                     app:banner_items="@{bannerstr}"
                                     app:is_auto_play="true" />
 
@@ -114,15 +115,15 @@
                                     android:id="@+id/rlcoutainer"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="50dp"
-                                    android:gravity="right|bottom"
+                                    android:layout_gravity="bottom"
+                                    android:layout_marginBottom="10dp"
                                     android:paddingLeft="10dp"
                                     android:paddingRight="10dp">
 
                                     <ImageView
                                         android:id="@+id/circle_iv_icon"
-                                        android:layout_width="65dp"
-                                        android:layout_height="65dp"
+                                        android:layout_width="45dp"
+                                        android:layout_height="45dp"
                                         android:layout_centerVertical="true"
                                         app:openImgUrl="@{CommonBdUtils.getCompleteImageUrl(circleDetail.logoUrl)}" />
 
@@ -166,6 +167,7 @@
                                         android:layout_width="80dp"
                                         android:layout_height="wrap_content"
                                         android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
                                         android:layout_marginTop="20dp"
                                         android:onClick="@{(view)->viewmodel.joinCircle(view)}"
                                         android:orientation="vertical">
@@ -226,10 +228,10 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:drawableRight="@mipmap/arrow_right"
-                                    android:paddingTop="10dp"
-                                    android:paddingBottom="10dp"
                                     android:drawablePadding="10dp"
                                     android:ellipsize="end"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
                                     android:singleLine="true"
                                     android:textColor="#333" />
                             </LinearLayout>
@@ -409,7 +411,8 @@
             android:layout_marginRight="24dp"
             android:layout_marginBottom="44dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/circle_add_icon" />
+            android:src="@mipmap/circle_add_icon"
+            android:visibility="gone" />
         <!--app:visibleGone="@{CommonBdUtils.isShowJoin(circleDetail.isJoin)}"-->
     </com.docker.common.common.widget.empty.EmptyLayout>
 

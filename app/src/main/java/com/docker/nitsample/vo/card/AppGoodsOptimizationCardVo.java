@@ -44,15 +44,13 @@ public class AppGoodsOptimizationCardVo extends BaseCardVo {
      * banner 点击事件
      * */
     public ReplyCommandParam replyCommandParam = (ReplyCommandParam) o -> {
-        if ("".equals(((BannerEntityVo) o).dynamicid) || "0".equals(((BannerEntityVo) o).dynamicid) && !TextUtils.isEmpty(((BannerEntityVo) o).http)) {
-            ARouter.getInstance().build(AppRouter.COMMONH5)
-                    .withString("title", ((BannerEntityVo) o).title)
-                    .withString("weburl", ((BannerEntityVo) o).http).navigation();
-        } else {
-            StaDetailParam staDetailParam = new StaDetailParam();
-            staDetailParam.dynamicId = (((BannerEntityVo) o)).dynamicid;
-            ARouter.getInstance().build(AppRouter.CIRCLE_DETAIL).withSerializable("mStaparam", staDetailParam).navigation();
-        }
+//        if ("".equals(((BannerEntityVo) o).dynamicid) || "0".equals(((BannerEntityVo) o).dynamicid) && !TextUtils.isEmpty(((BannerEntityVo) o).http)) {
+//            ARouter.getInstance().build(AppRouter.COMMONH5)
+//                    .withString("title", ((BannerEntityVo) o).title)
+//                    .withString("weburl", ((BannerEntityVo) o).http).navigation();
+//        } else {
+//            ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", (((BannerEntityVo) o)).dynamicid).navigation();
+//        }
     };
 
     public AppGoodsOptimizationCardVo(int style, int position) {
@@ -80,7 +78,6 @@ public class AppGoodsOptimizationCardVo extends BaseCardVo {
         goodsListOb.clear();
         goodsListOb.addAll(serviceDataBeans);
     }
-
 
 
     // 多类型条目适配

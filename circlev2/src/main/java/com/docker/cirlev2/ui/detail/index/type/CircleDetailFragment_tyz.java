@@ -47,7 +47,16 @@ public class CircleDetailFragment_tyz extends NitDefaultCircleFragment {
     @Override
     public void onCircleDetailFetched(CircleDetailVo circleDetailVo) {
         super.onCircleDetailFetched(circleDetailVo);
-        mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+//        mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        if (CacheUtils.getUser() != null) {
+            if ("1".equals(circleDetailVo.getRole())) {
+                mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+            }
+        } else {
+            mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+        }
     }
 
 
@@ -55,11 +64,16 @@ public class CircleDetailFragment_tyz extends NitDefaultCircleFragment {
     public void processPushSHow(CircleDetailVo circleDetailVo) {
         super.processPushSHow(circleDetailVo);
 
-        if ("1".equals(circleDetailVo.getRole())) {
-            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        if (CacheUtils.getUser() != null) {
+            if ("1".equals(circleDetailVo.getRole())) {
+                mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+            }
         } else {
             mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
         }
+
     }
 
     @Override

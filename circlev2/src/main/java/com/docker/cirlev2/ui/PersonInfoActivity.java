@@ -8,12 +8,14 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2ActivityCirclePersonInfoBinding;
+import com.docker.cirlev2.vm.CircleDynamicDetailViewModel;
 import com.docker.cirlev2.vm.card.CirclePersonInfoHeadCardVm;
 import com.docker.cirlev2.vo.card.PersonInfoHeadCardVo;
 import com.docker.cirlev2.vo.card.PersonInfoHeadVo;
@@ -33,11 +35,11 @@ import com.docker.common.common.vm.NitEmptyViewModel;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.appbar.AppBarStateChangeListener;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
-import com.docker.common.common.widget.empty.EmptyLayout;
 import com.docker.common.common.widget.indector.CommonIndector;
 import com.docker.common.common.widget.refresh.api.RefreshHeader;
 import com.docker.common.common.widget.refresh.api.RefreshLayout;
 import com.docker.common.common.widget.refresh.listener.SimpleMultiPurposeListener;
+import com.docker.core.widget.BottomSheetDialog;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
@@ -48,10 +50,11 @@ import static com.docker.common.common.config.Constant.CommonListParam;
  *  我的主页
  * */
 @Route(path = AppRouter.CIRCLE_person_info)
-public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Circlev2ActivityCirclePersonInfoBinding> {
+public class PersonInfoActivity extends NitCommonActivity<CircleDynamicDetailViewModel, Circlev2ActivityCirclePersonInfoBinding> {
     public ArrayList<Fragment> fragments = new ArrayList<>();
     private NitDelegetCommand nitDelegetCommand;
 
+    public PersonInfoHeadVo mPersonInfoHeadVo;
     @Autowired()
     String memberid2;
 
@@ -75,8 +78,8 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
     }
 
     @Override
-    public NitEmptyViewModel getmViewModel() {
-        return ViewModelProviders.of(this, factory).get(NitEmptyViewModel.class);
+    public CircleDynamicDetailViewModel getmViewModel() {
+        return ViewModelProviders.of(this, factory).get(CircleDynamicDetailViewModel.class);
     }
 
     @Override
@@ -84,8 +87,13 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
         isOverrideContentView = true;
         if (TextUtils.isEmpty(memberid2)) {
             UserInfoVo userInfoVo = CacheUtils.getUser();
-            memberid2 = userInfoVo.uid;
-            uuid2 = userInfoVo.uuid;
+            if (userInfoVo == null) {
+                ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+                finish();
+            } else {
+                memberid2 = userInfoVo.uid;
+                uuid2 = userInfoVo.uuid;
+            }
         }
         super.onCreate(savedInstanceState);
 
@@ -93,6 +101,10 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
 
     @Override
     public void initView() {
+
+        mBinding.ivMore.setOnClickListener(v -> {
+            processReportUi();
+        });
 
         mBinding.ivBack.setOnClickListener(v -> finish());
 
@@ -103,26 +115,6 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
         commonListOptions.falg = 0;
         NitBaseProviderCard.providerCardNoRefreshForFrame(PersonInfoActivity.this.getSupportFragmentManager(), R.id.frame, commonListOptions);
 
-
-        String[] titles = new String[]{"ta的动态", "ta的问答"};
-        CommonListOptions commonListOptions1 = new CommonListOptions();
-        commonListOptions1.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-        commonListOptions1.ReqParam.put("uuid", uuid2);
-        commonListOptions1.ReqParam.put("memberid", memberid2);
-        commonListOptions1.ReqParam.put("t", "dynamic");
-        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions1).navigation());
-
-        CommonListOptions commonListOptions2 = new CommonListOptions();
-        commonListOptions2.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-        commonListOptions2.ReqParam.put("uuid", uuid2);
-        commonListOptions2.ReqParam.put("memberid", memberid2);
-        commonListOptions2.ReqParam.put("t", "answer");
-        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions2).navigation());
-
-        // magic
-        mBinding.viewPager.setAdapter(new CommonpagerStateAdapter(getSupportFragmentManager(), fragments, titles));
-        CommonIndector commonIndector = new CommonIndector();
-        commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
 
         mBinding.appBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
@@ -181,7 +173,7 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
         mBinding.refresh.setOnMultiPurposeListener(new SimpleMultiPurposeListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                if (fragments != null) {
+                if (fragments != null && fragments.size() > 0) {
                     ((NitCommonListFragment) fragments.get(mBinding.viewPager.getCurrentItem())).onReFresh(mBinding.refresh);
                 }
             }
@@ -193,6 +185,34 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
         });
 
         mBinding.refresh.setEnableLoadMore(false);
+
+    }
+
+
+    private void processTab() {
+        String[] titles = new String[]{"ta的动态", "ta的问答"};
+        CommonListOptions commonListOptions1 = new CommonListOptions();
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions1.ReqParam.put("uuid", CacheUtils.getUser().uuid);
+        commonListOptions1.ReqParam.put("uuid2", uuid2);
+        commonListOptions1.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions1.ReqParam.put("memberid2", memberid2);
+        commonListOptions1.ReqParam.put("t", "dynamic");
+        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions1).navigation());
+
+        CommonListOptions commonListOptions2 = new CommonListOptions();
+        commonListOptions2.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+        commonListOptions2.ReqParam.put("uuid", CacheUtils.getUser().uuid);
+        commonListOptions2.ReqParam.put("uuid2", uuid2);
+        commonListOptions2.ReqParam.put("memberid", CacheUtils.getUser().uid);
+        commonListOptions2.ReqParam.put("memberid2", memberid2);
+        commonListOptions2.ReqParam.put("t", "answer");
+        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions2).navigation());
+
+        // magic
+        mBinding.viewPager.setAdapter(new CommonpagerStateAdapter(getSupportFragmentManager(), fragments, titles));
+        CommonIndector commonIndector = new CommonIndector();
+        commonIndector.initMagicIndicator(titles, mBinding.viewPager, mBinding.magicIndicator, this);
 
     }
 
@@ -219,12 +239,21 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
                             memberid2 = userInfoVo.uid;
                             uuid2 = userInfoVo.uuid;
                         }
+                        processTab();
                         personInfoHeadVo.mRepParamMap.put("memberid2", memberid2);
                         personInfoHeadVo.mRepParamMap.put("uuid2", uuid2);
                         NitBaseProviderCard.providerCard(commonListVm, personInfoHeadVo, nitCommonFragment);
+                        ((CirclePersonInfoHeadCardVm) personInfoHeadVo.mNitcommonCardViewModel).mAttenLv.observe(nitCommonFragment, s -> {
 
+                        });
                         personInfoHeadVo.mCardVoLiveData.observe(PersonInfoActivity.this, o -> {
                             if (o != null) {
+                                mPersonInfoHeadVo = (PersonInfoHeadVo) o;
+                                if (CacheUtils.getUser().uid.equals(mPersonInfoHeadVo.getMemberid())) {
+                                    mBinding.ivMore.setVisibility(View.GONE);
+                                } else {
+                                    mBinding.ivMore.setVisibility(View.VISIBLE);
+                                }
                                 name = ((PersonInfoHeadVo) o).nickname;
                                 mBinding.empty.hide();
                             } else {
@@ -260,5 +289,37 @@ public class PersonInfoActivity extends NitCommonActivity<NitEmptyViewModel, Cir
     @Override
     public void initImmersionBar() {
         ImmersionBar.with(this).titleBar(mBinding.titlebar).init();
+    }
+
+
+    public void processReportUi() {
+        if (mPersonInfoHeadVo == null) {
+            return;
+        }
+        String[] title = new String[]{"举报", "拉黑"};
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        bottomSheetDialog.setDataCallback(title, position -> {
+            bottomSheetDialog.dismiss();
+            switch (position) {
+                case 0:
+                    processReportUiStep2();
+                    break;
+                case 1:
+                    mViewModel.circleBlackList(mPersonInfoHeadVo.getMemberid());
+                    break;
+            }
+        });
+        bottomSheetDialog.show(this);
+    }
+
+
+    public void processReportUiStep2() {
+        String[] title = new String[]{"色情、赌博、毒品", "谣言、社会负面、诈骗", "邪教、非法集会、传销", "医药、整型、虚假广告", "有奖集赞和关注转发", "违反国家政策和法律"};
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+        bottomSheetDialog.setDataCallback(title, position -> {
+            bottomSheetDialog.dismiss();
+            mViewModel.circlePersionReport(mPersonInfoHeadVo.getMemberid(), title[position]);
+        });
+        bottomSheetDialog.show(this);
     }
 }

@@ -198,6 +198,7 @@ public class OrderVoV2 extends BaseSampleItem {
         @SerializedName("goodsNum")
         public String num;
 
+
         public String goods_num;
 
         @Override

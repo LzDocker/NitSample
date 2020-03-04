@@ -47,7 +47,7 @@
             android:id="@+id/tv_add_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFE60012"
+            android:background="@drawable/common_radius20_ovl"
             android:gravity="center"
             android:padding="10dp"
             android:text="新增收货地址"

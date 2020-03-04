@@ -73,21 +73,18 @@ public class LogisticsDetialActivity extends NitCommonActivity<OrderMakerViewMod
     @Override
     public void initObserver() {
 
-        mViewModel.mLogisticeVoLv.observe(this, new Observer<LogisticeVo>() {
-            @Override
-            public void onChanged(@Nullable LogisticeVo logisticeVo) {
-                mBinding.emptyLayout.hide();
-                mLogisticeVo = logisticeVo;
-                logisticeVo.setImgurl(imgurl);
-                mBinding.setItem(logisticeVo);
-                List<LogisticeVo.DataBean> dataList = logisticeVo.getData();
-                if (dataList.size() == 0) {
-                    mBinding.empty.showNodata();
-                } else {
-                    mBinding.empty.hide();
-                    //设置adapter
-                    mBinding.recyclerView.setAdapter(new TimerAdapter(LogisticsDetialActivity.this, dataList));
-                }
+        mViewModel.mLogisticeVoLv.observe(this, logisticeVo -> {
+            mBinding.emptyLayout.hide();
+            mLogisticeVo = logisticeVo;
+            logisticeVo.setImgurl(imgurl);
+            mBinding.setItem(logisticeVo);
+            List<LogisticeVo.DataBean> dataList = logisticeVo.getData();
+            if (dataList.size() == 0) {
+                mBinding.empty.showNodata();
+            } else {
+                mBinding.empty.hide();
+                //设置adapter
+                mBinding.recyclerView.setAdapter(new TimerAdapter(LogisticsDetialActivity.this, dataList));
             }
         });
     }

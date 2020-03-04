@@ -111,7 +111,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/circle_red"
+                            android:background="@color/colorPrimaryDark"
                             android:onClick="@{(view)->viewmodel.attention(item,view)}"
                             android:paddingLeft="14dp"
                             android:paddingTop="5dp"

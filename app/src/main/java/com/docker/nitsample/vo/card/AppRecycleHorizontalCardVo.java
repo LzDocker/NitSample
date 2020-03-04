@@ -56,7 +56,7 @@ public class AppRecycleHorizontalCardVo extends BaseCardVo<ActiveWraperVo> {
             ToastUtils.showShort("数据不存在");
             return;
         }
-        if (((ActiveVo) item).uuid.equals(CacheUtils.getUser().uuid)) {
+        if (CacheUtils.getUser() != null && ((ActiveVo) item).uuid.equals(CacheUtils.getUser().uuid)) {
             ARouter.getInstance().build(AppRouter.ACTIVE_MANAGER_DETAIL).withSerializable("activeVo", ((ActiveVo) item)).navigation();
         } else {
             ARouter.getInstance().build(AppRouter.ACTIVE_DEATIL_ACTIVITY)

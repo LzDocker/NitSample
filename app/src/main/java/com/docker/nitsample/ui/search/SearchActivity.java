@@ -13,9 +13,14 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bfhd.circle.ui.safe.DynamicFragment;
+import com.bfhd.circle.vo.StaDynaVo;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.common.common.adapter.CommonpagerAdapter;
+import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.adapter.NitAbsSampleAdapter;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.ui.base.NitCommonListFragment;
@@ -38,6 +43,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import static com.dcbfhd.utilcode.utils.ConvertUtils.dp2px;
+import static com.docker.common.common.config.Constant.CommonListParam;
 
 /*
  * 搜索
@@ -101,20 +107,44 @@ public class SearchActivity extends NitCommonActivity<SearchViewModel, ActivityS
     private void initTab() {
 
 
-        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation());
-        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation());
-        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation());
-        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).navigation());
+        String titles[] = new String[]{"动态", "文章", "活动", "问答"};
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions.ReqParam.put("t", "dynamic");
+//        commonListOptions.ReqParam.put("act", "search");
+        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions).navigation());
 
-        String mTitleList[] = new String[]{"动态", "文章", "活动", "问答"};
+        CommonListOptions commonListOptions1 = new CommonListOptions();
+        commonListOptions1.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions1.ReqParam.put("t", "news");
+//        commonListOptions1.ReqParam.put("act", "search");
+        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions1).navigation());
 
-        mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments, mTitleList));
-        CommonIndector commonIndector = new CommonIndector();
-        commonIndector.initMagicIndicator(mTitleList, mBinding.viewpager, mBinding.magic, this);
+//        CommonListOptions commonListOptions2 = new CommonListOptions();
+//        commonListOptions2.refreshState = Constant.KEY_REFRESH_OWNER;
+//        commonListOptions2.ReqParam.put("t", "activity");
+
+        fragments.add((Fragment) ARouter.getInstance()
+                .build(AppRouter.ACTIVE_FRAME_LIST)
+                .navigation());
+
+
+//        commonListOptions2.ReqParam.put("act", "search");
+//        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions2).navigation());
+
+        CommonListOptions commonListOptions3 = new CommonListOptions();
+        commonListOptions3.refreshState = Constant.KEY_REFRESH_OWNER;
+        commonListOptions3.ReqParam.put("t", "answer");
+//        commonListOptions3.ReqParam.put("act", "search");
+        fragments.add((Fragment) ARouter.getInstance().build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME).withSerializable(CommonListParam, commonListOptions3).navigation());
+
         mBinding.viewpager.setOffscreenPageLimit(4);
+        // magic
+        mBinding.viewpager.setAdapter(new CommonpagerStateAdapter(getSupportFragmentManager(), fragments, titles));
+        CommonIndector commonIndector = new CommonIndector();
+        commonIndector.initMagicIndicator(titles, mBinding.viewpager, mBinding.magic, this);
 
     }
-
 
     private void doSerach() {
         mBinding.llHistoryList.setVisibility(View.GONE);
@@ -128,15 +158,11 @@ public class SearchActivity extends NitCommonActivity<SearchViewModel, ActivityS
             ((NitCommonListFragment) fragments.get(i)).UpdateReqParam(false, pairs);
             ((NitCommonListFragment) fragments.get(i)).onReFresh(null);
         }
-
     }
-
 
     @Override
     public void initView() {
-
         mViewModel.fetchHotSearchLab();
-
         mBinding.edSerch.setOnEditorActionListener((v, actionId, event) -> {
             keyword = mBinding.edSerch.getText().toString().trim();
             if (TextUtils.isEmpty(keyword)) {
@@ -154,20 +180,16 @@ public class SearchActivity extends NitCommonActivity<SearchViewModel, ActivityS
             }
             return true;
         });
-
         mBinding.linBack.setOnClickListener(v -> {
             finish();
         });
-
         mBinding.edSerch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -207,7 +229,6 @@ public class SearchActivity extends NitCommonActivity<SearchViewModel, ActivityS
                         .setConfimLietener(new ConfirmDialog.ConfimLietener() {
                             @Override
                             public void onCancle() {
-
                             }
 
                             @Override
@@ -219,10 +240,8 @@ public class SearchActivity extends NitCommonActivity<SearchViewModel, ActivityS
 
                             @Override
                             public void onConfim(String edit) {
-
                             }
                         }).setMargin(50).show(getSupportFragmentManager());
-
             } else {
                 ToastUtils.showShort("暂无历史记录");
             }
@@ -231,7 +250,6 @@ public class SearchActivity extends NitCommonActivity<SearchViewModel, ActivityS
 
     @Override
     public void initObserver() {
-
         mViewModel.hotLableLv.observe(this, rstServerVos -> {
             hotItemVoList = new ArrayList<>();
             FlowLayoutManager flowLayoutManager = new FlowLayoutManager();

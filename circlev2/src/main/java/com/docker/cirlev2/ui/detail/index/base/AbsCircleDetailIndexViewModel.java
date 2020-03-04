@@ -5,11 +5,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.BR;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
+import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
@@ -78,8 +80,10 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
         this.utid = utid;
         UserInfoVo userInfoVo = CacheUtils.getUser();
         HashMap<String, String> param = new HashMap();
-        param.put("memberid", userInfoVo.uid);
-        param.put("uuid", userInfoVo.uuid);
+        if (userInfoVo != null) {
+            param.put("memberid", userInfoVo.uid);
+            param.put("uuid", userInfoVo.uuid);
+        }
         param.put("utid", utid);
         param.put("circleid", circleid);
         mCircleDetailLv.addSource(RequestServer(circleApiService.fechCircleDetail(param)),
@@ -138,10 +142,9 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
 
     public void joinCircle(View view) {
         if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
             return;
         }
-        Log.d("sss", "joinCircle: =========="+mCircleDetailLv.getValue().getMemberid()+"===="+CacheUtils.getUser().uid);
-
         if (mCircleDetailLv.getValue().getRole() > 0 && mCircleDetailLv.getValue().getMemberid().endsWith(CacheUtils.getUser().uid)) {
             ToastUtils.showShort("圈主不能退出圈子");
             return;
@@ -151,6 +154,7 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
         } else {
             joinCircle();
         }
+
     }
 
 

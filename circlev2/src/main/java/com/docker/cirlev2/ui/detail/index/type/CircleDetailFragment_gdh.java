@@ -16,6 +16,7 @@ import com.docker.cirlev2.vo.pro.AppVo;
 import com.docker.common.common.adapter.NitAbsSampleAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.card.NitBaseProviderCard;
 import com.docker.core.widget.BottomSheetDialog;
@@ -62,7 +63,7 @@ public class CircleDetailFragment_gdh extends NitDefaultCircleFragment {
     @Override
     public void onCircleDetailFetched(CircleDetailVo circleDetailVo) {
         super.onCircleDetailFetched(circleDetailVo);
-        mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+//        mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
         appImgHeaderCardVo.imgurl.set(circleDetailVo.getSurfaceImg());
         appImgHeaderCardVo.logourl.set(circleDetailVo.getLogoUrl());
     }
@@ -127,8 +128,12 @@ public class CircleDetailFragment_gdh extends NitDefaultCircleFragment {
     @Override
     public void processPushSHow(CircleDetailVo circleDetailVo) {
         super.processPushSHow(circleDetailVo);
-        if ("1".equals(circleDetailVo.getIsJoin())) {
-            mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+        if (CacheUtils.getUser() != null) {
+            if ("1".equals(circleDetailVo.getIsJoin())) {
+                mBinding.get().circlev2IvPublish.setVisibility(View.VISIBLE);
+            } else {
+                mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
+            }
         } else {
             mBinding.get().circlev2IvPublish.setVisibility(View.GONE);
         }

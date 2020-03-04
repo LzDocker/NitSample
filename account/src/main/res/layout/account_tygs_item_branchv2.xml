@@ -29,15 +29,13 @@
         android:paddingBottom="14dp">
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/round_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:scaleType="centerCrop"
-            app:errorImg="@{R.mipmap.circle_default_avatar}"
-            app:placeHolder="@{R.mipmap.circle_default_avatar}"
-            app:roundImgUrl="@{Constant.getCompleteImageUrl(item.logoUrl)}" />
+            app:imageUrl="@{Constant.getCompleteImageUrl(item.logoUrl)}" />
 
 
         <RelativeLayout
@@ -71,7 +69,7 @@
                 android:layout_below="@id/tv_name"
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/tv_pl"
-                android:text="@{item.linkman}"
+                android:text="@{item.emploeeName}"
                 android:textColor="@color/color_69"
                 android:textSize="14sp" />
 

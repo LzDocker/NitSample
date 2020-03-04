@@ -30,7 +30,7 @@ import static com.docker.common.common.config.Constant.KEY_RVUI_GRID2;
 @Route(path = AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
 public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynamicListViewModel> {
 
-    CommonListOptions commonListReq = new CommonListOptions();
+    CommonListOptions commonListOptions;
 
     public CircleTitlesVo mCircleTitlesVo;
     public int mChildPos = 0;
@@ -63,7 +63,7 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("dynamic_refresh")) {
                 mViewModel.mPage = 1;
-                if(mViewModel.mItems!=null){
+                if (mViewModel.mItems != null) {
                     mViewModel.mItems.clear();
                 }
                 mViewModel.loadData();
@@ -81,14 +81,9 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
     public CommonListOptions getArgument() {
 
 
-//        commonListReq.ReqParam.put("uuid", "3c29a4eed44db285468df3443790e64a");
-//        commonListReq.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-//        commonListReq.ReqParam.put("memberid", "3");
-//        commonListReq.ReqParam.put("memberid", "64");
-//        commonListReq.ReqParam.put("companyid", "1");
-
         mCircleTitlesVo = (CircleTitlesVo) getArguments().getSerializable("param");
         if (mCircleTitlesVo != null) { // 圈子内
+            commonListReq = new CommonListOptions();
             commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
             mChildPos = getArguments().getInt("childPosition");
 
@@ -116,25 +111,15 @@ public class CircleDynamicListFragment extends NitCommonListFragment<CircleDynam
             if (TextUtils.isEmpty(commonListReq.ReqParam.get("t"))) {
                 commonListReq.ReqParam.remove("t");
             }
+        } else {
+            commonListReq = super.getArgument();
         }
-
-        /*
-        *
-        *  else {     // 圈子外使用列表
-//        commonListReq.refreshState = Constant.KEY_REFRESH_OWNER;
-//        commonListReq.ReqParam.put("t", "dynamic");
-            commonListReq.ReqParam.put("uuid", "420cd8fd09e4ae6cfb8f3b3fdf5b7af4");
-            commonListReq.ReqParam.put("memberid", "67");
-            commonListReq.ReqParam.put("companyid", "1");
-        }
-        * */
 
         if (refresh == -1) {
             commonListReq.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
         } else {
             commonListReq.refreshState = refresh;
         }
-
         return commonListReq;
     }
 

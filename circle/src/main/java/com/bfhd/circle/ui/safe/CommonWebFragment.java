@@ -393,11 +393,14 @@ public class CommonWebFragment extends CommonFragment<CircleTypeViewModel, Circl
             });
         }
 
-//        // 联系客服小蜜
-//        @SuppressLint("JavascriptInterface")
-//        @JavascriptInterface
-//        public void contactPhone(String phone) {
-//            ((Activity) context).runOnUiThread(() -> {
+        // 联系客服小蜜
+        @SuppressLint("JavascriptInterface")
+        @JavascriptInterface
+        public void contactPhone(String phone) {
+            ((Activity) context).runOnUiThread(() -> {
+                //跳转到拨号界面，同时传递电话号码
+                Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+                startActivity(dialIntent);
 //                CommonDialog.newInstance().setLayoutId(R.layout.open_dialog_confirm).setConvertListener((ViewConvertListener) (holder, dialog) -> {
 //                    TextView title = holder.getView(R.id.title);
 //                    TextView message = holder.getView(R.id.message);
@@ -415,14 +418,11 @@ public class CommonWebFragment extends CommonFragment<CircleTypeViewModel, Circl
 //                    });
 //
 //                    confirm.setOnClickListener(v1 -> {
-//                        //跳转到拨号界面，同时传递电话号码
-//                        Intent dialIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
-//                        startActivity(dialIntent);
-//                        dialog.dismiss();
+//
 //                    });
 //                }).setMargin(40).show(getFragmentManager());
-//            });
-//        }
+            });
+        }
 
         // 发布成功
         @SuppressLint("JavascriptInterface")

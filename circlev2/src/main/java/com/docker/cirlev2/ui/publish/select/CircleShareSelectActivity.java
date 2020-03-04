@@ -71,7 +71,9 @@ public class CircleShareSelectActivity extends NitCommonListActivity<CirlcleSele
             mStaCirParam.setCircleid(circlePubSelectVo.getCircleid());
             mStaCirParam.setUtid(circlePubSelectVo.getUtid());
             mStaCirParam.setExtentron(circlePubSelectVo.getCircleName());
-            CircleShareGroupSelectActivity.startMe(this, mStaCirParam);
+            RxBus.getDefault().post(new RxEvent<>("GroupSelect", mStaCirParam));
+            finish();
+//            CircleShareGroupSelectActivity.startMe(this, mStaCirParam);
         });
     }
 

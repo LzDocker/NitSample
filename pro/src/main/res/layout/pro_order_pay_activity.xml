@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="¥"
-                        android:textColor="@color/circle_red"
+                        android:textColor="@color/open_read"
                         android:textSize="12sp" />
 
 
@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:textColor="@color/circle_red"
+                        android:textColor="@color/open_read"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -128,7 +128,8 @@
                         android:layout_centerInParent="true"
                         android:background="@drawable/checkstate"
                         android:button="@null"
-                        android:checked="true" />
+                        android:checked="true"
+                        android:clickable="false" />
 
                 </RelativeLayout>
 
@@ -146,7 +147,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerInParent="true"
                         android:background="@drawable/checkstate"
-                        android:button="@null" />
+                        android:button="@null"
+                        android:clickable="false" />
 
                     <ImageView
                         android:id="@+id/iv_icon_wx"

@@ -10,7 +10,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.docker.cirlev2.R;
@@ -31,7 +34,7 @@ public class CommonWebFragmentv3 extends NitCommonFragment<NitEmptyViewModel, Ci
 
 
     private String weburl;
-    private com.tencent.smtt.sdk.WebView webView;
+    private WebView webView;
     private SmartRefreshLayout smartRefreshLayout;
 
 
@@ -66,7 +69,7 @@ public class CommonWebFragmentv3 extends NitCommonFragment<NitEmptyViewModel, Ci
     private void initWebview() {
 //        IX5WebViewExtension ix5WebViewExtension = mBinding.proWebview.getX5WebViewExtension();
 //        ix5WebViewExtension.setScrollBarFadingEnabled(false);
-        com.tencent.smtt.sdk.WebSettings webSettings = webView.getSettings();
+       WebSettings webSettings = webView.getSettings();
 //      WebSettings webSettings = webView.getSettings();
         // 特别注意：5.1以上默认禁止了https和http混用。下面代码是开启
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {// 21
@@ -84,10 +87,10 @@ public class CommonWebFragmentv3 extends NitCommonFragment<NitEmptyViewModel, Ci
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
         webSettings.setSavePassword(false);// 关闭密码保存提醒；该方法在以后的版本中该方法将不被支持
         webSettings.setDomStorageEnabled(true);// 设置支持DOM storage API
-        webView.setWebViewClient(new com.tencent.smtt.sdk.WebViewClient() {
+        webView.setWebViewClient(new WebViewClient() {
             // 设置不用系统浏览器打开,直接显示在当前 webview
             @Override
-            public boolean shouldOverrideUrlLoading(com.tencent.smtt.sdk.WebView view, String url) {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // 如果不是http或者https开头的url，那么使用手机自带的浏览器打开
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     try {
@@ -101,15 +104,15 @@ public class CommonWebFragmentv3 extends NitCommonFragment<NitEmptyViewModel, Ci
                 return true;
             }
 
-            @Override
-            public void onReceivedSslError(com.tencent.smtt.sdk.WebView webView, SslErrorHandler sslErrorHandler, SslError sslError) {
-                sslErrorHandler.proceed();  // 接受所有网站的证书
-//                super.onReceivedSslError(webView, sslErrorHandler, sslError);
-            }
+//            @Override
+//            public void onReceivedSslError(WebView webView, SslErrorHandler sslErrorHandler, SslError sslError) {
+//                sslErrorHandler.proceed();  // 接受所有网站的证书
+////                super.onReceivedSslError(webView, sslErrorHandler, sslError);
+//            }
         });
-        webView.setWebChromeClient(new com.tencent.smtt.sdk.WebChromeClient() {
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
-            public void onProgressChanged(com.tencent.smtt.sdk.WebView view, int newProgress) {
+            public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress > 70) {
                     if (mBinding != null && mBinding.get() != null && mBinding.get().empty != null) {
                         mBinding.get().empty.hide();

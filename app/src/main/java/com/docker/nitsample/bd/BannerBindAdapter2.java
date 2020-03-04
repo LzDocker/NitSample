@@ -4,7 +4,6 @@ import android.databinding.BindingAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.docker.common.common.command.ReplyCommandParam;
-import com.docker.nitsample.R;
 import com.docker.nitsample.util.GlideImageLoader;
 import com.docker.nitsample.vo.OptimizationVo;
 import com.docker.nitsample.vo.card.AppBannerCardVo;

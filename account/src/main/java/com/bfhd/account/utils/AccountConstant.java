@@ -30,6 +30,10 @@ public class AccountConstant {
     public static String CustomerService = ThiredPartConfig.ServeUrl + "index.php?m=default.problem";
 
 
+    //成为股东
+    public static String BecomeToBoss = ThiredPartConfig.ServeUrl + "index.php?m=default.custom";
+    
+
     public static String HelpCenterWeb = ThiredPartConfig.ServeUrl + "api.php?m=h5&mid=12&f=contents&id=1";
 
     public static String AboutUsWeb = ThiredPartConfig.ServeUrl + "api.php?m=h5&mid=1&f=content&id=2";

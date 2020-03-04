@@ -16,6 +16,7 @@ import com.docker.common.common.utils.GlideCacheUtil;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.core.widget.BottomSheetDialog;
+import com.docker.module_im.login.LogoutHelper;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -70,7 +71,7 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
         if (view.getId() == R.id.tv_go_out) { //退出登录
             ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
             CacheUtils.clearUser();
-//            LogoutHelper.logout();
+            LogoutHelper.logout();
             JPushInterface.deleteAlias(ActivityUtils.getTopActivity(), AppUtils.getAppVersionCode());
             JPushInterface.clearAllNotifications(ActivityUtils.getTopActivity());
 //            ActivityUtils.finishAllActivities();
