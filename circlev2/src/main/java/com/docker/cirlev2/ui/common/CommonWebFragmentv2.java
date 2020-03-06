@@ -18,10 +18,13 @@ import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.baidu.mapapi.search.geocode.GeoCoder;
+import com.dcbfhd.utilcode.utils.ConvertUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2FragmentCommonWebBinding;
@@ -45,6 +48,8 @@ import javax.inject.Inject;
 import io.reactivex.disposables.Disposable;
 
 import static android.app.Activity.RESULT_OK;
+import static com.dcbfhd.utilcode.utils.ScreenUtils.getScreenHeight;
+import static com.dcbfhd.utilcode.utils.ScreenUtils.getScreenWidth;
 
 /*
  * */
@@ -159,6 +164,7 @@ public class CommonWebFragmentv2 extends NitCommonFragment<NitEmptyViewModel, Ci
                 sslErrorHandler.proceed();  // 接受所有网站的证书
 //                super.onReceivedSslError(webView, sslErrorHandler, sslError);
             }
+            
         });
         webView.setWebChromeClient(new com.tencent.smtt.sdk.WebChromeClient() {
             @Override
@@ -364,7 +370,7 @@ public class CommonWebFragmentv2 extends NitCommonFragment<NitEmptyViewModel, Ci
         weburl = (String) getArguments().getSerializable("weburl");
         if (!TextUtils.isEmpty(weburl)) {
             webView.loadUrl(weburl);
-            Log.d("sss", "onActivityCreated: =================="+weburl);
+            Log.d("sss", "onActivityCreated: ==================" + weburl);
         }
     }
 

@@ -145,14 +145,18 @@ public abstract class AbsCircleDetailIndexViewModel extends NitCommonVm {
             ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
             return;
         }
+
         if (mCircleDetailLv.getValue().getRole() > 0 && mCircleDetailLv.getValue().getMemberid().endsWith(CacheUtils.getUser().uid)) {
-            ToastUtils.showShort("圈主不能退出圈子");
+            ToastUtils.showShort("舵主不能退出圈子");
             return;
         }
         if ("1".equals(mCircleDetailLv.getValue().getIsJoin())) {
             quitCirlce();
         } else {
-            joinCircle();
+//            joinCircle();
+            ARouter.getInstance().build(AppRouter.HOME_JOIN_ACTION).withString("circleid", circleid)
+                    .withString("utid", utid).navigation();
+            return;
         }
 
     }

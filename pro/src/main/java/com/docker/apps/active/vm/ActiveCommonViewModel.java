@@ -21,6 +21,8 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
+import com.docker.common.common.vo.ShareBean;
+import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.NitBoundCallback;
@@ -304,4 +306,26 @@ public class ActiveCommonViewModel extends NitCommonContainerViewModel {
     }
 
 
+    /*
+     * 分享数据
+     * */
+    public final MediatorLiveData<ShareBean> mShareLv = new MediatorLiveData();
+
+    public void FetchShareData(HashMap<String, String> params) {
+        mShareLv.addSource(RequestServer(circleApiService.share(params)),
+                new NitNetBoundObserver<>(new NitBoundCallback<ShareBean>() {
+                    @Override
+                    public void onNetworkError(Resource<ShareBean> resource) {
+                        super.onNetworkError(resource);
+                        ToastUtils.showShort("网络错误请重试");
+                    }
+
+                    @Override
+                    public void onComplete(Resource<ShareBean> resource) {
+                        super.onComplete(resource);
+                        mShareLv.setValue(resource.data);
+                        mEmptycommand.set(EmptyStatus.BdHiden);
+                    }
+                }));
+    }
 }

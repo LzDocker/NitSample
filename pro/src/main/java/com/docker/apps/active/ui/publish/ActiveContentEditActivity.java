@@ -232,7 +232,6 @@ public class ActiveContentEditActivity extends NitCommonActivity<PublishViewMode
     @Override
     public void initObserver() {
         mViewModel.mImageUploadLV.observe(this, s -> {
-            Log.d("sss", "initObserver: sss" + s);
             mBinding.richEditor.insertImage(CommonBdUtils.getServerImageUrl(s), "");
         });
     }

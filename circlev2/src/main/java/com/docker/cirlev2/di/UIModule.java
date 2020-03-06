@@ -31,6 +31,7 @@ import com.docker.cirlev2.ui.dynamicdetail.CircleShoppingCarListActivity;
 import com.docker.cirlev2.ui.dynamicdetail.CircleShoppingCarListActivityV2;
 import com.docker.cirlev2.ui.dynamicdetail.Circlev2ReplayQuestionActivity;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicBotContentFragment;
+import com.docker.cirlev2.ui.dynamicdetail.DynamicContentFragment;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicDetailFragment;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragment;
 import com.docker.cirlev2.ui.dynamicdetail.DynamicH5Fragmentv2;
@@ -294,7 +295,7 @@ public abstract class UIModule {
     abstract CircleDetailFragment_gdh contributeCircleDetailFragment_gdhInjector();
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
-    abstract CommonWebFragmentv2  contributeCommonWebFragmentv2Injector();
+    abstract CommonWebFragmentv2 contributeCommonWebFragmentv2Injector();
 
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleShoppingCarListActivityV2 contributeCircleShoppingCarListActivityV2Injector();
@@ -302,8 +303,8 @@ public abstract class UIModule {
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CommonWebFragmentv3 contributeCommonWebFragmentv3Injector();
 
-
-
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract DynamicContentFragment contributeDynamicContentFragmentInjector();
 
 
 }

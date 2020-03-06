@@ -3,6 +3,7 @@ package com.docker.cirlev2.vm;
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
 
+import com.dcbfhd.utilcode.utils.MapUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.entity.CircleCreateRst;
@@ -18,6 +19,7 @@ import com.docker.common.common.widget.empty.EmptyStatus;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +54,7 @@ public class CircleCreateViewModel extends NitCommonVm {
                     public void onNetworkError(Resource<CircleCreateVo> resource) {
                         super.onNetworkError(resource);
                     }
+
                     @Override
                     public void onComplete(Resource<CircleCreateVo> resource) {
                         super.onComplete(resource);
@@ -67,7 +70,7 @@ public class CircleCreateViewModel extends NitCommonVm {
         circleCreateVo.memberid = userInfoVo.uid;
         circleCreateVo.uuid = userInfoVo.uuid;
         circleCreateVo.fullName = circleCreateVo.circleName;
-        HashMap<String, String> params = (HashMap<String, String>) ParamUtils.objectToMap(circleCreateVo, false);
+        Map<String, String> params = ParamUtils.obj2map(circleCreateVo);
         params.put("memberid", userInfoVo.uid);
         params.put("uuid", userInfoVo.uuid);
         params.put("type", type);//官方圈0|兴趣圈1|企业圈2
@@ -101,7 +104,7 @@ public class CircleCreateViewModel extends NitCommonVm {
         circleCreateVo.memberid = userInfoVo.uid;
         circleCreateVo.uuid = userInfoVo.uuid;
         circleCreateVo.fullName = circleCreateVo.circleName;
-        HashMap<String, String> params = (HashMap<String, String>) ParamUtils.objectToMap(circleCreateVo, false);
+        LinkedTreeMap<String, String> params = (LinkedTreeMap<String, String>) ParamUtils.obj2map(circleCreateVo);
         params.put("memberid", userInfoVo.uid);
         params.put("uuid", userInfoVo.uuid);
         params.put("type", type);//官方圈0|兴趣圈1|企业圈2

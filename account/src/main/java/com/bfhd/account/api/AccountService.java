@@ -247,7 +247,7 @@ public interface AccountService {
      * */
     @POST("api.php?m=user.member_data_update")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<MsgVo>>> editCardInfo(@FieldMap HashMap<String, String> paramMap);
+    LiveData<ApiResponse<BaseResponse<String>>> editCardInfo(@FieldMap Map<String, String> paramMap);
 
 
     /*
@@ -256,8 +256,6 @@ public interface AccountService {
     @POST("api.php?m=user.member_data_update")
     @FormUrlEncoded
     LiveData<ApiResponse<BaseResponse<String>>> editCardInfov2(@FieldMap HashMap<String, String> paramMap);
-
-
 
 
     /*

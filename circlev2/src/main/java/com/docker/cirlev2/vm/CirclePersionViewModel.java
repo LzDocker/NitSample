@@ -78,7 +78,7 @@ public class CirclePersionViewModel extends NitCommonVm {
         HashMap<String, String> parammap = new HashMap<>();
         parammap.put("circleid", mStartParam.getCircleid());
         parammap.put("utid", mStartParam.getUtid());
-        mOuterTradingLV.addSource(RequestServer(circleApiService.fechInnerPersonList(parammap)),
+        mOuterTradingLV.addSource(RequestServer(circleApiService.fechOuterPersonList(parammap)),
                 new NitNetBoundObserver<>(new NitBoundCallback<List<TradingCommonVo>>() {
                     @Override
                     public void onNetworkError(Resource<List<TradingCommonVo>> resource) {

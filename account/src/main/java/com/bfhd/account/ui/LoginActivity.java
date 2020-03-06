@@ -430,6 +430,13 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
 //                String name = map.get("name");
 //                String gender = map.get("gender");
 //                String iconurl = map.get("iconurl");
+
+//                for (Map.Entry<String, String> entry : map.entrySet()) {
+//                    String mapKey = entry.getKey();
+//                    String mapValue = entry.getValue();
+//                    Log.d(TAG, "onComplete: =============" + (mapKey + ":" + mapValue));
+//                }
+
                 wechatInfo = (HashMap<String, String>) map;
                 HashMap<String, String> param = new HashMap<>();
                 param.put("wxUid", map.get("unionid"));

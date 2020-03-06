@@ -1,8 +1,21 @@
 package com.docker.common.common.utils;
 
+import android.text.TextUtils;
+
+import com.dcbfhd.utilcode.utils.GsonUtils;
+import com.dcbfhd.utilcode.utils.MapUtils;
+import com.docker.common.common.vo.ServiceDataBean;
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.reflect.TypeToken;
+
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ParamUtils {
 
@@ -16,12 +29,13 @@ public class ParamUtils {
             Field[] declaredFields = obj.getClass().getDeclaredFields();
             for (Field field : declaredFields) {
                 field.setAccessible(true);
-                if (keepNullVal == true) {
+                if (keepNullVal) {
                     map.put(field.getName(), (String) field.get(obj));
                 } else {
-                    if (field.get(obj) != null && !"".equals(field.get(obj).toString())) {
-                        map.put(field.getName(), (String) field.get(obj));
-                    }
+//                    if (field.get(obj) != null && !"".equals(field.get(obj).toString())) {
+//                    if (!TextUtils.isEmpty(field.getName()) && !TextUtils.isEmpty(field.get(obj).toString())) {
+                    map.put(field.getName(), (String) field.get(obj));
+//                    }
                 }
             }
         } catch (Exception e) {
@@ -29,6 +43,35 @@ public class ParamUtils {
         }
         return map;
     }
+
+
+    public static Map obj2map(Object o) {
+        String ss = GsonUtils.toJson(o);
+
+        LinkedTreeMap<String, String> hashMap = new LinkedTreeMap<>();
+        hashMap = GsonUtils.fromJson(ss, new TypeToken<Map<String, String>>() {
+        }.getType());
+
+        return removeMapEmptyValue(hashMap);
+    }
+
+
+    public static Map<String, String> removeMapEmptyValue(Map<String, String> paramMap) {
+        Set<String> set = paramMap.keySet();
+        Iterator<String> it = set.iterator();
+        List<String> listKey = new ArrayList<String>();
+        while (it.hasNext()) {
+            String str = it.next();
+            if (paramMap.get(str) == null || "".equals(paramMap.get(str))) {
+                listKey.add(str);
+            }
+        }
+        for (String key : listKey) {
+            paramMap.remove(key);
+        }
+        return paramMap;
+    }
+
 
     public static Map objectToMapRest(Object obj, boolean keepNullVal) {
         if (obj == null) {

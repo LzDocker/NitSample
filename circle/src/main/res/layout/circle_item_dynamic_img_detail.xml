@@ -51,11 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="2dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-
-                app:errorImg="@{R.mipmap.circle_icon_empty}"
-                app:placeHolder="@{R.mipmap.circle_icon_empty}"
-                app:autoSizeImgUrl="@{BdUtils.getResourceImgUrl(item)}" />
+                android:scaleType="centerInside"
+                app:dontTransImg="@{BdUtils.getResourceImgUrl(item)}" />
 
             <ImageView
                 android:layout_width="40dp"

@@ -93,7 +93,7 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
 
     @Override
     public void initView() {
-        mToolbar.setTitle("圈子成员");
+        mToolbar.setTitle("分舵成员");
         if (mStartParam.role > 0) {
             mToolbar.setIvRight(R.mipmap.gray_menu, v -> {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
@@ -141,10 +141,10 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
         mInnerAdapter = new NitAbsSampleAdapter(R.layout.circlev2_item_circle_inner_persion, BR.item) {
             @Override
             public void onRealviewBind(ViewHolder holder, int position) {
-                Circlev2ItemCircleInnerPersionBinding binding = (Circlev2ItemCircleInnerPersionBinding) holder.getBinding();
-                Random random = new Random();
-                int i = random.nextInt(darbles.size());
-                binding.roundIcon.setBackgroundDrawable(getResources().getDrawable(darbles.get(i)));
+//                Circlev2ItemCircleInnerPersionBinding binding = (Circlev2ItemCircleInnerPersionBinding) holder.getBinding();
+//                Random random = new Random();
+//                int i = random.nextInt(darbles.size());
+//                binding.roundIcon.setBackgroundDrawable(getResources().getDrawable(darbles.get(i)));
             }
         };
         mBinding.recyclerinner.setAdapter(mInnerAdapter);
@@ -176,12 +176,12 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
 
     @Override
     public void initObserver() {
-
+        mViewModel.getOuterPersonList(mStartParam);
         mViewModel.mInnerTradingLV.observe(this, tradingCommonVos -> {
             mInnerAdapter.getmObjects().clear();
             UserInfoVo userInfoVo = CacheUtils.getUser();
             if (tradingCommonVos == null || ((List<TradingCommonVo>) tradingCommonVos).size() == 0) {
-                mBinding.empty.showNodata();
+                mBinding.empty.hide();
                 return;
             }
             TradingCommonVo createBean = null;
@@ -204,7 +204,7 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
             mInnerAdapter.notifyDataSetChanged();
             mBinding.tvInnerNum.setText(String.valueOf(mInnerAdapter.getmObjects().size()));
             if (mCircleDetailVo.getRole() > 0) { // 管理员可以查看全部成员
-                mViewModel.getOuterPersonList(mStartParam);
+
             }
             mBinding.empty.hide();
         });
@@ -212,6 +212,7 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
         mViewModel.mOuterTradingLV.observe(this, tradingCommonVos -> {
             mOuterAdapter.getData().clear();
             mOuterAdapter.setData(tradingCommonVos);
+            mBinding.empty.hide();
         });
 
     }
@@ -245,7 +246,7 @@ public class CirclePersonListActivity extends NitCommonActivity<CirclePersionVie
                 msta.name = commonVo.getNickname();
 //                CirclePersonDetailActivity.startMe(CirclePersonListActivity.this, msta);
 
-                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2",  msta.uid).withString("uuid2", msta.uuid).navigation();
+                ARouter.getInstance().build(AppRouter.CIRCLE_person_info).withString("memberid2", msta.uid).withString("uuid2", msta.uuid).navigation();
 //                ARouter.getInstance().build(AppRouter.CIRCLE_persion_detail).withSerializable("mStartParam", msta).navigation();
             }
         }

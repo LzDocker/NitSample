@@ -148,6 +148,7 @@ public class OrderDetailActivity extends NitCommonActivity<OrderCommonViewModel,
     private void refreshStatus() {
         finish();
         ARouter.getInstance().build(AppRouter.ORDER_DETAIL).withString("orderid", mBinding.getItem().id).navigation();
+
     }
 
     @Override
@@ -164,7 +165,7 @@ public class OrderDetailActivity extends NitCommonActivity<OrderCommonViewModel,
     public void initImmersionBar() {
         ImmersionBar.with(this)
                 .navigationBarColor("#FFFFFF")
-                .fullScreen(true)
+                .fullScreen(false)
                 .navigationBarDarkIcon(true) //导航栏图标是深色，不写默认为亮色
                 .autoDarkModeEnable(true) //自动状态栏字体和导航栏图标变色，必须指定状态栏颜色和导航栏颜色才可以自动变色哦
                 .autoStatusBarDarkModeEnable(true, 0.2f) //自动状态栏字体变色，必须指定状态栏颜色才可以自动变色哦

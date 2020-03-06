@@ -32,6 +32,7 @@ import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonFragment;
+import com.docker.common.common.utils.TimerUtils;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.location.LocationManager;
 import com.docker.common.common.utils.rxbus.RxBus;
@@ -39,6 +40,7 @@ import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.picker.CommonWheelPicker;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -208,25 +210,20 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
                 activePubVo.dataid = activeVo.dataid;
 
-                activePubVo.startDate = stampToDate(activeVo.startDate);
+                activePubVo.startDate = activeVo.startDate;
+
+
                 mBinding.get().tvStartTime.setText(activePubVo.startDate);
 
 
-//                yearStart = String.valueOf(TimerUtils.getYear(activePubVo.startDate));
-//                mouthStart = String.valueOf(TimerUtils.getMonth(activePubVo.startDate));
-//                dayStart = String.valueOf(TimerUtils.getDay(activePubVo.startDate));
-//                housStart = String.valueOf(TimerUtils.getHour(activePubVo.startDate));
-//                secondStart = String.valueOf(TimerUtils.getMinute(activePubVo.startDate));
-
-//
-//                Log.d("sss", "onActivityCreated: " + yearStart);
-//                Log.d("sss", "mouthStart:=========== " + mouthStart);
-//                Log.d("sss", "dayStart:=========== " + dayStart);
-//                Log.d("sss", "housStart:=========== " + housStart);
-//                Log.d("sss", "secondStart:=========== " + secondStart);
+                yearStart = String.valueOf(TimerUtils.getYear(activePubVo.startDate));
+                mouthStart = String.valueOf(TimerUtils.getMonth(activePubVo.startDate));
+                dayStart = String.valueOf(TimerUtils.getDay(activePubVo.startDate));
+                housStart = String.valueOf(TimerUtils.getHour(activePubVo.startDate));
+                secondStart = String.valueOf(TimerUtils.getMinute(activePubVo.startDate));
 
 
-                activePubVo.endDate = stampToDate(activeVo.endDate);
+                activePubVo.endDate = activeVo.endDate;
                 mBinding.get().tvEndTime.setText(activePubVo.endDate);
                 activePubVo.num = activeVo.limitNum;
                 activePubVo.situs = activeVo.situs;
@@ -540,30 +537,7 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 //                mBinding.get().circleSelect.setVisibility(View.VISIBLE);
 //            }
 //        });
-
-
     }
-
-    public static String stampToDate(String s) {
-        String res = s;
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            long lt = new Long(s + "000");
-            Date date = new Date(lt);
-            res = simpleDateFormat.format(date);
-        } catch (Exception e) {
-
-        }
-        return res;
-    }
-
-    public static Date getDate(String s) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long lt = new Long(s + "000");
-        Date date = new Date(lt);
-        return date;
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

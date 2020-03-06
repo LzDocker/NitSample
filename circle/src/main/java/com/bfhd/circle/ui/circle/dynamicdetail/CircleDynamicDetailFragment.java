@@ -249,10 +249,8 @@ public class CircleDynamicDetailFragment extends CommonFragment<CircleDynamicVie
             UserInfoVo userInfoVo = CacheUtils.getUser();
             HashMap<String, String> param = new HashMap();
             param.put("dynamicid", mStaParam.dynamicId);
-            if (!"-1".equals(userInfoVo.memberid)) {
-                param.put("memberid", userInfoVo.uid);
-                param.put("uuid", userInfoVo.uuid);
-            }
+            param.put("memberid", userInfoVo.uid);
+            param.put("uuid", userInfoVo.uuid);
             mViewModel.fechDynamicDetail(param);
         }
     }
@@ -264,10 +262,10 @@ public class CircleDynamicDetailFragment extends CommonFragment<CircleDynamicVie
         switch (viewEventResouce.eventType) {
             case 204: // 大图预览
 //                PictureSelector.create(this).externalPicturePreview(Integer.parseInt(viewEventResouce.message), (List<LocalMedia>) viewEventResouce.data);
-                PictureSelector
-                        .create(this)
-                        .themeStyle(R.style.picture_default_style)
-                        .openExternalPreview(Integer.parseInt(viewEventResouce.message), (List<LocalMedia>) viewEventResouce.data);
+//                PictureSelector
+//                        .create(this)
+//                        .themeStyle(com.bfhd.opensource.R.style.picture_default_style)
+//                        .openExternalPreview(Integer.parseInt(viewEventResouce.message), (List<LocalMedia>) viewEventResouce.data);
                 break;
             case 210: // 显示评论对话框
                 serviceDataBean = (ServiceDataBean) viewEventResouce.data;
@@ -289,7 +287,7 @@ public class CircleDynamicDetailFragment extends CommonFragment<CircleDynamicVie
                 commentVo.setAvatar(userInfoVo.avatar);
                 commentVo.setContent(commentContent);
                 commentVo.setPraiseNum("0");
-                commentVo.setInputtime(System.currentTimeMillis() + "");
+                commentVo.setInputtime(String.valueOf(System.currentTimeMillis()).substring(0, String.valueOf(System.currentTimeMillis()).length() - 3));
                 commentFragment.addComment(commentVo);
                 commentContent = "";
                 break;

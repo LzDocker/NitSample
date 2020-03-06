@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -46,7 +47,8 @@ public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel,
 
     @Autowired
     String utid; // 要编辑的圈子
-    public static void startMe(Context context, int type, String utid,String circleID) {
+
+    public static void startMe(Context context, int type, String utid, String circleID) {
         Intent intent = new Intent(context, CircleCreateActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("TYPE", type);
@@ -55,6 +57,7 @@ public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel,
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
+
     @Override
     protected int getLayoutId() {
         return R.layout.circlev2_create_activity;
@@ -67,16 +70,18 @@ public class CircleCreateActivity extends NitCommonActivity<SampleListViewModel,
 
     @Override
     public void initView() {
-        mToolbar.hide();
+//        mToolbar.hide();
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("sss", utid + "onCreate: ==============" + circleid);
         if (TextUtils.isEmpty(utid)) {
-            mToolbar.setTitle("创建圈子");
+            mToolbar.setTitle("创建");
         } else {
-            mToolbar.setTitle("编辑圈子");
+            mToolbar.setTitle("编辑");
         }
         switch (flag) {
             case CIRCLE_TYPE_COMPANY:

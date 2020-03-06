@@ -50,6 +50,7 @@ import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.CommonRepository;
 import com.docker.core.repository.NetworkBoundResourceAuto;
 import com.docker.core.repository.Resource;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.HashMap;
 import java.util.List;
@@ -334,11 +335,10 @@ public class AccountViewModel extends HivsBaseViewModel {
 
     public void ThiredLogin(HashMap<String, String> param) {
         showDialogWait("登录中...", false);
-        param.put("t", "wx_icon");
+        param.put("t", "wx");
         param.put("clientType", "2");
         param.put("source", "1");
         param.put("version", AppUtils.getAppVersionCode() + "");
-        UserInfoVo userInfoVo = CacheUtils.getUser();
         param.put("udid", CacheUtils.getudid());
         mResourceLiveData.addSource(
                 commonRepository.noneChache(
@@ -1071,13 +1071,15 @@ public class AccountViewModel extends HivsBaseViewModel {
     }
 
 
+    public final MediatorLiveData<String> msgVoMediatorLiveData = new MediatorLiveData<>();
+
     /**
      * 编辑名片
      */
     public void saveCardInfo(VisitingCardVo visitingCardVo) {
         showDialogWait("加载中", false);
         UserInfoVo userInfoVo = CacheUtils.getUser();
-        HashMap<String, String> paramMap = (HashMap<String, String>) ParamUtils.objectToMap(visitingCardVo, false);
+        Map<String, String> paramMap = ParamUtils.obj2map(visitingCardVo);
         paramMap.put("memberid", userInfoVo.uid);
         paramMap.put("uuid", userInfoVo.uuid);
         paramMap.put("avatar", visitingCardVo.getAvatar());
@@ -1085,13 +1087,13 @@ public class AccountViewModel extends HivsBaseViewModel {
         paramMap.put("sex", visitingCardVo.getSex());
         paramMap.put("mobile", visitingCardVo.getMobile());
         paramMap.put("age", visitingCardVo.getAge());
-        mResourceLiveData.addSource(commonRepository.noneChache(
-                accountService.editCardInfo(paramMap)), new HivsNetBoundObserver<>(new NetBoundCallback<MsgVo>() {
+        msgVoMediatorLiveData.addSource(commonRepository.noneChache(
+                accountService.editCardInfo(paramMap)), new HivsNetBoundObserver<>(new NetBoundCallback<String>() {
             @Override
-            public void onComplete(Resource<MsgVo> resource) {
+            public void onComplete(Resource<String> resource) {
                 super.onComplete(resource);
                 hideDialogWait();
-                mVmEventSouce.setValue(new ViewEventResouce(538, "", resource.data));
+                msgVoMediatorLiveData.setValue("1");
                 UserInfoVo userInfoVo1 = CacheUtils.getUser();
                 userInfoVo1.nickname = visitingCardVo.getFullName();
                 userInfoVo1.fullName = visitingCardVo.getFullName();
@@ -1101,17 +1103,18 @@ public class AccountViewModel extends HivsBaseViewModel {
             }
 
             @Override
-            public void onNetworkError(Resource<MsgVo> resource) {
+            public void onNetworkError(Resource<String> resource) {
                 super.onNetworkError(resource);
                 hideDialogWait();
-                mVmEventSouce.setValue(new ViewEventResouce(539, "", null));
+                msgVoMediatorLiveData.setValue(null);
                 ToastUtils.showShort("网络问题，保存失败");
             }
 
             @Override
-            public void onBusinessError(Resource<MsgVo> resource) {
+            public void onBusinessError(Resource<String> resource) {
                 super.onComplete();
                 hideDialogWait();
+                msgVoMediatorLiveData.setValue(null);
             }
         }));
 

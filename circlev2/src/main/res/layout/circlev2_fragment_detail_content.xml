@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+
+        <variable
+            name="viewmodel"
+            type="com.docker.cirlev2.vm.CircleDynamicDetailViewModel" />
+
+        <import type="com.docker.cirlev2.util.BdUtils" />
+
+        <import type="com.docker.core.util.LayoutManager" />
+
+    </data>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:focusable="false"
+        android:nestedScrollingEnabled="false"
+        app:itemBinding="@{item.itemDetailBinding}"
+        app:items="@{item.getInnerResource()}"
+        app:layoutManager="@{LayoutManager.staggeredGrid(1,1)}" />
+
+</layout>

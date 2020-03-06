@@ -193,7 +193,7 @@ public abstract class NitAbsCircleFragment<VM extends AbsCircleDetailIndexViewMo
     public void onCircleMenuClick() {
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
         /*"编辑圈子",*/
-        bottomSheetDialog.setDataCallback(new String[]{"邀请新成员", "成员列表", "圈子简介"}, position -> {
+        bottomSheetDialog.setDataCallback(new String[]{"邀请新成员", "成员列表", "分舵简介"}, position -> {
             bottomSheetDialog.dismiss();
             switch (position) {
                 case 0: //邀请新成员

@@ -82,6 +82,7 @@ public class MessageRouterUtils {
             } else {
                 ispush = "0";
             }
+            ARouter.getInstance().build(AppRouter.ORDER_DETAIL).withString("orderid", paramsBean.orderid).navigation();
 //            ARouter.getInstance().build(AppRouter.Pro_order_detail)
 //                    .withString("status", paramsBean.status)
 //                    .withString("is_push", ispush)

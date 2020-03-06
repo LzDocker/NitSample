@@ -56,7 +56,7 @@ import static com.docker.common.common.config.Constant.CommonListParam;
 public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewModel, ProActiveDetailFragmentLayoutBinding> {
 
     ActiveDetailHeadCard activeDetailHeadCard;
-    ActiveVo activeVo;
+    public ActiveVo activeVo;
     public String activityid;
     private BasePopupView basePopupView;
     public int edit = 0;

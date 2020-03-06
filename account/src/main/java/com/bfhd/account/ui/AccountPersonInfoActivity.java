@@ -1,5 +1,6 @@
 package com.bfhd.account.ui;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityPersonInfoBinding;
 import com.bfhd.account.vm.AccountViewModel;
 
+import com.bfhd.account.vo.MsgVo;
 import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
 import com.bfhd.circle.ui.common.CircleSourceUpFragment;
@@ -64,6 +66,14 @@ public class AccountPersonInfoActivity extends HivsBaseActivity<AccountViewModel
         super.onCreate(savedInstanceState);
         mViewModel.cardDetail();
         mBinding.setItem(visitingCardVo);
+        mViewModel.msgVoMediatorLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String msgVo) {
+                if (msgVo != null) {
+                    finish();
+                }
+            }
+        });
     }
 
     @Override
@@ -161,13 +171,13 @@ public class AccountPersonInfoActivity extends HivsBaseActivity<AccountViewModel
                 }
                 break;
 
-            case 538:
-                AccountPersonInfoActivity.this.finish();
-                break;
-
-            case 539:
-
-                break;
+//            case 538:
+//                AccountPersonInfoActivity.this.finish();
+//                break;
+//
+//            case 539:
+//
+//                break;
         }
     }
 }

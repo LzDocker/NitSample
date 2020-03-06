@@ -15,6 +15,7 @@
 
         <import type="com.bfhd.circle.base.Constant" />
 
+
         <import type="com.bfhd.circle.R" />
 
         <import type="com.docker.core.util.LayoutManager" />
@@ -24,8 +25,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:layout_height="match_parent">
 
         <com.docker.common.common.widget.refresh.SmartRefreshLayout
             android:id="@+id/refresh"
@@ -71,7 +72,7 @@
                                 android:paddingBottom="10dp">
 
 
-                                <ImageView
+                                <de.hdodenhof.circleimageview.CircleImageView
                                     android:id="@+id/iv_user_icon"
                                     android:layout_width="35dp"
                                     android:layout_height="35dp"
@@ -481,10 +482,10 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:background="@drawable/open_top_liner_shape"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/circle_common_bar"
@@ -492,8 +493,8 @@
                 android:layout_height="45dp"
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:paddingRight="20dp">
 
 
                 <LinearLayout
@@ -564,8 +565,9 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="5dp"
+                android:visibility="gone"
                 android:paddingRight="5dp"
-                android:visibility="gone">
+                >
 
                 <!-- android:visibility="gone"-->
 

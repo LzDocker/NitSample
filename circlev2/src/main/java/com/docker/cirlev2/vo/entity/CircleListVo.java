@@ -39,7 +39,7 @@ public class CircleListVo extends BaseSampleItem implements Serializable {
                 CircleConfig circleConfig = new CircleConfig();
                 circleConfig.circleid = ((CircleListVo) item).circleid;
                 circleConfig.utid = ((CircleListVo) item).utid;
-                circleConfig.circleType = ((CircleListVo) item).type;
+                circleConfig.circleType = "2";//((CircleListVo) item).type
                 circleConfig.Temple = 0;
                 ARouter.getInstance()
                         .build(AppRouter.CIRCLE_DETAIL_v2_INDEX_NEW_default)

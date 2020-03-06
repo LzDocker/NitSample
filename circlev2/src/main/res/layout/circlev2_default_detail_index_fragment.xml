@@ -178,7 +178,7 @@
                                             android:layout_height="wrap_content"
                                             android:background="@drawable/circlev2_people_top"
                                             android:gravity="center"
-                                            android:text="已关注"
+                                            android:text="已加入"
                                             android:textColor="@color/colorAccent"
                                             app:visibleGone="@{CommonBdUtils.isShowJoin(circleDetail.isJoin)}" />
 
@@ -188,7 +188,7 @@
                                             android:layout_height="wrap_content"
                                             android:background="@drawable/circlev2_people_top_attend"
                                             android:gravity="center"
-                                            android:text="关注"
+                                            android:text="加入"
                                             android:textColor="@color/white"
                                             app:visibleGone="@{!CommonBdUtils.isShowJoin(circleDetail.isJoin)}" />
 

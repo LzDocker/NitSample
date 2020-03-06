@@ -124,9 +124,9 @@ public class CirclePersionListAdapter extends SectionedRecyclerViewAdapter<Secti
                 onItemCilckListener.onItemClick(section, position);
             }
         });
-        Random random = new Random();
-        int i = random.nextInt(darbles.size());
-        itembinding.roundIcon.setBackgroundDrawable(context.getResources().getDrawable(darbles.get(i)));
+//        Random random = new Random();
+//        int i = random.nextInt(darbles.size());
+//        itembinding.roundIcon.setBackgroundDrawable(context.getResources().getDrawable(darbles.get(i)));
     }
 
     public interface OnItemCilckListener {

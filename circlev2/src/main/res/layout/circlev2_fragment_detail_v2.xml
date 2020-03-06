@@ -19,20 +19,20 @@
 
     </data>
 
-
     <com.docker.common.common.widget.refresh.SmartRefreshLayout
-        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        app:srlEnablePureScrollMode="true">
+        android:fillViewport="true"
+        app:srlEnableLoadMore="false"
+        app:srlEnableRefresh="false">
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/net_speed"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_scrollFlags="scroll">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -315,12 +315,12 @@
                 <FrameLayout
                     android:id="@+id/frame_bot_content"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:overScrollMode="never"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
+
         </android.support.v4.widget.NestedScrollView>
 
     </com.docker.common.common.widget.refresh.SmartRefreshLayout>
+
 
 </layout>

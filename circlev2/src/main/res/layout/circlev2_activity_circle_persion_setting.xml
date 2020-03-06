@@ -35,13 +35,13 @@
                     android:paddingLeft="14dp"
                     android:paddingRight="14dp">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
                         android:id="@+id/round_icon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
-                        app:roundImgUrl="@{CommonBdUtils.getCompleteImageUrl(personVo.avatar)}" />
+                        app:avaterImageUrl="@{CommonBdUtils.getCompleteImageUrl(personVo.avatar)}" />
 
                     <!--      app:errorImg="@{R.mipmap.circle_default_avatar}"
                         app:placeHolder="@{R.mipmap.circle_default_avatar}"-->
@@ -267,7 +267,7 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="45dp"
                     android:layout_marginRight="12dp"
-                    android:background="#B41D23"
+                    android:background="@color/colorPrimaryDark"
                     android:gravity="center"
                     android:text="保存设置"
                     android:textColor="@color/white"

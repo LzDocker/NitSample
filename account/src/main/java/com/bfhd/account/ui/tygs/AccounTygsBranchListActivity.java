@@ -1,16 +1,13 @@
 package com.bfhd.account.ui.tygs;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.vm.AccountAttentionViewModel;
 import com.bfhd.account.vm.AccountBranchViewModel;
 import com.bfhd.account.vo.tygs.BranchVoV2;
-import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;
@@ -19,8 +16,6 @@ import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
-
-import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 

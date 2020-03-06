@@ -10,15 +10,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.databinding.Circlev2ActivityCircleInfoBinding;
-import com.docker.cirlev2.databinding.Circlev2SampleActivityBinding;
-import com.docker.cirlev2.ui.create.CircleCreateActivity;
 import com.docker.cirlev2.vm.CircleCreateViewModel;
-import com.docker.cirlev2.vm.SampleListViewModel;
 import com.docker.cirlev2.vo.param.StaCirParam;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
-import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 
@@ -64,7 +60,7 @@ public class CircleInfoActivity extends NitCommonActivity<CircleCreateViewModel,
         super.onCreate(savedInstanceState);
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("refresh_circle_myjoin")) {
-//                mViewModel.getCircleDetailVo(mStartParam.getUtid(), mStartParam.getCircleid());
+                mViewModel.getCircleDetailVo(mStartParam.getUtid(), mStartParam.getCircleid());
             }
         });
 
@@ -73,12 +69,14 @@ public class CircleInfoActivity extends NitCommonActivity<CircleCreateViewModel,
 
     @Override
     public void initView() {
-        mToolbar.setTitle("圈子简介");
+        mToolbar.setTitle("分舵简介");
         if (mStartParam.role == 1) {
-            mToolbar.setTvRight("编辑", v -> {
-                ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2).withInt("flag", 1).withString("circleid", mStartParam.getCircleid()).withString("utid", mStartParam.getUtid()).navigation();
-            });
+
         }
+//        mToolbar.setTvRight("编辑", v -> {
+//            ARouter.getInstance().build(AppRouter.CIRCLE_CREATE_v2).withInt("flag", 1).withString("circleid", mStartParam.getCircleid()).withString("utid", mStartParam.getUtid()).navigation();
+//        });
+
         mViewModel.getCircleDetailVo(mStartParam.getUtid(), mStartParam.getCircleid());
         mBinding.circleInfoQuit.setOnClickListener(v -> {
             CircleCreateVo circleCreateVo = mBinding.getVo();
@@ -90,6 +88,7 @@ public class CircleInfoActivity extends NitCommonActivity<CircleCreateViewModel,
     @Override
     public void initObserver() {
 
+        mViewModel.mCircleDetailLv.observe(this, circleCreateVo -> mBinding.setVo(circleCreateVo));
     }
 
     @Override
@@ -97,4 +96,11 @@ public class CircleInfoActivity extends NitCommonActivity<CircleCreateViewModel,
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (disposable != null) {
+            disposable.dispose();
+        }
+    }
 }

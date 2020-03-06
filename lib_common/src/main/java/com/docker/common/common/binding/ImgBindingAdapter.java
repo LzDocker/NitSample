@@ -204,7 +204,7 @@ public class ImgBindingAdapter {
 //                .into(imageView);
 
         Glide.with(imageView)
-                .load(url)
+                .load(CommonBdUtils.getImgUrl(url))
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()).placeholder(R.mipmap.common_default_avatar))
                 .into(imageView);
 
@@ -225,8 +225,12 @@ public class ImgBindingAdapter {
      * */
     @BindingAdapter(value = {"dontTransImg"}, requireAll = false)
     public static void donttransImg(ImageView imageView, String url) {
-        options.diskCacheStrategy(DiskCacheStrategy.ALL);
-        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).dontTransform().transition(withCrossFade()).into(imageView);
+//        options.diskCacheStrategy(DiskCacheStrategy.ALL);
+//        GlideApp.with(imageView).applyDefaultRequestOptions(options).load(url).placeholder(null).dontTransform().dontAnimate().into(imageView);
+        options.skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
+                .dontTransform()
+                .dontAnimate();
+        Glide.with(imageView.getContext()).load(url).apply(options).into(imageView);
 
     }
 
