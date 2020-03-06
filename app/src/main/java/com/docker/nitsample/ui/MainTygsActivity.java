@@ -121,14 +121,24 @@ public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityM
 
         disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
             if (rxEvent.getT().equals("Badger")) {
-                if (mBinding != null && mBinding.tlHomeTab != null) {
-                    int num = (int) rxEvent.getR();
-                    if (num > 0) {
-                        mBinding.tlHomeTab.showDot(3);
-                    } else {
-                        mBinding.tlHomeTab.hideMsg(3);
+
+                MainTygsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if (mBinding != null && mBinding.tlHomeTab != null) {
+                                int num = (int) rxEvent.getR();
+                                if (num > 0) {
+                                    mBinding.tlHomeTab.showDot(3);
+                                } else {
+                                    mBinding.tlHomeTab.hideMsg(3);
+                                }
+                            }
+                        } catch (Exception e) {
+                        }
                     }
-                }
+                });
+
             }
             if (rxEvent.getT().equals("change")) {
                 int num = (int) rxEvent.getR();

@@ -32,6 +32,14 @@ import static com.docker.common.common.binding.CommonBdUtils.getCompleteImageUrl
  * */
 public class BdUtils {
 
+
+    public static boolean isJoin(String isjoin) {
+        if (TextUtils.isEmpty(isjoin)) {
+            return false;
+        }
+        return "1".equals(isjoin);
+    }
+
     public static boolean isPointEmpty(String ss) {
         if ("0.00".equals(ss) || TextUtils.isEmpty(ss)) {
             return true;

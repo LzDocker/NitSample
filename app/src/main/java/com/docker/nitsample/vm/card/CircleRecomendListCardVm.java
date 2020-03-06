@@ -81,14 +81,14 @@ public class CircleRecomendListCardVm extends NitcommonCardViewModel {
                         super.onComplete(resource);
                         appRecycleHorizontalCardVo2.mCardVoLiveData.setValue(resource.data);
                         appRecycleHorizontalCardVo2.mCardVoLiveData.removeSource(responseLiveData);
-                        ArrayList<CircleListNomalVo> unjoinlist = null;
-                        for (int i = 0; i < resource.data.size(); i++) {
-                            unjoinlist = new ArrayList<>();
-                            if (!"1".equals(resource.data.get(i).getIsJoin())) {
-                                unjoinlist.add(resource.data.get(i));
-                            }
-                        }
-                        appRecycleHorizontalCardVo2.setDatasource(unjoinlist);
+//                        ArrayList<CircleListNomalVo> unjoinlist = null;
+//                        for (int i = 0; i < resource.data.size(); i++) {
+//                            unjoinlist = new ArrayList<>();
+//                            if (!"1".equals(resource.data.get(i).getIsJoin())) {
+//                                unjoinlist.add(resource.data.get(i));
+//                            }
+//                        }
+                        appRecycleHorizontalCardVo2.setDatasource(resource.data);
                     }
 
                     @Override

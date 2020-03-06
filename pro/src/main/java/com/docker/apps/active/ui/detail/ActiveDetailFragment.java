@@ -85,7 +85,12 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
                 return;
             }
 
-
+            if (activeVo.signStatus == 1) {
+//                    return "查看我的凭证"; //绿色
+                showPop(activeVo.evoucherNo, activeVo.AuditUrl);
+                //todo
+                return;
+            }
             if (activeVo.status == -1) {
                 ToastUtils.showShort("已结束");
                 return;
@@ -134,7 +139,9 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
             public void onCreated() {
                 TextView textView = basePopupView.findViewById(R.id.tv_pzh);
                 TextView title = basePopupView.findViewById(R.id.tv_title);
-                title.setText(activeVo.title);
+                if (title != null) {
+                    title.setText(activeVo.title);
+                }
                 textView.setText("凭证号：" + evoucherNo);
                 ImageView imageView = basePopupView.findViewById(R.id.iv_bar_code);
                 GlideApp.with(imageView).load(ThiredPartConfig.BarcoderUrl + evoucherNo).into(imageView);
@@ -270,6 +277,9 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
         if (activeVo == null) {
             return str;
         }
+        if (activeVo.signStatus == 1) {
+            return "查看我的凭证"; //绿色
+        }
         if (activeVo.status == -1) {
             return "已结束"; //灰色
         }
@@ -305,6 +315,10 @@ public class ActiveDetailFragment extends NitCommonFragment<ActiveCommonViewMode
         }
         if (CacheUtils.getUser() == null) {
             return R.drawable.common_radius30_zi;
+        }
+        if (activeVo.signStatus == 1) {
+            //绿色
+            return R.drawable.common_radius30_lv;
         }
         if (activeVo.status == -1) {
             return R.drawable.common_radius30_hui; //灰色

@@ -272,30 +272,30 @@ public class RecentContactsFragment extends TFragment {
                 refreshMessages(false);
             }
         });
-        alertDialog.addItem("删除该聊天（仅服务器）", new onSeparateItemClickListener() {
-
-            @Override
-            public void onClick() {
-                NIMClient.getService(MsgService.class).deleteRoamingRecentContact(recent.getContactId(),
-                        recent.getSessionType()).setCallback(
-                        new RequestCallback<Void>() {
-
-                            @Override
-                            public void onSuccess(Void param) {
-                                ToastHelper.showToast(getActivity(), "delete success");
-                            }
-
-                            @Override
-                            public void onFailed(int code) {
-                                ToastHelper.showToast(getActivity(), "delete failed, code:" + code);
-                            }
-
-                            @Override
-                            public void onException(Throwable exception) {
-                            }
-                        });
-            }
-        });
+//        alertDialog.addItem("删除该聊天（仅服务器）", new onSeparateItemClickListener() {
+//
+//            @Override
+//            public void onClick() {
+//                NIMClient.getService(MsgService.class).deleteRoamingRecentContact(recent.getContactId(),
+//                        recent.getSessionType()).setCallback(
+//                        new RequestCallback<Void>() {
+//
+//                            @Override
+//                            public void onSuccess(Void param) {
+//                                ToastHelper.showToast(getActivity(), "delete success");
+//                            }
+//
+//                            @Override
+//                            public void onFailed(int code) {
+//                                ToastHelper.showToast(getActivity(), "delete failed, code:" + code);
+//                            }
+//
+//                            @Override
+//                            public void onException(Throwable exception) {
+//                            }
+//                        });
+//            }
+//        });
         alertDialog.show();
     }
 

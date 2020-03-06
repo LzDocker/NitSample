@@ -151,7 +151,10 @@
         <activity
             android:name="com.docker.nitsample.ui.MainTygsActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+
+
+        </activity>
 
 
         <!--  android:theme="@style/AppSplash"-->

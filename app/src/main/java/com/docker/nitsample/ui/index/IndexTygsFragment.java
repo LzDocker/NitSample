@@ -115,16 +115,15 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
                     NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
 
                     UserInfoVo userInfoVo = CacheUtils.getUser();
+                    AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
+                            new LayoutManagerVo(0, 0, false),
+                            new RecycleTopLayout("分部推荐", "", false));
                     if (userInfoVo != null) {
-                        AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
-                                new LayoutManagerVo(0, 0, false),
-                                new RecycleTopLayout("分部推荐", "", false));
-
                         appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
                         appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
-                        appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
-                        NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
                     }
+                    appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
+                    NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
                 }
 
             }

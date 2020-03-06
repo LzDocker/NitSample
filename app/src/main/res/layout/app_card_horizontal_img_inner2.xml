@@ -128,7 +128,21 @@
                         android:onClick="@{(view)->parent.onChildItemCilck(item,view)}"
                         android:text="加入"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:visibleGone="@{!BdUtils.isJoin(item.isJoin)}" />
+
+                    <TextView
+                        android:layout_width="117dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/app_btn_shape_gray"
+                        android:gravity="center"
+                        android:text="已加入"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:visibleGone="@{BdUtils.isJoin(item.isJoin)}" />
+
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

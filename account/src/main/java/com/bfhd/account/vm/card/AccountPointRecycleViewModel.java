@@ -69,12 +69,7 @@ public class AccountPointRecycleViewModel extends NitCommonContainerViewModel {
                     }
                 }));
     }
-
-    public void process() {
-        Log.d("sss", "process: ===============================");
-    }
-
-
+    
     @Override
     public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
 

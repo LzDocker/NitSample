@@ -13,12 +13,15 @@
     </data>
 
 
-    <LinearLayout
+    <com.docker.common.common.widget.CustomLinearLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <android.support.v4.widget.NestedScrollView
+        <ScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -685,7 +688,7 @@
                 <!--</LinearLayout>-->
 
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </ScrollView>
 
         <Button
             android:id="@+id/publish"
@@ -698,5 +701,5 @@
             android:background="@drawable/common_radius20_ovl"
             android:text="确认发布"
             android:textColor="@color/white" />
-    </LinearLayout>
+    </com.docker.common.common.widget.CustomLinearLayout>
 </layout>

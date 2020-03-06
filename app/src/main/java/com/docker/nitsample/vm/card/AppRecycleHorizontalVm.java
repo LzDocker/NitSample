@@ -53,10 +53,6 @@ public class AppRecycleHorizontalVm extends NitcommonCardViewModel {
                 }));
     }
 
-    public void process() {
-        Log.d("sss", "process: ===============================");
-    }
-
     @Override
     public BaseItemModel formatData(BaseItemModel data) {
         return null;

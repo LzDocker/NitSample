@@ -100,7 +100,7 @@ public class DynamicBotContentFragment extends NitCommonFragment<CircleDynamicDe
                         CommonListOptions commonListReq = new CommonListOptions();
                         // commonListReq.ReqParam.put("t", "dynamic");
                         commonListReq.ReqParam.put("t", "goods");
-//                        commonListReq.ReqParam.put("isrecommend", "1");
+                        commonListReq.ReqParam.put("isrecommend", "1");
                         commonListReq.ReqParam.put("page", "1");
                         commonListVm.initParam(commonListReq);
                     }

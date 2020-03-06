@@ -40,7 +40,6 @@ import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.common.common.widget.picker.CommonWheelPicker;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -578,6 +577,11 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
     // 发布
     public void publish() {
 
+        if (selectSurfImgs == null || selectSurfImgs.size() == 0) {
+            ToastUtils.showShort("请选择活动封面图");
+            return;
+        }
+
         if (TextUtils.isEmpty(mBinding.get().tvContent.getText().toString())) {
             ToastUtils.showShort("请输入要发表的内容");
             return;
@@ -648,6 +652,11 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
     private void realPublish() {
 
+        if (TextUtils.isEmpty(mBinding.get().getPub().utid)) {
+            ToastUtils.showShort("请选择要同步的分舵");
+            return;
+        }
+
         UserInfoVo userInfoVo = CacheUtils.getUser();
         HashMap<String, String> paramMap = new HashMap();
         paramMap.put("memberid", userInfoVo.uid);
@@ -655,6 +664,7 @@ public class ActivePublishFragment extends NitCommonFragment<ActiveCommonViewMod
 
 //        paramMap.put("actType", mBinding.get().getPub().actType);
         paramMap.put("actType", mBinding.get().getPub().actType);
+
         paramMap.put("utid", mBinding.get().getPub().utid);
         paramMap.put("circleid", mBinding.get().getPub().circleid);
 

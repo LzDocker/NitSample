@@ -13,7 +13,7 @@
         <activity android:name="com.docker.cirlev2.ui.detail.CircleDetailIndexActivity"></activity>
         <activity
             android:name="com.docker.cirlev2.ui.publish.CirclePublishActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="com.docker.cirlev2.ui.common.CircleCoverActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.publish.select.CirclePerssionSelectActivity"></activity>
         <activity android:name="com.docker.cirlev2.ui.publish.select.CircleShareSelectActivity"></activity>
