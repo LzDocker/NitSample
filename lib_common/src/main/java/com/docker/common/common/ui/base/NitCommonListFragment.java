@@ -133,8 +133,8 @@ public abstract class NitCommonListFragment<VM extends NitCommonListVm> extends 
         }
         itemTouchHelperCallback = new ItemTouchHelperCallback(this);
         touchHelper = new ItemTouchHelper(itemTouchHelperCallback);
-//        itemTouchHelperCallback.setLongPressDragEnabled(true);
-//        touchHelper.attachToRecyclerView(mBinding.get().recyclerView);
+        itemTouchHelperCallback.setLongPressDragEnabled(true);
+        touchHelper.attachToRecyclerView(mBinding.get().recyclerView);
     }
 
     protected void initRefreshUi() {

@@ -144,7 +144,7 @@ public class EditSpaFragment extends NitCommonFragment<SampleEditSpaViewModel, F
 
                                                             @Override
                                                             public void onConfim() {
-
+                                                                save("111", baseCardVos);
                                                             }
 
                                                             @Override

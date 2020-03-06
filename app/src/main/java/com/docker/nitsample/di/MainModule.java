@@ -26,35 +26,45 @@ public class MainModule {
     @Provides
     List<Fragment> providerFragments() {
         List<Fragment> fragments = new ArrayList<>();
-        CommonListOptions commonListOptions = new CommonListOptions();
-        commonListOptions.falg = 0;
+//        CommonListOptions commonListOptions = new CommonListOptions();
+//        commonListOptions.falg = 0;
+//        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
+//        fragments.add(containerFragment);
+
 //        fragments.add(SampleFragment.newInstance());
-        NitCommonContainerFragment containerFragment = NitCommonContainerFragment.newinstance(commonListOptions);
-        fragments.add(containerFragment);
 
 
 //        fragments.add(SampleVideoListFragment.newInstance());
 
-        CommonListOptions commonListOptions1 = new CommonListOptions();
-        commonListOptions1.falg = 1;
-        commonListOptions1.refreshState = 0;
-        commonListOptions1.RvUi = 0;
-        commonListOptions1.ReqParam.put("t", "goods");
-        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
-        commonListOptions1.ReqParam.put("memberid", "64");
-        commonListOptions1.ReqParam.put("companyid", "1");
-
-        //shopType2=&shopType1=&t=goods&page=1&goodsui=product&uuid=8621e837a2a1579710a95143e5862424&memberid=64&companyid=1
-        fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
+//        CommonListOptions commonListOptions1 = new CommonListOptions();
+//        commonListOptions1.falg = 1;
+//        commonListOptions1.refreshState = 0;
+//        commonListOptions1.RvUi = 0;
+//        commonListOptions1.ReqParam.put("t", "goods");
+//        commonListOptions1.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
+//        commonListOptions1.ReqParam.put("memberid", "64");
+//        commonListOptions1.ReqParam.put("companyid", "1");
+//
+//        //shopType2=&shopType1=&t=goods&page=1&goodsui=product&uuid=8621e837a2a1579710a95143e5862424&memberid=64&companyid=1
+//        fragments.add(NitCommonContainerFragment.newinstance(commonListOptions1));
 
 //        fragments.add(VideoListFragment.newInstance());
-        fragments.add(VideoListFragment.newInstance());
+//        fragments.add(VideoListFragment.newInstance());
 //        fragments.add(BaseVideoListFragment.newinstance());
 
 
 //        fragments.add(VideoFullListFragment.newInstance());
 //        fragments.add(IndexFragment.newInstance());
-        fragments.add(FragmentMineIndex.newInstance());
+//        fragments.add(FragmentMineIndex.newInstance());
+
+
+        //        // 框架index     SampleListViewModel
+        CommonListOptions commonListOptions0 = new CommonListOptions();
+        commonListOptions0.falg = 0;
+        commonListOptions0.isActParent = true;
+        NitCommonContainerFragment containerFragment0 = NitCommonContainerFragment.newinstance(commonListOptions0);
+        fragments.add(containerFragment0);
+
         return fragments;
     }
 

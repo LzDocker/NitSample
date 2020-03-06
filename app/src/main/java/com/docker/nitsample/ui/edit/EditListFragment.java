@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.bfhd.account.vm.AccountIndexListViewModel;
+import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.ui.base.NitCommonFragment;
 import com.docker.common.common.ui.base.NitCommonListFragment;
+import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
+import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.nitsample.vm.EditListViewModel;
 
 import io.reactivex.disposables.Disposable;
@@ -22,10 +27,19 @@ public class EditListFragment extends NitCommonListFragment<EditListViewModel> {
     }
 
     private Disposable disposable;
-    
+
     @Override
     public EditListViewModel getViewModel() {
         return ViewModelProviders.of(this, factory).get(EditListViewModel.class);
+    }
+
+
+    public static EditListFragment newinstance(CommonListOptions commonListReq) {
+        EditListFragment editListFragment = new EditListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constant.ContainerParam, commonListReq);
+        editListFragment.setArguments(bundle);
+        return editListFragment;
     }
 
     @Override
@@ -46,7 +60,6 @@ public class EditListFragment extends NitCommonListFragment<EditListViewModel> {
         commonListReq.RvUi = 0;
         return commonListReq;
     }
-
 
     @Override
     public void onVisible() {

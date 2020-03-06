@@ -56,7 +56,7 @@ import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_N
 import static com.docker.cirlev2.ui.publish.CirclePublishActivity.PUBLISH_TYPE_QREQUESTION;
 import static com.docker.common.common.router.AppRouter.HOME;
 
-@Route(path = HOME)
+//@Route(path = HOME)
 public class MainTygsActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject

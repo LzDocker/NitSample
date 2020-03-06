@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
+import com.docker.common.common.config.Constant;
+import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.widget.boottomBar.Bottombar;
 import com.docker.nitsample.R;
@@ -88,7 +90,9 @@ public class EditIndexActivity extends NitCommonActivity<SampleEditSpaViewModel,
 
 //        fragments.add(EditCoutainerFragment.getInstance("", true));
         fragments.add(EditSpaFragment.getInstance("", true));
-        fragments.add(EditListFragment.newInstance());
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.refreshState = Constant.KEY_REFRESH_OWNER;
+        fragments.add(EditListFragment.newinstance(commonListOptions));
         mBinding.viewpager.setAdapter(new CommonpagerAdapter(getSupportFragmentManager(), fragments));
     }
 

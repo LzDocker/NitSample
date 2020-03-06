@@ -37,6 +37,9 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
          *
          * */
 
+        SampleItemVo spa_sample = new SampleItemVo("spa", -1);
+        mItems.add(spa_sample);
+
         SampleItemVo account_sample = new SampleItemVo("登录注册", 0);
         mItems.add(account_sample);
 

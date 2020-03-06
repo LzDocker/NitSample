@@ -24,6 +24,9 @@ public class SampleItemVo implements BaseItemModel {
             Timber.e("=========itemclick============");
 
             switch (((SampleItemVo) item).flag) {
+                case -1:
+                    ARouter.getInstance().build(AppRouter.HOME_edit_index).navigation();
+                    break;
                 case 0:
                     ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
                     break;

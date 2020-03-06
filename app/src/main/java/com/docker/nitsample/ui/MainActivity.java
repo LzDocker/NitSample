@@ -46,7 +46,7 @@ import io.reactivex.disposables.Disposable;
 
 import static com.docker.common.common.router.AppRouter.HOME;
 
-//@Route(path = HOME)
+@Route(path = HOME)
 public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainBinding> {
 
     @Inject
@@ -129,7 +129,7 @@ public class MainActivity extends NitCommonActivity<MainViewModel, ActivityMainB
         NitContainerCommand nitContainerCommand = null;
         switch (flag) {
             case 0:
-                nitContainerCommand = (NitContainerCommand) () -> (SampleNetListViewModel.class);
+                nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
                 break;
             case 1:
                 nitContainerCommand = (NitContainerCommand) () -> (SampleListViewModel.class);
