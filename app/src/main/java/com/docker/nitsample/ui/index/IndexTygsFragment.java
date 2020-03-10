@@ -7,7 +7,8 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.GsonUtils;
-import com.docker.apps.active.vm.ActiveCommonViewModel;
+import com.docker.active.vm.ActiveCommonViewModel;
+import com.docker.active.vm.ActiveCommonViewModel;
 import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;

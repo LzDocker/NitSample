@@ -76,6 +76,7 @@ public class AppRouter {
     public static final String CircleGroup = "/Circle/";
 
     public static final String MINECIRCLELIST = CircleGroup + "minecirclelist";
+    public static final String CIRCLE_SAMPLE = CircleGroup + "CIRCLE_SAMPLE";
 
     public static final String CIRCLE_CREATE = CircleGroup + "circlecreate";
 
@@ -141,6 +142,7 @@ public class AppRouter {
 
     public static final String COMMON_CONTAINER = COMMONGROUP + "container";
     public static final String COMMON_address_list = COMMONGROUP + "COMMON_address_list";
+    public static final String COMMON_LIST_INDEX = COMMONGROUP + "COMMON_LIST_INDEX";
 
     public static final String COMMON_CONTAINER_FRAGMENT = COMMONGROUP + "container_fragment";
     public static final String COMMON_CONTAINER_FRAGMENTV2 = COMMONGROUP + "container_fragmentv2";
@@ -186,14 +188,15 @@ public class AppRouter {
     public static final String POINT_GROUP = ProGroup + "/point/";
     public static final String POINT_SORT_INDEX = POINT_GROUP + "POINT_SORT_INDEX";
 
-    public static final String ACTIVE_GROUP = ProGroup + "/active/";
+
+    /*
+     * 活动active
+     * */
+    public static final String ACTIVE_GROUP = "/active/";
     public static final String ACTIVE_INDEX = ACTIVE_GROUP + "ACTIVE_INDEX";
     public static final String ACTIVE_DEATIL = ACTIVE_GROUP + "ACTIVE_DEATIL";
     public static final String ACTIVE_DEATIL_ACTIVITY = ACTIVE_GROUP + "ACTIVE_DEATIL_ACTIVITY";
-
     public static final String ACTIVE_SUCC = ACTIVE_GROUP + "ACTIVE_SUCC";
-
-
     public static final String ACTIVE_RESULT = ACTIVE_GROUP + "ACTIVE_RESULT";
     public static final String ACTIVE_REGIST_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_REGIST_LIST";
     public static final String ACTIVE_MANAGER_LIST = ACTIVE_GROUP + "ACCOUNT_ACT_MANAGER_LIST";
@@ -214,7 +217,7 @@ public class AppRouter {
     public static final String INVITE_INDEX_CODE_SCAN = INVITE_GROUP + "INVITE_INDEX_CODE_SCAN";
 
 
-    public static final String ORDER_GROUP = ProGroup + "/order/";
+    public static final String ORDER_GROUP = "/order/";
     //    public static final String ORDER_INDEX = ORDER_GROUP + "INVITE_INDEX";
     public static final String ORDER_ADDRESS_MANAGER = ORDER_GROUP + "ORDER_ADDRESS_MANAGER";
     public static final String ORDER_ADDRESS_EDIT = ORDER_GROUP + "ORDER_ADDRESS_EDIT";
@@ -225,7 +228,6 @@ public class AppRouter {
     public static final String ORDER_GOODS_LIST = ORDER_GROUP + "ORDER_GOODS_LIST";
     public static final String ORDER_COMMENT_SUCCESS_LIST = ORDER_GROUP + "ORDER_COMMENT_SUCCESS_LIST";
     public static final String ORDER_GOODS_COMMENT = ORDER_GROUP + "ORDER_GOODS_COMMENT";
-
     public static final String ORDER_Logistics_LIST = ORDER_GROUP + "ORDER_Logistics_LIST";
     public static final String ORDER_DETAIL = ORDER_GROUP + "ORDER_DETAIL";
 

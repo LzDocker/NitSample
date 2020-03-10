@@ -34,6 +34,7 @@ import com.bfhd.circle.ui.circle.CirclePersonDetailActivity;
 import com.bfhd.circle.ui.circle.CirclePersonListActivity;
 import com.bfhd.circle.ui.circle.CircleRecommandPersionListFragment;
 import com.bfhd.circle.ui.circle.CircleReplayQuestionActivity;
+import com.bfhd.circle.ui.circle.CircleSampleActivity;
 import com.bfhd.circle.ui.circle.CircleSearchActivity;
 import com.bfhd.circle.ui.circle.CircleShareGroupSelectActivity;
 import com.bfhd.circle.ui.circle.CircleShareSelectActivity;
@@ -306,6 +307,10 @@ public abstract class UIModule {
     @ActivityScope
     @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
     abstract CircleAddSurfActivity contributeCircleAddSurfActivityInjector();
+
+    @ActivityScope
+    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
+    abstract CircleSampleActivity contributeCircleSampleActivityInjector();
 //    @ActivityScope
 //    @ContributesAndroidInjector/*(modules = HomeActivityModule.class)*/
 //    abstract DynamicFragmentV2 contributeDynamicFragmentV2Injector();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
@@ -26,7 +27,6 @@ import com.docker.cirlev2.vo.vo.ShoppingCartDbVo;
 import com.docker.common.common.binding.CommonBdUtils;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.command.ReplyCommand;
-import com.docker.common.common.config.GlideApp;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.ui.base.NitCommonActivity;
 import com.docker.common.common.utils.cache.CacheUtils;
@@ -275,7 +275,7 @@ public class CircleDynamicDetailActivity extends NitCommonActivity<CircleDynamic
                 ImageView iv_close = bottomPopup.findViewById(com.docker.common.R.id.iv_close);
                 ImageView iv_goods_icon = bottomPopup.findViewById(com.docker.common.R.id.iv_goods_icon);
 
-                GlideApp.with(iv_goods_icon).load(BdUtils.getDynamicSingleImg(mDynamicDetailVo)).into(iv_goods_icon);
+                Glide.with(iv_goods_icon).load(BdUtils.getDynamicSingleImg(mDynamicDetailVo)).into(iv_goods_icon);
 
                 tv_barcode.setText("编号：" + mDynamicDetailVo.getExtData().goodsSn);
                 tv_money.setText(mDynamicDetailVo.getExtData().price);

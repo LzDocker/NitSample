@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_behavior="com.docker.common.common.widget.behavior.AppBarLayoutBehavior"
             app:layout_scrollFlags="scroll">
 
             <LinearLayout
@@ -150,6 +150,7 @@
 
                 <FrameLayout
                     android:id="@+id/frame_bot_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

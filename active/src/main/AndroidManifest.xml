@@ -1,0 +1,24 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.docker.active" >
+
+
+    <application>
+
+        <activity android:name="com.docker.active.ui.index.ActiveIndexActivity" />
+        <activity android:name="com.docker.active.ui.detail.ActiveSuccActivity" />
+        <activity android:name="com.docker.active.ui.detail.ActiveResultActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActiveRegistListActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActiveManagerListActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActiveManagerDetailActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActiveVerificationActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActivePersionManagerListActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActivePersionDetailActivity" />
+        <activity android:name="com.docker.active.ui.publish.ActiveBannerPreviewActivity" />
+        <activity android:name="com.docker.active.ui.publish.ActiveContentEditActivity" />
+        <activity android:name="com.docker.active.ui.publish.ActiveTypeSelectActivity" />
+        <activity android:name="com.docker.active.ui.detail.ActiveDetailActivity" />
+        <activity android:name="com.docker.active.ui.manager.ActiveSearchActivity" />
+
+    </application>
+
+</manifest>

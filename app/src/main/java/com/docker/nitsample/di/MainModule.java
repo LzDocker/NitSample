@@ -8,6 +8,7 @@ import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.ui.container.NitCommonContainerFragment;
 import com.docker.nitsample.ui.index.IndexFragment;
+import com.docker.nitsample.ui.index.IndexTygsFragment;
 import com.docker.nitsample.ui.index.SampleFragment;
 import com.docker.nitsample.ui.index.SampleListFragment;
 import com.docker.videobasic.ui.VideoFullListFragment;
@@ -57,6 +58,16 @@ public class MainModule {
 //        fragments.add(IndexFragment.newInstance());
 //        fragments.add(FragmentMineIndex.newInstance());
 
+
+        CommonListOptions commonListOptions = new CommonListOptions();
+        commonListOptions.falg = 0;
+        commonListOptions.refreshState = 0;
+        commonListOptions.RvUi = 0;
+        commonListOptions.ReqParam.put("t", "goods");
+        commonListOptions.ReqParam.put("uuid", "8621e837a2a1579710a95143e5862424");
+        commonListOptions.ReqParam.put("memberid", "64");
+        commonListOptions.ReqParam.put("companyid", "1");
+        fragments.add(IndexTygsFragment.newinstance(commonListOptions));
 
         //        // 框架index     SampleListViewModel
         CommonListOptions commonListOptions0 = new CommonListOptions();

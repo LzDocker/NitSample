@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.docker.apps.active.vo.ActiveVo" />
+            type="com.docker.active.vo.ActiveVo" />
 
         <variable
             name="parent"

@@ -102,4 +102,6 @@ dependencies {
     api project(":circlev2")
     api project(":evaluate")
     api project(':pro')
+    api project(':active')
+    api project(':order')
 }

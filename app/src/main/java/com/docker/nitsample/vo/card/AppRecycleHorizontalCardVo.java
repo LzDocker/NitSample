@@ -7,8 +7,8 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ToastUtils;
-import com.docker.apps.active.vo.ActiveVo;
-import com.docker.apps.active.vo.ActiveWraperVo;
+import com.docker.active.vo.ActiveVo;
+import com.docker.active.vo.ActiveWraperVo;
 import com.docker.cirlev2.BR;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;

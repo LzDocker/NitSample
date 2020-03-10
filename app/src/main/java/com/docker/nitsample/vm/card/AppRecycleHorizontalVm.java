@@ -1,10 +1,9 @@
 package com.docker.nitsample.vm.card;
 
 import android.arch.lifecycle.LiveData;
-import android.util.Log;
 
-import com.docker.apps.active.api.ActiveService;
-import com.docker.apps.active.vo.ActiveWraperVo;
+import com.docker.active.api.ActiveService;
+import com.docker.active.vo.ActiveWraperVo;
 import com.docker.common.common.model.BaseItemModel;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.card.BaseCardVo;
