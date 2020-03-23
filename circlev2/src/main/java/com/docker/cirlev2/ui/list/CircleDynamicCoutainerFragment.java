@@ -134,64 +134,35 @@ public class CircleDynamicCoutainerFragment extends NitCommonFragment<CircleDyna
                 mBinding.get().commonTvEdit.setVisibility(View.GONE);
                 titles = new String[]{""};
                 if (mCircleTitlesVo.get(pos).getShowType() == 1) {
-
-                    if ("activity".equals(mCircleTitlesVo.get(pos).getDataType())) {
-                        fragments.add((Fragment) ARouter.getInstance()
-                                .build(AppRouter.ACTIVE_FRAME_LIST)
-                                .withSerializable("param", mCircleTitlesVo.get(pos))
-                                .withInt("childPosition", -1)
-                                .withInt("refresh", refresh)
-                                .navigation());
-
-                    } else {
-                        fragments.add((Fragment) ARouter.getInstance()
-                                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                                .withSerializable("param", mCircleTitlesVo.get(pos))
-                                .withInt("childPosition", -1)
-                                .withInt("refresh", refresh)
-                                .navigation());
-                    }
-                    Log.d("sss", "processTab: ====111===============");
-
+                    fragments.add((Fragment) ARouter.getInstance()
+                            .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                            .withSerializable("param", mCircleTitlesVo.get(pos))
+                            .withInt("childPosition", -1)
+                            .withInt("refresh", refresh)
+                            .navigation());
                 } else {
                     fragments.add((Fragment) ARouter.getInstance()
                             .build(AppRouter.CIRCLEV2_COMMONH5)
                             .withString("weburl", ThiredPartConfig.BaseServeUrl + mCircleTitlesVo.get(pos).getH5_url())
                             .navigation());
-                    Log.d("sss", "processTab: ====222===============");
                 }
-
             } else {
                 mBinding.get().magicIndicator.setVisibility(View.VISIBLE);
                 titles = new String[circleTitlesVos.size()];
                 for (int i = 0; i < circleTitlesVos.size(); i++) {
                     titles[i] = circleTitlesVos.get(i).getName();
                     if (circleTitlesVos.get(i).getShowType() == 1) {
-
-                        if ("activity".equals(mCircleTitlesVo.get(pos).getDataType())) {
-
-                            fragments.add((Fragment) ARouter.getInstance()
-                                    .build(AppRouter.ACTIVE_FRAME_LIST)
-                                    .withSerializable("param", mCircleTitlesVo.get(pos))
-                                    .withInt("childPosition", -1)
-                                    .withInt("refresh", refresh)
-                                    .navigation());
-                        } else {
-                            fragments.add((Fragment) ARouter.getInstance()
-                                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                                    .withInt("refresh", refresh)
-                                    .withSerializable("param", mCircleTitlesVo.get(pos))
-                                    .withInt("childPosition", i)
-                                    .navigation());
-                        }
-
-
+                        fragments.add((Fragment) ARouter.getInstance()
+                                .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                                .withInt("refresh", refresh)
+                                .withSerializable("param", mCircleTitlesVo.get(pos))
+                                .withInt("childPosition", i)
+                                .navigation());
                     } else {
                         fragments.add((Fragment) ARouter.getInstance()
                                 .build(AppRouter.CIRCLEV2_COMMONH5)
                                 .withString("weburl", ThiredPartConfig.BaseServeUrl + circleTitlesVos.get(i).getH5_url())
                                 .navigation());
-                        Log.d("sss", "processTab: ====333===============");
                     }
                 }
             }

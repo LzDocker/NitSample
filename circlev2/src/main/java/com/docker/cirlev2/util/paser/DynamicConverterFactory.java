@@ -1,9 +1,8 @@
-package com.docker.common.common.utils.paser;
+package com.docker.cirlev2.util.paser;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.docker.common.common.vo.servervo.vo.DynamicDataBase;
+import com.docker.cirlev2.vo.pro.base.DynamicDataBase;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,11 +15,13 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 
 public class DynamicConverterFactory extends Converter.Factory {
-    
+
     @Nullable
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         if (type.toString().equals(new TypeToken<BaseResponse<List<DynamicDataBase>>>() {
+        }.getType().toString())
+                || type.toString().equals(new TypeToken<BaseResponse<DynamicDataBase>>() {
         }.getType().toString())) {
             /*
             解析不同类型的extdata

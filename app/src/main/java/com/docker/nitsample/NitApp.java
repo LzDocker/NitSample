@@ -1,8 +1,8 @@
 package com.docker.nitsample;
 
+import com.docker.cirlev2.util.paser.DynamicConverterFactory;
 import com.docker.common.common.config.CommonWidgetModel;
 import com.docker.common.common.config.ThiredPartConfig;
-import com.docker.common.common.utils.paser.DynamicConverterFactory;
 import com.docker.core.base.BaseApp;
 import com.docker.core.di.netmodule.ConverterHoledr;
 import com.docker.core.di.netmodule.GlobalConfigModule;

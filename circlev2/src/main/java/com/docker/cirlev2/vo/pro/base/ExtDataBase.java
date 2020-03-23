@@ -1,4 +1,4 @@
-package com.docker.common.common.vo.servervo.vo;
+package com.docker.cirlev2.vo.pro.base;
 
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
@@ -11,6 +11,8 @@ public class ExtDataBase extends BaseSampleItem {
     public String uuid;
     public String updatetime;
     public String title;
+    public String linkman;
+    public String content;
 
     public List<DynamicResource> resource;
 

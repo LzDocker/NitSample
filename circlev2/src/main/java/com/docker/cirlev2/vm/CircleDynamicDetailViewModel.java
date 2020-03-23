@@ -11,6 +11,7 @@ import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.util.AudioPlayerUtils;
 import com.docker.cirlev2.util.BdUtils;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.cirlev2.vo.pro.base.DynamicDataBase;
 import com.docker.common.BR;
 import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.router.AppRouter;
@@ -193,8 +194,32 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
 //        SessionHelper.startP2PSession(ActivityUtils.getTopActivity(), item.getUuid());
     }
 
+    // 聊一聊
+    public void ItemTalkClick(DynamicDataBase item, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+        if (item == null) {
+            return;
+        }
+        MessageService imService = (MessageService) ARouter.getInstance().build(AppRouter.IMPROVIDER_TALK).navigation();
+        imService.enterToTalk(item.getUuid());
+
+//        SessionHelper.startP2PSession(ActivityUtils.getTopActivity(), item.getUuid());
+    }
+
     // 购物车
     public void ItemShopCartClick(ServiceDataBean item, View view) {
+        if (CacheUtils.getUser() == null) {
+            ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
+            return;
+        }
+        ARouter.getInstance().build(AppRouter.CIRCLE_shopping_car).navigation();
+    }
+
+    // 购物车
+    public void ItemShopCartClick(DynamicDataBase item, View view) {
         if (CacheUtils.getUser() == null) {
             ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
             return;

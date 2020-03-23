@@ -1,4 +1,4 @@
-package com.docker.common.common.vo.servervo.vo;
+package com.docker.cirlev2.vo.pro.base;
 
 import android.databinding.BaseObservable;
 

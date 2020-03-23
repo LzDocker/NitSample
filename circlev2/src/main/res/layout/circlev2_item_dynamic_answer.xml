@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+            type="com.docker.cirlev2.vo.pro.Answer" />
 
         <variable
             name="viewmodel"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
         android:orientation="vertical">
 
 
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:text="@{item.extData.content}"
+                        android:text="@{item.content}"
                         android:textColor="#121212"
                         android:textSize="16sp" />
 
@@ -61,7 +61,7 @@
                         android:layout_marginTop="20dp"
                         android:text="还没有人回答哦！"
                         android:textSize="11sp"
-                        app:visibleGone="@{item.commentUsers.size == 0}" />
+                        app:visibleGone="@{item.parent.commentUsers.size == 0}" />
 
 
                 </LinearLayout>
@@ -72,8 +72,8 @@
                     android:layout_height="65dp"
                     android:layout_marginLeft="15dp"
                     android:scaleType="centerCrop"
-                    app:imageUrl="@{BdUtils.getCommentSingleImg(item.extData.resource)}"
-                    app:visibleGone="@{item.extData.resource.size() != 0}" />
+                    app:imageUrl="@{BdUtils.getCommentSingleImgv2(item.resource)}"
+                    app:visibleGone="@{item.resource.size() != 0}" />
 
 
             </LinearLayout>
@@ -84,7 +84,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                app:visibleGone="@{item.commentUsers.size != 0}">
+                app:visibleGone="@{item.parent.commentUsers.size != 0}">
 
 
                 <ImageView
@@ -127,7 +127,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"
-                app:visibleGone="@{item.commentUsers.size != 0}">
+                app:visibleGone="@{item.parent.commentUsers.size != 0}">
 
 
                 <TextView
@@ -146,14 +146,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:visibleGone="@{item.commentUsers.size != 0}">
+                app:visibleGone="@{item.parent.commentUsers.size != 0}">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    android:text='@{item.commentNum+""}'
+                    android:text='@{item.parent.commentNum+""}'
                     android:textSize="11sp" />
 
                 <TextView

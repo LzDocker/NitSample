@@ -14,11 +14,15 @@ import com.docker.cirlev2.vo.entity.CommentVo;
 import com.docker.cirlev2.vo.entity.MemberSettingsVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.cirlev2.vo.entity.TradingCommonVo;
-import com.docker.common.common.binding.CommonBdUtils;
+import com.docker.cirlev2.vo.pro.Answer;
+import com.docker.cirlev2.vo.pro.Dynamic;
+import com.docker.cirlev2.vo.pro.Goods;
+import com.docker.cirlev2.vo.pro.News;
+import com.docker.cirlev2.vo.pro.base.DynamicDataBase;
+import com.docker.cirlev2.vo.pro.base.DynamicResource;
+import com.docker.cirlev2.vo.pro.base.ExtDataBase;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.MoneyDetailVo;
-import com.docker.core.util.LayoutManager;
-import com.library.flowlayout.FlowLayoutManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,6 +117,20 @@ public class BdUtils {
                 return getImgUrl(resourceBean.getUrl());
             } else {
                 return getImgUrl(resourceBean.getImg());
+            }
+        }
+        return "";
+    }
+
+    /*
+     * 获取图片url
+     * */
+    public static String getResourceImgUrl(DynamicResource dynamicResource) {
+        if (dynamicResource != null) {
+            if (TextUtils.isEmpty(dynamicResource.getImg())) {
+                return getImgUrl(dynamicResource.getUrl());
+            } else {
+                return getImgUrl(dynamicResource.getImg());
             }
         }
         return "";
@@ -321,9 +339,23 @@ public class BdUtils {
         return "";
     }
 
+    public static String getAnswer(Answer answer) {
+        if (answer != null && answer.parent.commentUsers != null && answer.parent.commentUsers.size() > 0) {
+            return answer.parent.commentUsers.get(0).getContent();
+        }
+        return "";
+    }
+
     public static String getAnswerName(ServiceDataBean serviceDataBean) {
         if (serviceDataBean != null && serviceDataBean.getCommentUsers() != null && serviceDataBean.getCommentUsers().size() > 0) {
             return serviceDataBean.getCommentUsers().get(0).getNickname();
+        }
+        return "";
+    }
+
+    public static String getAnswerName(Answer answer) {
+        if (answer != null && answer.parent.commentUsers != null && answer.parent.commentUsers.size() > 0) {
+            return answer.parent.commentUsers.get(0).getNickname();
         }
         return "";
     }
@@ -339,9 +371,31 @@ public class BdUtils {
         return false;
     }
 
+    public static boolean isShowSingleImg(Dynamic dynamic) {
+        if (dynamic != null && dynamic.resource != null) {
+            if (dynamic.resource.size() == 1 && dynamic.resource.get(0).getT() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     public static boolean isShowSingleNewsImg(ServiceDataBean serviceDataBean) {
         if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getNewsImgs() != null) {
             if (serviceDataBean.getExtData().getNewsImgs().size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isShowSingleNewsImg(News item) {
+        if (item != null && item.newsImgs != null) {
+            if (item.newsImgs.size() > 0) {
                 return true;
             } else {
                 return false;
@@ -409,6 +463,17 @@ public class BdUtils {
         return false;
     }
 
+    public static boolean isShowVideoSingleImg(Dynamic dynamic) {
+        if (dynamic != null && dynamic.resource != null) {
+            if (dynamic.resource.size() == 1 && dynamic.resource.get(0).getT() == 2) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
 
     public static boolean isShowSingleImg(List<ServiceDataBean.ResourceBean> resource) {
         if (resource == null || resource.size() == 0) {
@@ -423,6 +488,17 @@ public class BdUtils {
     }
 
     public static String getCommentSingleImg(List<ServiceDataBean.ResourceBean> resource) {
+        if (resource == null || resource.size() == 0) {
+            return "";
+        }
+        if (resource.get(0).getImg() != null) {
+            return getCompleteImageUrl(resource.get(0).getImg());
+        } else {
+            return "";
+        }
+    }
+
+    public static String getCommentSingleImgv2(List<DynamicResource> resource) {
         if (resource == null || resource.size() == 0) {
             return "";
         }
@@ -462,9 +538,28 @@ public class BdUtils {
         }
     }
 
+    public static boolean isshowBottomImg(Dynamic dynamic) {
+        if (isShowSingleImg(dynamic) || isShowVideoSingleImg(dynamic)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean isShowRvImg(ServiceDataBean serviceDataBean) {
         if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getResource() != null) {
             if (serviceDataBean.getExtData().getResource().size() > 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isShowRvImg(Dynamic dynamic) {
+        if (dynamic != null && dynamic.resource != null) {
+            if (dynamic.resource.size() > 1) {
                 return true;
             } else {
                 return false;
@@ -486,10 +581,58 @@ public class BdUtils {
         return "";
     }
 
+    public static String getDynamicSingleImg(ExtDataBase extDataBase) {
+        if (extDataBase != null && extDataBase.resource != null) {
+            if (extDataBase.resource.size() > 0) {
+                if (TextUtils.isEmpty(extDataBase.resource.get(0).getImg())) {
+                    return getImgUrl(extDataBase.resource.get(0).getUrl());
+                } else {
+                    return getImgUrl(extDataBase.resource.get(0).getImg());
+                }
+            }
+        }
+        return "";
+    }
+
+    public static String getDynamicSingleImg(DynamicDataBase serviceDataBean) {
+        if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().resource != null) {
+            if (serviceDataBean.getExtData().resource.size() > 0) {
+                if (TextUtils.isEmpty(serviceDataBean.getExtData().resource.get(0).getImg())) {
+                    return getImgUrl(serviceDataBean.getExtData().resource.get(0).getUrl());
+                } else {
+                    return getImgUrl(serviceDataBean.getExtData().resource.get(0).getImg());
+                }
+            }
+        }
+        return "";
+    }
+
+    public static String getDynamicSingleImg(Dynamic dynamic) {
+        if (dynamic != null && dynamic.resource != null) {
+            if (dynamic.resource.size() > 0) {
+                if (TextUtils.isEmpty(dynamic.resource.get(0).getImg())) {
+                    return getImgUrl(dynamic.resource.get(0).getUrl());
+                } else {
+                    return getImgUrl(dynamic.resource.get(0).getImg());
+                }
+            }
+        }
+        return "";
+    }
+
     public static String getDynamicNewsSingleImg(ServiceDataBean serviceDataBean) {
         if (serviceDataBean != null && serviceDataBean.getExtData() != null && serviceDataBean.getExtData().getNewsImgs() != null) {
             if (serviceDataBean.getExtData().getNewsImgs().size() > 0) {
                 return serviceDataBean.getExtData().getNewsImgs().get(0);
+            }
+        }
+        return "";
+    }
+
+    public static String getDynamicNewsSingleImg(News item) {
+        if (item != null && item.newsImgs != null) {
+            if (item.newsImgs.size() > 0) {
+                return item.newsImgs.get(0);
             }
         }
         return "";
@@ -740,8 +883,26 @@ public class BdUtils {
         }
     }
 
+    public static String getAnswerIcon(Answer answer) {
+        if (answer == null || answer.parent.commentUsers == null || answer.parent.commentUsers.size() == 0) {
+            return "";
+        }
+        if (TextUtils.isEmpty(answer.parent.commentUsers.get(0).getAvatar())) {
+            return "";
+        } else {
+            return getImgUrl(answer.parent.commentUsers.get(0).getAvatar());
+        }
+    }
+
     public static boolean isShowAnswerIcon(ServiceDataBean serviceDataBean) {
         if (serviceDataBean == null || serviceDataBean.getCommentUsers() == null || serviceDataBean.getCommentUsers().size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isShowAnswerIcon(Answer answer) {
+        if (answer == null || answer.parent.commentUsers == null || answer.parent.commentUsers.size() == 0) {
             return false;
         }
         return true;
@@ -975,6 +1136,15 @@ public class BdUtils {
         }
     }
 
+    // 积分
+    public static String getPoint(Goods goods) {
+        if (goods == null) {
+            return "赠送" + goods.point + "积分";
+        } else {
+            return "";
+        }
+    }
+
 
     // money
     public static String getPayMoney(ServiceDataBean serviceDataBean) {
@@ -988,6 +1158,16 @@ public class BdUtils {
             return "";
         }
     }
+
+
+    public static String getPayMoney(Goods goods) {
+        if (goods != null) {
+            return goods.price;
+        } else {
+            return "";
+        }
+    }
+
 
     public static String getPayMoneyforHourse(ServiceDataBean serviceDataBean) {
         if (CheckServerData(serviceDataBean)) {
@@ -1214,6 +1394,18 @@ public class BdUtils {
                 }
             } else {
                 return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isShowPoint(Goods goods) {
+        if (goods != null) {
+            if (TextUtils.isEmpty(goods.point)) {
+                return false;
+            } else {
+                return true;
             }
         } else {
             return false;

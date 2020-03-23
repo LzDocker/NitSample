@@ -1,4 +1,4 @@
-package com.docker.common.common.utils.paser;
+package com.docker.cirlev2.util.paser;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +11,7 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class MultiTypeJsonParser <T> {
+public class MultiTypeJsonParser<T> {
     private HashMap<String, Class<? extends T>> typeClassMap = new HashMap<>();
     private String typeElementName;
     private String typeElementValue;

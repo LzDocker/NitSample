@@ -189,6 +189,7 @@ public class ServiceDataBean extends BaseSampleItem implements Serializable {
 
     @Bindable
     private int isFav;
+
     private ShareBean share;
     private List<FavsUsersBean> favsUsers;
     private List<CommentUsersBean> commentUsers;

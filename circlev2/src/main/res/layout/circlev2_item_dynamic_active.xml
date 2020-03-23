@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+            type="com.docker.cirlev2.vo.pro.Dynamic" />
 
         <variable
             name="viewmodel"
@@ -27,8 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"
+        android:onClick="@{(view)->item.getOnItemClickListener().onItemClick(item,view)}"
         android:orientation="vertical">
+        <!--    android:onClick="@{(view)->viewmodel.ItemDynamicClick(item,view)}"-->
 
 
         <LinearLayout
@@ -53,8 +54,8 @@
                     android:layout_below="@+id/ll_content"
                     android:layout_marginLeft="7dp"
                     android:layout_marginTop="8dp"
-                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
-                    app:avaterImageUrl="@{BdUtils.getImgUrl(item.avatar)}" />
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item.parent,view)}"
+                    app:avaterImageUrl="@{BdUtils.getImgUrl(item.parent.avatar)}" />
 
                 <TextView
                     android:id="@+id/tv_username"
@@ -62,8 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/circle_iv_avater"
-                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item,view)}"
-                    android:text="@{item.nickname}"
+                    android:onClick="@{(view)->viewmodel.ItemAvaterClick(item.parent,view)}"
+                    android:text="@{item.parent.nickname}"
                     android:textColor="#121212"
                     android:textSize="14sp" />
 
@@ -75,7 +76,7 @@
                     android:layout_below="@+id/tv_username"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/circle_iv_avater"
-                    android:text="@{CommonBdUtils.getStandardDate(item.inputtime)}"
+                    android:text="@{CommonBdUtils.getStandardDate(item.parent.inputtime)}"
                     android:textColor="#979797"
                     android:textSize="11sp" />
 
@@ -85,7 +86,7 @@
                     android:layout_below="@+id/tv_username"
                     android:layout_marginLeft="14dp"
                     android:layout_toRightOf="@+id/tv_pub_time"
-                    android:text="@{item.labels}"
+                    android:text="@{item.parent.labels}"
                     android:textColor="#979797"
                     android:textSize="11sp" />
                 <!--                    android:text="@{item.circleName}"-->
@@ -105,7 +106,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:text="@{item.extData.content}"
+                    android:text="@{item.content}"
                     android:textColor="#121212"
                     android:textSize="16sp" />
 
@@ -200,7 +201,7 @@
                     android:drawableLeft="@mipmap/circle_zhuanfa_icon"
                     android:drawablePadding="5dp"
                     android:gravity="center"
-                    android:onClick="@{(view)->viewmodel.ItemZFClick(item,view)}"
+                    android:onClick="@{(view)->viewmodel.ItemZFClick(item.parent,view)}"
                     android:text="转发" />
 
                 <TextView
@@ -210,8 +211,8 @@
                     android:drawableLeft="@mipmap/circle_pinglun_icon"
                     android:drawablePadding="5dp"
                     android:gravity="center"
-                    android:onClick="@{()->viewmodel.ItemPLClick(item)}"
                     android:text="评论" />
+                <!-- android:onClick="@{()->viewmodel.ItemPLClick(item)}"-->
                 <!--android:drawableLeft="@mipmap/circle_pinglun_icon"-->
 
 
@@ -221,7 +222,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:gravity="center_vertical"
-                    android:onClick="@{(view)->viewmodel.ItemDZClick(item,view)}"
+                    android:onClick="@{(view)->viewmodel.ItemDZClick(item.parent,view)}"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -229,14 +230,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@mipmap/circle_icon_dz1"
-                        android:src="@{item.isFav == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />
+                        android:src="@{item.parent.isFav == 1?R.mipmap.circle_icon_dz2:R.mipmap.circle_icon_dz1}" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:text="@{item.favourNum == 0?BdUtils.getFavNum(item.favourNum):BdUtils.getFavNum(item.favourNum)}" />
+                        android:text="@{item.parent.favourNum == 0?BdUtils.getFavNum(item.parent.favourNum):BdUtils.getFavNum(item.parent.favourNum)}" />
 
                 </LinearLayout>
 

@@ -7,6 +7,7 @@ import com.docker.cirlev2.vo.card.PersonInfoHeadVo;
 import com.docker.cirlev2.vo.entity.CircleCountpageVo;
 import com.docker.cirlev2.vo.entity.CircleCreateRst;
 import com.docker.cirlev2.vo.entity.CirclePubSelectVo;
+import com.docker.cirlev2.vo.pro.base.DynamicDataBase;
 import com.docker.cirlev2.vo.vo.CircleCreateVo;
 import com.docker.cirlev2.vo.entity.CircleDetailVo;
 import com.docker.cirlev2.vo.entity.CircleGroupPerssionVo;
@@ -35,7 +36,6 @@ import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.RstServerVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.vo.ShareBean;
-import com.docker.common.common.vo.servervo.vo.DynamicDataBase;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 

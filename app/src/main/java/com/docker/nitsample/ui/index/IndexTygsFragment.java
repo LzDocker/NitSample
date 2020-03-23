@@ -8,7 +8,6 @@ import android.view.View;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.GsonUtils;
 import com.docker.active.vm.ActiveCommonViewModel;
-import com.docker.active.vm.ActiveCommonViewModel;
 import com.docker.common.common.adapter.CommonpagerStateAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
 import com.docker.common.common.config.Constant;
@@ -76,57 +75,51 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
 
             @Override
             public void next(NitCommonListVm commonListVm, NitCommonFragment nitCommonFragment) {
-                if (flag == 101) {
-                    ActiveCommonViewModel innerVm = (ActiveCommonViewModel) commonListVm;
-                    innerVm.apiType = 2;
-                } else {
-                    outerVm = commonListVm;
-                    AppBannerCardVo appBannerHeaderCardVo = new AppBannerCardVo(0, 0);
-                    appBannerHeaderCardVo.mRepParamMap.put("cid", "1");
-                    appBannerHeaderCardVo.mRepParamMap.put("companyid", "1001");
+                outerVm = commonListVm;
+                AppBannerCardVo appBannerHeaderCardVo = new AppBannerCardVo(0, 0);
+                appBannerHeaderCardVo.mRepParamMap.put("cid", "1");
+                appBannerHeaderCardVo.mRepParamMap.put("companyid", "1001");
 //                appBannerHeaderCardVo.isNoNetNeed = true;
 
 //                AppRecycleCardVo appRecycleCardVo = new AppRecycleCardVo(0, 0);
-                    AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 1);
-                    appRecycleCardVo.mRepParamMap.put("keyid", "3471");
+                AppRecycleCard2Vo appRecycleCardVo = new AppRecycleCard2Vo(0, 1);
+                appRecycleCardVo.mRepParamMap.put("keyid", "3471");
 
 
-                    AppRecycleHorizontalCardVo appRecycleHorizontalCardVo = new AppRecycleHorizontalCardVo(0, 2,
-                            new LayoutManagerVo(0, 0, false),
-                            new RecycleTopLayout("热门活动", "更多", true));
+                AppRecycleHorizontalCardVo appRecycleHorizontalCardVo = new AppRecycleHorizontalCardVo(0, 2,
+                        new LayoutManagerVo(0, 0, false),
+                        new RecycleTopLayout("热门活动", "更多", true));
 
-                    HashMap<String, String> JXhashMap = new HashMap<>();
-                    JXhashMap.put("showFields", "*");
-                    Map<String, String> filterMap = new HashMap<>();
-                    filterMap.put("is_recommend", "1");
-                    JXhashMap.put("filter", GsonUtils.toJson(filterMap));
-                    appRecycleHorizontalCardVo.mRepParamMap = JXhashMap;
+                HashMap<String, String> JXhashMap = new HashMap<>();
+                JXhashMap.put("showFields", "*");
+                Map<String, String> filterMap = new HashMap<>();
+                filterMap.put("is_recommend", "1");
+                JXhashMap.put("filter", GsonUtils.toJson(filterMap));
+                appRecycleHorizontalCardVo.mRepParamMap = JXhashMap;
 
-                    disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
-                        if (rxEvent.getT().equals("activedel")
-                                || rxEvent.getT().equals("activeStusUpdate")
-                                || rxEvent.getT().equals("active_refresh")
-                                || rxEvent.getT().equals("activemodify")) {
-                            appRecycleHorizontalCardVo.mNitcommonCardViewModel.loadCardData(appRecycleHorizontalCardVo);
-                        }
-                    });
-
-                    NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
-                    NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
-                    NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
-
-                    UserInfoVo userInfoVo = CacheUtils.getUser();
-                    AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
-                            new LayoutManagerVo(0, 0, false),
-                            new RecycleTopLayout("分部推荐", "", false));
-                    if (userInfoVo != null) {
-                        appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
-                        appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
+                disposable = RxBus.getDefault().toObservable(RxEvent.class).subscribe(rxEvent -> {
+                    if (rxEvent.getT().equals("activedel")
+                            || rxEvent.getT().equals("activeStusUpdate")
+                            || rxEvent.getT().equals("active_refresh")
+                            || rxEvent.getT().equals("activemodify")) {
+                        appRecycleHorizontalCardVo.mNitcommonCardViewModel.loadCardData(appRecycleHorizontalCardVo);
                     }
-                    appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
-                    NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
-                }
+                });
 
+                NitBaseProviderCard.providerCard(commonListVm, appRecycleCardVo, nitCommonFragment);
+                NitBaseProviderCard.providerCard(commonListVm, appBannerHeaderCardVo, nitCommonFragment);
+                NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo, nitCommonFragment);
+
+                UserInfoVo userInfoVo = CacheUtils.getUser();
+                AppRecycleHorizontalCardVo2 appRecycleHorizontalCardVo2 = new AppRecycleHorizontalCardVo2(0, 3,
+                        new LayoutManagerVo(0, 0, false),
+                        new RecycleTopLayout("分部推荐", "", false));
+                if (userInfoVo != null) {
+                    appRecycleHorizontalCardVo2.mRepParamMap.put("memberid", userInfoVo.uid);
+                    appRecycleHorizontalCardVo2.mRepParamMap.put("uuid", userInfoVo.uuid);
+                }
+                appRecycleHorizontalCardVo2.mRepParamMap.put("isrecommend", "1");
+                NitBaseProviderCard.providerCard(commonListVm, appRecycleHorizontalCardVo2, nitCommonFragment);
             }
         };
         return nitDelegetCommand;
@@ -158,7 +151,7 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
         });
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-//        NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), com.docker.cirlev2.R.id.frame_header, commonListOptions);
+        NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), com.docker.cirlev2.R.id.frame_header, commonListOptions);
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();
@@ -186,45 +179,27 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
 
     }
 
-    //    public void peocessTab(List<Tabvo> tabvos) {
-//        String[] titles = new String[tabvos.size()];
-//        for (int i = 0; i < tabvos.size(); i++) {
-//            titles[i] = tabvos.get(i).name;
-//            CommonListOptions commonListOptions = new CommonListOptions();
-//            commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-//            if ("goods".equals(tabvos.get(i).type)) {
-//                commonListOptions.RvUi = Constant.KEY_RVUI_GRID2;
-//            } else {
-//                commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-//            }
-//            commonListOptions.ReqParam.put("t", tabvos.get(i).type);
-//            commonListOptions.ReqParam.put("index_bottom_catid", tabvos.get(i).id);
-//            if ("activity".equals(tabvos.get(i).type)) {
-//                commonListOptions.isActParent = false;
-//                commonListOptions.falg = 101;
-//                NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
-//                fragments.add(nitCommonContainerFragmentV2);
-//            } else {
-//                fragments.add((Fragment) ARouter.getInstance()
-//                        .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-//                        .withSerializable(CommonListParam, commonListOptions)
-//                        .navigation());
-//            }
-//        }
-//        //
-//        mBinding.get().viewPager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));
-//        CommonIndector commonIndector = new CommonIndector();
-//        commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
-//    }
     public void peocessTab(List<Tabvo> tabvos) {
         String[] titles = new String[tabvos.size()];
         for (int i = 0; i < tabvos.size(); i++) {
             titles[i] = tabvos.get(i).name;
             CommonListOptions commonListOptions = new CommonListOptions();
             commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-            commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-            commonListOptions.ReqParam.put("t", "news");
+            if ("goods".equals(tabvos.get(i).type)) {
+                commonListOptions.RvUi = Constant.KEY_RVUI_GRID2;
+            } else {
+                commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+            }
+            commonListOptions.ReqParam.put("t", tabvos.get(i).type);
             commonListOptions.ReqParam.put("index_bottom_catid", tabvos.get(i).id);
+//            if ("activity".equals(tabvos.get(i).type)) {
+//                commonListOptions.isActParent = false;
+//                commonListOptions.falg = 101;
+//                NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+//                fragments.add(nitCommonContainerFragmentV2);
+//            } else {
+//
+//            }
 
             fragments.add((Fragment) ARouter.getInstance()
                     .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)

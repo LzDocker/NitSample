@@ -1,13 +1,22 @@
-package com.docker.common.common.vo.servervo.vo;
+package com.docker.cirlev2.vo.pro.base;
 
 
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.docker.cirlev2.vo.pro.CommentUserBean;
+import com.docker.cirlev2.BR;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 
-public class DynamicDataBase extends BaseObservable {
+import java.io.Serializable;
+import java.util.List;
 
+public class DynamicDataBase extends BaseObservable implements Serializable {
+
+
+    public int scope = 0;
 
     public OnItemClickListener getOnItemClickListener() {
         return (item, view) -> ARouter.getInstance().build(AppRouter.CIRCLE_dynamic_v2_detail).withString("dynamicId", this.getDynamicid()).navigation();
@@ -17,6 +26,48 @@ public class DynamicDataBase extends BaseObservable {
 
     public ExtDataBase extData;
 
+
+    @Bindable
+    private int isCollect;
+
+    @Bindable
+    public int getIsCollect() {
+        return isCollect;
+    }
+
+    @Bindable
+    public void setIsCollect(int isCollect) {
+        this.isCollect = isCollect;
+        notifyPropertyChanged(BR.isCollect);
+    }
+
+    @Bindable
+    private int favourNum = 0;
+
+    @Bindable
+    public int getFavourNum() {
+        return favourNum;
+    }
+
+    @Bindable
+    public void setFavourNum(int favourNum) {
+        this.favourNum = favourNum;
+    }
+
+
+    @Bindable
+    private int isFav;
+
+    @Bindable
+    public int getIsFav() {
+        return isFav;
+    }
+
+    @Bindable
+    public void setIsFav(int isFav) {
+        this.isFav = isFav;
+        notifyPropertyChanged(BR.isFav);
+    }
 
     public String dynamicid;  // "27",
     public String memberid;  // "3",
@@ -30,7 +81,6 @@ public class DynamicDataBase extends BaseObservable {
     public String dataid;  // "8",
     public String dis;  // "18.718626256207717",
     public String commentNum;  // "0",
-    public String favourNum;  // "0",
     public String seeNum;  // 495,
     public String avatar;  // "",
     public String circleName;  // "官方圈",
@@ -40,6 +90,11 @@ public class DynamicDataBase extends BaseObservable {
     public String city;  // "北京市",
     public String district;  // "海淀区",
     public String new_content;
+    public String labels;
+    public String companyName;
+
+
+    public List<CommentUserBean> commentUsers;
 
 
     public String getType() {
@@ -154,13 +209,6 @@ public class DynamicDataBase extends BaseObservable {
         this.commentNum = commentNum;
     }
 
-    public String getFavourNum() {
-        return favourNum;
-    }
-
-    public void setFavourNum(String favourNum) {
-        this.favourNum = favourNum;
-    }
 
     public String getSeeNum() {
         return seeNum;

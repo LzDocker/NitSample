@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.docker.cirlev2.vo.entity.ServiceDataBean" />
+            type="com.docker.cirlev2.vo.pro.Goods" />
 
 
         <import type="com.docker.cirlev2.util.BdUtils" />
@@ -52,7 +52,7 @@
                     android:paddingTop="2dp"
                     android:paddingRight="5dp"
                     android:paddingBottom="2dp"
-                    android:text="@{item.companyName}"
+                    android:text="@{item.parent.companyName}"
                     android:textColor="@color/white"
                     android:textSize="10sp"
                     android:visibility="gone" />
@@ -95,7 +95,7 @@
                     android:minHeight="30dp"
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
-                    android:text="@{item}"
+                    android:text="@{item.name}"
                     android:textColor="#333"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -140,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{BdUtils.getSeeNum(item.seeNum)}"
+                    android:text="@{BdUtils.getSeeNum(item.parent.seeNum)}"
                     android:textColor="#999"
                     android:textSize="10sp" />
 

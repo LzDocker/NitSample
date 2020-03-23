@@ -6,6 +6,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.active.R;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
+import com.docker.cirlev2.vo.pro.base.ExtDataBase;
 import com.docker.common.common.model.BaseSampleItem;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
@@ -13,7 +14,7 @@ import com.docker.common.common.utils.cache.CacheUtils;
 
 import java.util.List;
 
-public class ActiveVo extends BaseSampleItem {
+public class ActiveVo extends ExtDataBase {
 
 
     public int scope = 0;
@@ -52,9 +53,9 @@ public class ActiveVo extends BaseSampleItem {
     public String cityCode;
     public String sponsorName;
     public String utid;
-    public String title;
-    public String uuid;
-    public String content;
+    //    public String title;
+//    public String uuid;
+//    public String content;
     public List<ServiceDataBean.ResourceBean> banner;
 
     public String contact;
@@ -71,9 +72,9 @@ public class ActiveVo extends BaseSampleItem {
     public String startDate;
     public String memberid;
 
-    public List<ServiceDataBean.ResourceBean> resource;
+//    public List<ServiceDataBean.ResourceBean> resource;
 
-    public String updatetime;
+    //    public String updatetime;
     public String inputtime;
 
     public int status;
