@@ -31,12 +31,14 @@ public class GlobalConfigModule {
     private List<Interceptor> mInterceptors;
     private File mCacheFile;
     private HttpRequestHandler mHandler;
+    private ConverterHoledr converterHoled;
 
     private GlobalConfigModule(Buidler buidler) {
         this.mApiUrl = buidler.apiUrl;
         this.mInterceptors = buidler.interceptors;
         this.mHandler = buidler.handler;
         this.mCacheFile = buidler.cacheFile;
+        this.converterHoled = buidler.converterHoled;
     }
 
     public static Buidler buidler() {
@@ -62,12 +64,18 @@ public class GlobalConfigModule {
         return mHandler == null ? HttpRequestHandler.EMPTY : mHandler;//打印请求信息
     }
 
+    @Singleton
+    @Provides
+    public ConverterHoledr provideConverterHoledr() {
+        return converterHoled;
+    }
 
     public static final class Buidler {
         private HttpUrl apiUrl;
         private List<Interceptor> interceptors = new ArrayList<>();
         private File cacheFile;
         private HttpRequestHandler handler;
+        private ConverterHoledr converterHoled;
 
         private Buidler() {
 
@@ -93,6 +101,11 @@ public class GlobalConfigModule {
 
         public Buidler cacheFile(File cacheFile) {
             this.cacheFile = cacheFile;
+            return this;
+        }
+
+        public Buidler converterHoled(ConverterHoledr converterHoled) {
+            this.converterHoled = converterHoled;
             return this;
         }
 

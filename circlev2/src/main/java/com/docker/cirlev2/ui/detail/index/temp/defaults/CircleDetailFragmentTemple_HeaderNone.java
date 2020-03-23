@@ -55,7 +55,7 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
 
 
 //        mBinding.get().ivMenuMore.setVisibility(View.GONE);
-//        mBinding.get().toolbar.setVisibility(View.GONE);
+//        mBinding.get().vd_toolbar.setVisibility(View.GONE);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class CircleDetailFragmentTemple_HeaderNone extends NitDefaultCircleFragm
         super.initImmersionBar();
 //        View view = null;
 //        if (!TextUtils.isEmpty(circleConfig.extens.get("title"))) {
-//            view = mBinding.get().toolbar;
+//            view = mBinding.get().vd_toolbar;
 //            mBinding.get().toolbarLayout.setVisibility(View.VISIBLE);
 //            ImmersionBar.with(this)
 //                    .navigationBarColor("#ffffff")

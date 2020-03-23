@@ -219,7 +219,7 @@ public class NitDefaultCircleFragment extends NitAbsCircleFragment<DefaultDetail
 //            ImmersionBar.with(this)
 //                    .navigationBarColor("#ffffff")
 //                    .statusBarDarkFont(true)
-//                    .titleBarMarginTop(mBinding.get().toolbar)
+//                    .titleBarMarginTop(mBinding.get().vd_toolbar)
 //                    .init();
 //        } else {
 //

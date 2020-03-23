@@ -10,7 +10,6 @@ import com.docker.cirlev2.R;
 import com.docker.cirlev2.vm.card.CirclePersonInfoHeadCardVm;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.card.BaseCardVo;
-import com.docker.module_im.session.SessionHelper;
 
 public class PersonInfoHeadCardVo extends BaseCardVo {
 

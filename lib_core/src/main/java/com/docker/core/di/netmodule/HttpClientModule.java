@@ -1,6 +1,7 @@
 package com.docker.core.di.netmodule;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.docker.core.di.netmodule.converter.GsonConverterFactory;
 import com.docker.core.di.module.cookie.CookieJarImpl;
@@ -11,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +31,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -41,17 +44,37 @@ public class HttpClientModule {
         this.context = context;
     }
 
+//    @Singleton
+//    @Provides
+//    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient client, HttpUrl httpUrl) {
+//        Log.d("sss", "provideRetrofit: =============111========");
+//
+//        return builder
+//                .baseUrl(httpUrl)
+//                .client(client)
+//                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//    }
+
     @Singleton
     @Provides
-    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient client, HttpUrl httpUrl) {
-        return builder
-                .baseUrl(httpUrl)
+    Retrofit provideRetrofit(Retrofit.Builder builder, OkHttpClient client, HttpUrl httpUrl, ConverterHoledr converterHoledr) {
+        builder.baseUrl(httpUrl)
                 .client(client)
                 .addCallAdapterFactory(new LiveDataCallAdapterFactory())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+        if (converterHoledr != null && converterHoledr.mConverters.size() > 0) {
+            for (int i = 0; i < converterHoledr.mConverters.size(); i++) {
+                builder.addConverterFactory(converterHoledr.mConverters.get(i));
+                Log.d("sss", "provideRetrofit: ========add=  cover==");
+            }
+        }
+        builder.addConverterFactory(GsonConverterFactory.create());
+        return builder.build();
     }
+
 
 //    @Singleton
 //    @Provides

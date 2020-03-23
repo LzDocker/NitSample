@@ -6,14 +6,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.vo.card.PersonInfoHeadCardVo;
 import com.docker.cirlev2.vo.card.PersonInfoHeadVo;
-import com.docker.cirlev2.vo.entity.CircleCountpageVo;
-import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.BR;
 import com.docker.common.common.model.BaseItemModel;
+import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.container.NitcommonCardViewModel;
 import com.docker.common.common.vo.UserInfoVo;
@@ -21,7 +21,6 @@ import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
-import com.docker.module_im.session.SessionHelper;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,6 +30,9 @@ import javax.inject.Inject;
 public class CirclePersonInfoHeadCardVm extends NitcommonCardViewModel {
 
     public PersonInfoHeadCardVo personInfoHeadVo;
+
+    @Autowired
+    MessageService messageService;
 
     @Inject
     CircleApiService circleApiService;
@@ -137,8 +139,6 @@ public class CirclePersonInfoHeadCardVm extends NitcommonCardViewModel {
         if (personInfoHeadVo == null) {
             return;
         }
-        SessionHelper.startP2PSession(ActivityUtils.getTopActivity(), personInfoHeadVo.getUuid());
+        messageService.enterToTalk(personInfoHeadVo.getUuid());
     }
-
-
 }

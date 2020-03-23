@@ -9,10 +9,6 @@
             name="item"
             type="com.docker.order.vo.OrderVoV2" />
 
-        <import type="com.bfhd.circle.utils.BdUtils" />
-
-        <import type="com.bfhd.circle.base.Constant" />
-
         <import type="com.docker.order.utils.OrderBdUtils" />
 
         <import type="com.docker.core.util.LayoutManager" />
@@ -72,7 +68,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="10dp"
                         android:onClick="@{(view)->viewmodel.delOrder(item,view)}"
-                        android:src="@mipmap/del_icon"
+                        android:src="@mipmap/circlev2_delete"
                         app:visibleGone="@{item.status==0}" />
 
                 </LinearLayout>
@@ -139,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_toLeftOf="@id/tv_price"
                             android:layout_weight="1"
-                            android:text="@string/yjf"
+                            android:text="¥"
                             android:textColor="#333333"
                             android:textSize="11sp" />
 

@@ -110,10 +110,10 @@ public class CircleDetailFragmentTemple_HeaderImg extends NitDefaultCircleFragme
 //            ImmersionBar.with(this)
 //                    .navigationBarColor("#ffffff")
 //                    .statusBarDarkFont(true)
-//                    .titleBarMarginTop(mBinding.get().toolbar)
+//                    .titleBarMarginTop(mBinding.get().vd_toolbar)
 //                    .init();
 //        } else {
-//            mBinding.get().toolbar.setVisibility(View.GONE);
+//            mBinding.get().vd_toolbar.setVisibility(View.GONE);
 //        }
         if(circleConfig.isNeedToobar){
             super.initImmersionBar();

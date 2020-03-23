@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.circle.base.HivsNetBoundObserver;
-import com.bfhd.circle.base.NetBoundCallback;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
@@ -240,7 +238,7 @@ public class OrderCommonViewModel extends NitCommonContainerViewModel {
      */
     public void getWuliu(HashMap<String, String> params) {
         mLogisticeVoLv.addSource(RequestServer(
-                orderService.wuliu(params)), new HivsNetBoundObserver<>(new NetBoundCallback<LogisticeVo>() {
+                orderService.wuliu(params)), new NitNetBoundObserver<>(new NitBoundCallback<LogisticeVo>() {
             @Override
             public void onComplete(Resource<LogisticeVo> resource) {
                 super.onComplete(resource);

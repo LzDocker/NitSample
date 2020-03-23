@@ -254,7 +254,7 @@
 ////            mBinding.banner.setTranslationY(verticalOffset);
 //            int mAlpha = (int) Math.abs(255f / scrollRangle * verticalOffset);
 //            //顶部title渐变效果
-//            mBinding.toolbar.setBackgroundColor(Color.argb(mAlpha, 255, 255, 255));
+//            mBinding.vd_toolbar.setBackgroundColor(Color.argb(mAlpha, 255, 255, 255));
 //        });
 //
 //    }
@@ -342,7 +342,7 @@
 //        ImmersionBar.with(DefaultCircleDetailIndexActivity.this)
 //                .navigationBarColor("#ffffff")
 //                .statusBarDarkFont(true)
-//                .titleBarMarginTop(mBinding.toolbar)
+//                .titleBarMarginTop(mBinding.vd_toolbar)
 //                .init();
 //    }
 //

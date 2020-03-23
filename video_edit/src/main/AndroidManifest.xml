@@ -1,0 +1,36 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.docker.video_edit">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+
+        <activity
+            android:name="com.docker.video_edit.sample.ui.activity.MainActivity"
+            android:configChanges="keyboard|orientation|screenSize" />
+        <activity
+            android:name="com.docker.video_edit.sample.ui.activity.TrimVideoActivity"
+            android:configChanges="keyboard|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.video_edit.sample.ui.activity.VideoAlbumActivity"
+            android:configChanges="keyboard|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.video_edit.sample.ui.activity.VideoCameraActivity"
+            android:configChanges="keyboard|orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.docker.video_edit.sample.ui.activity.VideoPreviewActivity"
+            android:configChanges="keyboard|orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>

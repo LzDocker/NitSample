@@ -4,8 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.util.Log;
 
-import com.bfhd.circle.base.HivsNetBoundObserver;
-import com.bfhd.circle.base.NetBoundCallback;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vo.PayOrederVo;
@@ -92,7 +90,7 @@ public class OrderMakerViewModel extends NitCommonContainerViewModel {
      */
     public void getWuliu(HashMap<String, String> params) {
         mLogisticeVoLv.addSource(RequestServer(
-                orderService.wuliu(params)), new HivsNetBoundObserver<>(new NetBoundCallback<LogisticeVo>() {
+                orderService.wuliu(params)), new NitNetBoundObserver<>(new NitBoundCallback<LogisticeVo>() {
             @Override
             public void onComplete(Resource<LogisticeVo> resource) {
                 super.onComplete(resource);

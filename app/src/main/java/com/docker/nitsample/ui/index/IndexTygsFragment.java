@@ -158,7 +158,7 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
         });
         CommonListOptions commonListOptions = new CommonListOptions();
         commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-        NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), com.docker.cirlev2.R.id.frame_header, commonListOptions);
+//        NitBaseProviderCard.providerCardNoRefreshForFrame(getChildFragmentManager(), com.docker.cirlev2.R.id.frame_header, commonListOptions);
 
         mBinding.get().tvSearch.setOnClickListener(v -> {
 //            ARouter.getInstance().build(AppRouter.App_SEARCH_index).withString("t", "-1").navigation();
@@ -186,30 +186,50 @@ public class IndexTygsFragment extends NitCommonFragment<IndexTygsViewModel, Ind
 
     }
 
+    //    public void peocessTab(List<Tabvo> tabvos) {
+//        String[] titles = new String[tabvos.size()];
+//        for (int i = 0; i < tabvos.size(); i++) {
+//            titles[i] = tabvos.get(i).name;
+//            CommonListOptions commonListOptions = new CommonListOptions();
+//            commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
+//            if ("goods".equals(tabvos.get(i).type)) {
+//                commonListOptions.RvUi = Constant.KEY_RVUI_GRID2;
+//            } else {
+//                commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+//            }
+//            commonListOptions.ReqParam.put("t", tabvos.get(i).type);
+//            commonListOptions.ReqParam.put("index_bottom_catid", tabvos.get(i).id);
+//            if ("activity".equals(tabvos.get(i).type)) {
+//                commonListOptions.isActParent = false;
+//                commonListOptions.falg = 101;
+//                NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
+//                fragments.add(nitCommonContainerFragmentV2);
+//            } else {
+//                fragments.add((Fragment) ARouter.getInstance()
+//                        .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+//                        .withSerializable(CommonListParam, commonListOptions)
+//                        .navigation());
+//            }
+//        }
+//        //
+//        mBinding.get().viewPager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));
+//        CommonIndector commonIndector = new CommonIndector();
+//        commonIndector.initMagicIndicator(titles, mBinding.get().viewPager, mBinding.get().magicIndicator, this.getHoldingActivity());
+//    }
     public void peocessTab(List<Tabvo> tabvos) {
         String[] titles = new String[tabvos.size()];
         for (int i = 0; i < tabvos.size(); i++) {
             titles[i] = tabvos.get(i).name;
             CommonListOptions commonListOptions = new CommonListOptions();
             commonListOptions.refreshState = Constant.KEY_REFRESH_ONLY_LOADMORE;
-            if ("goods".equals(tabvos.get(i).type)) {
-                commonListOptions.RvUi = Constant.KEY_RVUI_GRID2;
-            } else {
-                commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
-            }
-            commonListOptions.ReqParam.put("t", tabvos.get(i).type);
+            commonListOptions.RvUi = Constant.KEY_RVUI_LINER;
+            commonListOptions.ReqParam.put("t", "news");
             commonListOptions.ReqParam.put("index_bottom_catid", tabvos.get(i).id);
-            if ("activity".equals(tabvos.get(i).type)) {
-                commonListOptions.isActParent = false;
-                commonListOptions.falg = 101;
-                NitCommonContainerFragmentV2 nitCommonContainerFragmentV2 = NitCommonContainerFragmentV2.newinstance(commonListOptions);
-                fragments.add(nitCommonContainerFragmentV2);
-            } else {
-                fragments.add((Fragment) ARouter.getInstance()
-                        .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
-                        .withSerializable(CommonListParam, commonListOptions)
-                        .navigation());
-            }
+
+            fragments.add((Fragment) ARouter.getInstance()
+                    .build(AppRouter.CIRCLE_DYNAMIC_LIST_FRAME)
+                    .withSerializable(CommonListParam, commonListOptions)
+                    .navigation());
         }
         //
         mBinding.get().viewPager.setAdapter(new CommonpagerStateAdapter(getChildFragmentManager(), fragments, titles));

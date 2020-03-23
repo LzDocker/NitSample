@@ -35,6 +35,7 @@ import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.RstServerVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.common.vo.ShareBean;
+import com.docker.common.common.vo.servervo.vo.DynamicDataBase;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 
@@ -266,7 +267,7 @@ public interface CircleApiService {
      * */
     @POST("api.php?m=dynamic.getList")
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<List<ServiceDataBean>>>> fechCircleInfoList(@FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<List<DynamicDataBase>>>> fechCircleInfoList(@FieldMap Map<String, String> params);
 
 
     /*
@@ -282,7 +283,7 @@ public interface CircleApiService {
      * */
     @POST()
     @FormUrlEncoded
-    LiveData<ApiResponse<BaseResponse<List<ServiceDataBean>>>> fechCircleInfoList(@Url String url, @FieldMap Map<String, String> params);
+    LiveData<ApiResponse<BaseResponse<List<DynamicDataBase>>>> fechCircleInfoList(@Url String url, @FieldMap Map<String, String> params);
 
 
     /*

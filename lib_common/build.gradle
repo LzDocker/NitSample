@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.LzDocker'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -71,14 +69,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
-    //core
-    api project(':lib_core')
-
-    //utilcode
-    api project(':lib_utilcode')
-
-    //opensource
-    api project(':lib_opensource')
 
     // glide
     api rootProject.ext.dependencies["glide"]
@@ -115,6 +105,7 @@ dependencies {
     api rootProject.ext.dependencies["zxing-qrcode"] // 音频
     api rootProject.ext.dependencies["pickerview"] // 选择器
 
+//    api 'com.github.tbruyelle:rxpermissions:0.10.2'
     api 'com.github.1002326270xc:LayoutManager-FlowLayout:v1.8'
     api 'com.yanzhenjie.recyclerview:support:1.3.2'
     api 'org.linwg1988:lcardview:1.4.2'//可以设置阴影的cardview
@@ -122,33 +113,10 @@ dependencies {
 
     // 视频基础类库
     api project(':lib_video')
-}
 
-// 指定编码
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
+    //core
+    api project(':lib_core')
 
-// 打包源码
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    failOnError  false
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
-}
-
-// 制作文档(Javadoc)
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
+    //opensource
+    api project(':lib_opensource')
 }

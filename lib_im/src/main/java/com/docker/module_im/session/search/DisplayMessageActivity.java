@@ -71,7 +71,7 @@ public class DisplayMessageActivity extends UI implements ModuleProxy {
                 .autoStatusBarDarkModeEnable(true, 0.2f) //自动状态栏字体变色，必须指定状态栏颜色才可以自动变色哦
                 .autoNavigationBarDarkModeEnable(true, 0.2f) //自动导航栏图标变色，必须指定导航栏颜色才可以自动变色哦
                 .flymeOSStatusBarFontColor("#000000")  //修改flyme OS状态栏字体颜色
-                .navigationBarColor(com.netease.nim.uikit.R.color.transparent_white)
+                .navigationBarColor(com.netease.nim.uikit.R.color.common_white)
                 .init();
     }
 

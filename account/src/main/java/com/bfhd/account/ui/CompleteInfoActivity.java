@@ -4,61 +4,34 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.Observable;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityCompleteInfoBinding;
-import com.bfhd.account.databinding.AccountActivityRegistBinding;
-import com.bfhd.account.utils.AccountConstant;
 import com.bfhd.account.vm.AccountViewModel;
-import com.bfhd.account.vo.RegistParmVo;
 import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
 import com.bfhd.circle.ui.common.CircleSourceUpFragment;
-import com.bfhd.circle.ui.common.CommonH5Activity;
 import com.bfhd.circle.vo.bean.SourceUpParam;
 import com.dcbfhd.utilcode.utils.FragmentUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.util.BdUtils;
+import com.docker.common.common.command.ReplyCommandParam;
 import com.docker.common.common.config.GlideApp;
+import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.tool.MD5Util;
 import com.docker.common.common.vo.UserInfoVo;
-import com.docker.common.common.vo.VisitingCardVo;
-import com.docker.module_im.DemoCache;
-import com.docker.module_im.config.preference.UserPreferences;
 import com.gyf.immersionbar.ImmersionBar;
-import com.netease.nim.uikit.api.NimUIKit;
-import com.netease.nim.uikit.common.ToastHelper;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.StatusBarNotificationConfig;
-import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import java.util.HashMap;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 
 /*
  * 完善信息
@@ -66,6 +39,8 @@ import io.reactivex.disposables.Disposable;
 @Route(path = AppRouter.ACCOUNT_COMPLETE_INFO)
 public class CompleteInfoActivity extends HivsBaseActivity<AccountViewModel, AccountActivityCompleteInfoBinding> {
 
+    @Autowired
+    MessageService messageService;
 
     SourceUpParam mHeadSourceUpParam;
     private CircleSourceUpFragment sourceHeadUpFragment;
@@ -186,49 +161,10 @@ public class CompleteInfoActivity extends HivsBaseActivity<AccountViewModel, Acc
     }
 
     public void loginWithIm(String account, String token) {
-        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-            @Override
-            public void onSuccess(LoginInfo param) {
-                DemoCache.setAccount(account);
-                // 初始化消息提醒配置
-                initNotificationConfig();
-//                // 进入主界面
-//                MainActivity.start(LoginActivity.this, null);
-                ARouter.getInstance().build(AppRouter.HOME).navigation();
-                finish();
-            }
-
-            @Override
-            public void onFailed(int code) {
-                if (code == 302 || code == 404) {
-//                    ToastHelper.showToast(CompleteInfoActivity.this, R.string.login_failed);
-                } else {
-//                    ToastHelper.showToast(CompleteInfoActivity.this, "im登录失败: " + code);
-                }
-                ARouter.getInstance().build(AppRouter.HOME).navigation(CompleteInfoActivity.this);
-                finish();
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-//                ToastHelper.showToast(CompleteInfoActivity.this, R.string.login_exception);
-                ARouter.getInstance().build(AppRouter.HOME).navigation(CompleteInfoActivity.this);
-                finish();
-            }
+        messageService.loginIm(account, token, (ReplyCommandParam<Integer>) integer -> {
+            ARouter.getInstance().build(AppRouter.HOME).navigation();
+            finish();
         });
-    }
-
-    private void initNotificationConfig() {
-        // 初始化消息提醒
-        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-        // 加载状态栏配置
-        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
-        if (statusBarNotificationConfig == null) {
-            statusBarNotificationConfig = DemoCache.getNotificationConfig();
-            UserPreferences.setStatusConfig(statusBarNotificationConfig);
-        }
-        // 更新配置
-        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
     }
 
 

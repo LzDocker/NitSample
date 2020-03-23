@@ -73,7 +73,7 @@
 //        mapView.onCreate(savedInstanceState);// 此方法必须重写
 //
 //        ToolBarOptions options = new NimToolBarOptions();
-//        setToolBar(R.id.toolbar, options);
+//        setToolBar(R.id.vd_toolbar, options);
 //
 //        initView();
 //        initAmap();

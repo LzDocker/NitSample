@@ -304,7 +304,7 @@ public class CirclePersonDetailWjActivity extends HivsBaseActivity<CircleViewMod
 //            mBinding.parallax.setTranslationY(verticalOffset);
 //            int mAlpha = (int) Math.abs(255f / scrollRangle * verticalOffset);
 //            //顶部title渐变效果
-////            mBinding.toolbar.setBackgroundColor(Color.argb(mAlpha, 255, 255, 255));
+////            mBinding.vd_toolbar.setBackgroundColor(Color.argb(mAlpha, 255, 255, 255));
 //            mBinding.rlcoutainer.setBackgroundColor(Color.argb(mAlpha, 255, 255, 255));
 //        });
     }

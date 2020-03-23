@@ -5,9 +5,9 @@
 
     <data>
 
-        <variable
-            name="viewmodel"
-            type="com.bfhd.account.vm.AccountViewModel" />
+        <!--<variable-->
+            <!--name="viewmodel"-->
+            <!--type="com.bfhd.account.vm.AccountViewModel" />-->
     </data>
 
     <LinearLayout

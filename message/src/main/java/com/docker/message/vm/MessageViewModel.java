@@ -3,12 +3,8 @@ package com.docker.message.vm;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
-import com.bfhd.circle.base.HivsNetBoundObserver;
-import com.bfhd.circle.base.NetBoundCallback;
-import com.dcbfhd.utilcode.utils.CacheMemoryUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.common.common.model.BaseItemModel;
@@ -108,7 +104,7 @@ public class MessageViewModel extends NitCommonContainerViewModel {
     public void readAllMsg() {
         UserInfoVo userInfoVo = CacheUtils.getUser();
         mRearAllLiveData.addSource(RequestServer(messageService.readAllMsg(userInfoVo.memberid)),
-                new HivsNetBoundObserver<>(new NetBoundCallback<String>() {
+                new NitNetBoundObserver<>(new NitBoundCallback<String>() {
                     @Override
                     public void onComplete(Resource<String> resource) {
                         super.onComplete(resource);

@@ -99,9 +99,9 @@ dependencies {
     api project(":account")
     api project(":videobasic")
     api project(":message")
-    api project(":circlev2")
     api project(":evaluate")
     api project(':pro')
     api project(':active')
     api project(':order')
+    api project(':video_edit')
 }

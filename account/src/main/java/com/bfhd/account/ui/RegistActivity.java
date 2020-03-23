@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -15,40 +14,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.databinding.AccountActivityRegistBinding;
 import com.bfhd.account.utils.AccountConstant;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.account.vo.RegistParmVo;
-import com.bfhd.circle.base.Constant;
 import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
 import com.bfhd.circle.ui.common.CommonH5Activity;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
-import com.docker.common.common.utils.tool.MD5Util;
 import com.docker.common.common.vo.UserInfoVo;
-import com.docker.module_im.DemoCache;
-import com.docker.module_im.config.preference.UserPreferences;
 import com.gyf.immersionbar.ImmersionBar;
-import com.netease.nim.uikit.api.NimUIKit;
-import com.netease.nim.uikit.common.ToastHelper;
-import com.netease.nim.uikit.common.util.log.LogUtil;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.StatusBarNotificationConfig;
-import com.netease.nimlib.sdk.auth.LoginInfo;
 
 import java.util.HashMap;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -67,8 +54,10 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
     private String area_code = "+86";
     private HashMap<String, String> wechatInfo = null;
     private String isCheckbox = "";
-
     private String bindType;
+
+    @Autowired
+    MessageService imService;
 
     @Override
     public AccountViewModel getmViewModel() {
@@ -147,10 +136,6 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
                 ToastUtils.showShort("手机号不能为空！");
                 return;
             }
-//            if (mBinding.getRegistParm().getPhone().length() != 11) {
-//                ToastUtils.showShort("手机号格式不正确！");
-//                return;
-//            }
             mViewModel.sendSms(mBinding.getRegistParm().getPhone(), mBinding.tvNum.getText().toString().trim());
         });
 
@@ -217,64 +202,6 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
     }
 
 
-    // 激光设置
-    private void setAlias() {
-        UserInfoVo userInfoVo = CacheUtils.getUser();
-        if (!"-1".equals(userInfoVo.uuid)) {
-            String alias = userInfoVo.uuid;
-            if (TextUtils.isEmpty(alias)) {
-                return;
-            }
-            if (!TextUtils.isEmpty(CacheUtils.getJpAlias())) {
-                return;
-            }
-            mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
-        }
-    }
-
-    private String TAG = "jiguang";
-    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-        @Override
-        public void gotResult(int code, String alias, Set<String> tags) {
-            String logs;
-            switch (code) {
-                case 0:
-                    logs = "Set tag and alias success";
-                    Log.i(TAG, logs);
-                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-                    break;
-                case 6002:
-                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-                    Log.i(TAG, logs);
-                    // 延迟 60 秒来调用 Handler 设置别名
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-                    break;
-                default:
-                    logs = "Failed with errorCode = " + code;
-                    Log.e(TAG, logs);
-            }
-        }
-    };
-    private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
-
     @Override
     public void OnVmEnentListner(ViewEventResouce viewEventResouce) {
         super.OnVmEnentListner(viewEventResouce);
@@ -285,7 +212,7 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
             case 105:
                 ToastUtils.showShort("注册成功");
                 UserInfoVo userInfoVo = CacheUtils.getUser();
-                setAlias();
+                imService.setAlias(true);
                 ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
 
                 //loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
@@ -298,53 +225,6 @@ public class RegistActivity extends HivsBaseActivity<AccountViewModel, AccountAc
                 break;
         }
     }
-
-    public void loginWithIm(String account, String token) {
-        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-            @Override
-            public void onSuccess(LoginInfo param) {
-                DemoCache.setAccount(account);
-                // 初始化消息提醒配置
-                initNotificationConfig();
-//                // 进入主界面
-//                MainActivity.start(LoginActivity.this, null);
-                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
-                finish();
-            }
-
-            @Override
-            public void onFailed(int code) {
-                if (code == 302 || code == 404) {
-//                    ToastHelper.showToast(RegistActivity.this, R.string.login_failed);
-                } else {
-//                    ToastHelper.showToast(RegistActivity.this, "im登录失败: " + code);
-                }
-                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
-                finish();
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-                ToastHelper.showToast(RegistActivity.this, R.string.login_exception);
-                ARouter.getInstance().build(AppRouter.HOME).navigation(RegistActivity.this);
-                finish();
-            }
-        });
-    }
-
-    private void initNotificationConfig() {
-        // 初始化消息提醒
-        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-        // 加载状态栏配置
-        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
-        if (statusBarNotificationConfig == null) {
-            statusBarNotificationConfig = DemoCache.getNotificationConfig();
-            UserPreferences.setStatusConfig(statusBarNotificationConfig);
-        }
-        // 更新配置
-        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
-    }
-
 
     private void verfi() {
         final int count = 60;

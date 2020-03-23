@@ -9,8 +9,6 @@ import android.util.Log;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.account.databinding.AccountActivityOrderBinding;
-import com.bfhd.circle.base.adapter.HivsSampleAdapter;
 import com.docker.cirlev2.vo.entity.CircleTitlesVo;
 import com.docker.common.common.adapter.CommonpagerAdapter;
 import com.docker.common.common.command.NitDelegetCommand;
@@ -25,6 +23,8 @@ import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.NitCommonListVm;
 import com.docker.common.common.widget.indector.CommonIndector;
+import com.docker.order.R;
+import com.docker.order.databinding.ProOrderListActivityBinding;
 import com.docker.order.vm.OrderCommonViewModel;
 
 import java.util.ArrayList;
@@ -38,12 +38,11 @@ import io.reactivex.disposables.Disposable;
  * 订单支付
  **/
 @Route(path = AppRouter.ORDER_LIST)
-public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, AccountActivityOrderBinding> {
+public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, ProOrderListActivityBinding> {
 
 
     @Inject
     ViewModelProvider.Factory factory;
-    private HivsSampleAdapter mAdapter;
 
     private OrderCommonViewModel innervm;
     public ArrayList<Fragment> fragments = new ArrayList<>();
@@ -57,7 +56,7 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
 
     @Override
     protected int getLayoutId() {
-        return com.bfhd.account.R.layout.account_activity_order;
+        return R.layout.pro_order_list_activity;
     }
 
     @Override
@@ -133,17 +132,6 @@ public class OrderListActivity extends NitCommonActivity<OrderCommonViewModel, A
 
                     }
                 });
-
-//                switch (flag) {
-//                    case 0:
-//                    case 1:
-//                    case 2:
-//                    case 3:
-//                    case 4:
-//
-//                        break;
-//
-//                }
             }
         };
 

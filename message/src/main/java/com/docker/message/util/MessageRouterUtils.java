@@ -3,7 +3,7 @@ package com.docker.message.util;
 import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bfhd.circle.vo.bean.StaDetailParam;
+import com.docker.cirlev2.vo.param.StaDetailParam;
 import com.docker.common.common.config.Constant;
 import com.docker.common.common.model.CommonListOptions;
 import com.docker.common.common.router.AppRouter;

@@ -5,6 +5,7 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -24,13 +25,17 @@ import com.docker.common.BR;
 import com.docker.common.common.model.OnItemClickListener;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
+import com.docker.common.common.utils.paser.DynamicConverterFactory;
 import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.common.common.vo.ShareBean;
 import com.docker.common.common.vo.UserInfoVo;
+import com.docker.common.common.vo.servervo.vo.DynamicDataBase;
+import com.docker.common.common.vo.servervo.vo.ExtDataBase;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
+import com.docker.core.di.netmodule.ConverterHoledr;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
@@ -52,6 +57,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import retrofit2.Retrofit;
+
 import static com.docker.common.common.router.AppRouter.CIRCLE_comment_v2_ANSWER;
 
 public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
@@ -71,8 +78,10 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
 
     }
 
+
     @Override
-    public LiveData<ApiResponse<BaseResponse>> getServicefun(String apiurl, HashMap param) {
+    public LiveData<ApiResponse<BaseResponse<List<DynamicDataBase>>>> getServicefun(String apiurl, HashMap param) {
+
         if (!TextUtils.isEmpty(apiurl)) {
             return circleApiService.fechCircleInfoList(apiurl, param);
         }
@@ -86,14 +95,24 @@ public class CircleDynamicListViewModel extends NitCommonContainerViewModel {
         };
     }
 
+
     @Override
     public void formartData(Resource resource) {
         super.formartData(resource);
-        if (flag == 1) {
-            for (int i = 0; i < ((List<ServiceDataBean>) resource.data).size(); i++) {
-                ((List<ServiceDataBean>) resource.data).get(i).flag = flag;
+
+        ArrayList<ExtDataBase> extDataBases = new ArrayList<>();
+        for (int i = 0; i < ((List<DynamicDataBase>) resource.data).size(); i++) {
+            if (((List<DynamicDataBase>) resource.data).get(i).extData.parent == null) {
+                ((List<DynamicDataBase>) resource.data).get(i).extData.parent = ((List<DynamicDataBase>) resource.data).get(i);
             }
+            extDataBases.add(((List<DynamicDataBase>) resource.data).get(i).extData);
         }
+        resource.data = extDataBases;
+//        if (flag == 1) {
+//            for (int i = 0; i < ((List<ServiceDataBean>) resource.data).size(); i++) {
+//                ((List<ServiceDataBean>) resource.data).get(i).flag = flag;
+//            }
+//        }
     }
 
     // 动态点击

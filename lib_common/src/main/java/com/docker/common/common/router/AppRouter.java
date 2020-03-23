@@ -13,26 +13,18 @@ public class AppRouter {
     public static final String HOME_preview = AppGroup + "home_preview";
     public static final String HOME_edit_index = AppGroup + "home_edit_index";
     public static final String HOME_JOIN_ACTION = AppGroup + "HOME_JOIN_ACTION";
-
     public static final String CIRCLE_INDEX_FRAMEV2 = AppGroup + "CIRCLE_INDEX_FRAMEV2";
-
     public static final String COMPANY_GROUP = AppGroup + "companygroup";
 
-
     public static final String AccountGroup = "/Account/";
-
     public static final String ACCOUNT_LOGIN = AccountGroup + "login";
     public static final String ACCOUNT_COMPLETE_INFO = AccountGroup + "ACCOUNT_COMPLETE_INFO";
-
     public static final String ACCOUNT_COUNTRY = AccountGroup + "country";
-
     public static final String ACCOUNT_ATTEN_LISt = AccountGroup + "attention_list";
     public static final String ACCOUNT_FANS_LISt = AccountGroup + "ACCOUNT_FANS_LISt";
     public static final String ACCOUNT_BRANCH_LIST = AccountGroup + "attention_branch_list";
     public static final String ACCOUNT_BRANCH_SELECT_LIST = AccountGroup + "ACCOUNT_BRANCH_SELECT_LIST";
     public static final String ACCOUNT_PERSION_INFO = AccountGroup + "ACCOUNT_PERSION_INFO";
-
-
     public static final String ACCOUNT_ORDER_LIST = AccountGroup + "ACCOUNT_ORDER_LIST";
     public static final String ACCOUNT_COLLECT_LIST = AccountGroup + "ACCOUNT_COLLECT_LIST";
 
@@ -183,8 +175,6 @@ public class AppRouter {
     public static final String Pro_Country_select = ProGroup + "country_select";
 
     public static final String Pro_Training_collect = ProGroup + "pro_training_collect";
-
-
     public static final String POINT_GROUP = ProGroup + "/point/";
     public static final String POINT_SORT_INDEX = POINT_GROUP + "POINT_SORT_INDEX";
 
@@ -230,6 +220,17 @@ public class AppRouter {
     public static final String ORDER_GOODS_COMMENT = ORDER_GROUP + "ORDER_GOODS_COMMENT";
     public static final String ORDER_Logistics_LIST = ORDER_GROUP + "ORDER_Logistics_LIST";
     public static final String ORDER_DETAIL = ORDER_GROUP + "ORDER_DETAIL";
+
+
+    public static final String IMGROUP = "/im/";
+    public static final String IMPROVIDER_TALK = IMGROUP + "talk";
+
+    public static final String AROUTER_SER = "/AROUTER_SER/a";
+
+
+    public static final String VideoEditGroup = "/VIDEOEDIT/";
+
+    public static final String VideoEditIndex = VideoEditGroup + "index";
 
 
 }

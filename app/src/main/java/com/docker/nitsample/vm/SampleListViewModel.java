@@ -37,6 +37,9 @@ public class SampleListViewModel extends NitCommonContainerViewModel {
          *
          * */
 
+        SampleItemVo video_edit = new SampleItemVo("video_edit", -4);
+        mItems.add(video_edit);
+
         SampleItemVo stick_sample = new SampleItemVo("stick", -3);
         mItems.add(stick_sample);
 

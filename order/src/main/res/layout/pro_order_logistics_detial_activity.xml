@@ -13,11 +13,11 @@
             name="item"
             type="com.docker.order.vo.LogisticeVo" />
 
-        <import type="com.bfhd.circle.utils.BdUtils" />
+
+        <import type="com.docker.common.common.binding.CommonBdUtils" />
 
         <import type="com.docker.core.util.LayoutManager" />
 
-        <import type="com.bfhd.circle.R" />
 
     </data>
 
@@ -105,7 +105,7 @@
                                                             android:layout_width="83dp"
                                                             android:layout_height="83dp"
                                                             android:layout_centerVertical="true"
-                                                            app:imageUrl="@{BdUtils.getImgUrl(item.imgurl)}" />
+                                                            app:imageUrl="@{CommonBdUtils.getImgUrl(item.imgurl)}" />
 
                                                         <TextView
                                                             android:id="@+id/tv_title"
@@ -113,7 +113,7 @@
                                                             android:layout_height="wrap_content"
                                                             android:layout_marginLeft="10dp"
                                                             android:layout_toRightOf="@id/iv"
-                                                            android:text="@{@string/state+ BdUtils.getWlStatus(item.state)}"
+                                                            android:text="@{@string/state+ CommonBdUtils.getWlStatus(item.state)}"
                                                             android:textColor="@color/black"
                                                             android:textSize="14sp" />
 

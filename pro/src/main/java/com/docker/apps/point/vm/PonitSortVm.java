@@ -26,7 +26,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class PonitSortVm extends CircleDynamicListViewModel {
+public class PonitSortVm extends NitCommonContainerViewModel {
 
 
     @Inject

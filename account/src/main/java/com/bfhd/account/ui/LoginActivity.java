@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,8 +21,9 @@ import com.bfhd.account.databinding.AccountActivityLoginBinding;
 import com.bfhd.account.vm.AccountViewModel;
 import com.bfhd.circle.base.HivsBaseActivity;
 import com.bfhd.circle.base.ViewEventResouce;
-import com.dcbfhd.utilcode.utils.EncodeUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
+import com.docker.common.common.command.ReplyCommandParam;
+import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.utils.cache.DbCacheUtils;
@@ -31,17 +31,8 @@ import com.docker.common.common.utils.rxbus.RxBus;
 import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.utils.tool.MD5Util;
 import com.docker.common.common.vo.UserInfoVo;
-import com.docker.module_im.DemoCache;
-import com.docker.module_im.config.preference.UserPreferences;
 import com.gyf.immersionbar.ImmersionBar;
 import com.luck.picture.lib.permissions.RxPermissions;
-import com.netease.nim.uikit.api.NimUIKit;
-import com.netease.nim.uikit.common.ToastHelper;
-import com.netease.nim.uikit.common.util.C;
-import com.netease.nimlib.sdk.NIMClient;
-import com.netease.nimlib.sdk.RequestCallback;
-import com.netease.nimlib.sdk.StatusBarNotificationConfig;
-import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -49,19 +40,18 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.inject.Inject;
-
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
-import timber.log.Timber;
 
 @Route(path = AppRouter.ACCOUNT_LOGIN)
 public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountActivityLoginBinding> {
 
     private String area_code = "+86";
     private HashMap<String, String> wechatInfo = null;
+
+    @Autowired
+    MessageService imService;
+
 
     @Autowired
     boolean isFoceLogin = false;
@@ -101,154 +91,32 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
         mToolbar.setBackgroundColor(getResources().getColor(R.color.account_white));
         mToolbar.setTitle("登录", getResources().getColor(R.color.account_black));
         initperssion();
-
-        Timber.e("===========" + userInfoVo.nickname);
     }
 
-
     public void loginWithIm(String account, String token) {
-        NimUIKit.login(new LoginInfo(account, token), new RequestCallback<LoginInfo>() {
-            @Override
-            public void onSuccess(LoginInfo param) {
-                DemoCache.setAccount(account);
-                // 初始化消息提醒配置
-                initNotificationConfig();
-
-                if ("1".equals(CacheUtils.getUser().perfectData)) {
-                    ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
-                    finish();
-                    return;
-                }
-
-//                // 进入主界面
-//                MainActivity.start(LoginActivity.this, null);
-                if (!isFoceLogin) {
-                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
-                } else {
-                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
-                    setAlias();
-                }
+//        imService = (MessageService) ARouter.getInstance().build(AppRouter.IMPROVIDER_TALK).navigation();
+        imService.loginIm(account, token, (ReplyCommandParam<Integer>) integer -> {
+            if ("1".equals(CacheUtils.getUser().perfectData)) {
+                ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
                 finish();
+                return;
             }
-
-            @Override
-            public void onFailed(int code) {
-                if ("1".equals(CacheUtils.getUser().perfectData)) {
-                    ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
+            switch (integer) {
+                case 0:
+                case 1:
+                case 2:
+                    imService.setAlias(isFoceLogin);
+                    if (!isFoceLogin) {
+                        ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
+                    } else {
+                        RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
+                    }
                     finish();
-                    return;
-                }
-
-                if (code == 302 || code == 404) {
-//                    ToastHelper.showToast(LoginActivity.this, R.string.login_failed);
-                } else {
-//                    ToastHelper.showToast(LoginActivity.this, "登录失败: " + code);
-                }
-                if (!isFoceLogin) {
-                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
-                } else {
-                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
-                    setAlias();
-                }
-                finish();
-            }
-
-            @Override
-            public void onException(Throwable exception) {
-                if ("1".equals(CacheUtils.getUser().perfectData)) {
-                    ARouter.getInstance().build(AppRouter.ACCOUNT_COMPLETE_INFO).navigation();
-                    finish();
-                    return;
-                }
-                ToastHelper.showToast(LoginActivity.this, R.string.login_exception);
-                if (!isFoceLogin) {
-                    ARouter.getInstance().build(AppRouter.HOME).navigation(LoginActivity.this);
-                } else {
-                    RxBus.getDefault().post(new RxEvent<>("login_state_change", ""));
-                    setAlias();
-                }
-                finish();
+                    break;
             }
         });
     }
 
-
-    // 激光设置
-    private void setAlias() {
-        UserInfoVo userInfoVo = CacheUtils.getUser();
-        if (!"-1".equals(userInfoVo.uuid)) {
-            String alias = userInfoVo.uuid;
-            if (TextUtils.isEmpty(alias)) {
-                return;
-            }
-            if (!TextUtils.isEmpty(CacheUtils.getJpAlias())) {
-                return;
-            }
-            mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, alias));
-
-            Log.d("sss", "setAlias: ==============2222");
-        }
-    }
-
-    private String TAG = "jiguang";
-    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-        @Override
-        public void gotResult(int code, String alias, Set<String> tags) {
-            String logs;
-            switch (code) {
-                case 0:
-                    Log.d("sss", "setAlias: ==============3333");
-                    logs = "Set tag and alias success";
-                    Log.i(TAG, logs);
-                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-                    break;
-                case 6002:
-                    Log.d("sss", "setAlias: ==============4444");
-                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-                    Log.i(TAG, logs);
-                    // 延迟 60 秒来调用 Handler 设置别名
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-                    break;
-                default:
-                    logs = "Failed with errorCode = " + code;
-                    Log.d("sss", "setAlias: ==============555" + logs);
-                    Log.e(TAG, logs);
-            }
-        }
-    };
-    private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    Log.d(TAG, "Set alias in handler.");
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(),
-                            (String) msg.obj,
-                            null,
-                            mAliasCallback);
-                    break;
-                default:
-                    Log.i(TAG, "Unhandled msg - " + msg.what);
-            }
-        }
-    };
-
-
-    private void initNotificationConfig() {
-        // 初始化消息提醒
-        NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
-        // 加载状态栏配置
-        StatusBarNotificationConfig statusBarNotificationConfig = UserPreferences.getStatusConfig();
-        if (statusBarNotificationConfig == null) {
-            statusBarNotificationConfig = DemoCache.getNotificationConfig();
-            UserPreferences.setStatusConfig(statusBarNotificationConfig);
-        }
-        // 更新配置
-        NIMClient.updateStatusBarNotificationConfig(statusBarNotificationConfig);
-    }
 
     private void initperssion() {
         RxPermissions rxPermissions = new RxPermissions(this);
@@ -388,7 +256,7 @@ public class LoginActivity extends HivsBaseActivity<AccountViewModel, AccountAct
                 if (viewEventResouce.data != null) {
                     UserInfoVo userInfoVo = (UserInfoVo) viewEventResouce.data;
                     CacheUtils.saveUser(userInfoVo);
-                    setAlias();
+                    imService.setAlias(true);
                     loginWithIm(userInfoVo.uuid, MD5Util.toMD5_32(userInfoVo.uuid));
                 }
                 break;

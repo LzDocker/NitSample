@@ -1,31 +1,25 @@
 package com.docker.cirlev2.vm;
 
 import android.arch.lifecycle.MediatorLiveData;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.ToastUtils;
 import com.docker.cirlev2.R;
 import com.docker.cirlev2.api.CircleApiService;
 import com.docker.cirlev2.util.AudioPlayerUtils;
 import com.docker.cirlev2.util.BdUtils;
-import com.docker.cirlev2.vo.entity.CommentVo;
 import com.docker.cirlev2.vo.entity.ServiceDataBean;
 import com.docker.common.BR;
+import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.cache.CacheUtils;
-import com.docker.common.common.utils.rxbus.RxBus;
-import com.docker.common.common.utils.rxbus.RxEvent;
 import com.docker.common.common.vo.UserInfoVo;
 import com.docker.core.repository.NitBoundCallback;
 import com.docker.core.repository.NitNetBoundObserver;
 import com.docker.core.repository.Resource;
-import com.docker.module_im.session.SessionHelper;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -186,9 +180,6 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
 
     // 聊一聊
     public void ItemTalkClick(ServiceDataBean item, View view) {
-//        if (checkLoginState()) {
-//            return;
-//        }
         if (CacheUtils.getUser() == null) {
             ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).withBoolean("isFoceLogin", true).navigation();
             return;
@@ -196,7 +187,10 @@ public class CircleDynamicDetailViewModel extends CircleDynamicListViewModel {
         if (item == null) {
             return;
         }
-        SessionHelper.startP2PSession(ActivityUtils.getTopActivity(), item.getUuid());
+        MessageService imService = (MessageService) ARouter.getInstance().build(AppRouter.IMPROVIDER_TALK).navigation();
+        imService.enterToTalk(item.getUuid());
+
+//        SessionHelper.startP2PSession(ActivityUtils.getTopActivity(), item.getUuid());
     }
 
     // 购物车

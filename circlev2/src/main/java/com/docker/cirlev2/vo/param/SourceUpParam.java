@@ -28,6 +28,11 @@ public class SourceUpParam implements Serializable {
 
     public boolean needCrop = false;
 
+    /*
+     * 选择视频后是否编辑
+     * */
+    public boolean VideoNeedEdit = false;
+
     // 裁剪完的宽度 默认屏幕宽度一致
     public int width = ScreenUtils.getScreenWidth();
 

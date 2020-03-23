@@ -27,12 +27,12 @@
         <item name="android:paddingLeft">10dp</item>
     </style>
 
-    <!-- toolbar 文本 -->
+    <!-- vd_toolbar 文本 -->
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- toolbar 文本 -->
+    <!-- vd_toolbar 文本 -->
     <style name="Toolbar.SubTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
         <item name="android:textSize">10sp</item>
     </style>

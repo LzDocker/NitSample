@@ -3,21 +3,18 @@ package com.bfhd.account.vo.index.setting;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bfhd.account.R;
 import com.bfhd.account.vo.MyInfoVo;
 import com.dcbfhd.utilcode.utils.ActivityUtils;
 import com.dcbfhd.utilcode.utils.AppUtils;
-import com.docker.common.common.config.Constant;
-import com.docker.common.common.model.CommonContainerOptions;
-import com.docker.common.common.model.CommonListOptions;
+import com.docker.common.common.provider.MessageService;
 import com.docker.common.common.router.AppRouter;
 import com.docker.common.common.utils.GlideCacheUtil;
 import com.docker.common.common.utils.cache.CacheUtils;
 import com.docker.common.common.vo.card.BaseCardVo;
 import com.docker.core.widget.BottomSheetDialog;
-import com.docker.module_im.login.LogoutHelper;
-
 import cn.jpush.android.api.JPushInterface;
 
 
@@ -26,6 +23,7 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
 
     public SettingItemVo(int style, int position) {
         super(style, position);
+        ARouter.getInstance().inject(this);
         mVmPath = "com.bfhd.account.vm.AccountSettingViewModel";
     }
 
@@ -34,6 +32,8 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
         return R.layout.account_fragment_mine_setting_item;
     }
 
+    @Autowired
+    MessageService messageService;
 
     @Override
     public void onItemClick(BaseCardVo item, View view) {
@@ -71,7 +71,7 @@ public class SettingItemVo extends BaseCardVo<MyInfoVo> {
         if (view.getId() == R.id.tv_go_out) { //退出登录
             ARouter.getInstance().build(AppRouter.ACCOUNT_LOGIN).navigation();
             CacheUtils.clearUser();
-            LogoutHelper.logout();
+            messageService.loginOut();
             JPushInterface.deleteAlias(ActivityUtils.getTopActivity(), AppUtils.getAppVersionCode());
             JPushInterface.clearAllNotifications(ActivityUtils.getTopActivity());
 //            ActivityUtils.finishAllActivities();

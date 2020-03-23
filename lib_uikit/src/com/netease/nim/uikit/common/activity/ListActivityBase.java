@@ -41,7 +41,7 @@ public abstract class ListActivityBase<T> extends UI {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nim_list_activity_layout);
 
-        // toolbar
+        // vd_toolbar
         ToolBarOptions options = new NimToolBarOptions();
         options.titleString = getTitleString();
         setToolBar(R.id.toolbar, options);

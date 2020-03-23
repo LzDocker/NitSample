@@ -25,8 +25,6 @@ import com.bfhd.account.vo.tygs.InvatationVo;
 import com.bfhd.account.vo.tygs.MoneyItemVo;
 import com.bfhd.account.vo.tygs.PointItemVo;
 import com.bfhd.circle.vo.RstVo;
-import com.docker.cirlev2.vo.entity.CircleListVo;
-import com.docker.common.common.config.CommonApiConfig;
 import com.docker.common.common.vo.AddressVo;
 import com.docker.common.common.vo.MoneyDetailVo;
 import com.docker.common.common.vo.UpdateInfo;
@@ -367,7 +365,6 @@ public interface AccountService {
 
 
     /*
-
      * */
     @POST("api.php/?m=my.my_invite")
     @FormUrlEncoded

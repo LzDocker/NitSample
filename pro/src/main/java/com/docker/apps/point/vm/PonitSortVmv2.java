@@ -8,6 +8,7 @@ import com.docker.apps.point.vo.PointSortItemVo;
 import com.docker.apps.point.vo.PointSortVo;
 import com.docker.cirlev2.vm.CircleDynamicListViewModel;
 import com.docker.common.common.model.BaseItemModel;
+import com.docker.common.common.vm.container.NitCommonContainerViewModel;
 import com.docker.core.di.netmodule.ApiResponse;
 import com.docker.core.di.netmodule.BaseResponse;
 import com.docker.core.repository.Resource;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class PonitSortVmv2 extends CircleDynamicListViewModel {
+public class PonitSortVmv2 extends NitCommonContainerViewModel {
 
 
     @Inject
