@@ -16,16 +16,12 @@ public class Goods extends ExtDataBase {
 
     @Override
     public int getItemLayout() {
-        return R.layout.circlev2_item_dynamic_goodsv2;
+        int lay = 0;
+        if (this.parent.scope == 0) {
+            lay = R.layout.circlev2_item_dynamic_goodsv2;
+        } else {
+            lay = R.layout.circlev2_item_dynamic_goodsv3;
+        }
+        return lay;
     }
-//    @Override
-//    public int getItemLayout() {
-//        int lay =
-////        if (this.parent.scope == 0) {
-////            lay = R.layout.circlev2_item_dynamic_goodsv2;
-////        } else {
-////            lay = R.layout.circlev2_item_dynamic_goodsv3;
-////        }
-//        return lay;
-//    }
 }
